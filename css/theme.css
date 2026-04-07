@@ -238,3 +238,35 @@ ul  { list-style: none; }
   .footer-top    { grid-template-columns: 1fr; gap: 40px; }
   .footer-bottom { flex-direction: column-reverse; gap: 16px; text-align: center; }
 }
+
+/* ── View Transitions (horizontal page navigation) ──────────
+   When nav-sequence.js triggers a page change, the View Transitions
+   API snapshots the outgoing page, navigates, and crossfades or
+   slides the new page in. We override the default crossfade with
+   a directional slide based on the data-vt-direction attribute
+   that nav-sequence.js sets on <html> just before navigation.
+
+   Falls back to the browser's default transition (crossfade) on
+   browsers that support View Transitions, and to instant nav on
+   browsers that don't.
+   ──────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  /* Forward (right swipe / scroll right): old slides LEFT, new comes from RIGHT */
+  :root[data-vt-direction="forward"]::view-transition-old(root) {
+    animation: vt-slide-out-left .35s cubic-bezier(.4, 0, .2, 1) both;
+  }
+  :root[data-vt-direction="forward"]::view-transition-new(root) {
+    animation: vt-slide-in-right .35s cubic-bezier(.4, 0, .2, 1) both;
+  }
+  /* Back (left swipe / scroll left): old slides RIGHT, new comes from LEFT */
+  :root[data-vt-direction="back"]::view-transition-old(root) {
+    animation: vt-slide-out-right .35s cubic-bezier(.4, 0, .2, 1) both;
+  }
+  :root[data-vt-direction="back"]::view-transition-new(root) {
+    animation: vt-slide-in-left .35s cubic-bezier(.4, 0, .2, 1) both;
+  }
+}
+@keyframes vt-slide-out-left  { to   { transform: translateX(-30%); opacity: 0; } }
+@keyframes vt-slide-in-right  { from { transform: translateX( 30%); opacity: 0; } }
+@keyframes vt-slide-out-right { to   { transform: translateX( 30%); opacity: 0; } }
+@keyframes vt-slide-in-left   { from { transform: translateX(-30%); opacity: 0; } }
