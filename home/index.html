@@ -27,6 +27,9 @@
   --color-error: #A8071A;
   --font-display: "neue-haas-grotesk-display", sans-serif;
   --font-text: "neue-haas-grotesk-text", sans-serif;
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
 }
 
 /* ============================================================
@@ -386,7 +389,7 @@ ul { list-style: none; }
 }
 .value-card {
   padding: 40px 36px;
-  border-radius: 3px;
+  border-radius: var(--radius-lg);
   border: 1px solid rgba(255,255,255,0.06);
   background: rgba(255,255,255,0.03);
   transition: all 0.4s ease;
@@ -400,7 +403,7 @@ ul { list-style: none; }
   background: linear-gradient(233.39deg, rgba(0,215,238,1) 0%, rgba(97,0,255,1) 100%);
   opacity: 0;
   transition: opacity 0.4s ease;
-  border-radius: 3px;
+  border-radius: var(--radius-lg);
 }
 .value-card:hover::before { opacity: 1; }
 .value-card:hover { border-color: transparent; transform: translateY(-4px); }
@@ -454,7 +457,7 @@ ul { list-style: none; }
 .approach-visual {
   position: relative;
   aspect-ratio: 4/3;
-  border-radius: 3px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
 }
 .approach-visual img {
@@ -550,93 +553,6 @@ ul { list-style: none; }
   .stat-number { font-size: 44px; }
 }
 
-/* ============================================================
-   SECTION: TEAM PREVIEW
-   ============================================================ */
-.section-team {
-  padding: 140px 0;
-}
-.team-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 60px;
-}
-.team-header-left .section-label {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 12px;
-  letter-spacing: 1.71px;
-  text-transform: uppercase;
-  color: var(--color-neutral-60);
-  margin-bottom: 20px;
-}
-.team-header-left h2 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 44px;
-  line-height: 46px;
-  color: var(--color-neutral-100);
-}
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 28px;
-}
-.team-card {
-  display: block;
-  transition: transform 0.4s ease;
-}
-.team-card:hover { transform: translateY(-6px); }
-.team-card-thumb {
-  aspect-ratio: 1/1.1;
-  overflow: hidden;
-  background: var(--color-neutral-40);
-  margin-bottom: 20px;
-  position: relative;
-}
-.team-card-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.team-card:hover .team-card-thumb img { transform: scale(1.06); }
-.team-card-thumb::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(14,15,17,0.3), transparent 50%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-.team-card:hover .team-card-thumb::after { opacity: 1; }
-
-.team-card h4 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 24px;
-  color: var(--color-neutral-100);
-  margin-bottom: 4px;
-  transition: color 0.3s ease;
-}
-.team-card:hover h4 { color: var(--color-accent); }
-.team-card .team-role {
-  font-size: 15px;
-  line-height: 22px;
-  color: var(--color-neutral-70);
-}
-
-@media (max-width: 991px) {
-  .section-team { padding: 80px 0; }
-  .team-header { flex-direction: column; align-items: flex-start; gap: 20px; }
-  .team-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-  .team-header-left h2 { font-size: 36px; line-height: 42px; }
-}
-@media (max-width: 567px) {
-  .team-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
-}
 
 /* ============================================================
    CTA BANNER
@@ -676,7 +592,7 @@ ul { list-style: none; }
   background: var(--color-accent);
   border: 1px solid var(--color-accent);
   padding: 16px 70px;
-  border-radius: 3px;
+  border-radius: var(--radius);
   transition: all 0.4s ease;
   cursor: pointer;
 }
@@ -696,7 +612,7 @@ ul { list-style: none; }
   background: transparent;
   border: 1px solid var(--color-accent);
   padding: 16px 70px;
-  border-radius: 3px;
+  border-radius: var(--radius);
   transition: all 0.4s ease;
   cursor: pointer;
 }
@@ -929,51 +845,6 @@ ul { list-style: none; }
   </div>
 </section>
 
-<!-- ==================== TEAM PREVIEW ==================== -->
-<section class="section-team">
-  <div class="container">
-    <div class="team-header">
-      <div class="team-header-left">
-        <div class="section-label reveal">Our People</div>
-        <h2 class="reveal reveal-delay-1">The minds behind the lab</h2>
-      </div>
-      <a href="/people/" class="approach-link reveal">
-        View all
-        <svg width="8" height="16" viewBox="0 0 8 16" fill="none"><path d="M1 1L6 8L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      </a>
-    </div>
-    <div class="team-grid">
-      <a href="/people/suranga-nanayakkara/" class="team-card reveal">
-        <div class="team-card-thumb">
-          <img src="https://ahlab.org/wp-content/uploads/2021/04/Suranga-Nanayakkara.jpg" alt="Suranga Nanayakkara">
-        </div>
-        <h4>Suranga Nanayakkara</h4>
-        <div class="team-role">Director / Associate Professor</div>
-      </a>
-      <a href="/people/" class="team-card reveal reveal-delay-1">
-        <div class="team-card-thumb">
-          <img src="https://ahlab.org/wp-content/uploads/2021/05/Roger-Boldu-1.jpg" alt="Roger Boldu">
-        </div>
-        <h4>Roger Boldu</h4>
-        <div class="team-role">Research Fellow</div>
-      </a>
-      <a href="/people/" class="team-card reveal reveal-delay-2">
-        <div class="team-card-thumb">
-          <img src="https://ahlab.org/wp-content/uploads/2024/01/Yilun_potrait-scaled.jpg" alt="Yilun">
-        </div>
-        <h4>Yilun</h4>
-        <div class="team-role">PhD Researcher</div>
-      </a>
-      <a href="/people/" class="team-card reveal reveal-delay-3">
-        <div class="team-card-thumb">
-          <img src="https://ahlab.org/wp-content/uploads/2024/01/Ziyue_potrait-scaled.jpg" alt="Ziyue">
-        </div>
-        <h4>Ziyue</h4>
-        <div class="team-role">PhD Researcher</div>
-      </a>
-    </div>
-  </div>
-</section>
 
 <!-- ==================== CTA ==================== -->
 <section class="section-cta">

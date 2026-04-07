@@ -27,7 +27,7 @@
 .project-hero-image {
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  border-radius: 3px;
+  border-radius: var(--radius-lg);
   background: var(--color-neutral-40);
   position: relative;
 }
@@ -122,4 +122,4 @@
 
 /* ── Project images ──────────────────────────────────────── */
 .project-images     { margin-top: 48px; }
-.project-images img { margin-bottom: 20px; border-radius: 3px; }
+.project-images img { margin-bottom: 20px; border-radius: var(--radius-lg); }

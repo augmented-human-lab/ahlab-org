@@ -61,6 +61,7 @@
   background: var(--color-neutral-40);
   margin-bottom: 16px;
   position: relative;
+  border-radius: var(--radius-lg);
 }
 .person-card-photo img {
   width: 100%; height: 100%; object-fit: cover;
@@ -105,7 +106,7 @@
 .profile-photo {
   aspect-ratio: 1 / 1.1;
   overflow: hidden;
-  border-radius: 3px;
+  border-radius: var(--radius-lg);
   background: var(--color-neutral-40);
   position: relative;
 }
@@ -166,7 +167,7 @@
 }
 .profile-project-card {
   display: block;
-  border-radius: 3px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   background: #fff;
   border: 1px solid var(--color-neutral-30);

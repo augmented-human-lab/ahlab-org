@@ -230,7 +230,7 @@
 .press-type-tag {
   font-family: var(--font-display); font-weight: 700;
   font-size: 10px; letter-spacing: .8px; text-transform: uppercase;
-  padding: 3px 8px; border-radius: 3px;
+  padding: 3px 8px; border-radius: var(--radius-sm);
   background: var(--color-neutral-20);
   color: var(--color-neutral-80);
 }
@@ -293,7 +293,7 @@
 .yt-embed {
   margin-top: 14px;
   max-width: 640px;
-  border-radius: 4px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   background: #000;
   position: relative;

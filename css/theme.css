@@ -41,6 +41,14 @@
 
   --font-display:       "neue-haas-grotesk-display", sans-serif;
   --font-text:          "neue-haas-grotesk-text", sans-serif;
+
+  /* Corner radii — medium hierarchy.
+     Small for tags/buttons, default for medium things, large for cards/images.
+     Avatars (50%) and filter pills (999px) keep their hardcoded shape values
+     because they're intentional shapes, not just rounded corners. */
+  --radius-sm:          8px;
+  --radius:             12px;
+  --radius-lg:          16px;
 }
 
 /* ── Reset & base ────────────────────────────────────────── */
@@ -181,7 +189,7 @@ ul  { list-style: none; }
   font-family: var(--font-text); font-weight: 600; font-size: 18px;
   color: var(--color-accent);
   border: 1px solid var(--color-accent);
-  padding: 16px 60px; border-radius: 3px;
+  padding: 16px 60px; border-radius: var(--radius);
   transition: all .4s;
 }
 .back-link:hover { background: var(--color-accent); color: #fff; }
