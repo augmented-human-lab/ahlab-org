@@ -1,0 +1,240 @@
+/* ============================================================
+   theme.css
+   Canonical shared chrome for the AHLab site.
+
+   This file is the single source of truth for:
+   - Design tokens (:root)
+   - Reset and base typography
+   - .container
+   - .rv reveal animations
+   - .site-nav (two-mode: transparent over hero, white when scrolled)
+   - .site-nav.nav-light variant (always-light, for detail pages)
+   - .site-footer
+   - .back-strip / .back-link
+   - .sidebar-section / .sidebar-section-title
+
+   Page-specific stylesheets (people.css, project.css, press.css,
+   publications.css) MUST link this file FIRST. They contain only
+   page-specific rules — heroes, grids, item cards, and so on.
+
+   When changing a token, color, or shared layout, edit it HERE only.
+   ============================================================ */
+
+/* ── Tokens ──────────────────────────────────────────────── */
+:root {
+  --color-accent:       #6100FF;
+  --color-accent-dark:  #4400B3;
+  --color-accent-light: #904DFF;
+  --gradient-start:     #00D7EE;
+  --gradient-end:       #6100FF;
+  --gradient:           linear-gradient(221deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+
+  --color-neutral-10:   #FFFFFF;
+  --color-neutral-20:   #F4F7F9;
+  --color-neutral-30:   #EDF0F3;
+  --color-neutral-40:   #C9D8E3;
+  --color-neutral-60:   #AAAFB6;
+  --color-neutral-70:   #838D95;
+  --color-neutral-80:   #5E6875;
+  --color-neutral-100:  #0E0F11;
+  --color-black:        #000000;
+
+  --font-display:       "neue-haas-grotesk-display", sans-serif;
+  --font-text:          "neue-haas-grotesk-text", sans-serif;
+}
+
+/* ── Reset & base ────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-text);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-neutral-100);
+  background: var(--color-neutral-10);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a   { color: inherit; text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; }
+ul  { list-style: none; }
+
+/* ── Container ───────────────────────────────────────────── */
+.container { width: 100%; max-width: 1370px; margin: 0 auto; padding: 0 40px; }
+@media (max-width: 767px) { .container { padding: 0 20px; } }
+
+/* ── Reveal animations ───────────────────────────────────── */
+.rv     { opacity: 0; transform: translateY(28px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+.rv.vis { opacity: 1; transform: translateY(0); }
+.rv-d1  { transition-delay: .1s; }
+.rv-d2  { transition-delay: .2s; }
+.rv-d3  { transition-delay: .3s; }
+
+/* ── Navigation ──────────────────────────────────────────────
+   Two modes:
+   1. DEFAULT (used on index pages with a gradient hero):
+      - Transparent over the hero
+      - White links
+      - On scroll (.scrolled), transitions to a white background with
+        dark links — wired up by JS that toggles .scrolled when
+        window.scrollY > ~60.
+
+   2. NAV-LIGHT (used on detail pages without a hero):
+      - Always white background
+      - Always dark links
+      - Add .nav-light to the <nav> element to opt in.
+   ──────────────────────────────────────────────────────────── */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 40px; height: 92px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background .4s, box-shadow .4s;
+}
+.site-nav.scrolled {
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 rgba(0,0,0,.06);
+}
+
+.site-nav .logo img { height: 28px; width: auto; transition: opacity .3s; }
+.site-nav .logo:hover img { opacity: .7; }
+
+/* Logo swap: light logo on transparent nav, dark logo on scrolled nav */
+.site-nav .logo .logo-l { display: block; }
+.site-nav .logo .logo-d { display: none; }
+.site-nav.scrolled .logo .logo-l { display: none; }
+.site-nav.scrolled .logo .logo-d { display: block; }
+
+/* Nav links */
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a {
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: .02em;
+  color: rgba(255,255,255,.7);
+  transition: color .3s;
+}
+.nav-links a:hover  { color: #fff; }
+.nav-links a.active { color: #fff; }
+
+.site-nav.scrolled .nav-links a        { color: var(--color-neutral-80); }
+.site-nav.scrolled .nav-links a:hover  { color: var(--color-accent); }
+.site-nav.scrolled .nav-links a.active { color: var(--color-neutral-100); }
+
+/* Mobile toggle */
+.nav-toggle {
+  display: none; background: none; border: none; cursor: pointer;
+  width: 35px; height: 19px; position: relative;
+}
+.nav-toggle span {
+  display: block; width: 100%; height: 2px;
+  background: #fff;
+  position: absolute; left: 0; transition: all .3s;
+}
+.nav-toggle span:nth-child(1) { top: 0; }
+.nav-toggle span:nth-child(2) { top: 8px; }
+.nav-toggle span:nth-child(3) { top: 16px; }
+.site-nav.scrolled .nav-toggle span { background: var(--color-neutral-100); }
+
+@media (max-width: 991px) {
+  .nav-links  { display: none; }
+  .nav-toggle { display: block; }
+}
+
+/* ── Nav-light variant (detail pages, no hero) ───────────── */
+.site-nav.nav-light {
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 rgba(0,0,0,.06);
+}
+.site-nav.nav-light .logo .logo-l { display: none; }
+.site-nav.nav-light .logo .logo-d { display: block; }
+.site-nav.nav-light .nav-links a        { color: var(--color-neutral-80); }
+.site-nav.nav-light .nav-links a:hover  { color: var(--color-accent); }
+.site-nav.nav-light .nav-links a.active { color: var(--color-neutral-100); }
+.site-nav.nav-light .nav-toggle span    { background: var(--color-neutral-100); }
+
+/* ── Sidebar section helpers (used by project + person bodies) ── */
+.sidebar-section { margin-bottom: 40px; }
+.sidebar-section-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1.71px;
+  text-transform: uppercase;
+  color: var(--color-neutral-60);
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--color-neutral-30);
+  margin-bottom: 16px;
+}
+
+/* ── Back link strip (used by detail pages) ──────────────── */
+.back-strip {
+  padding: 60px 0;
+  border-top: 2px solid var(--color-neutral-30);
+  text-align: center;
+}
+.back-link {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-text); font-weight: 600; font-size: 18px;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  padding: 16px 60px; border-radius: 3px;
+  transition: all .4s;
+}
+.back-link:hover { background: var(--color-accent); color: #fff; }
+
+/* ── Footer ──────────────────────────────────────────────── */
+.site-footer { background: var(--color-neutral-100); padding: 80px 0 24px; }
+.footer-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.footer-brand img { height: 28px; width: auto; margin-bottom: 24px; }
+.footer-brand p {
+  font-size: 15px; line-height: 24px;
+  color: var(--color-neutral-70); max-width: 280px;
+}
+.footer-nav-col h5 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 14px; color: var(--color-neutral-60);
+  text-transform: uppercase; letter-spacing: .1em;
+  margin-bottom: 20px;
+}
+.footer-nav-col a {
+  display: block; font-size: 15px;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 12px;
+  transition: color .3s;
+}
+.footer-nav-col a:hover { color: #fff; }
+
+.footer-contact h5 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 14px; color: var(--color-neutral-60);
+  text-transform: uppercase; letter-spacing: .1em;
+  margin-bottom: 20px;
+}
+.footer-contact a,
+.footer-contact p {
+  font-size: 15px; line-height: 24px;
+  color: rgba(255,255,255,.5);
+  transition: color .3s;
+}
+.footer-contact a:hover { color: #fff; }
+
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 24px;
+}
+.footer-copy { font-size: 12px; color: rgba(255,255,255,.3); }
+
+@media (max-width: 767px) {
+  .footer-top    { grid-template-columns: 1fr; gap: 40px; }
+  .footer-bottom { flex-direction: column-reverse; gap: 16px; text-align: center; }
+}
