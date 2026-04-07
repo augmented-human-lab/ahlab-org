@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shi Yilei — Augmented Human Lab</title>
+<link rel="stylesheet" href="https://use.typekit.net/zws2qzx.css">
+<link rel="stylesheet" href="/css/people.css">
+<link rel="icon" href="https://ahlab.org/wp-content/uploads/2021/05/cropped-Group@2x-32x32.png" sizes="32x32">
+<meta name="description" content="Shi Yilei — PhD Candidate at Augmented Human Lab.">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav nav-light">
+  <a href="/" class="logo">
+    <img class="logo-l" src="https://ahlab.org/wp-content/uploads/2021/03/Group-4@2x.png" alt="AHLab" height="28">
+    <img class="logo-d" src="https://ahlab.org/wp-content/uploads/2021/03/Group@2x.png" alt="AHLab" height="28">
+  </a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/vision/">Vision</a>
+    <a href="/projects/">Projects</a>
+    <a href="/publications/">Publications</a>
+    <a href="/people/" class="active">People</a>
+    <a href="/press/">Press &amp; Awards</a>
+    <a href="/join/">Join Us</a>
+  </div>
+  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- PAGE -->
+<div class="container">
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <a href="/people/">People</a>
+    <span>→</span>
+    <span style="color:var(--color-neutral-100)">Shi Yilei</span>
+  </div>
+
+  <!-- Hero -->
+  <section class="profile-hero rv">
+    <div class="profile-hero-grid">
+      <div class="profile-photo">
+        <img src="https://ahlab.org/wp-content/uploads/2021/03/shiyilei.png" alt="Shi Yilei">
+      </div>
+      <div class="profile-info">
+        <h1>Shi Yilei</h1>
+        <div class="profile-role">PhD Candidate</div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Body -->
+  <section class="profile-body">
+    <div class="profile-content rv"><p style="color:var(--color-neutral-70)">Profile details coming soon.</p></div>
+  </section>
+
+  <!-- Back -->
+  <div class="back-strip rv">
+    <a href="/people/" class="back-link">← All People</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://ahlab.org/wp-content/uploads/2021/03/Group-4@2x.png" alt="AHLab">
+        <p>Augmented Human Lab — extending the limits of our perceptual and cognitive capabilities.</p>
+      </div>
+      <div class="footer-nav-col">
+        <h5>Explore</h5>
+        <a href="/vision/">Vision</a>
+        <a href="/projects/">Projects</a>
+        <a href="/publications/">Publications</a>
+        <a href="/people/">People</a>
+        <a href="/press/">Press &amp; Awards</a>
+        <a href="/join/">Join Us</a>
+      </div>
+      <div class="footer-contact">
+        <h5>Contact</h5>
+        <a href="mailto:info@ahlab.org">info@ahlab.org</a>
+        <p style="margin-top:16px">
+          <strong style="color:rgba(255,255,255,.7)">Augmented Human Lab</strong><br>
+          Smart Systems Institute<br>
+          National University of Singapore
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Augmented Human Lab. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach(n=>{if(n.isIntersecting)n.target.classList.add('vis')})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+document.querySelector('.nav-toggle')?.addEventListener('click',()=>{const l=document.querySelector('.nav-links');l.style.display=l.style.display==='flex'?'none':'flex'});
+</script>
+</body>
+</html>

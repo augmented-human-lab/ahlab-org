@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Augmented Human Lab</title>
+<link rel="stylesheet" href="https://use.typekit.net/zws2qzx.css">
+<link rel="stylesheet" href="/css/project.css">
+<link rel="icon" href="https://ahlab.org/wp-content/uploads/2021/05/cropped-Group@2x-32x32.png" sizes="32x32">
+<meta name="description" content="Research projects from the Augmented Human Lab — extending perceptual and cognitive capabilities.">
+<style>
+/* Inline overrides specific to the projects archive page only.
+   Reuses tokens, nav, footer, .container, .rv from project.css */
+.projects-hero{padding:160px 0 60px;border-bottom:2px solid var(--color-neutral-30)}
+.projects-hero .hero-label{font-family:var(--font-display);font-weight:800;font-size:12px;letter-spacing:1.71px;text-transform:uppercase;color:var(--color-neutral-60);margin-bottom:14px}
+.projects-hero h1{font-family:var(--font-display);font-weight:700;font-size:60px;line-height:1.05;letter-spacing:-.02em;color:var(--color-neutral-100);margin-bottom:18px;max-width:900px}
+.projects-hero p{font-size:19px;line-height:28px;color:var(--color-neutral-70);max-width:620px}
+@media(max-width:767px){.projects-hero{padding:140px 0 48px}.projects-hero h1{font-size:38px}.projects-hero p{font-size:16px;line-height:24px}}
+
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;padding:60px 0 100px}
+@media(max-width:991px){.projects-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.projects-grid{grid-template-columns:1fr;gap:24px}}
+
+.project-card{display:block;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.project-card:hover{transform:translateY(-4px)}
+.project-card-thumb{aspect-ratio:16/10;overflow:hidden;border-radius:3px;background:var(--color-neutral-40);position:relative;margin-bottom:18px}
+.project-card-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.project-card:hover .project-card-thumb img{transform:scale(1.04)}
+.project-card-thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(221deg,rgba(0,215,238,.10) 0%,rgba(97,0,255,.06) 100%);pointer-events:none}
+.project-card .project-year{font-family:var(--font-display);font-weight:800;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--color-neutral-60);margin-bottom:6px}
+.project-card h3{font-family:var(--font-display);font-weight:700;font-size:22px;line-height:1.2;color:var(--color-neutral-100);margin-bottom:8px;transition:color .3s}
+.project-card:hover h3{color:var(--color-accent)}
+.project-card .project-summary{font-size:14px;line-height:21px;color:var(--color-neutral-70)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="/" class="logo"><img src="https://ahlab.org/wp-content/uploads/2021/03/Group@2x.png" alt="AHLab" height="28"></a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/vision/">Vision</a>
+    <a href="/projects/" class="active">Projects</a>
+    <a href="/publications/">Publications</a>
+    <a href="/people/">People</a>
+    <a href="/press/">Press &amp; Awards</a>
+    <a href="/join/">Join Us</a>
+  </div>
+  <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section class="projects-hero">
+  <div class="container">
+    <div class="hero-label">Projects</div>
+    <h1>Research at the Augmented Human Lab</h1>
+    <p>108 projects spanning audio, sensing, accessibility, and human-AI collaboration</p>
+  </div>
+</section>
+
+<!-- GRID -->
+<section class="container">
+  <div class="projects-grid">
+    
+    <a href="/projects/blind-drone/" class="project-card rv" style="transition-delay:0s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2025/10/image.png" alt="Blind Drone" loading="lazy">
+      </div>
+      <div class="project-year">Current</div>
+      <h3>Blind Drone</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/emodrink/" class="project-card rv" style="transition-delay:0.05s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2026/03/emo_teasor.png" alt="EmoDrink" loading="lazy">
+      </div>
+      <div class="project-year">Current</div>
+      <h3>EmoDrink</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/factually/" class="project-card rv" style="transition-delay:0.1s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2026/04/Thumbnail-Chitralekha-Gupta.png" alt="Factually" loading="lazy">
+      </div>
+      <div class="project-year">Current</div>
+      <h3>Factually</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/gutio/" class="project-card rv" style="transition-delay:0.15000000000000002s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2026/04/movie_study-Mia-Huong-Nguyen.png" alt="GutIO" loading="lazy">
+      </div>
+      <div class="project-year">Current</div>
+      <h3>GutIO</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/zenflow/" class="project-card rv" style="transition-delay:0.2s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2026/04/Thumbnail-Praveen-Sasikumar.jpg" alt="Zenflow" loading="lazy">
+      </div>
+      <div class="project-year">Current</div>
+      <h3>Zenflow</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/soniphy/" class="project-card rv" style="transition-delay:0.25s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2024/02/soniphy-cover-Phoebe-Chua-scaled.jpg" alt="SoniPhy" loading="lazy">
+      </div>
+      <div class="project-year">2025</div>
+      <h3>SoniPhy</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/sonicvista/" class="project-card rv" style="transition-delay:0.30000000000000004s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2024/02/sonicvista_thumbnail.png" alt="SonicVista" loading="lazy">
+      </div>
+      <div class="project-year">2025</div>
+      <h3>SonicVista</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/dysalytics/" class="project-card rv" style="transition-delay:0.35000000000000003s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2025/10/image-2.png" alt="Dysalytics" loading="lazy">
+      </div>
+      <div class="project-year">2025</div>
+      <h3>Dysalytics</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/dronebuddy/" class="project-card rv" style="transition-delay:0.4s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2024/02/dronebuddy_thumb-scaled.jpg" alt="DroneBuddy" loading="lazy">
+      </div>
+      <div class="project-year">2025</div>
+      <h3>DroneBuddy</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/curious-shorts/" class="project-card rv" style="transition-delay:0.45s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2025/02/s5ufioq3tobz8kfcztmq-copy-1.jpg" alt="Curious Shorts" loading="lazy">
+      </div>
+      <div class="project-year">2025</div>
+      <h3>Curious Shorts</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/aisee/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/AiSee_v2_headset.jpg" alt="AiSee" loading="lazy">
+      </div>
+      <div class="project-year">2025</div>
+      <h3>AiSee</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/xr-floatation-therapy/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2024/02/mafe_feature-scaled.jpg" alt="XR Floatation Therapy" loading="lazy">
+      </div>
+      <div class="project-year">2024</div>
+      <h3>XR Floatation Therapy</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/ubipen/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2024/10/apparatusgui2-copy-Moritz-Messerschmidt.png" alt="UbiPen" loading="lazy">
+      </div>
+      <div class="project-year">2024</div>
+      <h3>UbiPen</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/toro/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/09/Screen-Shot-2021-09-24-at-1.46.01-AM.png" alt="Toro" loading="lazy">
+      </div>
+      <div class="project-year">2024</div>
+      <h3>Toro</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/stakco/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2024/02/20240214_132245-scaled.jpg" alt="Stakco" loading="lazy">
+      </div>
+      <div class="project-year">2024</div>
+      <h3>Stakco</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/sound-designer-generative-ai-interactions/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2024/08/thumbnail-Purnima-Kamath.png" alt="Sound Designer-Generative AI Interactions" loading="lazy">
+      </div>
+      <div class="project-year">2024</div>
+      <h3>Sound Designer-Generative AI Interactions</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/seear/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2024/04/teaser-2-Yasith-Samaradivakara.jpg" alt="SeEar" loading="lazy">
+      </div>
+      <div class="project-year">2024</div>
+      <h3>SeEar</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/kavy/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2024/02/kavy_sq.png" alt="Kavy" loading="lazy">
+      </div>
+      <div class="project-year">2024</div>
+      <h3>Kavy</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/itiles/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2024/02/itiles_header-scaled.jpg" alt="iTILES" loading="lazy">
+      </div>
+      <div class="project-year">2024</div>
+      <h3>iTILES</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/emo-know/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2024/02/emotion-distribution-Mia-Huong-Nguyen.png" alt="EMO-KNOW" loading="lazy">
+      </div>
+      <div class="project-year">2024</div>
+      <h3>EMO-KNOW</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/cotacs/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2024/10/img-DOso4XQdWwf9D0QUQvS53-Moritz-Messerschmidt.jpeg" alt="CoTacs" loading="lazy">
+      </div>
+      <div class="project-year">2024</div>
+      <h3>CoTacs</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/hopu/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2023/02/hopu-square.png" alt="Hopu" loading="lazy">
+      </div>
+      <div class="project-year">2023</div>
+      <h3>Hopu</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/crowd-eval-audio/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2023/02/crowdeval-audio-thumb.png" alt="Crowd-Eval-Audio" loading="lazy">
+      </div>
+      <div class="project-year">2023</div>
+      <h3>Crowd-Eval-Audio</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/audio-morph-gan/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2023/03/thumbnail-min.png" alt="Audio-Morph GAN" loading="lazy">
+      </div>
+      <div class="project-year">2023</div>
+      <h3>Audio-Morph GAN</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/xrtic/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2022/11/0-thumbnail-square-scaled.jpg" alt="XRtic" loading="lazy">
+      </div>
+      <div class="project-year">2022</div>
+      <h3>XRtic</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/vrhook/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2022/07/Screen-Shot-2022-07-28-at-10.47.32-AM-e1666881657577.png" alt="VRHook" loading="lazy">
+      </div>
+      <div class="project-year">2022</div>
+      <h3>VRHook</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/scratch-and-sense/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2022/06/scratch_feature.png" alt="Scratch and Sense" loading="lazy">
+      </div>
+      <div class="project-year">2022</div>
+      <h3>Scratch and Sense</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/kiwrious/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/20_12_03_ABI_MCrawford_CP_2647-scaled.jpg" alt="Kiwrious" loading="lazy">
+      </div>
+      <div class="project-year">2022</div>
+      <h3>Kiwrious</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/affect-in-the-wild/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/affect-in-wild-header.png" alt="Affect in the Wild" loading="lazy">
+      </div>
+      <div class="project-year">2022</div>
+      <h3>Affect in the Wild</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/ticklefoot/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/09/prototype_v2.jpg" alt="TickleFoot" loading="lazy">
+      </div>
+      <div class="project-year">2021</div>
+      <h3>TickleFoot</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/stressshoe/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/06/IMG_0176.png" alt="StressShoe" loading="lazy">
+      </div>
+      <div class="project-year">2021</div>
+      <h3>StressShoe</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/om/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/Screen-Shot-2020-07-23-at-10.30.40.png" alt="OM" loading="lazy">
+      </div>
+      <div class="project-year">2021</div>
+      <h3>OM</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/magicblocks/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/09/image3.jpg" alt="MagicBLOCKS" loading="lazy">
+      </div>
+      <div class="project-year">2021</div>
+      <h3>MagicBLOCKS</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/lightsense/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/08/LightSense_post-header.jpg" alt="LightSense" loading="lazy">
+      </div>
+      <div class="project-year">2021</div>
+      <h3>LightSense</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/kinvoice/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/09/teaser_2.jpg" alt="KinVoice" loading="lazy">
+      </div>
+      <div class="project-year">2021</div>
+      <h3>KinVoice</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/eyeknowyou/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/09/eyeknowyou.png" alt="EyeKnowYou" loading="lazy">
+      </div>
+      <div class="project-year">2021</div>
+      <h3>EyeKnowYou</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/clothtiles/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/5-1.jpg" alt="ClothTiles" loading="lazy">
+      </div>
+      <div class="project-year">2021</div>
+      <h3>ClothTiles</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/anisma/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/09/ANISMA_logo_thumbnail_sm.jpg" alt="ANISMA" loading="lazy">
+      </div>
+      <div class="project-year">2021</div>
+      <h3>ANISMA</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/versatouch/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/1_1.png" alt="VersaTouch" loading="lazy">
+      </div>
+      <div class="project-year">2020</div>
+      <h3>VersaTouch</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/stressfoot/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/thumbnail_0.jpg" alt="StressFoot" loading="lazy">
+      </div>
+      <div class="project-year">2020</div>
+      <h3>StressFoot</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/rainbowhub/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/RUN_Creative_Agency_NZ_LightsDA_2.jpg" alt="RainbowHub" loading="lazy">
+      </div>
+      <div class="project-year">2020</div>
+      <h3>RainbowHub</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/prompto/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/usercloseup.jpg" alt="Prompto" loading="lazy">
+      </div>
+      <div class="project-year">2020</div>
+      <h3>Prompto</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/phantomtouch/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/1-PhantomTouch.jpg" alt="PhantomTouch" loading="lazy">
+      </div>
+      <div class="project-year">2020</div>
+      <h3>PhantomTouch</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/jammify/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/1.jpg" alt="Jammify" loading="lazy">
+      </div>
+      <div class="project-year">2020</div>
+      <h3>Jammify</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/actualtouch/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/image-1.png" alt="ActualTouch" loading="lazy">
+      </div>
+      <div class="project-year">2020</div>
+      <h3>ActualTouch</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/prospero/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/prospero_feature_new.png" alt="Prospero" loading="lazy">
+      </div>
+      <div class="project-year">2019</div>
+      <h3>Prospero</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/m-hair/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/xr_144s1-yaml5_website_image_0.jpg" alt="M-Hair" loading="lazy">
+      </div>
+      <div class="project-year">2019</div>
+      <h3>M-Hair</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/gymsoles/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/GymSoleV3_0.png" alt="GymSoles" loading="lazy">
+      </div>
+      <div class="project-year">2019</div>
+      <h3>GymSoles</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/chewit/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/ChewIt3.png" alt="ChewIt" loading="lazy">
+      </div>
+      <div class="project-year">2019</div>
+      <h3>ChewIt</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/target-driven-navigation/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/WhatsApp-Image-2021-06-11-at-2.28.49-PM.jpeg" alt="Target Driven Navigation" loading="lazy">
+      </div>
+      <div class="project-year">2018</div>
+      <h3>Target Driven Navigation</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/step-detection-algorithm/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/sui2018_0_0.jpg" alt="Step Detection Algorithm" loading="lazy">
+      </div>
+      <div class="project-year">2018</div>
+      <h3>Step Detection Algorithm</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/prospecfit/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/prospecfit_user1_0.jpg" alt="ProspecFit" loading="lazy">
+      </div>
+      <div class="project-year">2018</div>
+      <h3>ProspecFit</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/osense/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/device_0-scaled.jpg" alt="oSense" loading="lazy">
+      </div>
+      <div class="project-year">2018</div>
+      <h3>oSense</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/lighttank/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/LightTank-3_arc-sec_Inhalt-1_0.jpg" alt="LightTank" loading="lazy">
+      </div>
+      <div class="project-year">2018</div>
+      <h3>LightTank</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/fsense/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/application_scenarios-Copy.jpg" alt="fSense" loading="lazy">
+      </div>
+      <div class="project-year">2018</div>
+      <h3>fSense</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/evaluating-ivr-in-schools/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/header-scaled.jpg" alt="Evaluating IVR in schools" loading="lazy">
+      </div>
+      <div class="project-year">2018</div>
+      <h3>Evaluating IVR in schools</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/cricketcoach/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/3-grip-scaled.jpg" alt="CricketCoach" loading="lazy">
+      </div>
+      <div class="project-year">2018</div>
+      <h3>CricketCoach</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/comprate/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/Artboard-1.png" alt="CompRate" loading="lazy">
+      </div>
+      <div class="project-year">2018</div>
+      <h3>CompRate</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/capmat/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/IMG_4432_cut_comp_0.jpg" alt="CapMat" loading="lazy">
+      </div>
+      <div class="project-year">2018</div>
+      <h3>CapMat</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/abi-foodcam/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/foodcam_thumbnail.jpg" alt="ABI FoodCam" loading="lazy">
+      </div>
+      <div class="project-year">2018</div>
+      <h3>ABI FoodCam</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/2bit-tactile-hand/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/banner3-2_0.png" alt="2bit-Tactile Hand" loading="lazy">
+      </div>
+      <div class="project-year">2018</div>
+      <h3>2bit-Tactile Hand</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/thumb-in-motion/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/SIM_2.png" alt="Thumb in Motion" loading="lazy">
+      </div>
+      <div class="project-year">2017</div>
+      <h3>Thumb in Motion</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/muss-bits/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/MuSS-Bits3-300x225_0.jpg" alt="MuSS-Bits" loading="lazy">
+      </div>
+      <div class="project-year">2017</div>
+      <h3>MuSS-Bits</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/kyanite/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/rsz_kyanite-pic.png" alt="Kyanite" loading="lazy">
+      </div>
+      <div class="project-year">2017</div>
+      <h3>Kyanite</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/insight/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/G-Ripple2-scaled.jpg" alt="InSight" loading="lazy">
+      </div>
+      <div class="project-year">2017</div>
+      <h3>InSight</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/gestakey/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/GestAKey_1.jpg" alt="GestAKey" loading="lazy">
+      </div>
+      <div class="project-year">2017</div>
+      <h3>GestAKey</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/gescad/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/Screen-Shot-2017-08-25-at-3.21.49-PM.png" alt="GesCAD" loading="lazy">
+      </div>
+      <div class="project-year">2017</div>
+      <h3>GesCAD</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/fingerreader/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/10_0-scaled.jpg" alt="FingerReader" loading="lazy">
+      </div>
+      <div class="project-year">2017</div>
+      <h3>FingerReader</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/doodle-daydream/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/thumbnail.jpg" alt="Doodle Daydream" loading="lazy">
+      </div>
+      <div class="project-year">2017</div>
+      <h3>Doodle Daydream</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/chaddybuddy/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/Picture_ChaddyBuddy.png" alt="ChaddyBuddy" loading="lazy">
+      </div>
+      <div class="project-year">2017</div>
+      <h3>ChaddyBuddy</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/zsense/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/zSense0_0-1.png" alt="zSense" loading="lazy">
+      </div>
+      <div class="project-year">2016</div>
+      <h3>zSense</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/wavesense/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/Screen-Shot-2016-09-07-at-5.28.24-pm.png" alt="WaveSense" loading="lazy">
+      </div>
+      <div class="project-year">2016</div>
+      <h3>WaveSense</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/swimsight/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/rsz_3g1a56281.jpg" alt="SwimSight" loading="lazy">
+      </div>
+      <div class="project-year">2016</div>
+      <h3>SwimSight</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/stickamps/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/sa_glove_using-web.png" alt="StickAmps" loading="lazy">
+      </div>
+      <div class="project-year">2016</div>
+      <h3>StickAmps</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/postbits/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/Image-9_0.jpg" alt="PostBits" loading="lazy">
+      </div>
+      <div class="project-year">2016</div>
+      <h3>PostBits</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/knoctify/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/AHLab1.jpg" alt="Knoctify" loading="lazy">
+      </div>
+      <div class="project-year">2016</div>
+      <h3>Knoctify</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/armsleeve/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/2016-01-21-14.34.50-scaled.jpg" alt="ArmSleeve" loading="lazy">
+      </div>
+      <div class="project-year">2016</div>
+      <h3>ArmSleeve</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/the-ribbon/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/RIBbon2.jpg" alt="The RIBbon" loading="lazy">
+      </div>
+      <div class="project-year">2015</div>
+      <h3>The RIBbon</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/sonicsg/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/sutd-sonic-sg-19_edited-s.jpeg" alt="SonicSG" loading="lazy">
+      </div>
+      <div class="project-year">2015</div>
+      <h3>SonicSG</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/shrug/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/Screen-Shot-2015-07-24-at-10.59.44-am.png" alt="SHRUG" loading="lazy">
+      </div>
+      <div class="project-year">2015</div>
+      <h3>SHRUG</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/rippletouch/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/06/Screen-Shot-2021-06-07-at-10.49.46-AM.png" alt="RippleTouch" loading="lazy">
+      </div>
+      <div class="project-year">2015</div>
+      <h3>RippleTouch</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/mobile-360-video-interaction/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/Mixed-300x225-1.png" alt="Mobile 360° Video Interaction" loading="lazy">
+      </div>
+      <div class="project-year">2015</div>
+      <h3>Mobile 360° Video Interaction</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/fingerreader-v0/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/ring_in_use_corrected.jpg" alt="FingerReader-v0" loading="lazy">
+      </div>
+      <div class="project-year">2015</div>
+      <h3>FingerReader-v0</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/feel-the-globe/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/feeltheglobe_feature_image_0.png" alt="Feel the Globe" loading="lazy">
+      </div>
+      <div class="project-year">2015</div>
+      <h3>Feel the Globe</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/bward/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/frontpicture.png" alt="BWard" loading="lazy">
+      </div>
+      <div class="project-year">2015</div>
+      <h3>BWard</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/sparkubes/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/sparkubes_feature_image.jpg" alt="SparKubes" loading="lazy">
+      </div>
+      <div class="project-year">2014</div>
+      <h3>SparKubes</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/paperpixels/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/PaperPixels_feature_image.jpg" alt="PaperPixels" loading="lazy">
+      </div>
+      <div class="project-year">2014</div>
+      <h3>PaperPixels</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/nzwarm/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/nZwarm_feature_image.jpg" alt="nZwarm" loading="lazy">
+      </div>
+      <div class="project-year">2014</div>
+      <h3>nZwarm</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/keepers-bees/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/KeeperandBeeper_feature_image.jpeg" alt="Keepers &amp; Bees" loading="lazy">
+      </div>
+      <div class="project-year">2014</div>
+      <h3>Keepers &amp; Bees</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/iswarm/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/iswarm_feature_image.png" alt="iSwarm" loading="lazy">
+      </div>
+      <div class="project-year">2014</div>
+      <h3>iSwarm</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/ircx/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/ircX-webpage.png" alt="ircX" loading="lazy">
+      </div>
+      <div class="project-year">2014</div>
+      <h3>ircX</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/i-draw/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/idraw_feature_image.jpg" alt="I-Draw" loading="lazy">
+      </div>
+      <div class="project-year">2014</div>
+      <h3>I-Draw</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/foot-note/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/footnote.png" alt="Foot.Note" loading="lazy">
+      </div>
+      <div class="project-year">2014</div>
+      <h3>Foot.Note</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/earput/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/earput_feature_image.png" alt="EarPut" loading="lazy">
+      </div>
+      <div class="project-year">2014</div>
+      <h3>EarPut</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/stickear/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/stickear_feature_image.png" alt="StickEar" loading="lazy">
+      </div>
+      <div class="project-year">2013</div>
+      <h3>StickEar</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/spidervision/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/spidervision_feature_image.png" alt="SpiderVision" loading="lazy">
+      </div>
+      <div class="project-year">2013</div>
+      <h3>SpiderVision</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/smartfinger/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/smartfinger_feature_image.png" alt="SmartFinger" loading="lazy">
+      </div>
+      <div class="project-year">2013</div>
+      <h3>SmartFinger</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/fingerdraw/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/fingerdraw_feature_image.png" alt="FingerDraw" loading="lazy">
+      </div>
+      <div class="project-year">2013</div>
+      <h3>FingerDraw</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/birdie/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/Birdie_feature_image.png" alt="Birdie" loading="lazy">
+      </div>
+      <div class="project-year">2013</div>
+      <h3>Birdie</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/augmented-forearm/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/augmentedforearm_feature_image.png" alt="Augmented Forearm" loading="lazy">
+      </div>
+      <div class="project-year">2013</div>
+      <h3>Augmented Forearm</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/watchme/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/watchme_feature_image.png" alt="WatchMe" loading="lazy">
+      </div>
+      <div class="project-year">2012</div>
+      <h3>WatchMe</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/speechplay/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/speechplay_feature_image.png" alt="SpeechPlay" loading="lazy">
+      </div>
+      <div class="project-year">2012</div>
+      <h3>SpeechPlay</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/sparsh/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/sparsh_feature_image.png" alt="Sparsh" loading="lazy">
+      </div>
+      <div class="project-year">2012</div>
+      <h3>Sparsh</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/eyering/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/eyering_feature_image.png" alt="EyeRing" loading="lazy">
+      </div>
+      <div class="project-year">2012</div>
+      <h3>EyeRing</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/sutdfoodcam/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/foodcam_feature_image.png" alt="SUTDFoodCam" loading="lazy">
+      </div>
+      <div class="project-year">2011</div>
+      <h3>SUTDFoodCam</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/soundfloor/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/soundfloor_feature_image.png" alt="SoundFloor" loading="lazy">
+      </div>
+      <div class="project-year">2011</div>
+      <h3>SoundFloor</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/sensei/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/sensei_feature_image.png" alt="Sensei" loading="lazy">
+      </div>
+      <div class="project-year">2011</div>
+      <h3>Sensei</h3>
+      <div class="project-summary"></div>
+    </a>
+    <a href="/projects/hapticchair/" class="project-card rv" style="transition-delay:0.5s">
+      <div class="project-card-thumb">
+        <img src="https://ahlab.org/wp-content/uploads/2021/05/hapticchair_feature_image.png" alt="HapticChair" loading="lazy">
+      </div>
+      <div class="project-year">2011</div>
+      <h3>HapticChair</h3>
+      <div class="project-summary"></div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://ahlab.org/wp-content/uploads/2021/03/Group-4@2x.png" alt="AHLab">
+        <p>Augmented Human Lab — extending the limits of our perceptual and cognitive capabilities.</p>
+      </div>
+      <div class="footer-nav-col">
+        <h5>Explore</h5>
+        <a href="/vision/">Vision</a>
+        <a href="/projects/">Projects</a>
+        <a href="/publications/">Publications</a>
+        <a href="/people/">People</a>
+        <a href="/press/">Press &amp; Awards</a>
+        <a href="/join/">Join Us</a>
+      </div>
+      <div class="footer-contact">
+        <h5>Contact</h5>
+        <a href="mailto:info@ahlab.org">info@ahlab.org</a>
+        <p style="margin-top:16px">
+          <strong style="color:rgba(255,255,255,.7)">Augmented Human Lab</strong><br>
+          Smart Systems Institute<br>
+          National University of Singapore
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Augmented Human Lab. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach(n=>{if(n.isIntersecting)n.target.classList.add('vis')})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+document.querySelector('.nav-toggle')?.addEventListener('click',()=>{const l=document.querySelector('.nav-links');l.style.display=l.style.display==='flex'?'none':'flex'});
+</script>
+</body>
+</html>

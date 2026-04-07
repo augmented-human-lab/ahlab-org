@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join Us — Augmented Human Lab</title>
+<link rel="stylesheet" href="https://use.typekit.net/zws2qzx.css">
+<style>
+:root{--color-accent:#6100FF;--color-accent-dark:#4400B3;--color-accent-light:#904DFF;--gradient-start:#00D7EE;--gradient-end:#6100FF;--color-neutral-10:#FFFFFF;--color-neutral-20:#F4F7F9;--color-neutral-30:#EDF0F3;--color-neutral-40:#C9D8E3;--color-neutral-60:#AAAFB6;--color-neutral-70:#838D95;--color-neutral-80:#5E6875;--color-neutral-100:#0E0F11;--color-black:#000;--color-error:#A8071A;--font-display:"neue-haas-grotesk-display",sans-serif;--font-text:"neue-haas-grotesk-text",sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-text);font-weight:400;font-size:16px;line-height:24px;color:var(--color-neutral-100);background:var(--color-neutral-10);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;height:auto;display:block}
+ul{list-style:none}
+.container{width:100%;max-width:1370px;margin:0 auto;padding:0 40px}
+@media(max-width:767px){.container{padding:0 20px}}
+
+/* Reveal */
+.rv{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.rv.vis{opacity:1;transform:translateY(0)}
+.rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}.rv-d4{transition-delay:.4s}.rv-d5{transition-delay:.5s}
+
+/* ---- NAV ---- */
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:92px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,box-shadow .4s}
+.site-nav.scrolled{background:rgba(255,255,255,.96);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.site-nav .logo img{height:28px;width:auto;transition:opacity .3s}
+.site-nav .logo:hover img{opacity:.7}
+.site-nav .logo .logo-l{display:block}.site-nav .logo .logo-d{display:none}
+.site-nav.scrolled .logo .logo-l{display:none}.site-nav.scrolled .logo .logo-d{display:block}
+.nav-links{display:flex;gap:36px;align-items:center}
+.nav-links a{font-family:var(--font-text);font-weight:500;font-size:14px;letter-spacing:.02em;color:rgba(255,255,255,.7);transition:color .3s}
+.nav-links a:hover{color:#fff}.nav-links a.active{color:#fff}
+.site-nav.scrolled .nav-links a{color:var(--color-neutral-80)}
+.site-nav.scrolled .nav-links a:hover{color:var(--color-accent)}
+.site-nav.scrolled .nav-links a.active{color:var(--color-neutral-100)}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;width:35px;height:19px;position:relative}
+.nav-toggle span{display:block;width:100%;height:2px;background:#fff;position:absolute;left:0;transition:all .3s}
+.nav-toggle span:nth-child(1){top:0}.nav-toggle span:nth-child(2){top:8px}.nav-toggle span:nth-child(3){top:16px}
+.site-nav.scrolled .nav-toggle span{background:var(--color-neutral-100)}
+@media(max-width:991px){.nav-links{display:none}.nav-toggle{display:block}}
+
+/* ---- HERO ---- */
+.hero{position:relative;min-height:560px;display:flex;align-items:flex-end;padding:0 0 80px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(221deg,rgba(0,215,238,.7) 0%,rgba(97,0,255,.5) 100%),url('https://ahlab.org/wp-content/uploads/2021/06/join_us_hero-1-1-scaled.jpg');background-size:cover;background-position:center top;animation:heroScale 1.4s cubic-bezier(.16,1,.3,1) both}
+@keyframes heroScale{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:scale(1)}}
+.hero::after{content:"";position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,rgba(0,0,0,.25),transparent);pointer-events:none}
+.hero .container{position:relative;z-index:2}
+.hero-label{font-family:var(--font-display);font-weight:800;font-size:12px;letter-spacing:1.71px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:20px;animation:fadeUp .8s .2s cubic-bezier(.16,1,.3,1) both}
+.hero h1{font-family:var(--font-display);font-weight:700;font-size:52px;line-height:1.1;color:#fff;letter-spacing:-.02em;max-width:780px;animation:fadeUp .8s .4s cubic-bezier(.16,1,.3,1) both}
+.hero-sub{font-size:21px;line-height:35px;color:rgba(255,255,255,.8);margin-top:24px;max-width:580px;animation:fadeUp .8s .6s cubic-bezier(.16,1,.3,1) both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:991px){.hero{min-height:440px;padding-bottom:60px}.hero h1{font-size:40px}}
+@media(max-width:567px){.hero h1{font-size:32px;line-height:1.15}.hero-sub{font-size:19px;line-height:28px}}
+
+/* ---- POSITIONS SECTION ---- */
+.section-positions{padding:120px 0 60px}
+.positions-intro{max-width:720px;margin-bottom:80px}
+.positions-intro .section-label{font-family:var(--font-display);font-weight:800;font-size:12px;letter-spacing:1.71px;text-transform:uppercase;color:var(--color-neutral-60);margin-bottom:20px}
+.positions-intro h2{font-family:var(--font-display);font-weight:700;font-size:44px;line-height:46px;color:var(--color-neutral-100);margin-bottom:20px}
+.positions-intro p{font-size:21px;line-height:35px;color:var(--color-neutral-80)}
+
+/* Position rows */
+.position-row{display:grid;grid-template-columns:280px 1fr;gap:60px;align-items:start;padding:56px 0;border-top:2px solid var(--color-neutral-30)}
+.position-row:last-child{border-bottom:2px solid var(--color-neutral-30)}
+.position-row .pos-number{font-family:var(--font-display);font-weight:200;font-size:48px;line-height:1;color:var(--color-neutral-30);margin-bottom:12px}
+.position-row h3{font-family:var(--font-display);font-weight:700;font-size:24px;line-height:29px;color:var(--color-neutral-100)}
+.position-row .pos-body p{font-size:21px;line-height:35px;color:var(--color-neutral-100);margin-bottom:16px}
+.position-row .pos-body p:last-child{margin-bottom:0}
+.position-row .pos-body a{color:var(--color-accent);font-weight:600;transition:color .3s;border-bottom:1px solid transparent}
+.position-row .pos-body a:hover{border-bottom-color:var(--color-accent)}
+.pos-apply{display:inline-flex;align-items:center;gap:10px;margin-top:24px;font-family:var(--font-text);font-weight:600;font-size:16px;color:var(--color-accent);border:1px solid var(--color-accent);padding:12px 32px;border-radius:3px;transition:all .4s}
+.pos-apply:hover{background:var(--color-accent);color:#fff}
+.pos-apply svg{transition:transform .3s}.pos-apply:hover svg{transform:translateX(3px)}
+
+@media(max-width:991px){
+  .section-positions{padding:80px 0 40px}
+  .positions-intro h2{font-size:36px;line-height:42px}
+  .position-row{grid-template-columns:1fr;gap:20px;padding:40px 0}
+  .position-row .pos-body p{font-size:19px;line-height:28px}
+}
+
+/* ---- WHAT WE LOOK FOR ---- */
+.section-qualities{padding:100px 0;background:var(--color-neutral-100);position:relative;overflow:hidden}
+.section-qualities::before{content:"";position:absolute;top:-160px;right:-160px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(97,0,255,.1) 0%,transparent 70%);pointer-events:none}
+.qualities-header{text-align:center;max-width:640px;margin:0 auto 64px}
+.qualities-header .section-label{font-family:var(--font-display);font-weight:800;font-size:12px;letter-spacing:1.71px;text-transform:uppercase;color:var(--color-neutral-60);margin-bottom:20px}
+.qualities-header h2{font-family:var(--font-display);font-weight:700;font-size:44px;line-height:46px;color:#fff}
+.qualities-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.quality-card{padding:36px 32px;border-radius:3px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03);transition:all .4s;position:relative;overflow:hidden}
+.quality-card::before{content:"";position:absolute;inset:0;background:linear-gradient(233.39deg,rgba(0,215,238,1) 0%,rgba(97,0,255,1) 100%);opacity:0;transition:opacity .4s;border-radius:3px}
+.quality-card:hover::before{opacity:1}
+.quality-card:hover{border-color:transparent;transform:translateY(-4px)}
+.quality-card>*{position:relative;z-index:1}
+.quality-icon{font-family:var(--font-display);font-weight:200;font-size:56px;line-height:1;color:rgba(255,255,255,.08);margin-bottom:20px;transition:color .4s}
+.quality-card:hover .quality-icon{color:rgba(255,255,255,.2)}
+.quality-card h3{font-family:var(--font-display);font-weight:700;font-size:20px;line-height:26px;color:#fff;margin-bottom:10px}
+.quality-card p{font-size:15px;line-height:24px;color:rgba(255,255,255,.55);transition:color .4s}
+.quality-card:hover p{color:rgba(255,255,255,.9)}
+@media(max-width:991px){.qualities-grid{grid-template-columns:1fr;gap:16px}.qualities-header h2{font-size:36px;line-height:42px}}
+
+/* ---- CTA ---- */
+.section-cta{padding:100px 0;background:linear-gradient(228deg,var(--gradient-start) 0%,var(--gradient-end) 100%)}
+.cta-inner{display:flex;align-items:center;justify-content:space-between;gap:40px}
+.cta-text h2{font-family:var(--font-display);font-weight:700;font-size:36px;line-height:41.5px;color:#fff;margin-bottom:12px}
+.cta-text p{font-size:21px;line-height:35px;color:rgba(255,255,255,.8)}
+.btn-white{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-text);font-weight:600;font-size:18px;color:var(--color-accent);background:#fff;border:1px solid #fff;padding:16px 70px;border-radius:3px;transition:all .4s;cursor:pointer;flex-shrink:0}
+.btn-white:hover{background:transparent;color:#fff}
+@media(max-width:991px){.cta-inner{flex-direction:column;text-align:center}.cta-text h2{font-size:32px;line-height:38px}.cta-text p{font-size:19px;line-height:28px}}
+
+/* ---- FOOTER ---- */
+.site-footer{background:var(--color-neutral-100);padding:80px 0 24px}
+.footer-top{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,.08)}
+.footer-brand img{height:28px;width:auto;margin-bottom:24px}
+.footer-brand p{font-size:15px;line-height:24px;color:var(--color-neutral-70);max-width:280px}
+.footer-nav-col h5{font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--color-neutral-60);text-transform:uppercase;letter-spacing:.1em;margin-bottom:20px}
+.footer-nav-col a{display:block;font-size:15px;color:rgba(255,255,255,.5);margin-bottom:12px;transition:color .3s}
+.footer-nav-col a:hover{color:#fff}
+.footer-contact h5{font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--color-neutral-60);text-transform:uppercase;letter-spacing:.1em;margin-bottom:20px}
+.footer-contact a,.footer-contact p{font-size:15px;line-height:24px;color:rgba(255,255,255,.5);transition:color .3s}
+.footer-contact a:hover{color:#fff}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.3)}
+.footer-social{display:flex;gap:20px}
+.footer-social a{color:rgba(255,255,255,.4);transition:color .3s;display:flex}
+.footer-social a:hover{color:#fff}
+.footer-social svg{width:18px;height:18px}
+@media(max-width:767px){.footer-top{grid-template-columns:1fr;gap:40px}.footer-bottom{flex-direction:column-reverse;gap:16px;text-align:center}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav" id="siteNav">
+  <a href="/" class="logo">
+    <img class="logo-l" src="https://ahlab.org/wp-content/uploads/2021/03/Group-4@2x.png" alt="AHLab" height="28">
+    <img class="logo-d" src="https://ahlab.org/wp-content/uploads/2021/03/Group@2x.png" alt="AHLab" height="28">
+  </a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/vision/">Vision</a>
+    <a href="/projects/">Projects</a>
+    <a href="/publications/">Publications</a>
+    <a href="/people/">People</a>
+    <a href="/press/">Press & Awards</a>
+    <a href="/join/" class="active">Join Us</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-label">Join Us</div>
+    <h1>Interested in joining a talented and fun team of people?</h1>
+    <p class="hero-sub">We're always looking for curious minds who want to push the boundaries of human-computer interaction and assistive augmentation.</p>
+  </div>
+</section>
+
+<!-- POSITIONS -->
+<section class="section-positions">
+  <div class="container">
+    <div class="positions-intro rv">
+      <div class="section-label">Open Opportunities</div>
+      <h2>Ways to join our lab</h2>
+      <p>Whether you're an undergraduate, graduate student, or an experienced researcher — there's a place for you at AHLab.</p>
+    </div>
+
+    <div class="position-row rv">
+      <div class="pos-meta">
+        <div class="pos-number">01</div>
+        <h3>NUS Undergraduates</h3>
+      </div>
+      <div class="pos-body">
+        <p>We are open to curious, hardworking students who are not over-committed with other work. Please look at our <a href="/projects/">projects</a> to find out more about what we do, and read about <a href="https://interactions.acm.org/archive/view/january-february-2025/assistive-augmentation-fundamentally-transforming-human-ability" target="_blank">Assistive Augmentation</a>.</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7-BXkjVxggnYZuV1I8mQKeEEIHEQE370B4vqGIdfg5QNt9A/viewform" target="_blank" class="pos-apply">
+          Apply Now
+          <svg width="8" height="16" viewBox="0 0 8 16" fill="none"><path d="M1 1L6 8L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="position-row rv">
+      <div class="pos-meta">
+        <div class="pos-number">02</div>
+        <h3>Graduate Students</h3>
+      </div>
+      <div class="pos-body">
+        <p>As a PhD student, you will be working in the broader area of <a href="https://interactions.acm.org/archive/view/january-february-2025/assistive-augmentation-fundamentally-transforming-human-ability" target="_blank">Assistive Augmentation</a>. Please make sure that your Statement of Purpose is aligned with this vision. Best to reach out via our application form prior to formally applying through <a href="https://www.comp.nus.edu.sg/programmes/pg/phdcs/" target="_blank">NUS Computer Science</a>.</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7-BXkjVxggnYZuV1I8mQKeEEIHEQE370B4vqGIdfg5QNt9A/viewform" target="_blank" class="pos-apply">
+          Apply Now
+          <svg width="8" height="16" viewBox="0 0 8 16" fill="none"><path d="M1 1L6 8L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="position-row rv">
+      <div class="pos-meta">
+        <div class="pos-number">03</div>
+        <h3>Full-Time Positions</h3>
+      </div>
+      <div class="pos-body">
+        <p>We may have full-time positions (Research Fellow, Research Assistant) coming up. We are particularly keen to hire those interested in Assistive Tech, Cognitive Augmentation, Human-Centered AI, Interaction Design, and Wearable & Ubiquitous Computing.</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7-BXkjVxggnYZuV1I8mQKeEEIHEQE370B4vqGIdfg5QNt9A/viewform" target="_blank" class="pos-apply">
+          Apply Now
+          <svg width="8" height="16" viewBox="0 0 8 16" fill="none"><path d="M1 1L6 8L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="position-row rv">
+      <div class="pos-meta">
+        <div class="pos-number">04</div>
+        <h3>Visiting Students</h3>
+      </div>
+      <div class="pos-body">
+        <p>We have limited openings for visiting researchers and interns (undergraduate or graduate students). These are typically self-funded positions.</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7-BXkjVxggnYZuV1I8mQKeEEIHEQE370B4vqGIdfg5QNt9A/viewform" target="_blank" class="pos-apply">
+          Apply Now
+          <svg width="8" height="16" viewBox="0 0 8 16" fill="none"><path d="M1 1L6 8L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="position-row rv">
+      <div class="pos-meta">
+        <div class="pos-number">05</div>
+        <h3>Industry Partners</h3>
+      </div>
+      <div class="pos-body">
+        <p>Augmented Human Lab has had very successful collaborations with industry. We welcome new industry collaborations. If interested, please reach out directly.</p>
+        <a href="mailto:suranga@ahlab.org" class="pos-apply">
+          Contact Us
+          <svg width="8" height="16" viewBox="0 0 8 16" fill="none"><path d="M1 1L6 8L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE LOOK FOR -->
+<section class="section-qualities">
+  <div class="container">
+    <div class="qualities-header rv">
+      <div class="section-label">What We Value</div>
+      <h2>What we look for</h2>
+    </div>
+    <div class="qualities-grid">
+      <div class="quality-card rv rv-d1">
+        <div class="quality-icon">01</div>
+        <h3>Curiosity & Initiative</h3>
+        <p>We value self-starters who ask "what if?" and aren't afraid to explore unconventional ideas across disciplines.</p>
+      </div>
+      <div class="quality-card rv rv-d2">
+        <div class="quality-icon">02</div>
+        <h3>Interdisciplinary Thinking</h3>
+        <p>Our best work happens at the intersection of engineering, design, and human sciences. We seek people who bridge domains.</p>
+      </div>
+      <div class="quality-card rv rv-d3">
+        <div class="quality-icon">03</div>
+        <h3>Human-Centered Mindset</h3>
+        <p>Technology should serve people. We look for team members who deeply care about the humans their work will impact.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-cta">
+  <div class="container">
+    <div class="cta-inner rv">
+      <div class="cta-text">
+        <h2>Ready to make an impact?</h2>
+        <p>Explore our projects and publications to learn more about the research you could be part of.</p>
+      </div>
+      <a href="/projects/" class="btn-white">Our Projects</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://ahlab.org/wp-content/uploads/2021/03/Group-4@2x.png" alt="AHLab">
+        <p>Augmented Human Lab — extending the limits of our perceptual and cognitive capabilities.</p>
+      </div>
+      <div class="footer-nav-col">
+        <h5>Explore</h5>
+        <a href="/vision/">Vision</a>
+        <a href="/projects/">Projects</a>
+        <a href="/publications/">Publications</a>
+        <a href="/people/">People</a>
+        <a href="/press/">Press & Awards</a>
+        <a href="/join/">Join Us</a>
+      </div>
+      <div class="footer-contact">
+        <h5>Contact</h5>
+        <a href="mailto:info@ahlab.org">info@ahlab.org</a>
+        <p style="margin-top:16px"><strong style="color:rgba(255,255,255,.7)">Augmented Human Lab</strong><br>Smart Systems Institute<br>National University of Singapore</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Augmented Human Lab. All rights reserved.</div>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/profile.php?id=100067138591873" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="https://twitter.com/AugmentedHumanL" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+        <a href="https://www.linkedin.com/company/augmented-human-lab" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="https://www.instagram.com/augmented_human_lab/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558a5.898 5.898 0 002.126-1.384 5.86 5.86 0 001.384-2.126c.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913a5.89 5.89 0 00-1.384-2.126A5.847 5.847 0 0019.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227a3.81 3.81 0 01-.899 1.382 3.744 3.744 0 01-1.38.896c-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421a3.716 3.716 0 01-1.379-.899 3.644 3.644 0 01-.9-1.38c-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678a6.162 6.162 0 100 12.324 6.162 6.162 0 100-12.324zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405a1.441 1.441 0 11-2.88 0 1.441 1.441 0 012.88 0z"/></svg></a>
+        <a href="https://www.youtube.com/channel/UC_7uHrkKUKjGKKvDUK7rDkg" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const rv=document.querySelectorAll('.rv');
+const obs=new IntersectionObserver(e=>{e.forEach(n=>{if(n.isIntersecting)n.target.classList.add('vis')})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+rv.forEach(el=>obs.observe(el));
+const nav=document.getElementById('siteNav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)},{passive:true});
+document.getElementById('navToggle')?.addEventListener('click',()=>{const l=document.querySelector('.nav-links');l.style.display=l.style.display==='flex'?'none':'flex'});
+</script>
+</body>
+</html>

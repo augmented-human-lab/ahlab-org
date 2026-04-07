@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Augmented Human Lab</title>
+<link rel="stylesheet" href="https://use.typekit.net/zws2qzx.css">
+<style>
+/* ============================================================
+   DESIGN TOKENS (from theme.css)
+   ============================================================ */
+:root {
+  --color-accent: #6100FF;
+  --color-accent-dark: #4400B3;
+  --color-accent-light: #904DFF;
+  --gradient-start: #00D7EE;
+  --gradient-end: #6100FF;
+  --color-neutral-10: #FFFFFF;
+  --color-neutral-20: #F4F7F9;
+  --color-neutral-30: #EDF0F3;
+  --color-neutral-40: #C9D8E3;
+  --color-neutral-60: #AAAFB6;
+  --color-neutral-70: #838D95;
+  --color-neutral-80: #5E6875;
+  --color-neutral-100: #0E0F11;
+  --color-black: #000000;
+  --color-error: #A8071A;
+  --font-display: "neue-haas-grotesk-display", sans-serif;
+  --font-text: "neue-haas-grotesk-text", sans-serif;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-text);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-neutral-100);
+  background: var(--color-neutral-10);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; }
+ul { list-style: none; }
+
+/* ============================================================
+   UTILITY
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: 1370px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+@media (max-width: 767px) {
+  .container { padding: 0 20px; }
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0 40px;
+  height: 92px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+.site-nav.scrolled {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+}
+.site-nav .logo img {
+  height: 28px;
+  width: auto;
+  transition: opacity 0.3s ease;
+}
+.site-nav .logo:hover img { opacity: 0.7; }
+.site-nav .logo .logo-light { display: block; }
+.site-nav .logo .logo-dark { display: none; }
+.site-nav.scrolled .logo .logo-light { display: none; }
+.site-nav.scrolled .logo .logo-dark { display: block; }
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+}
+.nav-links a {
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.7);
+  transition: color 0.3s ease;
+}
+.nav-links a:hover { color: var(--color-neutral-10); }
+.nav-links a.active { color: var(--color-neutral-10); }
+.site-nav.scrolled .nav-links a { color: var(--color-neutral-80); }
+.site-nav.scrolled .nav-links a:hover { color: var(--color-accent); }
+.site-nav.scrolled .nav-links a.active { color: var(--color-neutral-100); }
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 35px;
+  height: 19px;
+  position: relative;
+}
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  position: absolute;
+  left: 0;
+  transition: all 0.3s ease;
+}
+.nav-toggle span:nth-child(1) { top: 0; }
+.nav-toggle span:nth-child(2) { top: 8px; }
+.nav-toggle span:nth-child(3) { top: 16px; }
+.site-nav.scrolled .nav-toggle span { background: var(--color-neutral-100); }
+
+@media (max-width: 991px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 0 120px;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(221deg, rgba(0,215,238,0.65) 0%, rgba(97,0,255,0.5) 100%),
+              url('https://ahlab.org/wp-content/themes/wp-bootstrap-starter/inc/assets/images/banners/home_hero.png');
+  background-size: cover;
+  background-position: center;
+  animation: scaleIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(to top, rgba(0,0,0,0.25), transparent);
+  pointer-events: none;
+}
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+.hero-content {
+  max-width: 860px;
+}
+.hero-label {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1.71px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 24px;
+  animation: fadeUp 0.8s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 1.08;
+  color: var(--color-neutral-10);
+  letter-spacing: -0.02em;
+  animation: fadeUp 0.8s 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-sub {
+  font-family: var(--font-text);
+  font-size: 21px;
+  line-height: 35px;
+  color: rgba(255,255,255,0.85);
+  margin-top: 28px;
+  max-width: 620px;
+  animation: fadeUp 0.8s 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.5);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: fadeIn 1s 1.2s both;
+}
+.hero-scroll .scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+  animation: fadeIn 1s 1.4s both;
+}
+
+@media (max-width: 991px) {
+  .hero { min-height: 80vh; padding-bottom: 80px; }
+  .hero h1 { font-size: 40px; line-height: 1.12; }
+  .hero-sub { font-size: 19px; line-height: 28px; }
+}
+@media (max-width: 567px) {
+  .hero h1 { font-size: 32px; }
+}
+
+/* ============================================================
+   SECTION: INTRO
+   ============================================================ */
+.section-intro {
+  padding: 140px 0;
+}
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.intro-left .section-label {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1.71px;
+  text-transform: uppercase;
+  color: var(--color-neutral-60);
+  margin-bottom: 20px;
+}
+.intro-left h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 46px;
+  color: var(--color-neutral-100);
+  letter-spacing: -0.01em;
+}
+.intro-right {
+  padding-top: 12px;
+}
+.intro-right p {
+  font-size: 21px;
+  line-height: 35px;
+  color: var(--color-neutral-100);
+  margin-bottom: 24px;
+}
+.intro-right p:last-child { margin-bottom: 0; }
+
+@media (max-width: 991px) {
+  .section-intro { padding: 80px 0; }
+  .intro-grid { grid-template-columns: 1fr; gap: 32px; }
+  .intro-left h2 { font-size: 36px; line-height: 42px; }
+  .intro-right p { font-size: 19px; line-height: 28px; }
+}
+
+/* ============================================================
+   SECTION: VALUES
+   ============================================================ */
+.section-values {
+  padding: 120px 0;
+  background: var(--color-neutral-100);
+  position: relative;
+  overflow: hidden;
+}
+.section-values::before {
+  content: "";
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(97,0,255,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.section-values::after {
+  content: "";
+  position: absolute;
+  bottom: -150px;
+  left: -150px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,215,238,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.values-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 80px;
+}
+.values-header .section-label {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1.71px;
+  text-transform: uppercase;
+  color: var(--color-neutral-60);
+  margin-bottom: 20px;
+}
+.values-header h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 46px;
+  color: var(--color-neutral-10);
+  letter-spacing: -0.01em;
+}
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.value-card {
+  padding: 40px 36px;
+  border-radius: 3px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.03);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+.value-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(233.39deg, rgba(0,215,238,1) 0%, rgba(97,0,255,1) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 3px;
+}
+.value-card:hover::before { opacity: 1; }
+.value-card:hover { border-color: transparent; transform: translateY(-4px); }
+.value-card > * { position: relative; z-index: 1; }
+
+.value-number {
+  font-family: var(--font-display);
+  font-weight: 200;
+  font-size: 64px;
+  line-height: 1;
+  color: rgba(255,255,255,0.08);
+  margin-bottom: 24px;
+  transition: color 0.4s ease;
+}
+.value-card:hover .value-number { color: rgba(255,255,255,0.2); }
+
+.value-card h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  color: var(--color-neutral-10);
+  margin-bottom: 16px;
+}
+.value-card p {
+  font-size: 16px;
+  line-height: 26px;
+  color: rgba(255,255,255,0.6);
+  transition: color 0.4s ease;
+}
+.value-card:hover p { color: rgba(255,255,255,0.9); }
+
+@media (max-width: 991px) {
+  .section-values { padding: 80px 0; }
+  .values-grid { grid-template-columns: 1fr; gap: 20px; }
+  .values-header h2 { font-size: 36px; line-height: 42px; }
+}
+
+/* ============================================================
+   SECTION: APPROACH
+   ============================================================ */
+.section-approach {
+  padding: 140px 0;
+}
+.approach-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.approach-visual {
+  position: relative;
+  aspect-ratio: 4/3;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.approach-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.approach-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(221deg, rgba(0,215,238,0.15) 0%, rgba(97,0,255,0.1) 100%);
+  pointer-events: none;
+}
+.approach-text .section-label {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1.71px;
+  text-transform: uppercase;
+  color: var(--color-neutral-60);
+  margin-bottom: 20px;
+}
+.approach-text h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 41.5px;
+  color: var(--color-neutral-100);
+  margin-bottom: 28px;
+}
+.approach-text p {
+  font-size: 21px;
+  line-height: 35px;
+  color: var(--color-neutral-100);
+  margin-bottom: 20px;
+}
+.approach-text p:last-of-type { margin-bottom: 40px; }
+.approach-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-text);
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--color-neutral-100);
+  transition: color 0.3s ease;
+}
+.approach-link:hover { color: var(--color-accent); }
+.approach-link svg {
+  transition: transform 0.3s ease;
+}
+.approach-link:hover svg { transform: translateX(4px); }
+
+@media (max-width: 991px) {
+  .section-approach { padding: 80px 0; }
+  .approach-grid { grid-template-columns: 1fr; gap: 40px; }
+  .approach-text h2 { font-size: 32px; line-height: 38px; }
+  .approach-text p { font-size: 19px; line-height: 28px; }
+}
+
+/* ============================================================
+   SECTION: STATS
+   ============================================================ */
+.section-stats {
+  padding: 100px 0;
+  background: linear-gradient(228deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  text-align: center;
+}
+.stat-item {}
+.stat-number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 60px;
+  line-height: 1;
+  color: var(--color-neutral-10);
+  margin-bottom: 8px;
+}
+.stat-label {
+  font-family: var(--font-text);
+  font-size: 16px;
+  line-height: 24px;
+  color: rgba(255,255,255,0.75);
+}
+
+@media (max-width: 767px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 20px; }
+  .stat-number { font-size: 44px; }
+}
+
+/* ============================================================
+   SECTION: TEAM PREVIEW
+   ============================================================ */
+.section-team {
+  padding: 140px 0;
+}
+.team-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 60px;
+}
+.team-header-left .section-label {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1.71px;
+  text-transform: uppercase;
+  color: var(--color-neutral-60);
+  margin-bottom: 20px;
+}
+.team-header-left h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 46px;
+  color: var(--color-neutral-100);
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+.team-card {
+  display: block;
+  transition: transform 0.4s ease;
+}
+.team-card:hover { transform: translateY(-6px); }
+.team-card-thumb {
+  aspect-ratio: 1/1.1;
+  overflow: hidden;
+  background: var(--color-neutral-40);
+  margin-bottom: 20px;
+  position: relative;
+}
+.team-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.team-card:hover .team-card-thumb img { transform: scale(1.06); }
+.team-card-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(14,15,17,0.3), transparent 50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.team-card:hover .team-card-thumb::after { opacity: 1; }
+
+.team-card h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--color-neutral-100);
+  margin-bottom: 4px;
+  transition: color 0.3s ease;
+}
+.team-card:hover h4 { color: var(--color-accent); }
+.team-card .team-role {
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--color-neutral-70);
+}
+
+@media (max-width: 991px) {
+  .section-team { padding: 80px 0; }
+  .team-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .team-header-left h2 { font-size: 36px; line-height: 42px; }
+}
+@media (max-width: 567px) {
+  .team-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+}
+
+/* ============================================================
+   CTA BANNER
+   ============================================================ */
+.section-cta {
+  padding: 120px 0;
+  background: var(--color-neutral-20);
+}
+.cta-inner {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.cta-inner h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 46px;
+  color: var(--color-neutral-100);
+  margin-bottom: 20px;
+}
+.cta-inner p {
+  font-size: 21px;
+  line-height: 35px;
+  color: var(--color-neutral-80);
+  margin-bottom: 40px;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-text);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 19.6px;
+  color: var(--color-neutral-10);
+  background: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  padding: 16px 70px;
+  border-radius: 3px;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background: var(--color-neutral-10);
+  color: var(--color-accent);
+}
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-text);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 19.6px;
+  color: var(--color-accent);
+  background: transparent;
+  border: 1px solid var(--color-accent);
+  padding: 16px 70px;
+  border-radius: 3px;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+.btn-outline:hover {
+  background: var(--color-accent);
+  color: var(--color-neutral-10);
+}
+
+@media (max-width: 767px) {
+  .cta-inner h2 { font-size: 32px; line-height: 38px; }
+  .cta-inner p { font-size: 19px; line-height: 28px; }
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  background: var(--color-neutral-100);
+  padding: 80px 0 24px;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.footer-brand img {
+  height: 28px;
+  width: auto;
+  margin-bottom: 24px;
+}
+.footer-brand p {
+  font-size: 15px;
+  line-height: 24px;
+  color: var(--color-neutral-70);
+  max-width: 280px;
+}
+.footer-nav-col h5 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--color-neutral-60);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+.footer-nav-col a {
+  display: block;
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 12px;
+  transition: color 0.3s ease;
+}
+.footer-nav-col a:hover { color: var(--color-neutral-10); }
+
+.footer-contact h5 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--color-neutral-60);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+.footer-contact a,
+.footer-contact p {
+  font-size: 15px;
+  line-height: 24px;
+  color: rgba(255,255,255,0.5);
+  transition: color 0.3s ease;
+}
+.footer-contact a:hover { color: var(--color-neutral-10); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+}
+.footer-copy {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.02em;
+}
+.footer-social {
+  display: flex;
+  gap: 20px;
+}
+.footer-social a {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.4);
+  transition: color 0.3s ease;
+}
+.footer-social a:hover { color: var(--color-neutral-10); }
+.footer-social svg { width: 18px; height: 18px; }
+
+@media (max-width: 767px) {
+  .footer-top { grid-template-columns: 1fr; gap: 40px; }
+  .footer-bottom { flex-direction: column-reverse; gap: 16px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== NAVIGATION ==================== -->
+<nav class="site-nav" id="siteNav">
+  <a href="/" class="logo">
+    <img class="logo-light" src="https://ahlab.org/wp-content/uploads/2021/03/Group-4@2x.png" alt="Augmented Human Lab" height="28">
+    <img class="logo-dark" src="https://ahlab.org/wp-content/uploads/2021/03/Group@2x.png" alt="Augmented Human Lab" height="28">
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="/">Home</a>
+    <a href="/vision/" class="active">About</a>
+    <a href="/projects/">Projects</a>
+    <a href="/publications/">Publications</a>
+    <a href="/people/">People</a>
+    <a href="/press/">Press & Awards</a>
+    <a href="/join/">Join Us</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-label">About Augmented Human Lab</div>
+      <h1>We humanise technology to extend the limits of human capability.</h1>
+      <p class="hero-sub">A multidisciplinary research lab exploring assistive augmentations that empower people to live more independently — and perceive the world beyond the ordinary.</p>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ==================== INTRO ==================== -->
+<section class="section-intro">
+  <div class="container">
+    <div class="intro-grid">
+      <div class="intro-left reveal">
+        <div class="section-label">Our Vision</div>
+        <h2>Lowering the barriers between technology and humans.</h2>
+      </div>
+      <div class="intro-right">
+        <p class="reveal reveal-delay-1">We are exploring ways of lowering the barriers between technology and humans to improve our lives. To achieve this, we are developing 'Assistive Augmentations' — technologies that fundamentally augment human abilities while becoming a natural extension of the person.</p>
+        <p class="reveal reveal-delay-2">We believe carefully designed assistive augmentations can empower anyone to live more independently and extend one's perceptual and cognitive capabilities beyond the ordinary.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== VALUES ==================== -->
+<section class="section-values">
+  <div class="container">
+    <div class="values-header reveal">
+      <div class="section-label">What Drives Us</div>
+      <h2>Three pillars of assistive augmentation</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal reveal-delay-1">
+        <div class="value-number">01</div>
+        <h3>Physical Augmentation</h3>
+        <p>Developing wearable technologies and embedded AI systems that support and extend the physical capabilities of users — from motor assistance to haptic feedback interfaces.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-2">
+        <div class="value-number">02</div>
+        <h3>Cognitive Augmentation</h3>
+        <p>Creating tools and platforms that enhance cognitive processes — learning, memory, and decision-making — through intelligent, context-aware systems designed for real-world use.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-3">
+        <div class="value-number">03</div>
+        <h3>Perceptual Augmentation</h3>
+        <p>Designing interfaces that expand how we sense the world — translating information across modalities so that sight, sound, touch, and proprioception work in new, powerful ways.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== APPROACH ==================== -->
+<section class="section-approach">
+  <div class="container">
+    <div class="approach-grid">
+      <div class="approach-visual reveal">
+        <img src="https://ahlab.org/wp-content/uploads/2021/04/home_section2_1.png" alt="Team working at AHLab">
+      </div>
+      <div class="approach-text">
+        <div class="section-label reveal">Our Approach</div>
+        <h2 class="reveal reveal-delay-1">A small, unique team of interdisciplinary experimenters.</h2>
+        <p class="reveal reveal-delay-2">Our team works hard to craft meaningful, beautiful experiences. We aim to foster smart, new and stunning experiences that change the way people live and experience the world.</p>
+        <p class="reveal reveal-delay-3">Our application focus spans Assistive Technology — wearables with embedded AI supporting deaf and blind users; EdTech — engaging learning platforms that make science fun; and Well-being — biofeedback-based affective music generation.</p>
+        <a href="/people/" class="approach-link reveal reveal-delay-4">
+          Meet our team
+          <svg width="8" height="16" viewBox="0 0 8 16" fill="none"><path d="M1 1L6 8L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== STATS ==================== -->
+<section class="section-stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Publications</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-number">30+</div>
+        <div class="stat-label">Team Members</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-number">20+</div>
+        <div class="stat-label">Active Projects</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-number">15+</div>
+        <div class="stat-label">Awards</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TEAM PREVIEW ==================== -->
+<section class="section-team">
+  <div class="container">
+    <div class="team-header">
+      <div class="team-header-left">
+        <div class="section-label reveal">Our People</div>
+        <h2 class="reveal reveal-delay-1">The minds behind the lab</h2>
+      </div>
+      <a href="/people/" class="approach-link reveal">
+        View all
+        <svg width="8" height="16" viewBox="0 0 8 16" fill="none"><path d="M1 1L6 8L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+    <div class="team-grid">
+      <a href="/people/suranga-nanayakkara/" class="team-card reveal">
+        <div class="team-card-thumb">
+          <img src="https://ahlab.org/wp-content/uploads/2021/04/Suranga-Nanayakkara.jpg" alt="Suranga Nanayakkara">
+        </div>
+        <h4>Suranga Nanayakkara</h4>
+        <div class="team-role">Director / Associate Professor</div>
+      </a>
+      <a href="/people/" class="team-card reveal reveal-delay-1">
+        <div class="team-card-thumb">
+          <img src="https://ahlab.org/wp-content/uploads/2021/05/Roger-Boldu-1.jpg" alt="Roger Boldu">
+        </div>
+        <h4>Roger Boldu</h4>
+        <div class="team-role">Research Fellow</div>
+      </a>
+      <a href="/people/" class="team-card reveal reveal-delay-2">
+        <div class="team-card-thumb">
+          <img src="https://ahlab.org/wp-content/uploads/2024/01/Yilun_potrait-scaled.jpg" alt="Yilun">
+        </div>
+        <h4>Yilun</h4>
+        <div class="team-role">PhD Researcher</div>
+      </a>
+      <a href="/people/" class="team-card reveal reveal-delay-3">
+        <div class="team-card-thumb">
+          <img src="https://ahlab.org/wp-content/uploads/2024/01/Ziyue_potrait-scaled.jpg" alt="Ziyue">
+        </div>
+        <h4>Ziyue</h4>
+        <div class="team-role">PhD Researcher</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CTA ==================== -->
+<section class="section-cta">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <h2>Interested in joining our lab?</h2>
+      <p>We're always looking for talented researchers, designers, and engineers who share our passion for humanising technology.</p>
+      <a href="/join/" class="btn-primary">Join Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://ahlab.org/wp-content/uploads/2021/03/Group-4@2x.png" alt="AHLab">
+        <p>Augmented Human Lab — extending the limits of our perceptual and cognitive capabilities.</p>
+      </div>
+      <div class="footer-nav-col">
+        <h5>Explore</h5>
+        <a href="/vision/">Vision</a>
+        <a href="/projects/">Projects</a>
+        <a href="/publications/">Publications</a>
+        <a href="/people/">People</a>
+        <a href="/press/">Press & Awards</a>
+        <a href="/join/">Join Us</a>
+      </div>
+      <div class="footer-contact">
+        <h5>Contact</h5>
+        <a href="mailto:info@ahlab.org">info@ahlab.org</a>
+        <p style="margin-top: 16px;">
+          <strong style="color: rgba(255,255,255,0.7);">Augmented Human Lab</strong><br>
+          Smart Systems Institute<br>
+          National University of Singapore
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Augmented Human Lab. All rights reserved.</div>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/profile.php?id=100067138591873" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://twitter.com/AugmentedHumanL" aria-label="Twitter">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/augmented-human-lab" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/augmented_human_lab/" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678a6.162 6.162 0 100 12.324 6.162 6.162 0 100-12.324zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405a1.441 1.441 0 11-2.88 0 1.441 1.441 0 012.88 0z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/channel/UC_7uHrkKUKjGKKvDUK7rDkg" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => observer.observe(el));
+
+// Nav scroll effect
+const nav = document.getElementById('siteNav');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  if (scrollY > 80) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+  lastScroll = scrollY;
+}, { passive: true });
+
+// Mobile nav toggle (placeholder)
+document.getElementById('navToggle')?.addEventListener('click', () => {
+  const links = document.getElementById('navLinks');
+  links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+});
+</script>
+</body>
+</html>
