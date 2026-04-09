@@ -54,7 +54,6 @@
 @media (max-width: 767px)  { .people-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
 
 .person-card { display: block; transition: transform .4s ease; }
-.person-card:hover { transform: translateY(-5px); }
 .person-card-photo {
   aspect-ratio: 1 / 1.1;
   overflow: hidden;
@@ -139,6 +138,174 @@
   .profile-info h1 { font-size: 36px; line-height: 42px; }
 }
 
+/* ── Social icons (LinkedIn / GitHub) ─────────────────────
+   Small icon-only buttons rendered above the text links.
+   Hidden if the person has neither linkedin nor github. */
+.profile-socials {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.profile-social {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: var(--radius-sm);
+  color: var(--color-neutral-80);
+  transition: all .25s;
+}
+.profile-social:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+/* ── Career timeline ───────────────────────────────────────
+   3-node horizontal graph rendered next to the hero photo.
+   Layout is a 3-column grid (Then / Now / Next), each column
+   containing a header label, a dot, and the org/role/duration
+   text. A SINGLE continuous line runs across the whole track
+   behind the dots — implemented as a ::before pseudo on the
+   .tl-track that stretches from the first dot's center to the
+   last dot's center. The dots sit ON TOP of this line so the
+   visual is one unbroken horizontal rule punctuated by three
+   circles.
+
+   The "Then / Now / Next" headers refer to AHL chronology, NOT
+   to today's calendar:
+     Then = before AHL  |  Now = at AHL  |  Next = after AHL
+   The .is-current dot highlight indicates where the person is
+   today. For current members that's "Now"; for alumni it's "Next". */
+.profile-timeline {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--color-neutral-30);
+}
+.tl-track {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  position: relative;
+  padding-top: 36px;       /* space for the column header above each dot */
+}
+/* Continuous line behind all three dots. Sits at the dot center
+   (padding-top + half the dot size). Stretches from the center of
+   column 1 to the center of column 3 — i.e. from 1/6 to 5/6 of the
+   track width — so the line starts and ends UNDER the outer dots
+   instead of running off either edge. */
+.tl-track::before {
+  content: "";
+  position: absolute;
+  left: 16.66%;
+  right: 16.66%;
+  top: calc(36px + 6px);   /* header space + (dot height / 2) */
+  height: 2px;
+  background: var(--color-neutral-30);
+  z-index: 0;
+}
+.tl-node {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+  position: relative;
+  z-index: 1;              /* above the connector line */
+}
+.tl-col-header {
+  position: absolute;
+  top: -32px;              /* sits in the padding-top area above the dot */
+  left: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-neutral-60);
+}
+.tl-node.is-current .tl-col-header { color: var(--color-accent); }
+.tl-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--color-neutral-60);
+  flex-shrink: 0;
+  /* White inset shadow gives the dot a "punch through" effect — visually
+     breaks the line behind it even though the line is one continuous element. */
+  box-shadow: 0 0 0 4px #fff;
+}
+.tl-node.is-current .tl-dot {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px #fff, 0 0 0 8px rgba(97,0,255,.15);
+}
+.tl-node.is-empty .tl-dot {
+  border-style: dashed;
+  border-color: var(--color-neutral-40);
+  background: transparent;
+}
+.tl-label {
+  font-family: var(--font-text);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--color-neutral-80);
+}
+.tl-org {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .2px;
+  color: var(--color-neutral-100);
+  margin-bottom: 2px;
+}
+.tl-node.is-current .tl-org { color: var(--color-accent); }
+.tl-role {
+  font-size: 12px;
+  color: var(--color-neutral-80);
+  margin-bottom: 2px;
+}
+.tl-duration {
+  font-size: 11px;
+  color: var(--color-neutral-60);
+  font-variant-numeric: tabular-nums;
+}
+.tl-node.is-empty .tl-label {
+  color: var(--color-neutral-40);
+  font-size: 11px;
+}
+
+/* Mobile: stack the 3 columns vertically. The continuous line becomes a
+   vertical spine on the left, dots sit on it, content flows to the right. */
+@media (max-width: 567px) {
+  .tl-track {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-top: 0;
+    padding-left: 32px;
+  }
+  .tl-track::before {
+    left: 6px;
+    right: auto;
+    top: 7px;
+    bottom: 7px;
+    width: 2px;
+    height: auto;
+  }
+  .tl-col-header {
+    position: static;
+    margin-bottom: 6px;
+  }
+  .tl-node .tl-dot {
+    position: absolute;
+    left: -32px;
+    top: 24px;
+  }
+}
+
 /* ── Profile body (detail) ───────────────────────────────── */
 .profile-body { padding: 60px 0 80px; border-top: 2px solid var(--color-neutral-30); }
 .profile-body-grid {
@@ -158,7 +325,12 @@
 .profile-content p:last-child { margin-bottom: 0; }
 @media (max-width: 991px) { .profile-content p { font-size: 19px; line-height: 28px; } }
 
-/* ── Projects grid in profile ────────────────────────────── */
+/* ── Projects grid in profile ──────────────────────────────
+   Image fills the entire card; title overlays at the bottom
+   with a frosted-glass background (backdrop-filter blur).
+   This is the modern poster-card pattern. The whole card has
+   rounded corners and clips its overflow so the overlay
+   inherits the rounded bottom edge. */
 .profile-projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -167,32 +339,131 @@
 }
 .profile-project-card {
   display: block;
+  position: relative;
+  aspect-ratio: 16 / 11;       /* slightly taller than the old 16/10 to give the title room */
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: #fff;
+  background: var(--color-neutral-40);
   border: 1px solid var(--color-neutral-30);
   transition: transform .4s, box-shadow .4s, border-color .4s;
 }
 .profile-project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(0,0,0,.06);
+  box-shadow: 0 12px 40px rgba(14,15,17,.18);
   border-color: transparent;
 }
+/* Image fills the whole card, edge to edge */
 .profile-project-card-thumb {
-  aspect-ratio: 16 / 10;
+  position: absolute;
+  inset: 0;
   overflow: hidden;
-  background: var(--color-neutral-40);
 }
 .profile-project-card-thumb img {
   width: 100%; height: 100%; object-fit: cover;
-  transition: transform .5s cubic-bezier(.16,1,.3,1);
+  transition: transform .6s cubic-bezier(.16,1,.3,1);
 }
-.profile-project-card:hover .profile-project-card-thumb img { transform: scale(1.04); }
+.profile-project-card:hover .profile-project-card-thumb img { transform: scale(1.06); }
+
+/* Title sits absolutely at the bottom, full width, with a frosted glass
+   background. The blur picks up whatever's behind it (the project image),
+   producing the modern glass-morphism effect. */
 .profile-project-card h5 {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  margin: 0;
+  padding: 14px 16px;
   font-family: var(--font-display); font-weight: 700;
-  font-size: 16px; padding: 14px 16px;
-  color: var(--color-neutral-100); transition: color .3s;
+  font-size: 16px; line-height: 1.25;
+  color: #fff;
+  background: rgba(14,15,17,.45);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  border-top: 1px solid rgba(255,255,255,.12);
+  transition: background .3s;
 }
-.profile-project-card:hover h5 { color: var(--color-accent); }
+.profile-project-card:hover h5 {
+  background: rgba(97,0,255,.55);   /* shifts toward accent on hover */
+}
+
 @media (max-width: 991px) { .profile-projects-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 567px) { .profile-projects-grid { grid-template-columns: 1fr; } }
+
+/* ── Orphan project (no thumbnail in projects.json) ───────
+   Renders the project card with a colored placeholder block
+   instead of an image. The title overlay still works on top. */
+.profile-project-card.is-orphan { opacity: .85; }
+.profile-project-card-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--color-neutral-30), var(--color-neutral-40));
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 72px;
+  color: rgba(255,255,255,.85);
+}
+
+/* ── Publications list ────────────────────────────────────
+   Used on the person profile page below the projects grid.
+   Each publication renders as: title (link if local), full
+   citation in muted text, and a row of small DOI/PDF buttons.
+   Numbered list to give each entry a clear order. */
+.profile-pub-list {
+  list-style: none;
+  counter-reset: pub;
+  padding: 0;
+  margin: 0;
+}
+.profile-pub-item {
+  counter-increment: pub;
+  position: relative;
+  padding: 24px 0 24px 56px;
+  border-bottom: 1px solid var(--color-neutral-30);
+}
+.profile-pub-item:first-child { border-top: 1px solid var(--color-neutral-30); }
+.profile-pub-item::before {
+  content: counter(pub, decimal-leading-zero);
+  position: absolute;
+  left: 0; top: 28px;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 12px; letter-spacing: 1.5px;
+  color: var(--color-neutral-60);
+}
+
+.profile-pub-title {
+  display: block;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 18px; line-height: 26px;
+  color: var(--color-neutral-100);
+  margin-bottom: 8px;
+  transition: color .25s;
+}
+a.profile-pub-title:hover { color: var(--color-accent); }
+
+.profile-pub-citation {
+  font-family: var(--font-text);
+  font-size: 14px; line-height: 22px;
+  color: var(--color-neutral-70);
+  margin-bottom: 12px;
+}
+
+.profile-pub-links {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.profile-pub-link {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: 11px; letter-spacing: .8px;
+  color: var(--color-accent);
+  padding: 5px 12px;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: var(--radius-sm);
+  transition: all .25s;
+}
+.profile-pub-link:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+
+@media (max-width: 567px) {
+  .profile-pub-item { padding-left: 0; padding-top: 32px; }
+  .profile-pub-item::before { top: 8px; }
+  .profile-pub-title { font-size: 17px; line-height: 24px; }
+}
