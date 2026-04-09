@@ -47,17 +47,59 @@
         <div class="project-year">2023</div>
         <h1>Audio-Morph GAN</h1>
         <div class="project-summary"></div>
+        <div class="project-description">
+    <p>Video games and movies often require custom sound effects. But these can be expensive and time consuming to record and produce. Therefore, we investigated how to generate environmental sounds with the ability to control various aspects of these sounds. For example, we would like to be able to generate wind sounds at low or high wind strength, or the sound of rain when it drizzles or buckets down. We achieve this using a data-driven approach to control the process of synthesis of environmental sounds using Generative Adversarial Networks (GAN). We conditioned the GAN on “soft-labels” extracted from an audio classifier trained on a target set of audio texture classes. We demonstrate that interpolation between such conditions or control vectors provide smooth morphing between the generated audio textures, and show similar or better audio texture morphing capability compared to the state-of-the-art methods, while remaining consistent with the intended control parameters.</p>
+    <p>Audio examples generated from our model and code are available here: https://animatedsound.com/research/morphgan_icassp2023</p>
+    <p>This is a step towards a general data-driven approach to designing generative audio models with customized controls capable of traversing out-of-distribution regions for novel sound synthesis. Future work will include investigating unsupervised ways of inducing controllability in these models, and exploring controllability of other dimensions of environmental sounds such as emotions.</p>
+  </div>
       </div>
     </div>
   </section>
 
-  <!-- Body (sidebar + content, or content-only — built by build script) -->
+  <!-- Body (people row + publications, full width) -->
   <section class="project-body">
-    
-    <div class="project-content rv" style="max-width:780px">
-      Video games and movies often require custom sound effects. But these can be expensive and time consuming to record and produce.....
-      
-    </div>
+    <div class="project-people-row rv">
+        <div class="sidebar-section-title">Team</div>
+        <div class="project-people-grid">
+          <a href="/people/chitralekha-gupta/" class="project-person-card">
+              <div class="project-person-avatar">
+                <img src="https://cdn.ahlab.org/media/site/people/chitralekha-gupta/chitralekha-gupta.jpg" alt="Chitralekha Gupta" loading="lazy">
+              </div>
+              <div class="project-person-name">Chitralekha Gupta</div>
+            </a><a href="/people/purnima-kamath/" class="project-person-card">
+              <div class="project-person-avatar">
+                <img src="https://cdn.ahlab.org/media/site/people/purnima-kamath/purnima-kamath.jpg" alt="Purnima Kamath" loading="lazy">
+              </div>
+              <div class="project-person-name">Purnima Kamath</div>
+            </a><a href="/people/yize-wei/" class="project-person-card">
+              <div class="project-person-avatar">
+                <img src="https://cdn.ahlab.org/media/site/people/yize-wei/yize-wei.jpg" alt="Yize Wei" loading="lazy">
+              </div>
+              <div class="project-person-name">Yize Wei</div>
+            </a><a href="/people/lonce-wyse/" class="project-person-card">
+              <div class="project-person-avatar">
+                <img src="https://cdn.ahlab.org/media/site/people/lonce-wyse/lonce-wyse.jpg" alt="Lonce Wyse" loading="lazy">
+              </div>
+              <div class="project-person-name">Lonce Wyse</div>
+            </a><a href="/people/suranga-nanayakkara/" class="project-person-card">
+              <div class="project-person-avatar">
+                <img src="https://cdn.ahlab.org/media/site/people/suranga-nanayakkara/suranga-nanayakkara.jpg" alt="Suranga Nanayakkara" loading="lazy">
+              </div>
+              <div class="project-person-name">Suranga Nanayakkara</div>
+            </a>
+        </div>
+      </div><div class="project-publications-row rv rv-d1">
+        <div class="sidebar-section-title">Publications</div>
+        <ol class="project-pub-list">
+          <li class="project-pub-item">
+              <a href="/publications/#towards-controllable-audio-texture-morphing" class="project-pub-title">Towards Controllable Audio Texture Morphing</a>
+              <div class="project-pub-citation">Gupta C*., Kamath P*., Wei. Y., Li, Z., Nanayakkara S.C., Wyse L. 2023. Towards Controllable Audio Texture Morphing. In 48th IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP '23), 4-10 June, 2023, Rhodes Island, Greece.</div>
+              <div class="project-pub-links">
+                  <a href="https://drive.google.com/file/d/1Od3J7IHFhiZ0fUatCoNCzD7Fp0AFBfg1/view?usp=sharing" target="_blank" rel="noopener" class="project-pub-link">PDF</a>
+                </div>
+            </li>
+        </ol>
+      </div>
   </section>
 
   <!-- Back -->
