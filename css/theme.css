@@ -93,76 +93,134 @@ ul  { list-style: none; }
       - Always dark links
       - Add .nav-light to the <nav> element to opt in.
    ──────────────────────────────────────────────────────────── */
+/* ============================================================
+   NAV — shared across site, injected via nav-include.js
+   Desktop: horizontal row. Mobile (<=991px): scroll-snap carousel
+   with centered active item + hamburger drawer dropdown.
+   ============================================================ */
+/* ============================================================
+   NAV — always-on frosted glass, shared across site.
+   Desktop: horizontal row. Mobile (<=991px): scroll-snap carousel
+   + fullscreen frosted drawer dropdown.
+   ============================================================ */
 .site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  padding: 0 40px; height: 92px;
-  display: flex; align-items: center; justify-content: space-between;
-  transition: background .4s, box-shadow .4s;
+  padding: 28px 40px 0; height: 120px;
+  display: flex; align-items: flex-start; justify-content: space-between;
+  background: var(--gradient);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 60%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 0%, #000 60%, transparent 100%);
+  transition: filter .3s;
 }
 .site-nav.scrolled {
-  background: rgba(255,255,255,.96);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 1px 0 rgba(0,0,0,.06);
+  filter: brightness(.92);
 }
-
-.site-nav .logo img { height: 28px; width: auto; transition: opacity .3s; }
+.site-nav .logo { display: flex; align-items: center; flex-shrink: 0; }
+.site-nav .logo img { height: 32px; width: auto; transition: opacity .3s; filter: brightness(0) invert(1); }
 .site-nav .logo:hover img { opacity: .7; }
-
-/* Logo swap: light logo on transparent nav, dark logo on scrolled nav */
 .site-nav .logo .logo-l { display: block; }
 .site-nav .logo .logo-d { display: none; }
-.site-nav.scrolled .logo .logo-l { display: none; }
-.site-nav.scrolled .logo .logo-d { display: block; }
 
-/* Nav links */
-.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links-wrap { display: flex; align-items: center; }
+.nav-links {
+  display: flex; gap: 36px; align-items: center;
+  list-style: none; margin: 0; padding: 0;
+}
+.nav-links li { list-style: none; }
 .nav-links a {
-  font-family: var(--font-text);
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: .02em;
-  color: rgba(255,255,255,.7);
+  font-family: var(--font-text); font-weight: 500;
+  font-size: 16px; letter-spacing: .01em;
+  color: rgba(255,255,255,.75);
   transition: color .3s;
+  text-decoration: none;
 }
 .nav-links a:hover  { color: #fff; }
 .nav-links a.active { color: #fff; }
 
-.site-nav.scrolled .nav-links a        { color: var(--color-neutral-80); }
-.site-nav.scrolled .nav-links a:hover  { color: var(--color-accent); }
-.site-nav.scrolled .nav-links a.active { color: var(--color-neutral-100); }
-
-/* Mobile toggle */
 .nav-toggle {
   display: none; background: none; border: none; cursor: pointer;
-  width: 35px; height: 19px; position: relative;
+  width: 35px; height: 19px; position: relative; flex-shrink: 0;
+  z-index: 201;
 }
 .nav-toggle span {
-  display: block; width: 100%; height: 2px;
-  background: #fff;
+  display: block; width: 100%; height: 2px; background: #fff;
   position: absolute; left: 0; transition: all .3s;
 }
 .nav-toggle span:nth-child(1) { top: 0; }
 .nav-toggle span:nth-child(2) { top: 8px; }
 .nav-toggle span:nth-child(3) { top: 16px; }
-.site-nav.scrolled .nav-toggle span { background: var(--color-neutral-100); }
+
+/* nav-light variant — kept for backward compat, now a no-op since base is light */
+.site-nav.nav-light { }
+
+.nav-drawer { display: none; }
 
 @media (max-width: 991px) {
-  .nav-links  { display: none; }
+  .site-nav { gap: 12px; padding: 0 20px; }
+  .nav-links-wrap {
+    flex: 1; min-width: 0; overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 15%, #000 85%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 15%, #000 85%, transparent 100%);
+  }
+  .nav-links {
+    gap: 28px; padding: 0 40%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links li { scroll-snap-align: center; scroll-snap-stop: always; flex-shrink: 0; }
+  .nav-links a {
+    display: block; padding: 8px 0; font-size: 14px;
+    white-space: nowrap; opacity: .45; position: relative;
+    transition: opacity .3s, transform .3s;
+  }
+  .nav-links a.active { opacity: 1; transform: scale(1.05); }
+  .nav-links a.active::after {
+    content: ""; position: absolute;
+    left: 50%; bottom: -4px; width: 20px; height: 2px;
+    background: currentColor; transform: translateX(-50%); border-radius: 2px;
+  }
   .nav-toggle { display: block; }
+
+  /* Fullscreen frosted drawer */
+  .nav-drawer {
+    display: flex; flex-direction: column;
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255,255,255,.85);
+    -webkit-backdrop-filter: saturate(180%) blur(30px);
+            backdrop-filter: saturate(180%) blur(30px);
+    transform: translateY(-100%); opacity: 0; pointer-events: none;
+    transition: transform .4s cubic-bezier(.16,1,.3,1), opacity .3s;
+    z-index: 200;
+  }
+  .nav-drawer.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .nav-drawer::before { content: ""; height: 120px; flex-shrink: 0; }
+
+  /* Hide hamburger lines, show X when drawer open. The toggle button itself
+     stays in place (acts as the close target) */
+  body:has(.nav-drawer.open) .nav-toggle span:nth-child(1) { top: 8px; transform: rotate(45deg); }
+  body:has(.nav-drawer.open) .nav-toggle span:nth-child(2) { opacity: 0; }
+  body:has(.nav-drawer.open) .nav-toggle span:nth-child(3) { top: 8px; transform: rotate(-45deg); }
+
+  .nav-drawer-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px;
+    max-width: 520px; margin: 0 auto; padding: 24px 20px;
+    list-style: none; width: 100%;
+  }
+  .nav-drawer-grid li { list-style: none; }
+  .nav-drawer-grid a {
+    display: block; padding: 16px 8px;
+    font-family: var(--font-display); font-weight: 500; font-size: 18px;
+    color: var(--color-neutral-100);
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    transition: color .3s; text-decoration: none;
+  }
+  .nav-drawer-grid a:hover { color: var(--color-accent); }
 }
 
-/* ── Nav-light variant (detail pages, no hero) ───────────── */
-.site-nav.nav-light {
-  background: rgba(255,255,255,.96);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 1px 0 rgba(0,0,0,.06);
-}
-.site-nav.nav-light .logo .logo-l { display: none; }
-.site-nav.nav-light .logo .logo-d { display: block; }
-.site-nav.nav-light .nav-links a        { color: var(--color-neutral-80); }
-.site-nav.nav-light .nav-links a:hover  { color: var(--color-accent); }
-.site-nav.nav-light .nav-links a.active { color: var(--color-neutral-100); }
-.site-nav.nav-light .nav-toggle span    { background: var(--color-neutral-100); }
+
 
 /* ── Sidebar section helpers (used by project + person bodies) ── */
 .sidebar-section { margin-bottom: 40px; }

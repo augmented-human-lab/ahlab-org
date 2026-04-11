@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — Augmented Human Lab</title>
 <link rel="stylesheet" href="https://use.typekit.net/zws2qzx.css">
+  <link rel="stylesheet" href="/css/theme.css">
 <style>
 /* ============================================================
    DESIGN TOKENS (from theme.css)
@@ -103,85 +104,6 @@ ul { list-style: none; }
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 .reveal-delay-4 { transition-delay: 0.4s; }
-
-/* ============================================================
-   NAVIGATION
-   ============================================================ */
-.site-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  padding: 0 40px;
-  height: 92px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: background 0.4s ease, box-shadow 0.4s ease;
-}
-.site-nav.scrolled {
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
-}
-.site-nav .logo img {
-  height: 28px;
-  width: auto;
-  transition: opacity 0.3s ease;
-}
-.site-nav .logo:hover img { opacity: 0.7; }
-.site-nav .logo .logo-light { display: block; }
-.site-nav .logo .logo-dark { display: none; }
-.site-nav.scrolled .logo .logo-light { display: none; }
-.site-nav.scrolled .logo .logo-dark { display: block; }
-
-.nav-links {
-  display: flex;
-  gap: 36px;
-  align-items: center;
-}
-.nav-links a {
-  font-family: var(--font-text);
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: 0.02em;
-  color: rgba(255,255,255,0.7);
-  transition: color 0.3s ease;
-}
-.nav-links a:hover { color: var(--color-neutral-10); }
-.nav-links a.active { color: var(--color-neutral-10); }
-.site-nav.scrolled .nav-links a { color: var(--color-neutral-80); }
-.site-nav.scrolled .nav-links a:hover { color: var(--color-accent); }
-.site-nav.scrolled .nav-links a.active { color: var(--color-neutral-100); }
-
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  width: 35px;
-  height: 19px;
-  position: relative;
-}
-.nav-toggle span {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: #fff;
-  position: absolute;
-  left: 0;
-  transition: all 0.3s ease;
-}
-.nav-toggle span:nth-child(1) { top: 0; }
-.nav-toggle span:nth-child(2) { top: 8px; }
-.nav-toggle span:nth-child(3) { top: 16px; }
-.site-nav.scrolled .nav-toggle span { background: var(--color-neutral-100); }
-
-@media (max-width: 991px) {
-  .nav-links { display: none; }
-  .nav-toggle { display: block; }
-}
 
 /* ============================================================
    HERO
@@ -523,7 +445,7 @@ ul { list-style: none; }
    SECTION: STATS
    ============================================================ */
 .section-stats {
-  padding: 100px 0;
+  padding: 64px 0;
   background: linear-gradient(228deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
 }
 .stats-grid {
@@ -536,7 +458,7 @@ ul { list-style: none; }
 .stat-number {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 60px;
+  font-size: 52px;
   line-height: 1;
   color: var(--color-neutral-10);
   margin-bottom: 8px;
@@ -550,7 +472,7 @@ ul { list-style: none; }
 
 @media (max-width: 767px) {
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 20px; }
-  .stat-number { font-size: 44px; }
+  .stat-number { font-size: 38px; }
 }
 
 
@@ -723,24 +645,8 @@ ul { list-style: none; }
 <body>
 
 <!-- ==================== NAVIGATION ==================== -->
-<nav class="site-nav" id="siteNav">
-  <a href="/" class="logo">
-    <img class="logo-light" src="https://ahlab.org/wp-content/uploads/2021/03/Group-4@2x.png" alt="Augmented Human Lab" height="28">
-    <img class="logo-dark" src="https://ahlab.org/wp-content/uploads/2021/03/Group@2x.png" alt="Augmented Human Lab" height="28">
-  </a>
-  <div class="nav-links" id="navLinks">
-    <a href="/" class="active">Home</a>
-    <a href="/vision/">Vision</a>
-    <a href="/projects/">Projects</a>
-    <a href="/publications/">Publications</a>
-    <a href="/people/">People</a>
-    <a href="/press/">Press & Awards</a>
-    <a href="/join/">Join Us</a>
-  </div>
-  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+<div id="site-nav-mount"></div>
+<script src="/js/nav-include.js"></script>
 
 <!-- ==================== HERO ==================== -->
 <section class="hero">
@@ -845,17 +751,6 @@ ul { list-style: none; }
   </div>
 </section>
 
-
-<!-- ==================== CTA ==================== -->
-<section class="section-cta">
-  <div class="container">
-    <div class="cta-inner reveal">
-      <h2>Interested in joining our lab?</h2>
-      <p>We're always looking for talented researchers, designers, and engineers who share our passion for humanising technology.</p>
-      <a href="/join/" class="btn-primary">Join Us</a>
-    </div>
-  </div>
-</section>
 
 <!-- ==================== FOOTER ==================== -->
 <div id="site-footer-mount"></div>

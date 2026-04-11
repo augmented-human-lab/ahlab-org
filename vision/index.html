@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vision — Augmented Human Lab</title>
 <link rel="stylesheet" href="https://use.typekit.net/zws2qzx.css">
+  <link rel="stylesheet" href="/css/theme.css">
 <style>
 :root {
   --color-accent:#6100FF;--color-accent-dark:#4400B3;--color-accent-light:#904DFF;
@@ -29,41 +30,21 @@ ul{list-style:none}
 /* ---- REVEAL ---- */
 .rv{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
 .rv.vis{opacity:1;transform:translateY(0)}
-@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 .rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}.rv-d4{transition-delay:.4s}.rv-d5{transition-delay:.5s}
 
 /* ============================================================
    NAV
    ============================================================ */
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:92px;display:flex;align-items:center;justify-content:space-between;transition:background .4s ease,box-shadow .4s ease}
-.site-nav.scrolled{background:rgba(255,255,255,.96);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
-.site-nav .logo img{height:28px;width:auto;transition:opacity .3s}
-.site-nav .logo:hover img{opacity:.7}
-.site-nav .logo .logo-l{display:block}.site-nav .logo .logo-d{display:none}
-.site-nav.scrolled .logo .logo-l{display:none}.site-nav.scrolled .logo .logo-d{display:block}
-.nav-links{display:flex;gap:36px;align-items:center}
-.nav-links a{font-family:var(--font-text);font-weight:500;font-size:14px;letter-spacing:.02em;color:rgba(255,255,255,.7);transition:color .3s}
-.nav-links a:hover{color:#fff}.nav-links a.active{color:#fff}
-.site-nav.scrolled .nav-links a{color:var(--color-neutral-80)}
-.site-nav.scrolled .nav-links a:hover{color:var(--color-accent)}
-.site-nav.scrolled .nav-links a.active{color:var(--color-neutral-100)}
-.nav-toggle{display:none;background:none;border:none;cursor:pointer;width:35px;height:19px;position:relative}
-.nav-toggle span{display:block;width:100%;height:2px;background:#fff;position:absolute;left:0;transition:all .3s}
-.nav-toggle span:nth-child(1){top:0}.nav-toggle span:nth-child(2){top:8px}.nav-toggle span:nth-child(3){top:16px}
-.site-nav.scrolled .nav-toggle span{background:var(--color-neutral-100)}
-@media(max-width:991px){.nav-links{display:none}.nav-toggle{display:block}}
-
 /* ============================================================
    HERO
    ============================================================ */
-.hero{position:relative;min-height:38vh;display:flex;align-items:flex-end;padding:120px 0 36px;overflow:hidden}
+.hero{position:relative;min-height:520px;display:flex;align-items:flex-end;padding:0 0 80px;overflow:hidden}
 .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(221deg,rgba(0,215,238,.7) 0%,rgba(97,0,255,.5) 100%),url('https://ahlab.org/wp-content/uploads/2025/01/pexels-photo-6153357.webp');background-size:cover;background-position:center;animation:heroIn 1.4s cubic-bezier(.16,1,.3,1) both}
 @keyframes heroIn{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:scale(1)}}
 .hero::after{content:"";position:absolute;bottom:0;left:0;right:0;height:35%;background:linear-gradient(to top,rgba(0,0,0,.2),transparent);pointer-events:none}
 .hero .container{position:relative;z-index:2}
 .hero-label{font-family:var(--font-display);font-weight:800;font-size:12px;letter-spacing:1.71px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:20px;animation:fadeUp .8s .2s cubic-bezier(.16,1,.3,1) both}
-.hero h1{font-family:var(--font-display);font-weight:700;font-size:44px;line-height:50px;color:#fff;letter-spacing:-.02em;max-width:700px;animation:fadeUp .8s .4s cubic-bezier(.16,1,.3,1) both}
-.hero-label{margin-bottom:10px}
+.hero h1{font-family:var(--font-display);font-weight:700;font-size:60px;line-height:63px;color:#fff;letter-spacing:-.02em;max-width:700px;animation:fadeUp .8s .4s cubic-bezier(.16,1,.3,1) both}
 @keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:991px){.hero{min-height:420px;padding-bottom:60px}.hero h1{font-size:45px;line-height:54px}}
 @media(max-width:567px){.hero h1{font-size:36px;line-height:42px}}
@@ -71,30 +52,31 @@ ul{list-style:none}
 /* ============================================================
    SECTION: PERSPECTIVE
    ============================================================ */
-.section-perspective{padding:48px 0 28px}
-.persp-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:center}
-.persp-left h2{font-family:var(--font-display);font-weight:700;font-size:28px;line-height:34px;color:var(--color-neutral-100)}
-.persp-right{padding-top:0}
-.persp-right p{font-size:16px;line-height:25px;color:var(--color-neutral-80);margin-bottom:12px}
+.section-perspective{padding:140px 0 100px}
+.persp-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.persp-left .section-label{font-family:var(--font-display);font-weight:800;font-size:12px;letter-spacing:1.71px;text-transform:uppercase;color:var(--color-neutral-60);margin-bottom:20px}
+.persp-left h2{font-family:var(--font-display);font-weight:700;font-size:36px;line-height:41.5px;color:var(--color-neutral-100)}
+.persp-figure{margin-top:32px;border-radius:var(--radius-lg);overflow:hidden}
+.persp-figure img{width:100%;height:auto;display:block}
+.persp-right{padding-top:8px}
+.persp-right p{font-size:21px;line-height:35px;color:var(--color-neutral-100);margin-bottom:24px}
 .persp-right p:last-of-type{margin-bottom:32px}
 .read-more-link{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-text);font-weight:600;font-size:18px;color:var(--color-neutral-100);transition:color .3s}
 .read-more-link:hover{color:var(--color-accent)}
 .read-more-link svg{transition:transform .3s}.read-more-link:hover svg{transform:translateX(4px)}
-@media(max-width:991px){.section-perspective{padding:32px 0 20px}.persp-grid{grid-template-columns:1fr;gap:20px}.persp-right p{font-size:15px;line-height:24px}}
+@media(max-width:991px){.section-perspective{padding:80px 0 60px}.persp-grid{grid-template-columns:1fr;gap:32px}.persp-right p{font-size:19px;line-height:28px}}
 
 /* ============================================================
    PARADIGM SHIFT VISUAL
    ============================================================ */
-.section-paradigm{padding:0 0 48px}
-.paradigm-cards{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:20px;margin-top:8px}
-.paradigm-card{background:var(--color-neutral-20);border-radius:16px;padding:28px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .4s ease,box-shadow .4s ease;min-height:280px;justify-content:center}
-.paradigm-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.06);transform:translateY(-2px)}
-.paradigm-card img{width:110px;height:auto;margin-bottom:16px}
-.paradigm-card h3{font-family:var(--font-display);font-weight:700;font-size:19px;line-height:24px;color:var(--color-neutral-100);margin-bottom:8px}
-.paradigm-card p{font-size:14px;line-height:21px;color:var(--color-neutral-80)}
-.paradigm-card.visual{padding:0;overflow:hidden;background:var(--color-neutral-20);border-radius:16px}
-.paradigm-card.visual img{width:100%;height:auto;max-height:100%;margin:0;object-fit:contain}
-@media(max-width:991px){.paradigm-cards{grid-template-columns:1fr;gap:16px}.paradigm-card{padding:32px 24px;min-height:auto}.paradigm-card.visual img{min-height:220px}}
+.section-paradigm{padding:0 0 120px}
+.paradigm-cards{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.paradigm-card{background:var(--color-neutral-20);border-radius:var(--radius-lg);padding:48px 40px;display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .4s ease,box-shadow .4s ease}
+.paradigm-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.06)}
+.paradigm-card img{width:auto;max-width:100%;height:200px;object-fit:contain;margin-bottom:28px}
+.paradigm-card h3{font-family:var(--font-display);font-weight:700;font-size:24px;line-height:29px;color:var(--color-neutral-100);margin-bottom:12px}
+.paradigm-card p{font-size:16px;line-height:26px;color:var(--color-neutral-80)}
+@media(max-width:767px){.paradigm-cards{grid-template-columns:1fr;gap:20px}.paradigm-card{padding:36px 28px}}
 
 /* ============================================================
    SECTION: PRINCIPLES
@@ -154,14 +136,6 @@ ul{list-style:none}
 /* ============================================================
    SECTION: CTA
    ============================================================ */
-.section-cta{padding:100px 0;background:linear-gradient(228deg,var(--gradient-start) 0%,var(--gradient-end) 100%)}
-.cta-inner{text-align:center;max-width:640px;margin:0 auto}
-.cta-inner h2{font-family:var(--font-display);font-weight:700;font-size:44px;line-height:46px;color:#fff;margin-bottom:20px}
-.cta-inner p{font-size:21px;line-height:35px;color:rgba(255,255,255,.8);margin-bottom:40px}
-.btn-white{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-text);font-weight:600;font-size:18px;color:var(--color-accent);background:#fff;border:1px solid #fff;padding:16px 70px;border-radius:var(--radius);transition:all .4s;cursor:pointer}
-.btn-white:hover{background:var(--color-accent);color:#fff;border-color:var(--color-accent)}
-@media(max-width:767px){.cta-inner h2{font-size:32px;line-height:38px}.cta-inner p{font-size:19px;line-height:28px}}
-
 /* ============================================================
    FOOTER
    ============================================================ */
@@ -186,23 +160,8 @@ ul{list-style:none}
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="site-nav" id="siteNav">
-  <a href="/" class="logo">
-    <img class="logo-l" src="https://ahlab.org/wp-content/uploads/2021/03/Group-4@2x.png" alt="AHLab" height="28">
-    <img class="logo-d" src="https://ahlab.org/wp-content/uploads/2021/03/Group@2x.png" alt="AHLab" height="28">
-  </a>
-  <div class="nav-links">
-    <a href="/">Home</a>
-    <a href="/vision/" class="active">Vision</a>
-    <a href="/projects/">Projects</a>
-    <a href="/publications/">Publications</a>
-    <a href="/people/">People</a>
-    <a href="/press/">Press & Awards</a>
-    <a href="/join/">Join Us</a>
-  </div>
-  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
-</nav>
+<div id="site-nav-mount"></div>
+<script src="/js/nav-include.js"></script>
 
 <!-- HERO -->
 <section class="hero">
@@ -219,6 +178,9 @@ ul{list-style:none}
       <div class="persp-left rv">
         <div class="section-label">Paradigm Shift</div>
         <h2>Technology as a seamless extension of human ability.</h2>
+        <div class="persp-figure">
+          <img src="https://ahlab.org/wp-content/uploads/2024/09/Fig4.jpg" alt="Assistive Augmentation Framework">
+        </div>
       </div>
       <div class="persp-right">
         <p class="rv rv-d1">We believe that wearable computing and intelligent user interface systems offer tremendous opportunities to revolutionize our daily interactions. However, today's user interfaces still often fail to meet actual needs — especially for people with disabilities who rely on assistive technologies.</p>
@@ -236,9 +198,6 @@ ul{list-style:none}
 <section class="section-paradigm">
   <div class="container">
     <div class="paradigm-cards rv">
-      <div class="paradigm-card visual">
-        <img src="https://ahlab.org/wp-content/uploads/2024/09/Fig4.jpg" alt="Assistive Augmentation Framework">
-      </div>
       <div class="paradigm-card">
         <img src="https://ahlab.org/wp-content/uploads/2025/01/compatible_user.png" alt="Compatible User">
         <h3>The Compatible User</h3>
@@ -254,22 +213,130 @@ ul{list-style:none}
 </section>
 
 <!-- PRINCIPLES -->
+<section class="section-principles">
+  <div class="container">
+    <div class="principles-header rv">
+      <div class="section-label">Design Framework</div>
+      <h2>Assistive Augmentation Principles</h2>
+      <p>Six principles that guide the design of technologies which truly become part of the person.</p>
+    </div>
+    <div class="principles-grid">
+      <div class="principle-card rv rv-d1">
+        <div class="principle-icon" style="--icon-default:url('https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png');--icon-hover:url('https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png')"></div>
+        <h3>Body</h3>
+        <p>Technology must respect and work with the user's body, considering physical comfort, ergonomics, and the intimate relationship between device and wearer.</p>
+      </div>
+      <div class="principle-card rv rv-d2">
+        <div class="principle-icon" style="--icon-default:url('https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png');--icon-hover:url('https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png')"></div>
+        <h3>Cognitive</h3>
+        <p>Augmentations should align with natural cognitive processes, reducing mental load while enhancing learning, memory, and decision-making.</p>
+      </div>
+      <div class="principle-card rv rv-d3">
+        <div class="principle-icon" style="--icon-default:url('https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png');--icon-hover:url('https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png')"></div>
+        <h3>Perceptual</h3>
+        <p>Design interfaces that expand sensory experiences — translating information across modalities so sight, sound, and touch work in powerful new ways.</p>
+      </div>
+      <div class="principle-card rv rv-d1">
+        <div class="principle-icon" style="--icon-default:url('https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png');--icon-hover:url('https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png')"></div>
+        <h3>Physical</h3>
+        <p>The augmentation must consider the physical environment and context of use, adapting to real-world constraints and varied conditions.</p>
+      </div>
+      <div class="principle-card rv rv-d2">
+        <div class="principle-icon" style="--icon-default:url('https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png');--icon-hover:url('https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png')"></div>
+        <h3>Identity</h3>
+        <p>Technology should preserve and enhance the user's sense of self. Assistive devices must empower without stigmatizing or diminishing personal identity.</p>
+      </div>
+      <div class="principle-card rv rv-d3">
+        <div class="principle-icon" style="--icon-default:url('https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png');--icon-hover:url('https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png')"></div>
+        <h3>Sociocultural</h3>
+        <p>Augmentations must account for social dynamics and cultural contexts, enabling meaningful human interactions rather than creating barriers.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- FEATURED PROJECTS -->
-
-<!-- CTA -->
+<section class="section-projects">
+  <div class="container">
+    <div class="projects-header rv">
+      <div class="section-label">Our Work</div>
+      <h2>Assistive Augmentation in Practice</h2>
+      <p>We aim to take on the Assistive Augmentation perspective by seamlessly enhancing perceptual, physical, and cognitive abilities.</p>
+    </div>
+    <div class="projects-grid">
+      <a href="https://ahlab.org/project/aisee/" class="project-card rv">
+        <div class="project-card-thumb">
+          <img src="https://ahlab.org/wp-content/uploads/2021/05/aisee_vision_photo.png" alt="AISee">
+        </div>
+        <div class="project-card-body">
+          <div class="project-card-tags">
+            <div class="project-tag"><img src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt=""></div>
+            <div class="project-tag"><img src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt=""></div>
+            <div class="project-tag"><img src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt=""></div>
+          </div>
+          <h4>AISee</h4>
+          <p>Wearable AI assistant enabling vision impaired people to access the visual world.</p>
+        </div>
+      </a>
+      <a href="https://ahlab.org/project/xr-floatation-therapy/" class="project-card rv rv-d1">
+        <div class="project-card-thumb">
+          <img src="https://ahlab.org/wp-content/uploads/2024/02/mafe_feature-scaled.jpg" alt="XR Floatation">
+        </div>
+        <div class="project-card-body">
+          <div class="project-card-tags">
+            <div class="project-tag"><img src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt=""></div>
+            <div class="project-tag"><img src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt=""></div>
+            <div class="project-tag"><img src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt=""></div>
+          </div>
+          <h4>XR Floatation</h4>
+          <p>Novel extended reality experiences leveraging floating tanks to mitigate aquaphobia.</p>
+        </div>
+      </a>
+      <a href="https://ahlab.org/project/dronebuddy/" class="project-card rv rv-d2">
+        <div class="project-card-thumb">
+          <img src="https://ahlab.org/wp-content/uploads/2024/02/dronebuddy-1.png" alt="DroneBuddy">
+        </div>
+        <div class="project-card-body">
+          <div class="project-card-tags">
+            <div class="project-tag"><img src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt=""></div>
+            <div class="project-tag"><img src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt=""></div>
+            <div class="project-tag"><img src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt=""></div>
+          </div>
+          <h4>DroneBuddy</h4>
+          <p>Exploring drones as an assistive companion for vision impaired people.</p>
+        </div>
+      </a>
+      <a href="https://ahlab.org/project/chewit/" class="project-card rv rv-d3">
+        <div class="project-card-thumb">
+          <img src="https://ahlab.org/wp-content/uploads/2021/05/chewit.png" alt="ChewIt">
+        </div>
+        <div class="project-card-body">
+          <div class="project-card-tags">
+            <div class="project-tag"><img src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt=""></div>
+            <div class="project-tag"><img src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt=""></div>
+            <div class="project-tag"><img src="https://ahlab.org/wp-content/uploads/2025/02/icon-temporal-1.png" alt=""></div>
+          </div>
+          <h4>ChewIt</h4>
+          <p>Enabling intuitive mouth interactions through a novel chewable mouth interface.</p>
+        </div>
+      </a>
+    </div>
+    <div class="projects-footer rv">
+      <a href="/projects/" class="btn-outline">
+        All Projects
+        <svg width="8" height="16" viewBox="0 0 8 16" fill="none"><path d="M1 1L6 8L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
 
 <div id="site-footer-mount"></div>
 <script src="/js/footer-include.js"></script>
 
 <script>
 const rv=document.querySelectorAll('.rv');
-const obs=new IntersectionObserver(e=>{e.forEach(n=>{if(n.isIntersecting){n.target.classList.add('vis');obs.unobserve(n.target)}})},{threshold:.01,rootMargin:'0px 0px 0px 0px'});
-rv.forEach(el=>{
-  const r=el.getBoundingClientRect();
-  if(r.top<window.innerHeight&&r.bottom>0){el.classList.add('vis')}
-  else{obs.observe(el)}
-});
+const obs=new IntersectionObserver(e=>{e.forEach(n=>{if(n.isIntersecting)n.target.classList.add('vis')})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+rv.forEach(el=>obs.observe(el));
 const nav=document.getElementById('siteNav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)},{passive:true});
 document.getElementById('navToggle')?.addEventListener('click',()=>{const l=document.querySelector('.nav-links');l.style.display=l.style.display==='flex'?'none':'flex'});
