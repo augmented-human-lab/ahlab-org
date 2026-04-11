@@ -169,38 +169,8 @@
 
 </div>
 
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <img src="https://ahlab.org/wp-content/uploads/2021/03/Group-4@2x.png" alt="AHLab">
-        <p>Augmented Human Lab — extending the limits of our perceptual and cognitive capabilities.</p>
-      </div>
-      <div class="footer-nav-col">
-        <h5>Explore</h5>
-        <a href="/vision/">Vision</a>
-        <a href="/projects/">Projects</a>
-        <a href="/publications/">Publications</a>
-        <a href="/people/">People</a>
-        <a href="/press/">Press &amp; Awards</a>
-        <a href="/join/">Join Us</a>
-      </div>
-      <div class="footer-contact">
-        <h5>Contact</h5>
-        <a href="mailto:info@ahlab.org">info@ahlab.org</a>
-        <p style="margin-top:16px">
-          <strong style="color:rgba(255,255,255,.7)">Augmented Human Lab</strong><br>
-          Smart Systems Institute<br>
-          National University of Singapore
-        </p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-copy">© 2025 Augmented Human Lab. All rights reserved.</div>
-    </div>
-  </div>
-</footer>
+<div id="site-footer-mount"></div>
+<script src="/js/footer-include.js"></script>
 
 <script>
 const obs=new IntersectionObserver(e=>{e.forEach(n=>{if(n.isIntersecting)n.target.classList.add('vis')})},{threshold:.1});
