@@ -6,17 +6,8 @@
    REQUIRES theme.css to be loaded FIRST.
    ============================================================ */
 
-/* ── Breadcrumb ──────────────────────────────────────────── */
-.breadcrumb-bar { padding: 112px 0 20px; }
-.breadcrumb-bar a {
-  font-family: var(--font-text); font-weight: 500; font-size: 14px;
-  color: var(--color-neutral-70); transition: color .3s;
-}
-.breadcrumb-bar a:hover { color: var(--color-accent); }
-.breadcrumb-bar span { font-size: 14px; color: var(--color-neutral-60); margin: 0 8px; }
-
 /* ── Project hero (detail) ───────────────────────────────── */
-.project-hero      { padding: 0 0 60px; }
+.project-hero      { padding: 132px 0 60px; }
 .project-hero-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
