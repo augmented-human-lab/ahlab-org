@@ -37,7 +37,7 @@
    RESET & BASE
    ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 body {
   font-family: var(--font-text);
   font-weight: 400;
@@ -123,7 +123,10 @@ ul { list-style: none; }
   background: linear-gradient(221deg, rgba(0,215,238,0.65) 0%, rgba(97,0,255,0.5) 100%),
               url('https://ahlab.org/wp-content/themes/wp-bootstrap-starter/inc/assets/images/banners/home_hero.png');
   background-size: cover;
-  background-position: center;
+  background-position: calc(50% + var(--hero-tilt-x, 0px)) center;
+  /* Smooth out the per-frame tilt updates from the device-orientation
+     listener — without this the background jitters with every reading. */
+  transition: background-position .25s ease-out;
   animation: scaleIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .hero::after {
@@ -196,7 +199,7 @@ ul { list-style: none; }
 }
 
 @media (max-width: 991px) {
-  .hero { min-height: 80vh; padding-bottom: 80px; }
+  .hero { min-height: 100vh; min-height: 100dvh; padding-bottom: 80px; }
   .hero h1 { font-size: 40px; line-height: 1.12; }
   .hero-sub { font-size: 19px; line-height: 28px; }
 }
@@ -769,17 +772,21 @@ const observer = new IntersectionObserver((entries) => {
 reveals.forEach(el => observer.observe(el));
 
 // Nav scroll effect
+// Nav scroll handler — null-guarded because #siteNav is mounted async
+// by /js/nav-include.js and may not exist when this inline script runs.
 const nav = document.getElementById('siteNav');
-let lastScroll = 0;
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  if (scrollY > 80) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
-  }
-  lastScroll = scrollY;
-}, { passive: true });
+if (nav) {
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    if (scrollY > 80) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+    lastScroll = scrollY;
+  }, { passive: true });
+}
 </script>
 </body>
 </html>
