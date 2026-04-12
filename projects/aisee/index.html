@@ -138,6 +138,11 @@
               <div class="project-person-name">Suranga Nanayakkara</div>
             </a>
         </div>
+      </div><div class="project-sponsors-row rv">
+        <div class="sidebar-section-title">Sponsored by</div>
+        <div class="project-sponsors-list">
+          <span class="project-sponsor" ><span class="project-sponsor-name">SG Enable</span></span>
+        </div>
       </div><div class="project-publications-row rv rv-d1">
         <div class="sidebar-section-title">Publications</div>
         <ol class="project-pub-list">
@@ -158,9 +163,21 @@
 <script src="/js/footer-include.js"></script>
 
 <script>
-const obs=new IntersectionObserver(e=>{e.forEach(n=>{if(n.isIntersecting)n.target.classList.add('vis')})},{threshold:.1});
-document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-document.querySelector('.nav-toggle')?.addEventListener('click',()=>{const l=document.querySelector('.nav-links');l.style.display=l.style.display==='flex'?'none':'flex'});
+/*
+ * Scroll-reveal: fade .rv elements in as they enter the viewport.
+ * threshold:0 (any overlap triggers) instead of a percentage, so tall
+ * elements always qualify on phones. Unobserve once visible since the
+ * transition is one-way.
+ */
+const obs = new IntersectionObserver((entries, observer) => {
+  entries.forEach(n => {
+    if (n.isIntersecting) {
+      n.target.classList.add('vis');
+      observer.unobserve(n.target);
+    }
+  });
+}, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>

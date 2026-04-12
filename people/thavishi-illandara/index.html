@@ -119,9 +119,26 @@
 <script src="/js/footer-include.js"></script>
 
 <script>
-const obs=new IntersectionObserver(e=>{e.forEach(n=>{if(n.isIntersecting)n.target.classList.add('vis')})},{threshold:.1});
-document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-document.querySelector('.nav-toggle')?.addEventListener('click',()=>{const l=document.querySelector('.nav-links');l.style.display=l.style.display==='flex'?'none':'flex'});
+/*
+ * Scroll-reveal: fade .rv elements in as they enter the viewport.
+ *
+ * IMPORTANT: threshold MUST be 0 (any overlap triggers), not a
+ * percentage. For very tall elements — e.g. a PI with 100+ project
+ * cards laid out in a tall grid — a 10% threshold requires ~875px
+ * of viewport overlap, which is impossible on a phone. Those tall
+ * elements would stay at opacity:0 forever. We also unobserve each
+ * element once it has become visible, because the class transition
+ * is one-way.
+ */
+const obs = new IntersectionObserver((entries, observer) => {
+  entries.forEach(n => {
+    if (n.isIntersecting) {
+      n.target.classList.add('vis');
+      observer.unobserve(n.target);
+    }
+  });
+}, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>

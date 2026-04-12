@@ -133,7 +133,68 @@
    horizontal row, then publications as full-width long rows. */
 .project-body { padding: 60px 0 80px; }
 .project-people-row { margin-bottom: 60px; }
+.project-sponsors-row { margin-bottom: 60px; }
 .project-publications-row { /* spacing only; container is full-width */ }
+
+/* ── Sponsors row ─────────────────────────────────────────
+   Industry collaborators that supported this specific project.
+   Renders as a row of pills; each pill shows either the sponsor's
+   logo (preferred) or their name as a text label. Pills with a
+   logo get a slightly larger height to give the image breathing
+   room; text-only pills stay compact. */
+.project-sponsors-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+.project-sponsor {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  background: var(--color-neutral-20);
+  border: 1px solid var(--color-neutral-30);
+  border-radius: var(--radius);
+  color: var(--color-neutral-90);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: -.005em;
+  text-decoration: none;
+  transition: border-color .25s, color .25s, transform .25s;
+  min-height: 48px;
+  box-sizing: border-box;
+}
+a.project-sponsor:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+.project-sponsor.has-logo {
+  padding: 8px 16px;
+}
+.project-sponsor.has-logo img {
+  max-height: 32px;
+  width: auto;
+  display: block;
+  /* Many sponsor logos are SVG/PNG with their own brand color and
+     are designed to read on a light background — leave untouched. */
+}
+/* Visually-hidden span used for the sponsor name when only the
+   logo is rendered, so screen readers and the title attribute
+   still announce who the sponsor is. */
+.project-sponsor .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 /* ── People row (horizontal grid of avatars) ─────────────────
    Each person is a small card: circular avatar on top with the

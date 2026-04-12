@@ -477,6 +477,86 @@ ul { list-style: none; }
 
 
 /* ============================================================
+   SECTION: COLLABORATORS
+   Industry partners that have sponsored projects across the lab.
+   List is hand-curated below — keep in sync with the `sponsors`
+   field on individual project records (see scripts/apply-project-
+   sponsors.mjs). When a logo asset becomes available, swap the
+   text label for an <img>; the styling handles both cases.
+   ============================================================ */
+.section-collaborators {
+  padding: 100px 0;
+  background: var(--color-neutral-10);
+  text-align: center;
+}
+.collaborators-header {
+  max-width: 600px;
+  margin: 0 auto 56px;
+}
+.collaborators-header .section-label {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1.71px;
+  text-transform: uppercase;
+  color: var(--color-neutral-60);
+  margin-bottom: 18px;
+}
+.collaborators-header h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 1.15;
+  color: var(--color-neutral-100);
+  letter-spacing: -.02em;
+}
+.collaborators-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px 28px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.collaborator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  min-height: 64px;
+  background: #fff;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: var(--radius);
+  color: var(--color-neutral-90);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -.005em;
+  text-decoration: none;
+  transition: border-color .25s, color .25s, transform .25s, box-shadow .25s;
+  box-sizing: border-box;
+}
+a.collaborator:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(14, 15, 17, .08);
+}
+.collaborator img {
+  max-height: 36px;
+  width: auto;
+  display: block;
+}
+@media (max-width: 767px) {
+  .section-collaborators { padding: 72px 0; }
+  .collaborators-header h2 { font-size: 28px; }
+  .collaborator { padding: 10px 20px; min-height: 52px; font-size: 14px; }
+  .collaborator img { max-height: 28px; }
+}
+
+
+/* ============================================================
    CTA BANNER
    ============================================================ */
 .section-cta {
@@ -751,6 +831,29 @@ ul { list-style: none; }
 </section>
 
 
+<!-- ==================== COLLABORATORS ==================== -->
+<!-- Industry partners that have sponsored work at AHL. Auto-populated
+     at build time by build-pages.js from the `sponsors` field on each
+     project in projects.json — so adding a sponsor to any project
+     flows through here automatically after rebuild. Deduped by name;
+     rendered as a logo <img> when a logo URL is present, else as a
+     text label. See scripts/apply-project-sponsors.mjs for the curated
+     per-project sponsor map. -->
+<section class="section-collaborators">
+  <div class="container">
+    <div class="collaborators-header reveal">
+      <div class="section-label">Industry Collaborators</div>
+      <h2>Building with partners across industries.</h2>
+    </div>
+    <div class="collaborators-grid reveal reveal-delay-1">
+      <span class="collaborator" >Asahi</span>
+      <span class="collaborator" >Digital Dreams</span>
+      <span class="collaborator" >SG Enable</span>
+    </div>
+  </div>
+</section>
+
+
 <!-- ==================== FOOTER ==================== -->
 <div id="site-footer-mount"></div>
 <script src="/js/footer-include.js"></script>
@@ -787,4 +890,3 @@ if (nav) {
 </script>
 </body>
 </html>
-<!-- test -->
