@@ -13,16 +13,10 @@
 .hero h1 { max-width: 700px; }
 
 /* ── Category sections (people index) ────────────────────── */
-/* Top padding gives each section its own headroom. Bottom padding is
-   applied whenever no *visible* section follows, so the last visible
-   section always has breathing room above the footer. Using
-   `:has(+ .people-section:not(.hidden))` lets us zero out the bottom
-   padding only when another visible section follows — this keeps the
-   original 80px rhythm between stacked sections AND guarantees bottom
-   space under filters (which hide Alumni/Collaborators and leave e.g.
-   Current Team as the last visible section). */
-.people-section { padding: 80px 0; }
-.people-section:has(+ .people-section:not(.hidden)) { padding-bottom: 0; }
+/* Section spacing is controlled below by `.people-section { margin-bottom }`
+   alone — the .people-content column above provides the column's top/bottom
+   gutter, so individual sections don't need their own top padding. The hidden
+   class is toggled by the role filter to remove non-matching sections. */
 .people-section.hidden { display: none; }
 /* Section heading ("Current Team", "Alumni", …). Rendered as a full
    heading rather than a tiny eyebrow label — big display type, dark
@@ -34,21 +28,102 @@
 .section-label {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 32px;
-  line-height: 1.1;
-  letter-spacing: -.015em;
+  font-size: 44px;
+  line-height: 1;
+  letter-spacing: -.02em;
   color: var(--color-neutral-100);
-  padding-bottom: 16px;
-  border-bottom: 2px solid var(--color-neutral-30);
-  margin-bottom: 40px;
+  margin-bottom: 28px;
   text-transform: none;
 }
 @media (max-width: 767px) {
-  .section-label { font-size: 26px; padding-bottom: 12px; margin-bottom: 28px; }
+  .section-label { font-size: 32px; }
 }
 
 /* Card-level hidden state used by the role filter. */
 .person-card.hidden { display: none; }
+
+/* ── Layout: sticky lab timeline (left) + people sections (right) ─
+   Mirrors the pattern used by /press/, /projects/, /publications/.
+   The year-nav exists as a placeholder for a future "lab timeline"
+   feature; it has no scroll-spy or filtering behaviour wired up yet,
+   it just highlights the current year. Keeping the structural parity
+   now so the feature can be activated later without having to rejig
+   the whole index markup. */
+.people-layout {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 0;
+  min-height: 60vh;
+}
+@media (max-width: 991px) { .people-layout { grid-template-columns: 1fr; } }
+
+/* ── Year nav ────────────────────────────────────────────── */
+.year-nav {
+  position: sticky;
+  top: 92px;
+  height: calc(100vh - 92px);
+  padding: 40px 0 40px 40px;
+  overflow-y: auto;
+  border-right: 1px solid var(--color-neutral-30);
+  scrollbar-width: none;               /* Firefox */
+}
+.year-nav::-webkit-scrollbar { display: none; } /* Chrome / Safari / Edge */
+.year-nav a {
+  display: flex;
+  align-items: baseline;
+  font-family: var(--font-display); font-weight: 500; font-size: 15px;
+  color: var(--color-neutral-60);
+  padding: 8px 20px 8px 0;
+  transition: color .25s, border-color .25s;
+  border-right: 2px solid transparent;
+  margin-right: -1px;
+  /* cursor:default because no click handler is wired up — revisit
+     when the lab-timeline feature lights up. */
+  cursor: default;
+  pointer-events: none;
+}
+.year-nav a.active {
+  color: var(--color-accent);
+  font-weight: 700;
+  border-right-color: var(--color-accent);
+}
+@media (max-width: 991px) {
+  .year-nav {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    top: auto;
+    height: auto;
+    padding: 10px 20px;
+    border-right: none;
+    border-top: 1px solid var(--color-neutral-30);
+    display: flex; gap: 6px;
+    overflow-x: auto;
+    z-index: 30;
+    background: rgba(255,255,255,.94);
+    backdrop-filter: blur(14px);
+  }
+  .people-content { padding-bottom: 100px; }
+  .year-nav a {
+    white-space: nowrap;
+    padding: 6px 14px;
+    border-right: none;
+    border-bottom: 2px solid transparent;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .year-nav a.active { border-bottom-color: var(--color-accent); border-right-color: transparent; }
+}
+
+/* ── People content column ───────────────────────────────── */
+/* Right padding matches the .container gutter (40px) so the
+   rightmost column doesn't touch the viewport edge on desktop.
+   48px on the left gives the content some breathing room from
+   the year-nav's border. */
+.people-content { padding: 40px 40px 80px 48px; }
+@media (max-width: 991px) { .people-content { padding: 32px 20px 60px; } }
+
+.people-section { margin-bottom: 72px; }
+.people-section:last-child { margin-bottom: 20px; }
 
 /* ── People grid (index) ─────────────────────────────────── */
 .people-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
@@ -412,26 +487,70 @@
 }
 .profile-project-card:hover .profile-project-card-thumb img { transform: scale(1.06); }
 
-/* Title sits absolutely at the bottom, full width, with a frosted glass
-   background. The blur picks up whatever's behind it (the project image),
-   producing the modern glass-morphism effect. */
-.profile-project-card h5 {
+/* Title bar sits absolutely at the bottom, full width, with a frosted
+   glass background. The blur picks up whatever's behind it (the project
+   image), producing the modern glass-morphism effect. The body is a
+   flex row: title left, principle icon tags right — mirroring the card
+   pattern used on the projects-index page so a project looks the same
+   wherever it appears. */
+.profile-project-card-body {
   position: absolute;
   left: 0; right: 0; bottom: 0;
-  margin: 0;
-  padding: 14px 16px;
-  font-family: var(--font-display); font-weight: 700;
-  font-size: 16px; line-height: 1.25;
-  color: #fff;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   background: rgba(14,15,17,.45);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   backdrop-filter: blur(14px) saturate(140%);
   border-top: 1px solid rgba(255,255,255,.12);
   transition: background .3s;
 }
-.profile-project-card:hover h5 {
+.profile-project-card:hover .profile-project-card-body {
   background: rgba(97,0,255,.55);   /* shifts toward accent on hover */
 }
+.profile-project-card h5 {
+  margin: 0;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 16px; line-height: 1.25;
+  color: #fff;
+  flex: 1;
+  min-width: 0;                /* allow flex shrinking so ellipsis can fire */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Principle tag icons (profile project card) ──────────
+   Right side of the title bar. Same hover-swap pattern as
+   the projects-index cards: two stacked <img>s cross-fade
+   between default and highlight variants. The icons sit on
+   the dark glass title bar, so use a subtle opacity boost
+   on the default variant to keep them readable. */
+.profile-project-card-tags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.profile-project-card-tag {
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 22px;
+  line-height: 0;
+}
+.profile-project-card-tag img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity .25s ease;
+}
+.profile-project-card-tag-hover { opacity: 0; }
+.profile-project-card-tag:hover .profile-project-card-tag-default { opacity: 0; }
+.profile-project-card-tag:hover .profile-project-card-tag-hover   { opacity: 1; }
 
 @media (max-width: 991px) { .profile-projects-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 567px) { .profile-projects-grid { grid-template-columns: 1fr; } }

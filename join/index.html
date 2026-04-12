@@ -29,11 +29,12 @@ ul{list-style:none}
 @keyframes heroScale{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:scale(1)}}
 .hero::after{content:"";position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,rgba(0,0,0,.25),transparent);pointer-events:none}
 .hero .container{position:relative;z-index:2}
-.hero h1{font-family:var(--font-display);font-weight:700;font-size:52px;line-height:1.1;color:#fff;letter-spacing:-.02em;max-width:780px;animation:fadeUp .8s .4s cubic-bezier(.16,1,.3,1) both}
-.hero-sub{font-size:21px;line-height:35px;color:rgba(255,255,255,.8);margin-top:24px;max-width:580px;animation:fadeUp .8s .6s cubic-bezier(.16,1,.3,1) both}
+.hero-content{max-width:860px}
+.hero h1{font-family:var(--font-display);font-weight:700;font-size:56px;line-height:1.08;color:#fff;letter-spacing:-.02em;animation:fadeUp .8s .4s cubic-bezier(.16,1,.3,1) both}
+.hero-sub{font-family:var(--font-text);font-size:21px;line-height:35px;color:rgba(255,255,255,.85);margin-top:28px;max-width:620px;animation:fadeUp .8s .6s cubic-bezier(.16,1,.3,1) both}
 @keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:991px){.hero{min-height:80vh;padding-bottom:80px}.hero h1{font-size:40px}}
-@media(max-width:567px){.hero h1{font-size:32px;line-height:1.15}.hero-sub{font-size:19px;line-height:28px}}
+@media(max-width:991px){.hero{min-height:80vh;padding-bottom:80px}.hero h1{font-size:40px;line-height:1.12}.hero-sub{font-size:19px;line-height:28px}}
+@media(max-width:567px){.hero h1{font-size:32px}}
 
 /* ---- POSITIONS SECTION ---- */
 .section-positions{padding:120px 0 60px}
@@ -110,8 +111,10 @@ ul{list-style:none}
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <h1>Interested in joining a talented and fun team of people?</h1>
-    <p class="hero-sub">We're always looking for curious minds who want to push the boundaries of human-computer interaction and assistive augmentation.</p>
+    <div class="hero-content">
+      <h1>Interested in joining a talented and fun team of people?</h1>
+      <p class="hero-sub">We're always looking for curious minds who want to push the boundaries of human-computer interaction and assistive augmentation.</p>
+    </div>
   </div>
 </section>
 
