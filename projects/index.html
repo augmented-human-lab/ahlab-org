@@ -11,34 +11,11 @@
 <meta name="description" content="Research projects from the Augmented Human Lab — extending perceptual and cognitive capabilities.">
 <style>
 /* Inline overrides specific to the projects archive page only.
-   Reuses tokens, nav, footer, .container, .rv from project.css */
-
-/* ── Hero (gradient, matching /press/ and /publications/) ──
-   Full-width gradient band with white type on top. The chip
-   sentence sits in this hero — the shared .hero-chip / .hero-
-   summary rules in theme.css are designed for exactly this
-   white-on-gradient context, so we don't need any per-page
-   chip overrides here. */
-.hero { position: relative; padding: 160px 0 80px; overflow: hidden; }
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--gradient);
-}
-.hero .container { position: relative; z-index: 2; }
-.hero h1 {
-  font-family: var(--font-display); font-weight: 700;
-  font-size: 60px; line-height: 1.05; color: #fff;
-  letter-spacing: -.02em;
-}
-@media (max-width: 991px) {
-  .hero { padding: 140px 0 60px; }
-  .hero h1 { font-size: 44px; }
-}
-@media (max-width: 567px) {
-  .hero h1 { font-size: 36px; }
-}
+   Reuses tokens, nav, footer, .container, .rv from project.css.
+   Hero styles are shared — see theme.css for .hero / .hero h1 /
+   .hero::before. The chip sentence sits in this hero — the shared
+   .hero-chip / .hero-summary rules in theme.css are designed for
+   exactly this white-on-gradient context. */
 
 /* ── Layout (sticky year timeline + content) ──────────────
    Mirrors the pattern used on /press/ and /publications/:

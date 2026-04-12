@@ -5,37 +5,7 @@
    REQUIRES theme.css to be loaded FIRST.
    ============================================================ */
 
-/* ── Hero (matching people-index gradient hero) ──────────── */
-.hero { position: relative; padding: 160px 0 80px; overflow: hidden; }
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--gradient);
-}
-.hero .container { position: relative; z-index: 2; }
-.hero-label {
-  font-family: var(--font-display); font-weight: 800;
-  font-size: 12px; letter-spacing: 1.71px; text-transform: uppercase;
-  color: rgba(255,255,255,.55); margin-bottom: 20px;
-}
-.hero h1 {
-  font-family: var(--font-display); font-weight: 700;
-  font-size: 48px; line-height: 52px; color: #fff;
-  letter-spacing: -.02em; max-width: 700px;
-  margin-bottom: 18px;
-}
-.hero p:not(.hero-summary) {
-  font-family: var(--font-display); font-weight: 300;
-  font-size: 21px; line-height: 28px;
-  color: rgba(255,255,255,.6);
-  max-width: 620px;
-}
-@media (max-width: 991px) {
-  .hero { padding: 140px 0 60px; }
-  .hero h1 { font-size: 36px; line-height: 42px; }
-  .hero p:not(.hero-summary) { font-size: 18px; line-height: 26px; }
-}
+/* Hero rules are shared — see theme.css for .hero / .hero h1 / .hero::before. */
 
 /* ── Layout (sticky year nav + content) ──────────────────── */
 .pubs-layout {

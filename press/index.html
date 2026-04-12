@@ -15,47 +15,18 @@
 <div id="site-nav-mount"></div>
 <script src="/js/nav-include.js"></script>
 
-<!-- HERO -->
+<!-- HERO (hosts the filter chips inline) -->
 <header class="hero">
   <div class="container">
-    <h1>Recognition for our work</h1>
-    <p>159 items · 2008–2025 · 43 awards, 96 news mentions, 20 videos</p>
+    <h1>Press &amp; Awards</h1>
+    <p class="hero-summary">
+      <span class="hero-filter-group" id="filterPills">
+        <span class="hero-chip" role="button" tabindex="0" data-group="award" data-label="Awards">43 Awards</span>, <span class="hero-chip" role="button" tabindex="0" data-group="news" data-label="News">96 News</span>, and <span class="hero-chip" role="button" tabindex="0" data-group="video" data-label="Videos">20 Videos</span>.
+      </span>
+      <button type="button" class="hero-filter-reset" id="filterReset" aria-label="Show all items">Show all</button>
+    </p>
   </div>
 </header>
-
-<!-- FILTER BAR -->
-<div class="filter-bar">
-  <div class="container">
-    <div class="filter-bar-inner">
-      <span class="filter-label">Filter</span>
-      <div class="filter-pills" id="filterPills">
-        
-  <button class="pill active" data-type="all">
-    
-    <span>All</span>
-    <span class="count">159</span>
-  </button>
-  <button class="pill " data-type="news">
-    <svg class="icon"><use href="#i-news"/></svg>
-    <span>News</span>
-    <span class="count">96</span>
-  </button>
-  <button class="pill " data-type="award">
-    <svg class="icon"><use href="#i-award"/></svg>
-    <span>Awards</span>
-    <span class="count">43</span>
-  </button>
-  <button class="pill " data-type="video">
-    <svg class="icon"><use href="#i-video"/></svg>
-    <span>Videos</span>
-    <span class="count">20</span>
-  </button>
-      </div>
-      <div class="filter-spacer"></div>
-      <div class="filter-result" id="filterResult">Showing all items</div>
-    </div>
-  </div>
-</div>
 
 <!-- LAYOUT -->
 <div class="press-layout">
@@ -1916,42 +1887,83 @@
   This script just wires up filtering, scroll-spy, reveal-on-scroll, and the mobile nav.
 */
 
-const state = { filter: 'all' };
+// ── Type filter (hero chips) ──────────────────────────────
+// Each .press-item carries data-type="news|award|video". Clicking a
+// hero chip hides non-matching items, collapses empty year sections
+// (and their year-nav links), and appends "/ Awards"-style suffix to
+// each visible year title — same pattern as /people/, /projects/,
+// /publications/. The template-provided "Show all" link resets.
+const filterPills = document.getElementById('filterPills');
+const filterReset = document.getElementById('filterReset');
+const heroSummary = document.querySelector('.hero-summary');
+const emptyState  = document.getElementById('emptyState');
+
+// Cache each year-title's base text once, so suffixes can be swapped
+// in and out without losing the original year string.
+document.querySelectorAll('.year-title').forEach(el => {
+  const yearText = el.childNodes[0]?.nodeValue?.trim() || '';
+  el.dataset.baseYear = yearText;
+});
 
 function applyFilter(type) {
-  const items = document.querySelectorAll('.press-item');
+  const isAll = !type || type === 'all';
+
+  heroSummary?.classList.toggle('is-filtered', !isAll);
+  let activeLabel = '';
+  document.querySelectorAll('#filterPills .hero-chip').forEach(chip => {
+    const active = !isAll && chip.dataset.group === type;
+    chip.classList.toggle('is-active', active);
+    if (active) activeLabel = chip.dataset.label || '';
+  });
+
   let visibleTotal = 0;
-  items.forEach(el => {
-    const match = type === 'all' || el.dataset.type === type;
+  document.querySelectorAll('.press-item').forEach(el => {
+    const match = isAll || el.dataset.type === type;
     el.classList.toggle('hidden', !match);
     if (match) visibleTotal++;
   });
+
   document.querySelectorAll('.year-section').forEach(section => {
     const anyVisible = section.querySelectorAll('.press-item:not(.hidden)').length;
     section.classList.toggle('empty', anyVisible === 0);
+
+    // Update year title with breadcrumb-style filter suffix
+    const titleEl = section.querySelector('.year-title');
+    if (titleEl) {
+      const base = titleEl.dataset.baseYear;
+      titleEl.firstChild.nodeValue = (!isAll && activeLabel)
+        ? `${base} / ${activeLabel} `
+        : `${base} `;
+    }
+
+    // Sync the per-year count (both inline and in the nav)
     const year = section.dataset.year;
     const navLink = document.querySelector(`.year-nav a[data-year="${year}"]`);
     if (navLink) {
       navLink.classList.toggle('hidden', anyVisible === 0);
-      const countEl = navLink.querySelector('.yr-count');
-      if (countEl) countEl.textContent = anyVisible;
+      const navCount = navLink.querySelector('.yr-count');
+      if (navCount) navCount.textContent = anyVisible;
     }
     const yrCountInline = document.getElementById(`ycount-${year}`);
     if (yrCountInline) yrCountInline.textContent = anyVisible;
   });
-  document.getElementById('emptyState').classList.toggle('hidden', visibleTotal > 0);
-  const label = type === 'all' ? 'all items' : type;
-  document.getElementById('filterResult').textContent = `Showing ${visibleTotal} ${label}`;
+
+  emptyState?.classList.toggle('hidden', visibleTotal > 0);
 }
 
-document.getElementById('filterPills').addEventListener('click', e => {
-  const btn = e.target.closest('.pill');
-  if (!btn) return;
-  const type = btn.dataset.type;
-  state.filter = type;
-  document.querySelectorAll('.pill').forEach(p => p.classList.toggle('active', p.dataset.type === type));
-  applyFilter(type);
+filterPills?.addEventListener('click', e => {
+  const chip = e.target.closest('.hero-chip');
+  if (!chip) return;
+  applyFilter(chip.dataset.group);
 });
+filterPills?.addEventListener('keydown', e => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const chip = e.target.closest('.hero-chip');
+  if (!chip) return;
+  e.preventDefault();
+  applyFilter(chip.dataset.group);
+});
+filterReset?.addEventListener('click', () => applyFilter('all'));
 
 // Reveal on scroll
 const reveal = new IntersectionObserver(entries => {
@@ -1985,11 +1997,14 @@ const spy = new IntersectionObserver(entries => {
 }, { threshold: 0, rootMargin: '-30% 0px -60% 0px' });
 sections.forEach(s => spy.observe(s));
 
-// Nav background on scroll
+// Nav background on scroll — null-guarded because #siteNav is mounted
+// async by /js/nav-include.js and may not exist when this inline script runs.
 const nav = document.getElementById('siteNav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-}, { passive: true });
+if (nav) {
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+}
 document.getElementById('navToggle')?.addEventListener('click', () => {
   const l = document.querySelector('.nav-links');
   l.style.display = l.style.display === 'flex' ? 'none' : 'flex';

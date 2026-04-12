@@ -8,33 +8,9 @@
    .sidebar-section helpers).
    ============================================================ */
 
-/* ── Hero (people index) ─────────────────────────────────── */
-.hero { position: relative; padding: 160px 0 80px; overflow: hidden; }
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--gradient);
-}
-.hero .container { position: relative; z-index: 2; }
-.hero-label {
-  font-family: var(--font-display); font-weight: 800;
-  font-size: 12px; letter-spacing: 1.71px; text-transform: uppercase;
-  color: rgba(255,255,255,.55); margin-bottom: 20px;
-}
-.hero h1 {
-  font-family: var(--font-display); font-weight: 700;
-  font-size: 48px; line-height: 52px; color: #fff;
-  letter-spacing: -.02em; max-width: 700px;
-}
-.hero-count {
-  font-family: var(--font-display); font-weight: 300;
-  font-size: 21px; color: rgba(255,255,255,.6); margin-top: 20px;
-}
-@media (max-width: 991px) {
-  .hero { padding: 140px 0 60px; }
-  .hero h1 { font-size: 36px; line-height: 42px; }
-}
+/* Hero rules are shared — see theme.css for .hero / .hero h1 / .hero::before.
+   Only page-specific extras kept here. */
+.hero h1 { max-width: 700px; }
 
 /* ── Category sections (people index) ────────────────────── */
 /* Top padding gives each section its own headroom. Bottom padding is

@@ -5,86 +5,7 @@
    REQUIRES theme.css to be loaded FIRST.
    ============================================================ */
 
-/* ── Hero (matching people-index gradient hero) ──────────── */
-.hero { position: relative; padding: 160px 0 80px; overflow: hidden; }
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--gradient);
-}
-.hero .container { position: relative; z-index: 2; }
-.hero-label {
-  font-family: var(--font-display); font-weight: 800;
-  font-size: 12px; letter-spacing: 1.71px; text-transform: uppercase;
-  color: rgba(255,255,255,.55); margin-bottom: 20px;
-}
-.hero h1 {
-  font-family: var(--font-display); font-weight: 700;
-  font-size: 48px; line-height: 52px; color: #fff;
-  letter-spacing: -.02em; max-width: 700px;
-  margin-bottom: 18px;
-}
-.hero p {
-  font-family: var(--font-display); font-weight: 300;
-  font-size: 21px; line-height: 28px;
-  color: rgba(255,255,255,.6);
-  max-width: 620px;
-}
-@media (max-width: 991px) {
-  .hero { padding: 140px 0 60px; }
-  .hero h1 { font-size: 36px; line-height: 42px; }
-  .hero p { font-size: 18px; line-height: 26px; }
-}
-
-/* ── Filter bar ──────────────────────────────────────────── */
-.filter-bar {
-  position: sticky;
-  top: 92px;
-  z-index: 40;
-  background: rgba(255,255,255,.92);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--color-neutral-30);
-}
-.filter-bar-inner {
-  padding: 18px 0;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.filter-label {
-  font-family: var(--font-display); font-weight: 800;
-  font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase;
-  color: var(--color-neutral-60);
-  margin-right: 4px;
-}
-.filter-pills { display: flex; gap: 8px; flex-wrap: wrap; }
-.pill {
-  font-family: var(--font-display); font-weight: 600; font-size: 13px;
-  padding: 8px 16px;
-  border-radius: 999px;
-  border: 1px solid var(--color-neutral-30);
-  background: #fff;
-  color: var(--color-neutral-80);
-  cursor: pointer;
-  transition: all .2s ease;
-  display: inline-flex; align-items: center; gap: 8px;
-}
-.pill:hover { border-color: var(--color-accent-light); color: var(--color-neutral-100); }
-.pill.active { background: var(--color-neutral-100); border-color: var(--color-neutral-100); color: #fff; }
-.pill .count { font-weight: 400; opacity: .6; font-size: 12px; }
-.pill.active .count { opacity: .7; }
-.pill .icon { width: 14px; height: 14px; flex-shrink: 0; }
-.filter-spacer { flex: 1; }
-.filter-result { font-size: 13px; color: var(--color-neutral-70); font-family: var(--font-display); }
-
-@media (max-width: 767px) {
-  .filter-bar-inner { padding: 14px 0; gap: 10px; }
-  .filter-label { width: 100%; margin-bottom: 2px; }
-  .filter-spacer { display: none; }
-  .filter-result { width: 100%; order: 3; }
-}
+/* Hero rules are shared — see theme.css for .hero / .hero h1 / .hero::before. */
 
 /* ── Layout (sticky year nav + content) ──────────────────── */
 .press-layout {
@@ -98,8 +19,8 @@
 /* ── Year nav ────────────────────────────────────────────── */
 .year-nav {
   position: sticky;
-  top: 166px;
-  height: calc(100vh - 166px);
+  top: 92px;
+  height: calc(100vh - 92px);
   padding: 40px 0 40px 40px;
   overflow-y: auto;
   border-right: 1px solid var(--color-neutral-30);
@@ -163,7 +84,7 @@
 .press-content { padding: 40px 40px 80px 48px; }
 @media (max-width: 991px) { .press-content { padding: 32px 20px 60px; } }
 
-.year-section { margin-bottom: 72px; scroll-margin-top: 200px; }
+.year-section { margin-bottom: 72px; scroll-margin-top: 120px; }
 .year-section:last-child { margin-bottom: 20px; }
 .year-section.empty { display: none; }
 .year-title {

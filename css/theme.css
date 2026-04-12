@@ -234,6 +234,34 @@ ul  { list-style: none; }
   margin-bottom: 16px;
 }
 
+/* ── Index-page hero (gradient band under the nav) ──────────
+   Shared across /people/, /projects/, /publications/, /press/.
+   Deliberately minimalist: just enough top padding to clear the
+   120px-tall transparent site nav plus a little breathing, and
+   a tight bottom gap so the page's content starts quickly.
+   The gradient is provided by the --gradient token (configured
+   in :root). All four pages use this as-is; page-specific
+   overrides (e.g. typography tweaks) can still be added in their
+   own stylesheets since these rules are deliberately unopinionated
+   about h1 sizing. */
+.hero { position: relative; padding: 132px 0 48px; overflow: hidden; }
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gradient);
+}
+.hero .container { position: relative; z-index: 2; }
+.hero h1 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 48px; line-height: 52px; color: #fff;
+  letter-spacing: -.02em;
+}
+@media (max-width: 991px) {
+  .hero { padding: 112px 0 40px; }
+  .hero h1 { font-size: 36px; line-height: 42px; }
+}
+
 /* ── Hero summary sentence with inline clickable chips ──────
    Shared control used by the people and publications index heroes.
    Reads as prose sitting under the headline — e.g.
@@ -254,13 +282,16 @@ ul  { list-style: none; }
                                     background so it stands out. */
 .hero-summary {
   margin-top: 22px;
-  max-width: 720px;
   font-family: var(--font-display);
   font-weight: 400;
   font-size: 20px;
   line-height: 1.55;
   color: rgba(255, 255, 255, .75);
   letter-spacing: -.005em;
+  /* No max-width: lets longer chip sentences (e.g. the 6 principle
+     filters on /projects/) stay on one line at desktop widths rather
+     than wrapping and making that hero visibly taller than the others.
+     The surrounding .container already caps the reach at ~1290px. */
 }
 .hero-filter-group {
   /* inline container — no layout of its own, chips are just inline text */

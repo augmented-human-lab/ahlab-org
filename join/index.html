@@ -24,7 +24,7 @@ ul{list-style:none}
 
 /* ---- NAV ---- */
 /* ---- HERO ---- */
-.hero{position:relative;min-height:560px;display:flex;align-items:flex-end;padding:0 0 80px;overflow:hidden}
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;padding:0 0 120px;overflow:hidden}
 .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(221deg,rgba(0,215,238,.7) 0%,rgba(97,0,255,.5) 100%),url('https://ahlab.org/wp-content/uploads/2021/06/join_us_hero-1-1-scaled.jpg');background-size:cover;background-position:center top;animation:heroScale 1.4s cubic-bezier(.16,1,.3,1) both}
 @keyframes heroScale{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:scale(1)}}
 .hero::after{content:"";position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,rgba(0,0,0,.25),transparent);pointer-events:none}
@@ -32,7 +32,7 @@ ul{list-style:none}
 .hero h1{font-family:var(--font-display);font-weight:700;font-size:52px;line-height:1.1;color:#fff;letter-spacing:-.02em;max-width:780px;animation:fadeUp .8s .4s cubic-bezier(.16,1,.3,1) both}
 .hero-sub{font-size:21px;line-height:35px;color:rgba(255,255,255,.8);margin-top:24px;max-width:580px;animation:fadeUp .8s .6s cubic-bezier(.16,1,.3,1) both}
 @keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:991px){.hero{min-height:440px;padding-bottom:60px}.hero h1{font-size:40px}}
+@media(max-width:991px){.hero{min-height:80vh;padding-bottom:80px}.hero h1{font-size:40px}}
 @media(max-width:567px){.hero h1{font-size:32px;line-height:1.15}.hero-sub{font-size:19px;line-height:28px}}
 
 /* ---- POSITIONS SECTION ---- */
