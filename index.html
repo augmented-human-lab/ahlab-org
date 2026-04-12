@@ -124,9 +124,6 @@ ul { list-style: none; }
               url('https://ahlab.org/wp-content/themes/wp-bootstrap-starter/inc/assets/images/banners/home_hero.png');
   background-size: cover;
   background-position: calc(50% + var(--hero-tilt-x, 0px)) center;
-  /* Smooth out the per-frame tilt updates from the device-orientation
-     listener — without this the background jitters with every reading. */
-  transition: background-position .25s ease-out;
   animation: scaleIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .hero::after {
