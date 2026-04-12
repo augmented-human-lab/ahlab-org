@@ -240,9 +240,6 @@ ul  { list-style: none; }
     overflow-y: auto;
   }
   .nav-drawer.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-  /* Top spacer matching the nav height so the first row of links
-     starts visibly below the (still-rendered) hamburger button. */
-  .nav-drawer::before { content: ""; height: 64px; flex-shrink: 0; }
 
   /* Hide hamburger lines, show X when drawer open. The toggle button itself
      stays in place (acts as the close target). The nav's gradient background
@@ -274,14 +271,16 @@ ul  { list-style: none; }
   }
   .nav-drawer-grid a:hover { color: var(--color-accent); }
 
-  /* Logo at the top-left of the drawer, above the link grid.
-     Sits within the drawer's frosted-white area so it can be a
-     bit more visually present than at the bottom — bumps to dark
-     ink at solid opacity. The padding aligns it visually with
-     the drawer-grid below (same 20px horizontal). */
+  /* Logo at the top-left of the drawer, aligned vertically with the
+     X (hamburger) button on the right side of the nav row. The nav
+     is 64px tall with `align-items: center`, so its content sits
+     centered around y=32px. We pad the logo top with the same
+     safe-area-aware offset the nav uses, plus extra to bring its
+     vertical center in line with the X. The horizontal 20px matches
+     the nav's own padding so logo and X are in the same gutters. */
   .nav-drawer-logo {
     display: block;
-    padding: 24px 20px 0;
+    padding: max(18px, calc(env(safe-area-inset-top, 0px) + 18px)) 20px 0;
     opacity: .7;
     transition: opacity .3s;
   }
