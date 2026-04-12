@@ -656,3 +656,79 @@ a.profile-pub-title:hover { color: var(--color-accent); }
   .profile-pub-item::before { top: 8px; }
   .profile-pub-title { font-size: 17px; line-height: 24px; }
 }
+
+/* ── Expertise bar ───────────────────────────────────────
+   Segmented horizontal bar visualizing the mix of assistive
+   augmentation principles across a person's projects. Each
+   segment stacks the principle name + count on two lines
+   inside the bar itself — no separate legend needed. Segment
+   width uses flex-grow with the count as the growth factor,
+   so proportions are exact without JS. Narrow segments clip
+   their labels gracefully; the title attribute still shows
+   the full label on hover. */
+.profile-expertise {
+  margin-top: 48px;
+  margin-bottom: 12px;
+}
+.profile-expertise .sidebar-section-title { margin-bottom: 16px; }
+.expertise-bar {
+  display: flex;
+  width: 100%;
+  height: 100px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-neutral-20);
+  gap: 2px;
+}
+.expertise-segment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 10px 8px;
+  overflow: hidden;
+  cursor: default;
+  transition: filter .2s;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .18);
+}
+.expertise-segment:hover { filter: brightness(1.08); }
+.expertise-segment-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+  /* Source icons are dark-on-transparent; invert so they read as
+     white on the colored segment. Slight opacity softens them so
+     they don't dominate over the numeric data. */
+  filter: brightness(0) invert(1);
+  opacity: .95;
+}
+.expertise-segment-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  max-width: 100%;
+}
+.expertise-segment-count {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+  opacity: .92;
+}
+
+@media (max-width: 567px) {
+  .expertise-bar { height: 84px; }
+  .expertise-segment { gap: 3px; padding: 8px 6px; }
+  .expertise-segment-icon { width: 24px; height: 24px; }
+  .expertise-segment-name { font-size: 11px; }
+  .expertise-segment-count { font-size: 12px; }
+}
