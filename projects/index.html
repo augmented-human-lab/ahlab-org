@@ -18,9 +18,90 @@
 .projects-hero p{font-size:19px;line-height:28px;color:var(--color-neutral-70);max-width:620px}
 @media(max-width:767px){.projects-hero{padding:140px 0 48px}.projects-hero h1{font-size:38px}.projects-hero p{font-size:16px;line-height:24px}}
 
-.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;padding:60px 0 100px}
-@media(max-width:991px){.projects-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:640px){.projects-grid{grid-template-columns:1fr;gap:24px}}
+/* ── Layout (sticky year timeline + content) ──────────────
+   Mirrors the pattern used on /press/ and /publications/:
+   fixed-width left column for the year nav, fluid right
+   column for the year-grouped project grid. Full-viewport
+   width (not inside .container) so the nav can hug the left
+   gutter and the grid can spread out. */
+.projects-layout{display:grid;grid-template-columns:140px 1fr;gap:0;min-height:60vh}
+@media(max-width:991px){.projects-layout{grid-template-columns:1fr}}
+
+/* ── Year nav ────────────────────────────────────────────── */
+.projects-layout .year-nav{
+  position:sticky;
+  top:92px;                          /* no filter bar on this page, so sit below the site nav (~92px) */
+  height:calc(100vh - 92px);
+  padding:40px 0 40px 40px;
+  overflow-y:auto;
+  border-right:1px solid var(--color-neutral-30);
+  scrollbar-width:none;
+}
+.projects-layout .year-nav::-webkit-scrollbar{display:none}
+.projects-layout .year-nav a{
+  display:flex;align-items:baseline;justify-content:space-between;
+  font-family:var(--font-display);font-weight:500;font-size:15px;
+  color:var(--color-neutral-60);
+  padding:8px 20px 8px 0;
+  transition:all .25s;
+  border-right:2px solid transparent;
+  margin-right:-1px;
+}
+.projects-layout .year-nav a:hover{color:var(--color-neutral-100)}
+.projects-layout .year-nav a.active{
+  color:var(--color-accent);
+  font-weight:700;
+  border-right-color:var(--color-accent);
+}
+.projects-layout .year-nav a .yr-count{
+  font-weight:400;font-size:12px;color:var(--color-neutral-60);margin-left:4px;
+}
+.projects-layout .year-nav a.active .yr-count{color:var(--color-accent-light)}
+@media(max-width:991px){
+  .projects-layout .year-nav{
+    position:fixed;bottom:0;left:0;right:0;top:auto;
+    height:auto;padding:10px 20px;
+    border-right:none;border-top:1px solid var(--color-neutral-30);
+    display:flex;gap:6px;overflow-x:auto;z-index:30;
+    background:rgba(255,255,255,.94);backdrop-filter:blur(14px);
+  }
+  .projects-content{padding-bottom:100px}
+  .projects-layout .year-nav a{
+    white-space:nowrap;padding:6px 14px;
+    border-right:none;border-bottom:2px solid transparent;
+    font-size:13px;flex-shrink:0;
+  }
+  .projects-layout .year-nav a.active{border-bottom-color:var(--color-accent);border-right-color:transparent}
+}
+
+/* ── Content column ──────────────────────────────────────── */
+/* 40px right gutter matches the .container gutter so the
+   rightmost card doesn't kiss the viewport edge. */
+.projects-content{padding:40px 40px 100px 48px}
+@media(max-width:991px){.projects-content{padding:32px 20px 60px}}
+
+.year-section{margin-bottom:72px;scroll-margin-top:120px}
+.year-section:last-child{margin-bottom:20px}
+.year-title{
+  font-family:var(--font-display);font-weight:700;
+  font-size:44px;line-height:1;
+  color:var(--color-neutral-100);
+  margin-bottom:28px;
+  letter-spacing:-.02em;
+  display:flex;align-items:baseline;gap:14px;
+}
+.year-title .yr-count{
+  font-family:var(--font-display);font-weight:400;font-size:16px;
+  color:var(--color-neutral-60);letter-spacing:0;
+}
+@media(max-width:767px){.year-title{font-size:32px}}
+
+/* ── Project grid (inside each year-section) ──────────────
+   3 columns on desktop; the left timeline already takes
+   140px, so the 3-up works at normal widths. */
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:1200px){.projects-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.projects-grid{grid-template-columns:1fr;gap:20px}}
 
 /* ── Project card (light glass-morphic) ────────────────────
    Image fills the entire card. A small white frosted-glass
@@ -112,14 +193,87 @@
 <section class="projects-hero">
   <div class="container">
     <h1>Research at the Augmented Human Lab</h1>
-    <p>108 projects spanning audio, sensing, accessibility, and human-AI collaboration</p>
+    <p>108 projects · 2011–2025 across audio, sensing, accessibility, and human-AI collaboration</p>
   </div>
 </section>
 
-<!-- GRID -->
-<section class="container">
-  <div class="projects-grid">
+<!-- LAYOUT -->
+<div class="projects-layout">
+
+  <aside class="year-nav" id="yearNav" aria-label="Jump to year">
     
+  <a href="#year-current" data-year="Current">
+    <span>Current</span>
+    <span class="yr-count">5</span>
+  </a>
+  <a href="#year-2025" data-year="2025">
+    <span>2025</span>
+    <span class="yr-count">6</span>
+  </a>
+  <a href="#year-2024" data-year="2024">
+    <span>2024</span>
+    <span class="yr-count">10</span>
+  </a>
+  <a href="#year-2023" data-year="2023">
+    <span>2023</span>
+    <span class="yr-count">3</span>
+  </a>
+  <a href="#year-2022" data-year="2022">
+    <span>2022</span>
+    <span class="yr-count">5</span>
+  </a>
+  <a href="#year-2021" data-year="2021">
+    <span>2021</span>
+    <span class="yr-count">9</span>
+  </a>
+  <a href="#year-2020" data-year="2020">
+    <span>2020</span>
+    <span class="yr-count">7</span>
+  </a>
+  <a href="#year-2019" data-year="2019">
+    <span>2019</span>
+    <span class="yr-count">4</span>
+  </a>
+  <a href="#year-2018" data-year="2018">
+    <span>2018</span>
+    <span class="yr-count">12</span>
+  </a>
+  <a href="#year-2017" data-year="2017">
+    <span>2017</span>
+    <span class="yr-count">9</span>
+  </a>
+  <a href="#year-2016" data-year="2016">
+    <span>2016</span>
+    <span class="yr-count">7</span>
+  </a>
+  <a href="#year-2015" data-year="2015">
+    <span>2015</span>
+    <span class="yr-count">8</span>
+  </a>
+  <a href="#year-2014" data-year="2014">
+    <span>2014</span>
+    <span class="yr-count">9</span>
+  </a>
+  <a href="#year-2013" data-year="2013">
+    <span>2013</span>
+    <span class="yr-count">6</span>
+  </a>
+  <a href="#year-2012" data-year="2012">
+    <span>2012</span>
+    <span class="yr-count">4</span>
+  </a>
+  <a href="#year-2011" data-year="2011">
+    <span>2011</span>
+    <span class="yr-count">4</span>
+  </a>
+  </aside>
+
+  <main class="projects-content">
+    
+  <section class="year-section" id="year-current" data-year="Current">
+    <h2 class="year-title">Current <span class="yr-count">5</span></h2>
+    <div class="projects-grid">
+      
     <a href="/projects/blind-drone/" class="project-card rv" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/blind-drone/blind-drone.jpg" alt="Blind Drone" loading="lazy">
@@ -129,7 +283,7 @@
         <h3>Blind Drone</h3>
       </div>
     </a>
-    <a href="/projects/emodrink/" class="project-card rv" style="transition-delay:0.05s">
+    <a href="/projects/emodrink/" class="project-card rv" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/emodrink/emodrink.jpg" alt="EmoDrink" loading="lazy">
       </div>
@@ -138,7 +292,7 @@
         <h3>EmoDrink</h3>
       </div>
     </a>
-    <a href="/projects/factually/" class="project-card rv" style="transition-delay:0.1s">
+    <a href="/projects/factually/" class="project-card rv" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/factually/factually.jpg" alt="Factually" loading="lazy">
       </div>
@@ -147,7 +301,7 @@
         <h3>Factually</h3>
       </div>
     </a>
-    <a href="/projects/gutio/" class="project-card rv" style="transition-delay:0.15000000000000002s">
+    <a href="/projects/gutio/" class="project-card rv" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/gutio/gutio.jpg" alt="GutIO" loading="lazy">
       </div>
@@ -156,7 +310,7 @@
         <h3>GutIO</h3>
       </div>
     </a>
-    <a href="/projects/zenflow/" class="project-card rv" style="transition-delay:0.2s">
+    <a href="/projects/zenflow/" class="project-card rv" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/zenflow/zenflow.jpg" alt="Zenflow" loading="lazy">
       </div>
@@ -165,7 +319,13 @@
         <h3>Zenflow</h3>
       </div>
     </a>
-    <a href="/projects/soniphy/" class="project-card rv" style="transition-delay:0.25s">
+    </div>
+  </section>
+  <section class="year-section" id="year-2025" data-year="2025">
+    <h2 class="year-title">2025 <span class="yr-count">6</span></h2>
+    <div class="projects-grid">
+      
+    <a href="/projects/soniphy/" class="project-card rv" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/soniphy/soniphy.jpg" alt="SoniPhy" loading="lazy">
       </div>
@@ -174,7 +334,7 @@
         <h3>SoniPhy</h3>
       </div>
     </a>
-    <a href="/projects/sonicvista/" class="project-card rv" style="transition-delay:0.30000000000000004s">
+    <a href="/projects/sonicvista/" class="project-card rv" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/sonicvista/sonicvista.jpg" alt="SonicVista" loading="lazy">
       </div>
@@ -183,7 +343,7 @@
         <h3>SonicVista</h3>
       </div>
     </a>
-    <a href="/projects/dysalytics/" class="project-card rv" style="transition-delay:0.35000000000000003s">
+    <a href="/projects/dysalytics/" class="project-card rv" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/dysalytics/dysalytics.jpg" alt="Dysalytics" loading="lazy">
       </div>
@@ -192,7 +352,7 @@
         <h3>Dysalytics</h3>
       </div>
     </a>
-    <a href="/projects/dronebuddy/" class="project-card rv" style="transition-delay:0.4s">
+    <a href="/projects/dronebuddy/" class="project-card rv" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/dronebuddy/dronebuddy.jpg" alt="DroneBuddy" loading="lazy">
       </div>
@@ -201,7 +361,7 @@
         <h3>DroneBuddy</h3>
       </div>
     </a>
-    <a href="/projects/curious-shorts/" class="project-card rv" style="transition-delay:0.45s">
+    <a href="/projects/curious-shorts/" class="project-card rv" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/curious-shorts/curious-shorts.jpg" alt="Curious Shorts" loading="lazy">
       </div>
@@ -210,7 +370,7 @@
         <h3>Curious Shorts</h3>
       </div>
     </a>
-    <a href="/projects/aisee/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/aisee/" class="project-card rv" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/aisee/aisee.jpg" alt="AiSee" loading="lazy">
       </div>
@@ -219,7 +379,13 @@
         <h3>AiSee</h3>
       </div>
     </a>
-    <a href="/projects/xr-floatation-therapy/" class="project-card rv" style="transition-delay:0.5s">
+    </div>
+  </section>
+  <section class="year-section" id="year-2024" data-year="2024">
+    <h2 class="year-title">2024 <span class="yr-count">10</span></h2>
+    <div class="projects-grid">
+      
+    <a href="/projects/xr-floatation-therapy/" class="project-card rv" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/xr-floatation-therapy/xr-floatation-therapy.jpg" alt="XR Floatation Therapy" loading="lazy">
       </div>
@@ -228,7 +394,7 @@
         <h3>XR Floatation Therapy</h3>
       </div>
     </a>
-    <a href="/projects/ubipen/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/ubipen/" class="project-card rv" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/ubipen/ubipen.jpg" alt="UbiPen" loading="lazy">
       </div>
@@ -237,7 +403,7 @@
         <h3>UbiPen</h3>
       </div>
     </a>
-    <a href="/projects/toro/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/toro/" class="project-card rv" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/toro/toro.jpg" alt="Toro" loading="lazy">
       </div>
@@ -246,7 +412,7 @@
         <h3>Toro</h3>
       </div>
     </a>
-    <a href="/projects/stakco/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/stakco/" class="project-card rv" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/stakco/stakco.jpg" alt="Stakco" loading="lazy">
       </div>
@@ -255,7 +421,7 @@
         <h3>Stakco</h3>
       </div>
     </a>
-    <a href="/projects/sound-designer-generative-ai-interactions/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/sound-designer-generative-ai-interactions/" class="project-card rv" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/sound-designer-generative-ai-interactions/sound-designer-generative-ai-interactions.jpg" alt="Sound Designer-Generative AI Interactions" loading="lazy">
       </div>
@@ -264,7 +430,7 @@
         <h3>Sound Designer-Generative AI Interactions</h3>
       </div>
     </a>
-    <a href="/projects/seear/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/seear/" class="project-card rv" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/seear/seear.jpg" alt="SeEar" loading="lazy">
       </div>
@@ -273,7 +439,7 @@
         <h3>SeEar</h3>
       </div>
     </a>
-    <a href="/projects/kavy/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/kavy/" class="project-card rv" style="transition-delay:0.24s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/kavy/kavy.jpg" alt="Kavy" loading="lazy">
       </div>
@@ -282,7 +448,7 @@
         <h3>Kavy</h3>
       </div>
     </a>
-    <a href="/projects/itiles/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/itiles/" class="project-card rv" style="transition-delay:0.28s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/itiles/itiles.jpg" alt="iTILES" loading="lazy">
       </div>
@@ -291,7 +457,7 @@
         <h3>iTILES</h3>
       </div>
     </a>
-    <a href="/projects/emo-know/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/emo-know/" class="project-card rv" style="transition-delay:0.32s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/emo-know/emo-know.jpg" alt="EMO-KNOW" loading="lazy">
       </div>
@@ -300,7 +466,7 @@
         <h3>EMO-KNOW</h3>
       </div>
     </a>
-    <a href="/projects/cotacs/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/cotacs/" class="project-card rv" style="transition-delay:0.36s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/cotacs/cotacs.jpg" alt="CoTacs" loading="lazy">
       </div>
@@ -309,7 +475,13 @@
         <h3>CoTacs</h3>
       </div>
     </a>
-    <a href="/projects/hopu/" class="project-card rv" style="transition-delay:0.5s">
+    </div>
+  </section>
+  <section class="year-section" id="year-2023" data-year="2023">
+    <h2 class="year-title">2023 <span class="yr-count">3</span></h2>
+    <div class="projects-grid">
+      
+    <a href="/projects/hopu/" class="project-card rv" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/hopu/hopu.jpg" alt="Hopu" loading="lazy">
       </div>
@@ -318,7 +490,7 @@
         <h3>Hopu</h3>
       </div>
     </a>
-    <a href="/projects/crowd-eval-audio/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/crowd-eval-audio/" class="project-card rv" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/crowd-eval-audio/crowd-eval-audio.jpg" alt="Crowd-Eval-Audio" loading="lazy">
       </div>
@@ -327,7 +499,7 @@
         <h3>Crowd-Eval-Audio</h3>
       </div>
     </a>
-    <a href="/projects/audio-morph-gan/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/audio-morph-gan/" class="project-card rv" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/audio-morph-gan/audio-morph-gan.jpg" alt="Audio-Morph GAN" loading="lazy">
       </div>
@@ -336,7 +508,13 @@
         <h3>Audio-Morph GAN</h3>
       </div>
     </a>
-    <a href="/projects/xrtic/" class="project-card rv" style="transition-delay:0.5s">
+    </div>
+  </section>
+  <section class="year-section" id="year-2022" data-year="2022">
+    <h2 class="year-title">2022 <span class="yr-count">5</span></h2>
+    <div class="projects-grid">
+      
+    <a href="/projects/xrtic/" class="project-card rv" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/xrtic/xrtic.jpg" alt="XRtic" loading="lazy">
       </div>
@@ -345,7 +523,7 @@
         <h3>XRtic</h3>
       </div>
     </a>
-    <a href="/projects/vrhook/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/vrhook/" class="project-card rv" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/vrhook/vrhook.jpg" alt="VRHook" loading="lazy">
       </div>
@@ -354,7 +532,7 @@
         <h3>VRHook</h3>
       </div>
     </a>
-    <a href="/projects/scratch-and-sense/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/scratch-and-sense/" class="project-card rv" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/scratch-and-sense/scratch-and-sense.jpg" alt="Scratch and Sense" loading="lazy">
       </div>
@@ -363,7 +541,7 @@
         <h3>Scratch and Sense</h3>
       </div>
     </a>
-    <a href="/projects/kiwrious/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/kiwrious/" class="project-card rv" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/kiwrious/kiwrious.jpg" alt="Kiwrious" loading="lazy">
       </div>
@@ -372,7 +550,7 @@
         <h3>Kiwrious</h3>
       </div>
     </a>
-    <a href="/projects/affect-in-the-wild/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/affect-in-the-wild/" class="project-card rv" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/affect-in-the-wild/affect-in-the-wild.jpg" alt="Affect in the Wild" loading="lazy">
       </div>
@@ -381,7 +559,13 @@
         <h3>Affect in the Wild</h3>
       </div>
     </a>
-    <a href="/projects/ticklefoot/" class="project-card rv" style="transition-delay:0.5s">
+    </div>
+  </section>
+  <section class="year-section" id="year-2021" data-year="2021">
+    <h2 class="year-title">2021 <span class="yr-count">9</span></h2>
+    <div class="projects-grid">
+      
+    <a href="/projects/ticklefoot/" class="project-card rv" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/ticklefoot/ticklefoot.jpg" alt="TickleFoot" loading="lazy">
       </div>
@@ -390,7 +574,7 @@
         <h3>TickleFoot</h3>
       </div>
     </a>
-    <a href="/projects/stressshoe/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/stressshoe/" class="project-card rv" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/stressshoe/stressshoe.jpg" alt="StressShoe" loading="lazy">
       </div>
@@ -399,7 +583,7 @@
         <h3>StressShoe</h3>
       </div>
     </a>
-    <a href="/projects/om/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/om/" class="project-card rv" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/om/om.jpg" alt="OM" loading="lazy">
       </div>
@@ -408,7 +592,7 @@
         <h3>OM</h3>
       </div>
     </a>
-    <a href="/projects/magicblocks/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/magicblocks/" class="project-card rv" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/magicblocks/magicblocks.jpg" alt="MagicBLOCKS" loading="lazy">
       </div>
@@ -417,7 +601,7 @@
         <h3>MagicBLOCKS</h3>
       </div>
     </a>
-    <a href="/projects/lightsense/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/lightsense/" class="project-card rv" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/lightsense/lightsense.jpg" alt="LightSense" loading="lazy">
       </div>
@@ -426,7 +610,7 @@
         <h3>LightSense</h3>
       </div>
     </a>
-    <a href="/projects/kinvoice/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/kinvoice/" class="project-card rv" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/kinvoice/kinvoice.jpg" alt="KinVoice" loading="lazy">
       </div>
@@ -435,7 +619,7 @@
         <h3>KinVoice</h3>
       </div>
     </a>
-    <a href="/projects/eyeknowyou/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/eyeknowyou/" class="project-card rv" style="transition-delay:0.24s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/eyeknowyou/eyeknowyou.jpg" alt="EyeKnowYou" loading="lazy">
       </div>
@@ -444,7 +628,7 @@
         <h3>EyeKnowYou</h3>
       </div>
     </a>
-    <a href="/projects/clothtiles/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/clothtiles/" class="project-card rv" style="transition-delay:0.28s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/clothtiles/clothtiles.jpg" alt="ClothTiles" loading="lazy">
       </div>
@@ -453,7 +637,7 @@
         <h3>ClothTiles</h3>
       </div>
     </a>
-    <a href="/projects/anisma/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/anisma/" class="project-card rv" style="transition-delay:0.32s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/anisma/anisma.jpg" alt="ANISMA" loading="lazy">
       </div>
@@ -462,7 +646,13 @@
         <h3>ANISMA</h3>
       </div>
     </a>
-    <a href="/projects/versatouch/" class="project-card rv" style="transition-delay:0.5s">
+    </div>
+  </section>
+  <section class="year-section" id="year-2020" data-year="2020">
+    <h2 class="year-title">2020 <span class="yr-count">7</span></h2>
+    <div class="projects-grid">
+      
+    <a href="/projects/versatouch/" class="project-card rv" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/versatouch/versatouch.jpg" alt="VersaTouch" loading="lazy">
       </div>
@@ -471,7 +661,7 @@
         <h3>VersaTouch</h3>
       </div>
     </a>
-    <a href="/projects/stressfoot/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/stressfoot/" class="project-card rv" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/stressfoot/stressfoot.jpg" alt="StressFoot" loading="lazy">
       </div>
@@ -480,7 +670,7 @@
         <h3>StressFoot</h3>
       </div>
     </a>
-    <a href="/projects/rainbowhub/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/rainbowhub/" class="project-card rv" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/rainbowhub/rainbowhub.jpg" alt="RainbowHub" loading="lazy">
       </div>
@@ -489,7 +679,7 @@
         <h3>RainbowHub</h3>
       </div>
     </a>
-    <a href="/projects/prompto/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/prompto/" class="project-card rv" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/prompto/prompto.jpg" alt="Prompto" loading="lazy">
       </div>
@@ -498,7 +688,7 @@
         <h3>Prompto</h3>
       </div>
     </a>
-    <a href="/projects/phantomtouch/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/phantomtouch/" class="project-card rv" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/phantomtouch/phantomtouch.jpg" alt="PhantomTouch" loading="lazy">
       </div>
@@ -507,7 +697,7 @@
         <h3>PhantomTouch</h3>
       </div>
     </a>
-    <a href="/projects/jammify/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/jammify/" class="project-card rv" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/jammify/jammify.jpg" alt="Jammify" loading="lazy">
       </div>
@@ -516,7 +706,7 @@
         <h3>Jammify</h3>
       </div>
     </a>
-    <a href="/projects/actualtouch/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/actualtouch/" class="project-card rv" style="transition-delay:0.24s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/actualtouch/actualtouch.jpg" alt="ActualTouch" loading="lazy">
       </div>
@@ -525,7 +715,13 @@
         <h3>ActualTouch</h3>
       </div>
     </a>
-    <a href="/projects/prospero/" class="project-card rv" style="transition-delay:0.5s">
+    </div>
+  </section>
+  <section class="year-section" id="year-2019" data-year="2019">
+    <h2 class="year-title">2019 <span class="yr-count">4</span></h2>
+    <div class="projects-grid">
+      
+    <a href="/projects/prospero/" class="project-card rv" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/prospero/prospero.jpg" alt="Prospero" loading="lazy">
       </div>
@@ -534,7 +730,7 @@
         <h3>Prospero</h3>
       </div>
     </a>
-    <a href="/projects/m-hair/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/m-hair/" class="project-card rv" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/m-hair/m-hair.jpg" alt="M-Hair" loading="lazy">
       </div>
@@ -543,7 +739,7 @@
         <h3>M-Hair</h3>
       </div>
     </a>
-    <a href="/projects/gymsoles/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/gymsoles/" class="project-card rv" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/gymsoles/gymsoles.jpg" alt="GymSoles" loading="lazy">
       </div>
@@ -552,7 +748,7 @@
         <h3>GymSoles</h3>
       </div>
     </a>
-    <a href="/projects/chewit/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/chewit/" class="project-card rv" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/chewit/chewit.jpg" alt="ChewIt" loading="lazy">
       </div>
@@ -561,7 +757,13 @@
         <h3>ChewIt</h3>
       </div>
     </a>
-    <a href="/projects/target-driven-navigation/" class="project-card rv" style="transition-delay:0.5s">
+    </div>
+  </section>
+  <section class="year-section" id="year-2018" data-year="2018">
+    <h2 class="year-title">2018 <span class="yr-count">12</span></h2>
+    <div class="projects-grid">
+      
+    <a href="/projects/target-driven-navigation/" class="project-card rv" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/target-driven-navigation/target-driven-navigation.jpg" alt="Target Driven Navigation" loading="lazy">
       </div>
@@ -570,7 +772,7 @@
         <h3>Target Driven Navigation</h3>
       </div>
     </a>
-    <a href="/projects/step-detection-algorithm/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/step-detection-algorithm/" class="project-card rv" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/step-detection-algorithm/step-detection-algorithm.jpg" alt="Step Detection Algorithm" loading="lazy">
       </div>
@@ -579,7 +781,7 @@
         <h3>Step Detection Algorithm</h3>
       </div>
     </a>
-    <a href="/projects/prospecfit/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/prospecfit/" class="project-card rv" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/prospecfit/prospecfit.jpg" alt="ProspecFit" loading="lazy">
       </div>
@@ -588,7 +790,7 @@
         <h3>ProspecFit</h3>
       </div>
     </a>
-    <a href="/projects/osense/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/osense/" class="project-card rv" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/osense/osense.jpg" alt="oSense" loading="lazy">
       </div>
@@ -597,7 +799,7 @@
         <h3>oSense</h3>
       </div>
     </a>
-    <a href="/projects/lighttank/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/lighttank/" class="project-card rv" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/lighttank/lighttank.jpg" alt="LightTank" loading="lazy">
       </div>
@@ -606,7 +808,7 @@
         <h3>LightTank</h3>
       </div>
     </a>
-    <a href="/projects/fsense/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/fsense/" class="project-card rv" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/fsense/fsense.jpg" alt="fSense" loading="lazy">
       </div>
@@ -615,7 +817,7 @@
         <h3>fSense</h3>
       </div>
     </a>
-    <a href="/projects/evaluating-ivr-in-schools/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/evaluating-ivr-in-schools/" class="project-card rv" style="transition-delay:0.24s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/evaluating-ivr-in-schools/evaluating-ivr-in-schools.jpg" alt="Evaluating IVR in schools" loading="lazy">
       </div>
@@ -624,7 +826,7 @@
         <h3>Evaluating IVR in schools</h3>
       </div>
     </a>
-    <a href="/projects/cricketcoach/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/cricketcoach/" class="project-card rv" style="transition-delay:0.28s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/cricketcoach/cricketcoach.jpg" alt="CricketCoach" loading="lazy">
       </div>
@@ -633,7 +835,7 @@
         <h3>CricketCoach</h3>
       </div>
     </a>
-    <a href="/projects/comprate/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/comprate/" class="project-card rv" style="transition-delay:0.32s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/comprate/comprate.jpg" alt="CompRate" loading="lazy">
       </div>
@@ -642,7 +844,7 @@
         <h3>CompRate</h3>
       </div>
     </a>
-    <a href="/projects/capmat/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/capmat/" class="project-card rv" style="transition-delay:0.36s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/capmat/capmat.jpg" alt="CapMat" loading="lazy">
       </div>
@@ -651,7 +853,7 @@
         <h3>CapMat</h3>
       </div>
     </a>
-    <a href="/projects/abi-foodcam/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/abi-foodcam/" class="project-card rv" style="transition-delay:0.4s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/abi-foodcam/abi-foodcam.jpg" alt="ABI FoodCam" loading="lazy">
       </div>
@@ -660,7 +862,7 @@
         <h3>ABI FoodCam</h3>
       </div>
     </a>
-    <a href="/projects/2bit-tactile-hand/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/2bit-tactile-hand/" class="project-card rv" style="transition-delay:0.4s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/2bit-tactile-hand/2bit-tactile-hand.jpg" alt="2bit-Tactile Hand" loading="lazy">
       </div>
@@ -669,7 +871,13 @@
         <h3>2bit-Tactile Hand</h3>
       </div>
     </a>
-    <a href="/projects/thumb-in-motion/" class="project-card rv" style="transition-delay:0.5s">
+    </div>
+  </section>
+  <section class="year-section" id="year-2017" data-year="2017">
+    <h2 class="year-title">2017 <span class="yr-count">9</span></h2>
+    <div class="projects-grid">
+      
+    <a href="/projects/thumb-in-motion/" class="project-card rv" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/thumb-in-motion/thumb-in-motion.jpg" alt="Thumb in Motion" loading="lazy">
       </div>
@@ -678,7 +886,7 @@
         <h3>Thumb in Motion</h3>
       </div>
     </a>
-    <a href="/projects/muss-bits/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/muss-bits/" class="project-card rv" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/muss-bits/muss-bits.jpg" alt="MuSS-Bits" loading="lazy">
       </div>
@@ -687,7 +895,7 @@
         <h3>MuSS-Bits</h3>
       </div>
     </a>
-    <a href="/projects/kyanite/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/kyanite/" class="project-card rv" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/kyanite/kyanite.jpg" alt="Kyanite" loading="lazy">
       </div>
@@ -696,7 +904,7 @@
         <h3>Kyanite</h3>
       </div>
     </a>
-    <a href="/projects/insight/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/insight/" class="project-card rv" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/insight/insight.jpg" alt="InSight" loading="lazy">
       </div>
@@ -705,7 +913,7 @@
         <h3>InSight</h3>
       </div>
     </a>
-    <a href="/projects/gestakey/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/gestakey/" class="project-card rv" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/gestakey/gestakey.jpg" alt="GestAKey" loading="lazy">
       </div>
@@ -714,7 +922,7 @@
         <h3>GestAKey</h3>
       </div>
     </a>
-    <a href="/projects/gescad/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/gescad/" class="project-card rv" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/gescad/gescad.jpg" alt="GesCAD" loading="lazy">
       </div>
@@ -723,7 +931,7 @@
         <h3>GesCAD</h3>
       </div>
     </a>
-    <a href="/projects/fingerreader/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/fingerreader/" class="project-card rv" style="transition-delay:0.24s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/fingerreader/fingerreader.jpg" alt="FingerReader" loading="lazy">
       </div>
@@ -732,7 +940,7 @@
         <h3>FingerReader</h3>
       </div>
     </a>
-    <a href="/projects/doodle-daydream/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/doodle-daydream/" class="project-card rv" style="transition-delay:0.28s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/doodle-daydream/doodle-daydream.jpg" alt="Doodle Daydream" loading="lazy">
       </div>
@@ -741,7 +949,7 @@
         <h3>Doodle Daydream</h3>
       </div>
     </a>
-    <a href="/projects/chaddybuddy/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/chaddybuddy/" class="project-card rv" style="transition-delay:0.32s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/chaddybuddy/chaddybuddy.jpg" alt="ChaddyBuddy" loading="lazy">
       </div>
@@ -750,7 +958,13 @@
         <h3>ChaddyBuddy</h3>
       </div>
     </a>
-    <a href="/projects/zsense/" class="project-card rv" style="transition-delay:0.5s">
+    </div>
+  </section>
+  <section class="year-section" id="year-2016" data-year="2016">
+    <h2 class="year-title">2016 <span class="yr-count">7</span></h2>
+    <div class="projects-grid">
+      
+    <a href="/projects/zsense/" class="project-card rv" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/zsense/zsense.jpg" alt="zSense" loading="lazy">
       </div>
@@ -759,7 +973,7 @@
         <h3>zSense</h3>
       </div>
     </a>
-    <a href="/projects/wavesense/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/wavesense/" class="project-card rv" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/wavesense/wavesense.jpg" alt="WaveSense" loading="lazy">
       </div>
@@ -768,7 +982,7 @@
         <h3>WaveSense</h3>
       </div>
     </a>
-    <a href="/projects/swimsight/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/swimsight/" class="project-card rv" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/swimsight/swimsight.jpg" alt="SwimSight" loading="lazy">
       </div>
@@ -777,7 +991,7 @@
         <h3>SwimSight</h3>
       </div>
     </a>
-    <a href="/projects/stickamps/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/stickamps/" class="project-card rv" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/stickamps/stickamps.jpg" alt="StickAmps" loading="lazy">
       </div>
@@ -786,7 +1000,7 @@
         <h3>StickAmps</h3>
       </div>
     </a>
-    <a href="/projects/postbits/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/postbits/" class="project-card rv" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/postbits/postbits.jpg" alt="PostBits" loading="lazy">
       </div>
@@ -795,7 +1009,7 @@
         <h3>PostBits</h3>
       </div>
     </a>
-    <a href="/projects/knoctify/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/knoctify/" class="project-card rv" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/knoctify/knoctify.jpg" alt="Knoctify" loading="lazy">
       </div>
@@ -804,7 +1018,7 @@
         <h3>Knoctify</h3>
       </div>
     </a>
-    <a href="/projects/armsleeve/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/armsleeve/" class="project-card rv" style="transition-delay:0.24s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/armsleeve/armsleeve.jpg" alt="ArmSleeve" loading="lazy">
       </div>
@@ -813,7 +1027,13 @@
         <h3>ArmSleeve</h3>
       </div>
     </a>
-    <a href="/projects/the-ribbon/" class="project-card rv" style="transition-delay:0.5s">
+    </div>
+  </section>
+  <section class="year-section" id="year-2015" data-year="2015">
+    <h2 class="year-title">2015 <span class="yr-count">8</span></h2>
+    <div class="projects-grid">
+      
+    <a href="/projects/the-ribbon/" class="project-card rv" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/the-ribbon/the-ribbon.jpg" alt="The RIBbon" loading="lazy">
       </div>
@@ -822,7 +1042,7 @@
         <h3>The RIBbon</h3>
       </div>
     </a>
-    <a href="/projects/sonicsg/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/sonicsg/" class="project-card rv" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/sonicsg/sonicsg.jpg" alt="SonicSG" loading="lazy">
       </div>
@@ -831,7 +1051,7 @@
         <h3>SonicSG</h3>
       </div>
     </a>
-    <a href="/projects/shrug/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/shrug/" class="project-card rv" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/shrug/shrug.jpg" alt="SHRUG" loading="lazy">
       </div>
@@ -840,7 +1060,7 @@
         <h3>SHRUG</h3>
       </div>
     </a>
-    <a href="/projects/rippletouch/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/rippletouch/" class="project-card rv" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/rippletouch/rippletouch.jpg" alt="RippleTouch" loading="lazy">
       </div>
@@ -849,7 +1069,7 @@
         <h3>RippleTouch</h3>
       </div>
     </a>
-    <a href="/projects/mobile-360-video-interaction/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/mobile-360-video-interaction/" class="project-card rv" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/mobile-360-video-interaction/mobile-360-video-interaction.jpg" alt="Mobile 360° Video Interaction" loading="lazy">
       </div>
@@ -858,7 +1078,7 @@
         <h3>Mobile 360° Video Interaction</h3>
       </div>
     </a>
-    <a href="/projects/fingerreader-v0/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/fingerreader-v0/" class="project-card rv" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/fingerreader-v0/fingerreader-v0.jpg" alt="FingerReader-v0" loading="lazy">
       </div>
@@ -867,7 +1087,7 @@
         <h3>FingerReader-v0</h3>
       </div>
     </a>
-    <a href="/projects/feel-the-globe/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/feel-the-globe/" class="project-card rv" style="transition-delay:0.24s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/feel-the-globe/feel-the-globe.jpg" alt="Feel the Globe" loading="lazy">
       </div>
@@ -876,7 +1096,7 @@
         <h3>Feel the Globe</h3>
       </div>
     </a>
-    <a href="/projects/bward/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/bward/" class="project-card rv" style="transition-delay:0.28s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/bward/bward.jpg" alt="BWard" loading="lazy">
       </div>
@@ -885,7 +1105,13 @@
         <h3>BWard</h3>
       </div>
     </a>
-    <a href="/projects/sparkubes/" class="project-card rv" style="transition-delay:0.5s">
+    </div>
+  </section>
+  <section class="year-section" id="year-2014" data-year="2014">
+    <h2 class="year-title">2014 <span class="yr-count">9</span></h2>
+    <div class="projects-grid">
+      
+    <a href="/projects/sparkubes/" class="project-card rv" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/sparkubes/sparkubes.jpg" alt="SparKubes" loading="lazy">
       </div>
@@ -894,7 +1120,7 @@
         <h3>SparKubes</h3>
       </div>
     </a>
-    <a href="/projects/paperpixels/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/paperpixels/" class="project-card rv" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/paperpixels/paperpixels.jpg" alt="PaperPixels" loading="lazy">
       </div>
@@ -903,7 +1129,7 @@
         <h3>PaperPixels</h3>
       </div>
     </a>
-    <a href="/projects/nzwarm/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/nzwarm/" class="project-card rv" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/nzwarm/nzwarm.jpg" alt="nZwarm" loading="lazy">
       </div>
@@ -912,7 +1138,7 @@
         <h3>nZwarm</h3>
       </div>
     </a>
-    <a href="/projects/keepers-bees/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/keepers-bees/" class="project-card rv" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/keepers-bees/keepers-bees.jpg" alt="Keepers &amp; Bees" loading="lazy">
       </div>
@@ -921,7 +1147,7 @@
         <h3>Keepers &amp; Bees</h3>
       </div>
     </a>
-    <a href="/projects/iswarm/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/iswarm/" class="project-card rv" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/iswarm/iswarm.jpg" alt="iSwarm" loading="lazy">
       </div>
@@ -930,7 +1156,7 @@
         <h3>iSwarm</h3>
       </div>
     </a>
-    <a href="/projects/ircx/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/ircx/" class="project-card rv" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/ircx/ircx.jpg" alt="ircX" loading="lazy">
       </div>
@@ -939,7 +1165,7 @@
         <h3>ircX</h3>
       </div>
     </a>
-    <a href="/projects/i-draw/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/i-draw/" class="project-card rv" style="transition-delay:0.24s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/i-draw/i-draw.jpg" alt="I-Draw" loading="lazy">
       </div>
@@ -948,7 +1174,7 @@
         <h3>I-Draw</h3>
       </div>
     </a>
-    <a href="/projects/foot-note/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/foot-note/" class="project-card rv" style="transition-delay:0.28s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/foot-note/foot-note.jpg" alt="Foot.Note" loading="lazy">
       </div>
@@ -957,7 +1183,7 @@
         <h3>Foot.Note</h3>
       </div>
     </a>
-    <a href="/projects/earput/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/earput/" class="project-card rv" style="transition-delay:0.32s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/earput/earput.jpg" alt="EarPut" loading="lazy">
       </div>
@@ -966,7 +1192,13 @@
         <h3>EarPut</h3>
       </div>
     </a>
-    <a href="/projects/stickear/" class="project-card rv" style="transition-delay:0.5s">
+    </div>
+  </section>
+  <section class="year-section" id="year-2013" data-year="2013">
+    <h2 class="year-title">2013 <span class="yr-count">6</span></h2>
+    <div class="projects-grid">
+      
+    <a href="/projects/stickear/" class="project-card rv" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/stickear/stickear.jpg" alt="StickEar" loading="lazy">
       </div>
@@ -975,7 +1207,7 @@
         <h3>StickEar</h3>
       </div>
     </a>
-    <a href="/projects/spidervision/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/spidervision/" class="project-card rv" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/spidervision/spidervision.jpg" alt="SpiderVision" loading="lazy">
       </div>
@@ -984,7 +1216,7 @@
         <h3>SpiderVision</h3>
       </div>
     </a>
-    <a href="/projects/smartfinger/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/smartfinger/" class="project-card rv" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/smartfinger/smartfinger.jpg" alt="SmartFinger" loading="lazy">
       </div>
@@ -993,7 +1225,7 @@
         <h3>SmartFinger</h3>
       </div>
     </a>
-    <a href="/projects/fingerdraw/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/fingerdraw/" class="project-card rv" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/fingerdraw/fingerdraw.jpg" alt="FingerDraw" loading="lazy">
       </div>
@@ -1002,7 +1234,7 @@
         <h3>FingerDraw</h3>
       </div>
     </a>
-    <a href="/projects/birdie/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/birdie/" class="project-card rv" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/birdie/birdie.jpg" alt="Birdie" loading="lazy">
       </div>
@@ -1011,7 +1243,7 @@
         <h3>Birdie</h3>
       </div>
     </a>
-    <a href="/projects/augmented-forearm/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/augmented-forearm/" class="project-card rv" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/augmented-forearm/augmented-forearm.jpg" alt="Augmented Forearm" loading="lazy">
       </div>
@@ -1020,7 +1252,13 @@
         <h3>Augmented Forearm</h3>
       </div>
     </a>
-    <a href="/projects/watchme/" class="project-card rv" style="transition-delay:0.5s">
+    </div>
+  </section>
+  <section class="year-section" id="year-2012" data-year="2012">
+    <h2 class="year-title">2012 <span class="yr-count">4</span></h2>
+    <div class="projects-grid">
+      
+    <a href="/projects/watchme/" class="project-card rv" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/watchme/watchme.jpg" alt="WatchMe" loading="lazy">
       </div>
@@ -1029,7 +1267,7 @@
         <h3>WatchMe</h3>
       </div>
     </a>
-    <a href="/projects/speechplay/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/speechplay/" class="project-card rv" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/speechplay/speechplay.jpg" alt="SpeechPlay" loading="lazy">
       </div>
@@ -1038,7 +1276,7 @@
         <h3>SpeechPlay</h3>
       </div>
     </a>
-    <a href="/projects/sparsh/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/sparsh/" class="project-card rv" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/sparsh/sparsh.jpg" alt="Sparsh" loading="lazy">
       </div>
@@ -1047,7 +1285,7 @@
         <h3>Sparsh</h3>
       </div>
     </a>
-    <a href="/projects/eyering/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/eyering/" class="project-card rv" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/eyering/eyering.jpg" alt="EyeRing" loading="lazy">
       </div>
@@ -1056,7 +1294,13 @@
         <h3>EyeRing</h3>
       </div>
     </a>
-    <a href="/projects/sutdfoodcam/" class="project-card rv" style="transition-delay:0.5s">
+    </div>
+  </section>
+  <section class="year-section" id="year-2011" data-year="2011">
+    <h2 class="year-title">2011 <span class="yr-count">4</span></h2>
+    <div class="projects-grid">
+      
+    <a href="/projects/sutdfoodcam/" class="project-card rv" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/sutdfoodcam/sutdfoodcam.jpg" alt="SUTDFoodCam" loading="lazy">
       </div>
@@ -1065,7 +1309,7 @@
         <h3>SUTDFoodCam</h3>
       </div>
     </a>
-    <a href="/projects/soundfloor/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/soundfloor/" class="project-card rv" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/soundfloor/soundfloor.jpg" alt="SoundFloor" loading="lazy">
       </div>
@@ -1074,7 +1318,7 @@
         <h3>SoundFloor</h3>
       </div>
     </a>
-    <a href="/projects/sensei/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/sensei/" class="project-card rv" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/sensei/sensei.jpg" alt="Sensei" loading="lazy">
       </div>
@@ -1083,7 +1327,7 @@
         <h3>Sensei</h3>
       </div>
     </a>
-    <a href="/projects/hapticchair/" class="project-card rv" style="transition-delay:0.5s">
+    <a href="/projects/hapticchair/" class="project-card rv" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/hapticchair/hapticchair.jpg" alt="HapticChair" loading="lazy">
       </div>
@@ -1092,16 +1336,50 @@
         <h3>HapticChair</h3>
       </div>
     </a>
-  </div>
-</section>
+    </div>
+  </section>
+  </main>
+
+</div>
 
 <div id="site-footer-mount"></div>
 <script src="/js/footer-include.js"></script>
 
 <script>
-const obs=new IntersectionObserver(e=>{e.forEach(n=>{if(n.isIntersecting)n.target.classList.add('vis')})},{threshold:.1});
-document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-document.querySelector('.nav-toggle')?.addEventListener('click',()=>{const l=document.querySelector('.nav-links');l.style.display=l.style.display==='flex'?'none':'flex'});
+// Reveal on scroll
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+// Scroll-spy on year nav (mirrors the press page behaviour)
+const sections  = document.querySelectorAll('.year-section');
+const navLinks  = document.querySelectorAll('.year-nav a');
+const spy = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === `#${id}`));
+      const active = document.querySelector('.year-nav a.active');
+      const bar = document.getElementById('yearNav');
+      if (active && bar) {
+        if (window.matchMedia('(max-width: 991px)').matches) {
+          const target = active.offsetLeft - (bar.clientWidth / 2) + (active.clientWidth / 2);
+          bar.scrollTo({ left: target, behavior: 'smooth' });
+        } else {
+          const target = active.offsetTop - (bar.clientHeight / 2) + (active.clientHeight / 2);
+          bar.scrollTo({ top: target, behavior: 'smooth' });
+        }
+      }
+    }
+  });
+}, { threshold: 0, rootMargin: '-30% 0px -60% 0px' });
+sections.forEach(s => spy.observe(s));
+
+document.querySelector('.nav-toggle')?.addEventListener('click', () => {
+  const l = document.querySelector('.nav-links');
+  l.style.display = l.style.display === 'flex' ? 'none' : 'flex';
+});
 </script>
 <script src="/js/nav-sequence.js"></script>
 </body>

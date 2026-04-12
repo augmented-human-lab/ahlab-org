@@ -158,7 +158,9 @@
 }
 
 /* ── Press content ───────────────────────────────────────── */
-.press-content { padding: 40px 0 80px 48px; }
+/* Right padding matches the .container gutter (40px) so the
+   rightmost column doesn't touch the viewport edge on desktop. */
+.press-content { padding: 40px 40px 80px 48px; }
 @media (max-width: 991px) { .press-content { padding: 32px 20px 60px; } }
 
 .year-section { margin-bottom: 72px; scroll-margin-top: 200px; }
