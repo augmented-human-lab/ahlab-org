@@ -25,7 +25,7 @@
   letter-spacing: -.02em; max-width: 700px;
   margin-bottom: 18px;
 }
-.hero p {
+.hero p:not(.hero-summary) {
   font-family: var(--font-display); font-weight: 300;
   font-size: 21px; line-height: 28px;
   color: rgba(255,255,255,.6);
@@ -34,7 +34,7 @@
 @media (max-width: 991px) {
   .hero { padding: 140px 0 60px; }
   .hero h1 { font-size: 36px; line-height: 42px; }
-  .hero p { font-size: 18px; line-height: 26px; }
+  .hero p:not(.hero-summary) { font-size: 18px; line-height: 26px; }
 }
 
 /* ── Layout (sticky year nav + content) ──────────────────── */
@@ -178,21 +178,9 @@
   .pub-item { grid-template-columns: 1fr; padding: 20px 0; }
   .pub-title { font-size: 17px; }
 }
-/* ── Venue filters ─────────────────────────────────────────── */
-.venue-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
-.venue-chip {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-family: var(--font-display); font-weight: 500; font-size: 13px;
-  color: var(--color-neutral-80);
-  background: var(--color-neutral-20);
-  border: 1px solid var(--color-neutral-30);
-  padding: 7px 14px; border-radius: 999px;
-  cursor: pointer; transition: all .2s;
-}
-.venue-chip:hover { color: var(--color-neutral-100); border-color: var(--color-neutral-40); }
-.venue-chip.active {
-  background: var(--color-accent); color: #fff; border-color: var(--color-accent);
-}
-.venue-chip .vn-count {
-  font-size: 11px; font-weight: 400; opacity: .7;
-}
+/* Filter state classes used by the hero-chip venue filter.
+   `.hidden` collapses pub-items, whole year-sections that end up
+   empty under a filter, and their corresponding year-nav links. */
+.pub-item.hidden { display: none; }
+.year-section.hidden { display: none; }
+.year-nav a.hidden { display: none; }

@@ -1376,8 +1376,16 @@ filterReset?.addEventListener('click', () => applyRoleFilter('all'));
 
 const obs=new IntersectionObserver(e=>{e.forEach(n=>{if(n.isIntersecting)n.target.classList.add('vis')})},{threshold:.08});
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-const nav=document.getElementById('siteNav');
-window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)},{passive:true});
+// The site nav is mounted async by /js/nav-include.js, so #siteNav may
+// not exist at the moment this inline script runs — and on the people
+// index it never has that id anyway. Null-guard the handler so the
+// scroll listener doesn't throw on every tick.
+const nav = document.getElementById('siteNav');
+if (nav) {
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+}
 document.querySelector('.nav-toggle')?.addEventListener('click',()=>{const l=document.querySelector('.nav-links');l.style.display=l.style.display==='flex'?'none':'flex'});
 </script>
 <script src="/js/nav-sequence.js"></script>

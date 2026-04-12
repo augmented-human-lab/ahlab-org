@@ -19,7 +19,12 @@
 <header class="hero">
   <div class="container">
     <h1>Publications</h1>
-    <p>194 publications · 2008–2026</p>
+    <p class="hero-summary">
+      <span class="hero-filter-group" id="venuePills">
+        <span class="hero-chip" role="button" tabindex="0" data-group="AH" data-label="AH">31 AH</span>, <span class="hero-chip" role="button" tabindex="0" data-group="CHI" data-label="CHI">26 CHI</span>, <span class="hero-chip" role="button" tabindex="0" data-group="ACM" data-label="ACM">22 ACM</span>, and <span class="hero-chip" role="button" tabindex="0" data-group="other" data-label="Other">115 Other</span>.
+      </span>
+      <button type="button" class="hero-filter-reset" id="filterReset" aria-label="Show all publications">Show all</button>
+    </p>
   </div>
 </header>
 
@@ -111,16 +116,13 @@
   </aside>
 
   <main class="pubs-content">
-    <div class="venue-filters" id="venueFilters">
-  <button class="venue-chip active" data-venue="all">All <span class="vn-count">194</span></button>
-  <button class="venue-chip" data-venue="AH">AH <span class="vn-count">31</span></button><button class="venue-chip" data-venue="CHI">CHI <span class="vn-count">26</span></button><button class="venue-chip" data-venue="ACM">ACM <span class="vn-count">22</span></button><button class="venue-chip" data-venue="CHI EA">CHI EA <span class="vn-count">9</span></button><button class="venue-chip" data-venue="IEEE">IEEE <span class="vn-count">6</span></button><button class="venue-chip" data-venue="UIST">UIST <span class="vn-count">6</span></button><button class="venue-chip" data-venue="IJHCI">IJHCI <span class="vn-count">4</span></button><button class="venue-chip" data-venue="SIGGRAPH">SIGGRAPH <span class="vn-count">4</span></button></div>
     <div id="pubsContent">
       
   <section class="year-section" id="year-2026" data-year="2026">
     <h2 class="year-title">2026 <span class="yr-count">6</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         <div class="pub-award">★ Honorable Mention Award</div>
         <div class="pub-title">Zenflow: Investigating MR Transitions for Enhancing Sleep and Relaxation</div>
@@ -128,7 +130,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3772318.3791875" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1tsj2UB9yNC06Rit9um4BGDV8guGoGrPa/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         <div class="pub-award">★ Honorable Mention Award</div>
         <div class="pub-title">VisceroHaptics: Investigating the Effects of Gut-based Audio-Haptic Feedback on Gastric Feelings and Gastric Interoceptive Behaviors</div>
@@ -136,7 +138,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3772318.3790268" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1OOsKm4M93YY_RcSgehTZLIb6kYRX4Gr8/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI EA">
+    <div class="pub-item rv" data-venue="CHI EA" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Interrupting Autopilot: Evaluating Sensory Interventions for Momentary Self-Regulation</div>
@@ -144,7 +146,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3772363.3798497" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1BNkKoR87_0D8bzfsWDP0wxX5draRdKu2/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">Feeling the Facts: Real-time Wearable Fact-checkers Can Use Nudges to Reduce User Belief in False Information</div>
@@ -152,7 +154,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3772318.3791679" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1xVjShf-s0pN6DzpPrydxkbI2SQLsDk_J/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">EmoDrink: Embodied MR for Physiology-Informed Beverage Recommendation</div>
@@ -160,7 +162,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2026/03/AH_26_Demo_EmoDrink__Embodied_Mixed_Reality_for_Physiology_Informed_Beverage_Recommendation.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">Beyond Descriptions: A Generative Scene2Audio Framework for Blind and Low-Vision Users to Experience Vista Landscapes</div>
@@ -174,7 +176,7 @@
     <h2 class="year-title">2025 <span class="yr-count">9</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="CHI EA">
+    <div class="pub-item rv" data-venue="CHI EA" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">VRSense: An Explainable System to Help Mitigate Cybersickness in VR Games</div>
@@ -182,7 +184,7 @@
         <div class="pub-links"><a href="https://dl.acm.org/doi/abs/10.1145/3706599.3719891" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1LZDUh0bsjSQCEu32ka_tnmEJczgguyEW/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Towards Temporally Explainable Dysarthric Speech Clarity Assessment</div>
@@ -190,7 +192,7 @@
         <div class="pub-links"><a href="https://www.isca-archive.org/interspeech_2025/park25c_interspeech.pdf" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1jFfcKCPupMHrfWGz_Sb4Em7O-5bSbjvt/view?usp=drive_link" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI EA">
+    <div class="pub-item rv" data-venue="CHI EA" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Scene-to-Audio: Distant Scene Sonification for Blind and Low Vision People</div>
@@ -198,7 +200,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3706599.3719849" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1P9tDkBXMwmtesGTh-TWgldmcurpBMh7z/view?usp=drive_link" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">Investigating the Use of Productive Failure as a Design Paradigm for Learning Introductory Python Programming</div>
@@ -206,7 +208,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3641554.3701911" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1yPnKqSyvdFMd6o4P15F6kIDkAnjYUXdw/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">Human Robot Interaction for People with Visual Impairments: A Systematic Literature Review</div>
@@ -214,7 +216,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3706598.3713438" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1be_Pyy85obvKW8OLJm4hdXpSwjOCD_Re/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI EA">
+    <div class="pub-item rv" data-venue="CHI EA" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">GutIO: Toward Sensing and Inducing Gut Feelings with Abdominal Sounds</div>
@@ -222,7 +224,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3706599.3719826" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1tIM7Ud1GHLhg0O2Fbdcfy9wtjoSltru9/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">DroneAudioset: An Audio Dataset for Drone-based Search and Rescue</div>
@@ -230,7 +232,7 @@
         <div class="pub-links"><a href="https://drive.google.com/file/d/1x4HXEwWi_6E0Gsgy3if_DDc23ilCI4ji/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">Curious Shorts: Curiosity-Driven Exploration and Learning on Short-Form Video Platforms</div>
@@ -238,7 +240,7 @@
         
       </div>
     </div>
-    <div class="pub-item rv" data-venue="IJHCS">
+    <div class="pub-item rv" data-venue="IJHCS" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Augmented Tabletop Interaction as an Assistive Tool: Tidd's Role in Daily Life Skills Training for Autistic Children</div>
@@ -252,7 +254,7 @@
     <h2 class="year-title">2024 <span class="yr-count">11</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="VR">
+    <div class="pub-item rv" data-venue="VR" data-venue-group="other">
       <div class="pub-body">
         <div class="pub-award">★ Best Paper Award</div>
         <div class="pub-title">VR.net: A Real-world Dataset for Virtual Reality Motion Sickness Research</div>
@@ -260,7 +262,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1109/TVCG.2024.3372044" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1eTlLX4o3eOzI7aPUcRHMiWoCrRe1aDqF/view?usp=drive_link" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">Sound Designer-Generative AI Interactions: Towards Designing Creative Support Tools for Professional Sound Designers</div>
@@ -268,7 +270,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3613904.3642040" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1nSdZe0irBvTQlWiNCC0oC6V15PiZOsEV/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">SonicVista: Towards Creating Awareness of Distant Scenes through Sonification</div>
@@ -276,7 +278,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3659609" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1VgtLBPs03dJodsN6_7-yPfqLuceCGBSj/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI EA">
+    <div class="pub-item rv" data-venue="CHI EA" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">SeEar: Tailoring Real-time AR Caption Interfaces for Deaf and Hard-of-Hearing (DHH) Students in Specialized Educational Settings</div>
@@ -284,7 +286,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3613905.3650974" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1Lea70xKlKilhKwF3W31LFrolj7sBZ5ri/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">Kavy: Fostering Language Speaking Skills and Self-Confidence Through Conversational AI</div>
@@ -292,7 +294,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3652920.3652944" target="_blank" rel="noopener" class="pub-link">DOI</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">Exploring an Extended Reality Floatation Tank Experience to Reduce the Fear of Being in Water</div>
@@ -300,7 +302,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3613904.3642285" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1kFNShCVypGn7mNFvkka4nwg2KH-qgEDN/view?usp=drive_link" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="IEEE">
+    <div class="pub-item rv" data-venue="IEEE" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Example-Based Framework for Perceptually Guided Audio Texture Generation</div>
@@ -308,7 +310,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1109/TASLP.2024.3393741" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1FsLz7rr1eNn0SPOZ-3-_WDTh-eqK55L1/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI EA">
+    <div class="pub-item rv" data-venue="CHI EA" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Early Autism Screening in Children Using Facial Recognition</div>
@@ -316,7 +318,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3613905.3651045" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1KuR88zGwSXJeohUUl9fdpgd8pH_YqcUn/view?usp=drive_link" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI EA">
+    <div class="pub-item rv" data-venue="CHI EA" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Designing Interactive Technology to Support Children with Autism</div>
@@ -324,7 +326,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3613905.3638192" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1uH8vCjTU95wyOvQDxMMi-F15xkp2IK80/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="IJHCI">
+    <div class="pub-item rv" data-venue="IJHCI" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">CoTacs: A Haptic Toolkit to Explore Effective On-Body Haptic Feedback by Ideating, Designing, Evaluating and Refining Haptic Designs Using Group Collaboration</div>
@@ -332,7 +334,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1080/10447318.2024.2358460" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/17Pw7AAbddfu-ocFQmeIMn_Tg9511YCyw/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="VR">
+    <div class="pub-item rv" data-venue="VR" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">A User Study on Sharing Physiological Cues in VR Assembly Tasks</div>
@@ -346,7 +348,7 @@
     <h2 class="year-title">2023 <span class="yr-count">11</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Using Sensor-Based Programming to Improve Self-Efficacy and Outcome Expectancy for Students from Underrepresented Groups</div>
@@ -354,7 +356,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3587102.3588854" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1Z1oDWS8r8P8ZdoY94MWnmYqAaOxGbE4_/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="IEEE">
+    <div class="pub-item rv" data-venue="IEEE" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Towards Controllable Audio Texture Morphing</div>
@@ -362,7 +364,7 @@
         <div class="pub-links"><a href="https://drive.google.com/file/d/1Od3J7IHFhiZ0fUatCoNCzD7Fp0AFBfg1/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="SIGGRAPH">
+    <div class="pub-item rv" data-venue="SIGGRAPH" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Tidd: Augmented Tabletop Interaction Supports Children with Autism to Train Daily Living Skills</div>
@@ -370,7 +372,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3588028.3603674" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1FCysSYe5KHNdxMQS5Mq7m84Q_a7ygOzs/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="IJHCI">
+    <div class="pub-item rv" data-venue="IJHCI" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Striving for Authentic and Sustained Technology Use in the Classroom: Lessons Learned from a Longitudinal Evaluation of a Sensor-Based Science Education Platform</div>
@@ -378,7 +380,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1080/10447318.2023.2229485" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1fhABNfB6965rV6NJCIXlgrVl0Bgn6e6n/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">Snatch and hatch: Improving receptivity towards a nature of science with a playful mobile application</div>
@@ -386,7 +388,7 @@
         <div class="pub-links"><a href="https://dl.acm.org/doi/abs/10.1145/3585088.3589384" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1xuGj3bQoTBCrW1i7V2UbRLTxacpA1EsL/view?usp=drive_link" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Know Thyself: Improving Interoceptive Ability Through Ambient Biofeedback in the Workplace</div>
@@ -394,7 +396,7 @@
         <div class="pub-links"><a href="https://aisel.aisnet.org/sighci2023/3/" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1jCWF9IyLhvTH6NEpPoT8lVZLLgo_4tpg/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Improving the Domain Adaptation of Retrieval Augmented Generation (RAG) Models for Open Domain Question Answering</div>
@@ -402,7 +404,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1162/tacl_a_00530" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1IVuyBxac-XR63kAzyDktpKxzjbIgEbrX/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="IUI">
+    <div class="pub-item rv" data-venue="IUI" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Evaluating Descriptive Quality of AI-Generated Audio Using Image-Schemas</div>
@@ -410,7 +412,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3581641.3584083" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/12oQ4uEVB4J1wura4sL9fYQEb8hnTkFtM/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">EMO-KNOW: A Large Scale Dataset on Emotion-Cause</div>
@@ -418,7 +420,7 @@
         <div class="pub-links"><a href="https://doi.org/10.18653/v1/2023.findings-emnlp.737" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1NsFaWPwX-DO21d_BEpvfUs5Ri8BMoOjb/view?usp=drive_link" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="IJHCI">
+    <div class="pub-item rv" data-venue="IJHCI" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Can AI Models Summarize Your Diary Entries? Investigating Utility of Abstractive Summarization for Autobiographical Text.</div>
@@ -426,7 +428,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1080/10447318.2023.2286090" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1FOiydcfVylDTV_LxLYRazstuyXhrN0hZ/view?usp=drive_link" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="IJHCI">
+    <div class="pub-item rv" data-venue="IJHCI" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">A Corneal Surface Reflections-Based Intelligent System for Lifelogging Applications</div>
@@ -440,7 +442,7 @@
     <h2 class="year-title">2022 <span class="yr-count">15</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="ISMAR">
+    <div class="pub-item rv" data-venue="ISMAR" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">XRtic: A Prototyping Toolkit for XR Applications using Cloth Deformation</div>
@@ -448,7 +450,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1109/ISMAR55827.2022.00071" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1m1irQX5MT0JKANEgfIncgX2kCWCJPDE0/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">WasmAndroid: A Cross-Platform Runtime for Native Programming Languages on Android</div>
@@ -456,7 +458,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3530286" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1TfJSwM0rH5dx0_sUN1IOt-poo8otb4Gl/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="UIST">
+    <div class="pub-item rv" data-venue="UIST" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">VRhook: A Data Collection Tool for VR Motion Sickness Research</div>
@@ -464,7 +466,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3526113.3545656" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/19XmsgbOQoJD8cteFliCCo2UBbd-6XShr/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Troi: Towards Understanding Users Perspectives to Mobile Automatic Emotion Recognition System in Their Natural Setting</div>
@@ -472,7 +474,7 @@
         <div class="pub-links"><a href="https://drive.google.com/file/d/1GhP_cGVEGYihifpJsfKpFDu7rJg7g90m/view?usp=share_link" target="_blank" rel="noopener" class="pub-link">PDF</a><a href="https://doi.org/10.1145/3546738" target="_blank" rel="noopener" class="pub-link">DOI</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Toro: A Web-based Tool to Search, Explore, Screen, Compare and Visualize Literature</div>
@@ -480,7 +482,7 @@
         <div class="pub-links"><a href="https://aisel.aisnet.org/sighci2022/13" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1iVWCo4Jh_fFHOr6wy8NUh_V55HOA7GLi/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">TickleFoot: Design, Development and Evaluation of a Novel Foot-tickling Mechanism that Can Evoke Laughter</div>
@@ -488,7 +490,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3490496" target="_blank" rel="noopener" class="pub-link">DOI</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="IEEE">
+    <div class="pub-item rv" data-venue="IEEE" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">SigRep: Towards Robust Wearable Emotion Recognition with Contrastive Representation Learning.</div>
@@ -496,7 +498,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1109/ACCESS.2022.3149509" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1xbZw21O1GVtRDXDroGVNkpxOPK9firwv/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Self-supervised Representation Fusion for Speech and Wearable Based Emotion Recognition</div>
@@ -504,7 +506,7 @@
         <div class="pub-links"><a href="https://doi.org/10.21437/Interspeech.2022-11258" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/10fhlbEhCmtt2AyR0XNNQk2lRO3PTuY-I/view?usp=share_link" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">Scratch and Sense: Using Real-Time Sensor Data to Motivate Students Learning Scratch</div>
@@ -512,7 +514,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3478431.3499316" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/190zsSnnTMiqlosHbzEDOWRCSzWuT2_kM/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Primary School Students Programming with Real-Time Environmental Sensor Data</div>
@@ -520,7 +522,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3511861.3511871" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/12H6A0apCmvWOAB66L2-fCa3nGPjrT9n8/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         <div class="pub-award">★ Honorable Mention Award</div>
         <div class="pub-title">Players and performance: opportunities for social interaction with augmented tabletop games at centres for children with autism</div>
@@ -528,7 +530,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3567716" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1dYyg1of9NPlN7IEyhkHiTpzUtywJYTMP/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Human-Computer Integration: Towards Integrating the Human Body with the Computational Machine</div>
@@ -536,7 +538,7 @@
         <div class="pub-links"><a href="http://dx.doi.org/10.1561/1100000086" target="_blank" rel="noopener" class="pub-link">DOI</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="IEEE">
+    <div class="pub-item rv" data-venue="IEEE" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Design and Evaluation of a Mobile Sensing Platform for Water Conductivity</div>
@@ -544,7 +546,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1109/SENSORS52175.2022.9967052" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1DFSQ28YIKzc-50XFIw-b9eA9IAkg1bUu/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Computational Music Systems for Emotional Health and Wellbeing: A Review</div>
@@ -552,7 +554,7 @@
         <div class="pub-links"><a href="https://aisel.aisnet.org/sighci2022/25/" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1N1sQDe8-K5xXkshjEOUeZ3YoaCvLyXgp/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">ANISMA: A Prototyping Toolkit to Explore Haptic Skin Deformation Applications Using Shape-Memory Alloys</div>
@@ -566,7 +568,7 @@
     <h2 class="year-title">2021 <span class="yr-count">13</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">WasmAndroid: A Cross-Platform Runtime for Native Programming Languages on Android</div>
@@ -574,7 +576,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3461648.3463849" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1XN5feC-vtZ3O7gdKS6PdXtjVwnXPLKvV/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="MobileHCI">
+    <div class="pub-item rv" data-venue="MobileHCI" data-venue-group="other">
       <div class="pub-body">
         <div class="pub-award">★ Honorable Mention Award</div>
         <div class="pub-title">StressShoe: A DIY Toolkit for just-in-time Personalised Stress Interventions for Office Workers Performing Sedentary Tasks</div>
@@ -582,7 +584,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/1122445.1122456" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/10PlvD_vcwx00qjnCFUK3trsWURCCkBqb/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         <div class="pub-award">★ Best Short Paper Award</div>
         <div class="pub-title">Sensor-Based Interactive Worksheets to Support Guided Scientific Inquiry</div>
@@ -590,7 +592,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3459990.3460716" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1PePtQbU4Qquk1UpyIv9DXGpejZnoNlbf/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="MobileHCI">
+    <div class="pub-item rv" data-venue="MobileHCI" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">OM: A Comprehensive Tool to Elicit Subjective Vibrotactile Expressions Associated with Contextualised Meaning in Our Everyday Lives</div>
@@ -598,7 +600,7 @@
         <div class="pub-links"><a href="https://dl.acm.org/doi/10.1145/3447526.3472028" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/16yAh6Mru7uMSg7MCGP5XHNFUKh-Yy9fb/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">mobiLLD: Exploring the Detection of Leg Length Discrepancy and Altering Gait with Mobile Smart Insoles</div>
@@ -606,7 +608,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3453892.3453896" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="http://www.denysmatthies.com/downloads/Matthies_mobiLLD_PETRA2021.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">KinVoices: Using Voices of Friends and Family in Voice Interfaces</div>
@@ -614,7 +616,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3479590" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1_Bp0ShrTKy81zvguDyOgrgdBunsin8iX/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Springer">
+    <div class="pub-item rv" data-venue="Springer" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Jammify: Interactive Multi-Sensory System for Digital Art Jamming</div>
@@ -622,7 +624,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1007/978-3-030-85607-6_2" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1IYyGOWazrK5HxzO-s2Bx687PW2n6E-JH/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         <div class="pub-award">★ Best Student Paper Award</div>
         <div class="pub-title">GymSoles++: Combining Google Glass with Smart Insoles to Improve Body Posture when Performing Squats</div>
@@ -630,7 +632,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3453892.3453898" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1EPAO5dtUngEmLXIoWB_ydB6bzsfDvIMR/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="MobileHCI">
+    <div class="pub-item rv" data-venue="MobileHCI" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">EyeKnowYou: A DIY Toolkit to Support Monitoring Cognitive Load and Actual Screen Time using a Head-Mounted Webcam</div>
@@ -638,7 +640,7 @@
         <div class="pub-links"><a href="https://drive.google.com/file/d/1fxUMUGfoCUhy4GOb0qLt-o0BbSIzZQRv/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">ClothTiles: A Prototyping Platform to Fabricate Customized Actuators on Clothing using 3D Printing and Shape-Memory Alloys</div>
@@ -646,7 +648,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3411764.3445613" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1UX7Q9UYPImpNHmt_FnGlT8p34sMy2UC0/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">CapGlasses: Untethered Capacitive Sensing with Smart Glasses</div>
@@ -654,7 +656,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3458709.3458945" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1E6hMfadLmb9L06GaV1Xpe_HQbUzIXBin/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">Augmented Foot: A Comprehensive Survey of Augmented Foot Interfaces</div>
@@ -662,7 +664,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3458709.3458958" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1KP1pV-9GWdhdWfqGX3RqeiBIyG2M6hBD/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">A Review of Recent Deep Learning Approaches in Human-Centered Machine Learning</div>
@@ -676,7 +678,7 @@
     <h2 class="year-title">2020 <span class="yr-count">16</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">WaveSense: Low Power Voxel-tracking Technique for Resource Limited Devices</div>
@@ -684,7 +686,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3384657.3384790" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1Ug6C2P7oOwuX8aUGQGA_UgnKDhhWpV2p/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">VersaTouch: A Versatile Plug-and-Play System that Enables Touch Interactions on Everyday Passive Surfaces.</div>
@@ -692,7 +694,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3384657.3384778" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1i34JQbLRvwYGth08m3AjH6Avwgia_CxB/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">Touch me Gently: Recreating the Perception of Touch using a Shape-Memory Alloy Matrix</div>
@@ -700,7 +702,7 @@
         <div class="pub-links"><a href="http://dx.doi.org/10.1145/3313831.3376491" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1QUbXiFQhbaoTaWZdWwOF_P1BAeVCbpJs/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">StressFoot: Uncovering the Potential of the Foot for Acute Stress Sensing in Sitting Posture</div>
@@ -708,7 +710,7 @@
         <div class="pub-links"><a href="https://doi.org/10.3390/s20102882" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1uNy7VxU7r78HUmD-ioSQmAou_vjKV_d2/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Speech Emotion Recognition 'in the Wild' Using an Autoencoder</div>
@@ -716,7 +718,7 @@
         <div class="pub-links"><a href="http://dx.doi.org/10.21437/Interspeech.2020-1356" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1zo2rhxXPDy5cEuG8Ckl-RLfb0Wr9RV5_/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">Ready, Steady, Touch!: Sensing Physical Contact with a Finger-Mounted IMU</div>
@@ -724,7 +726,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3397309" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1gEpRp35i_nJgMMf_RYiQBI7aKKMGmcpQ/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">Prompto: Investigating Receptivity to Prompts Based on Cognitive Load from Memory Training Conversational Agent</div>
@@ -732,7 +734,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3432190" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1Yw-HUkFRsdeuHzvP14rxq5RMq03kENsy/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Progression of Cognitive-Affective States During Learning in Kindergarteners: Bringing Together Physiological, Observational and Performance Data</div>
@@ -740,7 +742,7 @@
         <div class="pub-links"><a href="https://doi.org/10.3390/educsci10070177" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1q8FJqFhE4j5UDbQivqHO3KePXEwlMb6L/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">Next Steps in Human-Computer Integration</div>
@@ -748,7 +750,7 @@
         <div class="pub-links"><a href="http://dx.doi.org/10.1145/3313831.3376242" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1FCOhNt5M56_pQqwlo4Tc7LXBq5Vqe9OG/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="IEEE">
+    <div class="pub-item rv" data-venue="IEEE" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Multimodal Emotion Recognition With Transformer-Based Self Supervised Feature Fusion</div>
@@ -756,7 +758,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1109/ACCESS.2020.3026823" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1m5tgMX_9H-BhszgCcuqOznzKfkytoYdT/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">MAGHair: A Wearable System to Create Unique Tactile Feedback by Stimulating Only the Body Hair</div>
@@ -764,7 +766,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3379503.3403545" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1Yzptyr2NabyuRqgJEuxv28mVEzLbqmMN/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="SIGGRAPH">
+    <div class="pub-item rv" data-venue="SIGGRAPH" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">LightTank</div>
@@ -772,7 +774,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3414686.3427113" target="_blank" rel="noopener" class="pub-link">DOI</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Jointly Fine-Tuning &quot;BERT-like&quot; Self Supervised Models to Improve Multimodal Speech Emotion Recognition</div>
@@ -780,7 +782,7 @@
         <div class="pub-links"><a href="http://dx.doi.org/10.21437/Interspeech.2020-1212" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1wIWsr_58uAD_D6PCq2pQKOFw7CORBLWE/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">GymSoles++: Using Smart Wearables to Improve Body Posture when Performing Squats and Dead-Lifts.</div>
@@ -788,7 +790,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3384657.3385331" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/12-8uucgREP_yWssj9ufwEj6o7FshtQ_d/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI EA">
+    <div class="pub-item rv" data-venue="CHI EA" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Biosignal-Sensitive Memory Improvement and Support Systems</div>
@@ -796,7 +798,7 @@
         <div class="pub-links"><a href="https://doi-org.ezproxy.auckland.ac.nz/10.1145/3334480.3375031" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1TGUGp3DP9wQEccPRk8bo-OHiqdWnUkwd/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">AiSee: An Assistive Wearable Device to Support Visually Impaired Grocery Shoppers</div>
@@ -810,7 +812,7 @@
     <h2 class="year-title">2019 <span class="yr-count">18</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Reflexive Interaction - Extending the concept of Peripheral Interaction</div>
@@ -818,7 +820,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3369457.3369478" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1Kg3BKGJiR4bZhfxJF5dEDfTdK7jqFek4/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">Prospero: A Personal Wearable Memory Coach</div>
@@ -826,7 +828,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3311823.3311870" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1gzCAH8kVmlWjIDkt-ZBpCOT79vwFsf0Y/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">ProspecFit: In Situ Evaluation of Digital Prospective Memory Training for Older Adults</div>
@@ -834,7 +836,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3351235" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1tpwydWe6sRgWyFJ6K_H5b4hA7vgv25Kq/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Presenting a Data Imputation Concept to Support the Continuous Assessment of Human Vital Data and Activities</div>
@@ -842,7 +844,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3316782.3322785" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1vvPtgX41BxC8Km3rExOR4mHTzfwN9P98/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="SIGGRAPH">
+    <div class="pub-item rv" data-venue="SIGGRAPH" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">PhantomTouch: Creating an Extended Reality by the Illusion of Touch using a Shape-Memory Alloy Matrix</div>
@@ -850,7 +852,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3355355.3361877" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/16BtIPNFhPXG83RBdOGvcfTQoRYnFG-7R/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">oSense: Object-Activity Identification Based on Gasping Posture and Motion</div>
@@ -858,7 +860,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3311823.3311841" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1jYB9EbB5Ew_xlRgF5zZ2smbUTe1lz9ij/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="SIGGRAPH">
+    <div class="pub-item rv" data-venue="SIGGRAPH" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">M-Hair: Extended Reality by Stimulating the Body Hair</div>
@@ -866,7 +868,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3355355.3361881" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1uUG4MHtBsoGzp76JsQTtgxu8l90pXgfC/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="UIST">
+    <div class="pub-item rv" data-venue="UIST" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">M-Hair: Creating Novel Tactile Feedback by Augmenting the Body Hair to Respond to Magnetic Field</div>
@@ -874,7 +876,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3332165.3347955" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1UMlbIudlZv0bViid-U7XafGVuZMWl5Vl/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Hand-Arm Vibration Estimation using A Commercial Smartwatch</div>
@@ -882,7 +884,7 @@
         <div class="pub-links"><a href="https://doi.org/10.13140/RG.2.2.20412.28809" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1PoQSyRCr5aOTHuKpSOQ8Fb7dEZPgq9eQ/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">GymSoles: Improving Squats and Dead-Lifts by Visualizing the User's Centre of Pressure</div>
@@ -890,7 +892,7 @@
         <div class="pub-links"><a href="https://dl.acm.org/doi/fullHtml/10.1145/3290605.3300404" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1TxCTJcmr2k7xQLOp69HbGCyi6WaTZoIa/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Going beyond performance scores: Understanding cognitive-affective states in Kindergarteners and application of framework in classrooms</div>
@@ -898,7 +900,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1016/j.ijcci.2019.04.002" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1aYqvW4oLe6eqmZiCOaRpLs9clSm56OSb/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">fSense: Unlocking the Dimension of Force for Gestural Interactions using Smartwatch PPG Sensor</div>
@@ -906,7 +908,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3311823.3311839" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1kRU90YDIfXAg9X-cYnv2kneE25gbTwcH/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ISMAR">
+    <div class="pub-item rv" data-venue="ISMAR" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Evaluating IVR in Primary School Classrooms</div>
@@ -914,7 +916,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1109/ISMAR-Adjunct.2019.00-53" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/129Cpb0ZeVpfS2MKo33IkvmF7HKV2z44J/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">CricketCoach: Towards Creating a Better Awareness of Gripping Forces for Cricketers</div>
@@ -922,7 +924,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3311823.3311833" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1MizLM_-FhsL3H1D2T07_8nX8L9LGlDqe/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="VR">
+    <div class="pub-item rv" data-venue="VR" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">CompRate: Power Efficient Heart Rate and Heart Rate Variability Monitoring on Smart Wearables</div>
@@ -930,7 +932,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3359996.3364239" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1OC0qHFuRFRBxF1gUHwpiOUKGXz3OfP68/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">ChewIt. An Intraoral Interface for Discreet Interactions.</div>
@@ -938,7 +940,7 @@
         <div class="pub-links"><a href="https://dl.acm.org/doi/10.1145/3290605.3300556" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1uIUaPa2ktYIwhM9RoYvikVWJmPnS8JwB/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">CapMat: A Smart Foot Mat for User Authentication</div>
@@ -946,7 +948,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3311823.3311874" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1mHYxzlv5xAb_RaQvLQrWkwnJt0_yUctz/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">2bit-TactileHand: Evaluating Tactons for Nobody Vibrotactile Displays on the Hand and Wrist.</div>
@@ -960,7 +962,7 @@
     <h2 class="year-title">2018 <span class="yr-count">19</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">Visual Field Visualizer: Easier &amp; Scalable way to be Aware of the Visual Field</div>
@@ -968,7 +970,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3174910.3174931" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://dl.acm.org/citation.cfm?doid=3174910.3174931" target="_blank" rel="noopener" class="pub-link">URL</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ISWC">
+    <div class="pub-item rv" data-venue="ISWC" data-venue-group="other">
       <div class="pub-body">
         <div class="pub-award">★ Best Presentation Runners Up Award</div>
         <div class="pub-title">Uncovering the Potential of the Foot as a Source of User Information</div>
@@ -976,7 +978,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3267305.3267313" target="_blank" rel="noopener" class="pub-link">DOI</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Triangulation of Physiological, Behavioural and Observational Data offers better insights into cognitive-emotional states in learning</div>
@@ -984,7 +986,7 @@
         
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Thumb-In-Motion: Evaluating Thumb to Ring Microgestures for Athletic Activity</div>
@@ -992,7 +994,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3267782.3267796" target="_blank" rel="noopener" class="pub-link">DOI</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Target Driven Visual Navigation with Hybrid Asynchronous Universal Successor Representations</div>
@@ -1000,7 +1002,7 @@
         <div class="pub-links"><a href="https://arxiv.org/abs/1811.11312v1" target="_blank" rel="noopener" class="pub-link">URL</a><a href="https://ahlab.org/wp-content/uploads/2021/05/1811.11312v1.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">Supporting Rhythm Activities of Deaf Children using Music-Sensory-Substitution Systems.</div>
@@ -1008,7 +1010,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3173574.3174060" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/114srp0L-VRv_cMyNHAm6rVli-x-Z3FS2/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Step Detection for Rollator Users with Smartwatches</div>
@@ -1016,7 +1018,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3267782.3267784" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1PMW_SE18hsZsarSNhy9u5TyC7RdaBw_X/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="UIST">
+    <div class="pub-item rv" data-venue="UIST" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Scaling Notifications Beyond Alerts: From Subtly Drawing Attention up to Forcing the User to Take Action</div>
@@ -1024,7 +1026,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3266037.3266096" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1Oak3j-ZL-pjoGJeA5sr6HeRl7vbiW-3r/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ISWC">
+    <div class="pub-item rv" data-venue="ISWC" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Revealing Inaccessible Information on-the-go, by Augmenting Humans</div>
@@ -1032,7 +1034,7 @@
         <div class="pub-links"><a href="https://dl-acm-org.ezproxy.auckland.ac.nz/citation.cfm?doid=3267305.3277823" target="_blank" rel="noopener" class="pub-link">URL</a><a href="https://drive.google.com/file/d/1jDRyCVMLqjw4zzLdnmmEjs2b22doG8aW/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Mobile Assisted Living: Smartwatch-based Fall Risk Assessment for Elderly People</div>
@@ -1040,7 +1042,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3266157.3266210" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1S0XphfYdY7cK0A0laXiLxTbonVg9Ixj8/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Hand Range Interface: Information Always at Hand with a Body-Centric Mid-Air Input Surface</div>
@@ -1048,7 +1050,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3229434.3229449" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1fRbfKfpHzqerACFYYGNIGoyQneZ6SsHh/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">Going beyond performance scores: understanding cognitive-affective states in kindergarteners</div>
@@ -1056,7 +1058,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3202185.3202739" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://dl.acm.org/citation.cfm?id=3202739" target="_blank" rel="noopener" class="pub-link">URL</a><a href="https://drive.google.com/file/d/1-h8ju4A8yx_7zxEfnlQWi1vC99gVB8Mj/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">GestAKey: Touch Interaction on Individual Keycaps.</div>
@@ -1064,7 +1066,7 @@
         <div class="pub-links"><a href="https://dl.acm.org/citation.cfm?id=3174170" target="_blank" rel="noopener" class="pub-link">URL</a><a href="https://drive.google.com/uc?export=download&amp;id=1sSfqPj_lSe-cPTs-1nJLLJkQVoHZY_WN" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">FingerReader2.0: Designing and Evaluating a Wearable Finger-WornCamera to Assist People with Visual Impairments while Shopping,</div>
@@ -1072,7 +1074,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3264904" target="_blank" rel="noopener" class="pub-link">DOI</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ISWC">
+    <div class="pub-item rv" data-venue="ISWC" data-venue-group="other">
       <div class="pub-body">
         <div class="pub-award">★ Best Presentation Runners-Up</div>
         <div class="pub-title">Exploring the Potential of the Foot to Infer on User Information</div>
@@ -1080,7 +1082,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3267305.3278604" target="_blank" rel="noopener" class="pub-link">DOI</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Exploring Accelerometer-based Step Detection by using a Wheeled Walking Frame</div>
@@ -1088,7 +1090,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3266157.3266212" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1pDtfv91TFJ0n6KPGQXHJVqydc6BKmx0P/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Doodle Daydream: An Interactive Display to Support Playful and Creative Interactions Between Co-workers</div>
@@ -1096,7 +1098,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3267782.3274681" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1f1HKVvNJUjm2ZmrDFBJb09M2RK6g_swO/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Development of a Triangulated Framework Understand Cognitive-Emotional States during Learning in Children</div>
@@ -1104,7 +1106,7 @@
         
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Springer">
+    <div class="pub-item rv" data-venue="Springer" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Assistive Augmentation</div>
@@ -1118,7 +1120,7 @@
     <h2 class="year-title">2017 <span class="yr-count">8</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="TEI">
+    <div class="pub-item rv" data-venue="TEI" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">UTAP-Unique Topographies for Acoustic Propagation: Designing Algorithmic Waveguides for Sensing in Interactive Malleable Interfaces</div>
@@ -1126,7 +1128,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3024969.3024987" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/uc?&amp;id=15vLUR1NjIgJiQWNwwr5-Sljxd2XypPEj" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">Towards Understanding of Play with Augmented Toys</div>
@@ -1134,7 +1136,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3041164.3041191" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1lT6tByaqoIPscG6ylBk68xMSvMdwrQEU/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">SonicSG: From Floating to Sounding Pixels</div>
@@ -1142,7 +1144,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3041164.3041190" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1wKFn3i8CcrO-L8pi0-3Kqa74dqC3dUMJ/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Springer">
+    <div class="pub-item rv" data-venue="Springer" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Scaffolding the Music Listening and Music Making Experience for the Deaf</div>
@@ -1150,7 +1152,7 @@
         <div class="pub-links"><a href="https://link.springer.com/chapter/10.1007/978-981-10-6404-3_3" target="_blank" rel="noopener" class="pub-link">LINK</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         <div class="pub-award">★ Best Short Paper Award</div>
         <div class="pub-title">InSight: A Systematic Approach to Create Dynamic Human-Controller-Interactions</div>
@@ -1158,7 +1160,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3041164.3041195" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://drive.google.com/file/d/1VctHLqYA8VrCwAZVTuy_G_e3GaUWx3td/view?usp=sharing" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">GrabAmps: Grab a Wire to Sense the Current Flow</div>
@@ -1166,7 +1168,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3041164.3041199" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://ahlab.org/wp-content/uploads/2021/05/GrabAmps-AH2017CameraCopy-version2.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="UIST">
+    <div class="pub-item rv" data-venue="UIST" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">GestAKey: Get More Done with Just-a-Key on a Keyboard</div>
@@ -1174,7 +1176,7 @@
         <div class="pub-links"><a href="https://dl.acm.org/citation.cfm?id=3131786" target="_blank" rel="noopener" class="pub-link">URL</a><a href="https://drive.google.com/uc?export=download&amp;id=1TSiXd5f0Exdo4udT2vb8JW854lDdTro6" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">GesCAD: an Intuitive Interface for Conceptual Architectural Design</div>
@@ -1188,7 +1190,7 @@
     <h2 class="year-title">2016 <span class="yr-count">12</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Working with physiotherapists: Lessons learned from project SHRUG.</div>
@@ -1196,7 +1198,7 @@
         <div class="pub-links"><a href="https://drive.google.com/uc?&amp;id=1YozASx4reT8huotCiwjP3jYobL4ijZ-r" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="UIST">
+    <div class="pub-item rv" data-venue="UIST" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">waveSense: Ultra Low Power Gesture Sensing Based on Selective Volumetric Illumination</div>
@@ -1204,7 +1206,7 @@
         <div class="pub-links"><a href="http://dl.acm.org/citation.cfm?id=2985734" target="_blank" rel="noopener" class="pub-link">URL</a><a href="https://ahlab.org/wp-content/uploads/2021/05/p139-withana_0.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Towards One-Pixel-Displays for Sound Information Visualization</div>
@@ -1212,7 +1214,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3010915.3010980" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://ahlab.org/wp-content/uploads/2021/05/OzCHI-Peri.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">Towards Development and Evaluation of Tangible Interfaces that Support Learning in Children.</div>
@@ -1220,7 +1222,7 @@
         
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">SwimSight: Supporting Deaf Users to Participate in Swimming Games</div>
@@ -1228,7 +1230,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3010915.3010969" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://ahlab.org/wp-content/uploads/2021/05/paper1591.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="UbiComp">
+    <div class="pub-item rv" data-venue="UbiComp" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">PostBits: using contextual locations for embedding cloud information in the home</div>
@@ -1236,7 +1238,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/05/PostBits-PDF.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">MuSS-Bits: Sensor-Display Blocks for Deaf People to Explore Musical Sounds</div>
@@ -1244,7 +1246,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/3010915.3010939" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://ahlab.org/wp-content/uploads/2021/05/OzCHI-MuSS-Bits.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">MuSS-Bits Provisional Patent</div>
@@ -1252,7 +1254,7 @@
         
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">Electrosmog Visualization through Augmented Blurry Vision</div>
@@ -1260,7 +1262,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/a35-fan.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">Augmented Winter Ski with AR HMD</div>
@@ -1268,7 +1270,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/a34-fan.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="DIS">
+    <div class="pub-item rv" data-venue="DIS" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">ArmSleeve: A Patient Monitoring System to Support Occupational Therapists in Stroke Rehabilitation</div>
@@ -1276,7 +1278,7 @@
         <div class="pub-links"><a href="https://dl.acm.org/doi/10.1145/2901790.2901799" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://ahlab.org/wp-content/uploads/2021/03/Microsoft-Word-pn149-ploderer.docx-p700-ploderer.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">Ad-Hoc Access to Musical Sound for Deaf Individuals</div>
@@ -1290,7 +1292,7 @@
     <h2 class="year-title">2015 <span class="yr-count">12</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">zSense: Enabling Shallow Depth Gesture Recognition for Greater Input Expressivity on Smart Wearables</div>
@@ -1298,7 +1300,7 @@
         <div class="pub-links"><a href="http://dx.doi.org/10.1145/2702123.2702371" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://ahlab.org/wp-content/uploads/2021/03/2015-04_CHI-zSense_Full.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">Towards Effective Interaction with Omnidirectional Videos Using Immersive Virtual Reality Headsets</div>
@@ -1306,7 +1308,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/Petry-and-Huber-2015-Towards-Effective-Interaction-with-Omnidirectional.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="IUI">
+    <div class="pub-item rv" data-venue="IUI" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">SmartObjects: fourth workshop on interacting with smart objects</div>
@@ -1314,7 +1316,7 @@
         <div class="pub-links"><a href="http://www.smart-objects.org/" target="_blank" rel="noopener" class="pub-link">WEBPAGE</a><a href="https://ahlab.org/wp-content/uploads/2021/03/p453-schnelle-walka.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">SHRUG: stroke haptic rehabilitation using gaming</div>
@@ -1322,7 +1324,7 @@
         <div class="pub-links"><a href="http://dx.doi.org/10.1145/2735711.2735784" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://ahlab.org/wp-content/uploads/2021/03/2015-03_AH-SHRUG_Demo.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">RippleTouch: Initial Exploration of a Wave Resonant Based Full Body Haptic Interface</div>
@@ -1330,7 +1332,7 @@
         <div class="pub-links"><a href="http://dx.doi.org/10.1145/2735711.2735790" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://ahlab.org/wp-content/uploads/2021/03/p61-withana.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">FootNote: designing a cost effective plantar pressure monitoring system for diabetic foot ulcer prevention</div>
@@ -1338,7 +1340,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/p167-yong.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">FingerReader: A Wearable Device to Explore Printed Text on the Go</div>
@@ -1346,7 +1348,7 @@
         <div class="pub-links"><a href="http://fluid.media.mit.edu/sites/default/files/FingerReaderCHI15%20Camera%20Ready-fonts%20embedded.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a><a href="https://dl.acm.org/doi/10.1145/2702123.2702421" target="_blank" rel="noopener" class="pub-link">DOI</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">Feel &amp; See the Globe: A Thermal, Interactive Installation</div>
@@ -1354,7 +1356,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/p215-huber.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">Digital Digits: A Comprehensive Survey of Finger Augmentation Devices</div>
@@ -1362,7 +1364,7 @@
         <div class="pub-links"><a href="http://dl.acm.org/citation.cfm?doid=2830539.2828993" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://ahlab.org/wp-content/uploads/2021/05/a30-shilkrot_0.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">CloudDrops: Stamp-sized Pervasive Displays for Situated Awareness of Web-based Information</div>
@@ -1370,7 +1372,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/PerDis_CloudDrops_CR.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="IEEE">
+    <div class="pub-item rv" data-venue="IEEE" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">BWard: An Optical Approach for Reliable in-situ Early Blood Leakage Detection at Catheter Extraction Points</div>
@@ -1378,7 +1380,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1109/ICCIS.2015.7274626" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://ahlab.org/wp-content/uploads/2021/05/BWARD.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">Body as Display: Augmenting the Face through Transillumination</div>
@@ -1392,7 +1394,7 @@
     <h2 class="year-title">2014 <span class="yr-count">17</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">Workshop on Assistive Augmentation</div>
@@ -1400,7 +1402,7 @@
         <div class="pub-links"><a href="http://fluid.media.mit.edu/sites/default/files/abstract.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a><a href="http://assistaugment.xvm.mit.edu/" target="_blank" rel="noopener" class="pub-link">URL</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">SpiderVision: Extending the Human Field of View for Augmented Awareness</div>
@@ -1408,7 +1410,7 @@
         <div class="pub-links"><a href="http://doi.acm.org/10.1145/2582051.2582100" target="_blank" rel="noopener" class="pub-link">DOI</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">SparKubes: Exploring the Interplay between Digital and Physical Spaces with Minimalistic Interfaces</div>
@@ -1416,7 +1418,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/p204-ortega-avila.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="IUI">
+    <div class="pub-item rv" data-venue="IUI" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">SmartObjects: Third Workshop on Interacting with Smart Objects</div>
@@ -1424,7 +1426,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/05/p45-schnelle-walka.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">SHRUG: stroke haptic rehabilitation using gaming</div>
@@ -1432,7 +1434,7 @@
         <div class="pub-links"><a href="http://dx.doi.org/10.1145/2686612.2686669" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://ahlab.org/wp-content/uploads/2021/03/2014-12_OzCHI-SHRUG_Short.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">Permulin: Mixed-Focus Collaboration on Multi-View Tabletops</div>
@@ -1440,7 +1442,7 @@
         <div class="pub-links"><a href="http://fluid.media.mit.edu/sites/default/files/2014-CHI-Permulin.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a><a href="http://www.youtube.com/watch?v=3qVOMvOsAv0" target="_blank" rel="noopener" class="pub-link">VIDEO</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">PaperPixels: a Toolkit to Create Paper Based Displays</div>
@@ -1448,7 +1450,7 @@
         <div class="pub-links"><a href="http://dx.doi.org/10.1145/2686612.2686691" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://ahlab.org/wp-content/uploads/2021/03/2014-12_OzCHI-PaperPixels_fullpaper.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Paint with Your Voice: An Interactive, Sonic Installation</div>
@@ -1456,7 +1458,7 @@
         <div class="pub-links"><a href="http://fluid.media.mit.edu/sites/default/files/stimmmaler-CR.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a><a href="http://vimeo.com/78633545" target="_blank" rel="noopener" class="pub-link">VIDEO</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">nZwarm: a swarm of luminous sea creatures that interact with passers-by</div>
@@ -1464,7 +1466,7 @@
         <div class="pub-links"><a href="http://lux.org.nz/speakers/nzwarm/" target="_blank" rel="noopener" class="pub-link">LUX</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Keepers &amp; Bees: an interactive light-art installation of interactive critters that visitors can interact with in real time via their smartphones</div>
@@ -1472,7 +1474,7 @@
         <div class="pub-links"><a href="http://archifest.sg/2014/" target="_blank" rel="noopener" class="pub-link">ARCHIFEST14</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">iSwarm: a swarm of luminous sea creatures that interact with passers-by</div>
@@ -1480,7 +1482,7 @@
         <div class="pub-links"><a href="http://2014.ilightmarinabay.sg/installation/iswarm/" target="_blank" rel="noopener" class="pub-link">WEBPAGE</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">I-Draw: Towards a Freehand Drawing Assistant</div>
@@ -1488,7 +1490,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/2014-12_I-Draw_Short.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">FingerReader: A Wearable Device to Support Text-Reading on the Go</div>
@@ -1496,7 +1498,7 @@
         <div class="pub-links"><a href="http://doi.acm.org/10.1145/2559206.2581220" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="http://fluid.media.mit.edu/sites/default/files/paper317.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">EarPut: Augmenting Ear-worn Devices for Ear-based Interaction</div>
@@ -1504,7 +1506,7 @@
         <div class="pub-links"><a href="https://dl.acm.org/doi/10.1145/2686612.2686655" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://ahlab.org/wp-content/uploads/2021/03/p300-lissermann.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI EA">
+    <div class="pub-item rv" data-venue="CHI EA" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Birdie: Towards a true flying experience</div>
@@ -1512,7 +1514,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/Birdie-Towards-a-true-flying-experience.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">A Wearable Text-Reading Device for the Visually-Impaired</div>
@@ -1520,7 +1522,7 @@
         <div class="pub-links"><a href="http://doi.acm.org/10.1145/2559206.2579520" target="_blank" rel="noopener" class="pub-link">DOI</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">A Research Overview of Mobile Projected User Interfaces</div>
@@ -1534,7 +1536,7 @@
     <h2 class="year-title">2013 <span class="yr-count">9</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="UIST">
+    <div class="pub-item rv" data-venue="UIST" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">StickEar: Making Everyday Objects Respond to Sound</div>
@@ -1542,7 +1544,7 @@
         <div class="pub-links"><a href="https://dl.acm.org/doi/10.1145/2501988.2502019" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://ahlab.org/wp-content/uploads/2021/03/StickEar_UIST2013.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">StickEar: Augmenting Objects and Places Wherever Whenever</div>
@@ -1550,7 +1552,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/p_peen_2013.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">SpeechPlay: Composing and Sharing Expressive Speech Through Visually Augmented Text.</div>
@@ -1558,7 +1560,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/SpeechPlay_OZCHI13_CameraReady.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">SmartFinger: Connecting Devices, Objects and People seamlessly</div>
@@ -1566,7 +1568,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/2541016.2541064" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://ahlab.org/wp-content/uploads/2021/03/ozchi13_SmartFinger_ShortPaper.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">SmartFinger: An Augmented Finger as a Seamless 'Channel' between Digital and Physical Objects</div>
@@ -1574,7 +1576,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/p_ransiri_2013.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">FingerDraw: More than a Digital Paintbrush</div>
@@ -1582,7 +1584,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/p_hettiarachchi_2013.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">EyeRing: A Finger Worn Input Device for Seamless Interactions with our Surroundings</div>
@@ -1590,7 +1592,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/p_nanayakkara_2013.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Enhancing Musical Experience for the Hearing-impaired using Visual and Haptic Displays</div>
@@ -1598,7 +1600,7 @@
         <div class="pub-links"><a href="https://www.tandfonline.com/doi/abs/10.1080/07370024.2012.697006" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://ahlab.org/wp-content/uploads/2021/03/p_nanayakkara_2013_2.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="AH">
+    <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
         
         <div class="pub-title">AugmentedForearm: Exploring the Design Space of a Display-enhanced Forearm</div>
@@ -1612,7 +1614,7 @@
     <h2 class="year-title">2012 <span class="yr-count">7</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="ASSETS">
+    <div class="pub-item rv" data-venue="ASSETS" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">WatchMe: Wrist-worn interface that makes remote monitoring seamless</div>
@@ -1620,7 +1622,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/p_ransiri_2012.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">The Haptic Chair as a Speech Training Aid for the Deaf</div>
@@ -1628,7 +1630,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/p_nanayakkara_2012.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Palm-area sensitivity to vibrotactile stimuli above 1 kHz</div>
@@ -1636,7 +1638,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/p_wyse_2012.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Neural changes induced by behavioural stuttering therapies in persons with stuttering</div>
@@ -1644,7 +1646,7 @@
         
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">EyeRing: An Eye on a Finger</div>
@@ -1652,7 +1654,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/p_nanayakkara_2012_3.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">EyeRing: A Finger-worn Assistant</div>
@@ -1660,7 +1662,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/p_nanayakkara_2012_4.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">Effectiveness of the Haptic Chair in Speech Training</div>
@@ -1674,7 +1676,7 @@
     <h2 class="year-title">2011 <span class="yr-count">6</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">Touch and Copy, Touch and Paste</div>
@@ -1682,7 +1684,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/1979742.1979714" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://ahlab.org/wp-content/uploads/2021/03/p_mistry_2011_2.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">The effect of visualizing audio targets in a musical listening and performance task</div>
@@ -1690,7 +1692,7 @@
         <div class="pub-links"><a href="https://ahlab.org/wp-content/uploads/2021/03/p_wyse_2011_2.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="ACM">
+    <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
         
         <div class="pub-title">SPARSH: Passing Data using the Body as a Medium</div>
@@ -1698,7 +1700,7 @@
         <div class="pub-links"><a href="https://doi.org/10.1145/1958824.1958946" target="_blank" rel="noopener" class="pub-link">DOI</a><a href="https://ahlab.org/wp-content/uploads/2021/03/P_mistry_2011.pdf" target="_blank" rel="noopener" class="pub-link">PDF</a></div>
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Dysfluency Characteristics in Persons with Dementia</div>
@@ -1706,7 +1708,7 @@
         
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Clinical Implications Of Neuroimaging Studies On Stuttering: A Review</div>
@@ -1714,7 +1716,7 @@
         
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Biases and interaction effects in gestural acquisition of auditory targets using a hand-held device</div>
@@ -1728,7 +1730,7 @@
     <h2 class="year-title">2010 <span class="yr-count">1</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Effect of culture on non-verbal communication</div>
@@ -1742,7 +1744,7 @@
     <h2 class="year-title">2009 <span class="yr-count">1</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="CHI">
+    <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
         
         <div class="pub-title">An enhanced musical experience for the deaf: design and evaluation of a music display and a haptic chair</div>
@@ -1756,7 +1758,7 @@
     <h2 class="year-title">2008 <span class="yr-count">2</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Effect of Speaking Rate on Nasality</div>
@@ -1764,7 +1766,7 @@
         
       </div>
     </div>
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Effect of Hearing Loss on Cognition</div>
@@ -1778,7 +1780,7 @@
     <h2 class="year-title">Undated <span class="yr-count">1</span></h2>
     <div class="pub-list">
       
-    <div class="pub-item rv" data-venue="Other">
+    <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
         
         <div class="pub-title">Comparison of Attitudes of Mothers and Fathers of Typically Developing Children with those of Children with Mental Retardation and Hearing Impairment</div>
@@ -1831,29 +1833,88 @@ sections.forEach(s => spy.observe(s));
 
 // Nav background on scroll
 const nav = document.getElementById('siteNav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-}, { passive: true });
-document.querySelectorAll('.venue-chip').forEach(chip => {
-  chip.addEventListener('click', () => {
-    const v = chip.dataset.venue;
-    document.querySelectorAll('.venue-chip').forEach(c => c.classList.toggle('active', c === chip));
-    document.querySelectorAll('.pub-item').forEach(item => {
-      item.style.display = (v === 'all' || item.dataset.venue === v) ? '' : 'none';
-    });
-    // Hide year sections that end up empty, and sync the year nav bar
-    document.querySelectorAll('.year-section').forEach(sec => {
-      const visible = sec.querySelectorAll('.pub-item:not([style*="display: none"])').length;
-      sec.style.display = visible ? '' : 'none';
-      const navLink = document.querySelector(`.year-nav a[href="#${sec.id}"]`);
-      if (navLink) {
-        navLink.style.display = visible ? '' : 'none';
-        const countEl = navLink.querySelector('.yr-count');
-        if (countEl) countEl.textContent = visible;
-      }
-    });
-  });
+if (nav) {
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+}
+
+// ── Venue filter (hero chips) ─────────────────────────────
+// Chips live inline in the hero as text fragments. Each pub-item has a
+// data-venue-group: one of the top-3 venue slugs, or "other" for the
+// long tail. Clicking a chip hides non-matching pubs; empty year
+// sections disappear; year-nav links hide too and their counts update
+// to reflect the filtered total. Year titles gain a suffix
+// ("2024 / CHI") so the currently-active filter is visible in context.
+const venuePills  = document.getElementById('venuePills');
+const filterReset = document.getElementById('filterReset');
+const heroSummary = document.querySelector('.hero-summary');
+
+// Cache each year-title's base text once, so suffixes can be appended
+// and reverted without losing the original string.
+document.querySelectorAll('.year-title').forEach(el => {
+  // The year title also contains an inner <span class="yr-count"> with
+  // the per-year total. Cache just the year string (first text node).
+  const yearText = el.childNodes[0]?.nodeValue?.trim() || '';
+  el.dataset.baseYear = yearText;
 });
+
+function applyVenueFilter(group) {
+  const isAll = !group || group === 'all';
+
+  heroSummary?.classList.toggle('is-filtered', !isAll);
+  let activeLabel = '';
+  document.querySelectorAll('#venuePills .hero-chip').forEach(chip => {
+    const active = !isAll && chip.dataset.group === group;
+    chip.classList.toggle('is-active', active);
+    if (active) activeLabel = chip.dataset.label || '';
+  });
+
+  // Hide pubs whose group doesn't match
+  document.querySelectorAll('.pub-item').forEach(item => {
+    const match = isAll || item.dataset.venueGroup === group;
+    item.classList.toggle('hidden', !match);
+  });
+
+  // Recompute per-year visibility + nav-bar counts
+  document.querySelectorAll('.year-section').forEach(sec => {
+    const visible = sec.querySelectorAll('.pub-item:not(.hidden)').length;
+    sec.classList.toggle('hidden', visible === 0);
+
+    // Update year title: "2024" → "2024 / CHI" when filtered
+    const titleEl = sec.querySelector('.year-title');
+    if (titleEl) {
+      const base = titleEl.dataset.baseYear;
+      const countEl = titleEl.querySelector('.yr-count');
+      // Rebuild text node carefully — keep the .yr-count span intact
+      titleEl.firstChild.nodeValue = (!isAll && activeLabel)
+        ? `${base} / ${activeLabel} `
+        : `${base} `;
+      if (countEl) countEl.textContent = visible;
+    }
+
+    const navLink = document.querySelector(`.year-nav a[href="#${sec.id}"]`);
+    if (navLink) {
+      navLink.classList.toggle('hidden', visible === 0);
+      const navCount = navLink.querySelector('.yr-count');
+      if (navCount) navCount.textContent = visible;
+    }
+  });
+}
+
+venuePills?.addEventListener('click', e => {
+  const chip = e.target.closest('.hero-chip');
+  if (!chip) return;
+  applyVenueFilter(chip.dataset.group);
+});
+venuePills?.addEventListener('keydown', e => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const chip = e.target.closest('.hero-chip');
+  if (!chip) return;
+  e.preventDefault();
+  applyVenueFilter(chip.dataset.group);
+});
+filterReset?.addEventListener('click', () => applyVenueFilter('all'));
 
 document.getElementById('navToggle')?.addEventListener('click', () => {
   const l = document.querySelector('.nav-links');

@@ -12,11 +12,33 @@
 <style>
 /* Inline overrides specific to the projects archive page only.
    Reuses tokens, nav, footer, .container, .rv from project.css */
-.projects-hero{padding:160px 0 60px;border-bottom:2px solid var(--color-neutral-30)}
-.projects-hero .hero-label{font-family:var(--font-display);font-weight:800;font-size:12px;letter-spacing:1.71px;text-transform:uppercase;color:var(--color-neutral-60);margin-bottom:14px}
-.projects-hero h1{font-family:var(--font-display);font-weight:700;font-size:60px;line-height:1.05;letter-spacing:-.02em;color:var(--color-neutral-100);margin-bottom:18px;max-width:900px}
-.projects-hero p{font-size:19px;line-height:28px;color:var(--color-neutral-70);max-width:620px}
-@media(max-width:767px){.projects-hero{padding:140px 0 48px}.projects-hero h1{font-size:38px}.projects-hero p{font-size:16px;line-height:24px}}
+
+/* ── Hero (gradient, matching /press/ and /publications/) ──
+   Full-width gradient band with white type on top. The chip
+   sentence sits in this hero — the shared .hero-chip / .hero-
+   summary rules in theme.css are designed for exactly this
+   white-on-gradient context, so we don't need any per-page
+   chip overrides here. */
+.hero { position: relative; padding: 160px 0 80px; overflow: hidden; }
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gradient);
+}
+.hero .container { position: relative; z-index: 2; }
+.hero h1 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 60px; line-height: 1.05; color: #fff;
+  letter-spacing: -.02em;
+}
+@media (max-width: 991px) {
+  .hero { padding: 140px 0 60px; }
+  .hero h1 { font-size: 44px; }
+}
+@media (max-width: 567px) {
+  .hero h1 { font-size: 36px; }
+}
 
 /* ── Layout (sticky year timeline + content) ──────────────
    Mirrors the pattern used on /press/ and /publications/:
@@ -152,14 +174,19 @@
   font-variant-numeric:tabular-nums;
 }
 
-/* Bottom overlay — title only on a light frosted background.
-   Compact: ~14px vertical padding, single-line title clamped
-   so the overlay stays a thin band over the bottom of the image. */
+/* Bottom overlay — title on the left, principle icons on the right.
+   Compact: ~14px vertical padding, single-line title clamped so the
+   overlay stays a thin band over the bottom of the image. The row is
+   flex so the tag icons nudge right and the title takes remaining
+   width (truncating with ellipsis if too long). */
 .project-card-body{
   position:absolute;
   left:0;right:0;bottom:0;
   z-index:2;
-  padding:14px 16px;
+  padding:10px 16px;
+  display:flex;
+  align-items:center;
+  gap:12px;
   background:rgba(255,255,255,.55);
   -webkit-backdrop-filter:blur(8px) saturate(140%);
   backdrop-filter:blur(8px) saturate(140%);
@@ -177,11 +204,53 @@
   color:var(--color-neutral-100);
   margin:0;
   letter-spacing:-.005em;
+  flex:1;                    /* take remaining width, let tags sit right-aligned */
+  min-width:0;               /* allow shrinking below content width for ellipsis */
   /* Clamp to a single line with ellipsis if the title is unusually long */
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
+
+/* ── Principle tags on cards ─────────────────────────────
+   Live in the card's title bar, right side. No circular
+   background — icons read as clean pictograms. The title bar
+   has 14px vertical padding; we size the icons so they nearly
+   reach the top and bottom edges (28px leaves a ~4px breathing
+   margin above/below, which matches "small margin around" from
+   the spec). Hover swaps to the "highlighted" variant (the
+   -hl.png icon shared with /vision/) by fading between two
+   stacked <img> elements. Native title tooltip fires on hover
+   so the principle name appears without needing any JS. */
+.project-card-tags{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-shrink:0;             /* never compress the tag row */
+}
+.project-card-tag{
+  position:relative;
+  display:block;
+  width:28px;
+  height:28px;
+  line-height:0;             /* collapse inline spacing around imgs */
+}
+.project-card-tag img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  transition:opacity .25s ease;
+}
+.project-card-tag-hover{ opacity:0; }
+.project-card-tag:hover .project-card-tag-default{ opacity:0; }
+.project-card-tag:hover .project-card-tag-hover  { opacity:1; }
+
+/* Hidden state for filter interactions */
+.project-card.hidden{ display:none; }
+.year-section.hidden{ display:none; }
+.year-nav a.hidden{ display:none; }
 </style>
 </head>
 <body>
@@ -190,12 +259,17 @@
 <script src="/js/nav-include.js"></script>
 
 <!-- HERO -->
-<section class="projects-hero">
+<header class="hero">
   <div class="container">
-    <h1>Research at the Augmented Human Lab</h1>
-    <p>108 projects · 2011–2025 across audio, sensing, accessibility, and human-AI collaboration</p>
+    <h1>Projects</h1>
+    <p class="hero-summary">
+      <span class="hero-filter-group" id="principlePills">
+        <span class="hero-chip" role="button" tabindex="0" data-group="body" data-label="Body">57 Body</span>, <span class="hero-chip" role="button" tabindex="0" data-group="cognitive" data-label="Cognitive">41 Cognitive</span>, <span class="hero-chip" role="button" tabindex="0" data-group="perceptual" data-label="Perceptual">46 Perceptual</span>, <span class="hero-chip" role="button" tabindex="0" data-group="physical" data-label="Physical">25 Physical</span>, <span class="hero-chip" role="button" tabindex="0" data-group="identity" data-label="Identity">21 Identity</span>, and <span class="hero-chip" role="button" tabindex="0" data-group="sociocultural" data-label="Sociocultural">21 Sociocultural</span>.
+      </span>
+      <button type="button" class="hero-filter-reset" id="filterReset" aria-label="Show all projects">Show all</button>
+    </p>
   </div>
-</section>
+</header>
 
 <!-- LAYOUT -->
 <div class="projects-layout">
@@ -274,49 +348,96 @@
     <h2 class="year-title">Current <span class="yr-count">5</span></h2>
     <div class="projects-grid">
       
-    <a href="/projects/blind-drone/" class="project-card rv" style="transition-delay:0s">
+    <a href="/projects/blind-drone/" class="project-card rv" data-principles="perceptual physical" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/blind-drone/blind-drone.jpg" alt="Blind Drone" loading="lazy">
       </div>
       <div class="project-year-chip">Current</div>
       <div class="project-card-body">
         <h3>Blind Drone</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/emodrink/" class="project-card rv" style="transition-delay:0.04s">
+    <a href="/projects/emodrink/" class="project-card rv" data-principles="body cognitive perceptual" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/emodrink/emodrink.jpg" alt="EmoDrink" loading="lazy">
       </div>
       <div class="project-year-chip">Current</div>
       <div class="project-card-body">
         <h3>EmoDrink</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/factually/" class="project-card rv" style="transition-delay:0.08s">
+    <a href="/projects/factually/" class="project-card rv" data-principles="body cognitive perceptual" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/factually/factually.jpg" alt="Factually" loading="lazy">
       </div>
       <div class="project-year-chip">Current</div>
       <div class="project-card-body">
         <h3>Factually</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/gutio/" class="project-card rv" style="transition-delay:0.12s">
+    <a href="/projects/gutio/" class="project-card rv" data-principles="body cognitive perceptual" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/gutio/gutio.jpg" alt="GutIO" loading="lazy">
       </div>
       <div class="project-year-chip">Current</div>
       <div class="project-card-body">
         <h3>GutIO</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/zenflow/" class="project-card rv" style="transition-delay:0.16s">
+    <a href="/projects/zenflow/" class="project-card rv" data-principles="body cognitive perceptual" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/zenflow/zenflow.jpg" alt="Zenflow" loading="lazy">
       </div>
       <div class="project-year-chip">Current</div>
       <div class="project-card-body">
         <h3>Zenflow</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
     </div>
@@ -325,58 +446,109 @@
     <h2 class="year-title">2025 <span class="yr-count">6</span></h2>
     <div class="projects-grid">
       
-    <a href="/projects/soniphy/" class="project-card rv" style="transition-delay:0s">
+    <a href="/projects/soniphy/" class="project-card rv" data-principles="body cognitive perceptual" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/soniphy/soniphy.jpg" alt="SoniPhy" loading="lazy">
       </div>
       <div class="project-year-chip">2025</div>
       <div class="project-card-body">
         <h3>SoniPhy</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/sonicvista/" class="project-card rv" style="transition-delay:0.04s">
+    <a href="/projects/sonicvista/" class="project-card rv" data-principles="cognitive perceptual" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/sonicvista/sonicvista.jpg" alt="SonicVista" loading="lazy">
       </div>
       <div class="project-year-chip">2025</div>
       <div class="project-card-body">
         <h3>SonicVista</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/dysalytics/" class="project-card rv" style="transition-delay:0.08s">
+    <a href="/projects/dysalytics/" class="project-card rv" data-principles="cognitive identity" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/dysalytics/dysalytics.jpg" alt="Dysalytics" loading="lazy">
       </div>
       <div class="project-year-chip">2025</div>
       <div class="project-card-body">
         <h3>Dysalytics</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/dronebuddy/" class="project-card rv" style="transition-delay:0.12s">
+    <a href="/projects/dronebuddy/" class="project-card rv" data-principles="perceptual physical identity" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/dronebuddy/dronebuddy.jpg" alt="DroneBuddy" loading="lazy">
       </div>
       <div class="project-year-chip">2025</div>
       <div class="project-card-body">
         <h3>DroneBuddy</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/curious-shorts/" class="project-card rv" style="transition-delay:0.16s">
+    <a href="/projects/curious-shorts/" class="project-card rv" data-principles="cognitive" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/curious-shorts/curious-shorts.jpg" alt="Curious Shorts" loading="lazy">
       </div>
       <div class="project-year-chip">2025</div>
       <div class="project-card-body">
         <h3>Curious Shorts</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/aisee/" class="project-card rv" style="transition-delay:0.2s">
+    <a href="/projects/aisee/" class="project-card rv" data-principles="body cognitive perceptual identity" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/aisee/aisee.jpg" alt="AiSee" loading="lazy">
       </div>
       <div class="project-year-chip">2025</div>
       <div class="project-card-body">
         <h3>AiSee</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
     </div>
@@ -385,94 +557,164 @@
     <h2 class="year-title">2024 <span class="yr-count">10</span></h2>
     <div class="projects-grid">
       
-    <a href="/projects/xr-floatation-therapy/" class="project-card rv" style="transition-delay:0s">
+    <a href="/projects/xr-floatation-therapy/" class="project-card rv" data-principles="cognitive perceptual identity" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/xr-floatation-therapy/xr-floatation-therapy.jpg" alt="XR Floatation Therapy" loading="lazy">
       </div>
       <div class="project-year-chip">2024</div>
       <div class="project-card-body">
         <h3>XR Floatation Therapy</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/ubipen/" class="project-card rv" style="transition-delay:0.04s">
+    <a href="/projects/ubipen/" class="project-card rv" data-principles="body physical" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/ubipen/ubipen.jpg" alt="UbiPen" loading="lazy">
       </div>
       <div class="project-year-chip">2024</div>
       <div class="project-card-body">
         <h3>UbiPen</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/toro/" class="project-card rv" style="transition-delay:0.08s">
+    <a href="/projects/toro/" class="project-card rv" data-principles="cognitive" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/toro/toro.jpg" alt="Toro" loading="lazy">
       </div>
       <div class="project-year-chip">2024</div>
       <div class="project-card-body">
         <h3>Toro</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/stakco/" class="project-card rv" style="transition-delay:0.12s">
+    <a href="/projects/stakco/" class="project-card rv" data-principles="cognitive sociocultural" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/stakco/stakco.jpg" alt="Stakco" loading="lazy">
       </div>
       <div class="project-year-chip">2024</div>
       <div class="project-card-body">
         <h3>Stakco</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/sound-designer-generative-ai-interactions/" class="project-card rv" style="transition-delay:0.16s">
+    <a href="/projects/sound-designer-generative-ai-interactions/" class="project-card rv" data-principles="cognitive" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/sound-designer-generative-ai-interactions/sound-designer-generative-ai-interactions.jpg" alt="Sound Designer-Generative AI Interactions" loading="lazy">
       </div>
       <div class="project-year-chip">2024</div>
       <div class="project-card-body">
         <h3>Sound Designer-Generative AI Interactions</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/seear/" class="project-card rv" style="transition-delay:0.2s">
+    <a href="/projects/seear/" class="project-card rv" data-principles="cognitive perceptual sociocultural" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/seear/seear.jpg" alt="SeEar" loading="lazy">
       </div>
       <div class="project-year-chip">2024</div>
       <div class="project-card-body">
         <h3>SeEar</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/kavy/" class="project-card rv" style="transition-delay:0.24s">
+    <a href="/projects/kavy/" class="project-card rv" data-principles="cognitive sociocultural" style="transition-delay:0.24s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/kavy/kavy.jpg" alt="Kavy" loading="lazy">
       </div>
       <div class="project-year-chip">2024</div>
       <div class="project-card-body">
         <h3>Kavy</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/itiles/" class="project-card rv" style="transition-delay:0.28s">
+    <a href="/projects/itiles/" class="project-card rv" data-principles="body cognitive physical" style="transition-delay:0.28s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/itiles/itiles.jpg" alt="iTILES" loading="lazy">
       </div>
       <div class="project-year-chip">2024</div>
       <div class="project-card-body">
         <h3>iTILES</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/emo-know/" class="project-card rv" style="transition-delay:0.32s">
+    <a href="/projects/emo-know/" class="project-card rv" data-principles="cognitive" style="transition-delay:0.32s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/emo-know/emo-know.jpg" alt="EMO-KNOW" loading="lazy">
       </div>
       <div class="project-year-chip">2024</div>
       <div class="project-card-body">
         <h3>EMO-KNOW</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/cotacs/" class="project-card rv" style="transition-delay:0.36s">
+    <a href="/projects/cotacs/" class="project-card rv" data-principles="perceptual sociocultural" style="transition-delay:0.36s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/cotacs/cotacs.jpg" alt="CoTacs" loading="lazy">
       </div>
       <div class="project-year-chip">2024</div>
       <div class="project-card-body">
         <h3>CoTacs</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
     </div>
@@ -481,31 +723,49 @@
     <h2 class="year-title">2023 <span class="yr-count">3</span></h2>
     <div class="projects-grid">
       
-    <a href="/projects/hopu/" class="project-card rv" style="transition-delay:0s">
+    <a href="/projects/hopu/" class="project-card rv" data-principles="cognitive physical" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/hopu/hopu.jpg" alt="Hopu" loading="lazy">
       </div>
       <div class="project-year-chip">2023</div>
       <div class="project-card-body">
         <h3>Hopu</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/crowd-eval-audio/" class="project-card rv" style="transition-delay:0.04s">
+    <a href="/projects/crowd-eval-audio/" class="project-card rv" data-principles="cognitive perceptual" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/crowd-eval-audio/crowd-eval-audio.jpg" alt="Crowd-Eval-Audio" loading="lazy">
       </div>
       <div class="project-year-chip">2023</div>
       <div class="project-card-body">
         <h3>Crowd-Eval-Audio</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/audio-morph-gan/" class="project-card rv" style="transition-delay:0.08s">
+    <a href="/projects/audio-morph-gan/" class="project-card rv" data-principles="perceptual" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/audio-morph-gan/audio-morph-gan.jpg" alt="Audio-Morph GAN" loading="lazy">
       </div>
       <div class="project-year-chip">2023</div>
       <div class="project-card-body">
         <h3>Audio-Morph GAN</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
     </div>
@@ -514,49 +774,84 @@
     <h2 class="year-title">2022 <span class="yr-count">5</span></h2>
     <div class="projects-grid">
       
-    <a href="/projects/xrtic/" class="project-card rv" style="transition-delay:0s">
+    <a href="/projects/xrtic/" class="project-card rv" data-principles="body perceptual" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/xrtic/xrtic.jpg" alt="XRtic" loading="lazy">
       </div>
       <div class="project-year-chip">2022</div>
       <div class="project-card-body">
         <h3>XRtic</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/vrhook/" class="project-card rv" style="transition-delay:0.04s">
+    <a href="/projects/vrhook/" class="project-card rv" data-principles="body perceptual" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/vrhook/vrhook.jpg" alt="VRHook" loading="lazy">
       </div>
       <div class="project-year-chip">2022</div>
       <div class="project-card-body">
         <h3>VRHook</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/scratch-and-sense/" class="project-card rv" style="transition-delay:0.08s">
+    <a href="/projects/scratch-and-sense/" class="project-card rv" data-principles="cognitive physical" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/scratch-and-sense/scratch-and-sense.jpg" alt="Scratch and Sense" loading="lazy">
       </div>
       <div class="project-year-chip">2022</div>
       <div class="project-card-body">
         <h3>Scratch and Sense</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/kiwrious/" class="project-card rv" style="transition-delay:0.12s">
+    <a href="/projects/kiwrious/" class="project-card rv" data-principles="cognitive physical" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/kiwrious/kiwrious.jpg" alt="Kiwrious" loading="lazy">
       </div>
       <div class="project-year-chip">2022</div>
       <div class="project-card-body">
         <h3>Kiwrious</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/affect-in-the-wild/" class="project-card rv" style="transition-delay:0.16s">
+    <a href="/projects/affect-in-the-wild/" class="project-card rv" data-principles="cognitive identity" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/affect-in-the-wild/affect-in-the-wild.jpg" alt="Affect in the Wild" loading="lazy">
       </div>
       <div class="project-year-chip">2022</div>
       <div class="project-card-body">
         <h3>Affect in the Wild</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
     </div>
@@ -565,85 +860,154 @@
     <h2 class="year-title">2021 <span class="yr-count">9</span></h2>
     <div class="projects-grid">
       
-    <a href="/projects/ticklefoot/" class="project-card rv" style="transition-delay:0s">
+    <a href="/projects/ticklefoot/" class="project-card rv" data-principles="body perceptual" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/ticklefoot/ticklefoot.jpg" alt="TickleFoot" loading="lazy">
       </div>
       <div class="project-year-chip">2021</div>
       <div class="project-card-body">
         <h3>TickleFoot</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/stressshoe/" class="project-card rv" style="transition-delay:0.04s">
+    <a href="/projects/stressshoe/" class="project-card rv" data-principles="body cognitive" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/stressshoe/stressshoe.jpg" alt="StressShoe" loading="lazy">
       </div>
       <div class="project-year-chip">2021</div>
       <div class="project-card-body">
         <h3>StressShoe</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/om/" class="project-card rv" style="transition-delay:0.08s">
+    <a href="/projects/om/" class="project-card rv" data-principles="body perceptual identity" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/om/om.jpg" alt="OM" loading="lazy">
       </div>
       <div class="project-year-chip">2021</div>
       <div class="project-card-body">
         <h3>OM</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/magicblocks/" class="project-card rv" style="transition-delay:0.12s">
+    <a href="/projects/magicblocks/" class="project-card rv" data-principles="cognitive physical" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/magicblocks/magicblocks.jpg" alt="MagicBLOCKS" loading="lazy">
       </div>
       <div class="project-year-chip">2021</div>
       <div class="project-card-body">
         <h3>MagicBLOCKS</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/lightsense/" class="project-card rv" style="transition-delay:0.16s">
+    <a href="/projects/lightsense/" class="project-card rv" data-principles="perceptual sociocultural" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/lightsense/lightsense.jpg" alt="LightSense" loading="lazy">
       </div>
       <div class="project-year-chip">2021</div>
       <div class="project-card-body">
         <h3>LightSense</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/kinvoice/" class="project-card rv" style="transition-delay:0.2s">
+    <a href="/projects/kinvoice/" class="project-card rv" data-principles="cognitive identity sociocultural" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/kinvoice/kinvoice.jpg" alt="KinVoice" loading="lazy">
       </div>
       <div class="project-year-chip">2021</div>
       <div class="project-card-body">
         <h3>KinVoice</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/eyeknowyou/" class="project-card rv" style="transition-delay:0.24s">
+    <a href="/projects/eyeknowyou/" class="project-card rv" data-principles="body cognitive" style="transition-delay:0.24s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/eyeknowyou/eyeknowyou.jpg" alt="EyeKnowYou" loading="lazy">
       </div>
       <div class="project-year-chip">2021</div>
       <div class="project-card-body">
         <h3>EyeKnowYou</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/clothtiles/" class="project-card rv" style="transition-delay:0.28s">
+    <a href="/projects/clothtiles/" class="project-card rv" data-principles="body perceptual" style="transition-delay:0.28s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/clothtiles/clothtiles.jpg" alt="ClothTiles" loading="lazy">
       </div>
       <div class="project-year-chip">2021</div>
       <div class="project-card-body">
         <h3>ClothTiles</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/anisma/" class="project-card rv" style="transition-delay:0.32s">
+    <a href="/projects/anisma/" class="project-card rv" data-principles="body perceptual" style="transition-delay:0.32s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/anisma/anisma.jpg" alt="ANISMA" loading="lazy">
       </div>
       <div class="project-year-chip">2021</div>
       <div class="project-card-body">
         <h3>ANISMA</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
     </div>
@@ -652,67 +1016,110 @@
     <h2 class="year-title">2020 <span class="yr-count">7</span></h2>
     <div class="projects-grid">
       
-    <a href="/projects/versatouch/" class="project-card rv" style="transition-delay:0s">
+    <a href="/projects/versatouch/" class="project-card rv" data-principles="perceptual physical" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/versatouch/versatouch.jpg" alt="VersaTouch" loading="lazy">
       </div>
       <div class="project-year-chip">2020</div>
       <div class="project-card-body">
         <h3>VersaTouch</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/stressfoot/" class="project-card rv" style="transition-delay:0.04s">
+    <a href="/projects/stressfoot/" class="project-card rv" data-principles="body cognitive" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/stressfoot/stressfoot.jpg" alt="StressFoot" loading="lazy">
       </div>
       <div class="project-year-chip">2020</div>
       <div class="project-card-body">
         <h3>StressFoot</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/rainbowhub/" class="project-card rv" style="transition-delay:0.08s">
+    <a href="/projects/rainbowhub/" class="project-card rv" data-principles="sociocultural" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/rainbowhub/rainbowhub.jpg" alt="RainbowHub" loading="lazy">
       </div>
       <div class="project-year-chip">2020</div>
       <div class="project-card-body">
         <h3>RainbowHub</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/prompto/" class="project-card rv" style="transition-delay:0.12s">
+    <a href="/projects/prompto/" class="project-card rv" data-principles="body cognitive" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/prompto/prompto.jpg" alt="Prompto" loading="lazy">
       </div>
       <div class="project-year-chip">2020</div>
       <div class="project-card-body">
         <h3>Prompto</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/phantomtouch/" class="project-card rv" style="transition-delay:0.16s">
+    <a href="/projects/phantomtouch/" class="project-card rv" data-principles="body perceptual" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/phantomtouch/phantomtouch.jpg" alt="PhantomTouch" loading="lazy">
       </div>
       <div class="project-year-chip">2020</div>
       <div class="project-card-body">
         <h3>PhantomTouch</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/jammify/" class="project-card rv" style="transition-delay:0.2s">
+    <a href="/projects/jammify/" class="project-card rv" data-principles="body sociocultural" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/jammify/jammify.jpg" alt="Jammify" loading="lazy">
       </div>
       <div class="project-year-chip">2020</div>
       <div class="project-card-body">
         <h3>Jammify</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/actualtouch/" class="project-card rv" style="transition-delay:0.24s">
+    <a href="/projects/actualtouch/" class="project-card rv" data-principles="body" style="transition-delay:0.24s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/actualtouch/actualtouch.jpg" alt="ActualTouch" loading="lazy">
       </div>
       <div class="project-year-chip">2020</div>
       <div class="project-card-body">
         <h3>ActualTouch</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
     </div>
@@ -721,40 +1128,71 @@
     <h2 class="year-title">2019 <span class="yr-count">4</span></h2>
     <div class="projects-grid">
       
-    <a href="/projects/prospero/" class="project-card rv" style="transition-delay:0s">
+    <a href="/projects/prospero/" class="project-card rv" data-principles="body cognitive" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/prospero/prospero.jpg" alt="Prospero" loading="lazy">
       </div>
       <div class="project-year-chip">2019</div>
       <div class="project-card-body">
         <h3>Prospero</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/m-hair/" class="project-card rv" style="transition-delay:0.04s">
+    <a href="/projects/m-hair/" class="project-card rv" data-principles="body perceptual" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/m-hair/m-hair.jpg" alt="M-Hair" loading="lazy">
       </div>
       <div class="project-year-chip">2019</div>
       <div class="project-card-body">
         <h3>M-Hair</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/gymsoles/" class="project-card rv" style="transition-delay:0.08s">
+    <a href="/projects/gymsoles/" class="project-card rv" data-principles="body perceptual" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/gymsoles/gymsoles.jpg" alt="GymSoles" loading="lazy">
       </div>
       <div class="project-year-chip">2019</div>
       <div class="project-card-body">
         <h3>GymSoles</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/chewit/" class="project-card rv" style="transition-delay:0.12s">
+    <a href="/projects/chewit/" class="project-card rv" data-principles="body physical identity" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/chewit/chewit.jpg" alt="ChewIt" loading="lazy">
       </div>
       <div class="project-year-chip">2019</div>
       <div class="project-card-body">
         <h3>ChewIt</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
     </div>
@@ -763,112 +1201,181 @@
     <h2 class="year-title">2018 <span class="yr-count">12</span></h2>
     <div class="projects-grid">
       
-    <a href="/projects/target-driven-navigation/" class="project-card rv" style="transition-delay:0s">
+    <a href="/projects/target-driven-navigation/" class="project-card rv" data-principles="physical" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/target-driven-navigation/target-driven-navigation.jpg" alt="Target Driven Navigation" loading="lazy">
       </div>
       <div class="project-year-chip">2018</div>
       <div class="project-card-body">
         <h3>Target Driven Navigation</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/step-detection-algorithm/" class="project-card rv" style="transition-delay:0.04s">
+    <a href="/projects/step-detection-algorithm/" class="project-card rv" data-principles="body identity" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/step-detection-algorithm/step-detection-algorithm.jpg" alt="Step Detection Algorithm" loading="lazy">
       </div>
       <div class="project-year-chip">2018</div>
       <div class="project-card-body">
         <h3>Step Detection Algorithm</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/prospecfit/" class="project-card rv" style="transition-delay:0.08s">
+    <a href="/projects/prospecfit/" class="project-card rv" data-principles="cognitive" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/prospecfit/prospecfit.jpg" alt="ProspecFit" loading="lazy">
       </div>
       <div class="project-year-chip">2018</div>
       <div class="project-card-body">
         <h3>ProspecFit</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/osense/" class="project-card rv" style="transition-delay:0.12s">
+    <a href="/projects/osense/" class="project-card rv" data-principles="body physical" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/osense/osense.jpg" alt="oSense" loading="lazy">
       </div>
       <div class="project-year-chip">2018</div>
       <div class="project-card-body">
         <h3>oSense</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/lighttank/" class="project-card rv" style="transition-delay:0.16s">
+    <a href="/projects/lighttank/" class="project-card rv" data-principles="perceptual sociocultural" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/lighttank/lighttank.jpg" alt="LightTank" loading="lazy">
       </div>
       <div class="project-year-chip">2018</div>
       <div class="project-card-body">
         <h3>LightTank</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/fsense/" class="project-card rv" style="transition-delay:0.2s">
+    <a href="/projects/fsense/" class="project-card rv" data-principles="body" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/fsense/fsense.jpg" alt="fSense" loading="lazy">
       </div>
       <div class="project-year-chip">2018</div>
       <div class="project-card-body">
         <h3>fSense</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/evaluating-ivr-in-schools/" class="project-card rv" style="transition-delay:0.24s">
+    <a href="/projects/evaluating-ivr-in-schools/" class="project-card rv" data-principles="cognitive perceptual" style="transition-delay:0.24s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/evaluating-ivr-in-schools/evaluating-ivr-in-schools.jpg" alt="Evaluating IVR in schools" loading="lazy">
       </div>
       <div class="project-year-chip">2018</div>
       <div class="project-card-body">
         <h3>Evaluating IVR in schools</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/cricketcoach/" class="project-card rv" style="transition-delay:0.28s">
+    <a href="/projects/cricketcoach/" class="project-card rv" data-principles="body perceptual" style="transition-delay:0.28s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/cricketcoach/cricketcoach.jpg" alt="CricketCoach" loading="lazy">
       </div>
       <div class="project-year-chip">2018</div>
       <div class="project-card-body">
         <h3>CricketCoach</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/comprate/" class="project-card rv" style="transition-delay:0.32s">
+    <a href="/projects/comprate/" class="project-card rv" data-principles="body" style="transition-delay:0.32s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/comprate/comprate.jpg" alt="CompRate" loading="lazy">
       </div>
       <div class="project-year-chip">2018</div>
       <div class="project-card-body">
         <h3>CompRate</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/capmat/" class="project-card rv" style="transition-delay:0.36s">
+    <a href="/projects/capmat/" class="project-card rv" data-principles="body physical" style="transition-delay:0.36s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/capmat/capmat.jpg" alt="CapMat" loading="lazy">
       </div>
       <div class="project-year-chip">2018</div>
       <div class="project-card-body">
         <h3>CapMat</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/abi-foodcam/" class="project-card rv" style="transition-delay:0.4s">
+    <a href="/projects/abi-foodcam/" class="project-card rv" data-principles="sociocultural" style="transition-delay:0.4s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/abi-foodcam/abi-foodcam.jpg" alt="ABI FoodCam" loading="lazy">
       </div>
       <div class="project-year-chip">2018</div>
       <div class="project-card-body">
         <h3>ABI FoodCam</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/2bit-tactile-hand/" class="project-card rv" style="transition-delay:0.4s">
+    <a href="/projects/2bit-tactile-hand/" class="project-card rv" data-principles="body perceptual" style="transition-delay:0.4s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/2bit-tactile-hand/2bit-tactile-hand.jpg" alt="2bit-Tactile Hand" loading="lazy">
       </div>
       <div class="project-year-chip">2018</div>
       <div class="project-card-body">
         <h3>2bit-Tactile Hand</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
     </div>
@@ -877,85 +1384,148 @@
     <h2 class="year-title">2017 <span class="yr-count">9</span></h2>
     <div class="projects-grid">
       
-    <a href="/projects/thumb-in-motion/" class="project-card rv" style="transition-delay:0s">
+    <a href="/projects/thumb-in-motion/" class="project-card rv" data-principles="body physical" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/thumb-in-motion/thumb-in-motion.jpg" alt="Thumb in Motion" loading="lazy">
       </div>
       <div class="project-year-chip">2017</div>
       <div class="project-card-body">
         <h3>Thumb in Motion</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/muss-bits/" class="project-card rv" style="transition-delay:0.04s">
+    <a href="/projects/muss-bits/" class="project-card rv" data-principles="body perceptual identity" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/muss-bits/muss-bits.jpg" alt="MuSS-Bits" loading="lazy">
       </div>
       <div class="project-year-chip">2017</div>
       <div class="project-card-body">
         <h3>MuSS-Bits</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/kyanite/" class="project-card rv" style="transition-delay:0.08s">
+    <a href="/projects/kyanite/" class="project-card rv" data-principles="cognitive perceptual" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/kyanite/kyanite.jpg" alt="Kyanite" loading="lazy">
       </div>
       <div class="project-year-chip">2017</div>
       <div class="project-card-body">
         <h3>Kyanite</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/insight/" class="project-card rv" style="transition-delay:0.12s">
+    <a href="/projects/insight/" class="project-card rv" data-principles="body physical" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/insight/insight.jpg" alt="InSight" loading="lazy">
       </div>
       <div class="project-year-chip">2017</div>
       <div class="project-card-body">
         <h3>InSight</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/gestakey/" class="project-card rv" style="transition-delay:0.16s">
+    <a href="/projects/gestakey/" class="project-card rv" data-principles="body" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/gestakey/gestakey.jpg" alt="GestAKey" loading="lazy">
       </div>
       <div class="project-year-chip">2017</div>
       <div class="project-card-body">
         <h3>GestAKey</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/gescad/" class="project-card rv" style="transition-delay:0.2s">
+    <a href="/projects/gescad/" class="project-card rv" data-principles="body cognitive" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/gescad/gescad.jpg" alt="GesCAD" loading="lazy">
       </div>
       <div class="project-year-chip">2017</div>
       <div class="project-card-body">
         <h3>GesCAD</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/fingerreader/" class="project-card rv" style="transition-delay:0.24s">
+    <a href="/projects/fingerreader/" class="project-card rv" data-principles="body cognitive perceptual identity" style="transition-delay:0.24s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/fingerreader/fingerreader.jpg" alt="FingerReader" loading="lazy">
       </div>
       <div class="project-year-chip">2017</div>
       <div class="project-card-body">
         <h3>FingerReader</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/doodle-daydream/" class="project-card rv" style="transition-delay:0.28s">
+    <a href="/projects/doodle-daydream/" class="project-card rv" data-principles="sociocultural" style="transition-delay:0.28s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/doodle-daydream/doodle-daydream.jpg" alt="Doodle Daydream" loading="lazy">
       </div>
       <div class="project-year-chip">2017</div>
       <div class="project-card-body">
         <h3>Doodle Daydream</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/chaddybuddy/" class="project-card rv" style="transition-delay:0.32s">
+    <a href="/projects/chaddybuddy/" class="project-card rv" data-principles="cognitive" style="transition-delay:0.32s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/chaddybuddy/chaddybuddy.jpg" alt="ChaddyBuddy" loading="lazy">
       </div>
       <div class="project-year-chip">2017</div>
       <div class="project-card-body">
         <h3>ChaddyBuddy</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
     </div>
@@ -964,67 +1534,113 @@
     <h2 class="year-title">2016 <span class="yr-count">7</span></h2>
     <div class="projects-grid">
       
-    <a href="/projects/zsense/" class="project-card rv" style="transition-delay:0s">
+    <a href="/projects/zsense/" class="project-card rv" data-principles="body physical" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/zsense/zsense.jpg" alt="zSense" loading="lazy">
       </div>
       <div class="project-year-chip">2016</div>
       <div class="project-card-body">
         <h3>zSense</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/wavesense/" class="project-card rv" style="transition-delay:0.04s">
+    <a href="/projects/wavesense/" class="project-card rv" data-principles="body physical" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/wavesense/wavesense.jpg" alt="WaveSense" loading="lazy">
       </div>
       <div class="project-year-chip">2016</div>
       <div class="project-card-body">
         <h3>WaveSense</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/swimsight/" class="project-card rv" style="transition-delay:0.08s">
+    <a href="/projects/swimsight/" class="project-card rv" data-principles="perceptual identity" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/swimsight/swimsight.jpg" alt="SwimSight" loading="lazy">
       </div>
       <div class="project-year-chip">2016</div>
       <div class="project-card-body">
         <h3>SwimSight</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/stickamps/" class="project-card rv" style="transition-delay:0.12s">
+    <a href="/projects/stickamps/" class="project-card rv" data-principles="physical" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/stickamps/stickamps.jpg" alt="StickAmps" loading="lazy">
       </div>
       <div class="project-year-chip">2016</div>
       <div class="project-card-body">
         <h3>StickAmps</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/postbits/" class="project-card rv" style="transition-delay:0.16s">
+    <a href="/projects/postbits/" class="project-card rv" data-principles="cognitive physical" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/postbits/postbits.jpg" alt="PostBits" loading="lazy">
       </div>
       <div class="project-year-chip">2016</div>
       <div class="project-card-body">
         <h3>PostBits</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/knoctify/" class="project-card rv" style="transition-delay:0.2s">
+    <a href="/projects/knoctify/" class="project-card rv" data-principles="perceptual identity" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/knoctify/knoctify.jpg" alt="Knoctify" loading="lazy">
       </div>
       <div class="project-year-chip">2016</div>
       <div class="project-card-body">
         <h3>Knoctify</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/armsleeve/" class="project-card rv" style="transition-delay:0.24s">
+    <a href="/projects/armsleeve/" class="project-card rv" data-principles="body identity" style="transition-delay:0.24s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/armsleeve/armsleeve.jpg" alt="ArmSleeve" loading="lazy">
       </div>
       <div class="project-year-chip">2016</div>
       <div class="project-card-body">
         <h3>ArmSleeve</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
     </div>
@@ -1033,76 +1649,126 @@
     <h2 class="year-title">2015 <span class="yr-count">8</span></h2>
     <div class="projects-grid">
       
-    <a href="/projects/the-ribbon/" class="project-card rv" style="transition-delay:0s">
+    <a href="/projects/the-ribbon/" class="project-card rv" data-principles="sociocultural" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/the-ribbon/the-ribbon.jpg" alt="The RIBbon" loading="lazy">
       </div>
       <div class="project-year-chip">2015</div>
       <div class="project-card-body">
         <h3>The RIBbon</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/sonicsg/" class="project-card rv" style="transition-delay:0.04s">
+    <a href="/projects/sonicsg/" class="project-card rv" data-principles="sociocultural" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/sonicsg/sonicsg.jpg" alt="SonicSG" loading="lazy">
       </div>
       <div class="project-year-chip">2015</div>
       <div class="project-card-body">
         <h3>SonicSG</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/shrug/" class="project-card rv" style="transition-delay:0.08s">
+    <a href="/projects/shrug/" class="project-card rv" data-principles="body identity" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/shrug/shrug.jpg" alt="SHRUG" loading="lazy">
       </div>
       <div class="project-year-chip">2015</div>
       <div class="project-card-body">
         <h3>SHRUG</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/rippletouch/" class="project-card rv" style="transition-delay:0.12s">
+    <a href="/projects/rippletouch/" class="project-card rv" data-principles="body perceptual" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/rippletouch/rippletouch.jpg" alt="RippleTouch" loading="lazy">
       </div>
       <div class="project-year-chip">2015</div>
       <div class="project-card-body">
         <h3>RippleTouch</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/mobile-360-video-interaction/" class="project-card rv" style="transition-delay:0.16s">
+    <a href="/projects/mobile-360-video-interaction/" class="project-card rv" data-principles="perceptual" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/mobile-360-video-interaction/mobile-360-video-interaction.jpg" alt="Mobile 360° Video Interaction" loading="lazy">
       </div>
       <div class="project-year-chip">2015</div>
       <div class="project-card-body">
         <h3>Mobile 360° Video Interaction</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/fingerreader-v0/" class="project-card rv" style="transition-delay:0.2s">
+    <a href="/projects/fingerreader-v0/" class="project-card rv" data-principles="body cognitive perceptual identity" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/fingerreader-v0/fingerreader-v0.jpg" alt="FingerReader-v0" loading="lazy">
       </div>
       <div class="project-year-chip">2015</div>
       <div class="project-card-body">
         <h3>FingerReader-v0</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/feel-the-globe/" class="project-card rv" style="transition-delay:0.24s">
+    <a href="/projects/feel-the-globe/" class="project-card rv" data-principles="perceptual sociocultural" style="transition-delay:0.24s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/feel-the-globe/feel-the-globe.jpg" alt="Feel the Globe" loading="lazy">
       </div>
       <div class="project-year-chip">2015</div>
       <div class="project-card-body">
         <h3>Feel the Globe</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/bward/" class="project-card rv" style="transition-delay:0.28s">
+    <a href="/projects/bward/" class="project-card rv" data-principles="body" style="transition-delay:0.28s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/bward/bward.jpg" alt="BWard" loading="lazy">
       </div>
       <div class="project-year-chip">2015</div>
       <div class="project-card-body">
         <h3>BWard</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
     </div>
@@ -1111,85 +1777,127 @@
     <h2 class="year-title">2014 <span class="yr-count">9</span></h2>
     <div class="projects-grid">
       
-    <a href="/projects/sparkubes/" class="project-card rv" style="transition-delay:0s">
+    <a href="/projects/sparkubes/" class="project-card rv" data-principles="physical" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/sparkubes/sparkubes.jpg" alt="SparKubes" loading="lazy">
       </div>
       <div class="project-year-chip">2014</div>
       <div class="project-card-body">
         <h3>SparKubes</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/paperpixels/" class="project-card rv" style="transition-delay:0.04s">
+    <a href="/projects/paperpixels/" class="project-card rv" data-principles="physical" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/paperpixels/paperpixels.jpg" alt="PaperPixels" loading="lazy">
       </div>
       <div class="project-year-chip">2014</div>
       <div class="project-card-body">
         <h3>PaperPixels</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/nzwarm/" class="project-card rv" style="transition-delay:0.08s">
+    <a href="/projects/nzwarm/" class="project-card rv" data-principles="sociocultural" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/nzwarm/nzwarm.jpg" alt="nZwarm" loading="lazy">
       </div>
       <div class="project-year-chip">2014</div>
       <div class="project-card-body">
         <h3>nZwarm</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/keepers-bees/" class="project-card rv" style="transition-delay:0.12s">
+    <a href="/projects/keepers-bees/" class="project-card rv" data-principles="sociocultural" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/keepers-bees/keepers-bees.jpg" alt="Keepers &amp; Bees" loading="lazy">
       </div>
       <div class="project-year-chip">2014</div>
       <div class="project-card-body">
         <h3>Keepers &amp; Bees</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/iswarm/" class="project-card rv" style="transition-delay:0.16s">
+    <a href="/projects/iswarm/" class="project-card rv" data-principles="sociocultural" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/iswarm/iswarm.jpg" alt="iSwarm" loading="lazy">
       </div>
       <div class="project-year-chip">2014</div>
       <div class="project-card-body">
         <h3>iSwarm</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/ircx/" class="project-card rv" style="transition-delay:0.2s">
+    <a href="/projects/ircx/" class="project-card rv" data-principles="sociocultural" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/ircx/ircx.jpg" alt="ircX" loading="lazy">
       </div>
       <div class="project-year-chip">2014</div>
       <div class="project-card-body">
         <h3>ircX</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/i-draw/" class="project-card rv" style="transition-delay:0.24s">
+    <a href="/projects/i-draw/" class="project-card rv" data-principles="cognitive" style="transition-delay:0.24s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/i-draw/i-draw.jpg" alt="I-Draw" loading="lazy">
       </div>
       <div class="project-year-chip">2014</div>
       <div class="project-card-body">
         <h3>I-Draw</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/foot-note/" class="project-card rv" style="transition-delay:0.28s">
+    <a href="/projects/foot-note/" class="project-card rv" data-principles="body identity" style="transition-delay:0.28s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/foot-note/foot-note.jpg" alt="Foot.Note" loading="lazy">
       </div>
       <div class="project-year-chip">2014</div>
       <div class="project-card-body">
         <h3>Foot.Note</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/earput/" class="project-card rv" style="transition-delay:0.32s">
+    <a href="/projects/earput/" class="project-card rv" data-principles="body physical" style="transition-delay:0.32s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/earput/earput.jpg" alt="EarPut" loading="lazy">
       </div>
       <div class="project-year-chip">2014</div>
       <div class="project-card-body">
         <h3>EarPut</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
     </div>
@@ -1198,58 +1906,100 @@
     <h2 class="year-title">2013 <span class="yr-count">6</span></h2>
     <div class="projects-grid">
       
-    <a href="/projects/stickear/" class="project-card rv" style="transition-delay:0s">
+    <a href="/projects/stickear/" class="project-card rv" data-principles="physical" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/stickear/stickear.jpg" alt="StickEar" loading="lazy">
       </div>
       <div class="project-year-chip">2013</div>
       <div class="project-card-body">
         <h3>StickEar</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/spidervision/" class="project-card rv" style="transition-delay:0.04s">
+    <a href="/projects/spidervision/" class="project-card rv" data-principles="body perceptual" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/spidervision/spidervision.jpg" alt="SpiderVision" loading="lazy">
       </div>
       <div class="project-year-chip">2013</div>
       <div class="project-card-body">
         <h3>SpiderVision</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/smartfinger/" class="project-card rv" style="transition-delay:0.08s">
+    <a href="/projects/smartfinger/" class="project-card rv" data-principles="body perceptual" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/smartfinger/smartfinger.jpg" alt="SmartFinger" loading="lazy">
       </div>
       <div class="project-year-chip">2013</div>
       <div class="project-card-body">
         <h3>SmartFinger</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/fingerdraw/" class="project-card rv" style="transition-delay:0.12s">
+    <a href="/projects/fingerdraw/" class="project-card rv" data-principles="body cognitive physical" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/fingerdraw/fingerdraw.jpg" alt="FingerDraw" loading="lazy">
       </div>
       <div class="project-year-chip">2013</div>
       <div class="project-card-body">
         <h3>FingerDraw</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/birdie/" class="project-card rv" style="transition-delay:0.16s">
+    <a href="/projects/birdie/" class="project-card rv" data-principles="body perceptual" style="transition-delay:0.16s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/birdie/birdie.jpg" alt="Birdie" loading="lazy">
       </div>
       <div class="project-year-chip">2013</div>
       <div class="project-card-body">
         <h3>Birdie</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/augmented-forearm/" class="project-card rv" style="transition-delay:0.2s">
+    <a href="/projects/augmented-forearm/" class="project-card rv" data-principles="body physical" style="transition-delay:0.2s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/augmented-forearm/augmented-forearm.jpg" alt="Augmented Forearm" loading="lazy">
       </div>
       <div class="project-year-chip">2013</div>
       <div class="project-card-body">
         <h3>Augmented Forearm</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Physical" aria-label="Physical">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
     </div>
@@ -1258,40 +2008,71 @@
     <h2 class="year-title">2012 <span class="yr-count">4</span></h2>
     <div class="projects-grid">
       
-    <a href="/projects/watchme/" class="project-card rv" style="transition-delay:0s">
+    <a href="/projects/watchme/" class="project-card rv" data-principles="body identity sociocultural" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/watchme/watchme.jpg" alt="WatchMe" loading="lazy">
       </div>
       <div class="project-year-chip">2012</div>
       <div class="project-card-body">
         <h3>WatchMe</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/speechplay/" class="project-card rv" style="transition-delay:0.04s">
+    <a href="/projects/speechplay/" class="project-card rv" data-principles="cognitive perceptual" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/speechplay/speechplay.jpg" alt="SpeechPlay" loading="lazy">
       </div>
       <div class="project-year-chip">2012</div>
       <div class="project-card-body">
         <h3>SpeechPlay</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/sparsh/" class="project-card rv" style="transition-delay:0.08s">
+    <a href="/projects/sparsh/" class="project-card rv" data-principles="body" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/sparsh/sparsh.jpg" alt="Sparsh" loading="lazy">
       </div>
       <div class="project-year-chip">2012</div>
       <div class="project-card-body">
         <h3>Sparsh</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/eyering/" class="project-card rv" style="transition-delay:0.12s">
+    <a href="/projects/eyering/" class="project-card rv" data-principles="body perceptual identity" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/eyering/eyering.jpg" alt="EyeRing" loading="lazy">
       </div>
       <div class="project-year-chip">2012</div>
       <div class="project-card-body">
         <h3>EyeRing</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
     </div>
@@ -1300,40 +2081,74 @@
     <h2 class="year-title">2011 <span class="yr-count">4</span></h2>
     <div class="projects-grid">
       
-    <a href="/projects/sutdfoodcam/" class="project-card rv" style="transition-delay:0s">
+    <a href="/projects/sutdfoodcam/" class="project-card rv" data-principles="sociocultural" style="transition-delay:0s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/sutdfoodcam/sutdfoodcam.jpg" alt="SUTDFoodCam" loading="lazy">
       </div>
       <div class="project-year-chip">2011</div>
       <div class="project-card-body">
         <h3>SUTDFoodCam</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/soundfloor/" class="project-card rv" style="transition-delay:0.04s">
+    <a href="/projects/soundfloor/" class="project-card rv" data-principles="body perceptual identity sociocultural" style="transition-delay:0.04s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/soundfloor/soundfloor.jpg" alt="SoundFloor" loading="lazy">
       </div>
       <div class="project-year-chip">2011</div>
       <div class="project-card-body">
         <h3>SoundFloor</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Sociocultural" aria-label="Sociocultural">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-sociocultural-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/sensei/" class="project-card rv" style="transition-delay:0.08s">
+    <a href="/projects/sensei/" class="project-card rv" data-principles="cognitive perceptual" style="transition-delay:0.08s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/sensei/sensei.jpg" alt="Sensei" loading="lazy">
       </div>
       <div class="project-year-chip">2011</div>
       <div class="project-card-body">
         <h3>Sensei</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Cognitive" aria-label="Cognitive">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
-    <a href="/projects/hapticchair/" class="project-card rv" style="transition-delay:0.12s">
+    <a href="/projects/hapticchair/" class="project-card rv" data-principles="body perceptual identity" style="transition-delay:0.12s">
       <div class="project-card-thumb">
         <img src="https://cdn.ahlab.org/media/site/projects/hapticchair/hapticchair.jpg" alt="HapticChair" loading="lazy">
       </div>
       <div class="project-year-chip">2011</div>
       <div class="project-card-body">
         <h3>HapticChair</h3>
+        <div class="project-card-tags"><span class="project-card-tag" title="Body" aria-label="Body">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Perceptual" aria-label="Perceptual">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-hl.png" alt="" loading="lazy">
+    </span><span class="project-card-tag" title="Identity" aria-label="Identity">
+      <img class="project-card-tag-default" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="" loading="lazy">
+      <img class="project-card-tag-hover" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity-hl.png" alt="" loading="lazy">
+    </span></div>
       </div>
     </a>
     </div>
@@ -1346,6 +2161,88 @@
 <script src="/js/footer-include.js"></script>
 
 <script>
+// ── Principle filter (hero chips) ─────────────────────────
+// Each project card has data-principles="body cognitive perceptual"
+// (a space-separated list). Clicking a chip shows only cards whose
+// list contains that principle, hides empty year sections, and
+// appends "/ Perceptual"-style suffixes to year titles.
+const principlePills = document.getElementById('principlePills');
+const filterReset    = document.getElementById('filterReset');
+const heroSummary    = document.querySelector('.hero-summary');
+
+// Cache each year-title's base text once so we can swap suffixes in
+// and out without losing the original string.
+document.querySelectorAll('.year-title').forEach(el => {
+  const yearText = el.childNodes[0]?.nodeValue?.trim() || '';
+  el.dataset.baseYear = yearText;
+});
+
+function principlesOf(card) {
+  // data-principles is a space-separated list; split into a Set for
+  // O(1) membership checks. Cached on the element to avoid re-parsing
+  // on every filter change.
+  if (!card._principles) {
+    const raw = card.dataset.principles || '';
+    card._principles = new Set(raw.split(/\s+/).filter(Boolean));
+  }
+  return card._principles;
+}
+
+function applyPrincipleFilter(group) {
+  const isAll = !group || group === 'all';
+
+  heroSummary?.classList.toggle('is-filtered', !isAll);
+  let activeLabel = '';
+  document.querySelectorAll('#principlePills .hero-chip').forEach(chip => {
+    const active = !isAll && chip.dataset.group === group;
+    chip.classList.toggle('is-active', active);
+    if (active) activeLabel = chip.dataset.label || '';
+  });
+
+  // Filter cards by set membership
+  document.querySelectorAll('.project-card').forEach(card => {
+    const match = isAll || principlesOf(card).has(group);
+    card.classList.toggle('hidden', !match);
+  });
+
+  // Hide empty year sections, update titles + nav counts
+  document.querySelectorAll('.year-section').forEach(sec => {
+    const visible = sec.querySelectorAll('.project-card:not(.hidden)').length;
+    sec.classList.toggle('hidden', visible === 0);
+
+    const titleEl = sec.querySelector('.year-title');
+    if (titleEl) {
+      const base = titleEl.dataset.baseYear;
+      const countEl = titleEl.querySelector('.yr-count');
+      titleEl.firstChild.nodeValue = (!isAll && activeLabel)
+        ? `${base} / ${activeLabel} `
+        : `${base} `;
+      if (countEl) countEl.textContent = visible;
+    }
+
+    const navLink = document.querySelector(`.year-nav a[href="#${sec.id}"]`);
+    if (navLink) {
+      navLink.classList.toggle('hidden', visible === 0);
+      const navCount = navLink.querySelector('.yr-count');
+      if (navCount) navCount.textContent = visible;
+    }
+  });
+}
+
+principlePills?.addEventListener('click', e => {
+  const chip = e.target.closest('.hero-chip');
+  if (!chip) return;
+  applyPrincipleFilter(chip.dataset.group);
+});
+principlePills?.addEventListener('keydown', e => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const chip = e.target.closest('.hero-chip');
+  if (!chip) return;
+  e.preventDefault();
+  applyPrincipleFilter(chip.dataset.group);
+});
+filterReset?.addEventListener('click', () => applyPrincipleFilter('all'));
+
 // Reveal on scroll
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });

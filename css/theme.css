@@ -234,6 +234,102 @@ ul  { list-style: none; }
   margin-bottom: 16px;
 }
 
+/* ── Hero summary sentence with inline clickable chips ──────
+   Shared control used by the people and publications index heroes.
+   Reads as prose sitting under the headline — e.g.
+     "8 SRF / RF, 5 RE / RA, 5 Students, and 4 Interns."
+   Each count+noun span (`.hero-chip`) is actionable: clicking it
+   applies a filter on the surrounding list. Styling is deliberately
+   text-first (no button chrome), with a dotted underline as the
+   only "this is interactive" affordance. Lives in theme.css so any
+   index page with a gradient hero can use the same treatment.
+
+   States:
+     .hero-summary                — normal (all chips at rest)
+     .hero-summary.is-filtered    — a chip is currently active; non-
+                                    active chips fade and the reset
+                                    link becomes visible.
+     .hero-chip.is-active         — the chip matching the active
+                                    filter; solid underline + tinted
+                                    background so it stands out. */
+.hero-summary {
+  margin-top: 22px;
+  max-width: 720px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, .75);
+  letter-spacing: -.005em;
+}
+.hero-filter-group {
+  /* inline container — no layout of its own, chips are just inline text */
+  display: inline;
+}
+
+.hero-chip {
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 1px 2px;
+  border-radius: 3px;
+  /* Subtle dotted underline suggests "this is interactive" without
+     looking like a link. Becomes solid on hover / when active. */
+  text-decoration: underline dotted rgba(255, 255, 255, .45);
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+  transition: color .2s ease, text-decoration-color .2s ease, background .2s ease, opacity .25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.hero-chip:hover,
+.hero-chip:focus-visible {
+  text-decoration: underline solid #fff;
+  text-decoration-thickness: 2px;
+  outline: none;
+}
+.hero-chip.is-active {
+  color: #fff;
+  background: rgba(255, 255, 255, .14);
+  text-decoration: underline solid #fff;
+  text-decoration-thickness: 2px;
+}
+.hero-summary.is-filtered .hero-chip:not(.is-active) {
+  opacity: .4;
+}
+
+/* "Show all" reset link — hidden by default, appears next to the
+   sentence when any filter is active. Styled as a small inline text
+   link rather than a button. */
+.hero-filter-reset {
+  margin-left: .5em;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: rgba(255, 255, 255, .75);
+  cursor: pointer;
+  text-decoration: underline solid rgba(255, 255, 255, .35);
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease, color .2s ease, text-decoration-color .2s ease;
+}
+.hero-filter-reset:hover,
+.hero-filter-reset:focus-visible {
+  color: #fff;
+  text-decoration-color: #fff;
+  outline: none;
+}
+.hero-summary.is-filtered .hero-filter-reset {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 767px) {
+  .hero-summary { font-size: 17px; }
+}
+
 /* ── Back link strip (used by detail pages) ──────────────── */
 .back-strip {
   padding: 60px 0;

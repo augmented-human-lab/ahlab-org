@@ -29,6 +29,52 @@
   pointer-events: none;
 }
 
+/* ── Assistive Augmentation principles (detail page) ──────
+   A horizontal strip sitting directly below the hero image,
+   listing the principles this project embodies. Each chip is
+   a non-interactive icon + label pair. Larger than the card
+   version (28px icons) because the detail page has room and
+   we want the principles to read as a statement, not as a
+   decoration. The container .project-hero-image-col exists
+   just to group the image + strip into a single flex column
+   so they stay vertically aligned with the text column. */
+.project-hero-image-col { display: flex; flex-direction: column; gap: 18px; }
+.project-principles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+}
+.project-principle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: -.005em;
+  color: var(--color-neutral-80);
+  /* Pill-style background — reads as "these apply to this project"
+     without being so loud that it fights the hero image above. */
+  padding: 6px 12px 6px 8px;
+  background: var(--color-neutral-20);
+  border: 1px solid var(--color-neutral-30);
+  border-radius: 999px;
+}
+.project-principle img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+.project-principle-label { white-space: nowrap; }
+@media (max-width: 767px) {
+  .project-principles { gap: 10px; }
+  .project-principle { font-size: 13px; padding: 5px 10px 5px 6px; }
+  .project-principle img { width: 24px; height: 24px; }
+}
+
 .project-hero-text h1 {
   font-family: var(--font-display); font-weight: 700;
   font-size: 44px; line-height: 46px;
