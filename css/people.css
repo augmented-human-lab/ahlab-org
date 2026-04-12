@@ -37,8 +37,17 @@
 }
 
 /* ── Category sections (people index) ────────────────────── */
-.people-section { padding: 80px 0 0; }
-.people-section:last-of-type { padding-bottom: 80px; }
+/* Top padding gives each section its own headroom. Bottom padding is
+   applied whenever no *visible* section follows, so the last visible
+   section always has breathing room above the footer. Using
+   `:has(+ .people-section:not(.hidden))` lets us zero out the bottom
+   padding only when another visible section follows — this keeps the
+   original 80px rhythm between stacked sections AND guarantees bottom
+   space under filters (which hide Alumni/Collaborators and leave e.g.
+   Current Team as the last visible section). */
+.people-section { padding: 80px 0; }
+.people-section:has(+ .people-section:not(.hidden)) { padding-bottom: 0; }
+.people-section.hidden { display: none; }
 .section-label {
   font-family: var(--font-display); font-weight: 800;
   font-size: 12px; letter-spacing: 1.71px; text-transform: uppercase;
@@ -47,6 +56,97 @@
   border-bottom: 2px solid var(--color-neutral-30);
   margin-bottom: 40px;
 }
+
+/* ── Hero summary sentence (doubles as role filter) ─────────
+   Reads as prose: "Our active team includes 8 SRF / RF, 5 RE / RA,
+   5 Students, and 4 Interns." The count+noun spans (`.hero-chip`) are
+   subtly-styled actionable text — no button chrome. Hover / focus
+   brighten them; the active chip gets a solid underline to make the
+   current filter visible. When a filter is active, non-selected chips
+   fade so the highlighted one stands out.
+   Placed inside the gradient hero, so all colors are shades of white. */
+.hero-summary {
+  margin-top: 22px;
+  max-width: 720px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, .75);
+  letter-spacing: -.005em;
+}
+.hero-filter-group {
+  /* inline container — no layout of its own, chips are just inline text */
+  display: inline;
+}
+
+.hero-chip {
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 1px 2px;
+  border-radius: 3px;
+  /* Subtle dotted underline suggests "this is interactive" without
+     looking like a link. Becomes solid on hover / when active. */
+  text-decoration: underline dotted rgba(255, 255, 255, .45);
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+  transition: color .2s ease, text-decoration-color .2s ease, background .2s ease, opacity .25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.hero-chip:hover,
+.hero-chip:focus-visible {
+  text-decoration: underline solid #fff;
+  text-decoration-thickness: 2px;
+  outline: none;
+}
+.hero-chip.is-active {
+  color: #fff;
+  background: rgba(255, 255, 255, .14);
+  text-decoration: underline solid #fff;
+  text-decoration-thickness: 2px;
+}
+/* When any filter is active, fade the chips that aren't selected so
+   the active one pops visually. Targets chips inside .is-filtered. */
+.hero-summary.is-filtered .hero-chip:not(.is-active) {
+  opacity: .4;
+}
+
+/* "Show all" link — hidden by default, appears next to the sentence
+   when a filter is active. Styled as a small inline text link rather
+   than a button. */
+.hero-filter-reset {
+  margin-left: .5em;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: rgba(255, 255, 255, .75);
+  cursor: pointer;
+  text-decoration: underline solid rgba(255, 255, 255, .35);
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease, color .2s ease, text-decoration-color .2s ease;
+}
+.hero-filter-reset:hover,
+.hero-filter-reset:focus-visible {
+  color: #fff;
+  text-decoration-color: #fff;
+  outline: none;
+}
+.hero-summary.is-filtered .hero-filter-reset {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 767px) {
+  .hero-summary { font-size: 17px; }
+}
+
+/* Card-level hidden state used by the role filter. */
+.person-card.hidden { display: none; }
 
 /* ── People grid (index) ─────────────────────────────────── */
 .people-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
@@ -197,6 +297,16 @@
   background: var(--color-neutral-30);
   z-index: 0;
 }
+/* 2-node variant (current members: Then → Now at AHL; alumni: AHL → Now).
+   Two columns instead of three, and the connector line now spans from the
+   center of column 1 (25%) to the center of column 2 (75%). */
+.tl-track.is-2col {
+  grid-template-columns: 1fr 1fr;
+}
+.tl-track.is-2col::before {
+  left: 25%;
+  right: 25%;
+}
 .tl-node {
   display: flex;
   flex-direction: column;
@@ -298,7 +408,7 @@
 }
 
 /* ── Profile body (detail) ───────────────────────────────── */
-.profile-body { padding: 60px 0 80px; border-top: 2px solid var(--color-neutral-30); }
+.profile-body { padding: 60px 0 80px; }
 .profile-body-grid {
   display: grid;
   grid-template-columns: 240px 1fr;
@@ -315,6 +425,44 @@
 }
 .profile-content p:last-child { margin-bottom: 0; }
 @media (max-width: 991px) { .profile-content p { font-size: 19px; line-height: 28px; } }
+
+/* ── Intro grid (bio left, featured project right) ─────────
+   Uses the same 3-column template as .profile-projects-grid
+   below (3 equal columns, 20px gap). The bio spans columns 1–2,
+   the featured card sits in column 3. This guarantees the
+   featured card is the EXACT same width as each card in the
+   projects grid — any other approach (e.g. "2fr 1fr" with one
+   gap vs. two gaps) leaves a few pixels of drift because the
+   subtracted gap width differs.
+   Collapses to stacked on tablet/mobile so the featured project
+   falls in right after the bio, before the rest of the projects. */
+.profile-intro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.profile-intro-grid .profile-content {
+  grid-column: 1 / span 2;
+  max-width: none;   /* let the 2-column span define width */
+}
+.profile-intro-grid .profile-featured {
+  grid-column: 3 / span 1;
+}
+@media (max-width: 991px) {
+  .profile-intro-grid { grid-template-columns: 1fr; gap: 40px; }
+  .profile-intro-grid .profile-content,
+  .profile-intro-grid .profile-featured { grid-column: auto; }
+}
+
+/* The featured-project sidebar itself — just holds a label and
+   one .profile-project-card. The card's aspect-ratio handles the
+   height, so this wrapper doesn't need explicit sizing. */
+.profile-featured {
+  min-width: 0;   /* prevent grid blow-out on narrow viewports */
+}
+.profile-featured .sidebar-section-title { margin-bottom: 16px; }
+
 
 /* ── Projects grid in profile ──────────────────────────────
    Image fills the entire card; title overlays at the bottom
