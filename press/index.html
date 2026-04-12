@@ -2005,11 +2005,6 @@ if (nav) {
     nav.classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
 }
-document.getElementById('navToggle')?.addEventListener('click', () => {
-  const l = document.querySelector('.nav-links');
-  l.style.display = l.style.display === 'flex' ? 'none' : 'flex';
-});
-
 /* ── YouTube lazy embed ────────────────────────────────────
    Click the play button → swap the thumbnail for a real iframe.
    Uses youtube-nocookie.com so no tracking cookies are set

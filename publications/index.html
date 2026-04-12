@@ -1915,11 +1915,6 @@ venuePills?.addEventListener('keydown', e => {
   applyVenueFilter(chip.dataset.group);
 });
 filterReset?.addEventListener('click', () => applyVenueFilter('all'));
-
-document.getElementById('navToggle')?.addEventListener('click', () => {
-  const l = document.querySelector('.nav-links');
-  l.style.display = l.style.display === 'flex' ? 'none' : 'flex';
-});
 </script>
 </body>
 </html>

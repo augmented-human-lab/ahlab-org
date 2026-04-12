@@ -271,7 +271,7 @@ const obs=new IntersectionObserver(e=>{e.forEach(n=>{if(n.isIntersecting)n.targe
 rv.forEach(el=>obs.observe(el));
 const nav=document.getElementById('siteNav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)},{passive:true});
-document.getElementById('navToggle')?.addEventListener('click',()=>{const l=document.querySelector('.nav-links');l.style.display=l.style.display==='flex'?'none':'flex'});
+
 </script>
 </body>
 </html>

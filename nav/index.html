@@ -32,3 +32,45 @@
     </ul>
   </div>
 </nav>
+
+<script>
+/*
+ * Nav drawer toggle — runs once per page when nav.html is mounted by
+ * /js/nav-include.js. Wires up the hamburger button to slide the
+ * full-screen drawer in/out via the .open class.
+ *
+ * Idempotent: if the script runs twice (e.g. SPA-style re-mount), the
+ * data attribute prevents stacking duplicate listeners.
+ */
+(function () {
+  var toggle = document.getElementById('navToggle');
+  var drawer = document.getElementById('navDrawer');
+  if (!toggle || !drawer) return;
+  if (toggle.dataset.bound === '1') return;
+  toggle.dataset.bound = '1';
+
+  function setOpen(open) {
+    drawer.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+    // Lock body scroll while the drawer is up so the underlying page
+    // doesn't scroll behind the overlay.
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+  }
+
+  toggle.addEventListener('click', function () {
+    setOpen(!drawer.classList.contains('open'));
+  });
+
+  // Tapping a link inside the drawer should also dismiss the overlay
+  // (the link will navigate immediately afterwards on its own).
+  drawer.addEventListener('click', function (e) {
+    if (e.target.closest('a')) setOpen(false);
+  });
+
+  // ESC dismisses the drawer when it's open.
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && drawer.classList.contains('open')) setOpen(false);
+  });
+})();
+</script>
