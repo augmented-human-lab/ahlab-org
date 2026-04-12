@@ -214,9 +214,13 @@
   .profile-photo { max-width: none; }
 }
 
-/* ── Social icons (LinkedIn / GitHub) ─────────────────────
-   Small icon-only buttons rendered above the text links.
-   Hidden if the person has neither linkedin nor github. */
+/* ── Profile social row ───────────────────────────────────
+   Four icon slots rendered in a fixed order above the text
+   links: LinkedIn, GitHub, Google Scholar, Personal Website.
+   Filled slots are interactive <a> tags in the active color;
+   empty slots are non-interactive <span class="is-empty">
+   placeholders, greyscale and softened so the row's visual
+   rhythm stays consistent across all profiles. */
 .profile-socials {
   display: flex;
   gap: 10px;
@@ -238,6 +242,25 @@
   border-color: var(--color-accent);
   color: #fff;
 }
+/* Empty slot: a desaturated placeholder. Non-interactive (no hover
+   color shift, default cursor) so users immediately understand the
+   icon means "this slot exists but isn't filled in" rather than
+   "click here". The dashed border subtly reinforces the placeholder
+   meaning. */
+.profile-social.is-empty {
+  color: var(--color-neutral-40);
+  border-style: dashed;
+  border-color: var(--color-neutral-30);
+  background: transparent;
+  cursor: default;
+  opacity: .65;
+}
+.profile-social.is-empty:hover {
+  /* Override the default :hover rule so empty slots stay quiet */
+  background: transparent;
+  border-color: var(--color-neutral-30);
+  color: var(--color-neutral-40);
+}
 
 /* ── Career timeline ───────────────────────────────────────
    3-node horizontal graph rendered next to the hero photo.
@@ -257,8 +280,6 @@
    today. For current members that's "Now"; for alumni it's "Next". */
 .profile-timeline {
   margin-top: 32px;
-  padding-top: 28px;
-  border-top: 1px solid var(--color-neutral-30);
 }
 .tl-track {
   display: grid;

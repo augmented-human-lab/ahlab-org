@@ -30,20 +30,27 @@
 }
 
 /* ── Assistive Augmentation principles (detail page) ──────
-   A horizontal strip sitting directly below the hero image,
-   listing the principles this project embodies. Each chip is
-   a non-interactive icon + label pair. Larger than the card
-   version (28px icons) because the detail page has room and
-   we want the principles to read as a statement, not as a
-   decoration. The container .project-hero-image-col exists
-   just to group the image + strip into a single flex column
-   so they stay vertically aligned with the text column. */
-.project-hero-image-col { display: flex; flex-direction: column; gap: 18px; }
+   Sits at the bottom of the hero image as a frosted-glass strip,
+   matching the visual language of the project cards on the index
+   page (where the title bar sits inside the card image). Each
+   principle is an icon + label pair. The bar absolutely positions
+   over the image's gradient overlay (z-index:2 vs the ::after
+   gradient sitting at the default 0). */
 .project-principles {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
   align-items: center;
+  gap: 18px;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, .55);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  backdrop-filter: blur(10px) saturate(140%);
+  border-top: 1px solid rgba(255, 255, 255, .4);
 }
 .project-principle {
   display: inline-flex;
@@ -53,26 +60,20 @@
   font-weight: 600;
   font-size: 14px;
   letter-spacing: -.005em;
-  color: var(--color-neutral-80);
-  /* Pill-style background — reads as "these apply to this project"
-     without being so loud that it fights the hero image above. */
-  padding: 6px 12px 6px 8px;
-  background: var(--color-neutral-20);
-  border: 1px solid var(--color-neutral-30);
-  border-radius: 999px;
+  color: var(--color-neutral-100);
 }
 .project-principle img {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   object-fit: contain;
   display: block;
   flex-shrink: 0;
 }
 .project-principle-label { white-space: nowrap; }
 @media (max-width: 767px) {
-  .project-principles { gap: 10px; }
-  .project-principle { font-size: 13px; padding: 5px 10px 5px 6px; }
-  .project-principle img { width: 24px; height: 24px; }
+  .project-principles { padding: 10px 14px; gap: 10px; }
+  .project-principle { font-size: 12px; gap: 6px; }
+  .project-principle img { width: 20px; height: 20px; }
 }
 
 .project-hero-text h1 {
@@ -117,8 +118,6 @@
    it sparse below the summary line. */
 .project-hero-text .project-description {
   margin-top: 24px;
-  padding-top: 24px;
-  border-top: 1px solid var(--color-neutral-30);
 }
 .project-hero-text .project-description p {
   font-family: var(--font-text);
@@ -132,7 +131,7 @@
 /* ── Project body (detail) ───────────────────────────────────
    Single-column body, no sidebar. People come first as a
    horizontal row, then publications as full-width long rows. */
-.project-body { padding: 60px 0 80px; border-top: 2px solid var(--color-neutral-30); }
+.project-body { padding: 60px 0 80px; }
 .project-people-row { margin-bottom: 60px; }
 .project-publications-row { /* spacing only; container is full-width */ }
 
