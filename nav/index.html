@@ -19,25 +19,38 @@
   <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
-
-  <div class="nav-drawer" id="navDrawer" aria-hidden="true">
-    <ul class="nav-drawer-grid">
-      <li><a href="/">Home</a></li>
-      <li><a href="/vision/">Vision</a></li>
-      <li><a href="/projects/">Projects</a></li>
-      <li><a href="/publications/">Publications</a></li>
-      <li><a href="/people/">People</a></li>
-      <li><a href="/press/">Press &amp; Awards</a></li>
-      <li><a href="/join/">Join Us</a></li>
-    </ul>
-  </div>
 </nav>
+
+<!-- Drawer is intentionally a SIBLING of <nav>, not a child. The nav has
+     a `mask-image` that fades its bottom 40% to transparent — if the drawer
+     lived inside the nav it would inherit the mask + stacking context and
+     get clipped to a thin white sliver around the hamburger row, leaving
+     the rest of the drawer visually behind the hero. As a body-level
+     sibling, the drawer's own z-index (set high in CSS) wins cleanly. -->
+<div class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <a class="nav-drawer-logo" href="/" aria-label="AHLab">
+    <img src="https://ahlab.org/wp-content/uploads/2021/03/Group-4@2x.png" alt="AHLab">
+  </a>
+  <ul class="nav-drawer-grid">
+    <li><a href="/">Home</a></li>
+    <li><a href="/vision/">Vision</a></li>
+    <li><a href="/projects/">Projects</a></li>
+    <li><a href="/publications/">Publications</a></li>
+    <li><a href="/people/">People</a></li>
+    <li><a href="/press/">Press &amp; Awards</a></li>
+    <li><a href="/join/">Join Us</a></li>
+  </ul>
+</div>
 
 <script>
 /*
- * Nav drawer toggle — runs once per page when nav.html is mounted by
- * /js/nav-include.js. Wires up the hamburger button to slide the
- * full-screen drawer in/out via the .open class.
+ * Nav drawer toggle + active-link auto-center.
+ *
+ * Runs once per page when nav.html is mounted by /js/nav-include.js.
+ * Wires up:
+ *   - hamburger button → slides the full-screen drawer in/out via .open
+ *   - active link in mobile carousel → marks .active and scrolls it into
+ *     view (browser clamps at edges, so Home stays at left and Join at right)
  *
  * Idempotent: if the script runs twice (e.g. SPA-style re-mount), the
  * data attribute prevents stacking duplicate listeners.
@@ -45,6 +58,38 @@
 (function () {
   var toggle = document.getElementById('navToggle');
   var drawer = document.getElementById('navDrawer');
+  var navLinksEl = document.getElementById('navLinks');
+
+  // ── Active link marking + horizontal centering ─────────────
+  // On the mobile carousel we want the active link visually distinct
+  // (the .active CSS rule scales it up + adds the underline) AND
+  // scrolled into view. Browser clamps at the natural scroll edges,
+  // so Home (first) won't be force-centered — it stays at the left
+  // edge with the next links visible to its right. Same goes for
+  // Join Us at the right edge. Anything in the middle gets centered.
+  if (navLinksEl) {
+    var here = location.pathname.replace(/\/+$/, '/') || '/';
+    var links = navLinksEl.querySelectorAll('a[data-path]');
+    var activeLink = null;
+    links.forEach(function (a) {
+      var p = (a.getAttribute('data-path') || '').replace(/\/+$/, '/') || '/';
+      if (p === here) { a.classList.add('active'); activeLink = a; }
+    });
+
+    if (activeLink) {
+      // Defer to next frame so layout is settled (especially the carousel's
+      // scrollWidth) before we ask the browser to scroll.
+      requestAnimationFrame(function () {
+        var bar = navLinksEl;
+        var target = activeLink.offsetLeft - (bar.clientWidth / 2) + (activeLink.clientWidth / 2);
+        // No need to clamp manually — the browser refuses to scroll past
+        // the natural edges (0 to scrollWidth - clientWidth).
+        bar.scrollTo({ left: target, behavior: 'instant' in bar.scrollTo ? 'instant' : 'auto' });
+      });
+    }
+  }
+
+  // ── Drawer toggle ──────────────────────────────────────────
   if (!toggle || !drawer) return;
   if (toggle.dataset.bound === '1') return;
   toggle.dataset.bound = '1';

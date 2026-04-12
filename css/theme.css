@@ -104,7 +104,7 @@ ul  { list-style: none; }
    + fullscreen frosted drawer dropdown.
    ============================================================ */
 .site-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
   padding: 28px 40px 0; height: 120px;
   display: flex; align-items: flex-start; justify-content: space-between;
   background: var(--gradient);
@@ -140,7 +140,7 @@ ul  { list-style: none; }
 .nav-toggle {
   display: none; background: none; border: none; cursor: pointer;
   width: 35px; height: 19px; position: relative; flex-shrink: 0;
-  z-index: 201;
+  z-index: 9001;
 }
 .nav-toggle span {
   display: block; width: 100%; height: 2px; background: #fff;
@@ -174,21 +174,30 @@ ul  { list-style: none; }
   .site-nav .logo { display: none; }
   .nav-links-wrap {
     flex: 1; min-width: 0; overflow: hidden;
-    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 15%, #000 85%, transparent 100%);
-            mask-image: linear-gradient(90deg, transparent 0, #000 15%, #000 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
   }
+  /* Mobile nav-links carousel: a horizontally scrollable strip that
+     starts flush with the left edge and ends flush with the right.
+     No scroll-snap, no symmetric padding runway — the browser clamps
+     scroll position at the natural edges. So when the user is on Home
+     (the first link), it sits at the left edge with subsequent links
+     visible to its right; when on Join Us (the last link), it sits at
+     the right edge. JS in nav.html scrolls the active link into view
+     on page load, with smooth scrolling clamped by the browser so the
+     edge links don't get force-centered. */
   .nav-links {
-    gap: 28px; padding: 0 40%;
+    gap: 24px;
+    padding: 0 4px;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     scrollbar-width: none; -ms-overflow-style: none;
   }
   .nav-links::-webkit-scrollbar { display: none; }
-  .nav-links li { scroll-snap-align: center; scroll-snap-stop: always; flex-shrink: 0; }
+  .nav-links li { flex-shrink: 0; }
   .nav-links a {
     display: block; padding: 8px 0; font-size: 14px;
-    white-space: nowrap; opacity: .45; position: relative;
+    white-space: nowrap; opacity: .55; position: relative;
     transition: opacity .3s, transform .3s;
   }
   .nav-links a.active { opacity: 1; transform: scale(1.05); }
@@ -199,16 +208,35 @@ ul  { list-style: none; }
   }
   .nav-toggle { display: block; }
 
-  /* Fullscreen frosted drawer */
+  /* Fullscreen frosted glass drawer.
+     Sits at z-index: 9000 — well above the nav (100) and any
+     page-level sticky content (year-nav at 30, etc.). The drawer
+     is a body-level sibling of <nav> (NOT a child) so it isn't
+     subject to the nav's mask-image fade or local stacking
+     context. The hamburger button needs an even higher z-index
+     so it's still clickable / visible to switch back to the X.
+
+     Visual treatment: heavy frosted glass at the top (where the
+     menu links sit) fading to a softer, more transparent glass at
+     the bottom — lets the page underneath subtly bleed through
+     the lower edge for a layered feel. The mask-image applied to
+     the BACKGROUND (via mask-mode) is what produces the gradient;
+     the content (links) stays fully opaque. */
   .nav-drawer {
     display: flex; flex-direction: column;
     position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(255,255,255,.92);
     -webkit-backdrop-filter: saturate(180%) blur(30px);
             backdrop-filter: saturate(180%) blur(30px);
+    background: linear-gradient(to bottom,
+      rgba(255, 255, 255, .82) 0%,
+      rgba(255, 255, 255, .60) 35%,
+      rgba(255, 255, 255, .12) 60%,
+      rgba(255, 255, 255, .03) 85%,
+      rgba(255, 255, 255, 0)   100%
+    );
     transform: translateY(-100%); opacity: 0; pointer-events: none;
     transition: transform .4s cubic-bezier(.16,1,.3,1), opacity .3s;
-    z-index: 200;
+    z-index: 9000;
     overflow-y: auto;
   }
   .nav-drawer.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
@@ -217,20 +245,26 @@ ul  { list-style: none; }
   .nav-drawer::before { content: ""; height: 64px; flex-shrink: 0; }
 
   /* Hide hamburger lines, show X when drawer open. The toggle button itself
-     stays in place (acts as the close target) */
-  body:has(.nav-drawer.open) .nav-toggle span:nth-child(1) { top: 8px; transform: rotate(45deg); }
+     stays in place (acts as the close target). The nav's gradient background
+     is hidden in this state — the drawer's frosted surface should be the
+     only thing the user sees, with just the X icon on top. */
+  body:has(.nav-drawer.open) .site-nav { background: transparent; }
+  body:has(.nav-drawer.open) .nav-links-wrap { opacity: 0; pointer-events: none; }
+  body:has(.nav-drawer.open) .nav-toggle span:nth-child(1) { top: 8px; transform: rotate(45deg); background: var(--color-neutral-100); }
   body:has(.nav-drawer.open) .nav-toggle span:nth-child(2) { opacity: 0; }
-  body:has(.nav-drawer.open) .nav-toggle span:nth-child(3) { top: 8px; transform: rotate(-45deg); }
+  body:has(.nav-drawer.open) .nav-toggle span:nth-child(3) { top: 8px; transform: rotate(-45deg); background: var(--color-neutral-100); }
 
   /* Two-column grid: 7 links lay out as 2 cols × 4 rows, last cell
-     blank. Gives a tappable target list with comfortable spacing on
-     phones. */
+     blank. Reset margin/padding on both <ul> and <li> because browser
+     defaults add ~40px left padding on <ul>, which would push the
+     second column off the right edge of narrow phones. */
   .nav-drawer-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px;
     max-width: 520px; margin: 0 auto; padding: 24px 20px;
     list-style: none; width: 100%;
+    box-sizing: border-box;
   }
-  .nav-drawer-grid li { list-style: none; }
+  .nav-drawer-grid li { list-style: none; margin: 0; padding: 0; }
   .nav-drawer-grid a {
     display: block; padding: 16px 8px;
     font-family: var(--font-display); font-weight: 500; font-size: 18px;
@@ -239,6 +273,26 @@ ul  { list-style: none; }
     transition: color .3s; text-decoration: none;
   }
   .nav-drawer-grid a:hover { color: var(--color-accent); }
+
+  /* Logo at the top-left of the drawer, above the link grid.
+     Sits within the drawer's frosted-white area so it can be a
+     bit more visually present than at the bottom — bumps to dark
+     ink at solid opacity. The padding aligns it visually with
+     the drawer-grid below (same 20px horizontal). */
+  .nav-drawer-logo {
+    display: block;
+    padding: 24px 20px 0;
+    opacity: .7;
+    transition: opacity .3s;
+  }
+  .nav-drawer-logo img {
+    height: 28px;
+    width: auto;
+    /* Source PNG is white; invert it to dark so it's legible on
+       the light frosted glass background. */
+    filter: brightness(0);
+  }
+  .nav-drawer-logo:hover { opacity: 1; }
 }
 
 
