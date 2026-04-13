@@ -532,6 +532,168 @@ ul { list-style: none; }
   .stat-number { font-size: 38px; }
 }
 
+/* ============================================================
+   SECTION: EVENTS FEED
+   Compact news-row list of upcoming/ongoing/recent events, at
+   the end of the home page just above the footer. Low visual
+   weight — a quiet "here's what we're up to" feed rather than
+   a splashy showcase. Each row: small square thumb on the
+   left, text stack on the right (meta + title + location).
+
+   Styles are deliberately simple here (no CSS Grid, no :has(),
+   no CSS-variable-only colors) so the section renders reliably
+   across browsers. The `.reveal` classes used by other sections
+   are omitted: this section always shows at full opacity on
+   load, since it's at the bottom and the fade-in buys nothing. */
+.section-events {
+  padding: 56px 0 48px;
+  background: #F4F7F9;
+  border-top: 1px solid #EDF0F3;
+}
+.section-events .container {
+  max-width: 960px;
+}
+.section-events .events-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.section-events .section-label {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #838D95;
+  margin: 0;
+}
+.section-events h2 {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.2;
+  color: #0E0F11;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.events-feed {
+  display: block;
+}
+
+/* ── Single event row — flexbox, not grid, for maximum
+   browser compatibility. Thumb on left, text stack on right,
+   rows separated by hairline top-borders. */
+.event-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.event-row + .event-row {
+  border-top: 1px solid #EDF0F3;
+}
+a.event-row:hover {
+  background: #EDF0F3;
+}
+.event-row-thumb {
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  background-color: #EDF0F3;
+  background-size: cover;
+  background-position: center;
+}
+/* Gradient fallback when no thumbnail — hue per kind */
+.event-row-thumb.is-empty.is-conference { background-image: linear-gradient(135deg, #6100ff 0%, #00d7ee 100%); }
+.event-row-thumb.is-empty.is-exhibition { background-image: linear-gradient(135deg, #ff6b35 0%, #f7c948 100%); }
+.event-row-thumb.is-empty.is-talk       { background-image: linear-gradient(135deg, #1a2b7a 0%, #6100ff 100%); }
+.event-row-thumb.is-empty.is-trip       { background-image: linear-gradient(135deg, #00d7ee 0%, #3366ff 100%); }
+.event-row-thumb.is-empty.is-workshop   { background-image: linear-gradient(135deg, #a200d5 0%, #6100ff 100%); }
+
+.event-row-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.event-row-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+.event-row-meta .event-kind-badge {
+  display: inline-block;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 3px;
+  color: #0E0F11;
+  background: #EDF0F3;
+}
+.event-row-meta .event-kind-badge.is-conference { background: #ede4ff; color: #4a1a8a; }
+.event-row-meta .event-kind-badge.is-exhibition { background: #ffe8d6; color: #a04522; }
+.event-row-meta .event-kind-badge.is-talk       { background: #e0e6ff; color: #2a3a8a; }
+.event-row-meta .event-kind-badge.is-trip       { background: #d6f0ff; color: #1a5a8a; }
+.event-row-meta .event-kind-badge.is-workshop   { background: #f5d6ff; color: #6a1a8a; }
+.event-row-dates {
+  font-family: var(--font-text), sans-serif;
+  font-size: 12px;
+  color: #838D95;
+}
+.event-row-status {
+  display: inline-block;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+.event-row-status.is-now  { background: #6100ff; color: #fff; }
+.event-row-status.is-soon { background: #fff6d6; color: #b7861a; }
+.event-row-status.is-past { background: #EDF0F3; color: #838D95; }
+.event-row-title {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.3;
+  color: #0E0F11;
+  margin: 0 0 2px 0;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+a.event-row:hover .event-row-title {
+  color: #6100FF;
+}
+.event-row-loc {
+  display: block;
+  font-family: var(--font-text), sans-serif;
+  font-size: 12px;
+  color: #838D95;
+}
+
+@media (max-width: 640px) {
+  .section-events { padding: 44px 0 36px; }
+  .section-events .events-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .section-events h2 { font-size: 19px; }
+  .event-row { padding: 12px 0; gap: 12px; }
+  .event-row-thumb { flex-basis: 52px; width: 52px; height: 52px; }
+  .event-row-title { font-size: 15px; white-space: normal; overflow: visible; text-overflow: unset; }
+}
+
 
 /* ============================================================
    SECTION: FEATURED PROJECTS
@@ -1082,6 +1244,41 @@ ul { list-style: none; }
     </div>
     <div class="featured-cta reveal reveal-delay-2">
       <a href="/projects/">Browse all projects →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== EVENTS FEED ==================== -->
+<!-- Compact news-row feed of upcoming/ongoing/recently-ended events.
+     Sits as the last content section before the footer — low
+     visual weight, "here's what else we're up to" follow-up to
+     the main home narrative. Auto-populated by build-pages.js
+     from src/data/events.json, filtered to ±90 days of the build
+     date and sorted: ongoing → upcoming → recent past. Section
+     silently hides when the window is empty. Rows link to
+     external microsites (e.g. chi2026.ahlab.org) when present,
+     to a local /events/{slug}/ page when there's content worth a
+     detail view, or render as static info-only rows otherwise. -->
+<section class="section-events events-feed-section">
+  <div class="container">
+    <div class="events-header">
+      <div class="section-label">What we're up to</div>
+      <h2>Recent & upcoming events</h2>
+    </div>
+    <div class="events-feed">
+      <a class="event-row" data-kind="conference" href="https://chi2026.ahlab.org" target="_blank" rel="noopener">
+      <div class="event-row-thumb is-empty is-conference" ></div>
+      <div class="event-row-body">
+        <div class="event-row-meta">
+          <span class="event-kind-badge is-conference">Conference</span>
+          <span class="event-row-dates">13–17 April 2026</span>
+          <span class="event-row-status is-now">Happening now</span>
+        </div>
+        <h3 class="event-row-title">CHI 2026</h3>
+        <span class="event-row-loc">Barcelona, Spain</span>
+      </div>
+    </a>
     </div>
   </div>
 </section>

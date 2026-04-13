@@ -732,3 +732,49 @@ a.profile-pub-title:hover { color: var(--color-accent); }
   .expertise-segment-name { font-size: 11px; }
   .expertise-segment-count { font-size: 12px; }
 }
+
+/* ── Featured-at events row (person page) ──────────────────
+   Mirrors the same row on project pages. Shared chip visual
+   defined here (rather than in event.css) because the person
+   template loads only people.css. */
+.profile-events-row {
+  margin-bottom: 0;
+}
+.profile-events-row .event-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.profile-events-row .event-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--color-neutral-90);
+  background: var(--color-neutral-20);
+  border: 1px solid var(--color-neutral-30);
+  border-radius: 999px;
+  padding: 6px 14px;
+  text-decoration: none;
+  transition: background .25s, border-color .25s, color .25s;
+}
+.profile-events-row .event-chip:hover {
+  background: var(--color-neutral-30);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+.profile-events-row .event-chip-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-neutral-50);
+  flex-shrink: 0;
+}
+.profile-events-row .event-chip[data-kind="conference"] .event-chip-dot { background: #6100ff; }
+.profile-events-row .event-chip[data-kind="exhibition"] .event-chip-dot { background: #ff6b35; }
+.profile-events-row .event-chip[data-kind="talk"]       .event-chip-dot { background: #2a3a8a; }
+.profile-events-row .event-chip[data-kind="trip"]       .event-chip-dot { background: #00d7ee; }
+.profile-events-row .event-chip[data-kind="workshop"]   .event-chip-dot { background: #a200d5; }
