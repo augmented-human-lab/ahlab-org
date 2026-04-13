@@ -534,23 +534,26 @@ ul { list-style: none; }
 
 
 /* ============================================================
-   SECTION: COLLABORATORS
-   Industry partners that have sponsored projects across the lab.
-   List is hand-curated below — keep in sync with the `sponsors`
-   field on individual project records (see scripts/apply-project-
-   sponsors.mjs). When a logo asset becomes available, swap the
-   text label for an <img>; the styling handles both cases.
+   SECTION: FEATURED PROJECTS
+   Three hand-picked projects — one per era — auto-selected by
+   build-pages.js using Option C (era split: recent 2023+, mid
+   2019–2022, classic ≤2018). Reads left-to-right as "what we're
+   doing now → our flagship → the classic that defined us".
+
+   Cards use the same visual language as the /projects/ index:
+   image-fills-card with a frosted-glass title bar at the bottom,
+   year chip top-right, principle icons inside the title bar.
    ============================================================ */
-.section-collaborators {
+.section-featured {
   padding: 100px 0;
   background: var(--color-neutral-10);
+}
+.featured-header {
+  max-width: 720px;
+  margin: 0 auto 56px;
   text-align: center;
 }
-.collaborators-header {
-  max-width: 600px;
-  margin: 0 auto 56px;
-}
-.collaborators-header .section-label {
+.featured-header .section-label {
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 12px;
@@ -559,7 +562,7 @@ ul { list-style: none; }
   color: var(--color-neutral-60);
   margin-bottom: 18px;
 }
-.collaborators-header h2 {
+.featured-header h2 {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 38px;
@@ -567,49 +570,142 @@ ul { list-style: none; }
   color: var(--color-neutral-100);
   letter-spacing: -.02em;
 }
-.collaborators-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 20px 28px;
-  max-width: 1100px;
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1200px;
   margin: 0 auto;
 }
-.collaborator {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 28px;
-  min-height: 64px;
-  background: #fff;
-  border: 1px solid var(--color-neutral-30);
-  border-radius: var(--radius);
-  color: var(--color-neutral-90);
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 16px;
-  letter-spacing: -.005em;
-  text-decoration: none;
-  transition: border-color .25s, color .25s, transform .25s, box-shadow .25s;
-  box-sizing: border-box;
-}
-a.collaborator:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(14, 15, 17, .08);
-}
-.collaborator img {
-  max-height: 36px;
-  width: auto;
+@media (max-width: 1100px) { .featured-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { .featured-grid { grid-template-columns: 1fr; gap: 20px; } }
+
+/* ── Card: image fills the frame, frosted-glass bar at bottom ── */
+.featured-project-card {
+  position: relative;
   display: block;
+  aspect-ratio: 16/10;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-neutral-40);
+  border: 1px solid var(--color-neutral-30);
+  text-decoration: none;
+  transition: box-shadow .4s, border-color .4s;
 }
+.featured-project-card:hover {
+  box-shadow: 0 16px 48px rgba(14,15,17,.18);
+  border-color: transparent;
+}
+.featured-project-thumb {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.featured-project-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .6s cubic-bezier(.16,1,.3,1);
+}
+.featured-project-card:hover .featured-project-thumb img { transform: scale(1.06); }
+.featured-project-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(221deg, rgba(0,215,238,.10) 0%, rgba(97,0,255,.06) 100%);
+  pointer-events: none;
+}
+
+/* Bottom glass bar: title on left, principle icons on right.
+   Same dimensions and opacity as the /projects/ index cards
+   so the two pages read as a single visual system. */
+.featured-project-bar {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 2;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,.55);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  backdrop-filter: blur(8px) saturate(140%);
+  border-top: 1px solid rgba(255,255,255,.4);
+  transition: background .3s;
+}
+.featured-project-card:hover .featured-project-bar {
+  background: rgba(255,255,255,.7);
+}
+.featured-project-title {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.featured-project-title h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  color: var(--color-neutral-100);
+  margin: 0;
+  letter-spacing: -.005em;
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.featured-project-year {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  color: var(--color-neutral-70);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+/* Principle icons inside the bar — small pictograms, no bg.
+   The bar's vertical padding plus 22px glyph size = ~42px tall
+   bar on desktop. */
+.featured-project-tags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.featured-project-tag {
+  width: 22px;
+  height: 22px;
+  display: block;
+  opacity: .9;
+}
+
+/* Footer CTA: single centered link under the grid. */
+.featured-cta {
+  margin-top: 44px;
+  text-align: center;
+}
+.featured-cta a {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-neutral-100);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-neutral-40);
+  padding-bottom: 3px;
+  transition: color .25s, border-color .25s;
+}
+.featured-cta a:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
 @media (max-width: 767px) {
-  .section-collaborators { padding: 72px 0; }
-  .collaborators-header h2 { font-size: 28px; }
-  .collaborator { padding: 10px 20px; min-height: 52px; font-size: 14px; }
-  .collaborator img { max-height: 28px; }
+  .section-featured { padding: 72px 0; }
+  .featured-header h2 { font-size: 28px; }
 }
 
 
@@ -934,24 +1030,58 @@ a.collaborator:hover {
 </section>
 
 
-<!-- ==================== COLLABORATORS ==================== -->
-<!-- Industry partners that have sponsored work at AHL. Auto-populated
-     at build time by build-pages.js from the `sponsors` field on each
-     project in projects.json — so adding a sponsor to any project
-     flows through here automatically after rebuild. Deduped by name;
-     rendered as a logo <img> when a logo URL is present, else as a
-     text label. See scripts/apply-project-sponsors.mjs for the curated
-     per-project sponsor map. -->
-<section class="section-collaborators">
+<!-- ==================== FEATURED PROJECTS ==================== -->
+<!-- Three projects spotlighted as a mini-timeline of the lab.
+     Auto-selected at build time by build-pages.js using Option C
+     (one per era: recent / mid / classic). Scoring inside each
+     era uses the curated press.projects linkage — the set refreshes
+     automatically as new awards/news get linked to projects. -->
+<section class="section-featured">
   <div class="container">
-    <div class="collaborators-header reveal">
-      <div class="section-label">Industry Collaborators</div>
-      <h2>Building with partners across industries.</h2>
+    <div class="featured-header reveal">
+      <div class="section-label">Featured Projects</div>
+      <h2>From our latest experiments to the classics that defined us.</h2>
     </div>
-    <div class="collaborators-grid reveal reveal-delay-1">
-      <span class="collaborator" >Asahi</span>
-      <span class="collaborator" >Digital Dreams</span>
-      <span class="collaborator" >SG Enable</span>
+    <div class="featured-grid reveal reveal-delay-1">
+      <a href="/projects/aisee/" class="featured-project-card">
+        <div class="featured-project-thumb">
+          <img src="https://cdn.ahlab.org/media/site/projects/aisee/aisee.jpg" alt="AiSee" loading="lazy">
+        </div>
+        <div class="featured-project-bar">
+          <div class="featured-project-title">
+            <h3>AiSee</h3>
+            <span class="featured-project-year">2025</span>
+          </div>
+          <div class="featured-project-tags"><img class="featured-project-tag" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="Body" title="Body" loading="lazy"><img class="featured-project-tag" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="Cognitive" title="Cognitive" loading="lazy"><img class="featured-project-tag" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="Perceptual" title="Perceptual" loading="lazy"><img class="featured-project-tag" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="Identity" title="Identity" loading="lazy"></div>
+        </div>
+      </a>
+      <a href="/projects/kiwrious/" class="featured-project-card">
+        <div class="featured-project-thumb">
+          <img src="https://cdn.ahlab.org/media/site/projects/kiwrious/kiwrious.jpg" alt="Kiwrious" loading="lazy">
+        </div>
+        <div class="featured-project-bar">
+          <div class="featured-project-title">
+            <h3>Kiwrious</h3>
+            <span class="featured-project-year">2022</span>
+          </div>
+          <div class="featured-project-tags"><img class="featured-project-tag" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="Cognitive" title="Cognitive" loading="lazy"><img class="featured-project-tag" src="https://ahlab.org/wp-content/uploads/2025/02/icon-physical-1.png" alt="Physical" title="Physical" loading="lazy"></div>
+        </div>
+      </a>
+      <a href="/projects/fingerreader/" class="featured-project-card">
+        <div class="featured-project-thumb">
+          <img src="https://cdn.ahlab.org/media/site/projects/fingerreader/fingerreader.jpg" alt="FingerReader" loading="lazy">
+        </div>
+        <div class="featured-project-bar">
+          <div class="featured-project-title">
+            <h3>FingerReader</h3>
+            <span class="featured-project-year">2017</span>
+          </div>
+          <div class="featured-project-tags"><img class="featured-project-tag" src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="Body" title="Body" loading="lazy"><img class="featured-project-tag" src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="Cognitive" title="Cognitive" loading="lazy"><img class="featured-project-tag" src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="Perceptual" title="Perceptual" loading="lazy"><img class="featured-project-tag" src="https://ahlab.org/wp-content/uploads/2025/02/icon-identity.png" alt="Identity" title="Identity" loading="lazy"></div>
+        </div>
+      </a>
+    </div>
+    <div class="featured-cta reveal reveal-delay-2">
+      <a href="/projects/">Browse all projects →</a>
     </div>
   </div>
 </section>
