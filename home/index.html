@@ -242,13 +242,37 @@ ul { list-style: none; }
   color: var(--color-neutral-100);
   margin-bottom: 24px;
 }
-.intro-right p:last-child { margin-bottom: 0; }
+.intro-right p:last-of-type { margin-bottom: 0; }
+/* When a "Read our vision" CTA follows the paragraphs, give it
+   breathing room below the last paragraph. The link itself uses
+   the shared .approach-link style defined under the APPROACH
+   section (dark-on-light, chevron shifts on hover). */
+.intro-right .approach-link { margin-top: 32px; }
+
+/* Vision video primer — sits in the left column below the
+   "Our Vision" heading, matching the width + frame treatment of
+   the approach-section video further down the page. 16:9 with
+   a dark neutral placeholder for slow network conditions. */
+.intro-video {
+  margin-top: 32px;
+  aspect-ratio: 16/9;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-neutral-100);
+}
+.intro-video iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
 
 @media (max-width: 991px) {
   .section-intro { padding: 80px 0; }
   .intro-grid { grid-template-columns: 1fr; gap: 32px; }
   .intro-left h2 { font-size: 36px; line-height: 42px; }
   .intro-right p { font-size: 19px; line-height: 28px; }
+  .intro-video { margin-top: 24px; }
 }
 
 /* ============================================================
@@ -358,10 +382,36 @@ ul { list-style: none; }
 }
 .value-card:hover p { color: rgba(255,255,255,0.9); }
 
+/* CTA row below the three value cards. Holds the "Read our vision"
+   and "Explore our projects" links side-by-side on desktop, stacked
+   with tighter spacing on narrow viewports. Styled against the dark
+   section background: semi-transparent white that brightens on hover. */
+.values-cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px 40px;
+  margin-top: 60px;
+}
+.values-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-text);
+  font-weight: 600;
+  font-size: 18px;
+  color: rgba(255, 255, 255, .75);
+  transition: color .3s ease;
+}
+.values-link:hover { color: #fff; }
+.values-link svg { transition: transform .3s ease; }
+.values-link:hover svg { transform: translateX(4px); }
+
 @media (max-width: 991px) {
   .section-values { padding: 80px 0; }
   .values-grid { grid-template-columns: 1fr; gap: 20px; }
   .values-header h2 { font-size: 36px; line-height: 42px; }
+  .values-cta { margin-top: 40px; gap: 14px 28px; }
 }
 
 /* ============================================================
@@ -376,25 +426,14 @@ ul { list-style: none; }
   gap: 80px;
   align-items: center;
 }
-.approach-visual {
-  position: relative;
-  aspect-ratio: 4/3;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
+/* Left column: label + heading stacked above the video. Gives the
+   eye a clear top-to-bottom reading path before it jumps to the
+   supporting copy on the right. */
+.approach-visual-col {
+  display: flex;
+  flex-direction: column;
 }
-.approach-visual img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.approach-visual::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(221deg, rgba(0,215,238,0.15) 0%, rgba(97,0,255,0.1) 100%);
-  pointer-events: none;
-}
-.approach-text .section-label {
+.approach-visual-col .section-label {
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 12px;
@@ -403,14 +442,32 @@ ul { list-style: none; }
   color: var(--color-neutral-60);
   margin-bottom: 20px;
 }
-.approach-text h2 {
+.approach-visual-col h2 {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 36px;
   line-height: 41.5px;
   color: var(--color-neutral-100);
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 }
+.approach-visual {
+  position: relative;
+  aspect-ratio: 16/9;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-neutral-100);
+}
+.approach-visual img,
+.approach-visual iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  object-fit: cover;
+}
+/* Right column is now just supporting paragraphs + a "Meet the team"
+   link. The section label + headline have moved to the left column
+   above the video. */
 .approach-text p {
   font-size: 21px;
   line-height: 35px;
@@ -437,7 +494,7 @@ ul { list-style: none; }
 @media (max-width: 991px) {
   .section-approach { padding: 80px 0; }
   .approach-grid { grid-template-columns: 1fr; gap: 40px; }
-  .approach-text h2 { font-size: 32px; line-height: 38px; }
+  .approach-visual-col h2 { font-size: 32px; line-height: 38px; }
   .approach-text p { font-size: 19px; line-height: 28px; }
 }
 
@@ -746,13 +803,28 @@ a.collaborator:hover {
 <section class="section-intro">
   <div class="container">
     <div class="intro-grid">
-      <div class="intro-left reveal">
-        <div class="section-label">Our Vision</div>
-        <h2>Lowering the barriers between technology and humans.</h2>
+      <div class="intro-left">
+        <div class="section-label reveal">Our Vision</div>
+        <h2 class="reveal reveal-delay-1">Lowering the barriers between technology and humans.</h2>
+        <!-- Vision video primer. Click-to-play, no autoplay, no mute.
+             youtube-nocookie.com for privacy-friendly embed. -->
+        <div class="intro-video reveal reveal-delay-2">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/D5gB4ftBHoA?rel=0&modestbranding=1"
+            title="Assistive Augmentation vision"
+            frameborder="0"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"></iframe>
+        </div>
       </div>
       <div class="intro-right">
         <p class="reveal reveal-delay-1">We are exploring ways of lowering the barriers between technology and humans to improve our lives. To achieve this, we are developing 'Assistive Augmentations' — technologies that fundamentally augment human abilities while becoming a natural extension of the person.</p>
         <p class="reveal reveal-delay-2">We believe carefully designed assistive augmentations can empower anyone to live more independently and extend one's perceptual and cognitive capabilities beyond the ordinary.</p>
+        <a href="/vision/" class="approach-link reveal reveal-delay-3">
+          Read our vision
+          <svg width="8" height="16" viewBox="0 0 8 16" fill="none"><path d="M1 1L6 8L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </a>
       </div>
     </div>
   </div>
@@ -782,6 +854,12 @@ a.collaborator:hover {
         <p>Designing interfaces that expand how we sense the world — translating information across modalities so that sight, sound, touch, and proprioception work in new, powerful ways.</p>
       </div>
     </div>
+    <div class="values-cta reveal reveal-delay-4">
+      <a href="/projects/" class="values-link">
+        Explore our projects
+        <svg width="8" height="16" viewBox="0 0 8 16" fill="none"><path d="M1 1L6 8L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -789,12 +867,31 @@ a.collaborator:hover {
 <section class="section-approach">
   <div class="container">
     <div class="approach-grid">
-      <div class="approach-visual reveal">
-        <img src="https://ahlab.org/wp-content/uploads/2021/04/home_section2_1.png" alt="Team working at AHLab">
-      </div>
-      <div class="approach-text">
+      <div class="approach-visual-col">
         <div class="section-label reveal">Our Approach</div>
         <h2 class="reveal reveal-delay-1">A small, unique team of interdisciplinary experimenters.</h2>
+        <div class="approach-visual reveal reveal-delay-2">
+          <!-- Lab overview video. Shows YouTube's default poster thumbnail
+               until click, then plays with audio starting at 10 seconds.
+               No autoplay, no mute. Using youtube-nocookie.com for
+               privacy-friendly embed.
+               Note: YouTube's iframe API doesn't support custom poster
+               frames — the thumbnail shown before play is whatever the
+               channel uploader set in YouTube Studio. `start=10` only
+               controls the *playback* offset, not the poster. If you
+               want a frame from t=10s as the still image we'd need to
+               self-host the screenshot and implement a lite-YouTube
+               facade. -->
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/tT8RRAO4VyQ?rel=0&modestbranding=1&start=10"
+            title="Augmented Human Lab overview"
+            frameborder="0"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"></iframe>
+        </div>
+      </div>
+      <div class="approach-text">
         <p class="reveal reveal-delay-2">Our team works hard to craft meaningful, beautiful experiences. We aim to foster smart, new and stunning experiences that change the way people live and experience the world.</p>
         <p class="reveal reveal-delay-3">Our application focus spans Assistive Technology — wearables with embedded AI supporting deaf and blind users; EdTech — engaging learning platforms that make science fun; and Well-being — biofeedback-based affective music generation.</p>
         <a href="/people/" class="approach-link reveal reveal-delay-4">
@@ -807,23 +904,29 @@ a.collaborator:hover {
 </section>
 
 <!-- ==================== STATS ==================== -->
+<!-- Numbers auto-populated at build time by build-pages.js from the
+     canonical JSON files:
+       Publications  ← publications.json length
+       Team Members  ← people.json (Principal Investigator + Current Team)
+       Projects      ← projects.json length
+       Awards        ← press.json where type === 'award' -->
 <section class="section-stats">
   <div class="container">
     <div class="stats-grid">
       <div class="stat-item reveal">
-        <div class="stat-number">50+</div>
+        <div class="stat-number">194</div>
         <div class="stat-label">Publications</div>
       </div>
       <div class="stat-item reveal reveal-delay-1">
-        <div class="stat-number">30+</div>
+        <div class="stat-number">29</div>
         <div class="stat-label">Team Members</div>
       </div>
       <div class="stat-item reveal reveal-delay-2">
-        <div class="stat-number">20+</div>
-        <div class="stat-label">Active Projects</div>
+        <div class="stat-number">108</div>
+        <div class="stat-label">Projects</div>
       </div>
       <div class="stat-item reveal reveal-delay-3">
-        <div class="stat-number">15+</div>
+        <div class="stat-number">43</div>
         <div class="stat-label">Awards</div>
       </div>
     </div>
