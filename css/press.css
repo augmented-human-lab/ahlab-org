@@ -277,3 +277,47 @@
 @media (max-width: 767px) {
   .press-item.is-video-embed { grid-template-columns: 36px 1fr; }
 }
+
+
+/* ── Related-project chips on press items ─────────────────
+   Clickable links to the project detail page, rendered on press
+   cards where the press entry's `projects[]` array is populated
+   (auto-scraped from the legacy WP pages by fetch-project-press.mjs).
+
+   Text-color and background stay subtle by default so the chip
+   reads as metadata, not a CTA. A soft accent on hover makes
+   clickability discoverable without screaming. `text-decoration:
+   none` because <a> defaults would underline. */
+.press-projects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.press-project-chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: .02em;
+  color: var(--color-neutral-80);
+  background: var(--color-neutral-20);
+  border: 1px solid var(--color-neutral-30);
+  border-radius: 999px;
+  padding: 3px 10px;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background .25s, border-color .25s, color .25s;
+}
+.press-project-chip:hover {
+  background: var(--color-neutral-30);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+/* When the whole card is clickable (no chips case → outer is <a>),
+   a hovered card still gives a subtle cue on the chips even though
+   they aren't individually links here. Preserved for visual parity. */
+.press-item:hover .press-project-chip {
+  background: var(--color-neutral-30);
+}

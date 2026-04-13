@@ -308,3 +308,132 @@ a.project-pub-title:hover { color: var(--color-accent); }
 /* ── Project images ──────────────────────────────────────── */
 .project-images     { margin-top: 48px; }
 .project-images img { margin-bottom: 20px; border-radius: var(--radius-lg); }
+
+/* ── Press row (awards + news + videos for this project) ───
+   Groups sit vertically (one for each non-empty type). Each
+   group has a small eyebrow label and a list of bordered rows:
+   title + outlet/year meta. No pub-style big numbered rows —
+   press entries are shorter and look better in compact rows. */
+/* ── Press (awards / news / videos on a project page) ──────
+   Stacked groups — Awards first, then news, then videos —
+   each with a small eyebrow label and a bordered list of
+   items. Each item is a flex row: a type icon, the title,
+   and meta (outlet · year) below the title.
+
+   Visual weight is tuned so awards (usually the most
+   impressive) stand out with a gold accent icon, while news
+   and videos use more neutral icons. Items reveal an accent
+   left border on hover to confirm they're interactive. */
+.project-press-row {
+  margin-bottom: 60px;
+}
+.project-press-group {
+  margin-top: 28px;
+}
+.project-press-group:first-child {
+  margin-top: 20px;
+}
+.project-press-group-label {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--color-neutral-60);
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--color-neutral-30);
+}
+.project-press-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.project-press-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 14px;
+  padding: 14px 0 14px 12px;
+  border-bottom: 1px solid var(--color-neutral-20);
+  transition: background .2s, border-color .2s;
+}
+.project-press-item:last-child {
+  border-bottom: none;
+}
+/* A subtle accent bar appears on the left edge when an item
+   is hovered — hints at clickability without the heavier
+   hover effects used on larger cards elsewhere. */
+.project-press-item::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 14px; bottom: 14px;
+  width: 2px;
+  background: transparent;
+  border-radius: 2px;
+  transition: background .2s;
+}
+.project-press-item:hover::before {
+  background: var(--color-accent);
+}
+
+/* Type icon. Styled as a 24px rounded square with a glyph.
+   Colors differ per type so the eye can scan the list and
+   immediately spot "which of these is the award?". */
+.project-press-item::after {
+  content: "";
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background-color: var(--color-neutral-20);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px 16px;
+  flex-shrink: 0;
+}
+/* Inline SVG icons as data-URLs, so no extra HTTP requests.
+   Colors chosen to match the press-index card iconography. */
+.project-press-group.is-award .project-press-item::after {
+  background-color: #fff6d6;
+  /* trophy glyph (gold) */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b7861a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9H4.5a2.5 2.5 0 0 1 0-5H6'/><path d='M18 9h1.5a2.5 2.5 0 0 0 0-5H18'/><path d='M4 22h16'/><path d='M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22'/><path d='M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22'/><path d='M18 2H6v7a6 6 0 0 0 12 0V2Z'/></svg>");
+}
+.project-press-group.is-news .project-press-item::after {
+  background-color: #e8efff;
+  /* newspaper glyph */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233858a8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2'/><path d='M18 14h-8'/><path d='M15 18h-5'/><path d='M10 6h8v4h-8V6Z'/></svg>");
+}
+.project-press-group.is-video .project-press-item::after {
+  background-color: #fde8e8;
+  /* play glyph (red) */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c8371a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='6 3 20 12 6 21 6 3'/></svg>");
+}
+
+.project-press-title {
+  grid-column: 2;
+  display: block;
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--color-neutral-100);
+  text-decoration: none;
+  transition: color .25s;
+}
+a.project-press-title:hover { color: var(--color-accent); }
+.project-press-meta {
+  grid-column: 2;
+  margin-top: 4px;
+  font-family: var(--font-text);
+  font-size: 13px;
+  color: var(--color-neutral-60);
+}
+.project-press-outlet { font-weight: 500; }
+
+@media (max-width: 567px) {
+  .project-press-item { grid-template-columns: 24px 1fr; gap: 12px; }
+  .project-press-item::after { width: 24px; height: 24px; background-size: 14px 14px; }
+  .project-press-title { font-size: 15px; }
+}

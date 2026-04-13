@@ -1,16 +1,41 @@
 <footer class="site-footer">
   <style>
-    .site-footer{background:#0E0F11;color:rgba(255,255,255,.6);padding:36px 0;font-family:var(--font-text,sans-serif);font-size:13px}
-    .site-footer .container{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
-    .site-footer .footer-copy{letter-spacing:.01em}
+    .site-footer{background:#0E0F11;color:rgba(255,255,255,.6);padding:32px 0;font-family:var(--font-text,sans-serif);font-size:13px}
+    /* Single row on desktop: logos on the left, copy centered in the
+       remaining space, socials on the right. Copy's flex:1 claim on the
+       middle region keeps it centered even as the logo/social widths
+       change. Wraps to stacked on narrow viewports. */
+    .site-footer .container{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+    .site-footer .footer-logos{display:flex;align-items:center;gap:22px;flex-shrink:0}
+    .site-footer .footer-logos a{display:inline-flex;align-items:center;opacity:.85;transition:opacity .25s}
+    .site-footer .footer-logos a:hover{opacity:1}
+    .site-footer .footer-logos img{display:block;height:26px;width:auto}
+    /* NUS logo renders as-is — its source already carries the NUS
+       brand colors with enough contrast against the dark footer. */
+    .site-footer .footer-logo-nus img{height:22px}
+    .site-footer .footer-copy{flex:1;text-align:center;letter-spacing:.01em;min-width:0}
     .site-footer .footer-copy strong{color:rgba(255,255,255,.85);font-weight:600}
-    .site-footer .footer-social{display:flex;gap:18px;align-items:center}
+    .site-footer .footer-social{display:flex;gap:16px;align-items:center;flex-shrink:0}
     .site-footer .footer-social a{color:rgba(255,255,255,.55);transition:color .25s ease,transform .25s ease;display:inline-flex}
     .site-footer .footer-social a:hover{color:#fff;transform:translateY(-1px)}
     .site-footer .footer-social svg{width:18px;height:18px;display:block}
-    @media(max-width:640px){.site-footer{padding:28px 0}.site-footer .container{flex-direction:column;text-align:center;gap:18px}}
+    /* Mobile: two rows. Logos + socials share the first row; copy
+       line centers below. */
+    @media(max-width:640px){
+      .site-footer{padding:24px 0}
+      .site-footer .container{justify-content:space-between;gap:18px}
+      .site-footer .footer-copy{order:2;flex-basis:100%;text-align:center}
+    }
   </style>
   <div class="container">
+    <div class="footer-logos">
+      <a href="/" aria-label="Augmented Human Lab" class="footer-logo-ahl">
+        <img src="https://cdn.ahlab.org/media/site/ahllogo_white.png" alt="Augmented Human Lab" loading="lazy">
+      </a>
+      <a href="https://www.comp.nus.edu.sg/" target="_blank" rel="noopener" aria-label="NUS Computing" class="footer-logo-nus">
+        <img src="https://cdn.ahlab.org/media/site/nuslogo_black.png" alt="NUS Computing" loading="lazy">
+      </a>
+    </div>
     <div class="footer-copy">© 2026 <strong>Augmented Human Lab</strong> · NUS Computing</div>
     <div class="footer-social">
       <a href="https://www.linkedin.com/company/augmented-human-lab" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 110-4.13 2.06 2.06 0 010 4.13zm1.78 13.02H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
