@@ -97,7 +97,20 @@
 @media (max-width: 767px) { .year-title { font-size: 32px; } }
 
 /* ── Publication items ───────────────────────────────────── */
-.pub-list { display: flex; flex-direction: column; gap: 0; }
+/* Multi-column adaptive list. At typical MacBook widths (~1440px) this
+   stays 1-col — pub rows are long (title + citation + buttons) and a
+   single column still reads best there. Only kicks into 2 cols above
+   ~1680px of viewport, and 3 cols on 4K. Each column independently
+   stacks items with a top border; the container's bottom border
+   closes the last row of every column cleanly (individual :last-child
+   doesn't work for multi-col since only the DOM-last item has it). */
+.pub-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(640px, 1fr));
+  column-gap: 40px;
+  row-gap: 0;
+  border-bottom: 1px solid var(--color-neutral-30);
+}
 
 .pub-item {
   padding: 24px 0;
@@ -107,7 +120,7 @@
   gap: 16px;
   align-items: start;
 }
-.pub-item:last-child { border-bottom: 1px solid var(--color-neutral-30); }
+/* Container provides the closing border now; see .pub-list above. */
 .pub-item .pub-body { min-width: 0; }
 .pub-title {
   font-family: var(--font-display); font-weight: 600;

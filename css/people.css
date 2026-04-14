@@ -126,9 +126,12 @@
 .people-section:last-child { margin-bottom: 20px; }
 
 /* ── People grid (index) ─────────────────────────────────── */
-.people-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
-@media (max-width: 1200px) { .people-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 767px)  { .people-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
+/* Column count scales with viewport width rather than snapping to
+   fixed breakpoints. On a MacBook (~1440px content area) this still
+   yields 4 columns; on a 4K/ultrawide display it yields 6+, keeping
+   the card photo size sensible instead of stretching to huge squares. */
+.people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 28px; }
+@media (max-width: 767px)  { .people-grid { gap: 16px; } }
 
 .person-card { display: block; transition: transform .4s ease; }
 .person-card-photo {
@@ -478,7 +481,11 @@
    inherits the rounded bottom edge. */
 .profile-projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* Adaptive columns: roughly 260px min per card. Person pages sit in
+     a narrower content column than the projects index, so the min here
+     is tighter — we still want 3 cols on a standard laptop but more on
+     a 4K display without the cards becoming oversized image blocks. */
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px;
   margin-top: 40px;
 }
@@ -573,8 +580,8 @@
 .profile-project-card-tag:hover .profile-project-card-tag-default { opacity: 0; }
 .profile-project-card-tag:hover .profile-project-card-tag-hover   { opacity: 1; }
 
-@media (max-width: 991px) { .profile-projects-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 567px) { .profile-projects-grid { grid-template-columns: 1fr; } }
+/* (No breakpoint overrides for .profile-projects-grid — auto-fill + the
+   260px min handles the full range from mobile up to 4K on its own.) */
 
 /* ── Orphan project (no thumbnail in projects.json) ───────
    Renders the project card with a colored placeholder block
@@ -732,49 +739,3 @@ a.profile-pub-title:hover { color: var(--color-accent); }
   .expertise-segment-name { font-size: 11px; }
   .expertise-segment-count { font-size: 12px; }
 }
-
-/* ── Featured-at events row (person page) ──────────────────
-   Mirrors the same row on project pages. Shared chip visual
-   defined here (rather than in event.css) because the person
-   template loads only people.css. */
-.profile-events-row {
-  margin-bottom: 0;
-}
-.profile-events-row .event-chips-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-.profile-events-row .event-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 13px;
-  color: var(--color-neutral-90);
-  background: var(--color-neutral-20);
-  border: 1px solid var(--color-neutral-30);
-  border-radius: 999px;
-  padding: 6px 14px;
-  text-decoration: none;
-  transition: background .25s, border-color .25s, color .25s;
-}
-.profile-events-row .event-chip:hover {
-  background: var(--color-neutral-30);
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
-.profile-events-row .event-chip-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--color-neutral-50);
-  flex-shrink: 0;
-}
-.profile-events-row .event-chip[data-kind="conference"] .event-chip-dot { background: #6100ff; }
-.profile-events-row .event-chip[data-kind="exhibition"] .event-chip-dot { background: #ff6b35; }
-.profile-events-row .event-chip[data-kind="talk"]       .event-chip-dot { background: #2a3a8a; }
-.profile-events-row .event-chip[data-kind="trip"]       .event-chip-dot { background: #00d7ee; }
-.profile-events-row .event-chip[data-kind="workshop"]   .event-chip-dot { background: #a200d5; }

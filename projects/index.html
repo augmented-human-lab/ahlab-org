@@ -98,9 +98,13 @@
 /* ── Project grid (inside each year-section) ──────────────
    3 columns on desktop; the left timeline already takes
    140px, so the 3-up works at normal widths. */
-.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-@media(max-width:1200px){.projects-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:640px){.projects-grid{grid-template-columns:1fr;gap:20px}}
+/* Column count is now fully adaptive — the grid fits as many 320px-min
+   cards as the viewport allows, so narrow screens get 1 col, laptops
+   get 3, and 4K/ultrawide displays get 5–6 without the card sizes
+   ballooning. The only remaining media query is the mobile gap, since
+   tight spacing matters more there than the column math. */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
+@media(max-width:640px){.projects-grid{gap:20px}}
 
 /* ── Project card (light glass-morphic) ────────────────────
    Image fills the entire card. A small white frosted-glass
