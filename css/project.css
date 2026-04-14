@@ -299,6 +299,57 @@ a.project-pub-title:hover { color: var(--color-accent); }
   border-color: var(--color-accent);
 }
 
+/* ── External project links (demo / website / code / dataset / video) ──
+   Sits at the bottom of .project-description inside the hero. The
+   `demo` kind is rendered as a filled accent button to draw the
+   primary-action eye; other kinds inherit the outlined pattern from
+   .project-pub-link for visual consistency across the page. */
+.project-ext-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.project-ext-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 10px 18px;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: var(--radius-sm);
+  color: var(--color-accent);
+  transition: all .25s;
+}
+.project-ext-link:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+.project-ext-link-icon {
+  font-size: 12px;
+  line-height: 1;
+}
+/* Demo is the primary action — filled button, larger tap target. */
+.project-ext-link-demo {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+.project-ext-link-demo:hover {
+  background: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .project-ext-link { font-size: 13px; padding: 8px 14px; }
+}
+
 @media (max-width: 767px) {
   .project-pub-title { font-size: 17px; }
   .project-people-grid { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); }
