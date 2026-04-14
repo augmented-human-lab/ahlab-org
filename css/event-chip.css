@@ -1,0 +1,116 @@
+/* event-chip.css
+   =============
+   Shared chip rules used on person, project, and publication pages
+   to advertise event linkage ("Presenting at", "Featured at",
+   "Being presented at" followed by chip(s)).
+
+   Loaded independently from event.css so it can be included on
+   pages that have nothing else to do with the /events/ index (which
+   is what event.css is for). Keeping these rules in a separate file
+   avoids collisions on shared class names like .year-section,
+   .filter-pill, and .hero-filter-* that event.css uses for its own
+   page layout. */
+
+/* ── Inline "Presented at" / "Featured at" rows on
+   project + person pages. Small chip group, mirrors the
+   .press-projects pattern but with kind-aware coloring. */
+.event-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.event-chips-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--color-neutral-60);
+}
+.event-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--color-neutral-90);
+  background: var(--color-neutral-20);
+  border: 1px solid var(--color-neutral-30);
+  border-radius: 999px;
+  padding: 4px 11px;
+  text-decoration: none;
+  transition: background .25s, border-color .25s, color .25s;
+}
+.event-chip:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+.event-chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-neutral-50);
+  flex-shrink: 0;
+}
+.event-chip[data-kind="conference"] .event-chip-dot { background: #6100ff; }
+.event-chip[data-kind="exhibition"] .event-chip-dot { background: #ff6b35; }
+.event-chip[data-kind="talk"] .event-chip-dot       { background: #2a3a8a; }
+.event-chip[data-kind="trip"] .event-chip-dot       { background: #00d7ee; }
+.event-chip[data-kind="workshop"] .event-chip-dot   { background: #a200d5; }
+
+/* ── LIVE state ─────────────────────────────────────────────
+   Applied (at build time or by runtime JS) when the event is
+   currently happening — i.e. now ∈ [starts, ends]. The chip
+   gains a pulsing dot (with a ring-echo animation) and reveals
+   an inline "LIVE" text badge. Pre-live chips within the 7-day
+   lead-in render without the `is-live` class, so the LIVE badge
+   and pulse stay hidden until the event actually starts. */
+.event-chip-live {
+  display: none;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 1;
+  padding: 3px 6px 3px 5px;
+  border-radius: 3px;
+  background: #d92323;
+  color: #fff;
+  margin-left: 2px;
+}
+.event-chip.is-live {
+  border-color: #d92323;
+  background: #fff0f0;
+  color: #7a1111;
+}
+.event-chip.is-live:hover {
+  border-color: #b51c1c;
+  color: #5a0a0a;
+}
+.event-chip.is-live .event-chip-label {
+  color: inherit;
+}
+.event-chip.is-live .event-chip-live {
+  display: inline-block;
+}
+.event-chip.is-live .event-chip-dot {
+  position: relative;
+  background: #d92323 !important;
+  box-shadow: 0 0 0 0 rgba(217, 35, 35, 0.55);
+  animation: ahlab-chip-pulse 1.6s ease-out infinite;
+}
+/* Runtime script hides chips that have fallen outside the
+   7-day-before → end-date window when the page loads. */
+.event-chip[hidden] { display: none !important; }
+
+@keyframes ahlab-chip-pulse {
+  0%   { box-shadow: 0 0 0 0   rgba(217, 35, 35, 0.55); }
+  70%  { box-shadow: 0 0 0 8px rgba(217, 35, 35, 0);    }
+  100% { box-shadow: 0 0 0 0   rgba(217, 35, 35, 0);    }
+}
+@media (prefers-reduced-motion: reduce) {
+  .event-chip.is-live .event-chip-dot { animation: none; }
+}

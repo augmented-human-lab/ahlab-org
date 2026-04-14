@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://use.typekit.net/zws2qzx.css">
 <link rel="stylesheet" href="/css/theme.css">
 <link rel="stylesheet" href="/css/project.css">
+<link rel="stylesheet" href="/css/event-chip.css">
 <link rel="icon" href="https://ahlab.org/wp-content/uploads/2021/05/cropped-Group@2x-32x32.png" sizes="32x32">
 <meta name="description" content="">
 </head>
@@ -25,13 +26,13 @@
         <img src="https://cdn.ahlab.org/media/site/projects/zenflow/zenflow.jpg" alt="Zenflow">
         <div class="project-principles" aria-label="Assistive Augmentation principles">
         <span class="project-principle" title="Body" aria-label="Body">
-            <img src="https://ahlab.org/wp-content/uploads/2025/02/icon-body-1.png" alt="" loading="lazy">
+            <img src="https://cdn.ahlab.org/media/site/icon-body-1.png" alt="" loading="lazy">
             <span class="project-principle-label">Body</span>
           </span><span class="project-principle" title="Cognitive" aria-label="Cognitive">
-            <img src="https://ahlab.org/wp-content/uploads/2025/02/icon-cognitive-1.png" alt="" loading="lazy">
+            <img src="https://cdn.ahlab.org/media/site/icon-cognitive-1.png" alt="" loading="lazy">
             <span class="project-principle-label">Cognitive</span>
           </span><span class="project-principle" title="Perceptual" aria-label="Perceptual">
-            <img src="https://ahlab.org/wp-content/uploads/2025/02/icon-perceptual-1.png" alt="" loading="lazy">
+            <img src="https://cdn.ahlab.org/media/site/icon-perceptual-1.png" alt="" loading="lazy">
             <span class="project-principle-label">Perceptual</span>
           </span>
       </div>
@@ -83,11 +84,11 @@
         </div>
       </div><div class="project-events-row rv">
         <div class="sidebar-section-title">Featured at</div>
-        <div class="event-chips-row">
-          <a class="event-chip" data-kind="conference" href="https://chi2026.ahlab.org" target="_blank" rel="noopener">
-              <span class="event-chip-dot"></span>CHI 2026
-            </a>
-        </div>
+        <div class="event-chips-row" data-event-chip-row>
+    <a class="event-chip is-live" data-kind="conference" data-starts="2026-04-13" data-ends="2026-04-17" href="https://chi2026.ahlab.org" target="_blank" rel="noopener">
+    <span class="event-chip-dot"></span><span class="event-chip-label">CHI 2026</span><span class="event-chip-live" aria-hidden="true">LIVE</span>
+  </a>
+  </div>
       </div><div class="project-publications-row rv rv-d1">
         <div class="sidebar-section-title">Publications</div>
         <ol class="project-pub-list">
@@ -106,6 +107,7 @@
 
 <div id="site-footer-mount"></div>
 <script src="/js/footer-include.js"></script>
+<script src="/js/event-chip-live.js" defer></script>
 
 <script>
 /*
