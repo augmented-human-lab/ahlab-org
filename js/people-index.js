@@ -62,9 +62,17 @@
     const seg = card.dataset.sectionKey;
     // PI is always shown — not a toggleable segment.
     if (seg === 'pi') return true;
-    // When a year is picked, only team + pi are relevant (year-view
-    // is a team snapshot). Segment toggles are disabled in that mode.
-    if (state.year !== 'all') return seg === 'team';
+    // When a year is picked, segment toggles are intentionally disabled
+    // in the UI (chips are dimmed and click-handlers no-op). All segments
+    // pass the segment gate in year mode; what matters is whether the
+    // card's stints overlap the selected year (matchesYear).
+    //
+    // Visual grouping in year mode:
+    //   - PI + Team + Alumni active that year → pooled into "Current
+    //     Team / {year}" by the renderers
+    //   - Collaborators active that year → stay in their own section
+    //     (kept "separate and untouched" per the spec)
+    if (state.year !== 'all') return true;
     return state.segments.has(seg);
   }
 
@@ -74,6 +82,22 @@
     // specific role filter — matches pre-existing behavior.
     return card.dataset.roleGroup === state.role;
   }
+
+  // Stash each card's original parent grid so we can restore the DOM
+  // when leaving year-scoped mode. Year-scoped renders pool every active
+  // person into the team section's grid (so an alumnus active in the
+  // selected year appears under "Current Team / 2021" alongside today's
+  // team), and we need to put them back when the user clears the year
+  // filter or picks a different year.
+  const cardOrigin = new WeakMap();
+  allCards.forEach(card => cardOrigin.set(card, card.parentNode));
+
+  // Locate the team section's grid — the move target for year-scoped
+  // pooling. If the page somehow doesn't have a team section (no current
+  // members), the move-pool logic short-circuits and renderGrid behaves
+  // exactly as before.
+  const teamSection = sectionsWrap?.querySelector('.people-section[data-section-key="team"]') || null;
+  const teamGrid    = teamSection?.querySelector('.people-grid') || null;
 
   function cardVisible(card) {
     return matchesYear(card) && matchesSegment(card) && matchesRole(card);
@@ -89,6 +113,31 @@
       card.classList.toggle('hidden', !cardVisible(card));
     });
 
+    // Year-scoped DOM reflow: pool every visible non-team card into the
+    // team grid so the page reads as a single "Current Team / {year}"
+    // group — EXCEPT collaborators, which stay in their own section
+    // (filtered by year via matchesYear, but never pooled into team).
+    // We always restore-then-pool so switching between two years
+    // (e.g. 2015 → 2018) doesn't leave hidden 2015 cards sitting in the
+    // team grid — they go back to alumni first, then only 2018's actives
+    // get pooled in. Restore is cheap (parentNode equality check skips
+    // already-home cards). The per-section visibility pass below runs
+    // AFTER this so visibleCount on each section reflects the post-move
+    // DOM (alumni section ends up empty → hidden; collaborators section
+    // shows its year-filtered subset).
+    restoreCardOrigins();
+    const yearScoped = state.year !== 'all';
+    if (yearScoped && teamGrid) {
+      allCards.forEach(card => {
+        if (card.classList.contains('hidden')) return;
+        if (card.parentNode === teamGrid) return;
+        // Collaborators stay in their own section — they're not part of
+        // the team timeline pooling.
+        if (card.dataset.sectionKey === 'collaborators') return;
+        teamGrid.appendChild(card);   // appendChild also detaches from old parent
+      });
+    }
+
     // Per-section visibility + label breadcrumb
     const activeRoleLabel = (state.role === 'all') ? ''
       : (document.querySelector(`#rolePills .hero-chip[data-group="${state.role}"]`)?.dataset.label || '');
@@ -102,7 +151,23 @@
       const crumbs = [];
       if (state.year !== 'all') crumbs.push(String(state.year));
       if (activeRoleLabel)       crumbs.push(activeRoleLabel);
+      // In year-scoped mode the team section absorbs everyone, so its
+      // label always reads "Current Team / {year}" — that's the "single
+      // pool" framing. Other sections' labels still get the breadcrumb
+      // suffix for free, but those sections will be hidden by the
+      // visibleCount check above since their cards have moved out.
       lbl.textContent = crumbs.length ? `${base} / ${crumbs.join(' / ')}` : base;
+    });
+  }
+
+  // Move every card back to the parent grid recorded at startup. Used
+  // when leaving year-scoped mode (or moving between years — we restore
+  // first, then the next renderGrid pass re-pools into the new year's
+  // visible set). No-op for cards that haven't moved.
+  function restoreCardOrigins() {
+    allCards.forEach(card => {
+      const home = cardOrigin.get(card);
+      if (home && card.parentNode !== home) home.appendChild(card);
     });
   }
 
@@ -111,16 +176,21 @@
   // hexagonal layout with one hex per person (photo + hover label).
   // When a year is selected, only the Team hive renders since
   // collaborators/alumni are suppressed in year-scoped mode.
-  function renderHoneycomb() {
+  function renderHoneycomb(animate = true) {
     sectionsWrap.hidden = true;
     hivesWrap.hidden = false;
     hivesWrap.innerHTML = '';
 
     // Which segments to render as hives?
-    // Year-scoped mode → just Team. All-time mode → whichever segments
-    // the user hasn't toggled off (+ PI always merged into Team).
+    //   • All-time mode → whichever segments the user hasn't toggled off.
+    //                     PI is always merged into Team (centered hex).
+    //   • Year-scoped mode → Team (which now ABSORBS alumni active in
+    //                     that year, plus PI) + Collaborators (kept
+    //                     separate per spec — they're not pooled into
+    //                     team). Segment toggles are disabled in year
+    //                     mode so both always render.
     const segmentsToRender = (state.year !== 'all')
-      ? ['team']
+      ? ['team', 'collaborators']
       : ['team', 'collaborators', 'alumni'].filter(s => state.segments.has(s));
 
     const SEGMENT_LABEL = {
@@ -129,13 +199,28 @@
       alumni: 'Alumni',
     };
 
-    // Bucket matching cards by segment. PI always merges into team.
+    // Bucket matching cards by segment. Two modes:
+    //
+    //   • All-time:    bucket each card by its stored section. PI merges
+    //                  into the team hive at the front (centered hex).
+    //   • Year-scoped: pool team + alumni + PI into the team bucket
+    //                  (alumni active in the selected year are
+    //                  conceptually team-for-that-year). Collaborators
+    //                  stay in their own bucket and render as a separate
+    //                  hive — they're not part of the team timeline.
     const buckets = { team: [], collaborators: [], alumni: [] };
+    const yearScoped = state.year !== 'all';
     allCards.forEach(card => {
       if (!matchesYear(card) || !matchesRole(card)) return;
       const seg = card.dataset.sectionKey;
-      if (seg === 'pi') buckets.team.unshift(card);   // PI at center → prepend
-      else if (buckets[seg]) buckets[seg].push(card);
+      if (yearScoped) {
+        if (seg === 'pi')                               buckets.team.unshift(card); // PI at center
+        else if (seg === 'team' || seg === 'alumni')    buckets.team.push(card);
+        else if (buckets[seg])                          buckets[seg].push(card);    // collaborators stay separate
+      } else {
+        if (seg === 'pi') buckets.team.unshift(card);   // PI at center → prepend
+        else if (buckets[seg]) buckets[seg].push(card);
+      }
     });
 
     for (const seg of segmentsToRender) {
@@ -162,7 +247,7 @@
 
       // Defer layout to after mount so clientWidth is measurable.
       // RAF because we just appended — layout isn't ready synchronously.
-      requestAnimationFrame(() => layoutHive(hive, cards));
+      requestAnimationFrame(() => layoutHive(hive, cards, animate));
     }
   }
 
@@ -170,7 +255,12 @@
   // Spiral axial layout: find smallest ring k that fits n hexes,
   // pick R so that k+0.5 rings fit in the container width/height,
   // emit one <a class="hex"> per card with translate positioning.
-  function layoutHive(hive, cards) {
+  //
+  // `animate` controls the enter animation: true on the initial render
+  // and on filter/year/segment changes (the hexes bloom in), false on
+  // window resize where re-triggering the animation on every resize
+  // tick would feel jarring.
+  function layoutHive(hive, cards, animate = true) {
     const n = cards.length;
     if (n === 0) return;
     const w = hive.clientWidth  || 800;
@@ -199,13 +289,45 @@
       const py = 1.5 * R * c.r;
       const hexW = Math.sqrt(3) * R;
       const hexH = 2 * R;
+      const tx = (cx + px) - hexW / 2;
+      const ty = (cy + py) - hexH / 2;
       const hex = document.createElement('a');
-      hex.className = 'hex';
+      // `entering` starts the hex at opacity 0 + scale(0.3). We clear the
+      // class on the next animation frame below so the CSS transition on
+      // .hex picks up the change and animates transform+opacity back to
+      // the resting state. The --tx/--ty custom props let the entering
+      // rule translate to the hex's *final* position during the fade —
+      // without them the hex would snap from translate(0,0) to its
+      // destination after the opacity fade, which looks jumpy.
+      //
+      // Skipped entirely when animate=false (resize path) — we just want
+      // the hexes to land at their new positions without bloom.
+      hex.className = animate ? 'hex entering' : 'hex';
       hex.href = card.getAttribute('href');
       hex.dataset.section = card.dataset.sectionKey;
       hex.style.width  = hexW + 'px';
       hex.style.height = hexH + 'px';
-      hex.style.transform = `translate(${(cx + px) - hexW / 2}px, ${(cy + py) - hexH / 2}px)`;
+      hex.style.setProperty('--tx', tx + 'px');
+      hex.style.setProperty('--ty', ty + 'px');
+      hex.style.transform = `translate(${tx}px, ${ty}px)`;
+      // Per-hex random stagger so the bloom arrives in a scattered wave
+      // rather than a synchronized pop. Delay is applied via inline
+      // `transitionDelay`, which the CSS transition on .hex honors. We
+      // clear the delay on transitionend so future transitions (hover,
+      // resize, year-change re-layout) fire immediately without inherited
+      // stagger. 0–400ms range: short enough not to drag on large hives,
+      // long enough to feel like distinct arrivals rather than one pop.
+      if (animate) {
+        const delay = Math.random() * 400;
+        hex.style.transitionDelay = delay + 'ms';
+        hex.addEventListener('transitionend', function clearDelay(e) {
+          // Only clear once; opacity is the fastest of the three
+          // transitioned properties so it fires first/reliably.
+          if (e.propertyName !== 'opacity') return;
+          hex.style.transitionDelay = '';
+          hex.removeEventListener('transitionend', clearDelay);
+        });
+      }
       const photo = card.dataset.photo || '';
       hex.innerHTML =
         `<span class="hex-inner" style="background-image:url('${photo.replace(/"/g, '&quot;')}')"></span>` +
@@ -214,6 +336,15 @@
     });
     hive.innerHTML = '';
     hive.appendChild(frag);
+
+    // Clear .entering on the next frame so the transition kicks in. Doing
+    // this inside rAF (rather than synchronously after append) guarantees
+    // the browser has laid out the hexes in their entering state at least
+    // once — without that, some engines collapse the two style changes
+    // into a single commit and skip the transition entirely.
+    requestAnimationFrame(() => {
+      hive.querySelectorAll('.hex.entering').forEach(el => el.classList.remove('entering'));
+    });
   }
 
   // Spiral axial coordinates for n cells, starting at (0,0) and
@@ -361,11 +492,13 @@
   });
 
   // Relayout hives on resize (grid view needs no resize handling).
+  // Passes animate=false — resize shouldn't trigger the bloom on every
+  // viewport tick; hexes should just move to their new positions.
   let resizeRaf = 0;
   window.addEventListener('resize', () => {
     if (state.view !== 'honeycomb') return;
     cancelAnimationFrame(resizeRaf);
-    resizeRaf = requestAnimationFrame(() => renderHoneycomb());
+    resizeRaf = requestAnimationFrame(() => renderHoneycomb(false));
   });
 
   // ── Boot ─────────────────────────────────────────────────

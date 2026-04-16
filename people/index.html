@@ -15,86 +15,98 @@
 <div id="site-nav-mount"></div>
 <script src="/js/nav-include.js"></script>
 
-<!-- HERO (doubles as the filter bar — the role-group chips are
-     rendered as interactive sentence fragments below the headline) -->
+<!-- HERO (doubles as the filter bar).
+     Two filter groups live on the same line: role-group chips on the
+     left (SRF/RF, Students, Interns…) and segment chips on the right
+     (Team / Collaborators / Alumni). Same .hero-chip styling as /press/
+     + /publications/; the hero-summary is now a flex row so the two
+     groups can sit side-by-side with the right group right-aligned. -->
 <section class="hero">
   <div class="container">
     <h1>People</h1>
-    <p class="hero-summary">
-      <span class="hero-filter-group" id="rolePills">
-        <span class="hero-chip" role="button" tabindex="0" data-group="srf-rf" data-label="SRF / RF">8 SRF / RF</span>, <span class="hero-chip" role="button" tabindex="0" data-group="re-ra" data-label="RE / RA">5 RE / RA</span>, <span class="hero-chip" role="button" tabindex="0" data-group="student" data-label="Students">5 Students</span>, and <span class="hero-chip" role="button" tabindex="0" data-group="intern" data-label="Interns">4 Interns</span>.
+    <p class="hero-summary hero-summary-split">
+      <span class="hero-summary-left">
+        <span class="hero-filter-group" id="rolePills">
+          <span class="hero-chip" role="button" tabindex="0" data-group="srf-rf" data-label="SRF / RF">8 SRF / RF</span>, <span class="hero-chip" role="button" tabindex="0" data-group="re-ra" data-label="RE / RA">5 RE / RA</span>, <span class="hero-chip" role="button" tabindex="0" data-group="student" data-label="Students">5 Students</span>, and <span class="hero-chip" role="button" tabindex="0" data-group="intern" data-label="Interns">4 Interns</span>.
+        </span>
+        <button type="button" class="hero-filter-reset" id="filterReset" aria-label="Show everyone">Show all</button>
       </span>
-      <button type="button" class="hero-filter-reset" id="filterReset" aria-label="Show everyone">Show all</button>
+      <span class="hero-summary-right">
+        <span class="hero-filter-group hero-filter-segments" id="segmentPills" aria-label="Segment filters">
+          <span class="hero-chip is-active" role="button" tabindex="0" data-segment="team"         data-label="Team">Team</span>
+          <span class="hero-chip is-active" role="button" tabindex="0" data-segment="collaborators" data-label="Collaborators">Collaborators</span>
+          <span class="hero-chip is-active" role="button" tabindex="0" data-segment="alumni"        data-label="Alumni">Alumni</span>
+        </span>
+      </span>
     </p>
   </div>
 </section>
 
 <!-- LAYOUT: sticky year timeline (left) + people sections (right).
-     The year nav is a visual placeholder for a future "lab timeline"
-     feature — no scroll-spy, no filtering wired up yet. Only the
-     current year is highlighted. Kept here for parity with the other
-     index pages (/press/, /projects/, /publications/). -->
+     The year-nav drives a real filter now: "All time" shows everyone
+     grouped by segment; a specific year filters to people active that
+     year (derived from ahlab_stints[] at build time). -->
 <div class="people-layout">
 
   <aside class="year-nav" id="yearNav" aria-label="Lab timeline">
-    
-  <a href="#" data-year="2026" class="active" aria-label="2026">
-    <span>2026</span>
-  </a>
-  <a href="#" data-year="2025" class="" aria-label="2025">
-    <span>2025</span>
-  </a>
-  <a href="#" data-year="2024" class="" aria-label="2024">
-    <span>2024</span>
-  </a>
-  <a href="#" data-year="2023" class="" aria-label="2023">
-    <span>2023</span>
-  </a>
-  <a href="#" data-year="2022" class="" aria-label="2022">
-    <span>2022</span>
-  </a>
-  <a href="#" data-year="2021" class="" aria-label="2021">
-    <span>2021</span>
-  </a>
-  <a href="#" data-year="2020" class="" aria-label="2020">
-    <span>2020</span>
-  </a>
-  <a href="#" data-year="2019" class="" aria-label="2019">
-    <span>2019</span>
-  </a>
-  <a href="#" data-year="2018" class="" aria-label="2018">
-    <span>2018</span>
-  </a>
-  <a href="#" data-year="2017" class="" aria-label="2017">
-    <span>2017</span>
-  </a>
-  <a href="#" data-year="2016" class="" aria-label="2016">
-    <span>2016</span>
-  </a>
-  <a href="#" data-year="2015" class="" aria-label="2015">
-    <span>2015</span>
-  </a>
-  <a href="#" data-year="2014" class="" aria-label="2014">
-    <span>2014</span>
-  </a>
-  <a href="#" data-year="2013" class="" aria-label="2013">
-    <span>2013</span>
-  </a>
-  <a href="#" data-year="2012" class="" aria-label="2012">
-    <span>2012</span>
-  </a>
-  <a href="#" data-year="2011" class="" aria-label="2011">
-    <span>2011</span>
-  </a>
+    <!-- View-mode toggle (desktop only) sits at the very top of the
+         nav, above the "All time" entry. Icon-only: 3×3 dot grid for
+         Grid view, clustered hex cluster for Honeycomb. -->
+    <div class="view-toggle" id="peopleToolbar" role="toolbar" aria-label="View mode">
+      <button type="button" class="view-btn is-active" data-view="grid" aria-pressed="true" aria-label="Grid view" title="Grid view">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <circle cx="3"  cy="3"  r="1.6"/>
+          <circle cx="8"  cy="3"  r="1.6"/>
+          <circle cx="13" cy="3"  r="1.6"/>
+          <circle cx="3"  cy="8"  r="1.6"/>
+          <circle cx="8"  cy="8"  r="1.6"/>
+          <circle cx="13" cy="8"  r="1.6"/>
+          <circle cx="3"  cy="13" r="1.6"/>
+          <circle cx="8"  cy="13" r="1.6"/>
+          <circle cx="13" cy="13" r="1.6"/>
+        </svg>
+      </button>
+      <button type="button" class="view-btn" data-view="honeycomb" aria-pressed="false" aria-label="Honeycomb view" title="Honeycomb view">
+        <svg viewBox="0 0 18 16" aria-hidden="true" focusable="false">
+          <!-- Three pointy-top hexagons clustered: center + two flanking.
+               Each hex has circumradius ~3.2; centers chosen so they
+               tile cleanly without overlap. -->
+          <polygon points="9,1.2 13.2,3.6 13.2,8.4 9,10.8 4.8,8.4 4.8,3.6"/>
+          <polygon points="3.6,6.4 7.8,8.8 7.8,13.6 3.6,16 -0.6,13.6 -0.6,8.8"
+                   transform="translate(1 -1.6)"/>
+          <polygon points="14.4,6.4 18.6,8.8 18.6,13.6 14.4,16 10.2,13.6 10.2,8.8"
+                   transform="translate(-1 -1.6)"/>
+        </svg>
+      </button>
+    </div>
+    <a href="#" data-year="all" class="active" aria-label="All time"><span>All time</span></a>
+  <a href="#" data-year="2026" aria-label="2026"><span>2026</span></a>
+  <a href="#" data-year="2025" aria-label="2025"><span>2025</span></a>
+  <a href="#" data-year="2024" aria-label="2024"><span>2024</span></a>
+  <a href="#" data-year="2023" aria-label="2023"><span>2023</span></a>
+  <a href="#" data-year="2022" aria-label="2022"><span>2022</span></a>
+  <a href="#" data-year="2021" aria-label="2021"><span>2021</span></a>
+  <a href="#" data-year="2020" aria-label="2020"><span>2020</span></a>
+  <a href="#" data-year="2019" aria-label="2019"><span>2019</span></a>
+  <a href="#" data-year="2018" aria-label="2018"><span>2018</span></a>
+  <a href="#" data-year="2017" aria-label="2017"><span>2017</span></a>
+  <a href="#" data-year="2016" aria-label="2016"><span>2016</span></a>
+  <a href="#" data-year="2015" aria-label="2015"><span>2015</span></a>
+  <a href="#" data-year="2014" aria-label="2014"><span>2014</span></a>
+  <a href="#" data-year="2013" aria-label="2013"><span>2013</span></a>
+  <a href="#" data-year="2012" aria-label="2012"><span>2012</span></a>
+  <a href="#" data-year="2011" aria-label="2011"><span>2011</span></a>
   </aside>
 
   <main class="people-content">
-    
-<section class="people-section" data-section="Principal Investigator" data-filterable="true">
+
+    <div class="people-sections-wrap" id="peopleSectionsWrap">
+      
+<section class="people-section" data-section="Principal Investigator" data-section-key="pi" data-filterable="true">
     <div class="section-label rv">Principal Investigator</div>
     <div class="people-grid">
       
-      <a href="/people/suranga-nanayakkara/" class="person-card rv" style="transition-delay:0s">
+      <a href="/people/suranga-nanayakkara/" class="person-card rv" data-section-key="pi" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Suranga Nanayakkara" data-role="Associate Professor" data-photo="https://cdn.ahlab.org/media/site/people/suranga-nanayakkara/suranga-nanayakkara.jpg" style="transition-delay:0s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/suranga-nanayakkara/suranga-nanayakkara.jpg" alt="Suranga Nanayakkara" loading="lazy">
         </div>
@@ -103,200 +115,200 @@
       </a>
     </div>
 </section>
-<section class="people-section" data-section="Current Team" data-filterable="true">
+<section class="people-section" data-section="Current Team" data-section-key="team" data-filterable="true">
     <div class="section-label rv">Current Team</div>
     <div class="people-grid">
       
-      <a href="/people/chitralekha-gupta/" class="person-card rv" data-role-group="srf-rf" style="transition-delay:0s">
+      <a href="/people/chitralekha-gupta/" class="person-card rv" data-section-key="team" data-role-group="srf-rf" data-stint-years="2022 2023 2024 2025 2026" data-name="Chitralekha Gupta" data-role="Senior Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/chitralekha-gupta/chitralekha-gupta.jpg" style="transition-delay:0s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/chitralekha-gupta/chitralekha-gupta.jpg" alt="Chitralekha Gupta" loading="lazy">
         </div>
         <h4>Chitralekha Gupta</h4>
         <div class="person-role">Senior Research Fellow</div>
       </a>
-      <a href="/people/dixon-prem-daniel/" class="person-card rv" data-role-group="srf-rf" style="transition-delay:0.06s">
+      <a href="/people/dixon-prem-daniel/" class="person-card rv" data-section-key="team" data-role-group="srf-rf" data-stint-years="2023 2024 2025 2026" data-name="Dixon Prem Daniel" data-role="Senior Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/dixon-prem-daniel/dixon-prem-daniel.jpg" style="transition-delay:0.06s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/dixon-prem-daniel/dixon-prem-daniel.jpg" alt="Dixon Prem Daniel" loading="lazy">
         </div>
         <h4>Dixon Prem Daniel</h4>
         <div class="person-role">Senior Research Fellow</div>
       </a>
-      <a href="/people/prasanth-sasikumar/" class="person-card rv" data-role-group="srf-rf" style="transition-delay:0.12s">
+      <a href="/people/prasanth-sasikumar/" class="person-card rv" data-section-key="team" data-role-group="srf-rf" data-stint-years="2023 2024 2025 2026" data-name="Prasanth Sasikumar" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/prasanth-sasikumar/prasanth-sasikumar.jpg" style="transition-delay:0.12s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/prasanth-sasikumar/prasanth-sasikumar.jpg" alt="Prasanth Sasikumar" loading="lazy">
         </div>
         <h4>Prasanth Sasikumar</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/moritz-messerschmidt/" class="person-card rv" data-role-group="srf-rf" style="transition-delay:0.18s">
+      <a href="/people/moritz-messerschmidt/" class="person-card rv" data-section-key="team" data-role-group="srf-rf" data-stint-years="2026" data-name="Moritz Messerschmidt" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/moritz-messerschmidt/moritz-messerschmidt.jpg" style="transition-delay:0.18s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/moritz-messerschmidt/moritz-messerschmidt.jpg" alt="Moritz Messerschmidt" loading="lazy">
         </div>
         <h4>Moritz Messerschmidt</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/soundarya-ramesh/" class="person-card rv" data-role-group="srf-rf" style="transition-delay:0.24s">
+      <a href="/people/soundarya-ramesh/" class="person-card rv" data-section-key="team" data-role-group="srf-rf" data-stint-years="2025 2026" data-name="Soundarya Ramesh" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/soundarya-ramesh/soundarya-ramesh.jpg" style="transition-delay:0.24s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/soundarya-ramesh/soundarya-ramesh.jpg" alt="Soundarya Ramesh" loading="lazy">
         </div>
         <h4>Soundarya Ramesh</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/peter-cleveland/" class="person-card rv" data-role-group="srf-rf" style="transition-delay:0.3s">
+      <a href="/people/peter-cleveland/" class="person-card rv" data-section-key="team" data-role-group="srf-rf" data-stint-years="2025 2026" data-name="Peter Cleveland" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/peter-cleveland/peter-cleveland.jpg" style="transition-delay:0.3s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/peter-cleveland/peter-cleveland.jpg" alt="Peter Cleveland" loading="lazy">
         </div>
         <h4>Peter Cleveland</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/punyawee-anunpattana/" class="person-card rv" data-role-group="srf-rf" style="transition-delay:0.36s">
+      <a href="/people/punyawee-anunpattana/" class="person-card rv" data-section-key="team" data-role-group="srf-rf" data-stint-years="2025 2026" data-name="Punyawee Anunpattana" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/punyawee-anunpattana/punyawee-anunpattana.jpg" style="transition-delay:0.36s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/punyawee-anunpattana/punyawee-anunpattana.jpg" alt="Punyawee Anunpattana" loading="lazy">
         </div>
         <h4>Punyawee Anunpattana</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/harini-krishnan/" class="person-card rv" data-role-group="srf-rf" style="transition-delay:0.42s">
+      <a href="/people/harini-krishnan/" class="person-card rv" data-section-key="team" data-role-group="srf-rf" data-stint-years="2025 2026" data-name="Harini Krishnan" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/harini-krishnan/harini-krishnan.jpg" style="transition-delay:0.42s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/harini-krishnan/harini-krishnan.jpg" alt="Harini Krishnan" loading="lazy">
         </div>
         <h4>Harini Krishnan</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/sankha-cooray/" class="person-card rv" data-role-group="re-ra" style="transition-delay:0.48s">
+      <a href="/people/sankha-cooray/" class="person-card rv" data-section-key="team" data-role-group="re-ra" data-stint-years="2020 2021 2022 2023 2024 2025 2026" data-name="Sankha Cooray" data-role="Research Engineer" data-photo="https://cdn.ahlab.org/media/site/people/sankha-cooray/sankha-cooray.jpg" style="transition-delay:0.48s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/sankha-cooray/sankha-cooray.jpg" alt="Sankha Cooray" loading="lazy">
         </div>
         <h4>Sankha Cooray</h4>
         <div class="person-role">Research Engineer</div>
       </a>
-      <a href="/people/shreyas-sridhar/" class="person-card rv" data-role-group="re-ra" style="transition-delay:0.5s">
+      <a href="/people/shreyas-sridhar/" class="person-card rv" data-section-key="team" data-role-group="re-ra" data-stint-years="2023 2024 2025 2026" data-name="Shreyas Sridhar" data-role="Research Engineer" data-photo="https://cdn.ahlab.org/media/site/people/shreyas-sridhar/shreyas-sridhar.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/shreyas-sridhar/shreyas-sridhar.jpg" alt="Shreyas Sridhar" loading="lazy">
         </div>
         <h4>Shreyas Sridhar</h4>
         <div class="person-role">Research Engineer</div>
       </a>
-      <a href="/people/priambudi-lintang-bagaskara/" class="person-card rv" data-role-group="re-ra" style="transition-delay:0.5s">
+      <a href="/people/priambudi-lintang-bagaskara/" class="person-card rv" data-section-key="team" data-role-group="re-ra" data-stint-years="2023 2024 2025 2026" data-name="Priambudi Lintang Bagaskara" data-role="Research Engineer" data-photo="https://cdn.ahlab.org/media/site/people/priambudi-lintang-bagaskara/priambudi-lintang-bagaskara.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/priambudi-lintang-bagaskara/priambudi-lintang-bagaskara.jpg" alt="Priambudi Lintang Bagaskara" loading="lazy">
         </div>
         <h4>Priambudi Lintang Bagaskara</h4>
         <div class="person-role">Research Engineer</div>
       </a>
-      <a href="/people/ryo-hajika/" class="person-card rv" data-role-group="re-ra" style="transition-delay:0.5s">
+      <a href="/people/ryo-hajika/" class="person-card rv" data-section-key="team" data-role-group="re-ra" data-stint-years="2026" data-name="Ryo Hajika" data-role="Research Engineer" data-photo="https://cdn.ahlab.org/media/site/people/ryo-hajika/ryo-hajika.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/ryo-hajika/ryo-hajika.jpg" alt="Ryo Hajika" loading="lazy">
         </div>
         <h4>Ryo Hajika</h4>
         <div class="person-role">Research Engineer</div>
       </a>
-      <a href="/people/hyung-woon-lee/" class="person-card rv" data-role-group="re-ra" style="transition-delay:0.5s">
+      <a href="/people/hyung-woon-lee/" class="person-card rv" data-section-key="team" data-role-group="re-ra" data-stint-years="2023 2024 2025 2026" data-name="Hyung Woon Lee" data-role="Research Assistant" data-photo="https://cdn.ahlab.org/media/site/people/hyung-woon-lee/hyung-woon-lee.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/hyung-woon-lee/hyung-woon-lee.jpg" alt="Hyung Woon Lee" loading="lazy">
         </div>
         <h4>Hyung Woon Lee</h4>
         <div class="person-role">Research Assistant</div>
       </a>
-      <a href="/people/ariel-ong/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/ariel-ong/" class="person-card rv" data-section-key="team" data-stint-years="2024 2025 2026" data-name="Ariel Ong" data-role="Manager" data-photo="https://cdn.ahlab.org/media/site/people/ariel-ong/ariel-ong.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/ariel-ong/ariel-ong.jpg" alt="Ariel Ong" loading="lazy">
         </div>
         <h4>Ariel Ong</h4>
         <div class="person-role">Manager</div>
       </a>
-      <a href="/people/qin-wu/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/qin-wu/" class="person-card rv" data-section-key="team" data-stint-years="2026" data-name="Qin Wu" data-role="PhD Candidate" data-photo="https://cdn.ahlab.org/media/site/people/qin-wu/qin-wu.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/qin-wu/qin-wu.jpg" alt="Qin Wu" loading="lazy">
         </div>
         <h4>Qin Wu</h4>
         <div class="person-role">PhD Candidate</div>
       </a>
-      <a href="/people/phoebe-chua/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/phoebe-chua/" class="person-card rv" data-section-key="team" data-stint-years="2022 2023 2024 2025 2026" data-name="Phoebe Chua" data-role="PhD Candidate" data-photo="https://cdn.ahlab.org/media/site/people/phoebe-chua/phoebe-chua.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/phoebe-chua/phoebe-chua.jpg" alt="Phoebe Chua" loading="lazy">
         </div>
         <h4>Phoebe Chua</h4>
         <div class="person-role">PhD Candidate</div>
       </a>
-      <a href="/people/mia-huong-nguyen/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/mia-huong-nguyen/" class="person-card rv" data-section-key="team" data-stint-years="2022 2023 2024 2025 2026" data-name="Mia Huong Nguyen" data-role="PhD Candidate" data-photo="https://cdn.ahlab.org/media/site/people/mia-huong-nguyen/mia-huong-nguyen.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/mia-huong-nguyen/mia-huong-nguyen.jpg" alt="Mia Huong Nguyen" loading="lazy">
         </div>
         <h4>Mia Huong Nguyen</h4>
         <div class="person-role">PhD Candidate</div>
       </a>
-      <a href="/people/yize-wei/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/yize-wei/" class="person-card rv" data-section-key="team" data-stint-years="2022 2023 2024 2025 2026" data-name="Yize Wei" data-role="PhD Candidate" data-photo="https://cdn.ahlab.org/media/site/people/yize-wei/yize-wei.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/yize-wei/yize-wei.jpg" alt="Yize Wei" loading="lazy">
         </div>
         <h4>Yize Wei</h4>
         <div class="person-role">PhD Candidate</div>
       </a>
-      <a href="/people/dinithi-dissanayake/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/dinithi-dissanayake/" class="person-card rv" data-section-key="team" data-stint-years="2023 2024 2025 2026" data-name="Dinithi Dissanayake" data-role="PhD Candidate" data-photo="https://cdn.ahlab.org/media/site/people/dinithi-dissanayake/dinithi-dissanayake.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/dinithi-dissanayake/dinithi-dissanayake.jpg" alt="Dinithi Dissanayake" loading="lazy">
         </div>
         <h4>Dinithi Dissanayake</h4>
         <div class="person-role">PhD Candidate</div>
       </a>
-      <a href="/people/timothy-antoni/" class="person-card rv" data-role-group="student" style="transition-delay:0.5s">
+      <a href="/people/timothy-antoni/" class="person-card rv" data-section-key="team" data-role-group="student" data-stint-years="2025 2026" data-name="Timothy Antoni" data-role="PhD Student" data-photo="https://cdn.ahlab.org/media/site/people/timothy-antoni/timothy-antoni.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/timothy-antoni/timothy-antoni.jpg" alt="Timothy Antoni" loading="lazy">
         </div>
         <h4>Timothy Antoni</h4>
         <div class="person-role">PhD Student</div>
       </a>
-      <a href="/people/yadeesha-weerasinghe/" class="person-card rv" data-role-group="student" style="transition-delay:0.5s">
+      <a href="/people/yadeesha-weerasinghe/" class="person-card rv" data-section-key="team" data-role-group="student" data-stint-years="2024 2025 2026" data-name="Yadeesha Weerasinghe" data-role="PhD Student" data-photo="https://cdn.ahlab.org/media/site/people/yadeesha-weerasinghe/yadeesha-weerasinghe.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/yadeesha-weerasinghe/yadeesha-weerasinghe.jpg" alt="Yadeesha Weerasinghe" loading="lazy">
         </div>
         <h4>Yadeesha Weerasinghe</h4>
         <div class="person-role">PhD Student</div>
       </a>
-      <a href="/people/praveen-sasikumar/" class="person-card rv" data-role-group="student" style="transition-delay:0.5s">
+      <a href="/people/praveen-sasikumar/" class="person-card rv" data-section-key="team" data-role-group="student" data-stint-years="2025 2026" data-name="Praveen Sasikumar" data-role="PhD Student" data-photo="https://cdn.ahlab.org/media/site/people/praveen-sasikumar/praveen-sasikumar.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/praveen-sasikumar/praveen-sasikumar.jpg" alt="Praveen Sasikumar" loading="lazy">
         </div>
         <h4>Praveen Sasikumar</h4>
         <div class="person-role">PhD Student</div>
       </a>
-      <a href="/people/nadia-aritonang/" class="person-card rv" data-role-group="student" style="transition-delay:0.5s">
+      <a href="/people/nadia-aritonang/" class="person-card rv" data-section-key="team" data-role-group="student" data-stint-years="2025 2026" data-name="Nadia Aritonang" data-role="Master Student" data-photo="https://cdn.ahlab.org/media/site/people/nadia-aritonang/nadia-aritonang.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/nadia-aritonang/nadia-aritonang.jpg" alt="Nadia Aritonang" loading="lazy">
         </div>
         <h4>Nadia Aritonang</h4>
         <div class="person-role">Master Student</div>
       </a>
-      <a href="/people/lorelia-latarche/" class="person-card rv" data-role-group="student" style="transition-delay:0.5s">
+      <a href="/people/lorelia-latarche/" class="person-card rv" data-section-key="team" data-role-group="student" data-stint-years="2026" data-name="Lorelia Latarche" data-role="Visiting Student" data-photo="https://cdn.ahlab.org/media/site/people/lorelia-latarche/lorelia-latarche.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/lorelia-latarche/lorelia-latarche.jpg" alt="Lorelia Latarche" loading="lazy">
         </div>
         <h4>Lorelia Latarche</h4>
         <div class="person-role">Visiting Student</div>
       </a>
-      <a href="/people/yifei-luo/" class="person-card rv" data-role-group="intern" style="transition-delay:0.5s">
+      <a href="/people/yifei-luo/" class="person-card rv" data-section-key="team" data-role-group="intern" data-stint-years="2025 2026" data-name="Yifei Luo" data-role="Intern" data-photo="https://cdn.ahlab.org/media/site/people/yifei-luo/yifei-luo.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/yifei-luo/yifei-luo.jpg" alt="Yifei Luo" loading="lazy">
         </div>
         <h4>Yifei Luo</h4>
         <div class="person-role">Intern</div>
       </a>
-      <a href="/people/mohamed-muftee/" class="person-card rv" data-role-group="intern" style="transition-delay:0.5s">
+      <a href="/people/mohamed-muftee/" class="person-card rv" data-section-key="team" data-role-group="intern" data-stint-years="2025 2026" data-name="Mohamed Muftee" data-role="Intern" data-photo="https://cdn.ahlab.org/media/site/people/mohamed-muftee/mohamed-muftee.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/mohamed-muftee/mohamed-muftee.jpg" alt="Mohamed Muftee" loading="lazy">
         </div>
         <h4>Mohamed Muftee</h4>
         <div class="person-role">Intern</div>
       </a>
-      <a href="/people/ovindu-atukorala/" class="person-card rv" data-role-group="intern" style="transition-delay:0.5s">
+      <a href="/people/ovindu-atukorala/" class="person-card rv" data-section-key="team" data-role-group="intern" data-stint-years="2025 2026" data-name="Ovindu Atukorala" data-role="Intern" data-photo="https://cdn.ahlab.org/media/site/people/ovindu-atukorala/ovindu-atukorala.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/ovindu-atukorala/ovindu-atukorala.jpg" alt="Ovindu Atukorala" loading="lazy">
         </div>
         <h4>Ovindu Atukorala</h4>
         <div class="person-role">Intern</div>
       </a>
-      <a href="/people/shaveen-silva/" class="person-card rv" data-role-group="intern" style="transition-delay:0.5s">
+      <a href="/people/shaveen-silva/" class="person-card rv" data-section-key="team" data-role-group="intern" data-stint-years="2025 2026" data-name="Shaveen Silva" data-role="Intern" data-photo="https://cdn.ahlab.org/media/site/people/shaveen-silva/shaveen-silva.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/shaveen-silva/shaveen-silva.jpg" alt="Shaveen Silva" loading="lazy">
         </div>
@@ -305,186 +317,186 @@
       </a>
     </div>
 </section>
-<section class="people-section" data-section="Collaborators" data-filterable="false">
+<section class="people-section" data-section="Collaborators" data-section-key="collaborators" data-filterable="false">
     <div class="section-label rv">Collaborators</div>
     <div class="people-grid">
       
-      <a href="/people/pattie-maes/" class="person-card rv" style="transition-delay:0s">
+      <a href="/people/pattie-maes/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Pattie Maes" data-role="Professor" data-photo="https://cdn.ahlab.org/media/site/people/pattie-maes/pattie-maes.jpg" style="transition-delay:0s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/pattie-maes/pattie-maes.jpg" alt="Pattie Maes" loading="lazy">
         </div>
         <h4>Pattie Maes</h4>
         <div class="person-role">Professor</div>
       </a>
-      <a href="/people/paul-denny/" class="person-card rv" style="transition-delay:0.06s">
+      <a href="/people/paul-denny/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Paul Denny" data-role="Associate Professor" data-photo="https://cdn.ahlab.org/media/site/people/paul-denny/paul-denny.jpg" style="transition-delay:0.06s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/paul-denny/paul-denny.jpg" alt="Paul Denny" loading="lazy">
         </div>
         <h4>Paul Denny</h4>
         <div class="person-role">Associate Professor</div>
       </a>
-      <a href="/people/mark-billinghurst/" class="person-card rv" style="transition-delay:0.12s">
+      <a href="/people/mark-billinghurst/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Mark Billinghurst" data-role="Professor" data-photo="https://cdn.ahlab.org/media/site/people/mark-billinghurst/mark-billinghurst.jpg" style="transition-delay:0.12s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/mark-billinghurst/mark-billinghurst.jpg" alt="Mark Billinghurst" loading="lazy">
         </div>
         <h4>Mark Billinghurst</h4>
         <div class="person-role">Professor</div>
       </a>
-      <a href="/people/lonce-wyse/" class="person-card rv" style="transition-delay:0.18s">
+      <a href="/people/lonce-wyse/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Lonce Wyse" data-role="Associate Professor" data-photo="https://cdn.ahlab.org/media/site/people/lonce-wyse/lonce-wyse.jpg" style="transition-delay:0.18s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/lonce-wyse/lonce-wyse.jpg" alt="Lonce Wyse" loading="lazy">
         </div>
         <h4>Lonce Wyse</h4>
         <div class="person-role">Associate Professor</div>
       </a>
-      <a href="/people/jurgen-steimle/" class="person-card rv" style="transition-delay:0.24s">
+      <a href="/people/jurgen-steimle/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Jürgen Steimle" data-role="Professor" data-photo="https://cdn.ahlab.org/media/site/people/jurgen-steimle/jurgen-steimle.jpg" style="transition-delay:0.24s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/jurgen-steimle/jurgen-steimle.jpg" alt="Jürgen Steimle" loading="lazy">
         </div>
         <h4>Jürgen Steimle</h4>
         <div class="person-role">Professor</div>
       </a>
-      <a href="/people/pranav-mistry/" class="person-card rv" style="transition-delay:0.3s">
+      <a href="/people/pranav-mistry/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Pranav Mistry" data-role="CEO" data-photo="https://cdn.ahlab.org/media/site/people/pranav-mistry/pranav-mistry.jpg" style="transition-delay:0.3s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/pranav-mistry/pranav-mistry.jpg" alt="Pranav Mistry" loading="lazy">
         </div>
         <h4>Pranav Mistry</h4>
         <div class="person-role">CEO</div>
       </a>
-      <a href="/people/dawn-garbett/" class="person-card rv" style="transition-delay:0.36s">
+      <a href="/people/dawn-garbett/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Dawn Garbett" data-role="Associate Professor" data-photo="https://cdn.ahlab.org/media/site/people/dawn-garbett/dawn-garbett.jpg" style="transition-delay:0.36s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/dawn-garbett/dawn-garbett.jpg" alt="Dawn Garbett" loading="lazy">
         </div>
         <h4>Dawn Garbett</h4>
         <div class="person-role">Associate Professor</div>
       </a>
-      <a href="/people/danielle-lottridge/" class="person-card rv" style="transition-delay:0.42s">
+      <a href="/people/danielle-lottridge/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Danielle Lottridge" data-role="Senior Lecturer" data-photo="https://cdn.ahlab.org/media/site/people/danielle-lottridge/danielle-lottridge.jpg" style="transition-delay:0.42s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/danielle-lottridge/danielle-lottridge.jpg" alt="Danielle Lottridge" loading="lazy">
         </div>
         <h4>Danielle Lottridge</h4>
         <div class="person-role">Senior Lecturer</div>
       </a>
-      <a href="/people/bige-tuncer/" class="person-card rv" style="transition-delay:0.48s">
+      <a href="/people/bige-tuncer/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Bige Tuncer" data-role="Associate Professor" data-photo="https://cdn.ahlab.org/media/site/people/bige-tuncer/bige-tuncer.jpg" style="transition-delay:0.48s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/bige-tuncer/bige-tuncer.jpg" alt="Bige Tuncer" loading="lazy">
         </div>
         <h4>Bige Tuncer</h4>
         <div class="person-role">Associate Professor</div>
       </a>
-      <a href="/people/masahiko-inami/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/masahiko-inami/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Masahiko Inami" data-role="Professor" data-photo="https://cdn.ahlab.org/media/site/people/masahiko-inami/masahiko-inami.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/masahiko-inami/masahiko-inami.jpg" alt="Masahiko Inami" loading="lazy">
         </div>
         <h4>Masahiko Inami</h4>
         <div class="person-role">Professor</div>
       </a>
-      <a href="/people/wong-meng-ee/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/wong-meng-ee/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Wong Meng Ee" data-role="Associate Professor" data-photo="https://cdn.ahlab.org/media/site/people/wong-meng-ee/wong-meng-ee.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/wong-meng-ee/wong-meng-ee.jpg" alt="Wong Meng Ee" loading="lazy">
         </div>
         <h4>Wong Meng Ee</h4>
         <div class="person-role">Associate Professor</div>
       </a>
-      <a href="/people/yow-wei-quin/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/yow-wei-quin/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Yow Wei Quin" data-role="Associate Professor" data-photo="https://cdn.ahlab.org/media/site/people/yow-wei-quin/yow-wei-quin.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/yow-wei-quin/yow-wei-quin.jpg" alt="Yow Wei Quin" loading="lazy">
         </div>
         <h4>Yow Wei Quin</h4>
         <div class="person-role">Associate Professor</div>
       </a>
-      <a href="/people/foong-shaohui/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/foong-shaohui/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Foong Shaohui" data-role="Associate Professor" data-photo="https://cdn.ahlab.org/media/site/people/foong-shaohui/foong-shaohui.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/foong-shaohui/foong-shaohui.jpg" alt="Foong Shaohui" loading="lazy">
         </div>
         <h4>Foong Shaohui</h4>
         <div class="person-role">Associate Professor</div>
       </a>
-      <a href="/people/yinan-liu/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/yinan-liu/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Yinan Liu" data-role="Researcher" data-photo="https://cdn.ahlab.org/media/site/people/yinan-liu/yinan-liu.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/yinan-liu/yinan-liu.jpg" alt="Yinan Liu" loading="lazy">
         </div>
         <h4>Yinan Liu</h4>
         <div class="person-role">Researcher</div>
       </a>
-      <a href="/people/uwe-rieger/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/uwe-rieger/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Uwe Rieger" data-role="Associate Professor" data-photo="https://cdn.ahlab.org/media/site/people/uwe-rieger/uwe-rieger.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/uwe-rieger/uwe-rieger.jpg" alt="Uwe Rieger" loading="lazy">
         </div>
         <h4>Uwe Rieger</h4>
         <div class="person-role">Associate Professor</div>
       </a>
-      <a href="/people/hyowon-lee/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/hyowon-lee/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Hyowon Lee" data-role="Assistant Professor" data-photo="https://cdn.ahlab.org/media/site/people/hyowon-lee/hyowon-lee.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/hyowon-lee/hyowon-lee.jpg" alt="Hyowon Lee" loading="lazy">
         </div>
         <h4>Hyowon Lee</h4>
         <div class="person-role">Assistant Professor</div>
       </a>
-      <a href="/people/katja-holtta-otto/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/katja-holtta-otto/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Katja Holtta-Otto" data-role="Professor" data-photo="https://cdn.ahlab.org/media/site/people/katja-holtta-otto/katja-holtta-otto.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/katja-holtta-otto/katja-holtta-otto.jpg" alt="Katja Holtta-Otto" loading="lazy">
         </div>
         <h4>Katja Holtta-Otto</h4>
         <div class="person-role">Professor</div>
       </a>
-      <a href="/people/thomas-schroepfer/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/thomas-schroepfer/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Thomas Schroepfer" data-role="Professor" data-photo="https://cdn.ahlab.org/media/site/people/thomas-schroepfer/thomas-schroepfer.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/thomas-schroepfer/thomas-schroepfer.jpg" alt="Thomas Schroepfer" loading="lazy">
         </div>
         <h4>Thomas Schroepfer</h4>
         <div class="person-role">Professor</div>
       </a>
-      <a href="/people/erik-wilhelm/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/erik-wilhelm/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Erik Wilhelm" data-role="Assistant Professor" data-photo="https://cdn.ahlab.org/media/site/people/erik-wilhelm/erik-wilhelm.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/erik-wilhelm/erik-wilhelm.jpg" alt="Erik Wilhelm" loading="lazy">
         </div>
         <h4>Erik Wilhelm</h4>
         <div class="person-role">Assistant Professor</div>
       </a>
-      <a href="/people/bernd-ploderer/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/bernd-ploderer/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Bernd Ploderer" data-role="Senior Lecturer" data-photo="https://cdn.ahlab.org/media/site/people/bernd-ploderer/bernd-ploderer.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/bernd-ploderer/bernd-ploderer.jpg" alt="Bernd Ploderer" loading="lazy">
         </div>
         <h4>Bernd Ploderer</h4>
         <div class="person-role">Senior Lecturer</div>
       </a>
-      <a href="/people/elizabeth-taylor/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/elizabeth-taylor/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Elizabeth Taylor" data-role="Senior Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/elizabeth-taylor/elizabeth-taylor.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/elizabeth-taylor/elizabeth-taylor.jpg" alt="Elizabeth Taylor" loading="lazy">
         </div>
         <h4>Elizabeth Taylor</h4>
         <div class="person-role">Senior Research Fellow</div>
       </a>
-      <a href="/people/frank-vetere/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/frank-vetere/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Frank Vetere" data-role="Professor" data-photo="https://cdn.ahlab.org/media/site/people/frank-vetere/frank-vetere.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/frank-vetere/frank-vetere.jpg" alt="Frank Vetere" loading="lazy">
         </div>
         <h4>Frank Vetere</h4>
         <div class="person-role">Professor</div>
       </a>
-      <a href="/people/deepthika-de-silva/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/deepthika-de-silva/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Deepthika De Silva" data-role="Doctor" data-photo="https://cdn.ahlab.org/media/site/people/deepthika-de-silva/deepthika-de-silva.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/deepthika-de-silva/deepthika-de-silva.jpg" alt="Deepthika De Silva" loading="lazy">
         </div>
         <h4>Deepthika De Silva</h4>
         <div class="person-role">Doctor</div>
       </a>
-      <a href="/people/chionh-chang-yin/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/chionh-chang-yin/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Chionh Chang Yin" data-role="Doctor" data-photo="https://cdn.ahlab.org/media/site/people/chionh-chang-yin/chionh-chang-yin.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/chionh-chang-yin/chionh-chang-yin.jpg" alt="Chionh Chang Yin" loading="lazy">
         </div>
         <h4>Chionh Chang Yin</h4>
         <div class="person-role">Doctor</div>
       </a>
-      <a href="/people/pol-pla-i-conesa/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/pol-pla-i-conesa/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Pol Pla i Conesa" data-role="Research Engineer" data-photo="https://cdn.ahlab.org/media/site/people/pol-pla-i-conesa/pol-pla-i-conesa.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/pol-pla-i-conesa/pol-pla-i-conesa.jpg" alt="Pol Pla i Conesa" loading="lazy">
         </div>
         <h4>Pol Pla i Conesa</h4>
         <div class="person-role">Research Engineer</div>
       </a>
-      <a href="/people/roy-shilkrot/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/roy-shilkrot/" class="person-card rv" data-section-key="collaborators" data-stint-years="2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026" data-name="Roy Shilkrot" data-role="Assistant Professor" data-photo="https://cdn.ahlab.org/media/site/people/roy-shilkrot/roy-shilkrot.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/roy-shilkrot/roy-shilkrot.jpg" alt="Roy Shilkrot" loading="lazy">
         </div>
@@ -493,844 +505,844 @@
       </a>
     </div>
 </section>
-<section class="people-section" data-section="Alumni" data-filterable="false">
+<section class="people-section" data-section="Alumni" data-section-key="alumni" data-filterable="false">
     <div class="section-label rv">Alumni</div>
     <div class="people-grid">
       
-      <a href="/people/denys-matthies/" class="person-card rv" style="transition-delay:0s">
+      <a href="/people/denys-matthies/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Denys Matthies" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/denys-matthies/denys-matthies.jpg" style="transition-delay:0s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/denys-matthies/denys-matthies.jpg" alt="Denys Matthies" loading="lazy">
         </div>
         <h4>Denys Matthies</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/haimo-zhang/" class="person-card rv" style="transition-delay:0.06s">
+      <a href="/people/haimo-zhang/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Haimo Zhang" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/haimo-zhang/haimo-zhang.jpg" style="transition-delay:0.06s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/haimo-zhang/haimo-zhang.jpg" alt="Haimo Zhang" loading="lazy">
         </div>
         <h4>Haimo Zhang</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/alaeddin-nassani/" class="person-card rv" style="transition-delay:0.12s">
+      <a href="/people/alaeddin-nassani/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Alaeddin Nassani" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/alaeddin-nassani/alaeddin-nassani.jpg" style="transition-delay:0.12s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/alaeddin-nassani/alaeddin-nassani.jpg" alt="Alaeddin Nassani" loading="lazy">
         </div>
         <h4>Alaeddin Nassani</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/elliott-wen/" class="person-card rv" style="transition-delay:0.18s">
+      <a href="/people/elliott-wen/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Elliott Wen" data-role="Lecturer" data-photo="https://cdn.ahlab.org/media/site/people/elliott-wen/elliott-wen.jpg" style="transition-delay:0.18s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/elliott-wen/elliott-wen.jpg" alt="Elliott Wen" loading="lazy">
         </div>
         <h4>Elliott Wen</h4>
         <div class="person-role">Lecturer</div>
       </a>
-      <a href="/people/samitha-elvitigala/" class="person-card rv" style="transition-delay:0.24s">
+      <a href="/people/samitha-elvitigala/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Samitha Elvitigala" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/samitha-elvitigala/samitha-elvitigala.jpg" style="transition-delay:0.24s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/samitha-elvitigala/samitha-elvitigala.jpg" alt="Samitha Elvitigala" loading="lazy">
         </div>
         <h4>Samitha Elvitigala</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/juan-pablo-forero-cortes/" class="person-card rv" style="transition-delay:0.3s">
+      <a href="/people/juan-pablo-forero-cortes/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Juan Pablo Forero Cortés" data-role="Research Engineer" data-photo="https://cdn.ahlab.org/media/site/people/juan-pablo-forero-cortes/juan-pablo-forero-cortes.jpg" style="transition-delay:0.3s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/juan-pablo-forero-cortes/juan-pablo-forero-cortes.jpg" alt="Juan Pablo Forero Cortés" loading="lazy">
         </div>
         <h4>Juan Pablo Forero Cortés</h4>
         <div class="person-role">Research Engineer</div>
       </a>
-      <a href="/people/jochen-huber/" class="person-card rv" style="transition-delay:0.36s">
+      <a href="/people/jochen-huber/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Jochen Huber" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/jochen-huber/jochen-huber.jpg" style="transition-delay:0.36s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/jochen-huber/jochen-huber.jpg" alt="Jochen Huber" loading="lazy">
         </div>
         <h4>Jochen Huber</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/roshan-peiris/" class="person-card rv" style="transition-delay:0.42s">
+      <a href="/people/roshan-peiris/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Roshan Peiris" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/roshan-peiris/roshan-peiris.jpg" style="transition-delay:0.42s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/roshan-peiris/roshan-peiris.jpg" alt="Roshan Peiris" loading="lazy">
         </div>
         <h4>Roshan Peiris</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/iain-werry/" class="person-card rv" style="transition-delay:0.48s">
+      <a href="/people/iain-werry/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Iain Werry" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/iain-werry/iain-werry.jpg" style="transition-delay:0.48s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/iain-werry/iain-werry.jpg" alt="Iain Werry" loading="lazy">
         </div>
         <h4>Iain Werry</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/anusha-withana/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/anusha-withana/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Anusha Withana" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/anusha-withana/anusha-withana.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/anusha-withana/anusha-withana.jpg" alt="Anusha Withana" loading="lazy">
         </div>
         <h4>Anusha Withana</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/jordi-martori/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/jordi-martori/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Jordi Martori" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/jordi-martori/jordi-martori.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/jordi-martori/jordi-martori.jpg" alt="Jordi Martori" loading="lazy">
         </div>
         <h4>Jordi Martori</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/alexandru-dancu/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/alexandru-dancu/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Alexandru Dancu" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/alexandru-dancu/alexandru-dancu.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/alexandru-dancu/alexandru-dancu.jpg" alt="Alexandru Dancu" loading="lazy">
         </div>
         <h4>Alexandru Dancu</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/chamod-weerasinghe/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/chamod-weerasinghe/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Chamod Weerasinghe" data-role="Research Engineer" data-photo="https://cdn.ahlab.org/media/site/people/chamod-weerasinghe/chamod-weerasinghe.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/chamod-weerasinghe/chamod-weerasinghe.jpg" alt="Chamod Weerasinghe" loading="lazy">
         </div>
         <h4>Chamod Weerasinghe</h4>
         <div class="person-role">Research Engineer</div>
       </a>
-      <a href="/people/yvonne-chua/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/yvonne-chua/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Yvonne Chua" data-role="Designer" data-photo="https://cdn.ahlab.org/media/site/people/yvonne-chua/yvonne-chua.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/yvonne-chua/yvonne-chua.jpg" alt="Yvonne Chua" loading="lazy">
         </div>
         <h4>Yvonne Chua</h4>
         <div class="person-role">Designer</div>
       </a>
-      <a href="/people/philip-m-scholl/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/philip-m-scholl/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Philip M. Scholl" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/philip-m-scholl/philip-m-scholl.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/philip-m-scholl/philip-m-scholl.jpg" alt="Philip M. Scholl" loading="lazy">
         </div>
         <h4>Philip M. Scholl</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/daniel-wessolek/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/daniel-wessolek/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Daniel Wessolek" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/daniel-wessolek/daniel-wessolek.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/daniel-wessolek/daniel-wessolek.jpg" alt="Daniel Wessolek" loading="lazy">
         </div>
         <h4>Daniel Wessolek</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/roger-boldu/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/roger-boldu/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Roger Boldu" data-role="PhD Candidate" data-photo="https://cdn.ahlab.org/media/site/people/roger-boldu/roger-boldu.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/roger-boldu/roger-boldu.jpg" alt="Roger Boldu" loading="lazy">
         </div>
         <h4>Roger Boldu</h4>
         <div class="person-role">PhD Candidate</div>
       </a>
-      <a href="/people/tharindu-kaluarachchi/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/tharindu-kaluarachchi/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Tharindu Kaluarachchi" data-role="PhD Candidate" data-photo="https://cdn.ahlab.org/media/site/people/tharindu-kaluarachchi/tharindu-kaluarachchi.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/tharindu-kaluarachchi/tharindu-kaluarachchi.jpg" alt="Tharindu Kaluarachchi" loading="lazy">
         </div>
         <h4>Tharindu Kaluarachchi</h4>
         <div class="person-role">PhD Candidate</div>
       </a>
-      <a href="/people/benjamin-petry/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/benjamin-petry/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Benjamin Petry" data-role="PhD Candidate" data-photo="https://cdn.ahlab.org/media/site/people/benjamin-petry/benjamin-petry.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/benjamin-petry/benjamin-petry.jpg" alt="Benjamin Petry" loading="lazy">
         </div>
         <h4>Benjamin Petry</h4>
         <div class="person-role">PhD Candidate</div>
       </a>
-      <a href="/people/priyashri-sridhar/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/priyashri-sridhar/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Priyashri Sridhar" data-role="PhD Candidate" data-photo="https://cdn.ahlab.org/media/site/people/priyashri-sridhar/priyashri-sridhar.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/priyashri-sridhar/priyashri-sridhar.jpg" alt="Priyashri Sridhar" loading="lazy">
         </div>
         <h4>Priyashri Sridhar</h4>
         <div class="person-role">PhD Candidate</div>
       </a>
-      <a href="/people/hussel-suriyaarachchi/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/hussel-suriyaarachchi/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Hussel Suriyaarachchi" data-role="Research Engineer" data-photo="https://cdn.ahlab.org/media/site/people/hussel-suriyaarachchi/hussel-suriyaarachchi.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/hussel-suriyaarachchi/hussel-suriyaarachchi.jpg" alt="Hussel Suriyaarachchi" loading="lazy">
         </div>
         <h4>Hussel Suriyaarachchi</h4>
         <div class="person-role">Research Engineer</div>
       </a>
-      <a href="/people/sachith-muthukumarana/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/sachith-muthukumarana/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Sachith Muthukumarana" data-role="PhD Candidate" data-photo="https://cdn.ahlab.org/media/site/people/sachith-muthukumarana/sachith-muthukumarana.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/sachith-muthukumarana/sachith-muthukumarana.jpg" alt="Sachith Muthukumarana" loading="lazy">
         </div>
         <h4>Sachith Muthukumarana</h4>
         <div class="person-role">PhD Candidate</div>
       </a>
-      <a href="/people/shi-yilei/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/shi-yilei/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Shi Yilei" data-role="PhD Candidate" data-photo="https://cdn.ahlab.org/media/site/people/shi-yilei/shi-yilei.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/shi-yilei/shi-yilei.jpg" alt="Shi Yilei" loading="lazy">
         </div>
         <h4>Shi Yilei</h4>
         <div class="person-role">PhD Candidate</div>
       </a>
-      <a href="/people/samantha-chan/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/samantha-chan/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Samantha Chan" data-role="PhD Candidate" data-photo="https://cdn.ahlab.org/media/site/people/samantha-chan/samantha-chan.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/samantha-chan/samantha-chan.jpg" alt="Samantha Chan" loading="lazy">
         </div>
         <h4>Samantha Chan</h4>
         <div class="person-role">PhD Candidate</div>
       </a>
-      <a href="/people/shamane-siriwardhana/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/shamane-siriwardhana/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Shamane Siriwardhana" data-role="PhD Candidate" data-photo="https://cdn.ahlab.org/media/site/people/shamane-siriwardhana/shamane-siriwardhana.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/shamane-siriwardhana/shamane-siriwardhana.jpg" alt="Shamane Siriwardhana" loading="lazy">
         </div>
         <h4>Shamane Siriwardhana</h4>
         <div class="person-role">PhD Candidate</div>
       </a>
-      <a href="/people/felicia-tan/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/felicia-tan/" class="person-card rv" data-section-key="alumni" data-stint-years="2024" data-name="Felicia Tan" data-role="Research Assistant" data-photo="https://cdn.ahlab.org/media/site/people/felicia-tan/felicia-tan.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/felicia-tan/felicia-tan.jpg" alt="Felicia Tan" loading="lazy">
         </div>
         <h4>Felicia Tan</h4>
         <div class="person-role">Research Assistant</div>
       </a>
-      <a href="/people/vipula-dissanayake/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/vipula-dissanayake/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Vipula Dissanayake" data-role="PhD Candidate" data-photo="https://cdn.ahlab.org/media/site/people/vipula-dissanayake/vipula-dissanayake.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/vipula-dissanayake/vipula-dissanayake.jpg" alt="Vipula Dissanayake" loading="lazy">
         </div>
         <h4>Vipula Dissanayake</h4>
         <div class="person-role">PhD Candidate</div>
       </a>
-      <a href="/people/kin-fuai-yong/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/kin-fuai-yong/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Kin Fuai Yong" data-role="Master Student" data-photo="https://cdn.ahlab.org/media/site/people/kin-fuai-yong/kin-fuai-yong.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/kin-fuai-yong/kin-fuai-yong.jpg" alt="Kin Fuai Yong" loading="lazy">
         </div>
         <h4>Kin Fuai Yong</h4>
         <div class="person-role">Master Student</div>
       </a>
-      <a href="/people/pablo-g-c/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/pablo-g-c/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Pablo G.C." data-role="Master Student" data-photo="https://cdn.ahlab.org/media/site/people/pablo-g-c/pablo-g-c.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/pablo-g-c/pablo-g-c.jpg" alt="Pablo G.C." loading="lazy">
         </div>
         <h4>Pablo G.C.</h4>
         <div class="person-role">Master Student</div>
       </a>
-      <a href="/people/jiashuo-cao/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/jiashuo-cao/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Jiashuo Cao" data-role="Master Student" data-photo="https://cdn.ahlab.org/media/site/people/jiashuo-cao/jiashuo-cao.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/jiashuo-cao/jiashuo-cao.jpg" alt="Jiashuo Cao" loading="lazy">
         </div>
         <h4>Jiashuo Cao</h4>
         <div class="person-role">Master Student</div>
       </a>
-      <a href="/people/andrew-reis/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/andrew-reis/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Andrew Reis" data-role="Master Student" data-photo="https://cdn.ahlab.org/media/site/people/andrew-reis/andrew-reis.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/andrew-reis/andrew-reis.jpg" alt="Andrew Reis" loading="lazy">
         </div>
         <h4>Andrew Reis</h4>
         <div class="person-role">Master Student</div>
       </a>
-      <a href="/people/purnima-kamath/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/purnima-kamath/" class="person-card rv" data-section-key="alumni" data-stint-years="2022" data-name="Purnima Kamath" data-role="Research Fellow" data-photo="https://cdn.ahlab.org/media/site/people/purnima-kamath/purnima-kamath.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/purnima-kamath/purnima-kamath.jpg" alt="Purnima Kamath" loading="lazy">
         </div>
         <h4>Purnima Kamath</h4>
         <div class="person-role">Research Fellow</div>
       </a>
-      <a href="/people/yongquan-owen-hu/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/yongquan-owen-hu/" class="person-card rv" data-section-key="alumni" data-stint-years="2025" data-name="Yongquan 'Owen' Hu" data-role="Researcher" data-photo="https://cdn.ahlab.org/media/site/people/yongquan-owen-hu/yongquan-owen-hu.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/yongquan-owen-hu/yongquan-owen-hu.jpg" alt="Yongquan 'Owen' Hu" loading="lazy">
         </div>
         <h4>Yongquan 'Owen' Hu</h4>
         <div class="person-role">Researcher</div>
       </a>
-      <a href="/people/sonia-dupuch/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/sonia-dupuch/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Sonia Dupuch" data-role="Researcher" data-photo="https://cdn.ahlab.org/media/site/people/sonia-dupuch/sonia-dupuch.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/sonia-dupuch/sonia-dupuch.jpg" alt="Sonia Dupuch" loading="lazy">
         </div>
         <h4>Sonia Dupuch</h4>
         <div class="person-role">Researcher</div>
       </a>
-      <a href="/people/sumbul-khan/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/sumbul-khan/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Sumbul Khan" data-role="Research Scientist" data-photo="https://cdn.ahlab.org/media/site/people/sumbul-khan/sumbul-khan.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/sumbul-khan/sumbul-khan.jpg" alt="Sumbul Khan" loading="lazy">
         </div>
         <h4>Sumbul Khan</h4>
         <div class="person-role">Research Scientist</div>
       </a>
-      <a href="/people/shanaka-ransiri/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/shanaka-ransiri/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Shanaka Ransiri" data-role="Software Development Lead" data-photo="https://cdn.ahlab.org/media/site/people/shanaka-ransiri/shanaka-ransiri.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/shanaka-ransiri/shanaka-ransiri.jpg" alt="Shanaka Ransiri" loading="lazy">
         </div>
         <h4>Shanaka Ransiri</h4>
         <div class="person-role">Software Development Lead</div>
       </a>
-      <a href="/people/fiona-taimana/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/fiona-taimana/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Fiona Taimana" data-role="Researcher" data-photo="https://cdn.ahlab.org/media/site/people/fiona-taimana/fiona-taimana.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/fiona-taimana/fiona-taimana.jpg" alt="Fiona Taimana" loading="lazy">
         </div>
         <h4>Fiona Taimana</h4>
         <div class="person-role">Researcher</div>
       </a>
-      <a href="/people/yeo-kian-peen/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/yeo-kian-peen/" class="person-card rv" data-section-key="alumni" data-stint-years="2024" data-name="Yeo Kian Peen" data-role="Senior Embedded Engineer" data-photo="https://cdn.ahlab.org/media/site/people/yeo-kian-peen/yeo-kian-peen.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/yeo-kian-peen/yeo-kian-peen.jpg" alt="Yeo Kian Peen" loading="lazy">
         </div>
         <h4>Yeo Kian Peen</h4>
         <div class="person-role">Senior Embedded Engineer</div>
       </a>
-      <a href="/people/santiago-ortega/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/santiago-ortega/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Santiago Ortega" data-role="Research Engineer" data-photo="https://cdn.ahlab.org/media/site/people/santiago-ortega/santiago-ortega.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/santiago-ortega/santiago-ortega.jpg" alt="Santiago Ortega" loading="lazy">
         </div>
         <h4>Santiago Ortega</h4>
         <div class="person-role">Research Engineer</div>
       </a>
-      <a href="/people/piyum-fernando/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/piyum-fernando/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Piyum Fernando" data-role="Research Engineer" data-photo="https://cdn.ahlab.org/media/site/people/piyum-fernando/piyum-fernando.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/piyum-fernando/piyum-fernando.jpg" alt="Piyum Fernando" loading="lazy">
         </div>
         <h4>Piyum Fernando</h4>
         <div class="person-role">Research Engineer</div>
       </a>
-      <a href="/people/hasitha-rajapakse/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/hasitha-rajapakse/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Hasitha Rajapakse" data-role="Research Engineer" data-photo="https://cdn.ahlab.org/media/site/people/hasitha-rajapakse/hasitha-rajapakse.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/hasitha-rajapakse/hasitha-rajapakse.jpg" alt="Hasitha Rajapakse" loading="lazy">
         </div>
         <h4>Hasitha Rajapakse</h4>
         <div class="person-role">Research Engineer</div>
       </a>
-      <a href="/people/thisum-buddhika/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/thisum-buddhika/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Thisum Buddhika" data-role="Research Engineer" data-photo="https://cdn.ahlab.org/media/site/people/thisum-buddhika/thisum-buddhika.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/thisum-buddhika/thisum-buddhika.jpg" alt="Thisum Buddhika" loading="lazy">
         </div>
         <h4>Thisum Buddhika</h4>
         <div class="person-role">Research Engineer</div>
       </a>
-      <a href="/people/attila-victor-achenbach/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/attila-victor-achenbach/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Attila Victor Achenbach" data-role="Research Engineer" data-photo="https://cdn.ahlab.org/media/site/people/attila-victor-achenbach/attila-victor-achenbach.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/attila-victor-achenbach/attila-victor-achenbach.jpg" alt="Attila Victor Achenbach" loading="lazy">
         </div>
         <h4>Attila Victor Achenbach</h4>
         <div class="person-role">Research Engineer</div>
       </a>
-      <a href="/people/deviana-reis/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/deviana-reis/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Deviana Reis" data-role="Research Assistant" data-photo="https://cdn.ahlab.org/media/site/people/deviana-reis/deviana-reis.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/deviana-reis/deviana-reis.jpg" alt="Deviana Reis" loading="lazy">
         </div>
         <h4>Deviana Reis</h4>
         <div class="person-role">Research Assistant</div>
       </a>
-      <a href="/people/michelle-wu/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/michelle-wu/" class="person-card rv" data-section-key="alumni" data-stint-years="2021" data-name="Michelle Wu" data-role="Master Student" data-photo="https://cdn.ahlab.org/media/site/people/michelle-wu/michelle-wu.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/michelle-wu/michelle-wu.jpg" alt="Michelle Wu" loading="lazy">
         </div>
         <h4>Michelle Wu</h4>
         <div class="person-role">Master Student</div>
       </a>
-      <a href="/people/jerome-humphrey/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/jerome-humphrey/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Jerome Humphrey" data-role="Researcher" data-photo="https://cdn.ahlab.org/media/site/people/jerome-humphrey/jerome-humphrey.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/jerome-humphrey/jerome-humphrey.jpg" alt="Jerome Humphrey" loading="lazy">
         </div>
         <h4>Jerome Humphrey</h4>
         <div class="person-role">Researcher</div>
       </a>
-      <a href="/people/rivindu-weerasekera/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/rivindu-weerasekera/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Rivindu Weerasekera" data-role="Researcher" data-photo="https://cdn.ahlab.org/media/site/people/rivindu-weerasekera/rivindu-weerasekera.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/rivindu-weerasekera/rivindu-weerasekera.jpg" alt="Rivindu Weerasekera" loading="lazy">
         </div>
         <h4>Rivindu Weerasekera</h4>
         <div class="person-role">Researcher</div>
       </a>
-      <a href="/people/hannah-qiao/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/hannah-qiao/" class="person-card rv" data-section-key="alumni" data-stint-years="2020" data-name="Hannah Qiao" data-role="Designer" data-photo="https://cdn.ahlab.org/media/site/people/hannah-qiao/hannah-qiao.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/hannah-qiao/hannah-qiao.jpg" alt="Hannah Qiao" loading="lazy">
         </div>
         <h4>Hannah Qiao</h4>
         <div class="person-role">Designer</div>
       </a>
-      <a href="/people/malsha-de-zoysa/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/malsha-de-zoysa/" class="person-card rv" data-section-key="alumni" data-stint-years="2023" data-name="Malsha de Zoysa" data-role="Research Engineer" data-photo="https://cdn.ahlab.org/media/site/people/malsha-de-zoysa/malsha-de-zoysa.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/malsha-de-zoysa/malsha-de-zoysa.jpg" alt="Malsha de Zoysa" loading="lazy">
         </div>
         <h4>Malsha de Zoysa</h4>
         <div class="person-role">Research Engineer</div>
       </a>
-      <a href="/people/christoffer-matsson/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/christoffer-matsson/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Christoffer Matsson" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/christoffer-matsson/christoffer-matsson.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/christoffer-matsson/christoffer-matsson.jpg" alt="Christoffer Matsson" loading="lazy">
         </div>
         <h4>Christoffer Matsson</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/colin-toh/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/colin-toh/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Colin Toh" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/colin-toh/colin-toh.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/colin-toh/colin-toh.jpg" alt="Colin Toh" loading="lazy">
         </div>
         <h4>Colin Toh</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/lynn-takeshita/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/lynn-takeshita/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Lynn Takeshita" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/lynn-takeshita/lynn-takeshita.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/lynn-takeshita/lynn-takeshita.jpg" alt="Lynn Takeshita" loading="lazy">
         </div>
         <h4>Lynn Takeshita</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/nipuna-samarasekara/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/nipuna-samarasekara/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Nipuna Samarasekara" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/nipuna-samarasekara/nipuna-samarasekara.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/nipuna-samarasekara/nipuna-samarasekara.jpg" alt="Nipuna Samarasekara" loading="lazy">
         </div>
         <h4>Nipuna Samarasekara</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/connie-liu/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/connie-liu/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Connie Liu" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/connie-liu/connie-liu.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/connie-liu/connie-liu.jpg" alt="Connie Liu" loading="lazy">
         </div>
         <h4>Connie Liu</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/thavishi-illandara/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/thavishi-illandara/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Thavishi Illandara" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/thavishi-illandara/thavishi-illandara.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/thavishi-illandara/thavishi-illandara.jpg" alt="Thavishi Illandara" loading="lazy">
         </div>
         <h4>Thavishi Illandara</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/nuwan-janaka/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/nuwan-janaka/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Nuwan Janaka" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/nuwan-janaka/nuwan-janaka.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/nuwan-janaka/nuwan-janaka.jpg" alt="Nuwan Janaka" loading="lazy">
         </div>
         <h4>Nuwan Janaka</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/savithru-jayasinghe/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/savithru-jayasinghe/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Savithru Jayasinghe" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/savithru-jayasinghe/savithru-jayasinghe.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/savithru-jayasinghe/savithru-jayasinghe.jpg" alt="Savithru Jayasinghe" loading="lazy">
         </div>
         <h4>Savithru Jayasinghe</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/anuruddha-hettiarachchi/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/anuruddha-hettiarachchi/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Anuruddha Hettiarachchi" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/anuruddha-hettiarachchi/anuruddha-hettiarachchi.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/anuruddha-hettiarachchi/anuruddha-hettiarachchi.jpg" alt="Anuruddha Hettiarachchi" loading="lazy">
         </div>
         <h4>Anuruddha Hettiarachchi</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/chanaka-singhabahu/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/chanaka-singhabahu/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Chanaka Singhabahu" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/chanaka-singhabahu/chanaka-singhabahu.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/chanaka-singhabahu/chanaka-singhabahu.jpg" alt="Chanaka Singhabahu" loading="lazy">
         </div>
         <h4>Chanaka Singhabahu</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/jessica-fang/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/jessica-fang/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Jessica Fang" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/jessica-fang/jessica-fang.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/jessica-fang/jessica-fang.jpg" alt="Jessica Fang" loading="lazy">
         </div>
         <h4>Jessica Fang</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/ruth-park/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/ruth-park/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Ruth Park" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/ruth-park/ruth-park.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/ruth-park/ruth-park.jpg" alt="Ruth Park" loading="lazy">
         </div>
         <h4>Ruth Park</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/akshika-wijesundara/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/akshika-wijesundara/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Akshika Wijesundara" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/akshika-wijesundara/akshika-wijesundara.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/akshika-wijesundara/akshika-wijesundara.jpg" alt="Akshika Wijesundara" loading="lazy">
         </div>
         <h4>Akshika Wijesundara</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/hasantha-malavipathirana/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/hasantha-malavipathirana/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Hasantha Malavipathirana" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/hasantha-malavipathirana/hasantha-malavipathirana.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/hasantha-malavipathirana/hasantha-malavipathirana.jpg" alt="Hasantha Malavipathirana" loading="lazy">
         </div>
         <h4>Hasantha Malavipathirana</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/kevin-fan/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/kevin-fan/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Kevin Fan" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/kevin-fan/kevin-fan.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/kevin-fan/kevin-fan.jpg" alt="Kevin Fan" loading="lazy">
         </div>
         <h4>Kevin Fan</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/vikum-sri-wijesinghe/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/vikum-sri-wijesinghe/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Vikum Sri Wijesinghe" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/vikum-sri-wijesinghe/vikum-sri-wijesinghe.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/vikum-sri-wijesinghe/vikum-sri-wijesinghe.jpg" alt="Vikum Sri Wijesinghe" loading="lazy">
         </div>
         <h4>Vikum Sri Wijesinghe</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/buddhishan-manamperi/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/buddhishan-manamperi/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Buddhishan Manamperi" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/buddhishan-manamperi/buddhishan-manamperi.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/buddhishan-manamperi/buddhishan-manamperi.jpg" alt="Buddhishan Manamperi" loading="lazy">
         </div>
         <h4>Buddhishan Manamperi</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/fatin-atiqah/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/fatin-atiqah/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Fatin Atiqah" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/fatin-atiqah/fatin-atiqah.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/fatin-atiqah/fatin-atiqah.jpg" alt="Fatin Atiqah" loading="lazy">
         </div>
         <h4>Fatin Atiqah</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/fang-chuxian/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/fang-chuxian/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Fang Chuxian" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/fang-chuxian/fang-chuxian.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/fang-chuxian/fang-chuxian.jpg" alt="Fang Chuxian" loading="lazy">
         </div>
         <h4>Fang Chuxian</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/guo-yuanjing/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/guo-yuanjing/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Guo Yuanjing" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/guo-yuanjing/guo-yuanjing.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/guo-yuanjing/guo-yuanjing.jpg" alt="Guo Yuanjing" loading="lazy">
         </div>
         <h4>Guo Yuanjing</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/gesu-india/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/gesu-india/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Gesu India" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/gesu-india/gesu-india.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/gesu-india/gesu-india.jpg" alt="Gesu India" loading="lazy">
         </div>
         <h4>Gesu India</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/tomas-vega/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/tomas-vega/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Tomás Vega" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/tomas-vega/tomas-vega.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/tomas-vega/tomas-vega.jpg" alt="Tomás Vega" loading="lazy">
         </div>
         <h4>Tomás Vega</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/tomoya-sasaki/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/tomoya-sasaki/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Tomoya Sasaki" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/tomoya-sasaki/tomoya-sasaki.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/tomoya-sasaki/tomoya-sasaki.jpg" alt="Tomoya Sasaki" loading="lazy">
         </div>
         <h4>Tomoya Sasaki</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/noura-howell/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/noura-howell/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Noura Howell" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/noura-howell/noura-howell.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/noura-howell/noura-howell.jpg" alt="Noura Howell" loading="lazy">
         </div>
         <h4>Noura Howell</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/beniel-thileepan/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/beniel-thileepan/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Beniel Thileepan" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/beniel-thileepan/beniel-thileepan.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/beniel-thileepan/beniel-thileepan.jpg" alt="Beniel Thileepan" loading="lazy">
         </div>
         <h4>Beniel Thileepan</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/nuwan-tharaka-perera/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/nuwan-tharaka-perera/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Nuwan Tharaka Perera" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/nuwan-tharaka-perera/nuwan-tharaka-perera.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/nuwan-tharaka-perera/nuwan-tharaka-perera.jpg" alt="Nuwan Tharaka Perera" loading="lazy">
         </div>
         <h4>Nuwan Tharaka Perera</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/sanjay-pushparajan/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/sanjay-pushparajan/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Sanjay Pushparajan" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/sanjay-pushparajan/sanjay-pushparajan.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/sanjay-pushparajan/sanjay-pushparajan.jpg" alt="Sanjay Pushparajan" loading="lazy">
         </div>
         <h4>Sanjay Pushparajan</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/adrian-robertson/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/adrian-robertson/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Adrian Robertson" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/adrian-robertson/adrian-robertson.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/adrian-robertson/adrian-robertson.jpg" alt="Adrian Robertson" loading="lazy">
         </div>
         <h4>Adrian Robertson</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/heetesh-alwani/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/heetesh-alwani/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Heetesh Alwani" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/heetesh-alwani/heetesh-alwani.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/heetesh-alwani/heetesh-alwani.jpg" alt="Heetesh Alwani" loading="lazy">
         </div>
         <h4>Heetesh Alwani</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/loic-david/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/loic-david/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Loïc David" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/loic-david/loic-david.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/loic-david/loic-david.jpg" alt="Loïc David" loading="lazy">
         </div>
         <h4>Loïc David</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/james-lim/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/james-lim/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="James Lim" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/james-lim/james-lim.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/james-lim/james-lim.jpg" alt="James Lim" loading="lazy">
         </div>
         <h4>James Lim</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/alex-woodall/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/alex-woodall/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Alex Woodall" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/alex-woodall/alex-woodall.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/alex-woodall/alex-woodall.jpg" alt="Alex Woodall" loading="lazy">
         </div>
         <h4>Alex Woodall</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/annabelle-ritchie/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/annabelle-ritchie/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Annabelle Ritchie" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/annabelle-ritchie/annabelle-ritchie.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/annabelle-ritchie/annabelle-ritchie.jpg" alt="Annabelle Ritchie" loading="lazy">
         </div>
         <h4>Annabelle Ritchie</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/rebecca-mathews/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/rebecca-mathews/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Rebecca Mathews" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/rebecca-mathews/rebecca-mathews.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/rebecca-mathews/rebecca-mathews.jpg" alt="Rebecca Mathews" loading="lazy">
         </div>
         <h4>Rebecca Mathews</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/sambhav-jain/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/sambhav-jain/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Sambhav Jain" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/sambhav-jain/sambhav-jain.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/sambhav-jain/sambhav-jain.jpg" alt="Sambhav Jain" loading="lazy">
         </div>
         <h4>Sambhav Jain</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/shardul-sapkota/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/shardul-sapkota/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Shardul Sapkota" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/shardul-sapkota/shardul-sapkota.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/shardul-sapkota/shardul-sapkota.jpg" alt="Shardul Sapkota" loading="lazy">
         </div>
         <h4>Shardul Sapkota</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/aristee-thevenon/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/aristee-thevenon/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Aristée Thevenon" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/aristee-thevenon/aristee-thevenon.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/aristee-thevenon/aristee-thevenon.jpg" alt="Aristée Thevenon" loading="lazy">
         </div>
         <h4>Aristée Thevenon</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/yongzhen-li/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/yongzhen-li/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Yongzhen Li" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/yongzhen-li/yongzhen-li.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/yongzhen-li/yongzhen-li.jpg" alt="Yongzhen Li" loading="lazy">
         </div>
         <h4>Yongzhen Li</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/clarence-jiyu-sun/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/clarence-jiyu-sun/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Clarence Jiyu Sun" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/clarence-jiyu-sun/clarence-jiyu-sun.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/clarence-jiyu-sun/clarence-jiyu-sun.jpg" alt="Clarence Jiyu Sun" loading="lazy">
         </div>
         <h4>Clarence Jiyu Sun</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/mevan-wijewardena/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/mevan-wijewardena/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Mevan Wijewardena" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/mevan-wijewardena/mevan-wijewardena.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/mevan-wijewardena/mevan-wijewardena.jpg" alt="Mevan Wijewardena" loading="lazy">
         </div>
         <h4>Mevan Wijewardena</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/geert-den-bieman/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/geert-den-bieman/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Geert den Bieman" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/geert-den-bieman/geert-den-bieman.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/geert-den-bieman/geert-den-bieman.jpg" alt="Geert den Bieman" loading="lazy">
         </div>
         <h4>Geert den Bieman</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/mengmeng-sun/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/mengmeng-sun/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Mengmeng Sun" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/mengmeng-sun/mengmeng-sun.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/mengmeng-sun/mengmeng-sun.jpg" alt="Mengmeng Sun" loading="lazy">
         </div>
         <h4>Mengmeng Sun</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/douwe-schmaal/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/douwe-schmaal/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Douwe Schmaal" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/douwe-schmaal/douwe-schmaal.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/douwe-schmaal/douwe-schmaal.jpg" alt="Douwe Schmaal" loading="lazy">
         </div>
         <h4>Douwe Schmaal</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/jovana-lazarevic/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/jovana-lazarevic/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Jovana Lazarević" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/jovana-lazarevic/jovana-lazarevic.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/jovana-lazarevic/jovana-lazarevic.jpg" alt="Jovana Lazarević" loading="lazy">
         </div>
         <h4>Jovana Lazarević</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/yiyue-qiao/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/yiyue-qiao/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="YiYue Qiao" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/yiyue-qiao/yiyue-qiao.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/yiyue-qiao/yiyue-qiao.jpg" alt="YiYue Qiao" loading="lazy">
         </div>
         <h4>YiYue Qiao</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/tamil-selvan/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/tamil-selvan/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Tamil Selvan" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/tamil-selvan/tamil-selvan.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/tamil-selvan/tamil-selvan.jpg" alt="Tamil Selvan" loading="lazy">
         </div>
         <h4>Tamil Selvan</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/nazia-ahmed/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/nazia-ahmed/" class="person-card rv" data-section-key="alumni" data-stint-years="2021" data-name="Nazia Ahmed" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/nazia-ahmed/nazia-ahmed.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/nazia-ahmed/nazia-ahmed.jpg" alt="Nazia Ahmed" loading="lazy">
         </div>
         <h4>Nazia Ahmed</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/yiming-xu/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/yiming-xu/" class="person-card rv" data-section-key="alumni" data-stint-years="2021" data-name="Yiming Xu" data-role="Research Attachment" data-photo="https://cdn.ahlab.org/media/site/people/yiming-xu/yiming-xu.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/yiming-xu/yiming-xu.jpg" alt="Yiming Xu" loading="lazy">
         </div>
         <h4>Yiming Xu</h4>
         <div class="person-role">Research Attachment</div>
       </a>
-      <a href="/people/yasith-samaradivakara/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/yasith-samaradivakara/" class="person-card rv" data-section-key="alumni" data-stint-years="2022" data-name="Yasith Samaradivakara" data-role="Research Engineer" data-photo="https://cdn.ahlab.org/media/site/people/yasith-samaradivakara/yasith-samaradivakara.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/yasith-samaradivakara/yasith-samaradivakara.jpg" alt="Yasith Samaradivakara" loading="lazy">
         </div>
         <h4>Yasith Samaradivakara</h4>
         <div class="person-role">Research Engineer</div>
       </a>
-      <a href="/people/vanessa-tang/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/vanessa-tang/" class="person-card rv" data-section-key="alumni" data-stint-years="2021" data-name="Vanessa Tang" data-role="Research Assistant" data-photo="https://cdn.ahlab.org/media/site/people/vanessa-tang/vanessa-tang.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/vanessa-tang/vanessa-tang.jpg" alt="Vanessa Tang" loading="lazy">
         </div>
         <h4>Vanessa Tang</h4>
         <div class="person-role">Research Assistant</div>
       </a>
-      <a href="/people/dinuka-jayaweera/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/dinuka-jayaweera/" class="person-card rv" data-section-key="alumni" data-stint-years="2024" data-name="Dinuka Jayaweera" data-role="Project Manager" data-photo="https://cdn.ahlab.org/media/site/people/dinuka-jayaweera/dinuka-jayaweera.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/dinuka-jayaweera/dinuka-jayaweera.jpg" alt="Dinuka Jayaweera" loading="lazy">
         </div>
         <h4>Dinuka Jayaweera</h4>
         <div class="person-role">Project Manager</div>
       </a>
-      <a href="/people/suveen-ellawela/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/suveen-ellawela/" class="person-card rv" data-section-key="alumni" data-stint-years="2022" data-name="Suveen Ellawela" data-role="Undergraduate Student" data-photo="https://cdn.ahlab.org/media/site/people/suveen-ellawela/suveen-ellawela.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/suveen-ellawela/suveen-ellawela.jpg" alt="Suveen Ellawela" loading="lazy">
         </div>
         <h4>Suveen Ellawela</h4>
         <div class="person-role">Undergraduate Student</div>
       </a>
-      <a href="/people/jaliya-kodithuwakku/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/jaliya-kodithuwakku/" class="person-card rv" data-section-key="alumni" data-stint-years="2024" data-name="Jaliya Kodithuwakku" data-role="Research Engineer Intern" data-photo="https://cdn.ahlab.org/media/site/people/jaliya-kodithuwakku/jaliya-kodithuwakku.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/jaliya-kodithuwakku/jaliya-kodithuwakku.jpg" alt="Jaliya Kodithuwakku" loading="lazy">
         </div>
         <h4>Jaliya Kodithuwakku</h4>
         <div class="person-role">Research Engineer Intern</div>
       </a>
-      <a href="/people/anubhaw-xess/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/anubhaw-xess/" class="person-card rv" data-section-key="alumni" data-stint-years="2023" data-name="Anubhaw Xess" data-role="Master Student" data-photo="https://cdn.ahlab.org/media/site/people/anubhaw-xess/anubhaw-xess.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/anubhaw-xess/anubhaw-xess.jpg" alt="Anubhaw Xess" loading="lazy">
         </div>
         <h4>Anubhaw Xess</h4>
         <div class="person-role">Master Student</div>
       </a>
-      <a href="/people/annis-fu/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/annis-fu/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Annis Fu" data-role="Final Year Project Student" data-photo="https://cdn.ahlab.org/media/site/people/annis-fu/annis-fu.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/annis-fu/annis-fu.jpg" alt="Annis Fu" loading="lazy">
         </div>
         <h4>Annis Fu</h4>
         <div class="person-role">Final Year Project Student</div>
       </a>
-      <a href="/people/deborah-yin/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/deborah-yin/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Deborah Yin" data-role="Final Year Project Student" data-photo="https://cdn.ahlab.org/media/site/people/deborah-yin/deborah-yin.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/deborah-yin/deborah-yin.jpg" alt="Deborah Yin" loading="lazy">
         </div>
         <h4>Deborah Yin</h4>
         <div class="person-role">Final Year Project Student</div>
       </a>
-      <a href="/people/xinke-wu/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/xinke-wu/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Xinke Wu" data-role="Visiting Student" data-photo="https://cdn.ahlab.org/media/site/people/xinke-wu/xinke-wu.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/xinke-wu/xinke-wu.jpg" alt="Xinke Wu" loading="lazy">
         </div>
         <h4>Xinke Wu</h4>
         <div class="person-role">Visiting Student</div>
       </a>
-      <a href="/people/lachie-calder/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/lachie-calder/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Lachie Calder" data-role="Final Year Project Student" data-photo="https://cdn.ahlab.org/media/site/people/lachie-calder/lachie-calder.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/lachie-calder/lachie-calder.jpg" alt="Lachie Calder" loading="lazy">
         </div>
         <h4>Lachie Calder</h4>
         <div class="person-role">Final Year Project Student</div>
       </a>
-      <a href="/people/mia-biggs/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/mia-biggs/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Mia Biggs" data-role="Final Year Project Student" data-photo="https://cdn.ahlab.org/media/site/people/mia-biggs/mia-biggs.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/mia-biggs/mia-biggs.jpg" alt="Mia Biggs" loading="lazy">
         </div>
         <h4>Mia Biggs</h4>
         <div class="person-role">Final Year Project Student</div>
       </a>
-      <a href="/people/inmo-yang/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/inmo-yang/" class="person-card rv" data-section-key="alumni" data-stint-years="2021" data-name="Inmo Yang" data-role="Final Year Project Student" data-photo="https://cdn.ahlab.org/media/site/people/inmo-yang/inmo-yang.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/inmo-yang/inmo-yang.jpg" alt="Inmo Yang" loading="lazy">
         </div>
         <h4>Inmo Yang</h4>
         <div class="person-role">Final Year Project Student</div>
       </a>
-      <a href="/people/jaime-wu/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/jaime-wu/" class="person-card rv" data-section-key="alumni" data-stint-years="2021" data-name="Jaime Wu" data-role="Final Year Project Student" data-photo="https://cdn.ahlab.org/media/site/people/jaime-wu/jaime-wu.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/jaime-wu/jaime-wu.jpg" alt="Jaime Wu" loading="lazy">
         </div>
         <h4>Jaime Wu</h4>
         <div class="person-role">Final Year Project Student</div>
       </a>
-      <a href="/people/hwan-yoo/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/hwan-yoo/" class="person-card rv" data-section-key="alumni" data-stint-years="2021" data-name="Hwan Yoo" data-role="Final Year Project Student" data-photo="https://cdn.ahlab.org/media/site/people/hwan-yoo/hwan-yoo.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/hwan-yoo/hwan-yoo.jpg" alt="Hwan Yoo" loading="lazy">
         </div>
         <h4>Hwan Yoo</h4>
         <div class="person-role">Final Year Project Student</div>
       </a>
-      <a href="/people/justin-chen/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/justin-chen/" class="person-card rv" data-section-key="alumni" data-stint-years="2021" data-name="Justin Chen" data-role="Final Year Project Student" data-photo="https://cdn.ahlab.org/media/site/people/justin-chen/justin-chen.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/justin-chen/justin-chen.jpg" alt="Justin Chen" loading="lazy">
         </div>
         <h4>Justin Chen</h4>
         <div class="person-role">Final Year Project Student</div>
       </a>
-      <a href="/people/andrew-wang/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/andrew-wang/" class="person-card rv" data-section-key="alumni" data-stint-years="2021" data-name="Andrew Wang" data-role="Final Year Project Student" data-photo="https://cdn.ahlab.org/media/site/people/andrew-wang/andrew-wang.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/andrew-wang/andrew-wang.jpg" alt="Andrew Wang" loading="lazy">
         </div>
         <h4>Andrew Wang</h4>
         <div class="person-role">Final Year Project Student</div>
       </a>
-      <a href="/people/joshua-zhang/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/joshua-zhang/" class="person-card rv" data-section-key="alumni" data-stint-years="2021" data-name="Joshua Zhang" data-role="Final Year Project Student" data-photo="https://cdn.ahlab.org/media/site/people/joshua-zhang/joshua-zhang.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/joshua-zhang/joshua-zhang.jpg" alt="Joshua Zhang" loading="lazy">
         </div>
         <h4>Joshua Zhang</h4>
         <div class="person-role">Final Year Project Student</div>
       </a>
-      <a href="/people/damsy-de-silva/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/damsy-de-silva/" class="person-card rv" data-section-key="alumni" data-stint-years="" data-name="Damsy De Silva" data-role="Intern" data-photo="https://cdn.ahlab.org/media/site/people/damsy-de-silva/damsy-de-silva.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/damsy-de-silva/damsy-de-silva.jpg" alt="Damsy De Silva" loading="lazy">
         </div>
         <h4>Damsy De Silva</h4>
         <div class="person-role">Intern</div>
       </a>
-      <a href="/people/shani-de-silva/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/shani-de-silva/" class="person-card rv" data-section-key="alumni" data-stint-years="2022" data-name="Shani De Silva" data-role="Intern" data-photo="https://cdn.ahlab.org/media/site/people/shani-de-silva/shani-de-silva.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/shani-de-silva/shani-de-silva.jpg" alt="Shani De Silva" loading="lazy">
         </div>
         <h4>Shani De Silva</h4>
         <div class="person-role">Intern</div>
       </a>
-      <a href="/people/hasini-amanda/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/hasini-amanda/" class="person-card rv" data-section-key="alumni" data-stint-years="2024" data-name="Hasini Amanda" data-role="Intern" data-photo="https://cdn.ahlab.org/media/site/people/hasini-amanda/hasini-amanda.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/hasini-amanda/hasini-amanda.jpg" alt="Hasini Amanda" loading="lazy">
         </div>
         <h4>Hasini Amanda</h4>
         <div class="person-role">Intern</div>
       </a>
-      <a href="/people/sijan-poudel/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/sijan-poudel/" class="person-card rv" data-section-key="alumni" data-stint-years="2024" data-name="Sijan Poudel" data-role="Intern" data-photo="https://cdn.ahlab.org/media/site/people/sijan-poudel/sijan-poudel.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/sijan-poudel/sijan-poudel.jpg" alt="Sijan Poudel" loading="lazy">
         </div>
         <h4>Sijan Poudel</h4>
         <div class="person-role">Intern</div>
       </a>
-      <a href="/people/raina-song/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/raina-song/" class="person-card rv" data-section-key="alumni" data-stint-years="2024" data-name="Raina Song" data-role="Intern" data-photo="https://cdn.ahlab.org/media/site/people/raina-song/raina-song.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/raina-song/raina-song.jpg" alt="Raina Song" loading="lazy">
         </div>
         <h4>Raina Song</h4>
         <div class="person-role">Intern</div>
       </a>
-      <a href="/people/takuma-masuda/" class="person-card rv" style="transition-delay:0.5s">
+      <a href="/people/takuma-masuda/" class="person-card rv" data-section-key="alumni" data-stint-years="2025" data-name="Takuma Masuda" data-role="Intern" data-photo="https://cdn.ahlab.org/media/site/people/takuma-masuda/takuma-masuda.jpg" style="transition-delay:0.5s">
         <div class="person-card-photo">
           <img src="https://cdn.ahlab.org/media/site/people/takuma-masuda/takuma-masuda.jpg" alt="Takuma Masuda" loading="lazy">
         </div>
@@ -1339,108 +1351,18 @@
       </a>
     </div>
 </section>
+    </div>
+
+    <!-- Honeycomb view container — JS-populated when the user picks
+         Honeycomb view. One hive per segment. Hidden in Grid view. -->
+    <div class="people-hives" id="peopleHives" hidden></div>
+
   </main>
 
 </div>
 
 <div id="site-footer-mount"></div>
 <script src="/js/footer-include.js"></script>
-
-<script>
-// Role-group filter — the filter "chips" are inline text fragments in
-// the hero, styled to look like lightly-emphasized prose but clickable.
-// Clicking a fragment filters Current Team + PI cards to that group and
-// hides Alumni/Collaborators; the "Show all" link restores everything.
-// Cards whose role doesn't map to a group (Assoc. Prof., Manager, PhD
-// Candidate) have no data-role-group attribute, so they hide under any
-// specific filter and show under "all".
-const rolePills   = document.getElementById('rolePills');
-const filterReset = document.getElementById('filterReset');
-const heroSummary = document.querySelector('.hero-summary');
-const allSections = document.querySelectorAll('.people-section');
-
-// Cache the original section-label text once, so when a filter is
-// applied we can swap it to "<Original> / <FilterLabel>" and restore
-// on "Show all" without losing the original string.
-document.querySelectorAll('.people-section .section-label').forEach(el => {
-  el.dataset.baseLabel = el.textContent.trim();
-});
-
-function applyRoleFilter(group) {
-  const isAll = !group || group === 'all';
-
-  // Toggle the hero into "filtered" state so CSS can dim the non-active
-  // chips, show the reset link, etc.
-  heroSummary?.classList.toggle('is-filtered', !isAll);
-  let activeLabel = '';
-  document.querySelectorAll('#rolePills .hero-chip').forEach(chip => {
-    const isActive = !isAll && chip.dataset.group === group;
-    chip.classList.toggle('is-active', isActive);
-    if (isActive) activeLabel = chip.dataset.label || '';
-  });
-
-  allSections.forEach(section => {
-    const filterable = section.dataset.filterable === 'true';
-    const labelEl = section.querySelector('.section-label');
-
-    if (isAll) {
-      section.classList.remove('hidden');
-      section.querySelectorAll('.person-card').forEach(c => c.classList.remove('hidden'));
-      if (labelEl) labelEl.textContent = labelEl.dataset.baseLabel;
-      return;
-    }
-
-    if (!filterable) {
-      section.classList.add('hidden');
-      return;
-    }
-
-    let visible = 0;
-    section.querySelectorAll('.person-card').forEach(card => {
-      const match = card.dataset.roleGroup === group;
-      card.classList.toggle('hidden', !match);
-      if (match) visible++;
-    });
-    section.classList.toggle('hidden', visible === 0);
-
-    // Update the label to reflect the active filter, e.g.
-    //   "Current Team"  →  "Current Team / Students"
-    // so the section header reads as a breadcrumb of the applied filter.
-    if (labelEl && visible > 0 && activeLabel) {
-      labelEl.textContent = `${labelEl.dataset.baseLabel} / ${activeLabel}`;
-    }
-  });
-}
-
-rolePills?.addEventListener('click', e => {
-  const chip = e.target.closest('.hero-chip');
-  if (!chip) return;
-  applyRoleFilter(chip.dataset.group);
-});
-// Keyboard support for the text-styled chips — role="button" spans
-// don't get Enter/Space activation by default, so we add it manually.
-rolePills?.addEventListener('keydown', e => {
-  if (e.key !== 'Enter' && e.key !== ' ') return;
-  const chip = e.target.closest('.hero-chip');
-  if (!chip) return;
-  e.preventDefault();
-  applyRoleFilter(chip.dataset.group);
-});
-filterReset?.addEventListener('click', () => applyRoleFilter('all'));
-
-const obs=new IntersectionObserver(e=>{e.forEach(n=>{if(n.isIntersecting)n.target.classList.add('vis')})},{threshold:.08});
-document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-// The site nav is mounted async by /js/nav-include.js, so #siteNav may
-// not exist at the moment this inline script runs — and on the people
-// index it never has that id anyway. Null-guard the handler so the
-// scroll listener doesn't throw on every tick.
-const nav = document.getElementById('siteNav');
-if (nav) {
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
-}
-document.querySelector('.nav-toggle')?.addEventListener('click',()=>{const l=document.querySelector('.nav-links');l.style.display=l.style.display==='flex'?'none':'flex'});
-</script>
+<script src="/js/people-index.js" defer></script>
 </body>
 </html>

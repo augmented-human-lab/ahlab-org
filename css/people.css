@@ -77,14 +77,28 @@
   transition: color .25s, border-color .25s;
   border-right: 2px solid transparent;
   margin-right: -1px;
-  /* cursor:default because no click handler is wired up — revisit
-     when the lab-timeline feature lights up. */
-  cursor: default;
-  pointer-events: none;
+  cursor: pointer;
+  text-decoration: none;
 }
+.year-nav a:hover { color: var(--color-neutral-90); }
 .year-nav a.active {
   color: var(--color-accent);
   font-weight: 700;
+  border-right-color: var(--color-accent);
+}
+/* "All time" anchor sits at the very top of the list — slightly
+   heavier weight than year entries so it reads as the default /
+   master option, with a thin divider underneath to separate it
+   from the year list. */
+.year-nav a[data-year="all"] {
+  font-weight: 600;
+  color: var(--color-neutral-90);
+  border-bottom: 1px solid var(--color-neutral-30);
+  margin-bottom: 6px;
+  padding-bottom: 12px;
+}
+.year-nav a[data-year="all"].active {
+  color: var(--color-accent);
   border-right-color: var(--color-accent);
 }
 @media (max-width: 991px) {
@@ -196,6 +210,25 @@
   font-family: var(--font-display); font-weight: 500;
   font-size: 21px; color: var(--color-neutral-70);
   margin-bottom: 24px;
+}
+/* ── AHL period (bracketed) ────────────────────────────────
+   A quiet one-liner showing the person's time at the lab, e.g.
+   "[2022–2025]". Sits between the social links row and the Then→Now
+   career timeline in the hero column.
+
+   Uses a monospace stack so the "____" underscore sentinel in
+   unknown-date slots lands at a consistent visual weight and width
+   (proportional fonts render underscores awkwardly narrow). The
+   small size + neutral-60 color keep it quieter than the role,
+   giving a glanceable "when were they here" read without competing
+   with the name. */
+.profile-ahl-period {
+  font-family: var(--font-mono, ui-monospace, "SF Mono", Menlo, Consolas, monospace);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--color-neutral-60);
+  margin-bottom: 16px;
 }
 .profile-link {
   display: inline-flex; align-items: center; gap: 8px;
@@ -739,3 +772,182 @@ a.profile-pub-title:hover { color: var(--color-accent); }
   .expertise-segment-name { font-size: 11px; }
   .expertise-segment-count { font-size: 12px; }
 }
+/* ── People index: hero-summary two-column layout ─────────
+   The hero-summary line on /people/ carries two filter groups:
+   role-group chips on the left, segment chips on the right. We
+   flip the summary from an inline <p> into a flex row so the
+   right group can right-align. On narrow screens it wraps and
+   the right group drops to its own line. */
+.hero-summary.hero-summary-split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+.hero-summary-left  { display: inline; }
+.hero-summary-right { display: inline-flex; align-items: baseline; gap: 14px; }
+
+/* Segment chips — hidden on mobile (the segment concept doesn't
+   apply to the mobile list which stays grouped by section). */
+.hero-filter-segments {
+  display: inline-flex;
+  gap: 14px;
+}
+@media (max-width: 991px) {
+  .hero-summary-right { display: none; }
+}
+
+/* Year-scoped mode: a specific year is selected, so segment filters
+   are meaningless — we dim them all out and force-highlight the
+   "Team" chip to signal the year-view is a team snapshot. JS adds
+   `is-year-scoped` to the hero-summary-right in this mode. */
+.hero-summary-right.is-year-scoped .hero-chip {
+  pointer-events: none;
+  opacity: .35;
+  text-decoration: none;
+}
+.hero-summary-right.is-year-scoped .hero-chip[data-segment="team"] {
+  opacity: 1;
+  background: rgba(255,255,255,.22);
+  text-decoration: underline solid #fff;
+  text-decoration-thickness: 2px;
+}
+
+/* ── View-mode toggle (desktop only, lives in the year-nav) ──
+   Two icon-only buttons sitting above "All time" — Grid (3×3 dots)
+   and Honeycomb (hex cluster). Small & quiet; the content area
+   gets its full width back. Hidden on ≤991px; mobile always uses
+   Grid view. */
+.view-toggle {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  margin: 0 20px 16px 0;
+  background: var(--color-neutral-20);
+  border: 1px solid var(--color-neutral-30);
+  border-radius: 10px;
+  width: fit-content;
+}
+.view-btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-neutral-70);
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.view-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+.view-btn:hover { color: var(--color-neutral-100); background: rgba(0,0,0,.04); }
+.view-btn.is-active {
+  background: var(--color-neutral-100);
+  color: #fff;
+}
+@media (max-width: 991px) {
+  .view-toggle { display: none; }
+}
+
+/* ── Honeycomb view ───────────────────────────────────────
+   One .hive-section per segment (Team / Collaborators / Alumni),
+   stacked vertically. Each hive is laid out in JS — it sets width,
+   height, and translate() on every .hex node based on a spiral
+   axial coordinate system. We only provide the stage + per-hex
+   visuals here; JS owns positions. */
+.people-hives { padding-top: 8px; }
+.hive-section { margin-bottom: 64px; }
+.hive-section .section-label {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+.hive-stage {
+  position: relative;
+  width: 100%;
+  /* Aspect ratio gives us a predictable bounding box; JS reads
+     clientWidth/Height and derives the hex size from it. */
+  aspect-ratio: 16 / 9;
+  background: radial-gradient(ellipse at center, #fff 0%, var(--color-neutral-20) 72%);
+  border: 1px solid var(--color-neutral-30);
+  border-radius: var(--radius-lg, 16px);
+  overflow: hidden;
+}
+.hive {
+  position: absolute;
+  inset: 0;
+}
+.hex {
+  position: absolute;
+  left: 0; top: 0;
+  transform-origin: center center;
+  /* Transition transform (for position tweens on layout change) and opacity
+     (for the fade-in). Matches the prototype's feel: transform is the main
+     motion, opacity is a quick fade underneath. The longer transform curve
+     lets the scale-up from .3 → 1 breathe without feeling snappy. */
+  transition:
+    transform 600ms cubic-bezier(.22, 1, .36, 1),
+    opacity 400ms ease,
+    filter .2s;
+  cursor: pointer;
+  text-decoration: none;
+  will-change: transform, opacity;
+}
+/* Enter state — JS adds .entering to each hex when it's appended, then
+   removes it on the next animation frame. Going entering → (no class)
+   drives the CSS transition. The scale origin is the hex center, so the
+   bloom radiates outward from each tile's final position. */
+.hex.entering {
+  opacity: 0;
+  transform: translate(var(--tx, 0), var(--ty, 0)) scale(.3);
+}
+.hex-inner {
+  position: absolute;
+  inset: 0;
+  display: block;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background-color: var(--color-neutral-30);
+  /* Image sizing: scale to 115% of hex width and let it overflow on all
+     sides, cropped invisibly by the hex clip-path. The 15% overshoot is
+     the project preset chosen after iterating on edge artifacts — it
+     hides minor sub-pixel rounding at the hex perimeter and pushes
+     square headshots' baked-in white background out of the visible
+     hex area without cropping the subject's face.
+     `background-position: center` keeps the subject in frame; the extra
+     crop is distributed evenly across all four directions. */
+  background-size: 115% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* All section-specific inset rings removed (purple team ring,
+   accent-color PI outline, white highlight) in favor of a seamless
+   edge-to-edge hexagon tesselation. If section differentiation is
+   needed later, a non-ring cue — hex fill color, corner marker, or
+   a subtle saturation shift on hover — won't interrupt the grid. */
+.hex:hover .hex-inner { filter: brightness(1.08) saturate(1.1); }
+.hex-label {
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translate(-50%, 100%);
+  background: var(--color-neutral-100);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s;
+  z-index: 10;
+}
+.hex:hover .hex-label { opacity: 1; }
