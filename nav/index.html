@@ -16,6 +16,13 @@
     </ul>
   </div>
 
+  <!-- Member-login slot: auth.js fills this with either the "Member login"
+       button (logged-out) or the profile avatar + dropdown (logged-in).
+       Left empty intentionally so the first paint has no flash of the
+       wrong state — auth.js runs synchronously after nav mount and
+       renders the right thing based on sessionStorage. -->
+  <div class="ahl-auth-slot" data-auth-slot="desktop"></div>
+
   <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -40,6 +47,9 @@
     <li><a href="/press/">Press &amp; Awards</a></li>
     <li><a href="/join/">Join Us</a></li>
   </ul>
+  <!-- Mobile-only auth slot, pinned to the bottom of the drawer overlay.
+       Same data-auth-slot attribute so auth.js fills it the same way. -->
+  <div data-auth-slot="drawer"></div>
 </div>
 
 <script>
@@ -117,6 +127,10 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && drawer.classList.contains('open')) setOpen(false);
   });
+
+  // Notify auth.js (and anyone else) that the nav is now in the DOM.
+  // auth.js uses this to populate [data-auth-slot] without polling.
+  document.dispatchEvent(new CustomEvent('ahl-nav-ready'));
 })();
 
 /* ──────────────────────────────────────────────────────────

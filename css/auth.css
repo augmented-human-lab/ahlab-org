@@ -1,0 +1,248 @@
+/* ============================================================
+   auth.css
+   Member-login UI: the button that sits in the nav slot, the
+   profile trigger (avatar) that replaces it after sign-in, and
+   the inline "My AHL" link / "Logout" swap.
+
+   Depends on tokens from theme.css (--color-accent, --radius,
+   --font-text, etc.). Link this file AFTER theme.css on any
+   page that renders the nav.
+
+   v7 changes vs earlier versions
+   - Dropdown menu replaced by an inline "My AHL" link next to
+     the avatar. Clicking the avatar swaps the link to a red
+     "Logout" button with a 5-second auto-revert.
+   - Mobile drawer gets a single "Account" entry styled like
+     the other drawer grid links, with avatar inline.
+   - Vertical alignment fix: the nav uses `align-items: flex-start`
+     so we pin an explicit slot height (matching the nav-links
+     line-box) and rely on the slot's own align-items: center to
+     place the avatar's optical center on the nav-links text line.
+   ============================================================ */
+
+/* ── Slot positioning in the nav ────────────────────────── */
+.ahl-auth-slot {
+  display: flex;
+  align-items: center;
+  margin-left: 24px;
+  flex-shrink: 0;
+  /* The nav is 120px tall with padding: 28px 40px 0 and
+     align-items: flex-start. The nav-links text sits at its own
+     24px line-box at the top of that padding. Pinning this slot
+     to the same 24px height and centering its contents puts the
+     avatar's optical center on the nav-links baseline. If we
+     omit this, the 32px avatar anchors flush-top and ends up
+     pushed ~4px below the text. */
+  height: 24px;
+}
+
+/* On mobile the top nav is a tight carousel; we move the auth
+   slot into the drawer instead (see drawer variant below). */
+@media (max-width: 991px) {
+  .site-nav .ahl-auth-slot { display: none; }
+}
+
+
+/* ── Login button (logged-out state, desktop) ──────────── */
+.ahl-login-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, .35);
+  background: rgba(255, 255, 255, .08);
+  color: #fff;
+  font-family: var(--font-text);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .01em;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .25s, border-color .25s, color .25s;
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+  /* Override the slot's pinned height so the button can breathe. */
+  height: auto;
+  line-height: 1;
+}
+.ahl-login-btn:hover {
+  background: rgba(255, 255, 255, .18);
+  border-color: rgba(255, 255, 255, .55);
+}
+.ahl-login-btn:active { transform: scale(.98); }
+.ahl-login-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+.ahl-login-icon { flex-shrink: 0; }
+.ahl-login-label { white-space: nowrap; }
+
+
+/* ── Inline profile (logged-in state, desktop) ─────────── */
+.ahl-profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  /* Avatar is 32px; slot is 24px. Let the 4px overflow each
+     side bleed up/down — the nav has a mask-image fade at its
+     bottom and plenty of padding-top, so neither direction
+     clips. */
+  overflow: visible;
+}
+
+.ahl-profile-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, .45);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color .25s, transform .15s;
+  line-height: 0;   /* kill intrinsic baseline gap */
+  flex-shrink: 0;
+}
+.ahl-profile-trigger:hover { border-color: #fff; }
+.ahl-profile-trigger:active { transform: scale(.95); }
+.ahl-profile-trigger:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Action labels — "My AHL" by default, "Logout" when the avatar
+   has been clicked. Both elements exist in the DOM at all times;
+   CSS controls which is rendered. */
+.ahl-profile-action {
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: .01em;
+  color: rgba(255, 255, 255, .85);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color .2s, opacity .2s;
+  white-space: nowrap;
+  line-height: 1;
+}
+.ahl-profile-action:hover { color: #fff; }
+.ahl-profile-action:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* "My AHL" — visible by default, hidden when logout is showing. */
+.ahl-profile-action-primary { display: inline-block; }
+.ahl-profile.ahl-profile-logout-visible .ahl-profile-action-primary {
+  display: none;
+}
+
+/* "Logout" — hidden by default, shown when the avatar is clicked.
+   Red so it's clearly a different affordance. Small enter animation
+   so the state change is noticeable. */
+.ahl-profile-action-logout {
+  display: none;
+  color: #FF6B6B;
+  font-weight: 600;
+  letter-spacing: .02em;
+  animation: ahl-logout-pulse .4s cubic-bezier(.34, 1.56, .64, 1);
+}
+.ahl-profile-action-logout:hover { color: #FF3B3B; }
+.ahl-profile.ahl-profile-logout-visible .ahl-profile-action-logout {
+  display: inline-block;
+}
+@keyframes ahl-logout-pulse {
+  0%   { opacity: 0; transform: translateX(-4px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+
+/* ── Avatar (img or initials) ───────────────────────────── */
+.ahl-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--gradient-start) 100%);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: .02em;
+  flex-shrink: 0;
+  user-select: none;
+  line-height: 1;
+}
+.ahl-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* ── Mobile drawer variant ────────────────────────────────
+   In the drawer (fullscreen overlay triggered by hamburger),
+   the auth slot sits below the drawer-grid links, styled like
+   another entry in that list: big font, underline border,
+   left-aligned. */
+.nav-drawer [data-auth-slot] {
+  /* Shadow the drawer-grid's horizontal rail (max-width 520px,
+     20px padding) so the entry aligns with the other links. */
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Logged-out drawer: style the login button like a drawer link. */
+.nav-drawer [data-auth-slot] .ahl-login-btn {
+  display: flex;
+  width: 100%;
+  padding: 16px 8px;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, .08);
+  border-radius: 0;
+  color: var(--color-neutral-100);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0;
+  text-align: left;
+  justify-content: flex-start;
+  height: auto;
+}
+.nav-drawer [data-auth-slot] .ahl-login-btn:hover {
+  background: transparent;
+  color: var(--color-accent);
+}
+
+/* Logged-in drawer: "Account" entry with inline avatar + "My AHL"
+   label. Taps navigate to /my-ahl/ — logout lives on that page. */
+.ahl-profile-drawer { width: 100%; }
+.ahl-profile-drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 8px;
+  border-top: 1px solid rgba(0, 0, 0, .08);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--color-neutral-100);
+  text-decoration: none;
+  transition: color .3s;
+}
+.ahl-profile-drawer-link:hover { color: var(--color-accent); }
+.ahl-profile-drawer-label { line-height: 1; }
+.ahl-profile-drawer .ahl-avatar {
+  /* Subtle ring so the gradient avatar doesn't look borderless
+     on the light drawer background. */
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .08);
+}

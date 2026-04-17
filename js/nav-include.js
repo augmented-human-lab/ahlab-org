@@ -60,5 +60,9 @@
         if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
       });
     }
+
+    // Let auth.js (and any other listeners) know the nav is now in the
+    // DOM, so they can populate [data-auth-slot] elements without polling.
+    document.dispatchEvent(new CustomEvent('ahl-nav-ready'));
   }
 })();

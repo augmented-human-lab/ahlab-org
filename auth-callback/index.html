@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signing in… — Augmented Human Lab</title>
+<meta name="robots" content="noindex,nofollow">
+
+<!--
+  /auth-callback/ — redirect landing page for the member login flow.
+
+  This is the third stop on a round-trip:
+    (1) User clicked "Member login" on some page → auth.js navigated the
+        tab to the Apps Script webapp.
+    (2) Apps Script read the user's Google Workspace identity, then
+        redirected the tab here, with identity fields in the URL hash.
+    (3) This page (you are here) verifies the nonce and redirects the
+        tab back to wherever the user was in step (1).
+
+  The entire page is designed to unload within ~100ms of loading. The
+  identity-handling script runs inline at the TOP of the body so it
+  starts navigating away before any other assets need to load. The UI
+  is just a fallback in case the redirect is interrupted (slow device,
+  JS blocked, etc.).
+
+  There are no external scripts or stylesheets — everything is inline.
+-->
+
+<style>
+html, body {
+  margin: 0; padding: 0; height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: linear-gradient(221deg, #00D7EE 0%, #6100FF 100%);
+  color: #fff;
+}
+body {
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 24px;
+}
+.card {
+  background: rgba(255, 255, 255, .14);
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 16px;
+  padding: 28px 36px;
+  max-width: 420px;
+}
+h1 { font-size: 18px; font-weight: 600; margin: 0 0 8px; }
+p  { font-size: 14px; line-height: 1.55; opacity: .85; margin: 0; }
+.dot {
+  display: inline-block; width: 8px; height: 8px; margin-right: 6px;
+  background: #fff; border-radius: 50%;
+  animation: pulse 1.2s ease-in-out infinite;
+  vertical-align: baseline;
+}
+@keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+button {
+  margin-top: 14px; padding: 8px 18px;
+  background: #fff; color: #6100FF; font-weight: 600;
+  border: 0; border-radius: 999px; cursor: pointer; font-size: 13px;
+}
+.err { background: rgba(0, 0, 0, .3); }
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+  <h1><span class="dot"></span>Finishing sign-in…</h1>
+  <p>Redirecting you back to the AHLab site.</p>
+</div>
+
+<script>
+/*
+ * Storage keys — MUST match the ones in js/auth.js.
+ */
+var STORAGE_KEY = 'ahl-auth-v1';
+var NONCE_KEY   = 'ahl-auth-nonce-v1';
+var RETURN_KEY  = 'ahl-auth-return-v1';
+
+(function () {
+  var card = document.getElementById('card');
+
+  /**
+   * Render an error state and stop. Called when we can't complete the
+   * redirect (bad hash, wrong nonce, etc.) — gives the user a button
+   * back to the home page instead of stranding them here.
+   */
+  function fail(title, msg) {
+    card.classList.add('err');
+    card.innerHTML =
+      '<h1>' + title + '</h1>' +
+      '<p>' + msg + '</p>' +
+      '<button type="button" id="goHome">Back to site</button>';
+    document.getElementById('goHome').addEventListener('click', function () {
+      location.replace('/');
+    });
+  }
+
+  // ── Parse the hash ──────────────────────────────────────────
+  // Format: #email=...&name=...&picture=...&nonce=...&ts=...
+  var hash = String(location.hash || '').replace(/^#/, '');
+  if (!hash) {
+    fail('Nothing to finish',
+      'This page is the landing target for the member-login flow. ' +
+      'If you reached it some other way, no action is needed.');
+    return;
+  }
+
+  var params = {};
+  hash.split('&').forEach(function (pair) {
+    var idx = pair.indexOf('=');
+    if (idx === -1) return;
+    try {
+      params[decodeURIComponent(pair.slice(0, idx))] =
+        decodeURIComponent(pair.slice(idx + 1));
+    } catch (e) { /* malformed fragment */ }
+  });
+
+  var email = params.email || '';
+  var name = params.name || '';
+  var picture = params.picture || '';
+  var nonce = params.nonce || '';
+  var ts = parseInt(params.ts, 10) || Date.now();
+
+  // Diagnostic: Apps Script echoes a `psrc` param telling us which
+  // code path ran for name/photo lookup. Log it once so you can
+  // see at a glance whether People API was used or why it wasn't.
+  // Values: 'people-api-ok', 'people-api-empty', 'people-api-disabled',
+  // or 'people-api-error:<message>'. Safe to remove once photos work.
+  if (params.psrc) {
+    console.log('[ahl-auth] profile source:', params.psrc,
+                '| name:', name, '| picture:', picture ? 'present' : 'empty');
+  }
+
+  if (!email || !nonce) {
+    fail('Incomplete sign-in',
+      'The sign-in response was missing required fields. Please try again.');
+    return;
+  }
+
+  // ── Verify the nonce ────────────────────────────────────────
+  // The main tab wrote the nonce to localStorage (NOT sessionStorage)
+  // before navigating to Apps Script. sessionStorage is partitioned by
+  // top-level BrowsingContext ID, which changes on cross-origin
+  // navigation — so sessionStorage is empty here, even in the same tab.
+  // localStorage is only partitioned by origin and survives the round
+  // trip. A hand-crafted URL would have no matching nonce and be
+  // rejected.
+  var expected;
+  try { expected = localStorage.getItem(NONCE_KEY); }
+  catch (e) { expected = null; }
+
+  if (!expected || expected !== nonce) {
+    fail('Expired or invalid sign-in',
+      'This sign-in link is no longer valid. Please start over by ' +
+      'clicking <strong>Member login</strong> again.');
+    return;
+  }
+
+  // Nonce is single-use. Delete immediately so a browser back-button
+  // revisit can't re-trigger the flow with a stale hash.
+  try { localStorage.removeItem(NONCE_KEY); } catch (e) {}
+
+  // ── Cache the identity ──────────────────────────────────────
+  // This is what auth.js on the destination page will pick up and use
+  // to render the avatar + dropdown.
+  try {
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
+      email: email,
+      name: name || email,
+      picture: picture,
+      // person is filled in later by auth.js's people.json lookup
+      person: null,
+      ts: ts
+    }));
+  } catch (e) {
+    fail('Storage unavailable',
+      'Your browser blocked session storage. Sign-in needs ' +
+      'sessionStorage; try a regular (non-private) window.');
+    return;
+  }
+
+  // ── Determine where to send the user ────────────────────────
+  // auth.js stashed the path they were on when they clicked login.
+  // (In localStorage — see the auth.js storage-key comment for why.)
+  // Fall back to / if that's not set. Defensively require that the
+  // return path start with a single /: this ensures it's a path on
+  // our own origin and prevents an attacker from using storage
+  // injection to redirect elsewhere (very unlikely since nothing else
+  // writes our key, but free defense).
+  var returnPath;
+  try { returnPath = localStorage.getItem(RETURN_KEY); }
+  catch (e) { returnPath = null; }
+  try { localStorage.removeItem(RETURN_KEY); } catch (e) {}
+
+  if (!returnPath ||
+      returnPath.charAt(0) !== '/' ||
+      returnPath.charAt(1) === '/' ||   // reject protocol-relative "//evil"
+      returnPath.indexOf('/auth-callback/') === 0) {
+    returnPath = '/';
+  }
+
+  // ── Redirect ────────────────────────────────────────────────
+  // location.replace (rather than assign) so the callback URL doesn't
+  // end up in the browser's back-button history. If the user clicks
+  // back, they should go to where they came from BEFORE clicking
+  // login — not to this transient bounce page.
+  location.replace(returnPath);
+})();
+</script>
+
+</body>
+</html>
