@@ -7,7 +7,13 @@
  * This script reads device-orientation gamma (left/right roll) and
  * updates the CSS variable `--hero-tilt-x` so the hero pages read:
  *
- *   background-position: calc(50% + var(--hero-tilt-x, 0px)) center;
+ *   background-position: calc(50% + var(--hero-tilt-x, 0%)) center;
+ *
+ * We emit the value as a percentage rather than pixels: `50% + X%` is
+ * clamped by `cover` to the image's own edges (0% = left edge, 100% =
+ * right edge flush), so the shift can be generous without ever pushing
+ * the image off-frame into empty space, regardless of viewport size or
+ * image aspect ratio.
  *
  * As the user tilts the phone, the image pans horizontally and reveals
  * the cropped edges. A low-pass filter on the raw sensor value + rAF
@@ -45,10 +51,12 @@
     : function () {};
 
   // gamma is left/right roll in degrees (-90…+90 in portrait). Map
-  // ±MAX_TILT_DEG to ±MAX_SHIFT_PX; deeper tilts clamp so the image
-  // never pans off the cropped region.
-  var MAX_TILT_DEG = 20;
-  var MAX_SHIFT_PX = 60;
+  // ±MAX_TILT_DEG to ±MAX_SHIFT_PCT percent of background-position
+  // offset. 48 (not 50) leaves a 2% margin from the literal image edge
+  // to hide any compression artifacts or asymmetric framing on the
+  // outer pixels of the source image.
+  var MAX_TILT_DEG = 25;
+  var MAX_SHIFT_PCT = 48;
 
   var targetShift = 0;
   var currentShift = 0;
@@ -63,9 +71,9 @@
     // rigidly tracking every micro-motion.
     currentShift += (targetShift - currentShift) * 0.25;
     heroes.forEach(function (h) {
-      h.style.setProperty('--hero-tilt-x', currentShift.toFixed(1) + 'px');
+      h.style.setProperty('--hero-tilt-x', currentShift.toFixed(2) + '%');
     });
-    if (Math.abs(targetShift - currentShift) > 0.1) {
+    if (Math.abs(targetShift - currentShift) > 0.05) {
       rafScheduled = true;
       requestAnimationFrame(applyShift);
     } else {
@@ -83,7 +91,7 @@
       firstEvent = false;
     }
     var ratio = clamp(e.gamma / MAX_TILT_DEG, -1, 1);
-    targetShift = ratio * MAX_SHIFT_PX;
+    targetShift = ratio * MAX_SHIFT_PCT;
     if (!rafScheduled) {
       rafScheduled = true;
       requestAnimationFrame(applyShift);

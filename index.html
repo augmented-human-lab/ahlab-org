@@ -122,10 +122,19 @@ ul { list-style: none; }
   content: "";
   position: absolute;
   inset: 0;
+  /* Two stacked layers:
+   *   1. gradient tint — fixed at center, never pans. Keeping it fixed
+   *      avoids a visible tile seam when the image pans (the default
+   *      background-repeat would otherwise re-tile the gradient at its
+   *      edges, creating a hard cyan→purple boundary line).
+   *   2. hero photo — pans horizontally via --hero-tilt-x (set by
+   *      hero-parallax.js on mobile). Using a percentage so it clamps
+   *      naturally at 0%/100% — the true image edges under cover. */
   background: linear-gradient(221deg, rgba(0,215,238,0.65) 0%, rgba(97,0,255,0.5) 100%),
               url('https://cdn.ahlab.org/media/site/home_hero.png');
   background-size: cover;
-  background-position: calc(50% + var(--hero-tilt-x, 0px)) center;
+  background-position: center, calc(50% + var(--hero-tilt-x, 0%)) center;
+  background-repeat: no-repeat;
   animation: scaleIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .hero::after {
