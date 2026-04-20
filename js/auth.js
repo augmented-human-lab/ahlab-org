@@ -380,16 +380,15 @@
     btn.className = 'ahl-login-btn';
     btn.setAttribute('aria-label', 'Sign in as AHLab member');
 
-    // Key icon SVG — compact, neutral, reads clearly on both the gradient
-    // nav and the scrolled/light states. Uses currentColor so it inherits
-    // from the button text color.
+    // Profile icon SVG — head + shoulders silhouette. Uses currentColor
+    // so it inherits from the button text color and reads cleanly on
+    // both the gradient nav and the scrolled/light states.
     btn.innerHTML =
       '<svg class="ahl-login-icon" viewBox="0 0 24 24" width="16" height="16" ' +
       'fill="none" stroke="currentColor" stroke-width="1.8" ' +
       'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-      '<path d="M21 2l-9.6 9.6"/>' +
-      '<path d="M15.5 7.5l3 3L22 7l-3-3"/>' +
-      '<circle cx="7.5" cy="16.5" r="4.5"/>' +
+      '<circle cx="12" cy="8" r="4"/>' +
+      '<path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/>' +
       '</svg>' +
       '<span class="ahl-login-label">Member login</span>';
 
