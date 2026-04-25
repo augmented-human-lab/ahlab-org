@@ -100,6 +100,38 @@
   </div>
 </header>
 
+<!-- Inline SVG symbols used by tile icons + edit pencil. Hidden from
+     layout via aria-hidden + sr-only-equivalent inline style; <use>
+     references throughout the page resolve to these defs. -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-myahl-news" viewBox="0 0 24 24">
+    <path d="M4 4h13a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4z"/>
+    <path d="M19 6h2v12a2 2 0 0 1-2 2"/>
+    <path d="M8 8h7M8 12h7M8 16h4"/>
+  </symbol>
+  <symbol id="i-myahl-award" viewBox="0 0 24 24">
+    <circle cx="12" cy="9" r="6"/>
+    <path d="M8.5 14.5L7 22l5-3 5 3-1.5-7.5"/>
+  </symbol>
+  <symbol id="i-myahl-video" viewBox="0 0 24 24">
+    <polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/>
+    <rect x="3" y="5" width="18" height="14" rx="2"/>
+  </symbol>
+  <symbol id="i-myahl-event" viewBox="0 0 24 24">
+    <rect x="3" y="5" width="18" height="16" rx="2"/>
+    <path d="M3 10h18M8 3v4M16 3v4"/>
+  </symbol>
+  <symbol id="i-myahl-edit" viewBox="0 0 24 24">
+    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+  </symbol>
+  <symbol id="i-myahl-wiki" viewBox="0 0 24 24">
+    <!-- Open book — universal "knowledge / docs" glyph, sized to read
+         clearly inside the 84px app-icon tile. -->
+    <path d="M2 5h6.5A3.5 3.5 0 0 1 12 8.5V21a3 3 0 0 0-3-3H2z"/>
+    <path d="M22 5h-6.5A3.5 3.5 0 0 0 12 8.5V21a3 3 0 0 1 3-3h7z"/>
+  </symbol>
+</svg>
+
 <main class="myahl-main">
   <div class="container" id="myahl-root">
     <!-- Signed-out fallback. Replaced after auth.js loads. -->
@@ -164,82 +196,199 @@
     if (btn) btn.addEventListener('click', function () { window.AHLAuth.login(); });
   }
 
+  // ── Assistive-augmentation principle icons ────────────────
+  // Same six principles + CDN icon URLs used by build-people.js. Kept
+  // in sync manually — short list, low churn. Cards render an icon
+  // strip on the glass overlay; hover swaps to the highlighted variant.
+  var PRINCIPLE_BY_KEY = {
+    body:         { name: 'Body',         icon: 'https://cdn.ahlab.org/media/site/icon-body-1.png',         iconHover: 'https://cdn.ahlab.org/media/site/icon-body-hl.png' },
+    cognitive:    { name: 'Cognitive',    icon: 'https://cdn.ahlab.org/media/site/icon-cognitive-1.png',    iconHover: 'https://cdn.ahlab.org/media/site/icon-cognitive-hl.png' },
+    perceptual:   { name: 'Perceptual',   icon: 'https://cdn.ahlab.org/media/site/icon-perceptual-1.png',   iconHover: 'https://cdn.ahlab.org/media/site/icon-perceptual-hl.png' },
+    physical:     { name: 'Physical',     icon: 'https://cdn.ahlab.org/media/site/icon-physical-1.png',     iconHover: 'https://cdn.ahlab.org/media/site/icon-physical-hl.png' },
+    identity:     { name: 'Identity',     icon: 'https://cdn.ahlab.org/media/site/icon-identity.png',       iconHover: 'https://cdn.ahlab.org/media/site/icon-identity-hl.png' },
+    sociocultural:{ name: 'Sociocultural',icon: 'https://cdn.ahlab.org/media/site/icon-sociocultural-1.png',iconHover: 'https://cdn.ahlab.org/media/site/icon-sociocultural-hl.png' }
+  };
+
+  function renderPrincipleTags(tags) {
+    if (!Array.isArray(tags) || !tags.length) return '';
+    var icons = tags
+      .map(function (k) { return PRINCIPLE_BY_KEY[k]; })
+      .filter(Boolean)
+      .map(function (p) {
+        return '<span class="myahl-project-tag" title="' + escapeHtml(p.name) + '" aria-label="' + escapeHtml(p.name) + '">' +
+          '<img class="myahl-project-tag-default" src="' + escapeHtml(p.icon) + '" alt="" loading="lazy">' +
+          '<img class="myahl-project-tag-hover" src="' + escapeHtml(p.iconHover) + '" alt="" loading="lazy">' +
+        '</span>';
+      })
+      .join('');
+    return icons ? '<div class="myahl-project-tags">' + icons + '</div>' : '';
+  }
+
+  // Edit-pencil button — disabled state, same tooltip across all cards
+  // until the edit pipeline ships. The optional `extraClass` lets the
+  // pub list override its absolute positioning to align with its counter.
+  function editButton(extraClass) {
+    var cls = 'myahl-edit' + (extraClass ? ' ' + extraClass : '');
+    return '<button type="button" class="' + cls + '" disabled aria-label="Edit" ' +
+      'title="Coming soon — the editing pipeline is being wired up.">' +
+      '<svg aria-hidden="true"><use href="#i-myahl-edit"/></svg>' +
+    '</button>';
+  }
+
   // ── Section renderers ─────────────────────────────────────
-  // Each returns a fragment of HTML. The "add new" tile is
-  // included as the last element of the grid/list so it shows
-  // up at the end (or as the only item when the section is
-  // empty for this user).
+  // Each returns a fragment of HTML. The "add new" tile is included
+  // as the last element of the grid/list so it shows up at the end
+  // (or as the only item when the section is empty for this user).
 
   function projectCardHTML(p) {
     var thumb = p.thumbnail
       ? '<div class="myahl-project-thumb"><img src="' + escapeHtml(p.thumbnail) + '" alt="' + escapeHtml(p.title) + '" loading="lazy"></div>'
       : '<div class="myahl-project-thumb"><div class="myahl-project-thumb-placeholder">' + escapeHtml(p.title.charAt(0)) + '</div></div>';
-    return '<a href="/projects/' + escapeHtml(p.slug) + '/" class="myahl-project-card">' +
-      thumb +
-      '<div class="myahl-project-body">' +
-        '<h5>' + escapeHtml(p.title) + '</h5>' +
-        '<div class="meta">' + escapeHtml(p.year || '') + '</div>' +
-      '</div></a>';
+    return '<div class="myahl-project-wrap">' +
+      '<a href="/projects/' + escapeHtml(p.slug) + '/" class="myahl-project-card">' +
+        thumb +
+        '<div class="myahl-project-body">' +
+          '<h5>' + escapeHtml(p.title) + '</h5>' +
+          renderPrincipleTags(p.principles) +
+        '</div>' +
+      '</a>' +
+      editButton() +
+    '</div>';
   }
 
-  function pubRowHTML(p) {
+  // Publications: numbered <li> rows with title link + citation + pill
+  // DOI/PDF buttons. Wrapper is <li> not <a> — nesting the pill <a>s
+  // inside an outer <a> would silently strip them out of the card on
+  // render (invalid HTML). Title alone is the link.
+  function pubItemHTML(p) {
     var url = '/publications/#' + encodeURIComponent(p.slug);
-    var awardHTML = p.award ? '<div class="row-award">★ ' + escapeHtml(p.award) + '</div>' : '';
-    var citationHTML = p.citation ? '<div class="row-citation">' + escapeHtml(p.citation) + '</div>' : '';
+    var titleEl = '<a href="' + escapeHtml(url) + '" class="myahl-pub-title">' + escapeHtml(p.title) + '</a>';
+    var awardHTML = p.award ? '<div class="myahl-pub-award">★ ' + escapeHtml(p.award) + '</div>' : '';
+    var citationHTML = p.citation ? '<div class="myahl-pub-citation">' + escapeHtml(p.citation) + '</div>' : '';
     var linksHTML = '';
     if (Array.isArray(p.links) && p.links.length) {
-      linksHTML = '<div class="row-links">' + p.links.map(function (l) {
-        return '<a href="' + escapeHtml(l.url) + '" target="_blank" rel="noopener" class="row-link">' +
+      linksHTML = '<div class="myahl-pub-links">' + p.links.map(function (l) {
+        return '<a href="' + escapeHtml(l.url) + '" target="_blank" rel="noopener" class="myahl-pub-link">' +
           escapeHtml(String(l.label || '').toUpperCase()) + '</a>';
       }).join('') + '</div>';
     }
-    return '<a href="' + escapeHtml(url) + '" class="myahl-row-card">' +
+    return '<li class="myahl-pub-item">' +
       awardHTML +
-      '<div class="row-title">' + escapeHtml(p.title) + '</div>' +
-      '<div class="row-meta">' + escapeHtml(p.year || '') + (p.venue ? ' · ' + escapeHtml(p.venue) : '') + '</div>' +
+      titleEl +
       citationHTML +
       linksHTML +
-      '</a>';
+      editButton('myahl-pub-edit') +
+    '</li>';
   }
 
-  function eventRowHTML(e) {
-    // Reuse the public site's event-chip pattern for visual continuity.
-    // Detail link prefers the external url when present (e.g. chi2026.ahlab.org)
-    // — same behavior as the project pages.
+  // Events / press tile — shared shape, only the type icon differs.
+  // `iconType` is one of "news" | "video" | "award" | "event"; the
+  // matching <symbol id="i-myahl-<type>"> defined inline at the top of
+  // the body provides the SVG glyph.
+  function tileHTML(opts) {
+    // opts: { iconType, href, target, title, meta, summary }
+    var titleEl = opts.href
+      ? '<a class="myahl-tile-title" href="' + escapeHtml(opts.href) + '"' + (opts.target || '') + '>' + escapeHtml(opts.title) + '</a>'
+      : '<div class="myahl-tile-title">' + escapeHtml(opts.title) + '</div>';
+    return '<div class="myahl-tile">' +
+      '<div class="myahl-tile-icon ' + escapeHtml(opts.iconType) + '">' +
+        '<svg aria-hidden="true"><use href="#i-myahl-' + escapeHtml(opts.iconType) + '"/></svg>' +
+      '</div>' +
+      '<div class="myahl-tile-body">' +
+        titleEl +
+        (opts.meta    ? '<div class="myahl-tile-meta">' + escapeHtml(opts.meta) + '</div>' : '') +
+        (opts.summary ? '<div class="myahl-tile-summary">' + escapeHtml(opts.summary) + '</div>' : '') +
+      '</div>' +
+      editButton() +
+    '</div>';
+  }
+
+  function eventTileHTML(e) {
     var href = e.url || ('/events/' + encodeURIComponent(e.slug) + '/');
     var isExternal = /^https?:/.test(href);
-    var target = isExternal ? ' target="_blank" rel="noopener"' : '';
-    var meta = [e.location, e.starts ? new Date(e.starts).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : null].filter(Boolean).join(' · ');
-    return '<a class="myahl-row-card" href="' + escapeHtml(href) + '"' + target + '>' +
-      '<div class="row-title">' + escapeHtml(e.title) + '</div>' +
-      (meta ? '<div class="row-meta">' + escapeHtml(meta) + '</div>' : '') +
-      (e.summary ? '<div class="row-citation">' + escapeHtml(e.summary) + '</div>' : '') +
-      '</a>';
+    var dateStr = e.starts ? new Date(e.starts).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : null;
+    return tileHTML({
+      iconType: 'event',
+      href: href,
+      target: isExternal ? ' target="_blank" rel="noopener"' : '',
+      title: e.title,
+      meta: [e.location, dateStr].filter(Boolean).join(' · '),
+      summary: e.summary || ''
+    });
   }
 
-  function pressRowHTML(p) {
+  function pressTileHTML(p) {
+    var iconType = (p.type === 'video' || p.type === 'award') ? p.type : 'news';
     var meta = [p.outlet, p.year].filter(Boolean).join(' · ');
-    var titleEl = p.url
-      ? '<a href="' + escapeHtml(p.url) + '" target="_blank" rel="noopener" class="row-title" style="display:block">' + escapeHtml(p.title) + '</a>'
-      : '<div class="row-title">' + escapeHtml(p.title) + '</div>';
-    return '<div class="myahl-row-card">' +
-      titleEl +
-      (meta ? '<div class="row-meta">' + escapeHtml(meta) + '</div>' : '') +
-      '</div>';
+    return tileHTML({
+      iconType: iconType,
+      href: p.url || null,
+      target: p.url ? ' target="_blank" rel="noopener"' : '',
+      title: p.title,
+      meta: meta,
+      summary: ''
+    });
+  }
+
+  // Three add-new shapes — each mirrors its section's card.
+  // All are <button disabled> with a shared tooltip until the edit
+  // pipeline ships. Always returned by render functions as the
+  // leading item of their grid/list.
+  var ADDNEW_TIP = 'Coming soon — the editing pipeline is being wired up.';
+
+  // ── Resources ─────────────────────────────────────────────
+  // Static list for now — bookmark-style links to internal AHLab
+  // services. Edit pipeline integration will eventually let members
+  // pin their own resources, hence the disabled "Add new" tile.
+  // SVG glyph maps to a <symbol> defined inline at the top of <body>.
+  var RESOURCES = [
+    { label: 'Wiki', href: 'https://wiki.ahlab.org', symbol: 'i-myahl-wiki' }
+  ];
+
+  function resourceCardHTML(r) {
+    return '<a class="myahl-resource" href="' + escapeHtml(r.href) + '" target="_blank" rel="noopener">' +
+      '<div class="myahl-resource-icon">' +
+        '<svg aria-hidden="true"><use href="#' + escapeHtml(r.symbol) + '"/></svg>' +
+      '</div>' +
+      '<div class="myahl-resource-label">' + escapeHtml(r.label) + '</div>' +
+    '</a>';
+  }
+
+  function addNewResource(label) {
+    return '<button type="button" class="myahl-resource myahl-resource-addnew" disabled title="' + ADDNEW_TIP + '">' +
+      '<div class="myahl-resource-icon" aria-hidden="true">+</div>' +
+      '<div class="myahl-resource-label">' + escapeHtml(label) + '</div>' +
+    '</button>';
+  }
+
+  function addNewProjectCard(label) {
+    return '<button type="button" class="myahl-addnew-base myahl-addnew-project" disabled title="' + ADDNEW_TIP + '">' +
+      '<span class="myahl-addnew-plus" aria-hidden="true">+</span>' +
+      '<span>' + escapeHtml(label) + '</span>' +
+    '</button>';
   }
 
   function addNewTile(label) {
-    return '<button type="button" class="myahl-addnew" disabled title="Coming soon — the editing pipeline is being wired up.">' +
-      '<span class="myahl-addnew-plus" aria-hidden="true">+</span>' +
+    // Same shape as .myahl-tile (44px icon + body) so it slots into
+    // the 2-column tile grid as just another tile.
+    return '<button type="button" class="myahl-addnew-base myahl-addnew-tile" disabled title="' + ADDNEW_TIP + '">' +
+      '<span class="myahl-addnew-plus-circle" aria-hidden="true">+</span>' +
       '<span>' + escapeHtml(label) + '</span>' +
     '</button>';
   }
 
-  function addNewRow(label) {
-    return '<button type="button" class="myahl-addnew-row" disabled title="Coming soon — the editing pipeline is being wired up.">' +
-      '<span class="myahl-addnew-plus" aria-hidden="true">+</span>' +
-      '<span>' + escapeHtml(label) + '</span>' +
-    '</button>';
+  function addNewPubRow(label) {
+    // Wrapped in a plain <li> so it lives INSIDE the <ol> (HTML
+    // requires <ol> children to be <li>). The plain <li> doesn't carry
+    // the .myahl-pub-item class — and the counter-increment is on
+    // .myahl-pub-item, not on every li — so the numbering stays clean
+    // (real publications still read as 01, 02, 03 …).
+    return '<li>' +
+      '<button type="button" class="myahl-addnew-base myahl-addnew-pub" disabled title="' + ADDNEW_TIP + '">' +
+        '<span class="myahl-addnew-plus" aria-hidden="true">+</span>' +
+        '<span>' + escapeHtml(label) + '</span>' +
+      '</button>' +
+    '</li>';
   }
 
   function sectionHeaderHTML(title, count) {
@@ -263,39 +412,56 @@
         '<button type="button" class="myahl-profile-edit" disabled title="Coming soon — the editing pipeline is being wired up.">Edit profile</button>' +
       '</div>';
 
+    // Each section leads with its add-new tile, sized to match the
+    // shape of the cards/tiles that follow.
     var projectsHTML =
       '<section class="myahl-section">' +
-        sectionHeaderHTML('Projects', d.projects.length) +
-        '<div class="myahl-cards-grid">' +
+        sectionHeaderHTML('My Projects', d.projects.length) +
+        '<div class="myahl-projects-grid">' +
+          addNewProjectCard('Add new project') +
           d.projects.map(projectCardHTML).join('') +
-          addNewTile('Add new project') +
         '</div>' +
       '</section>';
 
+    // Pub addnew leads the <ol> as a plain <li> wrapper so the
+    // counter still reads 01, 02, 03 for actual publications.
     var pubsHTML =
       '<section class="myahl-section">' +
-        sectionHeaderHTML('Publications', d.publications.length) +
-        '<div class="myahl-list">' +
-          d.publications.map(pubRowHTML).join('') +
-          addNewRow('Add new publication') +
-        '</div>' +
+        sectionHeaderHTML('My Publications', d.publications.length) +
+        '<ol class="myahl-pub-list">' +
+          addNewPubRow('Add new publication') +
+          d.publications.map(pubItemHTML).join('') +
+        '</ol>' +
       '</section>';
 
     var eventsHTML =
       '<section class="myahl-section">' +
-        sectionHeaderHTML('Events', d.events.length) +
-        '<div class="myahl-list">' +
-          d.events.map(eventRowHTML).join('') +
-          addNewRow('Add new event') +
+        sectionHeaderHTML('My Events', d.events.length) +
+        '<div class="myahl-tile-grid">' +
+          addNewTile('Add new event') +
+          d.events.map(eventTileHTML).join('') +
         '</div>' +
       '</section>';
 
     var pressHTML =
       '<section class="myahl-section">' +
-        sectionHeaderHTML('Press', d.press.length) +
-        '<div class="myahl-list">' +
-          d.press.map(pressRowHTML).join('') +
-          addNewRow('Add new press mention') +
+        sectionHeaderHTML('My Press', d.press.length) +
+        '<div class="myahl-tile-grid">' +
+          addNewTile('Add new press mention') +
+          d.press.map(pressTileHTML).join('') +
+        '</div>' +
+      '</section>';
+
+    // Resources — organization-wide tools (Wiki etc), shared across
+    // members. Rendered last to mirror the dashboard's "your stuff"
+    // → "lab tools" top-to-bottom flow. Static list for now; member-
+    // pinned resources land here later via the edit pipeline.
+    var resourcesHTML =
+      '<section class="myahl-section">' +
+        sectionHeaderHTML('Our Resources', RESOURCES.length) +
+        '<div class="myahl-resources-grid">' +
+          addNewResource('Add new') +
+          RESOURCES.map(resourceCardHTML).join('') +
         '</div>' +
       '</section>';
 
@@ -304,7 +470,7 @@
         '<button class="myahl-logout" type="button" id="myahl-signout">Sign out</button>' +
       '</div>';
 
-    root.innerHTML = profileHTML + projectsHTML + pubsHTML + eventsHTML + pressHTML + logoutHTML;
+    root.innerHTML = profileHTML + projectsHTML + pubsHTML + eventsHTML + pressHTML + resourcesHTML + logoutHTML;
 
     var signoutBtn = document.getElementById('myahl-signout');
     if (signoutBtn) signoutBtn.addEventListener('click', function () { window.AHLAuth.logout(); });

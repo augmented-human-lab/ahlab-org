@@ -1,18 +1,15 @@
 /* ============================================================
    myahl.css
-   Dashboard layout for /my-ahl/. Reuses card patterns from
-   people.css (.profile-project-card, .profile-pub-list) and
-   event-chip.css for consistency with public profile pages —
-   so a member's "my workspace" view feels like a familiar,
-   editable mirror of their public profile.
+   Dashboard layout for /my-ahl/. Mirrors the public profile-page
+   visuals (full-bleed glass-overlay project cards + numbered pub
+   list) so a member's editable workspace looks like the same site
+   they see publicly. Self-contained — does not depend on
+   people.css being loaded.
    ============================================================ */
 
 /* ── Section wrapper ───────────────────────────────────────── */
 .myahl-section {
   margin-top: 56px;
-}
-.myahl-section:first-of-type {
-  margin-top: 0;
 }
 .myahl-section-header {
   display: flex;
@@ -20,8 +17,6 @@
   justify-content: space-between;
   gap: 16px;
   margin-bottom: 20px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--color-neutral-30);
 }
 .myahl-section-header h2 {
   font-family: var(--font-display);
@@ -34,11 +29,6 @@
   font-size: 13px;
   font-weight: 500;
   color: var(--color-neutral-70);
-}
-.myahl-section-empty {
-  color: var(--color-neutral-70);
-  font-size: 14px;
-  padding: 16px 0;
 }
 
 /* ── Profile tile (top of dashboard) ───────────────────────── */
@@ -109,108 +99,187 @@
   .myahl-profile-info h2 { font-size: 18px; }
 }
 
-/* ── Generic grid containers ───────────────────────────────── */
-.myahl-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
+/* ── Edit-pencil button ─────────────────────────────────────
+   Appears on every project / pub / event / press card. Disabled
+   until the Apps Script edit pipeline lands. Always positioned at
+   the card's top-right corner, on top of the content; z-index keeps
+   it above the project card's image and glass overlay.
+
+   Stops the click from bubbling to the parent <a> when the wrapper
+   is a link — though we typically wrap in <div> for that reason.
+*/
+.myahl-edit {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, .9);
+  color: var(--color-neutral-80);
+  border: 1px solid var(--color-neutral-30);
+  border-radius: 50%;
+  padding: 0;
+  cursor: not-allowed;
+  opacity: .8;
+  transition: opacity .2s, background .2s;
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
 }
-.myahl-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.myahl-edit:hover {
+  opacity: 1;
+  background: #fff;
+}
+.myahl-edit svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-/* ── Add-new tile (disabled) ───────────────────────────────────
-   Same dimensions as a real card so the grid stays even. Dashed
-   border + accent + sign signals "this is where new things will
-   go". cursor:not-allowed + reduced opacity makes it clear the
-   button isn't wired up yet. */
-.myahl-addnew {
+/* ── Add-new tiles (disabled placeholders) ────────────────────
+   Three shape variants — each mirrors the matching content card so
+   the "+ Add" tile slots in as the leading item of the grid/list
+   without breaking visual rhythm. Inert until the edit pipeline
+   ships; tooltip explains.
+
+   Common base                 ▸ .myahl-addnew-base   (typography
+                                  + dashed border + opacity / hover)
+   Project-grid (aspect 16:11) ▸ .myahl-addnew-project
+   Tile-grid (event / press)   ▸ .myahl-addnew-tile  (44px+body)
+   Pub-list (numbered ol)      ▸ .myahl-addnew-pub   (full-width row)
+
+   The shared `.myahl-addnew-plus` sets the accent-colored "+" glyph. */
+.myahl-addnew-base {
+  background: transparent;
+  border: 2px dashed var(--color-neutral-40);
+  color: var(--color-neutral-70);
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 14px;
+  cursor: not-allowed;
+  opacity: .65;
+  text-align: left;
+  transition: opacity .2s, border-color .2s, background .2s;
+}
+.myahl-addnew-base:hover {
+  opacity: .85;
+  border-color: var(--color-neutral-60);
+  background: rgba(0, 0, 0, .015);
+}
+.myahl-addnew-plus {
+  color: var(--color-accent-light);
+  line-height: 1;
+}
+
+/* Project variant — same 16/11 aspect-ratio as a real card so the
+   grid stays even regardless of which slot it occupies. */
+.myahl-addnew-project {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 8px;
-  min-height: 100%;
+  gap: 10px;
+  aspect-ratio: 16 / 11;
   padding: 24px;
-  background: transparent;
-  border: 2px dashed var(--color-neutral-40);
-  border-radius: var(--radius);
-  color: var(--color-neutral-70);
-  font-family: var(--font-text);
-  font-weight: 500;
-  font-size: 14px;
-  cursor: not-allowed;
-  opacity: .65;
-  transition: opacity .2s, border-color .2s;
+  border-radius: var(--radius-lg);
 }
-.myahl-addnew:hover {
-  /* Hover doesn't change much — these are disabled — but a slight
-     darkening telegraphs that the affordance exists. */
-  opacity: .8;
-  border-color: var(--color-neutral-60);
-}
-.myahl-addnew .myahl-addnew-plus {
-  font-size: 24px;
-  line-height: 1;
-  color: var(--color-accent-light);
+.myahl-addnew-project .myahl-addnew-plus {
+  font-size: 36px;
 }
 
-/* List-shape add-new (publication / press rows) — full row,
-   left-aligned with a + on the left. Same disabled affordance. */
-.myahl-addnew-row {
+/* Tile variant — same 44px-icon + body shape as .myahl-tile so
+   sitting first in the 2-column grid reads as just another tile. */
+.myahl-addnew-tile {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 16px;
+  border-radius: var(--radius);
+  /* Match the regular tile's natural height; min-height is enough,
+     real tiles stretch via grid auto-rows: 1fr if needed. */
+  min-height: 76px;
+}
+.myahl-addnew-tile .myahl-addnew-plus-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px dashed var(--color-neutral-40);
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px 20px;
-  background: transparent;
-  border: 2px dashed var(--color-neutral-40);
-  border-radius: var(--radius);
-  color: var(--color-neutral-70);
-  font-family: var(--font-text);
-  font-weight: 500;
-  font-size: 14px;
-  cursor: not-allowed;
-  opacity: .65;
-  transition: opacity .2s, border-color .2s;
-}
-.myahl-addnew-row:hover {
-  opacity: .8;
-  border-color: var(--color-neutral-60);
-}
-.myahl-addnew-row .myahl-addnew-plus {
+  justify-content: center;
   font-size: 22px;
-  line-height: 1;
   color: var(--color-accent-light);
 }
 
-/* ── Project card (reuses profile-project-card visuals) ────── */
-.myahl-project-card {
+/* Pub variant — full-width row that lives inside the <ol> as the
+   first <li>. Sized to roughly match a real .myahl-pub-item without
+   inheriting its counter slot, so numbering stays clean (01, 02, …
+   for actual publications).
+
+   Content is left-aligned so the "+ Add new publication" lines up
+   with the publication titles below — matching the left-anchored
+   pattern of the event / press add-new tiles. */
+.myahl-addnew-pub {
   display: flex;
-  flex-direction: column;
-  background: var(--color-neutral-10);
-  border: 1px solid var(--color-neutral-30);
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 22px 56px;
   border-radius: var(--radius);
+  width: 100%;
+}
+.myahl-addnew-pub .myahl-addnew-plus {
+  font-size: 22px;
+}
+
+/* ── Project cards: full-bleed thumbnail + glass overlay ────
+   Mirrors the public profile-page card pattern. The wrap is
+   position:relative so the edit-pencil can absolute-position over
+   it without sitting inside the click target. */
+.myahl-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+.myahl-project-wrap {
+  position: relative;
+}
+.myahl-project-card {
+  display: block;
+  position: relative;
+  aspect-ratio: 16 / 11;
+  border-radius: var(--radius-lg);
   overflow: hidden;
+  background: var(--color-neutral-40);
+  border: 1px solid var(--color-neutral-30);
   text-decoration: none;
-  color: inherit;
-  transition: transform .2s, box-shadow .2s;
+  transition: transform .4s, box-shadow .4s, border-color .4s;
 }
 .myahl-project-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+  box-shadow: 0 12px 40px rgba(14, 15, 17, .18);
+  border-color: transparent;
 }
 .myahl-project-thumb {
-  aspect-ratio: 16 / 10;
-  background: var(--color-neutral-30);
+  position: absolute;
+  inset: 0;
   overflow: hidden;
 }
 .myahl-project-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
+  transition: transform .6s cubic-bezier(.16, 1, .3, 1);
+}
+.myahl-project-card:hover .myahl-project-thumb img {
+  transform: scale(1.06);
 }
 .myahl-project-thumb-placeholder {
   width: 100%;
@@ -218,63 +287,116 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(135deg, var(--color-neutral-30), var(--color-neutral-40));
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 36px;
-  color: var(--color-neutral-60);
-  background: var(--color-neutral-20);
+  font-size: 64px;
+  color: rgba(255, 255, 255, .85);
 }
+/* Glass-morphic overlay at the bottom of the card — title left,
+   principle icons right. Reads as a translucent label band over the
+   project image. */
 .myahl-project-body {
-  padding: 14px 16px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 16px;
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  flex: 1;
+  align-items: center;
+  gap: 12px;
+  background: rgba(14, 15, 17, .45);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+          backdrop-filter: blur(14px) saturate(140%);
+  border-top: 1px solid rgba(255, 255, 255, .12);
+  transition: background .3s;
+}
+.myahl-project-card:hover .myahl-project-body {
+  background: rgba(97, 0, 255, .55);
 }
 .myahl-project-body h5 {
+  margin: 0;
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--color-neutral-100);
-  letter-spacing: -.005em;
-}
-.myahl-project-body .meta {
-  font-size: 12px;
-  color: var(--color-neutral-70);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  color: #fff;
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* ── Publication / press row card ──────────────────────────── */
-.myahl-row-card {
+/* ── Principle tag icons (project card overlay) ──────────────
+   Hover-swap pattern — two stacked <img>s cross-fade between the
+   default and highlight variants. */
+.myahl-project-tags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.myahl-project-tag {
+  position: relative;
   display: block;
-  background: var(--color-neutral-10);
-  border: 1px solid var(--color-neutral-30);
-  border-radius: var(--radius);
-  padding: 16px 20px;
-  text-decoration: none;
-  color: inherit;
-  transition: border-color .2s;
+  width: 22px;
+  height: 22px;
+  line-height: 0;
 }
-.myahl-row-card:hover {
-  border-color: var(--color-neutral-40);
+.myahl-project-tag img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity .25s ease;
 }
-.myahl-row-card .row-title {
+.myahl-project-tag-hover { opacity: 0; }
+.myahl-project-card:hover .myahl-project-tag-default { opacity: 0; }
+.myahl-project-card:hover .myahl-project-tag-hover { opacity: 1; }
+
+/* ── Publications: numbered list with pill-style DOI/PDF ────
+   Same pattern as the public profile pubs list — counter on the
+   left, title link, full citation in muted text, pill links for
+   doi/pdf etc. The wrapper is intentionally a <div>, not an <a>,
+   to avoid the nested-anchor problem (which silently strips the
+   inner pill links out of the card on render). */
+.myahl-pub-list {
+  list-style: none;
+  counter-reset: pub;
+  padding: 0;
+  margin: 0;
+}
+.myahl-pub-item {
+  counter-increment: pub;
+  position: relative;
+  padding: 24px 56px 24px 56px;
+}
+.myahl-pub-item::before {
+  content: counter(pub, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 28px;
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--color-neutral-100);
-  margin-bottom: 4px;
-}
-.myahl-row-card .row-meta {
+  font-weight: 800;
   font-size: 12px;
-  color: var(--color-neutral-70);
-  margin-bottom: 6px;
+  letter-spacing: 1.5px;
+  color: var(--color-neutral-60);
 }
-.myahl-row-card .row-citation {
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--color-neutral-80);
+.myahl-pub-title {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  color: var(--color-neutral-100);
+  margin-bottom: 8px;
+  text-decoration: none;
+  transition: color .25s;
 }
-.myahl-row-card .row-award {
+a.myahl-pub-title:hover { color: var(--color-accent); }
+.myahl-pub-award {
   display: inline-block;
   font-size: 12px;
   font-weight: 600;
@@ -282,33 +404,234 @@
   background: rgba(97, 0, 255, .08);
   padding: 2px 10px;
   border-radius: 999px;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
-.myahl-row-card .row-links {
-  margin-top: 8px;
+.myahl-pub-citation {
+  font-family: var(--font-text);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--color-neutral-70);
+  margin-bottom: 12px;
+}
+.myahl-pub-links {
   display: flex;
+  gap: 8px;
   flex-wrap: wrap;
-  gap: 6px;
 }
-.myahl-row-card .row-link {
-  font-size: 11px;
+.myahl-pub-link {
+  font-family: var(--font-display);
   font-weight: 600;
-  letter-spacing: .04em;
-  padding: 4px 10px;
+  font-size: 11px;
+  letter-spacing: .8px;
+  color: var(--color-accent);
+  padding: 5px 12px;
   border: 1px solid var(--color-neutral-30);
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   text-decoration: none;
-  color: var(--color-neutral-80);
+  transition: all .25s;
 }
-.myahl-row-card .row-link:hover {
-  background: var(--color-neutral-20);
+.myahl-pub-link:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+.myahl-pub-edit {
+  /* For pub items, place the edit pencil on the right side aligned
+     with the count number on the left. */
+  top: 22px;
+  right: 0;
+}
+@media (max-width: 567px) {
+  .myahl-pub-item { padding-left: 0; padding-top: 32px; padding-right: 44px; }
+  .myahl-pub-item::before { top: 8px; }
+  .myahl-pub-title { font-size: 17px; line-height: 24px; }
 }
 
-/* ── Sign-out (kept here, consolidates page styles) ────────── */
+/* ── Events / Press: 2-column tile grid with type icons ─────
+   Each tile is a row card with a circular type icon on the left
+   (news/award/video/event), title + meta on the right, and the
+   edit pencil at the top-right. */
+.myahl-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+@media (max-width: 767px) {
+  .myahl-tile-grid { grid-template-columns: 1fr; }
+}
+.myahl-tile {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 16px 56px 16px 16px;
+  background: var(--color-neutral-10);
+  border: 1px solid var(--color-neutral-30);
+  border-radius: var(--radius);
+  transition: border-color .2s, box-shadow .2s;
+}
+.myahl-tile:hover {
+  border-color: var(--color-neutral-40);
+  box-shadow: 0 4px 16px rgba(14, 15, 17, .06);
+}
+.myahl-tile-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.myahl-tile-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* Type variants — same color treatment as /press/ index */
+.myahl-tile-icon.news       { background: var(--color-neutral-20); color: var(--color-neutral-80); }
+.myahl-tile-icon.video      { background: var(--color-neutral-100); color: #fff; }
+.myahl-tile-icon.event      { background: rgba(97, 0, 255, .12); color: var(--color-accent); }
+.myahl-tile-icon.award      {
+  background: linear-gradient(135deg, #ffe066, #ffd24a);
+  color: #6e4f00;
+}
+.myahl-tile-body {
+  min-width: 0;
+}
+.myahl-tile-title {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.3;
+  color: var(--color-neutral-100);
+  margin-bottom: 4px;
+  text-decoration: none;
+}
+a.myahl-tile-title:hover { color: var(--color-accent); }
+.myahl-tile-meta {
+  font-size: 12px;
+  color: var(--color-neutral-70);
+  line-height: 1.5;
+}
+.myahl-tile-summary {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-neutral-80);
+  /* Clamp to 2 lines so tiles stay even-height in the grid. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.myahl-section-empty {
+  color: var(--color-neutral-70);
+  font-size: 14px;
+  padding: 16px 0;
+}
+
+/* ── Resources grid (macOS-app-style icon + label) ──────────
+   Compact app-launcher feel: rounded-square gradient icons in a
+   responsive grid, label centered beneath each. Hover lifts the
+   icon and deepens its drop-shadow, mirroring the springy app-icon
+   feedback you get on macOS / iOS home screens. */
+.myahl-resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 24px 20px;
+  justify-items: center;
+}
+.myahl-resource {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--color-neutral-100);
+  width: 100px;
+  padding: 4px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: transform .25s cubic-bezier(.16, 1, .3, 1);
+}
+.myahl-resource:hover {
+  transform: translateY(-3px);
+}
+.myahl-resource:hover .myahl-resource-icon {
+  box-shadow: 0 12px 24px rgba(14, 15, 17, .18);
+}
+.myahl-resource-icon {
+  width: 84px;
+  height: 84px;
+  border-radius: 22px;        /* macOS rounded-square (≈26%) */
+  background: var(--gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(14, 15, 17, .10);
+  transition: box-shadow .25s, transform .25s;
+}
+.myahl-resource-icon svg {
+  width: 42px;
+  height: 42px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.myahl-resource-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: -.005em;
+  text-align: center;
+  color: var(--color-neutral-100);
+  line-height: 1.3;
+}
+
+/* Add-new variant — same 84px square shape, dashed border, accent
+   plus glyph. Disabled like the other section addnew tiles. */
+.myahl-resource-addnew {
+  cursor: not-allowed;
+  opacity: .65;
+  transition: opacity .2s;
+}
+.myahl-resource-addnew:hover {
+  opacity: .85;
+  transform: none;
+}
+.myahl-resource-addnew .myahl-resource-icon {
+  background: transparent;
+  border: 2px dashed var(--color-neutral-40);
+  box-shadow: none;
+  color: var(--color-accent-light);
+  font-size: 38px;
+  font-weight: 300;
+}
+.myahl-resource-addnew:hover .myahl-resource-icon {
+  box-shadow: none;
+  border-color: var(--color-neutral-60);
+}
+.myahl-resource-addnew .myahl-resource-label {
+  color: var(--color-neutral-70);
+  font-weight: 500;
+}
+
+
+/* ── Sign-out button ──────────────────────────────────────── */
 .myahl-logout-row {
   margin-top: 64px;
-  padding-top: 24px;
-  border-top: 1px solid var(--color-neutral-30);
   display: flex;
   justify-content: flex-start;
 }

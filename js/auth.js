@@ -131,19 +131,23 @@
   window.AHLAuth = API;
 
 
-  // ── Identity ingestion ─────────────────────────────────────────
-  // Called when the popup's URL reveals the signed-in identity.
-  // Looks up a matching people.json record, caches everything in
-  // sessionStorage, re-renders the UI, fires listeners.
-  function ingestIdentity(data) {
-    attachPersonRecord(data).then(function (enriched) {
-      currentUser = {
-        email: enriched.email,
-        name: enriched.name || enriched.email,
-        picture: enriched.picture || '',
-        person: enriched.person || null,
-        ts: data.ts || Date.now()
-      };
+  // ── Person-record enrichment on page load ───────────────────────
+  // /auth-callback/ writes a minimal session with person:null. On
+  // every subsequent page load we look up the email in
+  // /data/auth-index.json and patch in the matching slug, then
+  // persist + re-render so subscribers (e.g. /my-ahl/) see the
+  // resolved profile.
+  //
+  // No-ops when:
+  //   • no session yet (currentUser is null)
+  //   • person is already attached (cache hit from a previous load)
+  //   • the email isn't in the auth-index (external Google identity
+  //     that happens to be in the @ahlab.org domain but isn't a lab
+  //     member with an `email` field on their people record)
+  if (currentUser && !currentUser.person) {
+    attachPersonRecord({ email: currentUser.email }).then(function (enriched) {
+      if (!enriched.person || !currentUser) return;
+      currentUser.person = enriched.person;
       saveSession(currentUser);
       fire();
       renderAll();
