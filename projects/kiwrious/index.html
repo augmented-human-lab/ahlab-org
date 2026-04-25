@@ -21,8 +21,9 @@
 <!-- PAGE -->
 <div class="container">
 
-  <!-- Hero -->
-  <section class="project-hero rv">
+  <!-- Hero. data-project-people scopes the in-page edit pencils
+       (claim-buttons.js reads it via closest()). -->
+  <section class="project-hero rv" data-project-people="suranga-nanayakkara dawn-garbett sonia-dupuch alaeddin-nassani sankha-cooray yvonne-chua chamod-weerasinghe juan-pablo-forero-cortes jiashuo-cao qin-wu fiona-taimana hussel-suriyaarachchi paul-denny michelle-wu hannah-qiao">
     <div class="project-hero-grid">
       <div class="project-hero-image">
         <img src="https://cdn.ahlab.org/media/site/projects/kiwrious/kiwrious.jpg" alt="Kiwrious">
@@ -34,12 +35,30 @@
             <img src="https://cdn.ahlab.org/media/site/icon-physical-1.png" alt="" loading="lazy">
             <span class="project-principle-label">Physical</span>
           </span>
+        <button type="button" class="project-edit project-edit-principles"
+              data-myahl-claim="other" hidden disabled
+              title="Coming soon — claiming will be enabled with the editing pipeline."
+              aria-label="Edit assistive augmentation principles">
+       <svg viewBox="0 0 24 24" aria-hidden="true">
+         <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+       </svg>
+     </button>
       </div>
       </div>
       <div class="project-hero-text">
-        <h1>
-          Kiwrious<span class="project-title-year"><span class="project-title-sep" aria-hidden="true">·</span>2022</span>
-        </h1>
+        <div class="project-title-row">
+          <h1>
+            Kiwrious<span class="project-title-year"><span class="project-title-sep" aria-hidden="true">·</span>2022</span>
+          </h1>
+          <button type="button" class="project-edit project-edit-title"
+                  data-myahl-claim="other" hidden disabled
+                  title="Coming soon — claiming will be enabled with the editing pipeline."
+                  aria-label="Edit title and description">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+            </svg>
+          </button>
+        </div>
         <div class="project-summary"></div>
         <div class="project-description">
     <p>Science is a creative, tentative human endeavour. Many students disengage with science because it is presented in the classroom as a body of knowledge which is unchanging, absolute and with little real connection to everyday life.</p>
@@ -145,26 +164,24 @@
           <button type="button" class="project-person-card project-person-claim"
               data-myahl-claim="self" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
        <div class="project-person-avatar" aria-hidden="true">+</div>
-       <div class="project-person-name">Add Me</div>
+       <div class="project-person-name">Me</div>
      </button>
      <button type="button" class="project-person-card project-person-claim"
               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
        <div class="project-person-avatar" aria-hidden="true">+</div>
-       <div class="project-person-name">Add Someone</div>
+       <div class="project-person-name">Someone</div>
      </button>
         </div>
-      </div><div class="project-sponsors-row rv" data-project-slug="kiwrious" data-project-people="suranga-nanayakkara dawn-garbett sonia-dupuch alaeddin-nassani sankha-cooray yvonne-chua chamod-weerasinghe juan-pablo-forero-cortes jiashuo-cao qin-wu fiona-taimana hussel-suriyaarachchi paul-denny michelle-wu hannah-qiao">
+      </div><div class="project-sponsors-row rv" data-project-slug="kiwrious" data-project-people="suranga-nanayakkara dawn-garbett sonia-dupuch alaeddin-nassani sankha-cooray yvonne-chua chamod-weerasinghe juan-pablo-forero-cortes jiashuo-cao qin-wu fiona-taimana hussel-suriyaarachchi paul-denny michelle-wu hannah-qiao" hidden data-myahl-empty="true">
         <div class="sidebar-section-title">Sponsors</div>
         <div class="project-sponsors-list">
           
           <button type="button" class="project-sponsor project-sponsor-addnew"
-              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ Add new</button>
+              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
         </div>
-      </div><div class="project-press-row rv">
-        <div class="sidebar-section-title">Recognition &amp; coverage</div>
-        <div class="project-press-group is-award">
-          <div class="project-press-group-label">Awards</div>
-          <ul class="project-press-list">            <li class="project-press-item">
+      </div><section class="project-press-group is-award rv" data-project-slug="kiwrious" data-project-people="suranga-nanayakkara dawn-garbett sonia-dupuch alaeddin-nassani sankha-cooray yvonne-chua chamod-weerasinghe juan-pablo-forero-cortes jiashuo-cao qin-wu fiona-taimana hussel-suriyaarachchi paul-denny michelle-wu hannah-qiao">
+      <div class="sidebar-section-title">Awards</div>
+      <ul class="project-press-list"><li class="project-press-item">
               <a href="https://www.fastcompany.com/90623632/world-changing-ideas-awards-2021-education-finalists-and-honorable-mentions" target="_blank" rel="noopener" class="project-press-title">World Changing Ideas Awards 2021: Education | Finalist | Kiwrious</a>
               <div class="project-press-meta"><span class="project-press-outlet">Fast Company</span> · <span class="project-press-year">2021</span></div>
             </li>
@@ -187,11 +204,13 @@
           <li class="project-press-item">
               <a href="https://bestawards.co.nz/public-good-award/public-good-award/augmented-human-lab/kiwrious/" target="_blank" rel="noopener" class="project-press-title">Kiwrious | Best Design Awards | Public Good Award: Silver</a>
               <div class="project-press-meta"><span class="project-press-outlet">Designers Institute of New Zealand</span> · <span class="project-press-year">2021</span></div>
-            </li>
-          </ul>
-        </div><div class="project-press-group is-news">
-          <div class="project-press-group-label">In the press</div>
-          <ul class="project-press-list">            <li class="project-press-item">
+            </li></ul>
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section>
+<section class="project-press-group is-news rv" data-project-slug="kiwrious" data-project-people="suranga-nanayakkara dawn-garbett sonia-dupuch alaeddin-nassani sankha-cooray yvonne-chua chamod-weerasinghe juan-pablo-forero-cortes jiashuo-cao qin-wu fiona-taimana hussel-suriyaarachchi paul-denny michelle-wu hannah-qiao">
+      <div class="sidebar-section-title">Press</div>
+      <ul class="project-press-list"><li class="project-press-item">
               <a href="https://www.un.org/en/academic-impact/research-team-boosts-science-learning-children-kiwrious-project" target="_blank" rel="noopener" class="project-press-title">Research Team Boosts Science Learning for Children: The Kiwrious Project</a>
               <div class="project-press-meta"><span class="project-press-outlet">United Nations</span> · <span class="project-press-year">2022</span></div>
             </li>
@@ -202,10 +221,16 @@
           <li class="project-press-item">
               <a href="https://cloud.google.com/customers/augmented-human-lab" target="_blank" rel="noopener" class="project-press-title">Inspiring curiosity for science in kids with Google Cloud solutions</a>
               <div class="project-press-meta"><span class="project-press-outlet">Google Cloud</span> · <span class="project-press-year">2021</span></div>
-            </li>
-          </ul>
-        </div>
-      </div><div class="project-publications-row rv rv-d1" data-project-slug="kiwrious" data-project-people="suranga-nanayakkara dawn-garbett sonia-dupuch alaeddin-nassani sankha-cooray yvonne-chua chamod-weerasinghe juan-pablo-forero-cortes jiashuo-cao qin-wu fiona-taimana hussel-suriyaarachchi paul-denny michelle-wu hannah-qiao">
+            </li></ul>
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section>
+<section class="project-press-group is-video rv" data-project-slug="kiwrious" data-project-people="suranga-nanayakkara dawn-garbett sonia-dupuch alaeddin-nassani sankha-cooray yvonne-chua chamod-weerasinghe juan-pablo-forero-cortes jiashuo-cao qin-wu fiona-taimana hussel-suriyaarachchi paul-denny michelle-wu hannah-qiao" hidden data-myahl-empty="true">
+      <div class="sidebar-section-title">Videos</div>
+      
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section><div class="project-publications-row rv rv-d1" data-project-slug="kiwrious" data-project-people="suranga-nanayakkara dawn-garbett sonia-dupuch alaeddin-nassani sankha-cooray yvonne-chua chamod-weerasinghe juan-pablo-forero-cortes jiashuo-cao qin-wu fiona-taimana hussel-suriyaarachchi paul-denny michelle-wu hannah-qiao">
         <div class="sidebar-section-title">Publications</div>
         <ol class="project-pub-list">
           <li class="project-pub-item">
@@ -245,7 +270,7 @@
             </li>
           <li class="project-pub-addnew-li">
        <button type="button" class="project-pub-addnew"
-               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ Add new publication</button>
+               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
      </li>
         </ol>
       </div>

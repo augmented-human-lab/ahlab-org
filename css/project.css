@@ -76,11 +76,85 @@
   .project-principle img { width: 20px; height: 20px; }
 }
 
+/* Title row — h1 on the left, member-only edit pencil on the right.
+   The h1 keeps its own bottom margin; the row itself uses align-items
+   start so a long, wrapping title doesn't drag the pencil along with
+   it (pencil stays anchored near the title's first line). */
+.project-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.project-title-row > h1 {
+  /* Reset the h1's bottom margin since the row carries it now;
+     keeps spacing identical to the pre-row layout. */
+  margin-bottom: 0;
+  flex: 1;
+  min-width: 0;
+}
+
 .project-hero-text h1 {
   font-family: var(--font-display); font-weight: 700;
   font-size: 44px; line-height: 46px;
   color: var(--color-neutral-100);
   margin-bottom: 20px;
+}
+
+/* Round pencil edit button — used both at the title's right edge and
+   at the right end of the principles bar over the hero image. Hidden
+   by default; claim-buttons.js shows it for project members. */
+.project-edit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-neutral-10);
+  border: 1px solid var(--color-neutral-30);
+  color: var(--color-neutral-80);
+  cursor: pointer;
+  padding: 0;
+  transition: border-color .25s, color .25s, opacity .2s;
+}
+.project-edit[hidden] { display: none; }
+.project-edit[disabled] { cursor: not-allowed; opacity: .8; }
+.project-edit:not([disabled]):hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+.project-edit svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Title-row variant — slightly larger to balance the bigger h1 next to it. */
+.project-edit-title {
+  width: 40px;
+  height: 40px;
+  margin-top: 4px;            /* nudge to align with h1's optical baseline */
+}
+.project-edit-title svg { width: 18px; height: 18px; }
+
+/* Principles-bar variant — right-anchored over the glass overlay.
+   margin-left:auto pushes it to the far right of the flex row that
+   already exists in .project-principles. White-on-glass background
+   so it stays legible against any project image behind. */
+.project-edit-principles {
+  margin-left: auto;
+  background: rgba(255, 255, 255, .85);
+  border-color: rgba(255, 255, 255, .6);
+}
+.project-edit-principles:not([disabled]):hover {
+  background: #fff;
 }
 /* Inline year fragment that sits at the end of the h1, like
    "SonicVista · 2025". Lighter weight + neutral-60 color so the
@@ -134,6 +208,7 @@
 .project-body { padding: 60px 0 80px; }
 .project-people-row { margin-bottom: 60px; }
 .project-sponsors-row { margin-bottom: 60px; }
+.project-sponsors-row[hidden] { display: none; }
 .project-publications-row { /* spacing only; container is full-width */ }
 
 /* ── Sponsors row ─────────────────────────────────────────
@@ -336,12 +411,18 @@ a.project-sponsor:hover {
   list-style: none;
   margin: 20px 0 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
+/* Subtle card per publication — softer than other cards on the page
+   (no border, no shadow, just a faint neutral fill) so the list still
+   reads as a list, not a row of standalone cards. */
 .project-pub-item {
-  padding: 24px 0;
-  border-top: 1px solid var(--color-neutral-30);
+  padding: 20px 24px;
+  background: rgba(14, 15, 17, .025);
+  border-radius: var(--radius);
 }
-.project-pub-item:last-child { border-bottom: 1px solid var(--color-neutral-30); }
 .project-pub-title {
   display: block;
   font-family: var(--font-display); font-weight: 700;
@@ -490,57 +571,44 @@ a.project-pub-title:hover { color: var(--color-accent); }
    impressive) stand out with a gold accent icon, while news
    and videos use more neutral icons. Items reveal an accent
    left border on hover to confirm they're interactive. */
-.project-press-row {
-  margin-bottom: 60px;
-}
+/* Each press section (Awards / Press / Videos) is now a top-level
+   block with its own .sidebar-section-title heading, matching the
+   shape of Team / Sponsors / Publications. The old "Recognition &
+   coverage" wrapper and uppercase sub-label are gone — promoted
+   straight into peer sections instead of being nested. */
 .project-press-group {
-  margin-top: 28px;
+  margin-bottom: 60px;
+  position: relative;
 }
-.project-press-group:first-child {
-  margin-top: 20px;
+.project-press-group[hidden] {
+  display: none;
 }
-.project-press-group-label {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 11px;
-  letter-spacing: 1.4px;
-  text-transform: uppercase;
-  color: var(--color-neutral-60);
-  margin-bottom: 12px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--color-neutral-30);
-}
+/* 2-column tile grid on desktop. Single column on narrow viewports.
+   Each tile is a subtle card — soft neutral fill, no harsh borders,
+   matching the .project-pub-item treatment. */
 .project-press-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 20px 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+@media (max-width: 767px) {
+  .project-press-list { grid-template-columns: 1fr; }
 }
 .project-press-item {
   position: relative;
   display: grid;
   grid-template-columns: 28px 1fr;
   gap: 14px;
-  padding: 14px 0 14px 12px;
-  border-bottom: 1px solid var(--color-neutral-20);
-  transition: background .2s, border-color .2s;
-}
-.project-press-item:last-child {
-  border-bottom: none;
-}
-/* A subtle accent bar appears on the left edge when an item
-   is hovered — hints at clickability without the heavier
-   hover effects used on larger cards elsewhere. */
-.project-press-item::before {
-  content: "";
-  position: absolute;
-  left: 0; top: 14px; bottom: 14px;
-  width: 2px;
-  background: transparent;
-  border-radius: 2px;
+  padding: 16px 18px;
+  background: rgba(14, 15, 17, .025);
+  border-radius: var(--radius-sm);
   transition: background .2s;
 }
-.project-press-item:hover::before {
-  background: var(--color-accent);
+.project-press-item:hover {
+  background: rgba(14, 15, 17, .05);
 }
 
 /* Type icon. Styled as a 24px rounded square with a glyph.
@@ -602,6 +670,67 @@ a.project-press-title:hover { color: var(--color-accent); }
   .project-press-item { grid-template-columns: 24px 1fr; gap: 12px; }
   .project-press-item::after { width: 24px; height: 24px; background-size: 14px 14px; }
   .project-press-title { font-size: 15px; }
+}
+
+/* "+ new" button at the foot of each press section. Same shape as the
+   publications add-new — full-width dashed row, left-aligned plus
+   glyph + label. The leading ::before tile carries the type icon so
+   the button reads as e.g. "[trophy] + new", reusing the same
+   data-URL glyphs / colors used by the items above. claim-buttons.js
+   shows it for project members. */
+.project-press-addnew {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  width: 100%;
+  margin-top: 14px;
+  padding: 16px 20px;
+  background: transparent;
+  border: 2px dashed var(--color-neutral-40);
+  border-radius: var(--radius);
+  color: var(--color-neutral-70);
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .25s, color .25s, opacity .2s;
+}
+.project-press-addnew::before {
+  content: "";
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background-color: var(--color-neutral-30);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px 16px;
+  flex-shrink: 0;
+}
+/* Same data-URL glyphs used by .project-press-item::after in the
+   parent group — kept in sync visually so an Award row's icon looks
+   identical to the Award add-new's icon. */
+.project-press-group.is-award .project-press-addnew::before {
+  background-color: #fff6d6;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b7861a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9H4.5a2.5 2.5 0 0 1 0-5H6'/><path d='M18 9h1.5a2.5 2.5 0 0 0 0-5H18'/><path d='M4 22h16'/><path d='M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22'/><path d='M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22'/><path d='M18 2H6v7a6 6 0 0 0 12 0V2Z'/></svg>");
+}
+.project-press-group.is-news .project-press-addnew::before {
+  background-color: #e8efff;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233858a8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2'/><path d='M18 14h-8'/><path d='M15 18h-5'/><path d='M10 6h8v4h-8V6Z'/></svg>");
+}
+.project-press-group.is-video .project-press-addnew::before {
+  background-color: #fde8e8;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c8371a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='6 3 20 12 6 21 6 3'/></svg>");
+}
+.project-press-addnew[hidden] { display: none; }
+.project-press-addnew[disabled] {
+  cursor: not-allowed;
+  opacity: .65;
+}
+.project-press-addnew:not([disabled]):hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 /* ── Featured-at events row ────────────────────────────────

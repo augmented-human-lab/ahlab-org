@@ -21,8 +21,9 @@
 <!-- PAGE -->
 <div class="container">
 
-  <!-- Hero -->
-  <section class="project-hero rv">
+  <!-- Hero. data-project-people scopes the in-page edit pencils
+       (claim-buttons.js reads it via closest()). -->
+  <section class="project-hero rv" data-project-people="elizabeth-taylor lonce-wyse suranga-nanayakkara">
     <div class="project-hero-grid">
       <div class="project-hero-image">
         <img src="https://cdn.ahlab.org/media/site/projects/soundfloor/soundfloor.jpg" alt="SoundFloor">
@@ -40,12 +41,30 @@
             <img src="https://cdn.ahlab.org/media/site/icon-sociocultural-1.png" alt="" loading="lazy">
             <span class="project-principle-label">Sociocultural</span>
           </span>
+        <button type="button" class="project-edit project-edit-principles"
+              data-myahl-claim="other" hidden disabled
+              title="Coming soon — claiming will be enabled with the editing pipeline."
+              aria-label="Edit assistive augmentation principles">
+       <svg viewBox="0 0 24 24" aria-hidden="true">
+         <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+       </svg>
+     </button>
       </div>
       </div>
       <div class="project-hero-text">
-        <h1>
-          SoundFloor<span class="project-title-year"><span class="project-title-sep" aria-hidden="true">·</span>2011</span>
-        </h1>
+        <div class="project-title-row">
+          <h1>
+            SoundFloor<span class="project-title-year"><span class="project-title-sep" aria-hidden="true">·</span>2011</span>
+          </h1>
+          <button type="button" class="project-edit project-edit-title"
+                  data-myahl-claim="other" hidden disabled
+                  title="Coming soon — claiming will be enabled with the editing pipeline."
+                  aria-label="Edit title and description">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+            </svg>
+          </button>
+        </div>
         <div class="project-summary"></div>
         <div class="project-description">
     <p>We designed a vibrating wooden platform – a ‘Sound Floor’ – so that hearing-impaired children gained a better sense of the music being played and enabled them to synchronize their dance with the beat of the music. Sitting or lying on the floor and feel a more complex range of musical vibrations before they start to dance, helped them form a more detailed understanding of the music. In concept, this system is similar to the portable music floor developed by Palmer but we proposed significant refinements based on new technology (direct contact speakers instead of standard ‘sound speakers/loudspeakers’), an approach that was much more effective because it turns the entire floor surface into a sound speaker. There are more than 80 students in the Dr. Reijntje’s School for the Deaf who benefitted from this project. The Sound Floor was donated by Dr. Elizabeth Taylor .</p>
@@ -79,38 +98,48 @@
           <button type="button" class="project-person-card project-person-claim"
               data-myahl-claim="self" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
        <div class="project-person-avatar" aria-hidden="true">+</div>
-       <div class="project-person-name">Add Me</div>
+       <div class="project-person-name">Me</div>
      </button>
      <button type="button" class="project-person-card project-person-claim"
               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
        <div class="project-person-avatar" aria-hidden="true">+</div>
-       <div class="project-person-name">Add Someone</div>
+       <div class="project-person-name">Someone</div>
      </button>
         </div>
-      </div><div class="project-sponsors-row rv" data-project-slug="soundfloor" data-project-people="elizabeth-taylor lonce-wyse suranga-nanayakkara">
+      </div><div class="project-sponsors-row rv" data-project-slug="soundfloor" data-project-people="elizabeth-taylor lonce-wyse suranga-nanayakkara" hidden data-myahl-empty="true">
         <div class="sidebar-section-title">Sponsors</div>
         <div class="project-sponsors-list">
           
           <button type="button" class="project-sponsor project-sponsor-addnew"
-              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ Add new</button>
+              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
         </div>
-      </div><div class="project-press-row rv">
-        <div class="sidebar-section-title">Recognition &amp; coverage</div>
-        <div class="project-press-group is-news">
-          <div class="project-press-group-label">In the press</div>
-          <ul class="project-press-list">            <li class="project-press-item">
+      </div><section class="project-press-group is-award rv" data-project-slug="soundfloor" data-project-people="elizabeth-taylor lonce-wyse suranga-nanayakkara" hidden data-myahl-empty="true">
+      <div class="sidebar-section-title">Awards</div>
+      
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section>
+<section class="project-press-group is-news rv" data-project-slug="soundfloor" data-project-people="elizabeth-taylor lonce-wyse suranga-nanayakkara">
+      <div class="sidebar-section-title">Press</div>
+      <ul class="project-press-list"><li class="project-press-item">
               <span class="project-press-title">&quot;Haptic Chair hearing for the deaf&quot;</span>
               <div class="project-press-meta"><span class="project-press-outlet">The Island, Sri Lanka</span> · <span class="project-press-year">2008</span></div>
-            </li>
-          </ul>
-        </div>
-      </div><div class="project-publications-row rv rv-d1" data-project-slug="soundfloor" data-project-people="elizabeth-taylor lonce-wyse suranga-nanayakkara">
+            </li></ul>
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section>
+<section class="project-press-group is-video rv" data-project-slug="soundfloor" data-project-people="elizabeth-taylor lonce-wyse suranga-nanayakkara" hidden data-myahl-empty="true">
+      <div class="sidebar-section-title">Videos</div>
+      
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section><div class="project-publications-row rv rv-d1" data-project-slug="soundfloor" data-project-people="elizabeth-taylor lonce-wyse suranga-nanayakkara">
         <div class="sidebar-section-title">Publications</div>
         <ol class="project-pub-list">
           
           <li class="project-pub-addnew-li">
        <button type="button" class="project-pub-addnew"
-               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ Add new publication</button>
+               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
      </li>
         </ol>
       </div>

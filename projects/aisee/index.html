@@ -21,8 +21,9 @@
 <!-- PAGE -->
 <div class="container">
 
-  <!-- Hero -->
-  <section class="project-hero rv">
+  <!-- Hero. data-project-people scopes the in-page edit pencils
+       (claim-buttons.js reads it via closest()). -->
+  <section class="project-hero rv" data-project-people="hussel-suriyaarachchi yasith-samaradivakara yeo-kian-peen shreyas-sridhar vanessa-tang jaliya-kodithuwakku yadeesha-weerasinghe priambudi-lintang-bagaskara praveen-sasikumar suveen-ellawela alaeddin-nassani shamane-siriwardhana thisum-buddhika chamod-weerasinghe roger-boldu suranga-nanayakkara">
     <div class="project-hero-grid">
       <div class="project-hero-image">
         <img src="https://cdn.ahlab.org/media/site/projects/aisee/aisee.jpg" alt="AiSee">
@@ -40,12 +41,30 @@
             <img src="https://cdn.ahlab.org/media/site/icon-identity.png" alt="" loading="lazy">
             <span class="project-principle-label">Identity</span>
           </span>
+        <button type="button" class="project-edit project-edit-principles"
+              data-myahl-claim="other" hidden disabled
+              title="Coming soon — claiming will be enabled with the editing pipeline."
+              aria-label="Edit assistive augmentation principles">
+       <svg viewBox="0 0 24 24" aria-hidden="true">
+         <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+       </svg>
+     </button>
       </div>
       </div>
       <div class="project-hero-text">
-        <h1>
-          AiSee<span class="project-title-year"><span class="project-title-sep" aria-hidden="true">·</span>2025</span>
-        </h1>
+        <div class="project-title-row">
+          <h1>
+            AiSee<span class="project-title-year"><span class="project-title-sep" aria-hidden="true">·</span>2025</span>
+          </h1>
+          <button type="button" class="project-edit project-edit-title"
+                  data-myahl-claim="other" hidden disabled
+                  title="Coming soon — claiming will be enabled with the editing pipeline."
+                  aria-label="Edit title and description">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+            </svg>
+          </button>
+        </div>
         <div class="project-summary"></div>
         <div class="project-description">
     <p>The Project AiSee aims to create an assistive device that sustainably changes how people with visual impairments (PVI) can independently access information on the go. Our engagements with PVI users and caretakers have revealed numerous difficulties with existing state-of-the-art technologies, including problems with accuracy, efficiency, cost, and social acceptability. With AiSee, we address these challenges through a novel AI-powered wearable technology. It is a visual companion that is always ready to help, a user simply needs to ask a question to find out more about what it can see.</p>
@@ -147,12 +166,12 @@
           <button type="button" class="project-person-card project-person-claim"
               data-myahl-claim="self" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
        <div class="project-person-avatar" aria-hidden="true">+</div>
-       <div class="project-person-name">Add Me</div>
+       <div class="project-person-name">Me</div>
      </button>
      <button type="button" class="project-person-card project-person-claim"
               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
        <div class="project-person-avatar" aria-hidden="true">+</div>
-       <div class="project-person-name">Add Someone</div>
+       <div class="project-person-name">Someone</div>
      </button>
         </div>
       </div><div class="project-sponsors-row rv" data-project-slug="aisee" data-project-people="hussel-suriyaarachchi yasith-samaradivakara yeo-kian-peen shreyas-sridhar vanessa-tang jaliya-kodithuwakku yadeesha-weerasinghe priambudi-lintang-bagaskara praveen-sasikumar suveen-ellawela alaeddin-nassani shamane-siriwardhana thisum-buddhika chamod-weerasinghe roger-boldu suranga-nanayakkara">
@@ -160,13 +179,17 @@
         <div class="project-sponsors-list">
           <span class="project-sponsor" ><span class="project-sponsor-name">SG Enable</span></span>
           <button type="button" class="project-sponsor project-sponsor-addnew"
-              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ Add new</button>
+              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
         </div>
-      </div><div class="project-press-row rv">
-        <div class="sidebar-section-title">Recognition &amp; coverage</div>
-        <div class="project-press-group is-news">
-          <div class="project-press-group-label">In the press</div>
-          <ul class="project-press-list">            <li class="project-press-item">
+      </div><section class="project-press-group is-award rv" data-project-slug="aisee" data-project-people="hussel-suriyaarachchi yasith-samaradivakara yeo-kian-peen shreyas-sridhar vanessa-tang jaliya-kodithuwakku yadeesha-weerasinghe priambudi-lintang-bagaskara praveen-sasikumar suveen-ellawela alaeddin-nassani shamane-siriwardhana thisum-buddhika chamod-weerasinghe roger-boldu suranga-nanayakkara" hidden data-myahl-empty="true">
+      <div class="sidebar-section-title">Awards</div>
+      
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section>
+<section class="project-press-group is-news rv" data-project-slug="aisee" data-project-people="hussel-suriyaarachchi yasith-samaradivakara yeo-kian-peen shreyas-sridhar vanessa-tang jaliya-kodithuwakku yadeesha-weerasinghe priambudi-lintang-bagaskara praveen-sasikumar suveen-ellawela alaeddin-nassani shamane-siriwardhana thisum-buddhika chamod-weerasinghe roger-boldu suranga-nanayakkara">
+      <div class="sidebar-section-title">Press</div>
+      <ul class="project-press-list"><li class="project-press-item">
               <a href="https://www.straitstimes.com/singapore/i-wont-have-to-trouble-" target="_blank" rel="noopener" class="project-press-title">'I won't have to trouble anyone when I visit': How AiSee helps visitors with visual impairment at Gardens by the Bay</a>
               <div class="project-press-meta"><span class="project-press-outlet">The Straits Times</span> · <span class="project-press-year">2026</span></div>
             </li>
@@ -221,11 +244,13 @@
           <li class="project-press-item">
               <a href="https://newatlas.com/wearables/aisee-wearable-blind-object-recognition/" target="_blank" rel="noopener" class="project-press-title">AiSee wearable tells blind users what they're holding in their hand</a>
               <div class="project-press-meta"><span class="project-press-outlet">News Atlas</span> · <span class="project-press-year">2024</span></div>
-            </li>
-          </ul>
-        </div><div class="project-press-group is-video">
-          <div class="project-press-group-label">Videos</div>
-          <ul class="project-press-list">            <li class="project-press-item">
+            </li></ul>
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section>
+<section class="project-press-group is-video rv" data-project-slug="aisee" data-project-people="hussel-suriyaarachchi yasith-samaradivakara yeo-kian-peen shreyas-sridhar vanessa-tang jaliya-kodithuwakku yadeesha-weerasinghe priambudi-lintang-bagaskara praveen-sasikumar suveen-ellawela alaeddin-nassani shamane-siriwardhana thisum-buddhika chamod-weerasinghe roger-boldu suranga-nanayakkara">
+      <div class="sidebar-section-title">Videos</div>
+      <ul class="project-press-list"><li class="project-press-item">
               <a href="https://www.channelnewsasia.com/watch/robot-guide-dog-among-inclusive-innovations-help-visitors-disabilities-gardens-bay-6009986" target="_blank" rel="noopener" class="project-press-title">Robot guide dog among inclusive innovations to help visitors with disabilities at Gardens by the Bay</a>
               <div class="project-press-meta"><span class="project-press-outlet">Channel NewsAsia (CNA)</span> · <span class="project-press-year">2026</span></div>
             </li>
@@ -248,10 +273,10 @@
           <li class="project-press-item">
               <a href="https://youtu.be/81grB7BtN9k" target="_blank" rel="noopener" class="project-press-title">AiSee: AI-powered 'eye' for visually impaired people to 'see' objects</a>
               <div class="project-press-meta"><span class="project-press-outlet">National University of Singapore</span> · <span class="project-press-year">2024</span></div>
-            </li>
-          </ul>
-        </div>
-      </div><div class="project-publications-row rv rv-d1" data-project-slug="aisee" data-project-people="hussel-suriyaarachchi yasith-samaradivakara yeo-kian-peen shreyas-sridhar vanessa-tang jaliya-kodithuwakku yadeesha-weerasinghe priambudi-lintang-bagaskara praveen-sasikumar suveen-ellawela alaeddin-nassani shamane-siriwardhana thisum-buddhika chamod-weerasinghe roger-boldu suranga-nanayakkara">
+            </li></ul>
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section><div class="project-publications-row rv rv-d1" data-project-slug="aisee" data-project-people="hussel-suriyaarachchi yasith-samaradivakara yeo-kian-peen shreyas-sridhar vanessa-tang jaliya-kodithuwakku yadeesha-weerasinghe priambudi-lintang-bagaskara praveen-sasikumar suveen-ellawela alaeddin-nassani shamane-siriwardhana thisum-buddhika chamod-weerasinghe roger-boldu suranga-nanayakkara">
         <div class="sidebar-section-title">Publications</div>
         <ol class="project-pub-list">
           <li class="project-pub-item">
@@ -263,7 +288,7 @@
             </li>
           <li class="project-pub-addnew-li">
        <button type="button" class="project-pub-addnew"
-               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ Add new publication</button>
+               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
      </li>
         </ol>
       </div>

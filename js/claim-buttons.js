@@ -15,9 +15,12 @@
  *
  * Visibility rules:
  *   • not signed in           → both hidden
- *   • signed in               → "self" visible
- *   • signed in AND already a
- *     member of this scope    → "other" visible (in addition to "self")
+ *   • signed in, NOT already
+ *     a member of this scope  → "self" visible  (offer to join)
+ *   • signed in, ALREADY a
+ *     member of this scope    → "other" visible (offer to add another)
+ * "self" and "other" are mutually exclusive: a user is either looking
+ * to join, or already in and adding others — never both at once.
  *
  * The buttons themselves stay disabled (the click handler is a no-op
  * with a tooltip) until the Apps Script edit pipeline lands.
@@ -30,21 +33,27 @@
     claims.forEach(function (btn) {
       var type = btn.getAttribute('data-myahl-claim');
       var visible = false;
-      if (user) {
-        if (type === 'self') {
-          visible = true;
-        } else if (type === 'other') {
-          // Membership-scoped: only show when the signed-in user's
-          // slug is in the wrapper's people list.
-          var wrap = btn.closest('[data-project-people]');
-          if (wrap && user.person && user.person.slug) {
-            var raw = wrap.getAttribute('data-project-people') || '';
-            var slugs = raw.split(/\s+/).filter(Boolean);
-            visible = slugs.indexOf(user.person.slug) !== -1;
-          }
-        }
+      if (user && user.person && user.person.slug) {
+        var wrap = btn.closest('[data-project-people]');
+        var slugs = wrap
+          ? (wrap.getAttribute('data-project-people') || '').split(/\s+/).filter(Boolean)
+          : [];
+        var isMember = slugs.indexOf(user.person.slug) !== -1;
+        if (type === 'self')  visible = !isMember;   // hide "+ Me" once joined
+        if (type === 'other') visible =  isMember;
       }
       btn.hidden = !visible;
+    });
+
+    // Empty sections — those rendered server-side with
+    // data-myahl-empty="true" + hidden because they had no items at
+    // build time — should appear when a claim button inside them
+    // becomes visible (so members see an empty heading + "+ new"
+    // button). Non-members and signed-out users keep them hidden.
+    var emptySections = document.querySelectorAll('[data-myahl-empty="true"]');
+    emptySections.forEach(function (section) {
+      var visibleClaim = section.querySelector('[data-myahl-claim]:not([hidden])');
+      section.hidden = !visibleClaim;
     });
   }
 

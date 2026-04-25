@@ -21,8 +21,9 @@
 <!-- PAGE -->
 <div class="container">
 
-  <!-- Hero -->
-  <section class="project-hero rv">
+  <!-- Hero. data-project-people scopes the in-page edit pencils
+       (claim-buttons.js reads it via closest()). -->
+  <section class="project-hero rv" data-project-people="suranga-nanayakkara yeo-kian-peen roy-shilkrot savithru-jayasinghe pattie-maes">
     <div class="project-hero-grid">
       <div class="project-hero-image">
         <img src="https://cdn.ahlab.org/media/site/projects/eyering/eyering.jpg" alt="EyeRing">
@@ -37,12 +38,30 @@
             <img src="https://cdn.ahlab.org/media/site/icon-identity.png" alt="" loading="lazy">
             <span class="project-principle-label">Identity</span>
           </span>
+        <button type="button" class="project-edit project-edit-principles"
+              data-myahl-claim="other" hidden disabled
+              title="Coming soon — claiming will be enabled with the editing pipeline."
+              aria-label="Edit assistive augmentation principles">
+       <svg viewBox="0 0 24 24" aria-hidden="true">
+         <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+       </svg>
+     </button>
       </div>
       </div>
       <div class="project-hero-text">
-        <h1>
-          EyeRing<span class="project-title-year"><span class="project-title-sep" aria-hidden="true">·</span>2012</span>
-        </h1>
+        <div class="project-title-row">
+          <h1>
+            EyeRing<span class="project-title-year"><span class="project-title-sep" aria-hidden="true">·</span>2012</span>
+          </h1>
+          <button type="button" class="project-edit project-edit-title"
+                  data-myahl-claim="other" hidden disabled
+                  title="Coming soon — claiming will be enabled with the editing pipeline."
+                  aria-label="Edit title and description">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+            </svg>
+          </button>
+        </div>
         <div class="project-summary"></div>
         <div class="project-description">
     <p>EyeRing is a wearable intuitive interface that allows a person to point at an object to see or hear more information about it. We came up with the idea of a micro camera worn as a ring on the index finger with a button on the side, which can be pushed with the thumb to take a picture or a video that is then sent wirelessly to a mobile phone to be analyzed. The user receives information about the object in either auditory or visual form. Future versions of our proposed system may include more sensors to allow non-visual data capture and analysis. This finger-worn configuration of sensors opens up a myriad of possible applications for the visually impaired as well as the sighted. The project has been transformed into FingerReader .</p>
@@ -86,26 +105,30 @@
           <button type="button" class="project-person-card project-person-claim"
               data-myahl-claim="self" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
        <div class="project-person-avatar" aria-hidden="true">+</div>
-       <div class="project-person-name">Add Me</div>
+       <div class="project-person-name">Me</div>
      </button>
      <button type="button" class="project-person-card project-person-claim"
               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
        <div class="project-person-avatar" aria-hidden="true">+</div>
-       <div class="project-person-name">Add Someone</div>
+       <div class="project-person-name">Someone</div>
      </button>
         </div>
-      </div><div class="project-sponsors-row rv" data-project-slug="eyering" data-project-people="suranga-nanayakkara yeo-kian-peen roy-shilkrot savithru-jayasinghe pattie-maes">
+      </div><div class="project-sponsors-row rv" data-project-slug="eyering" data-project-people="suranga-nanayakkara yeo-kian-peen roy-shilkrot savithru-jayasinghe pattie-maes" hidden data-myahl-empty="true">
         <div class="sidebar-section-title">Sponsors</div>
         <div class="project-sponsors-list">
           
           <button type="button" class="project-sponsor project-sponsor-addnew"
-              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ Add new</button>
+              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
         </div>
-      </div><div class="project-press-row rv">
-        <div class="sidebar-section-title">Recognition &amp; coverage</div>
-        <div class="project-press-group is-news">
-          <div class="project-press-group-label">In the press</div>
-          <ul class="project-press-list">            <li class="project-press-item">
+      </div><section class="project-press-group is-award rv" data-project-slug="eyering" data-project-people="suranga-nanayakkara yeo-kian-peen roy-shilkrot savithru-jayasinghe pattie-maes" hidden data-myahl-empty="true">
+      <div class="sidebar-section-title">Awards</div>
+      
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section>
+<section class="project-press-group is-news rv" data-project-slug="eyering" data-project-people="suranga-nanayakkara yeo-kian-peen roy-shilkrot savithru-jayasinghe pattie-maes">
+      <div class="sidebar-section-title">Press</div>
+      <ul class="project-press-list"><li class="project-press-item">
               <a href="http://www.engadget.com/2012/04/25/mit-media-lab-eyering-camera-hands-on/" target="_blank" rel="noopener" class="project-press-title">EyeRing finger-mounted connected cam captures signs and dollar bills, identifies them with OCR</a>
               <div class="project-press-meta"><span class="project-press-outlet">Engadget</span> · <span class="project-press-year">2012</span></div>
             </li>
@@ -116,17 +139,19 @@
           <li class="project-press-item">
               <a href="http://www.technologyreview.com/news/428773/augmented-reality-wrapped-around-your-finger/" target="_blank" rel="noopener" class="project-press-title">Augmented Reality, Wrapped Around Your Finger</a>
               <div class="project-press-meta"><span class="project-press-outlet">Technology Review</span> · <span class="project-press-year">2012</span></div>
-            </li>
-          </ul>
-        </div><div class="project-press-group is-video">
-          <div class="project-press-group-label">Videos</div>
-          <ul class="project-press-list">            <li class="project-press-item">
+            </li></ul>
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section>
+<section class="project-press-group is-video rv" data-project-slug="eyering" data-project-people="suranga-nanayakkara yeo-kian-peen roy-shilkrot savithru-jayasinghe pattie-maes">
+      <div class="sidebar-section-title">Videos</div>
+      <ul class="project-press-list"><li class="project-press-item">
               <a href="http://tedxtalks.ted.com/video/Universal-Design-Enables-Everyo" target="_blank" rel="noopener" class="project-press-title">Universal Design Enables Everyone | Suranga Nanayakkara</a>
               <div class="project-press-meta"><span class="project-press-outlet">TEDxYouth@Palmerston</span> · <span class="project-press-year">2016</span></div>
-            </li>
-          </ul>
-        </div>
-      </div><div class="project-publications-row rv rv-d1" data-project-slug="eyering" data-project-people="suranga-nanayakkara yeo-kian-peen roy-shilkrot savithru-jayasinghe pattie-maes">
+            </li></ul>
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section><div class="project-publications-row rv rv-d1" data-project-slug="eyering" data-project-people="suranga-nanayakkara yeo-kian-peen roy-shilkrot savithru-jayasinghe pattie-maes">
         <div class="sidebar-section-title">Publications</div>
         <ol class="project-pub-list">
           <li class="project-pub-item">
@@ -152,7 +177,7 @@
             </li>
           <li class="project-pub-addnew-li">
        <button type="button" class="project-pub-addnew"
-               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ Add new publication</button>
+               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
      </li>
         </ol>
       </div>

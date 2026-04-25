@@ -21,8 +21,9 @@
 <!-- PAGE -->
 <div class="container">
 
-  <!-- Hero -->
-  <section class="project-hero rv">
+  <!-- Hero. data-project-people scopes the in-page edit pencils
+       (claim-buttons.js reads it via closest()). -->
+  <section class="project-hero rv" data-project-people="moritz-messerschmidt elliott-wen samantha-chan suranga-nanayakkara">
     <div class="project-hero-grid">
       <div class="project-hero-image">
         <img src="https://cdn.ahlab.org/media/site/projects/toro/toro.jpg" alt="Toro">
@@ -31,12 +32,30 @@
             <img src="https://cdn.ahlab.org/media/site/icon-cognitive-1.png" alt="" loading="lazy">
             <span class="project-principle-label">Cognitive</span>
           </span>
+        <button type="button" class="project-edit project-edit-principles"
+              data-myahl-claim="other" hidden disabled
+              title="Coming soon — claiming will be enabled with the editing pipeline."
+              aria-label="Edit assistive augmentation principles">
+       <svg viewBox="0 0 24 24" aria-hidden="true">
+         <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+       </svg>
+     </button>
       </div>
       </div>
       <div class="project-hero-text">
-        <h1>
-          Toro<span class="project-title-year"><span class="project-title-sep" aria-hidden="true">·</span>2024</span>
-        </h1>
+        <div class="project-title-row">
+          <h1>
+            Toro<span class="project-title-year"><span class="project-title-sep" aria-hidden="true">·</span>2024</span>
+          </h1>
+          <button type="button" class="project-edit project-edit-title"
+                  data-myahl-claim="other" hidden disabled
+                  title="Coming soon — claiming will be enabled with the editing pipeline."
+                  aria-label="Edit title and description">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+            </svg>
+          </button>
+        </div>
         <div class="project-summary"></div>
         <div class="project-description">
     <p>In this project we aim to develop a tool for the research community that simplifies the time-consuming literature research process by providing an interactive way of systematically exploring, analyzing, and reviewing literature. Our Interactive Literature Exploration tool, Toro, takes advantage of visualizing the relation between papers in a two-dimensional graph. Users can easily manipulate the graph, filter out undesired papers, or expand on related ones to explore relevant and interesting streams of literature.</p>
@@ -76,32 +95,42 @@
           <button type="button" class="project-person-card project-person-claim"
               data-myahl-claim="self" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
        <div class="project-person-avatar" aria-hidden="true">+</div>
-       <div class="project-person-name">Add Me</div>
+       <div class="project-person-name">Me</div>
      </button>
      <button type="button" class="project-person-card project-person-claim"
               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
        <div class="project-person-avatar" aria-hidden="true">+</div>
-       <div class="project-person-name">Add Someone</div>
+       <div class="project-person-name">Someone</div>
      </button>
         </div>
-      </div><div class="project-sponsors-row rv" data-project-slug="toro" data-project-people="moritz-messerschmidt elliott-wen samantha-chan suranga-nanayakkara">
+      </div><div class="project-sponsors-row rv" data-project-slug="toro" data-project-people="moritz-messerschmidt elliott-wen samantha-chan suranga-nanayakkara" hidden data-myahl-empty="true">
         <div class="sidebar-section-title">Sponsors</div>
         <div class="project-sponsors-list">
           
           <button type="button" class="project-sponsor project-sponsor-addnew"
-              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ Add new</button>
+              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
         </div>
-      </div><div class="project-press-row rv">
-        <div class="sidebar-section-title">Recognition &amp; coverage</div>
-        <div class="project-press-group is-award">
-          <div class="project-press-group-label">Awards</div>
-          <ul class="project-press-list">            <li class="project-press-item">
+      </div><section class="project-press-group is-award rv" data-project-slug="toro" data-project-people="moritz-messerschmidt elliott-wen samantha-chan suranga-nanayakkara">
+      <div class="sidebar-section-title">Awards</div>
+      <ul class="project-press-list"><li class="project-press-item">
               <a href="https://www.prototypesforhumanity.com/project/toro/" target="_blank" rel="noopener" class="project-press-title">Toro | Prototypes for Humanity</a>
               <div class="project-press-meta"><span class="project-press-year">2023</span></div>
-            </li>
-          </ul>
-        </div>
-      </div><div class="project-publications-row rv rv-d1" data-project-slug="toro" data-project-people="moritz-messerschmidt elliott-wen samantha-chan suranga-nanayakkara">
+            </li></ul>
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section>
+<section class="project-press-group is-news rv" data-project-slug="toro" data-project-people="moritz-messerschmidt elliott-wen samantha-chan suranga-nanayakkara" hidden data-myahl-empty="true">
+      <div class="sidebar-section-title">Press</div>
+      
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section>
+<section class="project-press-group is-video rv" data-project-slug="toro" data-project-people="moritz-messerschmidt elliott-wen samantha-chan suranga-nanayakkara" hidden data-myahl-empty="true">
+      <div class="sidebar-section-title">Videos</div>
+      
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section><div class="project-publications-row rv rv-d1" data-project-slug="toro" data-project-people="moritz-messerschmidt elliott-wen samantha-chan suranga-nanayakkara">
         <div class="sidebar-section-title">Publications</div>
         <ol class="project-pub-list">
           <li class="project-pub-item">
@@ -113,7 +142,7 @@
             </li>
           <li class="project-pub-addnew-li">
        <button type="button" class="project-pub-addnew"
-               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ Add new publication</button>
+               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
      </li>
         </ol>
       </div>

@@ -21,8 +21,9 @@
 <!-- PAGE -->
 <div class="container">
 
-  <!-- Hero -->
-  <section class="project-hero rv">
+  <!-- Hero. data-project-people scopes the in-page edit pencils
+       (claim-buttons.js reads it via closest()). -->
+  <section class="project-hero rv" data-project-people="tharindu-kaluarachchi shardul-sapkota aristee-thevenon denys-matthies suranga-nanayakkara">
     <div class="project-hero-grid">
       <div class="project-hero-image">
         <img src="https://cdn.ahlab.org/media/site/projects/eyeknowyou/eyeknowyou.jpg" alt="EyeKnowYou">
@@ -34,12 +35,30 @@
             <img src="https://cdn.ahlab.org/media/site/icon-cognitive-1.png" alt="" loading="lazy">
             <span class="project-principle-label">Cognitive</span>
           </span>
+        <button type="button" class="project-edit project-edit-principles"
+              data-myahl-claim="other" hidden disabled
+              title="Coming soon — claiming will be enabled with the editing pipeline."
+              aria-label="Edit assistive augmentation principles">
+       <svg viewBox="0 0 24 24" aria-hidden="true">
+         <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+       </svg>
+     </button>
       </div>
       </div>
       <div class="project-hero-text">
-        <h1>
-          EyeKnowYou<span class="project-title-year"><span class="project-title-sep" aria-hidden="true">·</span>2021</span>
-        </h1>
+        <div class="project-title-row">
+          <h1>
+            EyeKnowYou<span class="project-title-year"><span class="project-title-sep" aria-hidden="true">·</span>2021</span>
+          </h1>
+          <button type="button" class="project-edit project-edit-title"
+                  data-myahl-claim="other" hidden disabled
+                  title="Coming soon — claiming will be enabled with the editing pipeline."
+                  aria-label="Edit title and description">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+            </svg>
+          </button>
+        </div>
         <div class="project-summary"></div>
         <div class="project-description">
     <p>EyeKnowYou is a DIY toolkit to estimate cognitive load and actual screen time using a head-mounted webcam. The do-it-yourself guide makes the set-up of the hardware and software easy. It uses videos of the eye to analyze corneal surface reflections to recognize screen usage and eye movements to determine cognitive load. We collected data from 17 participants to train a neural network to predict screen usage and cognitive load simultaneously. Our initial model, which is a 3D Convolutional Neural Network, achieves up to 70% overall accuracy for both tasks. The accuracy can go up to 90% when a personalized calibration is carried out. We encapsulated the model into a software toolkit that can be used by non-AI-experts. Both the software toolkit and our model are open-sourced for the community to further develop and build upon. Our aim is to collect more data over time, using this software toolkit, to improve model performance.</p>
@@ -83,22 +102,39 @@
           <button type="button" class="project-person-card project-person-claim"
               data-myahl-claim="self" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
        <div class="project-person-avatar" aria-hidden="true">+</div>
-       <div class="project-person-name">Add Me</div>
+       <div class="project-person-name">Me</div>
      </button>
      <button type="button" class="project-person-card project-person-claim"
               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
        <div class="project-person-avatar" aria-hidden="true">+</div>
-       <div class="project-person-name">Add Someone</div>
+       <div class="project-person-name">Someone</div>
      </button>
         </div>
-      </div><div class="project-sponsors-row rv" data-project-slug="eyeknowyou" data-project-people="tharindu-kaluarachchi shardul-sapkota aristee-thevenon denys-matthies suranga-nanayakkara">
+      </div><div class="project-sponsors-row rv" data-project-slug="eyeknowyou" data-project-people="tharindu-kaluarachchi shardul-sapkota aristee-thevenon denys-matthies suranga-nanayakkara" hidden data-myahl-empty="true">
         <div class="sidebar-section-title">Sponsors</div>
         <div class="project-sponsors-list">
           
           <button type="button" class="project-sponsor project-sponsor-addnew"
-              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ Add new</button>
+              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
         </div>
-      </div><div class="project-publications-row rv rv-d1" data-project-slug="eyeknowyou" data-project-people="tharindu-kaluarachchi shardul-sapkota aristee-thevenon denys-matthies suranga-nanayakkara">
+      </div><section class="project-press-group is-award rv" data-project-slug="eyeknowyou" data-project-people="tharindu-kaluarachchi shardul-sapkota aristee-thevenon denys-matthies suranga-nanayakkara" hidden data-myahl-empty="true">
+      <div class="sidebar-section-title">Awards</div>
+      
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section>
+<section class="project-press-group is-news rv" data-project-slug="eyeknowyou" data-project-people="tharindu-kaluarachchi shardul-sapkota aristee-thevenon denys-matthies suranga-nanayakkara" hidden data-myahl-empty="true">
+      <div class="sidebar-section-title">Press</div>
+      
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section>
+<section class="project-press-group is-video rv" data-project-slug="eyeknowyou" data-project-people="tharindu-kaluarachchi shardul-sapkota aristee-thevenon denys-matthies suranga-nanayakkara" hidden data-myahl-empty="true">
+      <div class="sidebar-section-title">Videos</div>
+      
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section><div class="project-publications-row rv rv-d1" data-project-slug="eyeknowyou" data-project-people="tharindu-kaluarachchi shardul-sapkota aristee-thevenon denys-matthies suranga-nanayakkara">
         <div class="sidebar-section-title">Publications</div>
         <ol class="project-pub-list">
           <li class="project-pub-item">
@@ -117,7 +153,7 @@
             </li>
           <li class="project-pub-addnew-li">
        <button type="button" class="project-pub-addnew"
-               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ Add new publication</button>
+               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
      </li>
         </ol>
       </div>

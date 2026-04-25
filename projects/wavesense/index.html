@@ -21,8 +21,9 @@
 <!-- PAGE -->
 <div class="container">
 
-  <!-- Hero -->
-  <section class="project-hero rv">
+  <!-- Hero. data-project-people scopes the in-page edit pencils
+       (claim-buttons.js reads it via closest()). -->
+  <section class="project-hero rv" data-project-people="shanaka-ransiri juan-pablo-forero-cortes anusha-withana tharindu-kaluarachchi chanaka-singhabahu shi-yilei samitha-elvitigala suranga-nanayakkara">
     <div class="project-hero-grid">
       <div class="project-hero-image">
         <img src="https://cdn.ahlab.org/media/site/projects/wavesense/wavesense.jpg" alt="WaveSense">
@@ -34,12 +35,30 @@
             <img src="https://cdn.ahlab.org/media/site/icon-physical-1.png" alt="" loading="lazy">
             <span class="project-principle-label">Physical</span>
           </span>
+        <button type="button" class="project-edit project-edit-principles"
+              data-myahl-claim="other" hidden disabled
+              title="Coming soon — claiming will be enabled with the editing pipeline."
+              aria-label="Edit assistive augmentation principles">
+       <svg viewBox="0 0 24 24" aria-hidden="true">
+         <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+       </svg>
+     </button>
       </div>
       </div>
       <div class="project-hero-text">
-        <h1>
-          WaveSense<span class="project-title-year"><span class="project-title-sep" aria-hidden="true">·</span>2016</span>
-        </h1>
+        <div class="project-title-row">
+          <h1>
+            WaveSense<span class="project-title-year"><span class="project-title-sep" aria-hidden="true">·</span>2016</span>
+          </h1>
+          <button type="button" class="project-edit project-edit-title"
+                  data-myahl-claim="other" hidden disabled
+                  title="Coming soon — claiming will be enabled with the editing pipeline."
+                  aria-label="Edit title and description">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+            </svg>
+          </button>
+        </div>
         <div class="project-summary"></div>
         <div class="project-description">
     <p>Introduction of virtual reality devices such as Oculus and Samsung GearVR requires interaction methods go beyond the traditional touch / button based interfaces. However, computer vision based gesture recognition systems require larger physical space and energy resources that are extremely limited in compact devices. Other sensing approaches such as non-focused IR or magnetic markers has limited sensing range and expressibility making them unsuitable for many, including virtual reality applications. Alternatively, recently developed time of flight based low power sensing techniques such as Mime require significant processing power. We developed waveSense as a gesture sensing technology for such resource restricted devices. A novel Selective Volumetric Illumination (SVI) approach using off the shelf infrared (IR) emitters and non-focused IR sensors were introduced to achieve the power efficiency. Our current implementation consumes 8:65mW while sensing hand gestures within 60cm radius from the sensors.</p>
@@ -98,22 +117,39 @@
           <button type="button" class="project-person-card project-person-claim"
               data-myahl-claim="self" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
        <div class="project-person-avatar" aria-hidden="true">+</div>
-       <div class="project-person-name">Add Me</div>
+       <div class="project-person-name">Me</div>
      </button>
      <button type="button" class="project-person-card project-person-claim"
               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
        <div class="project-person-avatar" aria-hidden="true">+</div>
-       <div class="project-person-name">Add Someone</div>
+       <div class="project-person-name">Someone</div>
      </button>
         </div>
-      </div><div class="project-sponsors-row rv" data-project-slug="wavesense" data-project-people="shanaka-ransiri juan-pablo-forero-cortes anusha-withana tharindu-kaluarachchi chanaka-singhabahu shi-yilei samitha-elvitigala suranga-nanayakkara">
+      </div><div class="project-sponsors-row rv" data-project-slug="wavesense" data-project-people="shanaka-ransiri juan-pablo-forero-cortes anusha-withana tharindu-kaluarachchi chanaka-singhabahu shi-yilei samitha-elvitigala suranga-nanayakkara" hidden data-myahl-empty="true">
         <div class="sidebar-section-title">Sponsors</div>
         <div class="project-sponsors-list">
           
           <button type="button" class="project-sponsor project-sponsor-addnew"
-              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ Add new</button>
+              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
         </div>
-      </div><div class="project-publications-row rv rv-d1" data-project-slug="wavesense" data-project-people="shanaka-ransiri juan-pablo-forero-cortes anusha-withana tharindu-kaluarachchi chanaka-singhabahu shi-yilei samitha-elvitigala suranga-nanayakkara">
+      </div><section class="project-press-group is-award rv" data-project-slug="wavesense" data-project-people="shanaka-ransiri juan-pablo-forero-cortes anusha-withana tharindu-kaluarachchi chanaka-singhabahu shi-yilei samitha-elvitigala suranga-nanayakkara" hidden data-myahl-empty="true">
+      <div class="sidebar-section-title">Awards</div>
+      
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section>
+<section class="project-press-group is-news rv" data-project-slug="wavesense" data-project-people="shanaka-ransiri juan-pablo-forero-cortes anusha-withana tharindu-kaluarachchi chanaka-singhabahu shi-yilei samitha-elvitigala suranga-nanayakkara" hidden data-myahl-empty="true">
+      <div class="sidebar-section-title">Press</div>
+      
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section>
+<section class="project-press-group is-video rv" data-project-slug="wavesense" data-project-people="shanaka-ransiri juan-pablo-forero-cortes anusha-withana tharindu-kaluarachchi chanaka-singhabahu shi-yilei samitha-elvitigala suranga-nanayakkara" hidden data-myahl-empty="true">
+      <div class="sidebar-section-title">Videos</div>
+      
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section><div class="project-publications-row rv rv-d1" data-project-slug="wavesense" data-project-people="shanaka-ransiri juan-pablo-forero-cortes anusha-withana tharindu-kaluarachchi chanaka-singhabahu shi-yilei samitha-elvitigala suranga-nanayakkara">
         <div class="sidebar-section-title">Publications</div>
         <ol class="project-pub-list">
           <li class="project-pub-item">
@@ -132,7 +168,7 @@
             </li>
           <li class="project-pub-addnew-li">
        <button type="button" class="project-pub-addnew"
-               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ Add new publication</button>
+               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
      </li>
         </ol>
       </div>

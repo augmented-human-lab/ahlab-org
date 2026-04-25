@@ -21,8 +21,9 @@
 <!-- PAGE -->
 <div class="container">
 
-  <!-- Hero -->
-  <section class="project-hero rv">
+  <!-- Hero. data-project-people scopes the in-page edit pencils
+       (claim-buttons.js reads it via closest()). -->
+  <section class="project-hero rv" data-project-people="dinithi-dissanayake mohamed-muftee yifei-luo prasanth-sasikumar peter-cleveland timothy-antoni suranga-nanayakkara">
     <div class="project-hero-grid">
       <div class="project-hero-image">
         <img src="https://cdn.ahlab.org/media/site/projects/autopilot/autopilot.jpg" alt="Autopilot">
@@ -37,12 +38,30 @@
             <img src="https://cdn.ahlab.org/media/site/icon-body-1.png" alt="" loading="lazy">
             <span class="project-principle-label">Body</span>
           </span>
+        <button type="button" class="project-edit project-edit-principles"
+              data-myahl-claim="other" hidden disabled
+              title="Coming soon — claiming will be enabled with the editing pipeline."
+              aria-label="Edit assistive augmentation principles">
+       <svg viewBox="0 0 24 24" aria-hidden="true">
+         <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+       </svg>
+     </button>
       </div>
       </div>
       <div class="project-hero-text">
-        <h1>
-          Autopilot<span class="project-title-year"><span class="project-title-sep" aria-hidden="true">·</span>Current</span>
-        </h1>
+        <div class="project-title-row">
+          <h1>
+            Autopilot<span class="project-title-year"><span class="project-title-sep" aria-hidden="true">·</span>Current</span>
+          </h1>
+          <button type="button" class="project-edit project-edit-title"
+                  data-myahl-claim="other" hidden disabled
+                  title="Coming soon — claiming will be enabled with the editing pipeline."
+                  aria-label="Edit title and description">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+            </svg>
+          </button>
+        </div>
         <div class="project-summary"></div>
         <div class="project-description">
     <p>This project explores a different way of supporting behavior change. Many people want to reduce habits or temptations that pull them away from the version of themselves they hope to become, yet most current interventions depend heavily on conscious self-control. They assume that, in the moment, a person will notice a prompt, interpret its meaning, and deliberately resist an impulse. In reality, many habitual behaviors happen on autopilot, making these approaches easy to miss and hard to act on. We investigate sensory interruptions as an alternative pathway for behavior change. Rather than relying only on reflective decision-making, we ask whether brief physical or sensory cues can gently interrupt automatic behavior at the right moment, creating a small window for awareness and choice. The goal is to help them momentarily step out of autopilot and reconnect with their intentions. Taken together, this project points toward a broader vision for behavior-change technologies: systems that do not rely solely on conscious self-regulation, but instead work through the body and senses to support reflection in the moment. By bridging perception, cognition, and action, sensory interruptions offer a promising complementary approach for helping people regain control over deeply habitual behaviors. This work opens up new opportunities for designing interactive systems that are more immediate, embodied, and responsive to the realities of everyday self-control.</p>
@@ -96,22 +115,39 @@
           <button type="button" class="project-person-card project-person-claim"
               data-myahl-claim="self" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
        <div class="project-person-avatar" aria-hidden="true">+</div>
-       <div class="project-person-name">Add Me</div>
+       <div class="project-person-name">Me</div>
      </button>
      <button type="button" class="project-person-card project-person-claim"
               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
        <div class="project-person-avatar" aria-hidden="true">+</div>
-       <div class="project-person-name">Add Someone</div>
+       <div class="project-person-name">Someone</div>
      </button>
         </div>
-      </div><div class="project-sponsors-row rv" data-project-slug="autopilot" data-project-people="dinithi-dissanayake mohamed-muftee yifei-luo prasanth-sasikumar peter-cleveland timothy-antoni suranga-nanayakkara">
+      </div><div class="project-sponsors-row rv" data-project-slug="autopilot" data-project-people="dinithi-dissanayake mohamed-muftee yifei-luo prasanth-sasikumar peter-cleveland timothy-antoni suranga-nanayakkara" hidden data-myahl-empty="true">
         <div class="sidebar-section-title">Sponsors</div>
         <div class="project-sponsors-list">
           
           <button type="button" class="project-sponsor project-sponsor-addnew"
-              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ Add new</button>
+              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
         </div>
-      </div><div class="project-publications-row rv rv-d1" data-project-slug="autopilot" data-project-people="dinithi-dissanayake mohamed-muftee yifei-luo prasanth-sasikumar peter-cleveland timothy-antoni suranga-nanayakkara">
+      </div><section class="project-press-group is-award rv" data-project-slug="autopilot" data-project-people="dinithi-dissanayake mohamed-muftee yifei-luo prasanth-sasikumar peter-cleveland timothy-antoni suranga-nanayakkara" hidden data-myahl-empty="true">
+      <div class="sidebar-section-title">Awards</div>
+      
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section>
+<section class="project-press-group is-news rv" data-project-slug="autopilot" data-project-people="dinithi-dissanayake mohamed-muftee yifei-luo prasanth-sasikumar peter-cleveland timothy-antoni suranga-nanayakkara" hidden data-myahl-empty="true">
+      <div class="sidebar-section-title">Press</div>
+      
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section>
+<section class="project-press-group is-video rv" data-project-slug="autopilot" data-project-people="dinithi-dissanayake mohamed-muftee yifei-luo prasanth-sasikumar peter-cleveland timothy-antoni suranga-nanayakkara" hidden data-myahl-empty="true">
+      <div class="sidebar-section-title">Videos</div>
+      
+      <button type="button" class="project-press-addnew"
+                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
+    </section><div class="project-publications-row rv rv-d1" data-project-slug="autopilot" data-project-people="dinithi-dissanayake mohamed-muftee yifei-luo prasanth-sasikumar peter-cleveland timothy-antoni suranga-nanayakkara">
         <div class="sidebar-section-title">Publications</div>
         <ol class="project-pub-list">
           <li class="project-pub-item">
@@ -123,7 +159,7 @@
             </li>
           <li class="project-pub-addnew-li">
        <button type="button" class="project-pub-addnew"
-               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ Add new publication</button>
+               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
      </li>
         </ol>
       </div>

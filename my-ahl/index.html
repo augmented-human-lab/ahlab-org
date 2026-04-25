@@ -16,11 +16,36 @@
    in /css/myahl.css. */
 .myahl-hero {
   min-height: 28vh;
-  background: var(--gradient);
   display: flex;
   align-items: flex-end;
   padding: 140px 0 40px;
   color: #fff;
+
+  /* Slow, subtle gradient drift. Same theme colors as the static
+     --gradient — only their position in the canvas migrates. The
+     4-stop loop (start → end → start → end) at 200%×200% size means
+     only a quarter is visible at any moment; keyframes pan that
+     quadrant through three corners with non-uniform timing so the
+     motion feels organic rather than metronomic. ease-in-out + 22s
+     cycle keeps any single moment imperceptible. */
+  background:
+    linear-gradient(
+      221deg,
+      var(--gradient-start) 0%,
+      var(--gradient-end)   35%,
+      var(--gradient-start) 70%,
+      var(--gradient-end)   100%
+    );
+  background-size: 200% 200%;
+  animation: myahl-hero-gradient-shift 22s ease-in-out infinite;
+}
+@keyframes myahl-hero-gradient-shift {
+  0%, 100% { background-position: 0% 0%; }
+  33%      { background-position: 100% 0%; }
+  66%      { background-position: 0% 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .myahl-hero { animation: none; }
 }
 .myahl-hero h1 {
   font-family: var(--font-display);
