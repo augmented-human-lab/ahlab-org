@@ -54,7 +54,7 @@
 
   <!-- Body (people row + publications, full width) -->
   <section class="project-body">
-    <div class="project-people-row rv">
+    <div class="project-people-row rv" data-project-slug="fingerdraw" data-project-people="anuruddha-hettiarachchi yeo-kian-peen pattie-maes suranga-nanayakkara">
         <div class="sidebar-section-title">Team</div>
         <div class="project-people-grid">
           <a href="/people/anuruddha-hettiarachchi/" class="project-person-card">
@@ -78,6 +78,23 @@
               </div>
               <div class="project-person-name">Suranga Nanayakkara</div>
             </a>
+          <button type="button" class="project-person-card project-person-claim"
+              data-myahl-claim="self" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
+       <div class="project-person-avatar" aria-hidden="true">+</div>
+       <div class="project-person-name">Add Me</div>
+     </button>
+     <button type="button" class="project-person-card project-person-claim"
+              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
+       <div class="project-person-avatar" aria-hidden="true">+</div>
+       <div class="project-person-name">Add Someone</div>
+     </button>
+        </div>
+      </div><div class="project-sponsors-row rv" data-project-slug="fingerdraw" data-project-people="anuruddha-hettiarachchi yeo-kian-peen pattie-maes suranga-nanayakkara">
+        <div class="sidebar-section-title">Sponsors</div>
+        <div class="project-sponsors-list">
+          
+          <button type="button" class="project-sponsor project-sponsor-addnew"
+              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ Add new</button>
         </div>
       </div><div class="project-press-row rv">
         <div class="sidebar-section-title">Recognition &amp; coverage</div>
@@ -89,7 +106,7 @@
             </li>
           </ul>
         </div>
-      </div><div class="project-publications-row rv rv-d1">
+      </div><div class="project-publications-row rv rv-d1" data-project-slug="fingerdraw" data-project-people="anuruddha-hettiarachchi yeo-kian-peen pattie-maes suranga-nanayakkara">
         <div class="sidebar-section-title">Publications</div>
         <ol class="project-pub-list">
           <li class="project-pub-item">
@@ -99,6 +116,10 @@
                   <a href="https://ahlab.org/wp-content/uploads/2021/03/p_hettiarachchi_2013.pdf" target="_blank" rel="noopener" class="project-pub-link">PDF</a>
                 </div>
             </li>
+          <li class="project-pub-addnew-li">
+       <button type="button" class="project-pub-addnew"
+               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ Add new publication</button>
+     </li>
         </ol>
       </div>
   </section>
@@ -108,6 +129,7 @@
 <div id="site-footer-mount"></div>
 <script src="/js/footer-include.js"></script>
 <script src="/js/event-chip-live.js" defer></script>
+<script src="/js/claim-buttons.js" defer></script>
 
 <script>
 /*

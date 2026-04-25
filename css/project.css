@@ -184,6 +184,30 @@ a.project-sponsor:hover {
 /* Visually-hidden span used for the sponsor name when only the
    logo is rendered, so screen readers and the title attribute
    still announce who the sponsor is. */
+/* "Add new" sponsor pill — same shape as a real sponsor pill so it
+   slots into the flex row without breaking rhythm. Dashed border +
+   accent text signal "this is editable, not data". Hidden by default;
+   src/js/claim-buttons.js shows it for signed-in project members. */
+.project-sponsor-addnew {
+  background: transparent;
+  border: 2px dashed var(--color-neutral-40);
+  color: var(--color-neutral-70);
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color .25s, color .25s, opacity .2s;
+}
+.project-sponsor-addnew[hidden] {
+  display: none;
+}
+.project-sponsor-addnew[disabled] {
+  cursor: not-allowed;
+  opacity: .65;
+}
+.project-sponsor-addnew:not([disabled]):hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
 .project-sponsor .sr-only {
   position: absolute;
   width: 1px;
@@ -251,6 +275,58 @@ a.project-sponsor:hover {
 }
 .project-person-card:hover .project-person-name { color: var(--color-accent); }
 
+/* ── Claim buttons (Add Me / Add Someone) ──────────────────
+   Same shape as a real team-member card so they slot into the
+   grid without breaking rhythm: avatar-sized empty dashed circle
+   with a "+" instead of a photo, name slot reads the action
+   label. Hidden by default — src/js/claim-buttons.js shows them
+   based on the signed-in user (Add Me whenever logged in; Add
+   Someone only when the signed-in user is on this project's team).
+   Disabled until the editing pipeline lands; tooltip explains. */
+.project-person-claim {
+  background: transparent;
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+/* The browser's user-agent `[hidden] { display: none }` rule loses to
+   `.project-person-card { display: flex }`, so we have to repeat the
+   hide explicitly with the class selector for it to actually win. */
+.project-person-claim[hidden] {
+  display: none;
+}
+.project-person-claim[disabled] {
+  cursor: not-allowed;
+}
+.project-person-claim .project-person-avatar {
+  /* Override the gradient ring + inner padding the real avatars
+     use; render as a hollow dashed circle with an accent "+". */
+  background: transparent;
+  border: 2px dashed var(--color-neutral-40);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent-light);
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1;
+  transition: border-color .25s, color .25s;
+}
+.project-person-claim:not([disabled]):hover .project-person-avatar,
+.project-person-claim:not([disabled]):focus-visible .project-person-avatar {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+.project-person-claim .project-person-name {
+  /* Subtler than real names — these are calls-to-action, not data. */
+  color: var(--color-neutral-70);
+  font-weight: 500;
+}
+.project-person-claim:not([disabled]):hover .project-person-name {
+  color: var(--color-accent);
+}
+
 /* ── Publications list (long-row cards, matches publications archive) ──
    Numbered list, each item has title (linked), citation in muted text,
    and a row of small DOI/PDF buttons. Same pattern as the person profile
@@ -297,6 +373,45 @@ a.project-pub-title:hover { color: var(--color-accent); }
   background: var(--color-accent);
   color: #fff;
   border-color: var(--color-accent);
+}
+
+/* "Add new publication" trailing list item — wrapper <li> stays
+   plain (no .project-pub-item, so no border/padding from the pub
+   styles), and the button inside fills the row with a dashed-border
+   call-to-action. claim-buttons.js shows this only for signed-in
+   project members; everyone else sees the button as `hidden`. */
+.project-pub-addnew-li {
+  list-style: none;
+  margin-top: 16px;
+}
+.project-pub-addnew {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  padding: 22px;
+  background: transparent;
+  border: 2px dashed var(--color-neutral-40);
+  border-radius: var(--radius);
+  color: var(--color-neutral-70);
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .25s, color .25s, opacity .2s;
+}
+.project-pub-addnew[hidden] {
+  display: none;
+}
+.project-pub-addnew[disabled] {
+  cursor: not-allowed;
+  opacity: .65;
+}
+.project-pub-addnew:not([disabled]):hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 /* ── External project links (demo / website / code / dataset / video) ──
