@@ -1,0 +1,24 @@
+{
+  "slug": "hyung-woon-lee",
+  "name": "Hyung Woon Lee",
+  "role": "Research Assistant",
+  "section": "Current Team",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/hyung-woon-lee/hyung-woon-lee.jpg",
+  "profile_url": "/people/hyung-woon-lee/",
+  "projects": [
+    {
+      "slug": "emodrink",
+      "title": "EmoDrink",
+      "year": "Current",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/emodrink/emodrink.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual"
+      ]
+    }
+  ],
+  "publications": [],
+  "events": [],
+  "press": []
+}

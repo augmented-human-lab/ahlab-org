@@ -1,0 +1,231 @@
+{
+  "slug": "moritz-messerschmidt",
+  "name": "Moritz Messerschmidt",
+  "role": "Research Fellow",
+  "section": "Current Team",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/moritz-messerschmidt/moritz-messerschmidt.jpg",
+  "profile_url": "/people/moritz-messerschmidt/",
+  "projects": [
+    {
+      "slug": "gutio",
+      "title": "GutIO",
+      "year": "Current",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/gutio/gutio.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "curious-shorts",
+      "title": "Curious Shorts",
+      "year": "2025",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/curious-shorts/curious-shorts.jpg",
+      "principles": [
+        "cognitive"
+      ]
+    },
+    {
+      "slug": "ubipen",
+      "title": "UbiPen",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/ubipen/ubipen.jpg",
+      "principles": [
+        "body",
+        "physical"
+      ]
+    },
+    {
+      "slug": "toro",
+      "title": "Toro",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/toro/toro.jpg",
+      "principles": [
+        "cognitive"
+      ]
+    },
+    {
+      "slug": "cotacs",
+      "title": "CoTacs",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/cotacs/cotacs.jpg",
+      "principles": [
+        "perceptual",
+        "sociocultural"
+      ]
+    },
+    {
+      "slug": "clothtiles",
+      "title": "ClothTiles",
+      "year": "2021",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/clothtiles/clothtiles.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "anisma",
+      "title": "ANISMA",
+      "year": "2021",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/anisma/anisma.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "viscerohaptics-investigating-the-effects-of-gut-based-audio-haptic-feedback-on-gastric-feelings-and-gastric-interoceptive-behaviors",
+      "title": "VisceroHaptics: Investigating the Effects of Gut-based Audio-Haptic Feedback on Gastric Feelings and Gastric Interoceptive Behaviors",
+      "year": "2026",
+      "citation": "Nguyen, M.H., Messerschmidt, M.A., Huber, J. and Nanayakkara, S. C., 2026. VisceroHaptics: Investigating the Effects of Gut-based Audio-Haptic Feedback on Gastric Feelings and Gastric Interoceptive Behaviors. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI 2026).",
+      "award": "Honorable Mention Award",
+      "links": [
+        {
+          "label": "doi",
+          "url": "https://doi.org/10.1145/3772318.3790268"
+        },
+        {
+          "label": "pdf",
+          "url": "https://drive.google.com/file/d/1OOsKm4M93YY_RcSgehTZLIb6kYRX4Gr8/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "gutio-toward-sensing-and-inducing-gut-feelings-with-abdominal-sounds",
+      "title": "GutIO: Toward Sensing and Inducing Gut Feelings with Abdominal Sounds",
+      "year": "2025",
+      "citation": "Nguyen, M.H., Messerschmidt, M.A, Gupta, C. and Nanayakkara, S.C., 2025. GutIO: Toward Sensing and Inducing Gut Feelings with Abdominal Sounds. Extended Abstracts of the CHI Conference on Human Factors in Computing Systems. CHI EA '25",
+      "award": null,
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3706599.3719826"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1tIM7Ud1GHLhg0O2Fbdcfy9wtjoSltru9/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI EA"
+    },
+    {
+      "slug": "curious-shorts-curiosity-driven-exploration-and-learning-on-short-form-video-platforms",
+      "title": "Curious Shorts: Curiosity-Driven Exploration and Learning on Short-Form Video Platforms",
+      "year": "2025",
+      "citation": "Tan, F.F., Ram, A., Messerschmidt, A.M., Dissanayake, H.A., and Nanayakkara, S.C. 2025. Curious Shorts: Curiosity-Driven Exploration and Learning on Short-Form Video Platforms. Accepted to the Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI ’25).",
+      "award": null,
+      "links": [],
+      "venue": "CHI"
+    },
+    {
+      "slug": "cotacs-a-haptic-toolkit-to-explore-effective-on-body-haptic-feedback-by-ideating-designing-evaluating-and-refining-haptic-designs-using-group-collaboration",
+      "title": "CoTacs: A Haptic Toolkit to Explore Effective On-Body Haptic Feedback by Ideating, Designing, Evaluating and Refining Haptic Designs Using Group Collaboration",
+      "year": "2024",
+      "citation": "Messerschmidt, M. A., Cortes, J. P. F., & Nanayakkara, S.C. (2024). CoTacs: A Haptic Toolkit to Explore Effective On-Body Haptic Feedback by Ideating, Designing, Evaluating and Refining Haptic Designs Using Group Collaboration. International Journal of Human–Computer Interaction, 1–21.",
+      "award": null,
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1080/10447318.2024.2358460"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/17Pw7AAbddfu-ocFQmeIMn_Tg9511YCyw/view?usp=sharing"
+        }
+      ],
+      "venue": "IJHCI"
+    },
+    {
+      "slug": "toro-a-web-based-tool-to-search-explore-screen-compare-and-visualize-literature",
+      "title": "Toro: A Web-based Tool to Search, Explore, Screen, Compare and Visualize Literature",
+      "year": "2022",
+      "citation": "Messerschmidt, M., Chan, S., Wen, E. and Nanayakkara, S.C., 2022. Toro: A Web-based Tool to Search, Explore, Screen, Compare and Visualize Literature.",
+      "award": null,
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://aisel.aisnet.org/sighci2022/13"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1iVWCo4Jh_fFHOr6wy8NUh_V55HOA7GLi/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "anisma-a-prototyping-toolkit-to-explore-haptic-skin-deformation-applications-using-shape-memory-alloys",
+      "title": "ANISMA: A Prototyping Toolkit to Explore Haptic Skin Deformation Applications Using Shape-Memory Alloys",
+      "year": "2022",
+      "citation": "Messerschmidt M.A., Muthukumarana S., Hamdan N.A., Wagner A., Zhang H., Borchers J., and Nanayakkara S.C. 2022. ANISMA: A Prototyping Toolkit to Explore Haptic Skin Deformation Applications Using Shape-Memory Alloys. ACM Trans. Comput.-Hum. Interact. 29, 3, Article 19 (June 2022), 34 pages.",
+      "award": null,
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3490497"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "clothtiles-a-prototyping-platform-to-fabricate-customized-actuators-on-clothing-using-3d-printing-and-shape-memory-alloys",
+      "title": "ClothTiles: A Prototyping Platform to Fabricate Customized Actuators on Clothing using 3D Printing and Shape-Memory Alloys",
+      "year": "2021",
+      "citation": "Muthukumarana, S., Messerschmidt, M.A., Matthies, D.J.C., Steimle, J., Scholl, P.M., and Nanayakkara, S.C., 2021. ClothTiles: A Prototyping Platform to Fabricate Customized Actuators on Clothing using 3D Printing and Shape-Memory Alloys. In CHI Conference on Human Factors in Computing Systems (CHI ’21), May 8–13, 2021, Yokohama, Japan.",
+      "award": null,
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3411764.3445613"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1UX7Q9UYPImpNHmt_FnGlT8p34sMy2UC0/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    }
+  ],
+  "events": [
+    {
+      "slug": "chi-2026",
+      "title": "CHI 2026",
+      "subtitle": "ACM Conference on Human Factors in Computing Systems",
+      "kind": "conference",
+      "location": "Barcelona, Spain",
+      "starts": "2026-04-13",
+      "ends": "2026-04-17",
+      "url": "https://chi2026.ahlab.org",
+      "summary": "AHLab presents 5 papers and 2 posters at CHI 2026 in Barcelona."
+    }
+  ],
+  "press": [
+    {
+      "slug": "toro-prototypes-for-humanity",
+      "title": "Toro | Prototypes for Humanity",
+      "year": "2023",
+      "type": "award",
+      "outlet": null,
+      "url": "https://www.prototypesforhumanity.com/project/toro/",
+      "projects": [
+        "toro"
+      ]
+    },
+    {
+      "slug": "clothtiles-a-prototyping-platform-to-fabricate-customized-actuators-on-clothing",
+      "title": "ClothTiles: A Prototyping Platform to Fabricate Customized Actuators on Clothing",
+      "year": "2021",
+      "type": "news",
+      "outlet": "Ars Electronica",
+      "url": "https://www.ars.nz/clothtiles/",
+      "projects": [
+        "clothtiles"
+      ]
+    }
+  ]
+}

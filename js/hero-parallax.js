@@ -90,10 +90,7 @@
       log('first valid event:', { beta: e.beta, gamma: e.gamma, absolute: e.absolute });
       firstEvent = false;
     }
-    // Negate gamma so the pan feels like looking around a window:
-    // tilting the phone RIGHT reveals more of the image's right side
-    // (background-position shifts left), and vice versa.
-    var ratio = clamp(-e.gamma / MAX_TILT_DEG, -1, 1);
+    var ratio = clamp(e.gamma / MAX_TILT_DEG, -1, 1);
     targetShift = ratio * MAX_SHIFT_PCT;
     if (!rafScheduled) {
       rafScheduled = true;

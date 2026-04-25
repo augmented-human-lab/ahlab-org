@@ -1,0 +1,344 @@
+{
+  "slug": "shreyas-sridhar",
+  "name": "Shreyas Sridhar",
+  "role": "Research Engineer",
+  "section": "Current Team",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/shreyas-sridhar/shreyas-sridhar.jpg",
+  "profile_url": "/people/shreyas-sridhar/",
+  "projects": [
+    {
+      "slug": "sonicvista",
+      "title": "SonicVista",
+      "year": "2025",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/sonicvista/sonicvista.jpg",
+      "principles": [
+        "cognitive",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "dysalytics",
+      "title": "Dysalytics",
+      "year": "2025",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/dysalytics/dysalytics.jpg",
+      "principles": [
+        "cognitive",
+        "identity"
+      ]
+    },
+    {
+      "slug": "aisee",
+      "title": "AiSee",
+      "year": "2025",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/aisee/aisee.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual",
+        "identity"
+      ]
+    },
+    {
+      "slug": "itiles",
+      "title": "iTILES",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/itiles/itiles.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "physical"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "beyond-descriptions-a-generative-scene2audio-framework-for-blind-and-low-vision-users-to-experience-vista-landscapes",
+      "title": "Beyond Descriptions: A Generative Scene2Audio Framework for Blind and Low-Vision Users to Experience Vista Landscapes",
+      "year": "2026",
+      "citation": "Gupta, C., Peng, J., Ram, A., Sridhar, S., Jouffrais, C., Nanayakkara, S.C., 2026. Beyond Descriptions: A Generative Scene2Audio Framework for Blind and Low-Vision Users to Experience Vista Landscapes. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI 2026).",
+      "award": null,
+      "links": [
+        {
+          "label": "doi",
+          "url": "https://doi.org/10.1145/3772318.3791655"
+        },
+        {
+          "label": "pdf",
+          "url": "https://drive.google.com/file/d/1vTkl0YF-Komg84lNa2_18UB_5fK25vIM/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "scene-to-audio-distant-scene-sonification-for-blind-and-low-vision-people",
+      "title": "Scene-to-Audio: Distant Scene Sonification for Blind and Low Vision People",
+      "year": "2025",
+      "citation": "Gupta, C., Ram, A., Sridhar, S., Jouffrais, C. and Nanayakkara, S. C., 2025, April. Scene-to-Audio: Distant Scene Sonification for Blind and Low Vision People. In Proceedings of the Extended Abstracts of the CHI Conference on Human Factors in Computing Systems (pp. 1-9).",
+      "award": null,
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3706599.3719849"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1P9tDkBXMwmtesGTh-TWgldmcurpBMh7z/view?usp=drive_link"
+        }
+      ],
+      "venue": "CHI EA"
+    },
+    {
+      "slug": "sonicvista-towards-creating-awareness-of-distant-scenes-through-sonification",
+      "title": "SonicVista: Towards Creating Awareness of Distant Scenes through Sonification",
+      "year": "2024",
+      "citation": "Gupta, C., Sridhar, S., Matthies, D.J., Jouffrais, C. and Nanayakkara, S.C., 2024. SonicVista: Towards Creating Awareness of Distant Scenes through Sonification. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 8(2), pp.1-32.",
+      "award": null,
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3659609"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1VgtLBPs03dJodsN6_7-yPfqLuceCGBSj/view?usp=sharing"
+        }
+      ],
+      "venue": "ACM"
+    }
+  ],
+  "events": [
+    {
+      "slug": "chi-2026",
+      "title": "CHI 2026",
+      "subtitle": "ACM Conference on Human Factors in Computing Systems",
+      "kind": "conference",
+      "location": "Barcelona, Spain",
+      "starts": "2026-04-13",
+      "ends": "2026-04-17",
+      "url": "https://chi2026.ahlab.org",
+      "summary": "AHLab presents 5 papers and 2 posters at CHI 2026 in Barcelona."
+    }
+  ],
+  "press": [
+    {
+      "slug": "i-wont-have-to-trouble-anyone-when-i-visit",
+      "title": "'I won't have to trouble anyone when I visit': How AiSee helps visitors with visual impairment at Gardens by the Bay",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/i-wont-have-to-trouble-",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "gardens-by-the-bay-to-offer-robot-guide-dog-online-sensory-map-2026",
+      "title": "Gardens by the Bay to offer robot guide dog, online sensory map for visitors with disabilities",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/gardens-by-the-bay-to-offer-robot-guide-dog-online-sensory-map-for-visitors-with-disabilities",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "straits-times-facebook-aisee-wearable-headset-2026",
+      "title": "A wearable AI-powered headset is also in the works to help individuals with visual impairment",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times (Facebook)",
+      "url": "https://www.facebook.com/TheStraitsTimes/posts/a-wearable-ai-powered-headset-is-also-in-the-works-to-help-individuals-with-visu/1234420202178471/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "straits-times-x-aisee-gardens-by-the-bay-2026",
+      "title": "Gardens by the Bay to offer robot guide dog and AiSee headset (The Straits Times on X)",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times (X)",
+      "url": "https://x.com/straits_times/status/2035688344785412588",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "cna-robot-guide-dog-inclusive-innovations-gardens-by-the-bay-2026",
+      "title": "Robot guide dog among inclusive innovations to help visitors with disabilities at Gardens by the Bay",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Channel NewsAsia (CNA)",
+      "url": "https://www.channelnewsasia.com/watch/robot-guide-dog-among-inclusive-innovations-help-visitors-disabilities-gardens-bay-6009986",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "mothership-youtube-aisee-robot-guide-dog-2026",
+      "title": "Robot guide dog and AiSee at Gardens by the Bay (Mothership)",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Mothership (YouTube)",
+      "url": "https://www.youtube.com/shorts/q1csBHJOxzI",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "mothership-facebook-aisee-gardens-by-the-bay-2026",
+      "title": "Robot guide dog and AiSee at Gardens by the Bay (Mothership)",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Mothership (Facebook)",
+      "url": "https://www.facebook.com/watch/?v=960598809644633",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "mothership-instagram-aisee-gardens-by-the-bay-2026",
+      "title": "Robot guide dog and AiSee at Gardens by the Bay (Mothership)",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Mothership (Instagram)",
+      "url": "https://www.instagram.com/reel/DWMSdFFCm1a/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "how-aisee-can-make-the-blind-see",
+      "title": "How AiSee Can Make the Blind 'See'",
+      "year": "2025",
+      "type": "news",
+      "outlet": "Tech Briefs",
+      "url": "https://www.techbriefs.com/component/content/article/52354-how-aisee-can-make-the-blind-see",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "researchers-develop-ai-powered-eye-for-visually-impaired-people-to-see-objects",
+      "title": "Researchers develop AI-powered 'eye' for visually impaired people to 'see' objects",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Tech Xplore",
+      "url": "https://techxplore.com/news/2024-02-ai-powered-eye-visually-impaired.html",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-team-develops-affordable-headset-to-help-visually-impaired-see",
+      "title": "NUS team develops affordable headset to help visually impaired 'see'",
+      "year": "2024",
+      "type": "news",
+      "outlet": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/nus-team-develops-affordable-headset-to-help-visually-impaired-see",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-researchers-launch-aisee-to-help-the-visually-impaired-see-with-the-help-of-ai",
+      "title": "NUS researchers launch AiSee to help the visually impaired \"see\" with the help of AI",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Hardware Zone Singapore",
+      "url": "https://www.hardwarezone.com.sg/tech-news-nus-researchers-aisee-help-visually-impaired-see-ai",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-researchers-develop-ai-powered-headset-to-help-visually-impaired-see",
+      "title": "NUS researchers develop AI-powered headset to help visually impaired \"see\"",
+      "year": "2024",
+      "type": "video",
+      "outlet": "Channel NewsAsia (CNA)",
+      "url": "https://youtu.be/pHmUeN-ALUg",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-researchers-develop-ai-powered-eye-for-visually-impaired-people-to-see-objects",
+      "title": "NUS researchers develop AI-powered 'eye' for visually impaired people to 'see' objects",
+      "year": "2024",
+      "type": "news",
+      "outlet": "National University of Singapore",
+      "url": "https://news.nus.edu.sg/ai-powered-eye-for-visually-impaired-people/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "i-was-blind-but-now-aisee",
+      "title": "I Was Blind, But Now AiSee",
+      "year": "2024",
+      "type": "news",
+      "outlet": "hackster.io",
+      "url": "https://www.hackster.io/news/i-was-blind-but-now-aisee-997ed7e95610",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "an-experimental-ai-wearable-recognises-objects-and-tells-visually-impaired-users-details-of-what-theyre-holding",
+      "title": "An experimental AI wearable recognises objects and tells visually-impaired users details of what they're holding",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Yahoo News",
+      "url": "https://uk.news.yahoo.com/experimental-ai-wearable-recognises-objects-173329887.html",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-wearable-lets-visually-impaired-users-see",
+      "title": "AiSee: Wearable lets visually impaired users 'see'",
+      "year": "2024",
+      "type": "news",
+      "outlet": "FocusTechnica",
+      "url": "https://www.focustechnica.com/aisee-wearable-lets-visually-impaired-users-see/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-ai-powered-eye-for-visually-impaired-people-to-see-objects",
+      "title": "AiSee: AI-powered 'eye' for visually impaired people to 'see' objects",
+      "year": "2024",
+      "type": "video",
+      "outlet": "National University of Singapore",
+      "url": "https://youtu.be/81grB7BtN9k",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-ai-powered-eye-for-visually-impaired-people-to-see-objects-2",
+      "title": "AiSee: AI-Powered 'Eye' for Visually Impaired People to 'See' Objects",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Adafruit",
+      "url": "https://blog.adafruit.com/2024/02/12/aisee-ai-powered-eye-for-visually-impaired-people-to-see-objects/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-wearable-tells-blind-users-what-theyre-holding-in-their-hand",
+      "title": "AiSee wearable tells blind users what they're holding in their hand",
+      "year": "2024",
+      "type": "news",
+      "outlet": "News Atlas",
+      "url": "https://newatlas.com/wearables/aisee-wearable-blind-object-recognition/",
+      "projects": [
+        "aisee"
+      ]
+    }
+  ]
+}

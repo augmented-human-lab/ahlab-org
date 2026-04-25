@@ -1,0 +1,118 @@
+{
+  "slug": "mia-huong-nguyen",
+  "name": "Mia Huong Nguyen",
+  "role": "PhD Candidate",
+  "section": "Current Team",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/mia-huong-nguyen/mia-huong-nguyen.jpg",
+  "profile_url": "/people/mia-huong-nguyen/",
+  "projects": [
+    {
+      "slug": "gutio",
+      "title": "GutIO",
+      "year": "Current",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/gutio/gutio.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "emo-know",
+      "title": "EMO-KNOW",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/emo-know/emo-know.jpg",
+      "principles": [
+        "cognitive"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "viscerohaptics-investigating-the-effects-of-gut-based-audio-haptic-feedback-on-gastric-feelings-and-gastric-interoceptive-behaviors",
+      "title": "VisceroHaptics: Investigating the Effects of Gut-based Audio-Haptic Feedback on Gastric Feelings and Gastric Interoceptive Behaviors",
+      "year": "2026",
+      "citation": "Nguyen, M.H., Messerschmidt, M.A., Huber, J. and Nanayakkara, S. C., 2026. VisceroHaptics: Investigating the Effects of Gut-based Audio-Haptic Feedback on Gastric Feelings and Gastric Interoceptive Behaviors. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI 2026).",
+      "award": "Honorable Mention Award",
+      "links": [
+        {
+          "label": "doi",
+          "url": "https://doi.org/10.1145/3772318.3790268"
+        },
+        {
+          "label": "pdf",
+          "url": "https://drive.google.com/file/d/1OOsKm4M93YY_RcSgehTZLIb6kYRX4Gr8/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "human-robot-interaction-for-people-with-visual-impairments-a-systematic-literature-review",
+      "title": "Human Robot Interaction for People with Visual Impairments: A Systematic Literature Review",
+      "year": "2025",
+      "citation": "Wei, Y., Rocher, N., Gupta, C., Nguyen, M.H., Zimmermann, R., Ooi, W.T., Jouffrais, C. and Nanayakkara, S.C., 2025. Human Robot Interaction for Blind and Low Vision People: A Systematic Literature Review. In: Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems (CHI '25). New York, NY, USA: Association for Computing Machinery, Article 276, pp.1–19.",
+      "award": null,
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3706598.3713438"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1be_Pyy85obvKW8OLJm4hdXpSwjOCD_Re/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "gutio-toward-sensing-and-inducing-gut-feelings-with-abdominal-sounds",
+      "title": "GutIO: Toward Sensing and Inducing Gut Feelings with Abdominal Sounds",
+      "year": "2025",
+      "citation": "Nguyen, M.H., Messerschmidt, M.A, Gupta, C. and Nanayakkara, S.C., 2025. GutIO: Toward Sensing and Inducing Gut Feelings with Abdominal Sounds. Extended Abstracts of the CHI Conference on Human Factors in Computing Systems. CHI EA '25",
+      "award": null,
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3706599.3719826"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1tIM7Ud1GHLhg0O2Fbdcfy9wtjoSltru9/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI EA"
+    },
+    {
+      "slug": "emo-know-a-large-scale-dataset-on-emotion-cause",
+      "title": "EMO-KNOW: A Large Scale Dataset on Emotion-Cause",
+      "year": "2023",
+      "citation": "Nguyen, M., Samaradivakara, Y., Sasikumar, P., Gupta, C. and Nanayakkara, S.C., 2023, December. EMO-KNOW: A Large Scale Dataset on Emotion-Cause. In Findings of the Association for Computational Linguistics: EMNLP 2023 (pp. 11043-11051).",
+      "award": null,
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.18653/v1/2023.findings-emnlp.737"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1NsFaWPwX-DO21d_BEpvfUs5Ri8BMoOjb/view?usp=drive_link"
+        }
+      ],
+      "venue": "Other"
+    }
+  ],
+  "events": [
+    {
+      "slug": "chi-2026",
+      "title": "CHI 2026",
+      "subtitle": "ACM Conference on Human Factors in Computing Systems",
+      "kind": "conference",
+      "location": "Barcelona, Spain",
+      "starts": "2026-04-13",
+      "ends": "2026-04-17",
+      "url": "https://chi2026.ahlab.org",
+      "summary": "AHLab presents 5 papers and 2 posters at CHI 2026 in Barcelona."
+    }
+  ],
+  "press": []
+}

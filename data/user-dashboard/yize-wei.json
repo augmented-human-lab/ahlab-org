@@ -1,0 +1,93 @@
+{
+  "slug": "yize-wei",
+  "name": "Yize Wei",
+  "role": "PhD Candidate",
+  "section": "Current Team",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/yize-wei/yize-wei.jpg",
+  "profile_url": "/people/yize-wei/",
+  "projects": [
+    {
+      "slug": "dronebuddy",
+      "title": "DroneBuddy",
+      "year": "2025",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/dronebuddy/dronebuddy.jpg",
+      "principles": [
+        "perceptual",
+        "physical",
+        "identity"
+      ]
+    },
+    {
+      "slug": "sound-designer-generative-ai-interactions",
+      "title": "Sound Designer-Generative AI Interactions",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/sound-designer-generative-ai-interactions/sound-designer-generative-ai-interactions.jpg",
+      "principles": [
+        "cognitive"
+      ]
+    },
+    {
+      "slug": "audio-morph-gan",
+      "title": "Audio-Morph GAN",
+      "year": "2023",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/audio-morph-gan/audio-morph-gan.jpg",
+      "principles": [
+        "perceptual"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "human-robot-interaction-for-people-with-visual-impairments-a-systematic-literature-review",
+      "title": "Human Robot Interaction for People with Visual Impairments: A Systematic Literature Review",
+      "year": "2025",
+      "citation": "Wei, Y., Rocher, N., Gupta, C., Nguyen, M.H., Zimmermann, R., Ooi, W.T., Jouffrais, C. and Nanayakkara, S.C., 2025. Human Robot Interaction for Blind and Low Vision People: A Systematic Literature Review. In: Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems (CHI '25). New York, NY, USA: Association for Computing Machinery, Article 276, pp.1–19.",
+      "award": null,
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3706598.3713438"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1be_Pyy85obvKW8OLJm4hdXpSwjOCD_Re/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "sound-designer-generative-ai-interactions-towards-designing-creative-support-tools-for-professional-sound-designers",
+      "title": "Sound Designer-Generative AI Interactions: Towards Designing Creative Support Tools for Professional Sound Designers",
+      "year": "2024",
+      "citation": "Kamath, P., Morreale, F., Bagaskara, P.L., Wei, Y., and Nanayakkara, S.C. 2024. Sound Designer-Generative AI Interactions: Towards Designing Creative Support Tools for Professional Sound Designers. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI ’24), May 11–16, 2024, Honolulu, HI, USA.",
+      "award": null,
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3613904.3642040"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1nSdZe0irBvTQlWiNCC0oC6V15PiZOsEV/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "towards-controllable-audio-texture-morphing",
+      "title": "Towards Controllable Audio Texture Morphing",
+      "year": "2023",
+      "citation": "Gupta C*., Kamath P*., Wei. Y., Li, Z., Nanayakkara S.C., Wyse L. 2023. Towards Controllable Audio Texture Morphing. In 48th IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP '23), 4-10 June, 2023, Rhodes Island, Greece.",
+      "award": null,
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1Od3J7IHFhiZ0fUatCoNCzD7Fp0AFBfg1/view?usp=sharing"
+        }
+      ],
+      "venue": "IEEE"
+    }
+  ],
+  "events": [],
+  "press": []
+}

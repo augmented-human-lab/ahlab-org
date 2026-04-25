@@ -94,7 +94,7 @@
   // ── State ──────────────────────────────────────────────────────
   var currentUser = loadSession();
   var listeners = [];
-  var peopleIndex = null;       // lazy-loaded people.json lookup
+  var peopleIndex = null;       // lazy-loaded { email: slug } map
   var peopleIndexPromise = null;
 
 
@@ -264,87 +264,45 @@
 
 
   /**
-   * Given the raw identity from Apps Script, attempt to find the matching
-   * record in /people.json and attach it. Non-fatal: if the file can't be
-   * loaded or no match exists, the user is still logged in — they simply
-   * don't get a "View my profile" link in the dropdown.
+   * Given the raw identity from Apps Script, attempt to resolve a public
+   * profile slug from the email via /data/auth-index.json — a slim
+   * { <email>: <slug> } map built at site-build time. Non-fatal: if the
+   * fetch fails or the email isn't listed, the user is still logged in,
+   * they simply don't get a profile-linked dashboard.
    *
-   * Match strategy, in order of preference:
-   *   1. Exact match on person.email (future-proof; requires schema update)
-   *   2. Exact match on person.slug === local-part of email
-   *   3. Fuzzy: local-part matches start of name (e.g. "sankha" → "Sankha Cooray")
-   *      Only used as a last resort because names collide.
+   * The full person record is intentionally NOT fetched here. /my-ahl/
+   * fetches its own dashboard payload (which already contains everything
+   * the page needs). Other pages that show only the avatar in the nav
+   * don't need the full record either.
    */
   function attachPersonRecord(data) {
-    return loadPeopleIndex().then(function (idx) {
+    return loadAuthIndex().then(function (idx) {
       if (!idx) return data;
       var email = (data.email || '').toLowerCase();
       if (!email) return data;
-      var local = email.split('@')[0];
-
-      // (1) explicit email field
-      if (idx.byEmail[email]) {
-        data.person = idx.byEmail[email];
-        return data;
-      }
-      // (2) slug == local-part (e.g. "suranga-nanayakkara")
-      if (idx.bySlug[local]) {
-        data.person = idx.bySlug[local];
-        return data;
-      }
-      // (2b) dotted local-part → hyphenated slug
-      var dotted = local.replace(/\./g, '-');
-      if (idx.bySlug[dotted]) {
-        data.person = idx.bySlug[dotted];
-        return data;
-      }
-      // (3) fuzzy first-name match — ONLY if exactly one person's slug
-      // starts with the local-part. Avoids collisions on common names.
-      var candidates = idx.slugs.filter(function (s) {
-        return s === local || s.indexOf(local + '-') === 0;
-      });
-      if (candidates.length === 1) {
-        data.person = idx.bySlug[candidates[0]];
+      var slug = idx[email];
+      if (slug) {
+        data.person = { slug: slug };
       }
       return data;
-    }).catch(function () {
-      return data;
-    });
+    }).catch(function () { return data; });
   }
 
 
-  function loadPeopleIndex() {
+  function loadAuthIndex() {
     if (peopleIndex) return Promise.resolve(peopleIndex);
     if (peopleIndexPromise) return peopleIndexPromise;
 
-    // Fetch fallback chain: matches the established site-wide pattern
-    // (../data.json → ./data.json → /data.json → CDN).
-    var urls = ['/people.json', '/data/people.json'];
-    peopleIndexPromise = tryFetch(urls).then(function (arr) {
-      if (!Array.isArray(arr)) return null;
-      var byEmail = {}, bySlug = {}, slugs = [];
-      arr.forEach(function (p) {
-        if (!p || !p.slug) return;
-        bySlug[p.slug] = p;
-        slugs.push(p.slug);
-        if (p.email) byEmail[String(p.email).toLowerCase()] = p;
-      });
-      peopleIndex = { byEmail: byEmail, bySlug: bySlug, slugs: slugs };
-      return peopleIndex;
-    }).catch(function () { return null; });
+    peopleIndexPromise = fetch('/data/auth-index.json', { cache: 'default' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (idx) {
+        // Index is a flat { <email>: <slug> } object; cache and return.
+        peopleIndex = (idx && typeof idx === 'object') ? idx : null;
+        return peopleIndex;
+      })
+      .catch(function () { return null; });
 
     return peopleIndexPromise;
-  }
-
-  function tryFetch(urls) {
-    var i = 0;
-    function next() {
-      if (i >= urls.length) return Promise.reject(new Error('all fetch urls failed'));
-      return fetch(urls[i++], { cache: 'default' })
-        .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('not ok')); })
-        .catch(next);
-    }
-    return next();
   }
 
 

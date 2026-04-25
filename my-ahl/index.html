@@ -7,65 +7,65 @@
 <link rel="stylesheet" href="https://use.typekit.net/zws2qzx.css">
 <link rel="stylesheet" href="/css/theme.css">
 <link rel="stylesheet" href="/css/auth.css">
+<link rel="stylesheet" href="/css/myahl.css">
+<link rel="stylesheet" href="/css/event-chip.css">
 <style>
-/* ── My AHL page styles ──────────────────────────────────
-   Minimal for now — a themed hero, a state panel that
-   switches between "please sign in" and "welcome".
-   The auth slot in the nav handles the actual login UI;
-   this page just reads from window.AHLAuth.getUser() and
-   re-renders when it changes. */
-
+/* ── Hero (signed-out + signed-in) ─────────────────────────
+   Stays here because it's the only myahl-specific layout that
+   doesn't fit the dashboard-card pattern. Everything else is
+   in /css/myahl.css. */
 .myahl-hero {
-  min-height: 48vh;
+  min-height: 28vh;
   background: var(--gradient);
   display: flex;
   align-items: flex-end;
-  padding: 160px 0 60px;
+  padding: 140px 0 40px;
   color: #fff;
 }
 .myahl-hero h1 {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 48px;
+  font-size: 40px;
   line-height: 1.1;
   letter-spacing: -.01em;
 }
 .myahl-hero .sub {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.6;
   opacity: .85;
-  margin-top: 16px;
+  margin-top: 12px;
   max-width: 560px;
 }
 @media (max-width: 767px) {
-  .myahl-hero { padding: 120px 0 48px; min-height: 40vh; }
-  .myahl-hero h1 { font-size: 32px; }
-  .myahl-hero .sub { font-size: 16px; }
+  .myahl-hero { padding: 110px 0 32px; min-height: 24vh; }
+  .myahl-hero h1 { font-size: 28px; }
 }
 
 .myahl-main {
-  padding: 80px 0 120px;
+  padding: 48px 0 96px;
   background: var(--color-neutral-20);
   min-height: 40vh;
 }
-.myahl-card {
+
+/* ── Signed-out card (kept simple) ────────────────────────── */
+.myahl-signin-card {
   background: var(--color-neutral-10);
   border: 1px solid var(--color-neutral-30);
   border-radius: var(--radius-lg);
-  padding: 48px;
-  max-width: 720px;
+  padding: 40px;
+  max-width: 560px;
   margin: 0 auto;
 }
-.myahl-card h2 {
+.myahl-signin-card h2 {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 28px;
-  margin-bottom: 16px;
+  font-size: 24px;
+  margin-bottom: 12px;
   color: var(--color-neutral-100);
 }
-.myahl-card p {
-  font-size: 16px;
-  line-height: 1.65;
+.myahl-signin-card p {
+  font-size: 15px;
+  line-height: 1.6;
   color: var(--color-neutral-80);
   margin-bottom: 12px;
 }
@@ -73,76 +73,19 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-top: 20px;
-  padding: 14px 28px;
+  margin-top: 16px;
+  padding: 12px 24px;
   background: var(--color-accent);
   color: #fff;
   font-family: var(--font-text);
   font-weight: 500;
-  font-size: 15px;
+  font-size: 14px;
   border: 0;
   border-radius: 999px;
   cursor: pointer;
   transition: background .2s;
 }
 .myahl-cta:hover { background: var(--color-accent-dark); }
-
-.myahl-coming-soon {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-  margin-top: 32px;
-}
-.myahl-coming-soon li {
-  padding: 20px;
-  background: var(--color-neutral-20);
-  border-radius: var(--radius);
-  font-size: 14px;
-  color: var(--color-neutral-80);
-  border-left: 3px solid var(--color-accent-light);
-}
-.myahl-coming-soon li strong {
-  display: block;
-  color: var(--color-neutral-100);
-  font-family: var(--font-display);
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-@media (max-width: 767px) {
-  .myahl-card { padding: 28px 20px; border-radius: var(--radius); }
-}
-
-/* Sign-out button — sits at the bottom of the signed-in card.
-   Subtle red so it's clearly a destructive-ish action without
-   being alarming. Lives here so mobile users have an obvious
-   sign-out affordance (the nav drawer doesn't surface one). */
-.myahl-logout-row {
-  margin-top: 36px;
-  padding-top: 24px;
-  border-top: 1px solid var(--color-neutral-30);
-  display: flex;
-  justify-content: flex-start;
-}
-.myahl-logout {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 20px;
-  background: transparent;
-  color: #dc2626;
-  font-family: var(--font-text);
-  font-weight: 500;
-  font-size: 14px;
-  border: 1px solid #fca5a5;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background .2s, color .2s, border-color .2s;
-}
-.myahl-logout:hover {
-  background: #fee2e2;
-  border-color: #dc2626;
-  color: #b91c1c;
-}
 </style>
 </head>
 <body>
@@ -158,11 +101,9 @@
 </header>
 
 <main class="myahl-main">
-  <div class="container">
-    <div class="myahl-card" id="myahl-card">
-      <!-- Filled by the auth-aware script below. Default content
-           covers the case where JS is disabled / failed to load —
-           still looks reasonable and points users at the nav. -->
+  <div class="container" id="myahl-root">
+    <!-- Signed-out fallback. Replaced after auth.js loads. -->
+    <div class="myahl-signin-card">
       <h2>Sign in to continue</h2>
       <p>This page is for AHLab members signed in with their <strong>@ahlab.org</strong> Google account.</p>
       <p>Use the <em>Member login</em> button in the top-right corner to sign in.</p>
@@ -173,99 +114,249 @@
 <!-- Footer gets injected here by footer-include.js -->
 <div id="site-footer-mount"></div>
 
-<!-- Scripts: theme/nav/footer come from the shared pool; auth.js
-     lives on every page that shows the nav (so the login chrome
-     works everywhere), and the page-local script below handles
-     the card content specific to /my-ahl/. -->
 <script src="/js/nav-include.js"></script>
 <script src="/js/auth.js"></script>
 <script src="/js/footer-include.js"></script>
 
 <script>
 /*
- * My AHL page controller.
+ * /my-ahl/ controller — renders the dashboard for the signed-in user.
  *
- * Reads the current user from window.AHLAuth and swaps the card
- * content accordingly. Subscribes to onChange so the view stays in
- * sync if the user signs in or out while this tab is open.
+ *  - Subscribes to AHLAuth changes; re-renders on sign-in / sign-out.
+ *  - When a user is signed in AND has a person.slug, fetches
+ *    /data/user-dashboard/<slug>.json (built by build/build-myahl.js).
+ *  - Renders 4 sections: projects / publications / events / press,
+ *    each with a final disabled "Add new" tile to telegraph the
+ *    forthcoming edit pipeline.
  *
- * Defensive: window.AHLAuth is set by auth.js, which loads right
- * above this script. If for any reason AHLAuth isn't available
- * (e.g. network error fetching auth.js), we leave the fallback
- * "please sign in" content alone.
+ *  All "Add new" controls are intentionally inert (button[disabled])
+ *  until we ship the Apps Script edit broker. Tooltips explain the
+ *  state so users don't think it's broken.
  */
 (function () {
   if (!window.AHLAuth) return;
 
-  var card = document.getElementById('myahl-card');
+  var root = document.getElementById('myahl-root');
   var heroTitle = document.getElementById('myahl-hero-title');
-  var heroSub = document.getElementById('myahl-hero-sub');
+  var heroSub   = document.getElementById('myahl-hero-sub');
 
-  function render(user) {
-    if (!user) {
-      heroTitle.textContent = 'My AHL';
-      heroSub.textContent = 'Your AHLab member dashboard.';
-      card.innerHTML =
-        '<h2>Sign in to continue</h2>' +
-        '<p>This page is for AHLab members signed in with their <strong>@ahlab.org</strong> ' +
-        'Google account.</p>' +
-        '<p>Once signed in, you\u2019ll be able to update your public profile, add new ' +
-        'projects, and submit awards and publications \u2014 all reviewed before going live.</p>' +
-        '<button class="myahl-cta" type="button" id="myahl-signin">Sign in with Google</button>';
-      var btn = document.getElementById('myahl-signin');
-      if (btn) btn.addEventListener('click', function () { window.AHLAuth.login(); });
-      return;
-    }
-
-    // Logged in. Greet the user by first name when we can parse one
-    // from their display name; fall back to the full display name.
-    var firstName = (user.name || user.email).split(' ')[0];
-    heroTitle.textContent = 'Welcome back, ' + firstName;
-    heroSub.textContent = 'Signed in as ' + user.email;
-
-    var publicProfileHtml = '';
-    if (user.person && user.person.slug) {
-      publicProfileHtml =
-        '<p>Your public profile: ' +
-        '<a href="/people/' + escapeHtml(user.person.slug) + '/" ' +
-        'style="color:var(--color-accent);text-decoration:underline">' +
-        '/people/' + escapeHtml(user.person.slug) + '/</a></p>';
-    } else {
-      publicProfileHtml =
-        '<p style="color:var(--color-neutral-70);font-size:14px">' +
-        'We don\u2019t yet have a public profile linked to <code>' + escapeHtml(user.email) +
-        '</code>. Once one is added to the site\u2019s people data, it will show here automatically.</p>';
-    }
-
-    card.innerHTML =
-      '<h2>This is your home on the site.</h2>' +
-      '<p>Right now there\u2019s nothing here, but the editing tools are coming.</p>' +
-      publicProfileHtml +
-      '<ul class="myahl-coming-soon">' +
-        '<li><strong>Edit bio</strong>Update your public description, links, and photo.</li>' +
-        '<li><strong>Add a project</strong>Draft a new project and submit it for review.</li>' +
-        '<li><strong>Add a publication</strong>Paste a BibTeX entry or fill a form.</li>' +
-        '<li><strong>Claim an award</strong>Attach press &amp; award mentions to your record.</li>' +
-      '</ul>' +
-      // Sign-out button. Lives here so mobile users (where the nav
-      // drawer doesn't show an inline logout, by design) still have a
-      // clear way out. Desktop users can use either this or the
-      // nav-avatar → Logout flow.
-      '<div class="myahl-logout-row">' +
-        '<button class="myahl-logout" type="button" id="myahl-signout">Sign out</button>' +
-      '</div>';
-
-    var signoutBtn = document.getElementById('myahl-signout');
-    if (signoutBtn) {
-      signoutBtn.addEventListener('click', function () {
-        window.AHLAuth.logout();
-      });
-    }
-  }
+  // Cache fetched dashboards in-tab so re-renders (e.g., from auth
+  // change events firing twice) don't re-fetch.
+  var dashboardCache = {};
 
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function renderSignedOut() {
+    heroTitle.textContent = 'My AHL';
+    heroSub.textContent   = 'Your AHLab member dashboard.';
+    root.innerHTML =
+      '<div class="myahl-signin-card">' +
+        '<h2>Sign in to continue</h2>' +
+        '<p>This page is for AHLab members signed in with their <strong>@ahlab.org</strong> Google account.</p>' +
+        '<p>Once signed in, you’ll be able to edit your profile, add new projects, and submit publications, awards, and events — all reviewed before going live.</p>' +
+        '<button class="myahl-cta" type="button" id="myahl-signin">Sign in with Google</button>' +
+      '</div>';
+    var btn = document.getElementById('myahl-signin');
+    if (btn) btn.addEventListener('click', function () { window.AHLAuth.login(); });
+  }
+
+  // ── Section renderers ─────────────────────────────────────
+  // Each returns a fragment of HTML. The "add new" tile is
+  // included as the last element of the grid/list so it shows
+  // up at the end (or as the only item when the section is
+  // empty for this user).
+
+  function projectCardHTML(p) {
+    var thumb = p.thumbnail
+      ? '<div class="myahl-project-thumb"><img src="' + escapeHtml(p.thumbnail) + '" alt="' + escapeHtml(p.title) + '" loading="lazy"></div>'
+      : '<div class="myahl-project-thumb"><div class="myahl-project-thumb-placeholder">' + escapeHtml(p.title.charAt(0)) + '</div></div>';
+    return '<a href="/projects/' + escapeHtml(p.slug) + '/" class="myahl-project-card">' +
+      thumb +
+      '<div class="myahl-project-body">' +
+        '<h5>' + escapeHtml(p.title) + '</h5>' +
+        '<div class="meta">' + escapeHtml(p.year || '') + '</div>' +
+      '</div></a>';
+  }
+
+  function pubRowHTML(p) {
+    var url = '/publications/#' + encodeURIComponent(p.slug);
+    var awardHTML = p.award ? '<div class="row-award">★ ' + escapeHtml(p.award) + '</div>' : '';
+    var citationHTML = p.citation ? '<div class="row-citation">' + escapeHtml(p.citation) + '</div>' : '';
+    var linksHTML = '';
+    if (Array.isArray(p.links) && p.links.length) {
+      linksHTML = '<div class="row-links">' + p.links.map(function (l) {
+        return '<a href="' + escapeHtml(l.url) + '" target="_blank" rel="noopener" class="row-link">' +
+          escapeHtml(String(l.label || '').toUpperCase()) + '</a>';
+      }).join('') + '</div>';
+    }
+    return '<a href="' + escapeHtml(url) + '" class="myahl-row-card">' +
+      awardHTML +
+      '<div class="row-title">' + escapeHtml(p.title) + '</div>' +
+      '<div class="row-meta">' + escapeHtml(p.year || '') + (p.venue ? ' · ' + escapeHtml(p.venue) : '') + '</div>' +
+      citationHTML +
+      linksHTML +
+      '</a>';
+  }
+
+  function eventRowHTML(e) {
+    // Reuse the public site's event-chip pattern for visual continuity.
+    // Detail link prefers the external url when present (e.g. chi2026.ahlab.org)
+    // — same behavior as the project pages.
+    var href = e.url || ('/events/' + encodeURIComponent(e.slug) + '/');
+    var isExternal = /^https?:/.test(href);
+    var target = isExternal ? ' target="_blank" rel="noopener"' : '';
+    var meta = [e.location, e.starts ? new Date(e.starts).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : null].filter(Boolean).join(' · ');
+    return '<a class="myahl-row-card" href="' + escapeHtml(href) + '"' + target + '>' +
+      '<div class="row-title">' + escapeHtml(e.title) + '</div>' +
+      (meta ? '<div class="row-meta">' + escapeHtml(meta) + '</div>' : '') +
+      (e.summary ? '<div class="row-citation">' + escapeHtml(e.summary) + '</div>' : '') +
+      '</a>';
+  }
+
+  function pressRowHTML(p) {
+    var meta = [p.outlet, p.year].filter(Boolean).join(' · ');
+    var titleEl = p.url
+      ? '<a href="' + escapeHtml(p.url) + '" target="_blank" rel="noopener" class="row-title" style="display:block">' + escapeHtml(p.title) + '</a>'
+      : '<div class="row-title">' + escapeHtml(p.title) + '</div>';
+    return '<div class="myahl-row-card">' +
+      titleEl +
+      (meta ? '<div class="row-meta">' + escapeHtml(meta) + '</div>' : '') +
+      '</div>';
+  }
+
+  function addNewTile(label) {
+    return '<button type="button" class="myahl-addnew" disabled title="Coming soon — the editing pipeline is being wired up.">' +
+      '<span class="myahl-addnew-plus" aria-hidden="true">+</span>' +
+      '<span>' + escapeHtml(label) + '</span>' +
+    '</button>';
+  }
+
+  function addNewRow(label) {
+    return '<button type="button" class="myahl-addnew-row" disabled title="Coming soon — the editing pipeline is being wired up.">' +
+      '<span class="myahl-addnew-plus" aria-hidden="true">+</span>' +
+      '<span>' + escapeHtml(label) + '</span>' +
+    '</button>';
+  }
+
+  function sectionHeaderHTML(title, count) {
+    return '<div class="myahl-section-header">' +
+      '<h2>' + escapeHtml(title) + '</h2>' +
+      '<div class="myahl-section-count">' + count + (count === 1 ? ' item' : ' items') + '</div>' +
+    '</div>';
+  }
+
+  function renderDashboard(d) {
+    var profileHTML =
+      '<div class="myahl-profile-tile">' +
+        '<div class="myahl-profile-photo">' +
+          (d.profile_image ? '<img src="' + escapeHtml(d.profile_image) + '" alt="' + escapeHtml(d.name) + '">' : '') +
+        '</div>' +
+        '<div class="myahl-profile-info">' +
+          '<h2>' + escapeHtml(d.name) + '</h2>' +
+          (d.role ? '<div class="role">' + escapeHtml(d.role) + '</div>' : '') +
+          (d.profile_url ? '<a class="public-link" href="' + escapeHtml(d.profile_url) + '">View public profile</a>' : '') +
+        '</div>' +
+        '<button type="button" class="myahl-profile-edit" disabled title="Coming soon — the editing pipeline is being wired up.">Edit profile</button>' +
+      '</div>';
+
+    var projectsHTML =
+      '<section class="myahl-section">' +
+        sectionHeaderHTML('Projects', d.projects.length) +
+        '<div class="myahl-cards-grid">' +
+          d.projects.map(projectCardHTML).join('') +
+          addNewTile('Add new project') +
+        '</div>' +
+      '</section>';
+
+    var pubsHTML =
+      '<section class="myahl-section">' +
+        sectionHeaderHTML('Publications', d.publications.length) +
+        '<div class="myahl-list">' +
+          d.publications.map(pubRowHTML).join('') +
+          addNewRow('Add new publication') +
+        '</div>' +
+      '</section>';
+
+    var eventsHTML =
+      '<section class="myahl-section">' +
+        sectionHeaderHTML('Events', d.events.length) +
+        '<div class="myahl-list">' +
+          d.events.map(eventRowHTML).join('') +
+          addNewRow('Add new event') +
+        '</div>' +
+      '</section>';
+
+    var pressHTML =
+      '<section class="myahl-section">' +
+        sectionHeaderHTML('Press', d.press.length) +
+        '<div class="myahl-list">' +
+          d.press.map(pressRowHTML).join('') +
+          addNewRow('Add new press mention') +
+        '</div>' +
+      '</section>';
+
+    var logoutHTML =
+      '<div class="myahl-logout-row">' +
+        '<button class="myahl-logout" type="button" id="myahl-signout">Sign out</button>' +
+      '</div>';
+
+    root.innerHTML = profileHTML + projectsHTML + pubsHTML + eventsHTML + pressHTML + logoutHTML;
+
+    var signoutBtn = document.getElementById('myahl-signout');
+    if (signoutBtn) signoutBtn.addEventListener('click', function () { window.AHLAuth.logout(); });
+  }
+
+  // Signed-in but not yet linked to a person record (e.g. email
+  // not in /data/auth-index.json). Show a friendly message rather
+  // than a broken dashboard.
+  function renderSignedInButUnlinked(user) {
+    var firstName = (user.name || user.email).split(' ')[0];
+    heroTitle.textContent = 'Welcome, ' + firstName;
+    heroSub.textContent   = 'Signed in as ' + user.email;
+    root.innerHTML =
+      '<div class="myahl-signin-card">' +
+        '<h2>No matching profile</h2>' +
+        '<p>We couldn’t find a public profile linked to <code>' + escapeHtml(user.email) +
+        '</code>. Once a record with this email is added to the site, your dashboard will appear here.</p>' +
+        '<div class="myahl-logout-row" style="margin-top:24px;padding-top:16px">' +
+          '<button class="myahl-logout" type="button" id="myahl-signout">Sign out</button>' +
+        '</div>' +
+      '</div>';
+    var btn = document.getElementById('myahl-signout');
+    if (btn) btn.addEventListener('click', function () { window.AHLAuth.logout(); });
+  }
+
+  function fetchDashboard(slug) {
+    if (dashboardCache[slug]) return Promise.resolve(dashboardCache[slug]);
+    return fetch('/data/user-dashboard/' + encodeURIComponent(slug) + '.json', { cache: 'default' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (json) { dashboardCache[slug] = json; return json; })
+      .catch(function () { return null; });
+  }
+
+  function render(user) {
+    if (!user) return renderSignedOut();
+
+    var firstName = (user.name || user.email).split(' ')[0];
+    heroTitle.textContent = 'Welcome back, ' + firstName;
+    heroSub.textContent   = 'Signed in as ' + user.email;
+
+    var slug = user.person && user.person.slug;
+    if (!slug) return renderSignedInButUnlinked(user);
+
+    fetchDashboard(slug).then(function (dashboard) {
+      if (!dashboard) {
+        // Slug resolved from auth-index but dashboard file missing
+        // (build out of date, or person lost their email after build).
+        // Fall back to the unlinked state with a slightly different
+        // message — same UX, no crash.
+        return renderSignedInButUnlinked(user);
+      }
+      renderDashboard(dashboard);
     });
   }
 

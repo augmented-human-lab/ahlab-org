@@ -1,0 +1,77 @@
+{
+  "slug": "dixon-prem-daniel",
+  "name": "Dixon Prem Daniel",
+  "role": "Senior Research Fellow",
+  "section": "Current Team",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/dixon-prem-daniel/dixon-prem-daniel.jpg",
+  "profile_url": "/people/dixon-prem-daniel/",
+  "projects": [
+    {
+      "slug": "factually",
+      "title": "Factually",
+      "year": "Current",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/factually/factually.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "soniphy",
+      "title": "SoniPhy",
+      "year": "2025",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/soniphy/soniphy.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "itiles",
+      "title": "iTILES",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/itiles/itiles.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "physical"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "feeling-the-facts-real-time-wearable-fact-checkers-can-use-nudges-to-reduce-user-belief-in-false-information",
+      "title": "Feeling the Facts: Real-time Wearable Fact-checkers Can Use Nudges to Reduce User Belief in False Information",
+      "year": "2026",
+      "citation": "Gupta, C.*, Aritonang, N.*, Rajendran D., Danry, V., Maes, P., and Nanayakkara, S. C., 2026. Feeling the Facts: Real-time Wearable Fact-checkers Can Use Nudges to Reduce User Belief in False Information. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI 2026).",
+      "award": null,
+      "links": [
+        {
+          "label": "doi",
+          "url": "https://doi.org/10.1145/3772318.3791679"
+        },
+        {
+          "label": "pdf",
+          "url": "https://drive.google.com/file/d/1xVjShf-s0pN6DzpPrydxkbI2SQLsDk_J/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    }
+  ],
+  "events": [
+    {
+      "slug": "chi-2026",
+      "title": "CHI 2026",
+      "subtitle": "ACM Conference on Human Factors in Computing Systems",
+      "kind": "conference",
+      "location": "Barcelona, Spain",
+      "starts": "2026-04-13",
+      "ends": "2026-04-17",
+      "url": "https://chi2026.ahlab.org",
+      "summary": "AHLab presents 5 papers and 2 posters at CHI 2026 in Barcelona."
+    }
+  ],
+  "press": []
+}

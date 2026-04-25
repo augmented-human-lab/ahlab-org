@@ -1,0 +1,61 @@
+{
+  "slug": "dinithi-dissanayake",
+  "name": "Dinithi Dissanayake",
+  "role": "PhD Candidate",
+  "section": "Current Team",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/dinithi-dissanayake/dinithi-dissanayake.jpg",
+  "profile_url": "/people/dinithi-dissanayake/",
+  "projects": [],
+  "publications": [
+    {
+      "slug": "interrupting-autopilot-evaluating-sensory-interventions-for-momentary-self-regulation",
+      "title": "Interrupting Autopilot: Evaluating Sensory Interventions for Momentary Self-Regulation",
+      "year": "2026",
+      "citation": "Dissanayake, D., Mysan, M., Luo, Y., Antoni, T., Cleveland, P., Sasikumar, P., Nanayakkara, S. C., 2026. Interrupting Autopilot: Evaluating Sensory Interventions for Momentary Self-Regulation. In Extended Abstracts of the 2026 CHI Conference on Human Factors in Computing Systems (CHI EA ’26)",
+      "award": null,
+      "links": [
+        {
+          "label": "doi",
+          "url": "https://doi.org/10.1145/3772363.3798497"
+        },
+        {
+          "label": "pdf",
+          "url": "https://drive.google.com/file/d/1BNkKoR87_0D8bzfsWDP0wxX5draRdKu2/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI EA"
+    },
+    {
+      "slug": "vrsense-an-explainable-system-to-help-mitigate-cybersickness-in-vr-games",
+      "title": "VRSense: An Explainable System to Help Mitigate Cybersickness in VR Games",
+      "year": "2025",
+      "citation": "Dissanayake, D., Gupta, C., Sasikumar, P. and Nanayakkara, S.C., 2025, April. VRSense: An Explainable System to Help Mitigate Cybersickness in VR Games. In Proceedings of the Extended Abstracts of the CHI Conference on Human Factors in Computing Systems (pp. 1-7).",
+      "award": null,
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://dl.acm.org/doi/abs/10.1145/3706599.3719891"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1LZDUh0bsjSQCEu32ka_tnmEJczgguyEW/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI EA"
+    }
+  ],
+  "events": [
+    {
+      "slug": "chi-2026",
+      "title": "CHI 2026",
+      "subtitle": "ACM Conference on Human Factors in Computing Systems",
+      "kind": "conference",
+      "location": "Barcelona, Spain",
+      "starts": "2026-04-13",
+      "ends": "2026-04-17",
+      "url": "https://chi2026.ahlab.org",
+      "summary": "AHLab presents 5 papers and 2 posters at CHI 2026 in Barcelona."
+    }
+  ],
+  "press": []
+}
