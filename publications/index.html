@@ -121,6 +121,34 @@
   <main class="pubs-content">
     <div id="pubsContent">
       
+  <section class="pub-add-section rv" data-myahl-add-section data-myahl-claim="self" hidden>
+    <div class="pub-list pub-list-solo">
+      <button type="button" class="pub-item pub-item-add-trigger" data-myahl-add-trigger>
+        <div class="pub-body">
+          <div class="pub-add-trigger-label">
+            <span class="pub-add-plus" aria-hidden="true">+</span>
+            <span>Add new publication</span>
+          </div>
+        </div>
+      </button>
+      <div class="pub-item pub-item-add-form" data-myahl-add-form hidden>
+        <div class="pub-body">
+          <input type="text" class="pub-input pub-input-title" placeholder="Title">
+          <textarea class="pub-input pub-input-citation" rows="3" placeholder="Citation"></textarea>
+          <div class="pub-input-row">
+            <input type="text" class="pub-input pub-input-year" placeholder="Year">
+            <input type="text" class="pub-input pub-input-venue" placeholder="Venue (e.g. CHI)">
+            <input type="text" class="pub-input pub-input-award" placeholder="Award (optional)">
+          </div>
+          <div class="pub-input-row">
+            <input type="url" class="pub-input pub-input-link" placeholder="DOI URL">
+            <input type="url" class="pub-input pub-input-link" placeholder="PDF URL">
+          </div>
+        </div>
+        <button type="button" class="pub-add-close" data-myahl-add-close aria-label="Cancel">×</button>
+      </div>
+    </div>
+  </section>
   <section class="year-section" id="year-2026" data-year="2026">
     <h2 class="year-title">2026 <span class="yr-count">6</span></h2>
     <div class="pub-list">
@@ -1995,6 +2023,8 @@
 <div id="site-footer-mount"></div>
 <script src="/js/footer-include.js"></script>
 <script src="/js/event-chip-live.js" defer></script>
+<script src="/js/claim-buttons.js" defer></script>
+<script src="/js/inline-add.js" defer></script>
 
 <script>
 // Reveal on scroll

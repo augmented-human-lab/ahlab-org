@@ -167,3 +167,128 @@
 .pub-item.hidden { display: none; }
 .year-section.hidden { display: none; }
 .year-nav a.hidden { display: none; }
+
+/* ── Inline "+ Add new publication" affordance ──────────────
+   Sits as the very first card above the year sections. The whole
+   section is hidden by default and shown by claim-buttons.js when
+   the user is signed in. Inside, two cards swap places via
+   inline-add.js: a dashed trigger and a populated form card with a
+   close (×). Both share the same shape as a real .pub-item so the
+   list reads as a continuous flow. */
+.pub-add-section {
+  margin-bottom: 32px;
+}
+.pub-add-section[hidden] { display: none; }
+.pub-list-solo {
+  /* Single-card variant of .pub-list — no closing border, single
+     column regardless of viewport (we only have one card). */
+  border-bottom: 0;
+  grid-template-columns: 1fr !important;
+}
+
+.pub-item-add-trigger {
+  display: block;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  /* Inherit pub-item shape (padding, grid) but override the top
+     border with a subtle dashed all-around frame so it reads as a
+     button, not a list row. */
+  border: 2px dashed var(--color-neutral-30);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  background: transparent;
+  font-family: inherit;
+  transition: border-color .25s, background .2s, color .25s;
+}
+.pub-item-add-trigger[hidden] { display: none; }
+.pub-item-add-trigger:hover {
+  border-color: var(--color-accent);
+}
+.pub-item-add-trigger .pub-add-trigger-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--color-neutral-70);
+}
+.pub-item-add-trigger:hover .pub-add-trigger-label {
+  color: var(--color-accent);
+}
+.pub-add-plus {
+  font-size: 26px;
+  line-height: 1;
+  color: var(--color-accent-light);
+}
+
+.pub-item-add-form {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  background: var(--color-neutral-10);
+  /* Override the .pub-item base which uses border-top — we want a
+     full card boundary in form mode. */
+}
+.pub-item-add-form[hidden] { display: none; }
+.pub-item-add-form .pub-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  /* Title input + citation + small grid of metadata inputs. */
+}
+.pub-input {
+  font-family: var(--font-text);
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--color-neutral-100);
+  background: var(--color-neutral-10);
+  border: 1px solid var(--color-neutral-30);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color .2s;
+}
+.pub-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+.pub-input-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  padding: 12px 16px;
+}
+.pub-input-citation {
+  resize: vertical;
+  min-height: 72px;
+}
+.pub-input-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 8px;
+}
+.pub-add-close {
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 32px; height: 32px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: 50%;
+  background: var(--color-neutral-10);
+  color: var(--color-neutral-70);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.pub-add-close:hover {
+  background: var(--color-neutral-20);
+  color: var(--color-neutral-100);
+  border-color: var(--color-neutral-40);
+}

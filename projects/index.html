@@ -233,6 +233,41 @@
 .project-card.hidden{ display:none; }
 .year-section.hidden{ display:none; }
 .year-nav a.hidden{ display:none; }
+
+/* "+ Add new project" card — same shape and aspect ratio as a real
+   .project-card so it slots into the same grid template above the
+   year sections. Dashed border + accent "+" instead of a thumbnail.
+   The whole .project-add-section (and the card inside) is hidden by
+   default; claim-buttons.js shows it when the user is signed in. */
+.project-add-section{ margin-bottom:32px; }
+.project-add-section[hidden]{ display:none; }
+.project-card-add{
+  border:2px dashed var(--color-neutral-30);
+  background:transparent;
+  transition:border-color .25s, transform .25s, box-shadow .25s;
+}
+.project-card-add:hover{
+  border-color:var(--color-accent);
+  transform:translateY(-3px);
+  box-shadow:0 12px 40px rgba(14,15,17,.10);
+}
+.project-card-thumb-empty{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:transparent;
+}
+.project-card-thumb-empty::after{ display:none; }
+.project-card-add-plus{
+  font-size:64px;
+  font-weight:300;
+  line-height:1;
+  color:var(--color-accent-light);
+  transition:color .25s;
+}
+.project-card-add:hover .project-card-add-plus{ color:var(--color-accent); }
+.project-card-add .project-card-body h3{ color:var(--color-neutral-70); }
+.project-card-add:hover .project-card-body h3{ color:var(--color-accent); }
 </style>
 </head>
 <body>
@@ -327,6 +362,18 @@
 
   <main class="projects-content">
     
+  <section class="project-add-section rv" data-myahl-claim="self" hidden>
+    <div class="projects-grid">
+      <a href="/projects/new/" class="project-card project-card-add">
+        <div class="project-card-thumb project-card-thumb-empty">
+          <span class="project-card-add-plus" aria-hidden="true">+</span>
+        </div>
+        <div class="project-card-body">
+          <h3>Add new project</h3>
+        </div>
+      </a>
+    </div>
+  </section>
   <section class="year-section" id="year-current" data-year="Current">
     <h2 class="year-title">Current <span class="yr-count">6</span></h2>
     <div class="projects-grid">
@@ -2161,6 +2208,7 @@
 
 <div id="site-footer-mount"></div>
 <script src="/js/footer-include.js"></script>
+<script src="/js/claim-buttons.js" defer></script>
 
 <script>
 // ── Principle filter (hero chips) ─────────────────────────
