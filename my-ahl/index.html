@@ -505,6 +505,18 @@
     var signoutBtn = document.getElementById('myahl-signout');
     if (signoutBtn) signoutBtn.addEventListener('click', function () { window.AHLAuth.logout(); });
 
+    // Anything that's now in the user's authoritative dashboard
+    // already published — drop matching entries from the local
+    // pending cache before myahl-patches.js renders. Otherwise the
+    // tile would linger until the 7-day TTL expires.
+    if (window.AHLPendingCache) {
+      var covered = []
+        .concat((d.projects     || []).map(function (x) { return { targetType: 'project',     action: 'create', targetSlug: x.slug, patch: { slug: x.slug, title: x.title } }; }))
+        .concat((d.publications || []).map(function (x) { return { targetType: 'publication', action: 'create', targetSlug: x.slug, patch: { slug: x.slug, title: x.title } }; }))
+        .concat((d.press        || []).map(function (x) { return { targetType: 'press',       action: 'create', targetSlug: x.slug, patch: { slug: x.slug, title: x.title } }; }));
+      window.AHLPendingCache.pruneCovered(covered);
+    }
+
     // Tell myahl-patches.js the grid markup is in place so it can
     // overlay pending tiles (cache + broker response).
     document.dispatchEvent(new CustomEvent('myahl:dashboard-rendered'));
