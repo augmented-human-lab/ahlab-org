@@ -77,6 +77,15 @@
         "body",
         "cognitive"
       ]
+    },
+    {
+      "slug": "test-project",
+      "title": "Test Project",
+      "year": "Current",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/test-project/1_321329_leyard.jpg",
+      "principles": [
+        "cognitive"
+      ]
     }
   ],
   "publications": [
