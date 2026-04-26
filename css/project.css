@@ -894,3 +894,49 @@ a.project-press-title:hover { color: var(--color-accent); }
 }
 .pe-save:hover { background: var(--color-accent-dark, #4400b3); }
 .pe-save:disabled { opacity: .55; cursor: not-allowed; }
+
+
+/* Single-pick confirm stage. After the user clicks a candidate,
+   the picker swaps to this view; the actual onPick (which
+   submits the patch) only fires when the user clicks "Submit
+   for review". Cancel returns to the picker. */
+.np-singlepick-confirm {
+  padding: 6px 0;
+}
+.np-singlepick-confirm-title {
+  font-family: var(--font-display); font-weight: 600; font-size: 16px;
+  color: var(--color-neutral-100);
+  margin-bottom: 8px;
+}
+.np-singlepick-confirm-body {
+  font-size: 14px; line-height: 1.5; color: var(--color-neutral-70);
+  margin: 0 0 16px;
+}
+.np-singlepick-confirm-preview {
+  display: flex; justify-content: center;
+  margin-bottom: 22px;
+  padding: 12px;
+  background: var(--color-neutral-20);
+  border-radius: var(--radius);
+}
+.np-singlepick-card-large .project-person-avatar {
+  width: 96px; height: 96px;
+}
+.np-singlepick-confirm-actions {
+  display: flex; gap: 10px; justify-content: flex-end;
+}
+.np-singlepick-cancel,
+.np-singlepick-submit {
+  padding: 10px 22px; border-radius: 999px;
+  font-family: var(--font-text); font-weight: 500; font-size: 14px;
+  cursor: pointer; border: 1px solid var(--color-neutral-30);
+  transition: background .2s, color .2s, border-color .2s;
+}
+.np-singlepick-cancel { background: transparent; color: var(--color-neutral-70); }
+.np-singlepick-cancel:hover { background: var(--color-neutral-20); }
+.np-singlepick-submit {
+  background: var(--color-accent); color: #fff; border-color: var(--color-accent);
+  font-weight: 600;
+}
+.np-singlepick-submit:hover { background: var(--color-accent-dark, #4400b3); }
+.np-singlepick-submit:disabled { opacity: .55; cursor: wait; }

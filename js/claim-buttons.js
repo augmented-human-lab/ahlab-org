@@ -99,12 +99,21 @@
         sourceKey:    'people',
         title:        'Add team member',
         excludeSlugs: existingPeople,
+        confirm: {
+          title:       'Submit a request to add this person?',
+          body:        function (person) {
+            return person.label + ' will be added to this project once a moderator approves.';
+          },
+          submitLabel: 'Submit for review'
+        },
         onPick: function (person) {
           window.AHLPatch.submit({
             targetType: 'project',
             targetSlug: projectSlug,
             action:     'claim-other',
-            patch:      { personSlug: person.slug }
+            patch:      { personSlug: person.slug },
+            // Stay on the project page after the broker receipt.
+            returnUrl:  location.origin + location.pathname
           });
         }
       });
@@ -125,12 +134,20 @@
         sourceKey:    'sponsors',
         title:        'Add sponsor',
         excludeSlugs: existingSponsors,
+        confirm: {
+          title:       'Submit a request to add this sponsor?',
+          body:        function (sponsor) {
+            return sponsor.label + ' will appear in the project\'s Sponsors section once a moderator approves.';
+          },
+          submitLabel: 'Submit for review'
+        },
         onPick: function (sponsor) {
           window.AHLPatch.submit({
             targetType: 'project',
             targetSlug: projectSlug,
             action:     'edit',
-            patch:      { sponsors: existingSponsors.concat([sponsor.slug]) }
+            patch:      { sponsors: existingSponsors.concat([sponsor.slug]) },
+            returnUrl:  location.origin + location.pathname
           });
         }
       });
