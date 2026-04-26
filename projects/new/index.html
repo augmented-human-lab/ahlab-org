@@ -8,26 +8,33 @@
 <link rel="stylesheet" href="/css/project.css">
 <link rel="stylesheet" href="/css/auth.css">
 <style>
-  /* /projects/new/ — visually mirrors a real project page so a
-     creator sees roughly what their final page will look like even
-     while they're still typing. Inputs are styled to match the
-     surrounding text, and the thumbnail picker shows the live
-     preview as soon as a file is chosen. */
+  /* /projects/new/ — mirrors the real project page layout so the
+     creator sees a live preview of what the published page will
+     look like. Inputs read like the surrounding text; sections
+     (team, publications, awards, sponsors) accept slug references
+     via autocomplete so users can only attach EXISTING records. */
   body { background: var(--color-neutral-10); }
   .np-signed-out { display: none; padding: 160px 24px 80px; max-width: 480px; margin: 0 auto; text-align: center; }
   body[data-auth-state="signed-out"] .np-signed-out { display: block; }
   body[data-auth-state="signed-out"] .np-page { display: none; }
 
-  .np-page { padding-top: 140px; }
-  .np-banner { max-width: 1240px; margin: 0 auto 24px; padding: 12px 24px;
-               background: rgba(97,0,255,.06); border: 1px solid rgba(97,0,255,.18);
-               border-radius: var(--radius); color: var(--color-accent);
-               font-size: 13px; line-height: 1.5; }
+  /* Tightened: banner sits closer to the hero now (was margin-bottom:24px,
+     plus default project-hero top spacing → too airy). */
+  .np-page { padding-top: 140px; padding-bottom: 80px; }
+  .np-banner {
+    max-width: 1240px; margin: 0 auto 8px;
+    padding: 10px 18px;
+    background: rgba(97,0,255,.06); border: 1px solid rgba(97,0,255,.18);
+    border-radius: var(--radius); color: var(--color-accent);
+    font-size: 13px; line-height: 1.5;
+  }
   .np-banner a { color: var(--color-accent); text-decoration: underline; }
 
-  /* Reset input styling so they read like real page text instead of
-     boxes. Border only appears on hover/focus to keep the page calm
-     until the user is actually editing. */
+  /* The hero section's first child margin gets reset so banner→hero
+     gap is purely .np-banner's margin-bottom. */
+  .np-page .project-hero { margin-top: 16px; }
+
+  /* Reset input styling so they read like real page text. */
   .np-input, .np-textarea {
     box-sizing: border-box; width: 100%;
     background: transparent; border: 0; padding: 4px 6px;
@@ -47,12 +54,11 @@
     letter-spacing: -.005em;
   }
   .np-input-year {
-    width: 7ch; font-family: var(--font-display); font-weight: 400;
+    flex: 0 0 auto;
+    width: 5ch;
+    font-family: var(--font-display); font-weight: 400;
     color: var(--color-neutral-60); font-size: 28px; text-align: center;
-  }
-  .np-input-summary {
-    font-family: var(--font-text); font-size: 21px; line-height: 35px;
-    color: var(--color-neutral-80);
+    padding: 4px 6px;
   }
   .np-textarea-description {
     font-family: var(--font-text); font-size: 17px; line-height: 30px;
@@ -60,12 +66,20 @@
     min-height: 120px; resize: vertical;
   }
 
-  /* Title row — h1 + year input side by side, like the static page. */
-  .np-title-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  /* Title row — title + year on the same line. The title input is
+     flex:1 with min-width:0 so it shrinks gracefully when long, and
+     the year input has fixed width and flex-shrink:0 so it stays put.
+     maxlength on the title (HTML-level) prevents users entering more
+     than fits visually. */
+  .np-title-row {
+    display: flex; align-items: baseline; flex-wrap: nowrap; gap: 4px;
+    margin-bottom: 20px;
+  }
+  .np-title-row > .np-input-title { flex: 1 1 auto; min-width: 0; }
+  .np-title-row > .project-title-year { flex: 0 0 auto; white-space: nowrap; }
   .np-title-sep { color: var(--color-neutral-40); font-weight: 400; }
 
-  /* Thumbnail card — clickable label that wraps a hidden file input.
-     Shows the live preview once a file is chosen. */
+  /* Thumbnail card — clickable label wrapping a hidden file input. */
   .np-thumb-frame {
     position: relative; aspect-ratio: 16 / 11; overflow: hidden;
     border-radius: var(--radius-lg); background: var(--color-neutral-30);
@@ -91,8 +105,7 @@
   }
   .np-thumb-frame.has-image:hover .np-thumb-replace { opacity: 1; }
 
-  /* Principle chips — same look as the static page's principle bar
-     but each chip is a checkbox label that toggles on click. */
+  /* Principle chips */
   .np-principles-row {
     margin-top: 20px; padding: 14px 18px;
     background: var(--color-neutral-20); border-radius: var(--radius);
@@ -117,33 +130,67 @@
   .np-principle-chip:has(input:checked) .np-principle-icon { opacity: 0; }
   .np-principle-chip:has(input:checked) .np-principle-icon-hover { opacity: 1; }
 
-  /* Section labels (Description, Team) — small uppercase tag matching
-     project body sections. */
+  /* Section labels — small uppercase tag matching the project body
+     sections (Team, Publications, Awards, Sponsors). */
+  .np-section { margin-top: 50px; }
   .np-section-label {
     font-family: var(--font-display); font-weight: 700; font-size: 11px;
     letter-spacing: 1.4px; text-transform: uppercase;
-    color: var(--color-neutral-60); margin-bottom: 12px; padding-bottom: 10px;
+    color: var(--color-neutral-60); margin-bottom: 14px; padding-bottom: 10px;
     border-bottom: 1px solid var(--color-neutral-30);
   }
 
-  /* Creator-as-team-member chip seeded into the team row. */
-  .np-team-row { margin-top: 60px; }
-  .np-team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 24px 16px; }
-  .np-team-member { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
-  .np-team-avatar {
-    width: 72px; height: 72px; border-radius: 50%; padding: 2px;
-    background: var(--gradient); position: relative; overflow: hidden;
+  /* Chip-input — used for team / publications / awards / sponsors.
+     The list of chosen chips sits above a search field; chips are
+     removable. Source data comes from a <datalist> so the browser
+     surfaces autocomplete as the user types; chip-input.js only
+     accepts exact slug matches (free-form rejected). */
+  .np-chip-input {
+    background: var(--color-neutral-20);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    transition: box-shadow .2s;
   }
-  .np-team-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
-  .np-team-name { font-family: var(--font-text); font-weight: 600; font-size: 13px; color: var(--color-neutral-100); }
-  .np-team-creator-badge {
-    font-family: var(--font-display); font-weight: 700; font-size: 9px; letter-spacing: 1.2px;
-    text-transform: uppercase; color: var(--color-accent); margin-top: 2px;
+  .np-chip-input:focus-within { box-shadow: 0 0 0 1px var(--color-accent-light); }
+  .np-chip-list {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    min-height: 28px;
+    margin-bottom: 8px;
   }
+  .np-chip-list:empty { margin-bottom: 0; }
+  .np-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 4px 4px 4px 12px;
+    background: var(--color-neutral-10);
+    border: 1px solid var(--color-neutral-30);
+    border-radius: 999px;
+    font-size: 13px; color: var(--color-neutral-100);
+  }
+  .np-chip-label { line-height: 1.2; }
+  .np-chip-remove {
+    width: 22px; height: 22px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: transparent; color: var(--color-neutral-70);
+    border: 0; border-radius: 50%;
+    font-size: 18px; line-height: 1; cursor: pointer;
+    transition: background .15s, color .15s;
+  }
+  .np-chip-remove:hover { background: var(--color-neutral-30); color: var(--color-neutral-100); }
+  .np-chip-search {
+    width: 100%; box-sizing: border-box;
+    padding: 8px 10px;
+    border: 1px solid var(--color-neutral-30);
+    border-radius: var(--radius-sm);
+    background: var(--color-neutral-10);
+    font-family: var(--font-text); font-size: 14px;
+    color: var(--color-neutral-100);
+    transition: border-color .2s;
+  }
+  .np-chip-search:focus { outline: none; border-color: var(--color-accent); }
 
   /* Submit row */
   .np-actions {
-    margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--color-neutral-30);
+    margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--color-neutral-30);
     display: flex; gap: 12px; align-items: center; justify-content: flex-end;
   }
   .np-submit {
@@ -210,18 +257,15 @@
         <div class="project-hero-text">
           <div class="np-title-row">
             <input type="text" class="np-input np-input-title" data-field="title"
-                   placeholder="Project title…" required>
+                   placeholder="Project title…" required maxlength="60">
             <span class="project-title-year">
               <span class="project-title-sep np-title-sep" aria-hidden="true">·</span>
               <input type="text" class="np-input np-input-year" data-field="year"
-                     placeholder="2026" maxlength="12">
+                     placeholder="2026" maxlength="7">
             </span>
           </div>
 
-          <input type="text" class="np-input np-input-summary" data-field="summary"
-                 placeholder="One-line summary (optional)…">
-
-          <div class="project-description" style="margin-top:24px">
+          <div class="project-description">
             <textarea class="np-textarea np-textarea-description" data-field="description"
                       placeholder="What is this project about? Two or three short paragraphs work well — separate paragraphs with a blank line."></textarea>
           </div>
@@ -263,7 +307,7 @@
    </label></div>
 
     <!-- Slug (advanced, collapsible) -->
-    <details style="margin-top:32px;font-size:13px;color:var(--color-neutral-70)">
+    <details style="margin-top:24px;font-size:13px;color:var(--color-neutral-70)">
       <summary style="cursor:pointer">Advanced: custom URL slug</summary>
       <div style="margin-top:8px">
         <input type="text" class="np-input" data-field="slug"
@@ -273,20 +317,49 @@
       </div>
     </details>
 
-    <!-- Team — seeded with the creator's avatar -->
-    <section class="project-people-row np-team-row">
+    <!-- Team — chip-input. Creator pre-chipped on auth-ready. Add
+         more by typing in the search; only existing AHLab members
+         (sourced from peopleList) can be picked. -->
+    <section class="np-section">
       <div class="np-section-label">Team</div>
-      <div class="np-team-grid">
-        <div class="np-team-member">
-          <div class="np-team-avatar">
-            <img id="np-creator-photo" src="" alt="">
-          </div>
-          <div class="np-team-name" id="np-creator-name">You</div>
-          <div class="np-team-creator-badge">Creator</div>
-        </div>
-        <!-- Future: + Add more members. For v1 the creator is the
-             only seed; co-members can self-claim later via the project
-             page once it's published. -->
+      <div class="np-chip-input" data-chip-collection="people" id="np-team-chip-input">
+        <div class="np-chip-list" data-chip-list></div>
+        <input class="np-chip-search" list="np-people-list"
+               placeholder="Add a team member by name…" data-chip-search>
+        <datalist id="np-people-list"><option value="suranga-nanayakkara">Suranga Nanayakkara</option><option value="chitralekha-gupta">Chitralekha Gupta</option><option value="dixon-prem-daniel">Dixon Prem Daniel</option><option value="moritz-messerschmidt">Moritz Messerschmidt</option><option value="soundarya-ramesh">Soundarya Ramesh</option><option value="peter-cleveland">Peter Cleveland</option><option value="punyawee-anunpattana">Punyawee Anunpattana</option><option value="harini-krishnan">Harini Krishnan</option><option value="sankha-cooray">Sankha Cooray</option><option value="shreyas-sridhar">Shreyas Sridhar</option><option value="priambudi-lintang-bagaskara">Priambudi Lintang Bagaskara</option><option value="ryo-hajika">Ryo Hajika</option><option value="hyung-woon-lee">Hyung Woon Lee</option><option value="ariel-ong">Ariel Ong</option><option value="qin-wu">Qin Wu</option><option value="phoebe-chua">Phoebe Chua</option><option value="mia-huong-nguyen">Mia Huong Nguyen</option><option value="yize-wei">Yize Wei</option><option value="dinithi-dissanayake">Dinithi Dissanayake</option><option value="timothy-antoni">Timothy Antoni</option><option value="yadeesha-weerasinghe">Yadeesha Weerasinghe</option><option value="praveen-sasikumar">Praveen Sasikumar</option><option value="nadia-aritonang">Nadia Aritonang</option><option value="lorelia-latarche">Lorelia Latarche</option><option value="mohamed-muftee">Mohamed Muftee</option><option value="ovindu-atukorala">Ovindu Atukorala</option><option value="shaveen-silva">Shaveen Silva</option><option value="pattie-maes">Pattie Maes</option><option value="paul-denny">Paul Denny</option><option value="mark-billinghurst">Mark Billinghurst</option><option value="lonce-wyse">Lonce Wyse</option><option value="jurgen-steimle">Jürgen Steimle</option><option value="pranav-mistry">Pranav Mistry</option><option value="dawn-garbett">Dawn Garbett</option><option value="danielle-lottridge">Danielle Lottridge</option><option value="bige-tuncer">Bige Tuncer</option><option value="masahiko-inami">Masahiko Inami</option><option value="wong-meng-ee">Wong Meng Ee</option><option value="yow-wei-quin">Yow Wei Quin</option><option value="foong-shaohui">Foong Shaohui</option><option value="yinan-liu">Yinan Liu</option><option value="uwe-rieger">Uwe Rieger</option><option value="hyowon-lee">Hyowon Lee</option><option value="katja-holtta-otto">Katja Holtta-Otto</option><option value="thomas-schroepfer">Thomas Schroepfer</option><option value="erik-wilhelm">Erik Wilhelm</option><option value="bernd-ploderer">Bernd Ploderer</option><option value="elizabeth-taylor">Elizabeth Taylor</option><option value="frank-vetere">Frank Vetere</option><option value="deepthika-de-silva">Deepthika De Silva</option><option value="chionh-chang-yin">Chionh Chang Yin</option><option value="pol-pla-i-conesa">Pol Pla i Conesa</option><option value="roy-shilkrot">Roy Shilkrot</option></datalist>
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section class="np-section">
+      <div class="np-section-label">Publications</div>
+      <div class="np-chip-input" data-chip-collection="publications">
+        <div class="np-chip-list" data-chip-list></div>
+        <input class="np-chip-search" list="np-pubs-list"
+               placeholder="Search publications by title…" data-chip-search>
+        <datalist id="np-pubs-list"><option value="zenflow-investigating-mr-transitions-for-enhancing-sleep-and-relaxation">Zenflow: Investigating MR Transitions for Enhancing Sleep and Relaxation</option><option value="viscerohaptics-investigating-the-effects-of-gut-based-audio-haptic-feedback-on-gastric-feelings-and-gastric-interoceptive-behaviors">VisceroHaptics: Investigating the Effects of Gut-based Audio-Haptic Feedback on Gastric Feelings and Gastric Interoceptive Behaviors</option><option value="interrupting-autopilot-evaluating-sensory-interventions-for-momentary-self-regulation">Interrupting Autopilot: Evaluating Sensory Interventions for Momentary Self-Regulation</option><option value="feeling-the-facts-real-time-wearable-fact-checkers-can-use-nudges-to-reduce-user-belief-in-false-information">Feeling the Facts: Real-time Wearable Fact-checkers Can Use Nudges to Reduce User Belief in False Information</option><option value="emodrink-embodied-mr-for-physiology-informed-beverage-recommendation">EmoDrink: Embodied MR for Physiology-Informed Beverage Recommendation</option><option value="beyond-descriptions-a-generative-scene2audio-framework-for-blind-and-low-vision-users-to-experience-vista-landscapes">Beyond Descriptions: A Generative Scene2Audio Framework for Blind and Low-Vision Users to Experience Vista Landscapes</option><option value="vrsense-an-explainable-system-to-help-mitigate-cybersickness-in-vr-games">VRSense: An Explainable System to Help Mitigate Cybersickness in VR Games</option><option value="towards-temporally-explainable-dysarthric-speech-clarity-assessment">Towards Temporally Explainable Dysarthric Speech Clarity Assessment</option><option value="scene-to-audio-distant-scene-sonification-for-blind-and-low-vision-people">Scene-to-Audio: Distant Scene Sonification for Blind and Low Vision People</option><option value="investigating-the-use-of-productive-failure-as-a-design-paradigm-for-learning-introductory-python-programming">Investigating the Use of Productive Failure as a Design Paradigm for Learning Introductory Python Programming</option><option value="human-robot-interaction-for-people-with-visual-impairments-a-systematic-literature-review">Human Robot Interaction for People with Visual Impairments: A Systematic Literature Review</option><option value="gutio-toward-sensing-and-inducing-gut-feelings-with-abdominal-sounds">GutIO: Toward Sensing and Inducing Gut Feelings with Abdominal Sounds</option><option value="droneaudioset-an-audio-dataset-for-drone-based-search-and-rescue">DroneAudioset: An Audio Dataset for Drone-based Search and Rescue</option><option value="curious-shorts-curiosity-driven-exploration-and-learning-on-short-form-video-platforms">Curious Shorts: Curiosity-Driven Exploration and Learning on Short-Form Video Platforms</option><option value="augmented-tabletop-interaction-as-an-assistive-tool-tidds-role-in-daily-life-skills-training-for-autistic-children">Augmented Tabletop Interaction as an Assistive Tool: Tidd’s Role in Daily Life Skills Training for Autistic Children</option><option value="vr-net-a-real-world-dataset-for-virtual-reality-motion-sickness-research">VR.net: A Real-world Dataset for Virtual Reality Motion Sickness Research</option><option value="sound-designer-generative-ai-interactions-towards-designing-creative-support-tools-for-professional-sound-designers">Sound Designer-Generative AI Interactions: Towards Designing Creative Support Tools for Professional Sound Designers</option><option value="sonicvista-towards-creating-awareness-of-distant-scenes-through-sonification">SonicVista: Towards Creating Awareness of Distant Scenes through Sonification</option><option value="seear-tailoring-real-time-ar-caption-interfaces-for-deaf-and-hard-of-hearing-dhh-students-in-specialized-educational-settings">SeEar: Tailoring Real-time AR Caption Interfaces for Deaf and Hard-of-Hearing (DHH) Students in Specialized Educational Settings</option><option value="kavy-fostering-language-speaking-skills-and-self-confidence-through-conversational-ai">Kavy: Fostering Language Speaking Skills and Self-Confidence Through Conversational AI</option><option value="exploring-an-extended-reality-floatation-tank-experience-to-reduce-the-fear-of-being-in-water">Exploring an Extended Reality Floatation Tank Experience to Reduce the Fear of Being in Water</option><option value="example-based-framework-for-perceptually-guided-audio-texture-generation">Example-Based Framework for Perceptually Guided Audio Texture Generation</option><option value="early-autism-screening-in-children-using-facial-recognition">Early Autism Screening in Children Using Facial Recognition</option><option value="designing-interactive-technology-to-support-children-with-autism">Designing Interactive Technology to Support Children with Autism</option><option value="cotacs-a-haptic-toolkit-to-explore-effective-on-body-haptic-feedback-by-ideating-designing-evaluating-and-refining-haptic-designs-using-group-collaboration">CoTacs: A Haptic Toolkit to Explore Effective On-Body Haptic Feedback by Ideating, Designing, Evaluating and Refining Haptic Designs Using Group Collaboration</option><option value="a-user-study-on-sharing-physiological-cues-in-vr-assembly-tasks">A User Study on Sharing Physiological Cues in VR Assembly Tasks</option><option value="using-sensor-based-programming-to-improve-self-efficacy-and-outcome-expectancy-for-students-from-underrepresented-groups">Using Sensor-Based Programming to Improve Self-Efficacy and Outcome Expectancy for Students from Underrepresented Groups</option><option value="towards-controllable-audio-texture-morphing">Towards Controllable Audio Texture Morphing</option><option value="tidd-augmented-tabletop-interaction-supports-children-with-autism-to-train-daily-living-skills">Tidd: Augmented Tabletop Interaction Supports Children with Autism to Train Daily Living Skills</option><option value="striving-for-authentic-and-sustained-technology-use-in-the-classroom-lessons-learned-from-a-longitudinal-evaluation-of-a-sensor-based-science-education-platform">Striving for Authentic and Sustained Technology Use in the Classroom: Lessons Learned from a Longitudinal Evaluation of a Sensor-Based Science Education Platform</option><option value="snatch-and-hatch-improving-receptivity-towards-a-nature-of-science-with-a-playful-mobile-application">Snatch and hatch: Improving receptivity towards a nature of science with a playful mobile application</option><option value="know-thyself-improving-interoceptive-ability-through-ambient-biofeedback-in-the-workplace">Know Thyself: Improving Interoceptive Ability Through Ambient Biofeedback in the Workplace</option><option value="improving-the-domain-adaptation-of-retrieval-augmented-generation-rag-models-for-open-domain-question-answering">Improving the Domain Adaptation of Retrieval Augmented Generation (RAG) Models for Open Domain Question Answering</option><option value="evaluating-descriptive-quality-of-ai-generated-audio-using-image-schemas">Evaluating Descriptive Quality of AI-Generated Audio Using Image-Schemas</option><option value="emo-know-a-large-scale-dataset-on-emotion-cause">EMO-KNOW: A Large Scale Dataset on Emotion-Cause</option><option value="can-ai-models-summarize-your-diary-entries-investigating-utility-of-abstractive-summarization-for-autobiographical-text">Can AI Models Summarize Your Diary Entries? Investigating Utility of Abstractive Summarization for Autobiographical Text.</option><option value="a-corneal-surface-reflections-based-intelligent-system-for-lifelogging-applications">A Corneal Surface Reflections-Based Intelligent System for Lifelogging Applications</option><option value="xrtic-a-prototyping-toolkit-for-xr-applications-using-cloth-deformation">XRtic: A Prototyping Toolkit for XR Applications using Cloth Deformation</option><option value="wasmandroid-a-cross-platform-runtime-for-native-programming-languages-on-android-2">WasmAndroid: A Cross-Platform Runtime for Native Programming Languages on Android</option><option value="vrhook-a-data-collection-tool-for-vr-motion-sickness-research">VRhook: A Data Collection Tool for VR Motion Sickness Research</option><option value="troi-towards-understanding-users-perspectives-to-mobile-automatic-emotion-recognition-system-in-their-natural-setting">Troi: Towards Understanding Users Perspectives to Mobile Automatic Emotion Recognition System in Their Natural Setting</option><option value="toro-a-web-based-tool-to-search-explore-screen-compare-and-visualize-literature">Toro: A Web-based Tool to Search, Explore, Screen, Compare and Visualize Literature</option><option value="ticklefoot-design-development-and-evaluation-of-a-novel-foot-tickling-mechanism-that-can-evoke-laughter">TickleFoot: Design, Development and Evaluation of a Novel Foot-tickling Mechanism that Can Evoke Laughter</option><option value="sigrep-towards-robust-wearable-emotion-recognition-with-contrastive-representation-learning">SigRep: Towards Robust Wearable Emotion Recognition with Contrastive Representation Learning.</option><option value="self-supervised-representation-fusion-for-speech-and-wearable-based-emotion-recognition">Self-supervised Representation Fusion for Speech and Wearable Based Emotion Recognition</option><option value="scratch-and-sense-using-real-time-sensor-data-to-motivate-students-learning-scratch">Scratch and Sense: Using Real-Time Sensor Data to Motivate Students Learning Scratch</option><option value="primary-school-students-programming-with-real-time-environmental-sensor-data">Primary School Students Programming with Real-Time Environmental Sensor Data</option><option value="players-and-performance-opportunities-for-social-interaction-with-augmented-tabletop-games-at-centres-for-children-with-autism">Players and performance: opportunities for social interaction with augmented tabletop games at centres for children with autism</option><option value="human-computer-integration-towards-integrating-the-human-body-with-the-computational-machine">Human–Computer Integration: Towards Integrating the Human Body with the Computational Machine</option><option value="design-and-evaluation-of-a-mobile-sensing-platform-for-water-conductivity">Design and Evaluation of a Mobile Sensing Platform for Water Conductivity</option><option value="computational-music-systems-for-emotional-health-and-wellbeing-a-review">Computational Music Systems for Emotional Health and Wellbeing: A Review</option><option value="anisma-a-prototyping-toolkit-to-explore-haptic-skin-deformation-applications-using-shape-memory-alloys">ANISMA: A Prototyping Toolkit to Explore Haptic Skin Deformation Applications Using Shape-Memory Alloys</option><option value="wasmandroid-a-cross-platform-runtime-for-native-programming-languages-on-android">WasmAndroid: A Cross-Platform Runtime for Native Programming Languages on Android</option><option value="stressshoe-a-diy-toolkit-for-just-in-time-personalised-stress-interventions-for-office-workers-performing-sedentary-tasks">StressShoe: A DIY Toolkit for just-in-time Personalised Stress Interventions for Office Workers Performing Sedentary Tasks</option><option value="sensor-based-interactive-worksheets-to-support-guided-scientific-inquiry">Sensor-Based Interactive Worksheets to Support Guided Scientific Inquiry</option><option value="om-a-comprehensive-tool-to-elicit-subjective-vibrotactile-expressions-associated-with-contextualised-meaning-in-our-everyday-lives">OM: A Comprehensive Tool to Elicit Subjective Vibrotactile Expressions Associated with Contextualised Meaning in Our Everyday Lives</option><option value="mobilld-exploring-the-detection-of-leg-length-discrepancy-and-altering-gait-with-mobile-smart-insoles">mobiLLD: Exploring the Detection of Leg Length Discrepancy and Altering Gait with Mobile Smart Insoles</option><option value="kinvoices-using-voices-of-friends-and-family-in-voice-interfaces">KinVoices: Using Voices of Friends and Family in Voice Interfaces</option><option value="jammify-interactive-multi-sensory-system-for-digital-art-jamming">Jammify: Interactive Multi-Sensory System for Digital Art Jamming</option><option value="gymsoles-combining-google-glass-with-smart-insoles-to-improve-body-posture-when-performing-squats">GymSoles++: Combining Google Glass with Smart Insoles to Improve Body Posture when Performing Squats</option><option value="eyeknowyou-a-diy-toolkit-to-support-monitoring-cognitive-load-and-actual-screen-time-using-a-head-mounted-webcam">EyeKnowYou: A DIY Toolkit to Support Monitoring Cognitive Load and Actual Screen Time using a Head-Mounted Webcam</option><option value="clothtiles-a-prototyping-platform-to-fabricate-customized-actuators-on-clothing-using-3d-printing-and-shape-memory-alloys">ClothTiles: A Prototyping Platform to Fabricate Customized Actuators on Clothing using 3D Printing and Shape-Memory Alloys</option><option value="capglasses-untethered-capacitive-sensing-with-smart-glasses">CapGlasses: Untethered Capacitive Sensing with Smart Glasses</option><option value="augmented-foot-a-comprehensive-survey-of-augmented-foot-interfaces">Augmented Foot: A Comprehensive Survey of Augmented Foot Interfaces</option><option value="a-review-of-recent-deep-learning-approaches-in-human-centered-machine-learning">A Review of Recent Deep Learning Approaches in Human-Centered Machine Learning</option><option value="wavesense-low-power-voxel-tracking-technique-for-resource-limited-devices">WaveSense: Low Power Voxel-tracking Technique for Resource Limited Devices</option><option value="versatouch-a-versatile-plug-and-play-system-that-enables-touch-interactions-on-everyday-passive-surfaces">VersaTouch: A Versatile Plug-and-Play System that Enables Touch Interactions on Everyday Passive Surfaces.</option><option value="touch-me-gently-recreating-the-perception-of-touch-using-a-shape-memory-alloy-matrix">Touch me Gently: Recreating the Perception of Touch using a Shape-Memory Alloy Matrix</option><option value="stressfoot-uncovering-the-potential-of-the-foot-for-acute-stress-sensing-in-sitting-posture">StressFoot: Uncovering the Potential of the Foot for Acute Stress Sensing in Sitting Posture</option><option value="speech-emotion-recognition-in-the-wild-using-an-autoencoder">Speech Emotion Recognition ‘in the Wild’ Using an Autoencoder</option><option value="ready-steady-touch-sensing-physical-contact-with-a-finger-mounted-imu">Ready, Steady, Touch!: Sensing Physical Contact with a Finger-Mounted IMU</option><option value="prompto-investigating-receptivity-to-prompts-based-on-cognitive-load-from-memory-training-conversational-agent">Prompto: Investigating Receptivity to Prompts Based on Cognitive Load from Memory Training Conversational Agent</option><option value="progression-of-cognitive-affective-states-during-learning-in-kindergarteners-bringing-together-physiological-observational-and-performance-data">Progression of Cognitive-Affective States During Learning in Kindergarteners: Bringing Together Physiological, Observational and Performance Data</option><option value="next-steps-in-human-computer-integration">Next Steps in Human-Computer Integration</option><option value="multimodal-emotion-recognition-with-transformer-based-self-supervised-feature-fusion">Multimodal Emotion Recognition With Transformer-Based Self Supervised Feature Fusion</option><option value="maghair-a-wearable-system-to-create-unique-tactile-feedback-by-stimulating-only-the-body-hair">MAGHair: A Wearable System to Create Unique Tactile Feedback by Stimulating Only the Body Hair</option><option value="lighttank">LightTank</option><option value="jointly-fine-tuning-bert-like-self-supervised-models-to-improve-multimodal-speech-emotion-recognition">Jointly Fine-Tuning &quot;BERT-like&quot; Self Supervised Models to Improve Multimodal Speech Emotion Recognition</option><option value="gymsoles-using-smart-wearables-to-improve-body-posture-when-performing-squats-and-dead-lifts">GymSoles++: Using Smart Wearables to Improve Body Posture when Performing Squats and Dead-Lifts.</option><option value="biosignal-sensitive-memory-improvement-and-support-systems">Biosignal-Sensitive Memory Improvement and Support Systems</option><option value="aisee-an-assistive-wearable-device-to-support-visually-impaired-grocery-shoppers">AiSee: An Assistive Wearable Device to Support Visually Impaired Grocery Shoppers</option><option value="reflexive-interaction-extending-the-concept-of-peripheral-interaction">Reflexive Interaction - Extending the concept of Peripheral Interaction</option><option value="prospero-a-personal-wearable-memory-coach">Prospero: A Personal Wearable Memory Coach</option><option value="prospecfit-in-situ-evaluation-of-digital-prospective-memory-training-for-older-adults">ProspecFit: In Situ Evaluation of Digital Prospective Memory Training for Older Adults</option><option value="presenting-a-data-imputation-concept-to-support-the-continuous-assessment-of-human-vital-data-and-activities">Presenting a Data Imputation Concept to Support the Continuous Assessment of Human Vital Data and Activities</option><option value="phantomtouch-creating-an-extended-reality-by-the-illusion-of-touch-using-a-shape-memory-alloy-matrix">PhantomTouch: Creating an Extended Reality by the Illusion of Touch using a Shape-Memory Alloy Matrix</option><option value="osense-object-activity-identification-based-on-gasping-posture-and-motion">oSense: Object-Activity Identification Based on Gasping Posture and Motion</option><option value="m-hair-extended-reality-by-stimulating-the-body-hair">M-Hair: Extended Reality by Stimulating the Body Hair</option><option value="m-hair-creating-novel-tactile-feedback-by-augmenting-the-body-hair-to-respond-to-magnetic-field">M-Hair: Creating Novel Tactile Feedback by Augmenting the Body Hair to Respond to Magnetic Field</option><option value="hand-arm-vibration-estimation-using-a-commercial-smartwatch">Hand-Arm Vibration Estimation using A Commercial Smartwatch</option><option value="gymsoles-improving-squats-and-dead-lifts-by-visualizing-the-users-centre-of-pressure">GymSoles: Improving Squats and Dead-Lifts by Visualizing the User’s Centre of Pressure</option><option value="going-beyond-performance-scores-understanding-cognitive-affective-states-in-kindergarteners-and-application-of-framework-in-classrooms">Going beyond performance scores: Understanding cognitive-affective states in Kindergarteners and application of framework in classrooms</option><option value="fsense-unlocking-the-dimension-of-force-for-gestural-interactions-using-smartwatch-ppg-sensor">fSense: Unlocking the Dimension of Force for Gestural Interactions using Smartwatch PPG Sensor</option><option value="evaluating-ivr-in-primary-school-classrooms">Evaluating IVR in Primary School Classrooms</option><option value="cricketcoach-towards-creating-a-better-awareness-of-gripping-forces-for-cricketers">CricketCoach: Towards Creating a Better Awareness of Gripping Forces for Cricketers</option><option value="comprate-power-efficient-heart-rate-and-heart-rate-variability-monitoring-on-smart-wearables">CompRate: Power Efficient Heart Rate and Heart Rate Variability Monitoring on Smart Wearables</option><option value="chewit-an-intraoral-interface-for-discreet-interactions">ChewIt. An Intraoral Interface for Discreet Interactions.</option><option value="capmat-a-smart-foot-mat-for-user-authentication">CapMat: A Smart Foot Mat for User Authentication</option><option value="2bit-tactilehand-evaluating-tactons-for-nobody-vibrotactile-displays-on-the-hand-and-wrist">2bit-TactileHand: Evaluating Tactons for Nobody Vibrotactile Displays on the Hand and Wrist.</option><option value="visual-field-visualizer-easier-scalable-way-to-be-aware-of-the-visual-field">Visual Field Visualizer: Easier &amp; Scalable way to be Aware of the Visual Field</option><option value="uncovering-the-potential-of-the-foot-as-a-source-of-user-information">Uncovering the Potential of the Foot as a Source of User Information</option><option value="triangulation-of-physiological-behavioural-and-observational-data-offers-better-insights-into-cognitive-emotional-states-in-learning">Triangulation of Physiological, Behavioural and Observational Data offers better insights into cognitive-emotional states in learning</option><option value="thumb-in-motion-evaluating-thumb-to-ring-microgestures-for-athletic-activity">Thumb-In-Motion: Evaluating Thumb to Ring Microgestures for Athletic Activity</option><option value="target-driven-visual-navigation-with-hybrid-asynchronous-universal-successor-representations">Target Driven Visual Navigation with Hybrid Asynchronous Universal Successor Representations</option><option value="supporting-rhythm-activities-of-deaf-children-using-music-sensory-substitution-systems">Supporting Rhythm Activities of Deaf Children using Music-Sensory-Substitution Systems.</option><option value="step-detection-for-rollator-users-with-smartwatches">Step Detection for Rollator Users with Smartwatches</option><option value="scaling-notifications-beyond-alerts-from-subtly-drawing-attention-up-to-forcing-the-user-to-take-action">Scaling Notifications Beyond Alerts: From Subtly Drawing Attention up to Forcing the User to Take Action</option><option value="revealing-inaccessible-information-on-the-go-by-augmenting-humans">Revealing Inaccessible Information on-the-go, by Augmenting Humans</option><option value="mobile-assisted-living-smartwatch-based-fall-risk-assessment-for-elderly-people">Mobile Assisted Living: Smartwatch-based Fall Risk Assessment for Elderly People</option><option value="hand-range-interface-information-always-at-hand-with-a-body-centric-mid-air-input-surface">Hand Range Interface: Information Always at Hand with a Body-Centric Mid-Air Input Surface</option><option value="going-beyond-performance-scores-understanding-cognitive-affective-states-in-kindergarteners">Going beyond performance scores: understanding cognitive-affective states in kindergarteners</option><option value="gestakey-touch-interaction-on-individual-keycaps">GestAKey: Touch Interaction on Individual Keycaps.</option><option value="fingerreader2-0-designing-and-evaluating-a-wearable-finger-worncamera-to-assist-people-with-visual-impairments-while-shopping">FingerReader2.0: Designing and Evaluating a Wearable Finger-WornCamera to Assist People with Visual Impairments while Shopping,</option><option value="exploring-the-potential-of-the-foot-to-infer-on-user-information">Exploring the Potential of the Foot to Infer on User Information</option><option value="exploring-accelerometer-based-step-detection-by-using-a-wheeled-walking-frame">Exploring Accelerometer-based Step Detection by using a Wheeled Walking Frame</option><option value="doodle-daydream-an-interactive-display-to-support-playful-and-creative-interactions-between-co-workers">Doodle Daydream: An Interactive Display to Support Playful and Creative Interactions Between Co-workers</option><option value="development-of-a-triangulated-framework-understand-cognitive-emotional-states-during-learning-in-children">Development of a Triangulated Framework Understand Cognitive-Emotional States during Learning in Children</option><option value="assistive-augmentation">Assistive Augmentation</option><option value="utap-unique-topographies-for-acoustic-propagation-designing-algorithmic-waveguides-for-sensing-in-interactive-malleable-interfaces">UTAP-Unique Topographies for Acoustic Propagation: Designing Algorithmic Waveguides for Sensing in Interactive Malleable Interfaces</option><option value="towards-understanding-of-play-with-augmented-toys">Towards Understanding of Play with Augmented Toys</option><option value="sonicsg-from-floating-to-sounding-pixels">SonicSG: From Floating to Sounding Pixels</option><option value="scaffolding-the-music-listening-and-music-making-experience-for-the-deaf">Scaffolding the Music Listening and Music Making Experience for the Deaf</option><option value="insight-a-systematic-approach-to-create-dynamic-human-controller-interactions">InSight: A Systematic Approach to Create Dynamic Human-Controller-Interactions</option><option value="grabamps-grab-a-wire-to-sense-the-current-flow">GrabAmps: Grab a Wire to Sense the Current Flow</option><option value="gestakey-get-more-done-with-just-a-key-on-a-keyboard">GestAKey: Get More Done with Just-a-Key on a Keyboard</option><option value="gescad-an-intuitive-interface-for-conceptual-architectural-design">GesCAD: an Intuitive Interface for Conceptual Architectural Design</option><option value="working-with-physiotherapists-lessons-learned-from-project-shrug">Working with physiotherapists: Lessons learned from project SHRUG.</option><option value="wavesense-ultra-low-power-gesture-sensing-based-on-selective-volumetric-illumination">waveSense: Ultra Low Power Gesture Sensing Based on Selective Volumetric Illumination</option><option value="towards-one-pixel-displays-for-sound-information-visualization">Towards One-Pixel-Displays for Sound Information Visualization</option><option value="towards-development-and-evaluation-of-tangible-interfaces-that-support-learning-in-children">Towards Development and Evaluation of Tangible Interfaces that Support Learning in Children.</option><option value="swimsight-supporting-deaf-users-to-participate-in-swimming-games">SwimSight: Supporting Deaf Users to Participate in Swimming Games</option><option value="postbits-using-contextual-locations-for-embedding-cloud-information-in-the-home">PostBits: using contextual locations for embedding cloud information in the home</option><option value="muss-bits-sensor-display-blocks-for-deaf-people-to-explore-musical-sounds">MuSS-Bits: Sensor-Display Blocks for Deaf People to Explore Musical Sounds</option><option value="muss-bits-provisional-patent">MuSS-Bits Provisional Patent</option><option value="electrosmog-visualization-through-augmented-blurry-vision">Electrosmog Visualization through Augmented Blurry Vision</option><option value="augmented-winter-ski-with-ar-hmd">Augmented Winter Ski with AR HMD</option><option value="armsleeve-a-patient-monitoring-system-to-support-occupational-therapists-in-stroke-rehabilitation">ArmSleeve: A Patient Monitoring System to Support Occupational Therapists in Stroke Rehabilitation</option><option value="ad-hoc-access-to-musical-sound-for-deaf-individuals">Ad-Hoc Access to Musical Sound for Deaf Individuals</option><option value="zsense-enabling-shallow-depth-gesture-recognition-for-greater-input-expressivity-on-smart-wearables">zSense: Enabling Shallow Depth Gesture Recognition for Greater Input Expressivity on Smart Wearables</option><option value="towards-effective-interaction-with-omnidirectional-videos-using-immersive-virtual-reality-headsets">Towards Effective Interaction with Omnidirectional Videos Using Immersive Virtual Reality Headsets</option><option value="smartobjects-fourth-workshop-on-interacting-with-smart-objects">SmartObjects: fourth workshop on interacting with smart objects</option><option value="shrug-stroke-haptic-rehabilitation-using-gaming-2">SHRUG: stroke haptic rehabilitation using gaming</option><option value="rippletouch-initial-exploration-of-a-wave-resonant-based-full-body-haptic-interface">RippleTouch: Initial Exploration of a Wave Resonant Based Full Body Haptic Interface</option><option value="footnote-designing-a-cost-effective-plantar-pressure-monitoring-system-for-diabetic-foot-ulcer-prevention">FootNote: designing a cost effective plantar pressure monitoring system for diabetic foot ulcer prevention</option><option value="fingerreader-a-wearable-device-to-explore-printed-text-on-the-go">FingerReader: A Wearable Device to Explore Printed Text on the Go</option><option value="feel-see-the-globe-a-thermal-interactive-installation">Feel &amp; See the Globe: A Thermal, Interactive Installation</option><option value="digital-digits-a-comprehensive-survey-of-finger-augmentation-devices">Digital Digits: A Comprehensive Survey of Finger Augmentation Devices</option><option value="clouddrops-stamp-sized-pervasive-displays-for-situated-awareness-of-web-based-information">CloudDrops: Stamp-sized Pervasive Displays for Situated Awareness of Web-based Information</option><option value="bward-an-optical-approach-for-reliable-in-situ-early-blood-leakage-detection-at-catheter-extraction-points">BWard: An Optical Approach for Reliable in-situ Early Blood Leakage Detection at Catheter Extraction Points</option><option value="body-as-display-augmenting-the-face-through-transillumination">Body as Display: Augmenting the Face through Transillumination</option><option value="workshop-on-assistive-augmentation">Workshop on Assistive Augmentation</option><option value="spidervision-extending-the-human-field-of-view-for-augmented-awareness">SpiderVision: Extending the Human Field of View for Augmented Awareness</option><option value="sparkubes-exploring-the-interplay-between-digital-and-physical-spaces-with-minimalistic-interfaces">SparKubes: Exploring the Interplay between Digital and Physical Spaces with Minimalistic Interfaces</option><option value="smartobjects-third-workshop-on-interacting-with-smart-objects">SmartObjects: Third Workshop on Interacting with Smart Objects</option><option value="shrug-stroke-haptic-rehabilitation-using-gaming">SHRUG: stroke haptic rehabilitation using gaming</option><option value="permulin-mixed-focus-collaboration-on-multi-view-tabletops">Permulin: Mixed-Focus Collaboration on Multi-View Tabletops</option><option value="paperpixels-a-toolkit-to-create-paper-based-displays">PaperPixels: a Toolkit to Create Paper Based Displays</option><option value="paint-with-your-voice-an-interactive-sonic-installation">Paint with Your Voice: An Interactive, Sonic Installation</option><option value="nzwarm-a-swarm-of-luminous-sea-creatures-that-interact-with-passers-by">nZwarm: a swarm of luminous sea creatures that interact with passers-by</option><option value="keepers-bees-an-interactive-light-art-installation-of-interactive-critters-that-visitors-can-interact-with-in-real-time-via-their-smartphones">Keepers &amp; Bees: an interactive light-art installation of interactive critters that visitors can interact with in real time via their smartphones</option><option value="iswarm-a-swarm-of-luminous-sea-creatures-that-interact-with-passers-by">iSwarm: a swarm of luminous sea creatures that interact with passers-by</option><option value="i-draw-towards-a-freehand-drawing-assistant">I-Draw: Towards a Freehand Drawing Assistant</option><option value="fingerreader-a-wearable-device-to-support-text-reading-on-the-go">FingerReader: A Wearable Device to Support Text-Reading on the Go</option><option value="earput-augmenting-ear-worn-devices-for-ear-based-interaction">EarPut: Augmenting Ear-worn Devices for Ear-based Interaction</option><option value="birdie-towards-a-true-flying-experience">Birdie: Towards a true flying experience</option><option value="a-wearable-text-reading-device-for-the-visually-impaired">A Wearable Text-Reading Device for the Visually-Impaired</option><option value="a-research-overview-of-mobile-projected-user-interfaces">A Research Overview of Mobile Projected User Interfaces</option><option value="stickear-making-everyday-objects-respond-to-sound">StickEar: Making Everyday Objects Respond to Sound</option><option value="stickear-augmenting-objects-and-places-wherever-whenever">StickEar: Augmenting Objects and Places Wherever Whenever</option><option value="speechplay-composing-and-sharing-expressive-speech-through-visually-augmented-text">SpeechPlay: Composing and Sharing Expressive Speech Through Visually Augmented Text.</option><option value="smartfinger-connecting-devices-objects-and-people-seamlessly">SmartFinger: Connecting Devices, Objects and People seamlessly</option><option value="smartfinger-an-augmented-finger-as-a-seamless-channel-between-digital-and-physical-objects">SmartFinger: An Augmented Finger as a Seamless ‘Channel’ between Digital and Physical Objects</option><option value="fingerdraw-more-than-a-digital-paintbrush">FingerDraw: More than a Digital Paintbrush</option><option value="eyering-a-finger-worn-input-device-for-seamless-interactions-with-our-surroundings">EyeRing: A Finger Worn Input Device for Seamless Interactions with our Surroundings</option><option value="enhancing-musical-experience-for-the-hearing-impaired-using-visual-and-haptic-displays">Enhancing Musical Experience for the Hearing-impaired using Visual and Haptic Displays</option><option value="augmentedforearm-exploring-the-design-space-of-a-display-enhanced-forearm">AugmentedForearm: Exploring the Design Space of a Display-enhanced Forearm</option><option value="watchme-wrist-worn-interface-that-makes-remote-monitoring-seamless">WatchMe: Wrist-worn interface that makes remote monitoring seamless</option><option value="the-haptic-chair-as-a-speech-training-aid-for-the-deaf">The Haptic Chair as a Speech Training Aid for the Deaf</option><option value="palm-area-sensitivity-to-vibrotactile-stimuli-above-1-khz">Palm-area sensitivity to vibrotactile stimuli above 1 kHz</option><option value="neural-changes-induced-by-behavioural-stuttering-therapies-in-persons-with-stuttering">Neural changes induced by behavioural stuttering therapies in persons with stuttering</option><option value="eyering-an-eye-on-a-finger">EyeRing: An Eye on a Finger</option><option value="eyering-a-finger-worn-assistant">EyeRing: A Finger-worn Assistant</option><option value="effectiveness-of-the-haptic-chair-in-speech-training">Effectiveness of the Haptic Chair in Speech Training</option><option value="touch-and-copy-touch-and-paste">Touch and Copy, Touch and Paste</option><option value="the-effect-of-visualizing-audio-targets-in-a-musical-listening-and-performance-task">The effect of visualizing audio targets in a musical listening and performance task</option><option value="sparsh-passing-data-using-the-body-as-a-medium">SPARSH: Passing Data using the Body as a Medium</option><option value="dysfluency-characteristics-in-persons-with-dementia">Dysfluency Characteristics in Persons with Dementia</option><option value="clinical-implications-of-neuroimaging-studies-on-stuttering-a-review">Clinical Implications Of Neuroimaging Studies On Stuttering: A Review</option><option value="biases-and-interaction-effects-in-gestural-acquisition-of-auditory-targets-using-a-hand-held-device">Biases and interaction effects in gestural acquisition of auditory targets using a hand-held device</option><option value="effect-of-culture-on-non-verbal-communication">Effect of culture on non-verbal communication</option><option value="an-enhanced-musical-experience-for-the-deaf-design-and-evaluation-of-a-music-display-and-a-haptic-chair">An enhanced musical experience for the deaf: design and evaluation of a music display and a haptic chair</option><option value="effect-of-speaking-rate-on-nasality">Effect of Speaking Rate on Nasality</option><option value="effect-of-hearing-loss-on-cognition">Effect of Hearing Loss on Cognition</option><option value="comparison-of-attitudes-of-mothers-and-fathers-of-typically-developing-children-with-those-of-children-with-mental-retardation-and-hearing-impairment">Comparison of Attitudes of Mothers and Fathers of Typically Developing Children with those of Children with Mental Retardation and Hearing Impairment</option></datalist>
+      </div>
+    </section>
+
+    <!-- Awards (press records of type=award; cross-ref into press.projects[]) -->
+    <section class="np-section">
+      <div class="np-section-label">Awards</div>
+      <div class="np-chip-input" data-chip-collection="awards">
+        <div class="np-chip-list" data-chip-list></div>
+        <input class="np-chip-search" list="np-awards-list"
+               placeholder="Search awards…" data-chip-search>
+        <datalist id="np-awards-list"><option value="vr-net-best-paper-award">VR.net | Best Paper Award</option><option value="toro-prototypes-for-humanity">Toro | Prototypes for Humanity</option><option value="lightsense-best-design-awards-installation-exhibition-silver">LightSense | Best Design Awards | Installation &amp; Exhibition: Silver</option><option value="kinvoice-prototypes-for-humanity">KinVoice | Prototypes for Humanity</option><option value="world-changing-ideas-awards-2021-education-finalist-kiwrious">World Changing Ideas Awards 2021: Education | Finalist | Kiwrious</option><option value="world-changing-ideas-awards-2021-asia-pacific-honorable-mention-kiwrious">World Changing Ideas Awards 2021: Asia-Pacific | Honorable Mention | Kiwrious</option><option value="kiwrious-social-impact-winner">Kiwrious | Social Impact Winner</option><option value="kiwrious-best-design-awards-value-of-design-bronze">Kiwrious | Best Design Awards | Value of Design : Bronze</option><option value="kiwrious-best-design-awards-user-experience-bronze">Kiwrious | Best Design Awards | User Experience: Bronze</option><option value="kiwrious-best-design-awards-public-good-award-silver">Kiwrious | Best Design Awards | Public Good Award: Silver</option><option value="excellence-in-research-translation-2020">Excellence in research translation 2020</option><option value="excellence-in-graduate-supervision-2020">Excellence in graduate supervision 2020</option><option value="touch-me-gently-best-design-awards-student-digital-finalist">Touch me Gently | Best Design Awards | Student Digital: Finalist</option><option value="the-best-student-designed-projects-of-2020">The best student-designed projects of 2020</option><option value="suranga-wins-research-excellence-award">Suranga wins Research Excellence Award</option><option value="serious-scientific-fun-a-winner-at-velocity">Serious scientific fun a winner at Velocity</option><option value="prospero-best-design-awards-student-digital-gold">Prospero | Best Design Awards | Student Digital: Gold</option><option value="propsero-best-design-awards-public-good-award-finalist">Propsero | Best Design Awards | Public Good Award: Finalist</option><option value="pride-in-lights-best-design-awards-lighting-design-gold">Pride in Lights | Best Design Awards | Lighting Design: Gold</option><option value="pride-in-lights-best-design-awards-exhibitions-temporary-structures-gold">Pride in Lights | Best Design Awards | Exhibitions &amp; Temporary Structures: Gold</option><option value="om-best-design-awards-user-experience-finalist">OM | Best Design Awards | User Experience: Finalist</option><option value="om-best-design-awards-public-good-award-finalist">OM | Best Design Awards | Public Good Award: Finalist</option><option value="maia-best-design-awards-user-experience-bronze">Maia | Best Design Awards | User Experience: Bronze</option><option value="light-tank-best-design-awards-installation-exhibition-gold-2020">Light Tank| Best Design Awards | Installation &amp; Exhibition: Gold. 2020.</option><option value="jammify-best-design-awards-student-spatial-bronze">Jammify | Best Design Awards | Student Spatial: Bronze</option><option value="jammify-best-design-awards-student-digital-silver">Jammify | Best Design Awards | Student Digital: Silver</option><option value="gymsoles-best-design-awards-student-digital-bronze">GymSoles | Best Design Awards | Student Digital: Bronze</option><option value="fast-company-2020-world-changing-ideas-awards-honorable-mention-prospero-a-biosignal-sensitive-memory-assistant">Fast Company 2020 World Changing Ideas Awards | Honorable Mention | Prospero: A Biosignal-Sensitive Memory Assistant</option><option value="a-triumvirate-of-medals-for-the-auckland-bioengineering-institute">A triumvirate of medals for the Auckland Bioengineering Institute</option><option value="velocity-innovation-challenge-2019-female-founders-prize-by-uniservices-prospero">Velocity Innovation Challenge 2019 | Female Founders Prize by UniServices | Prospero</option><option value="best-design-awards-public-good-award-mussbits">Best Design Awards | Public Good Award | MussBits</option><option value="fingerreader-world-changing-ideas-award-finalist">FingerReader: World Changing Ideas Award Finalist</option><option value="180-seconds-of-discovery-video-competition-peoples-award">180 Seconds of Discovery video competition : Peoples Award</option><option value="fingerreader-winner-of-accelerator-program">FingerReader: Winner of Accelerator Program</option><option value="fingerreader-golden-pin-concept-design-award">FingerReader: Golden Pin Concept Design Award</option><option value="zsense-most-promising-technology-award-at-ihl-tech-pitching-event">zSense: Most Promising Technology Award at IHL Tech Pitching Event</option><option value="zsense-first-place-in-singapore-mit-alliance-for-research-and-technology-smart-bootcamp-pitch-competition">zSense: First place in Singapore-MIT Alliance for Research and Technology (SMART) Bootcamp pitch competition</option><option value="suranga-received-ink-fellowship">Suranga received INK Fellowship</option><option value="steve-howard-award-for-the-best-long-paper-by-a-student-presented-during-ozchi-chisigs-annual-conference-muss-bits-sensor-display-blocks-for-deaf-people-to-explore-musical-sounds">Steve Howard Award - for the best long paper by a student presented during OZCHI, CHISIG's Annual Conference: MuSS-Bits: Sensor-Display Blocks for Deaf People to Explore Musical Sounds</option><option value="singapore-design-award-2016-for-fingerreader">Singapore Design Award 2016 for FingerReader</option><option value="suranga-received-the-ten-outstanding-young-person-toyp-award-sri-lanka-december-2015">Suranga received The Ten Outstanding Young Person (TOYP) Award, Sri Lanka. December 2015</option><option value="suranga-received-innovator-under-35-mit-tr35-award-for-asia-pacific-region">Suranga received Innovator under 35 (MIT TR35) award for Asia Pacific Region</option><option value="sponsors-choice-award">Sponsor's Choice Award</option></datalist>
+      </div>
+    </section>
+
+    <!-- Sponsors -->
+    <section class="np-section">
+      <div class="np-section-label">Sponsors</div>
+      <div class="np-chip-input" data-chip-collection="sponsors">
+        <div class="np-chip-list" data-chip-list></div>
+        <input class="np-chip-search" list="np-sponsors-list"
+               placeholder="Search sponsors by name…" data-chip-search>
+        <datalist id="np-sponsors-list"><option value="asahi">Asahi</option><option value="digital-dreams">Digital Dreams</option><option value="sg-enable">SG Enable</option></datalist>
       </div>
     </section>
 
@@ -302,18 +375,29 @@
 <script src="/js/claim-buttons.js" defer></script>
 <script src="/js/image-processor.js" defer></script>
 <script src="/js/submit-patch.js" defer></script>
+<script src="/js/chip-input.js" defer></script>
 <script src="/js/myahl-forms.js" defer></script>
 
 <script>
 (function () {
-  // Show/hide based on auth + seed creator's avatar/name in the team chip.
   function setState(user) {
     document.body.setAttribute('data-auth-state', user ? 'signed-in' : 'signed-out');
-    if (user) {
-      var photo = document.getElementById('np-creator-photo');
-      var name  = document.getElementById('np-creator-name');
-      if (user.picture) photo.src = user.picture;
-      if (user.name)    name.textContent = user.name;
+    if (user && user.person && user.person.slug) {
+      // Pre-chip the creator into the team list. Wait for AHLChipInput
+      // to load before adding (defer scripts run after DOMContentLoaded
+      // but the listeners are still binding — small retry loop is
+      // simplest).
+      var teamWrap = document.getElementById('np-team-chip-input');
+      var slug = user.person.slug;
+      var label = user.name || slug;
+      function tryAdd() {
+        if (window.AHLChipInput) {
+          window.AHLChipInput.addChip(teamWrap, slug, label);
+        } else {
+          setTimeout(tryAdd, 50);
+        }
+      }
+      tryAdd();
     }
   }
   if (window.AHLAuth) window.AHLAuth.onChange(setState);
@@ -322,9 +406,7 @@
     window.AHLAuth && window.AHLAuth.login();
   });
 
-  // Live thumbnail preview — show the picked image immediately so the
-  // creator sees roughly what the published hero will look like even
-  // before submitting.
+  // Live thumbnail preview.
   var fileInput = document.getElementById('np-thumb-input');
   var previewImg = document.getElementById('np-thumb-preview');
   var thumbFrame = document.getElementById('np-thumb');
@@ -339,7 +421,7 @@
     });
   }
 
-  // Live slug preview — slugify the title input as the user types.
+  // Live slug preview.
   var titleInput = document.querySelector('[data-field="title"]');
   var slugInput  = document.querySelector('[data-field="slug"]');
   var slugPreview = document.getElementById('np-slug-preview');

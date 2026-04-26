@@ -77,6 +77,21 @@
     });
     if (links.length) payload.links = links;
 
+    // Chip inputs: each [data-chip-list] under the form contributes
+    // its chip slugs to a payload field named after data-chip-collection
+    // on the wrapper. Built by chip-input.js.
+    var chipWraps = form.querySelectorAll('[data-chip-collection]');
+    Array.prototype.forEach.call(chipWraps, function (wrap) {
+      var collection = wrap.getAttribute('data-chip-collection');
+      if (!collection) return;
+      var slugs = [];
+      Array.prototype.forEach.call(
+        wrap.querySelectorAll('[data-chip-list] [data-slug]'),
+        function (chip) { slugs.push(chip.getAttribute('data-slug')); }
+      );
+      payload[collection] = slugs;
+    });
+
     // Spec-specific finalization (e.g. project-create wants
     // principles[] from checkboxes; publication-create wants the
     // single projectSlug as projectSlugs[]).
