@@ -58,4 +58,43 @@
   }
 
   window.AHLAuth.onChange(applyClaims);
+
+  // ── Click handler for Add Me / Add Someone ─────────────────
+  // Buttons with data-myahl-claim-action submit a project/claim-*
+  // patch via AHLPatch (loaded by submit-patch.js — this script
+  // is no-op if the patch helper isn't on the page, e.g. before
+  // submit-patch.js loads).
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-myahl-claim-action]');
+    if (!btn || btn.disabled) return;
+    var action = btn.getAttribute('data-myahl-claim-action');
+    var wrap = btn.closest('[data-project-slug]');
+    if (!wrap) return;
+    var projectSlug = wrap.getAttribute('data-project-slug');
+    if (!window.AHLPatch) {
+      alert('Submit helper not loaded yet — reload the page and try again.');
+      return;
+    }
+    if (action === 'claim-self') {
+      window.AHLPatch.submit({
+        targetType: 'project',
+        targetSlug: projectSlug,
+        action:     'claim-self',
+        patch:      {}
+      });
+      return;
+    }
+    if (action === 'claim-other') {
+      var personSlug = window.prompt(
+        'Slug of the person to add (e.g. "ariel-ong"):'
+      );
+      if (!personSlug) return;
+      window.AHLPatch.submit({
+        targetType: 'project',
+        targetSlug: projectSlug,
+        action:     'claim-other',
+        patch:      { personSlug: personSlug.trim() }
+      });
+    }
+  });
 })();

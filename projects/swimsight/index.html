@@ -100,12 +100,16 @@
               <div class="project-person-name">Suranga Nanayakkara</div>
             </a>
           <button type="button" class="project-person-card project-person-claim"
-              data-myahl-claim="self" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
+              data-myahl-claim="self" hidden
+              data-myahl-claim-action="claim-self"
+              title="Add yourself to this project's team">
        <div class="project-person-avatar" aria-hidden="true">+</div>
        <div class="project-person-name">Me</div>
      </button>
      <button type="button" class="project-person-card project-person-claim"
-              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
+              data-myahl-claim="other" hidden
+              data-myahl-claim-action="claim-other"
+              title="Add another member to this project's team">
        <div class="project-person-avatar" aria-hidden="true">+</div>
        <div class="project-person-name">Someone</div>
      </button>
@@ -168,6 +172,7 @@
 <div id="site-footer-mount"></div>
 <script src="/js/footer-include.js"></script>
 <script src="/js/event-chip-live.js" defer></script>
+<script src="/js/submit-patch.js" defer></script>
 <script src="/js/claim-buttons.js" defer></script>
 
 <script>

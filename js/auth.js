@@ -100,8 +100,14 @@
 
   // ── Public API ─────────────────────────────────────────────────
   var API = {
-    /** Returns the cached identity { email, name, picture, person } or null. */
+    /** Returns the cached identity { email, name, picture, person, token } or null. */
     getUser: function () { return currentUser; },
+
+    /** Returns the HMAC bearer token from login (used by submit forms). */
+    getToken: function () { return currentUser && currentUser.token || null; },
+
+    /** Apps Script /exec URL — used as the form action on submit pages. */
+    getBrokerUrl: function () { return APPS_SCRIPT_URL; },
 
     /** Opens the login popup. */
     login: openLoginPopup,

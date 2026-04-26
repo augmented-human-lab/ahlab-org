@@ -1,130 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>New project — Augmented Human Lab</title>
 <link rel="stylesheet" href="https://use.typekit.net/zws2qzx.css">
 <link rel="stylesheet" href="/css/theme.css">
-<link rel="stylesheet" href="/css/project.css">
-<link rel="stylesheet" href="/css/event-chip.css">
 <link rel="stylesheet" href="/css/auth.css">
-<link rel="icon" href="https://ahlab.org/wp-content/uploads/2021/05/cropped-Group@2x-32x32.png" sizes="32x32">
-<meta name="description" content="">
-</head>
-<body>
+<style>
+  .np-wrap { padding: 140px 24px 80px; max-width: 720px; margin: 0 auto; }
+  .np-wrap[hidden] { display: none; }
+  .np-signed-out { display: none; padding: 140px 24px 80px; max-width: 480px; margin: 0 auto; text-align: center; }
+  body[data-auth-state="signed-out"] .np-signed-out { display: block; }
+  h1 { font-family: var(--font-display); font-weight: 700; font-size: 32px; margin-bottom: 12px; letter-spacing: -.01em; }
+  p.lead { color: var(--color-neutral-70); font-size: 16px; line-height: 1.55; margin-bottom: 32px; }
+  .np-form { display: flex; flex-direction: column; gap: 16px; }
+  .np-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 567px) { .np-row { grid-template-columns: 1fr; } }
+  .np-input, .np-textarea, .np-select {
+    width: 100%; box-sizing: border-box;
+    padding: 12px 16px; font-family: var(--font-text); font-size: 15px;
+    border: 1px solid var(--color-neutral-30); border-radius: var(--radius-sm);
+    background: var(--color-neutral-10); color: var(--color-neutral-100);
+    transition: border-color .2s;
+  }
+  .np-input:focus, .np-textarea:focus, .np-select:focus { outline: none; border-color: var(--color-accent); }
+  .np-textarea { min-height: 120px; resize: vertical; font-family: var(--font-text); line-height: 1.55; }
+  .np-input-title { font-family: var(--font-display); font-weight: 700; font-size: 22px; padding: 14px 18px; }
+  .np-label { font-family: var(--font-display); font-weight: 600; font-size: 13px;
+              letter-spacing: .04em; text-transform: uppercase; color: var(--color-neutral-70); margin-top: 12px; margin-bottom: 4px; }
+  .np-principles { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
+  .np-principle { display: flex; align-items: center; gap: 8px; padding: 10px 12px;
+                  border: 1px solid var(--color-neutral-30); border-radius: var(--radius-sm); cursor: pointer; transition: border-color .2s; }
+  .np-principle:hover { border-color: var(--color-neutral-40); }
+  .np-principle input { margin: 0; }
+  .np-principle img { width: 22px; height: 22px; object-fit: contain; }
+  .np-principle span { font-size: 13px; }
+  .np-thumb-input { display: flex; align-items: center; gap: 12px; }
+  .np-actions { display: flex; gap: 10px; margin-top: 24px; }
+  .np-submit { padding: 14px 28px; background: var(--color-accent); color: #fff; border: 0; border-radius: 999px;
+               font-family: var(--font-display); font-weight: 600; font-size: 15px; cursor: pointer;
+               transition: background .2s; }
+  .np-submit:hover { background: var(--color-accent-dark); }
+  .np-submit:disabled { opacity: .5; cursor: not-allowed; }
+  .np-cancel { padding: 14px 24px; background: transparent; color: var(--color-neutral-70);
+               border: 1px solid var(--color-neutral-30); border-radius: 999px;
+               text-decoration: none; font-weight: 500; font-size: 14px; }
+  .np-cancel:hover { background: var(--color-neutral-20); }
+  .np-signed-out a { display: inline-block; margin-top: 16px; padding: 12px 24px;
+                     background: var(--color-accent); color: #fff; border-radius: 999px;
+                     text-decoration: none; font-weight: 500; }
+</style>
+</head><body data-auth-state="signed-out">
 
 <div id="site-nav-mount"></div>
 <script src="/js/nav-include.js"></script>
 <script src="/js/auth.js"></script>
 
-<!-- PAGE -->
-<div class="container">
+<div class="np-signed-out">
+  <h1>Sign in to start a project</h1>
+  <p>Project creation is for AHLab members signed in with their @ahlab.org Google account.</p>
+  <a href="#" id="np-signin">Sign in</a>
+</div>
 
-  <!-- Hero. data-project-people scopes the in-page edit pencils
-       (claim-buttons.js reads it via closest()). -->
-  <section class="project-hero rv" data-project-people="">
-    <div class="project-hero-grid">
-      <div class="project-hero-image">
-        <img src="data:image/svg+xml;utf8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 16 11&quot;&gt;&lt;/svg&gt;" alt="New project">
-        
-      </div>
-      <div class="project-hero-text">
-        <div class="project-title-row">
-          <h1>
-            New project<span class="project-title-year"><span class="project-title-sep" aria-hidden="true">·</span></span>
-          </h1>
-          <button type="button" class="project-edit project-edit-title"
-                  data-myahl-claim="other" hidden disabled
-                  title="Coming soon — claiming will be enabled with the editing pipeline."
-                  aria-label="Edit title and description">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
-            </svg>
-          </button>
-        </div>
-        <div class="project-summary"></div>
-        
-      </div>
+<div class="np-wrap" id="np-wrap" hidden data-myahl-add-section
+     data-myahl-submit="project-create">
+  <h1>New project</h1>
+  <p class="lead">Submitted projects go through a brief moderator review before they appear publicly. Members on the new project will see it as "Pending" in their <a href="/my-ahl/">My AHL</a> dashboard until then.</p>
+
+  <div class="np-form">
+    <input type="text" class="np-input np-input-title" data-field="title" placeholder="Project title" required>
+    <div class="np-row">
+      <input type="text" class="np-input" data-field="year" placeholder="Year (e.g. 2026 or Current)">
+      <input type="text" class="np-input" data-field="slug" placeholder="Slug (auto from title if blank)">
     </div>
-  </section>
 
-  <!-- Body (people row + publications, full width) -->
-  <section class="project-body">
-    <div class="project-people-row rv" data-project-slug="new" data-project-people="">
-        <div class="sidebar-section-title">Team</div>
-        <div class="project-people-grid">
-          
-          <button type="button" class="project-person-card project-person-claim"
-              data-myahl-claim="self" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
-       <div class="project-person-avatar" aria-hidden="true">+</div>
-       <div class="project-person-name">Me</div>
-     </button>
-     <button type="button" class="project-person-card project-person-claim"
-              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">
-       <div class="project-person-avatar" aria-hidden="true">+</div>
-       <div class="project-person-name">Someone</div>
-     </button>
-        </div>
-      </div><div class="project-sponsors-row rv" data-project-slug="new" data-project-people="" hidden data-myahl-empty="true">
-        <div class="sidebar-section-title">Sponsors</div>
-        <div class="project-sponsors-list">
-          
-          <button type="button" class="project-sponsor project-sponsor-addnew"
-              data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
-        </div>
-      </div><section class="project-press-group is-award rv" data-project-slug="new" data-project-people="" hidden data-myahl-empty="true">
-      <div class="sidebar-section-title">Awards</div>
-      
-      <button type="button" class="project-press-addnew"
-                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
-    </section>
-<section class="project-press-group is-news rv" data-project-slug="new" data-project-people="" hidden data-myahl-empty="true">
-      <div class="sidebar-section-title">Press</div>
-      
-      <button type="button" class="project-press-addnew"
-                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
-    </section>
-<section class="project-press-group is-video rv" data-project-slug="new" data-project-people="" hidden data-myahl-empty="true">
-      <div class="sidebar-section-title">Videos</div>
-      
-      <button type="button" class="project-press-addnew"
-                data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
-    </section><div class="project-publications-row rv rv-d1" data-project-slug="new" data-project-people="">
-        <div class="sidebar-section-title">Publications</div>
-        <ol class="project-pub-list">
-          
-          <li class="project-pub-addnew-li">
-       <button type="button" class="project-pub-addnew"
-               data-myahl-claim="other" hidden disabled title="Coming soon — claiming will be enabled with the editing pipeline.">+ new</button>
-     </li>
-        </ol>
-      </div>
-  </section>
+    <div class="np-label">Description</div>
+    <textarea class="np-textarea" data-field="description" placeholder="What is this project about? Paragraphs separated by blank lines."></textarea>
 
+    <div class="np-label">Assistive Augmentation principles</div>
+    <div class="np-principles"><label class="np-principle">
+     <input type="checkbox" data-principle="body">
+     <img src="https://cdn.ahlab.org/media/site/icon-body-1.png" alt="" loading="lazy">
+     <span>Body</span>
+   </label><label class="np-principle">
+     <input type="checkbox" data-principle="cognitive">
+     <img src="https://cdn.ahlab.org/media/site/icon-cognitive-1.png" alt="" loading="lazy">
+     <span>Cognitive</span>
+   </label><label class="np-principle">
+     <input type="checkbox" data-principle="perceptual">
+     <img src="https://cdn.ahlab.org/media/site/icon-perceptual-1.png" alt="" loading="lazy">
+     <span>Perceptual</span>
+   </label><label class="np-principle">
+     <input type="checkbox" data-principle="physical">
+     <img src="https://cdn.ahlab.org/media/site/icon-physical-1.png" alt="" loading="lazy">
+     <span>Physical</span>
+   </label><label class="np-principle">
+     <input type="checkbox" data-principle="identity">
+     <img src="https://cdn.ahlab.org/media/site/icon-identity.png" alt="" loading="lazy">
+     <span>Identity</span>
+   </label><label class="np-principle">
+     <input type="checkbox" data-principle="sociocultural">
+     <img src="https://cdn.ahlab.org/media/site/icon-sociocultural-1.png" alt="" loading="lazy">
+     <span>Sociocultural</span>
+   </label></div>
+
+    <div class="np-label">Thumbnail (optional)</div>
+    <div class="np-thumb-input">
+      <input type="file" data-field="thumbnail" data-image-policy="project" accept="image/*">
+      <span style="font-size:12px;color:var(--color-neutral-70)">Auto-resized to 1600 px on the longer side. JPEG re-encoded.</span>
+    </div>
+
+    <div class="np-actions">
+      <button type="button" class="np-submit" data-myahl-submit-trigger>Submit for review</button>
+      <a class="np-cancel" href="/projects/">Cancel</a>
+    </div>
+  </div>
 </div>
 
 <div id="site-footer-mount"></div>
 <script src="/js/footer-include.js"></script>
-<script src="/js/event-chip-live.js" defer></script>
 <script src="/js/claim-buttons.js" defer></script>
+<script src="/js/image-processor.js" defer></script>
+<script src="/js/submit-patch.js" defer></script>
+<script src="/js/myahl-forms.js" defer></script>
 
 <script>
-/*
- * Scroll-reveal: fade .rv elements in as they enter the viewport.
- * threshold:0 (any overlap triggers) instead of a percentage, so tall
- * elements always qualify on phones. Unobserve once visible since the
- * transition is one-way.
- */
-const obs = new IntersectionObserver((entries, observer) => {
-  entries.forEach(n => {
-    if (n.isIntersecting) {
-      n.target.classList.add('vis');
-      observer.unobserve(n.target);
-    }
+// Toggle between signed-out / signed-in views via auth.js. Also wire
+// the inline "Sign in" link to AHLAuth.login() so it triggers the
+// usual redirect flow.
+(function () {
+  function setState(user) {
+    document.body.setAttribute('data-auth-state', user ? 'signed-in' : 'signed-out');
+    var wrap = document.getElementById('np-wrap');
+    if (wrap) wrap.hidden = !user;
+  }
+  if (window.AHLAuth) window.AHLAuth.onChange(setState);
+  document.getElementById('np-signin')?.addEventListener('click', function (e) {
+    e.preventDefault();
+    window.AHLAuth && window.AHLAuth.login();
   });
-}, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+})();
 </script>
-</body>
-</html>
+</body></html>

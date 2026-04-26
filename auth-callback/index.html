@@ -121,6 +121,7 @@ var RETURN_KEY  = 'ahl-auth-return-v1';
   var name = params.name || '';
   var picture = params.picture || '';
   var nonce = params.nonce || '';
+  var token = params.token || '';
   var ts = parseInt(params.ts, 10) || Date.now();
 
   // Diagnostic: Apps Script echoes a `psrc` param telling us which
@@ -170,8 +171,13 @@ var RETURN_KEY  = 'ahl-auth-return-v1';
       email: email,
       name: name || email,
       picture: picture,
-      // person is filled in later by auth.js's people.json lookup
+      // person is filled in later by auth.js's auth-index lookup
       person: null,
+      // HMAC-signed bearer token issued by Apps Script. The site
+      // includes it as a hidden input on every patch-submit form so
+      // the broker can prove the request originated from a genuine
+      // login flow on our origin (CSRF defense).
+      token: token,
       ts: ts
     }));
   } catch (e) {
