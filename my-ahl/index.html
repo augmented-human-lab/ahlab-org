@@ -504,6 +504,10 @@
 
     var signoutBtn = document.getElementById('myahl-signout');
     if (signoutBtn) signoutBtn.addEventListener('click', function () { window.AHLAuth.logout(); });
+
+    // Tell myahl-patches.js the grid markup is in place so it can
+    // overlay pending tiles (cache + broker response).
+    document.dispatchEvent(new CustomEvent('myahl:dashboard-rendered'));
   }
 
   // Signed-in but not yet linked to a person record (e.g. email

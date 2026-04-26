@@ -18,13 +18,21 @@
 (function () {
   'use strict';
 
-  // Render any locally-cached pending submissions immediately on
-  // load so the user's just-submitted patch is visible without
-  // waiting for the broker round-trip. Then hit list-my-patches and
-  // re-render with the canonical list (and prune cache entries the
-  // server has taken over).
+  // The /my-ahl/ page builds the dashboard markup asynchronously
+  // (auth → fetch JSON → render). We wait for its
+  // `myahl:dashboard-rendered` event before touching the DOM.
+  // This way the projects grid (and friends) actually exist when we
+  // try to insert pending tiles.
+  var ranOnce = false;
   function init() {
     if (!window.AHLAuth) return;
+    document.addEventListener('myahl:dashboard-rendered', onDashboardReady);
+    // If the event already fired before we attached (e.g. dashboard
+    // re-renders later via auth state changes), the listener catches
+    // future ones; the first render just lands when it lands.
+  }
+
+  function onDashboardReady() {
     var cachedRendered = false;
     if (window.AHLPendingCache) {
       var cached = window.AHLPendingCache.getAll();
@@ -33,27 +41,27 @@
         cachedRendered = true;
       }
     }
-    window.AHLAuth.onChange(function (user) {
-      if (!user) return;
-      var token = window.AHLAuth.getToken();
-      if (!token) return;
-      var broker = window.AHLAuth.getBrokerUrl();
-      var url = broker + (broker.indexOf('?') === -1 ? '?' : '&') +
-        'action=list-my-patches&token=' + encodeURIComponent(token);
-      fetch(url, { credentials: 'omit' })
-        .then(function (r) { return r.ok ? r.json() : null; })
-        .then(function (data) {
-          if (!data || data.error) return;
-          // Server has caught up — drop covered entries from the
-          // local cache, then clear any cached tiles and re-render
-          // from authoritative data.
-          var allServer = (data.own || []).concat(data.coMember || []);
-          if (window.AHLPendingCache) window.AHLPendingCache.pruneCovered(allServer);
-          if (cachedRendered) clearCachedTiles();
-          renderPending(data);
-        })
-        .catch(function () {});
-    });
+    var token = window.AHLAuth.getToken();
+    if (!token) return;
+    var broker = window.AHLAuth.getBrokerUrl();
+    var url = broker + (broker.indexOf('?') === -1 ? '?' : '&') +
+      'action=list-my-patches&token=' + encodeURIComponent(token);
+    // De-dupe across multiple dashboard renders within one tab.
+    if (ranOnce) clearCachedTiles();
+    ranOnce = true;
+    fetch(url, { credentials: 'omit' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        if (!data || data.error) return;
+        // Server has caught up — drop covered entries from the
+        // local cache, then clear any cached tiles and re-render
+        // from authoritative data.
+        var allServer = (data.own || []).concat(data.coMember || []);
+        if (window.AHLPendingCache) window.AHLPendingCache.pruneCovered(allServer);
+        if (cachedRendered) clearCachedTiles();
+        renderPending(data);
+      })
+      .catch(function () {});
   }
 
   // Re-shape cached entries to look like the server response, so we
