@@ -746,3 +746,151 @@ a.project-press-title:hover { color: var(--color-accent); }
 .project-events-row {
   margin-bottom: 40px;
 }
+
+/* ── Single-pick modal (people / sponsor pickers) ─────────────
+   Used by claim-buttons.js when a member clicks "Add Someone"
+   on the team grid or "+ new" on the sponsors row. Same visual
+   language as the chip-input picker on /projects/new/, just as
+   a centered modal instead of inline. */
+.np-singlepick-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(14,15,17,.45);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.np-singlepick {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 60px rgba(14,15,17,.25);
+  max-width: 560px;
+  width: 100%;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 22px;
+}
+.np-singlepick-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px;
+}
+.np-singlepick-title {
+  font-family: var(--font-display); font-weight: 700; font-size: 17px;
+  color: var(--color-neutral-100);
+}
+.np-singlepick-close {
+  background: transparent; border: 0; cursor: pointer;
+  font-size: 24px; line-height: 1; padding: 4px 10px;
+  color: var(--color-neutral-70); border-radius: 50%;
+  transition: background .15s, color .15s;
+}
+.np-singlepick-close:hover { background: var(--color-neutral-20); color: var(--color-neutral-100); }
+.np-singlepick-search {
+  width: 100%; box-sizing: border-box;
+  padding: 10px 14px;
+  border: 1px solid var(--color-neutral-30); border-radius: var(--radius-sm);
+  background: var(--color-neutral-10);
+  font-family: var(--font-text); font-size: 14px;
+  color: var(--color-neutral-100);
+  margin-bottom: 12px;
+}
+.np-singlepick-search:focus { outline: none; border-color: var(--color-accent); }
+.np-singlepick-results {
+  overflow-y: auto;
+  padding: 4px 4px 8px;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.np-singlepick-people .np-singlepick-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+  gap: 16px 12px;
+}
+.np-singlepick-sponsors .np-singlepick-results {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.np-singlepick-card {
+  background: transparent; border: 0; cursor: pointer;
+  padding: 6px 4px;
+  font-family: inherit;
+}
+.np-singlepick-card:hover { background: var(--color-neutral-20); border-radius: var(--radius); }
+.np-singlepick-row {
+  text-align: left; padding: 10px 12px;
+  background: transparent; border: 0; border-radius: var(--radius-sm);
+  font-family: var(--font-text); font-size: 14px; color: var(--color-neutral-100);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.np-singlepick-row:hover { background: var(--color-accent); color: #fff; }
+.np-singlepick-results .np-picker-empty {
+  padding: 16px; color: var(--color-neutral-60); font-size: 13px; text-align: center;
+}
+
+
+/* ── Inline project-edit mode ─────────────────────────────────
+   Activated when a member clicks the .project-edit pencil. The
+   project-edit.js module swaps title/year/description for inputs
+   and appends a .pe-actions bar at the hero's bottom. */
+.project-hero.is-editing .project-edit {
+  display: none;       /* hide pencils while in edit mode */
+}
+.pe-input {
+  box-sizing: border-box;
+  width: 100%;
+  font-family: inherit; color: inherit;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: var(--radius-sm);
+  background: var(--color-neutral-10);
+  padding: 6px 10px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.pe-input:focus {
+  outline: none; border-color: var(--color-accent);
+  box-shadow: 0 0 0 1px var(--color-accent);
+}
+.pe-title-input {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 44px; line-height: 1.05; letter-spacing: -.005em;
+  color: var(--color-neutral-100);
+  padding: 4px 10px;
+  width: auto;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.pe-year-input {
+  width: 6ch;
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 24px; color: var(--color-neutral-60);
+  padding: 4px 8px; text-align: center;
+}
+.pe-desc-input {
+  font-family: var(--font-text); font-size: 16px; line-height: 26px;
+  color: var(--color-neutral-90);
+  min-height: 140px; resize: vertical;
+}
+.pe-actions {
+  margin-top: 24px;
+  display: flex; gap: 10px; justify-content: flex-end;
+  align-items: center;
+  padding-top: 16px;
+}
+.pe-cancel, .pe-save {
+  padding: 12px 24px; border-radius: 999px;
+  font-family: var(--font-text); font-weight: 500; font-size: 14px;
+  cursor: pointer; border: 1px solid var(--color-neutral-30);
+  transition: background .2s, color .2s, border-color .2s;
+}
+.pe-cancel { background: transparent; color: var(--color-neutral-70); }
+.pe-cancel:hover { background: var(--color-neutral-20); }
+.pe-save {
+  background: var(--color-accent); color: #fff; border-color: var(--color-accent);
+  font-weight: 600;
+}
+.pe-save:hover { background: var(--color-accent-dark, #4400b3); }
+.pe-save:disabled { opacity: .55; cursor: not-allowed; }

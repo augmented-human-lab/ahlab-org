@@ -85,15 +85,54 @@
       return;
     }
     if (action === 'claim-other') {
-      var personSlug = window.prompt(
-        'Slug of the person to add (e.g. "ariel-ong"):'
-      );
-      if (!personSlug) return;
-      window.AHLPatch.submit({
-        targetType: 'project',
-        targetSlug: projectSlug,
-        action:     'claim-other',
-        patch:      { personSlug: personSlug.trim() }
+      // Use the single-pick people grid (same UX as the chip-input
+      // picker on /projects/new/) instead of a raw prompt() so the
+      // user can browse + search by name. Excluded slugs = current
+      // team members, since claim-other is "add SOMEONE ELSE".
+      if (!window.AHLSinglePick) {
+        alert('Picker not loaded yet — reload the page.');
+        return;
+      }
+      var existingPeople = (wrap.getAttribute('data-project-people') || '')
+        .split(/\s+/).filter(Boolean);
+      window.AHLSinglePick.open({
+        sourceKey:    'people',
+        title:        'Add team member',
+        excludeSlugs: existingPeople,
+        onPick: function (person) {
+          window.AHLPatch.submit({
+            targetType: 'project',
+            targetSlug: projectSlug,
+            action:     'claim-other',
+            patch:      { personSlug: person.slug }
+          });
+        }
+      });
+    }
+
+    if (action === 'sponsor-add') {
+      // Sponsor pick → submit a project/edit patch with the new
+      // sponsor appended to the existing list. Excluded slugs =
+      // sponsors already on this project (read from the wrapper's
+      // data-project-sponsors).
+      if (!window.AHLSinglePick) {
+        alert('Picker not loaded yet — reload the page.');
+        return;
+      }
+      var existingSponsors = (wrap.getAttribute('data-project-sponsors') || '')
+        .split(/\s+/).filter(Boolean);
+      window.AHLSinglePick.open({
+        sourceKey:    'sponsors',
+        title:        'Add sponsor',
+        excludeSlugs: existingSponsors,
+        onPick: function (sponsor) {
+          window.AHLPatch.submit({
+            targetType: 'project',
+            targetSlug: projectSlug,
+            action:     'edit',
+            patch:      { sponsors: existingSponsors.concat([sponsor.slug]) }
+          });
+        }
       });
     }
   });
