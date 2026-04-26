@@ -121,12 +121,29 @@
 
     Promise.all(fileWork).then(function (processed) {
       processed.forEach(function (f) { files.push(f); });
+      // Cache the pending patch locally so /my-ahl/ can render it
+      // immediately on next load (before the broker's list-my-patches
+      // round-trip catches up). Best-effort — silent failure if
+      // localStorage is full / disabled.
+      if (window.AHLPendingCache) {
+        try {
+          window.AHLPendingCache.add({
+            targetType: spec.targetType,
+            action:     spec.action,
+            targetSlug: targetSlug,
+            patch:      payload
+          });
+        } catch (e) {}
+      }
       window.AHLPatch.submit({
         targetType: spec.targetType,
         targetSlug: targetSlug,
         action:     spec.action,
         patch:      payload,
-        files:      files
+        files:      files,
+        // After the receipt page, send the user to /my-ahl/ where
+        // the pending card (cached above) is already visible.
+        returnUrl:  location.origin + '/my-ahl/'
       });
     }).catch(function (err) {
       setBusy(form, btn, false);
@@ -173,6 +190,25 @@
           function (cb) { princ.push(cb.getAttribute('data-principle')); }
         );
         if (princ.length) payload.principles = princ;
+        // external_links[] from each [data-external-link] row.
+        // Schema mirrors what's already on disk in
+        // cdn-ahlab-org/data/projects/<slug>.json: { kind, label, url }.
+        // Rows with empty URL are skipped; empty label defaults to
+        // the host so the public site has something to render.
+        var ext = [];
+        Array.prototype.forEach.call(
+          form.querySelectorAll('[data-external-link]'),
+          function (row) {
+            var url = (row.querySelector('[data-link-url]') || {}).value;
+            var kind = (row.querySelector('[data-link-kind]') || {}).value || 'website';
+            url = String(url || '').trim();
+            if (!url) return;
+            var label = '';
+            try { label = new URL(url).host.replace(/^www\./, ''); } catch (e) { label = kind; }
+            ext.push({ kind: kind, label: label, url: url });
+          }
+        );
+        if (ext.length) payload.external_links = ext;
         if (!payload.title) throw new Error('Project title is required.');
       }
     },

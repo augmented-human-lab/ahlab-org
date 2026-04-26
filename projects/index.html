@@ -235,17 +235,19 @@
 .year-nav a.hidden{ display:none; }
 
 /* "+ Add new project" card — same shape and aspect ratio as a real
-   .project-card so it slots into the same grid template above the
-   year sections. Dashed border + accent "+" instead of a thumbnail.
-   The whole .project-add-section (and the card inside) is hidden by
-   default; claim-buttons.js shows it when the user is signed in. */
-.project-add-section{ margin-bottom:32px; }
-.project-add-section[hidden]{ display:none; }
+   .project-card so it slots as the leading card in each year's
+   .projects-grid. Dashed border + accent "+" instead of a thumbnail.
+   Hidden by default (data-myahl-claim="self"); claim-buttons.js
+   shows it when the user is signed in. */
 .project-card-add{
   border:2px dashed var(--color-neutral-30);
   background:transparent;
   transition:border-color .25s, transform .25s, box-shadow .25s;
 }
+/* The browser's [hidden] UA rule loses to `.project-card{display:block}`
+   on equal specificity, so repeat the hide explicitly with the
+   add-card class to win. */
+.project-card-add[hidden]{ display:none; }
 .project-card-add:hover{
   border-color:var(--color-accent);
   transform:translateY(-3px);
@@ -366,9 +368,10 @@
 
   <main class="projects-content">
     
-  <section class="project-add-section rv" data-myahl-claim="self" hidden>
+  <section class="year-section" id="year-current" data-year="Current">
+    <h2 class="year-title">Current <span class="yr-count">6</span></h2>
     <div class="projects-grid">
-      <a href="/projects/new/" class="project-card project-card-add">
+      <a href="/projects/new/" class="project-card project-card-add" data-myahl-claim="self" hidden>
         <div class="project-card-thumb project-card-thumb-empty">
           <span class="project-card-add-plus" aria-hidden="true">+</span>
         </div>
@@ -376,11 +379,6 @@
           <h3>Add new project</h3>
         </div>
       </a>
-    </div>
-  </section>
-  <section class="year-section" id="year-current" data-year="Current">
-    <h2 class="year-title">Current <span class="yr-count">6</span></h2>
-    <div class="projects-grid">
       
     <a href="/projects/blind-drone/" class="project-card rv" data-principles="perceptual physical" style="transition-delay:0s">
       <div class="project-card-thumb">
@@ -498,6 +496,14 @@
   <section class="year-section" id="year-2026" data-year="2026">
     <h2 class="year-title">2026 <span class="yr-count">1</span></h2>
     <div class="projects-grid">
+      <a href="/projects/new/?year=2026" class="project-card project-card-add" data-myahl-claim="self" hidden>
+        <div class="project-card-thumb project-card-thumb-empty">
+          <span class="project-card-add-plus" aria-hidden="true">+</span>
+        </div>
+        <div class="project-card-body">
+          <h3>Add new project</h3>
+        </div>
+      </a>
       
     <a href="/projects/test-project-addition/" class="project-card rv" data-principles="body cognitive" style="transition-delay:0s">
       <div class="project-card-thumb">
@@ -520,6 +526,14 @@
   <section class="year-section" id="year-2025" data-year="2025">
     <h2 class="year-title">2025 <span class="yr-count">6</span></h2>
     <div class="projects-grid">
+      <a href="/projects/new/?year=2025" class="project-card project-card-add" data-myahl-claim="self" hidden>
+        <div class="project-card-thumb project-card-thumb-empty">
+          <span class="project-card-add-plus" aria-hidden="true">+</span>
+        </div>
+        <div class="project-card-body">
+          <h3>Add new project</h3>
+        </div>
+      </a>
       
     <a href="/projects/soniphy/" class="project-card rv" data-principles="body cognitive perceptual" style="transition-delay:0s">
       <div class="project-card-thumb">
@@ -631,6 +645,14 @@
   <section class="year-section" id="year-2024" data-year="2024">
     <h2 class="year-title">2024 <span class="yr-count">10</span></h2>
     <div class="projects-grid">
+      <a href="/projects/new/?year=2024" class="project-card project-card-add" data-myahl-claim="self" hidden>
+        <div class="project-card-thumb project-card-thumb-empty">
+          <span class="project-card-add-plus" aria-hidden="true">+</span>
+        </div>
+        <div class="project-card-body">
+          <h3>Add new project</h3>
+        </div>
+      </a>
       
     <a href="/projects/xr-floatation-therapy/" class="project-card rv" data-principles="cognitive perceptual identity" style="transition-delay:0s">
       <div class="project-card-thumb">
@@ -797,6 +819,14 @@
   <section class="year-section" id="year-2023" data-year="2023">
     <h2 class="year-title">2023 <span class="yr-count">3</span></h2>
     <div class="projects-grid">
+      <a href="/projects/new/?year=2023" class="project-card project-card-add" data-myahl-claim="self" hidden>
+        <div class="project-card-thumb project-card-thumb-empty">
+          <span class="project-card-add-plus" aria-hidden="true">+</span>
+        </div>
+        <div class="project-card-body">
+          <h3>Add new project</h3>
+        </div>
+      </a>
       
     <a href="/projects/hopu/" class="project-card rv" data-principles="cognitive physical" style="transition-delay:0s">
       <div class="project-card-thumb">
@@ -848,6 +878,14 @@
   <section class="year-section" id="year-2022" data-year="2022">
     <h2 class="year-title">2022 <span class="yr-count">5</span></h2>
     <div class="projects-grid">
+      <a href="/projects/new/?year=2022" class="project-card project-card-add" data-myahl-claim="self" hidden>
+        <div class="project-card-thumb project-card-thumb-empty">
+          <span class="project-card-add-plus" aria-hidden="true">+</span>
+        </div>
+        <div class="project-card-body">
+          <h3>Add new project</h3>
+        </div>
+      </a>
       
     <a href="/projects/xrtic/" class="project-card rv" data-principles="body perceptual" style="transition-delay:0s">
       <div class="project-card-thumb">
@@ -934,6 +972,14 @@
   <section class="year-section" id="year-2021" data-year="2021">
     <h2 class="year-title">2021 <span class="yr-count">9</span></h2>
     <div class="projects-grid">
+      <a href="/projects/new/?year=2021" class="project-card project-card-add" data-myahl-claim="self" hidden>
+        <div class="project-card-thumb project-card-thumb-empty">
+          <span class="project-card-add-plus" aria-hidden="true">+</span>
+        </div>
+        <div class="project-card-body">
+          <h3>Add new project</h3>
+        </div>
+      </a>
       
     <a href="/projects/ticklefoot/" class="project-card rv" data-principles="body perceptual" style="transition-delay:0s">
       <div class="project-card-thumb">
@@ -1090,6 +1136,14 @@
   <section class="year-section" id="year-2020" data-year="2020">
     <h2 class="year-title">2020 <span class="yr-count">7</span></h2>
     <div class="projects-grid">
+      <a href="/projects/new/?year=2020" class="project-card project-card-add" data-myahl-claim="self" hidden>
+        <div class="project-card-thumb project-card-thumb-empty">
+          <span class="project-card-add-plus" aria-hidden="true">+</span>
+        </div>
+        <div class="project-card-body">
+          <h3>Add new project</h3>
+        </div>
+      </a>
       
     <a href="/projects/versatouch/" class="project-card rv" data-principles="perceptual physical" style="transition-delay:0s">
       <div class="project-card-thumb">
@@ -1202,6 +1256,14 @@
   <section class="year-section" id="year-2019" data-year="2019">
     <h2 class="year-title">2019 <span class="yr-count">4</span></h2>
     <div class="projects-grid">
+      <a href="/projects/new/?year=2019" class="project-card project-card-add" data-myahl-claim="self" hidden>
+        <div class="project-card-thumb project-card-thumb-empty">
+          <span class="project-card-add-plus" aria-hidden="true">+</span>
+        </div>
+        <div class="project-card-body">
+          <h3>Add new project</h3>
+        </div>
+      </a>
       
     <a href="/projects/prospero/" class="project-card rv" data-principles="body cognitive" style="transition-delay:0s">
       <div class="project-card-thumb">
@@ -1275,6 +1337,14 @@
   <section class="year-section" id="year-2018" data-year="2018">
     <h2 class="year-title">2018 <span class="yr-count">12</span></h2>
     <div class="projects-grid">
+      <a href="/projects/new/?year=2018" class="project-card project-card-add" data-myahl-claim="self" hidden>
+        <div class="project-card-thumb project-card-thumb-empty">
+          <span class="project-card-add-plus" aria-hidden="true">+</span>
+        </div>
+        <div class="project-card-body">
+          <h3>Add new project</h3>
+        </div>
+      </a>
       
     <a href="/projects/target-driven-navigation/" class="project-card rv" data-principles="physical" style="transition-delay:0s">
       <div class="project-card-thumb">
@@ -1458,6 +1528,14 @@
   <section class="year-section" id="year-2017" data-year="2017">
     <h2 class="year-title">2017 <span class="yr-count">9</span></h2>
     <div class="projects-grid">
+      <a href="/projects/new/?year=2017" class="project-card project-card-add" data-myahl-claim="self" hidden>
+        <div class="project-card-thumb project-card-thumb-empty">
+          <span class="project-card-add-plus" aria-hidden="true">+</span>
+        </div>
+        <div class="project-card-body">
+          <h3>Add new project</h3>
+        </div>
+      </a>
       
     <a href="/projects/thumb-in-motion/" class="project-card rv" data-principles="body physical" style="transition-delay:0s">
       <div class="project-card-thumb">
@@ -1608,6 +1686,14 @@
   <section class="year-section" id="year-2016" data-year="2016">
     <h2 class="year-title">2016 <span class="yr-count">7</span></h2>
     <div class="projects-grid">
+      <a href="/projects/new/?year=2016" class="project-card project-card-add" data-myahl-claim="self" hidden>
+        <div class="project-card-thumb project-card-thumb-empty">
+          <span class="project-card-add-plus" aria-hidden="true">+</span>
+        </div>
+        <div class="project-card-body">
+          <h3>Add new project</h3>
+        </div>
+      </a>
       
     <a href="/projects/zsense/" class="project-card rv" data-principles="body physical" style="transition-delay:0s">
       <div class="project-card-thumb">
@@ -1723,6 +1809,14 @@
   <section class="year-section" id="year-2015" data-year="2015">
     <h2 class="year-title">2015 <span class="yr-count">8</span></h2>
     <div class="projects-grid">
+      <a href="/projects/new/?year=2015" class="project-card project-card-add" data-myahl-claim="self" hidden>
+        <div class="project-card-thumb project-card-thumb-empty">
+          <span class="project-card-add-plus" aria-hidden="true">+</span>
+        </div>
+        <div class="project-card-body">
+          <h3>Add new project</h3>
+        </div>
+      </a>
       
     <a href="/projects/the-ribbon/" class="project-card rv" data-principles="sociocultural" style="transition-delay:0s">
       <div class="project-card-thumb">
@@ -1851,6 +1945,14 @@
   <section class="year-section" id="year-2014" data-year="2014">
     <h2 class="year-title">2014 <span class="yr-count">9</span></h2>
     <div class="projects-grid">
+      <a href="/projects/new/?year=2014" class="project-card project-card-add" data-myahl-claim="self" hidden>
+        <div class="project-card-thumb project-card-thumb-empty">
+          <span class="project-card-add-plus" aria-hidden="true">+</span>
+        </div>
+        <div class="project-card-body">
+          <h3>Add new project</h3>
+        </div>
+      </a>
       
     <a href="/projects/sparkubes/" class="project-card rv" data-principles="physical" style="transition-delay:0s">
       <div class="project-card-thumb">
@@ -1980,6 +2082,14 @@
   <section class="year-section" id="year-2013" data-year="2013">
     <h2 class="year-title">2013 <span class="yr-count">6</span></h2>
     <div class="projects-grid">
+      <a href="/projects/new/?year=2013" class="project-card project-card-add" data-myahl-claim="self" hidden>
+        <div class="project-card-thumb project-card-thumb-empty">
+          <span class="project-card-add-plus" aria-hidden="true">+</span>
+        </div>
+        <div class="project-card-body">
+          <h3>Add new project</h3>
+        </div>
+      </a>
       
     <a href="/projects/stickear/" class="project-card rv" data-principles="physical" style="transition-delay:0s">
       <div class="project-card-thumb">
@@ -2082,6 +2192,14 @@
   <section class="year-section" id="year-2012" data-year="2012">
     <h2 class="year-title">2012 <span class="yr-count">4</span></h2>
     <div class="projects-grid">
+      <a href="/projects/new/?year=2012" class="project-card project-card-add" data-myahl-claim="self" hidden>
+        <div class="project-card-thumb project-card-thumb-empty">
+          <span class="project-card-add-plus" aria-hidden="true">+</span>
+        </div>
+        <div class="project-card-body">
+          <h3>Add new project</h3>
+        </div>
+      </a>
       
     <a href="/projects/watchme/" class="project-card rv" data-principles="body identity sociocultural" style="transition-delay:0s">
       <div class="project-card-thumb">
@@ -2155,6 +2273,14 @@
   <section class="year-section" id="year-2011" data-year="2011">
     <h2 class="year-title">2011 <span class="yr-count">4</span></h2>
     <div class="projects-grid">
+      <a href="/projects/new/?year=2011" class="project-card project-card-add" data-myahl-claim="self" hidden>
+        <div class="project-card-thumb project-card-thumb-empty">
+          <span class="project-card-add-plus" aria-hidden="true">+</span>
+        </div>
+        <div class="project-card-body">
+          <h3>Add new project</h3>
+        </div>
+      </a>
       
     <a href="/projects/sutdfoodcam/" class="project-card rv" data-principles="sociocultural" style="transition-delay:0s">
       <div class="project-card-thumb">

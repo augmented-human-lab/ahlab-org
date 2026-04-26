@@ -18,9 +18,21 @@
 (function () {
   'use strict';
 
-  // Wait until the dashboard JSON has rendered, then fetch.
+  // Render any locally-cached pending submissions immediately on
+  // load so the user's just-submitted patch is visible without
+  // waiting for the broker round-trip. Then hit list-my-patches and
+  // re-render with the canonical list (and prune cache entries the
+  // server has taken over).
   function init() {
     if (!window.AHLAuth) return;
+    var cachedRendered = false;
+    if (window.AHLPendingCache) {
+      var cached = window.AHLPendingCache.getAll();
+      if (cached && cached.length) {
+        renderFromCache(cached);
+        cachedRendered = true;
+      }
+    }
     window.AHLAuth.onChange(function (user) {
       if (!user) return;
       var token = window.AHLAuth.getToken();
@@ -28,16 +40,47 @@
       var broker = window.AHLAuth.getBrokerUrl();
       var url = broker + (broker.indexOf('?') === -1 ? '?' : '&') +
         'action=list-my-patches&token=' + encodeURIComponent(token);
-      // Apps Script doGet returns ContentService JSON — fetch with
-      // simple GET, no special headers needed.
       fetch(url, { credentials: 'omit' })
         .then(function (r) { return r.ok ? r.json() : null; })
         .then(function (data) {
           if (!data || data.error) return;
+          // Server has caught up — drop covered entries from the
+          // local cache, then clear any cached tiles and re-render
+          // from authoritative data.
+          var allServer = (data.own || []).concat(data.coMember || []);
+          if (window.AHLPendingCache) window.AHLPendingCache.pruneCovered(allServer);
+          if (cachedRendered) clearCachedTiles();
           renderPending(data);
         })
         .catch(function () {});
     });
+  }
+
+  // Re-shape cached entries to look like the server response, so we
+  // can reuse renderPending without branching everywhere.
+  function renderFromCache(entries) {
+    var asServerShape = entries.map(function (e) {
+      return {
+        patchId:     e.clientId,            // synthetic id; collisions with server impossible
+        targetType:  e.targetType,
+        targetSlug:  e.targetSlug,
+        action:      e.action,
+        submittedAt: e.cachedAt,
+        patch:       e.patch || {},
+        _fromCache:  true                   // marker so we can find/clear later
+      };
+    });
+    renderPending({ own: asServerShape, coMember: [] });
+  }
+
+  function clearCachedTiles() {
+    Array.prototype.forEach.call(
+      document.querySelectorAll('[data-pending-from-cache]'),
+      function (el) { el.remove(); }
+    );
+    // Also clear the profile-pending badge if it was added by cache.
+    var profileTile = document.querySelector('.myahl-profile-tile.is-pending[data-pending-from-cache]');
+    if (profileTile) profileTile.classList.remove('is-pending');
   }
 
   function renderPending(data) {
@@ -61,6 +104,10 @@
     flagPendingProfile(byType.profile);
   }
 
+  function tagCacheOrigin(el, p) {
+    if (p && p._fromCache) el.setAttribute('data-pending-from-cache', '');
+  }
+
   function insertPendingProjects(patches) {
     if (!patches.length) return;
     var grid = document.querySelector('.myahl-projects-grid');
@@ -79,7 +126,7 @@
           '</div>' +
         '</div>' +
         '<div class="myahl-pending-badge">Pending</div>';
-      // First child after the addnew (which is grid child #1).
+      tagCacheOrigin(card, p);
       var addnew = grid.querySelector('.myahl-addnew-project');
       if (addnew && addnew.nextSibling) {
         grid.insertBefore(card, addnew.nextSibling);
@@ -103,6 +150,7 @@
         '<div class="myahl-pub-pending-badge">Pending</div>' +
         '<div class="myahl-pub-title">' + escHtml(title) + '</div>' +
         (citation ? '<div class="myahl-pub-citation">' + escHtml(citation) + '</div>' : '');
+      tagCacheOrigin(li, p);
       var addnew = list.querySelector('.myahl-addnew-pub');
       if (addnew && addnew.parentNode && addnew.parentNode.nextSibling) {
         list.insertBefore(li, addnew.parentNode.nextSibling);
@@ -129,6 +177,7 @@
           (meta ? '<div class="myahl-tile-meta">' + escHtml(meta) + '</div>' : '') +
         '</div>' +
         '<div class="myahl-tile-pending-badge">Pending</div>';
+      tagCacheOrigin(div, p);
       var addnew = grid.querySelector('.myahl-addnew-tile');
       if (addnew && addnew.nextSibling) {
         grid.insertBefore(div, addnew.nextSibling);
@@ -143,6 +192,7 @@
     var tile = document.querySelector('.myahl-profile-tile');
     if (!tile) return;
     tile.classList.add('is-pending');
+    if (patches[0] && patches[0]._fromCache) tile.setAttribute('data-pending-from-cache', '');
     var info = tile.querySelector('.myahl-profile-info');
     if (info && !info.querySelector('.myahl-profile-pending-badge')) {
       var badge = document.createElement('div');
