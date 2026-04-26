@@ -5,50 +5,167 @@
 <title>New project — Augmented Human Lab</title>
 <link rel="stylesheet" href="https://use.typekit.net/zws2qzx.css">
 <link rel="stylesheet" href="/css/theme.css">
+<link rel="stylesheet" href="/css/project.css">
 <link rel="stylesheet" href="/css/auth.css">
 <style>
-  .np-wrap { padding: 140px 24px 80px; max-width: 720px; margin: 0 auto; }
-  .np-wrap[hidden] { display: none; }
-  .np-signed-out { display: none; padding: 140px 24px 80px; max-width: 480px; margin: 0 auto; text-align: center; }
+  /* /projects/new/ — visually mirrors a real project page so a
+     creator sees roughly what their final page will look like even
+     while they're still typing. Inputs are styled to match the
+     surrounding text, and the thumbnail picker shows the live
+     preview as soon as a file is chosen. */
+  body { background: var(--color-neutral-10); }
+  .np-signed-out { display: none; padding: 160px 24px 80px; max-width: 480px; margin: 0 auto; text-align: center; }
   body[data-auth-state="signed-out"] .np-signed-out { display: block; }
-  h1 { font-family: var(--font-display); font-weight: 700; font-size: 32px; margin-bottom: 12px; letter-spacing: -.01em; }
-  p.lead { color: var(--color-neutral-70); font-size: 16px; line-height: 1.55; margin-bottom: 32px; }
-  .np-form { display: flex; flex-direction: column; gap: 16px; }
-  .np-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  @media (max-width: 567px) { .np-row { grid-template-columns: 1fr; } }
-  .np-input, .np-textarea, .np-select {
-    width: 100%; box-sizing: border-box;
-    padding: 12px 16px; font-family: var(--font-text); font-size: 15px;
-    border: 1px solid var(--color-neutral-30); border-radius: var(--radius-sm);
-    background: var(--color-neutral-10); color: var(--color-neutral-100);
-    transition: border-color .2s;
+  body[data-auth-state="signed-out"] .np-page { display: none; }
+
+  .np-page { padding-top: 140px; }
+  .np-banner { max-width: 1240px; margin: 0 auto 24px; padding: 12px 24px;
+               background: rgba(97,0,255,.06); border: 1px solid rgba(97,0,255,.18);
+               border-radius: var(--radius); color: var(--color-accent);
+               font-size: 13px; line-height: 1.5; }
+  .np-banner a { color: var(--color-accent); text-decoration: underline; }
+
+  /* Reset input styling so they read like real page text instead of
+     boxes. Border only appears on hover/focus to keep the page calm
+     until the user is actually editing. */
+  .np-input, .np-textarea {
+    box-sizing: border-box; width: 100%;
+    background: transparent; border: 0; padding: 4px 6px;
+    margin: -4px -6px;
+    font-family: var(--font-text); color: var(--color-neutral-100);
+    border-radius: var(--radius-sm);
+    transition: background .2s, box-shadow .2s;
   }
-  .np-input:focus, .np-textarea:focus, .np-select:focus { outline: none; border-color: var(--color-accent); }
-  .np-textarea { min-height: 120px; resize: vertical; font-family: var(--font-text); line-height: 1.55; }
-  .np-input-title { font-family: var(--font-display); font-weight: 700; font-size: 22px; padding: 14px 18px; }
-  .np-label { font-family: var(--font-display); font-weight: 600; font-size: 13px;
-              letter-spacing: .04em; text-transform: uppercase; color: var(--color-neutral-70); margin-top: 12px; margin-bottom: 4px; }
-  .np-principles { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
-  .np-principle { display: flex; align-items: center; gap: 8px; padding: 10px 12px;
-                  border: 1px solid var(--color-neutral-30); border-radius: var(--radius-sm); cursor: pointer; transition: border-color .2s; }
-  .np-principle:hover { border-color: var(--color-neutral-40); }
-  .np-principle input { margin: 0; }
-  .np-principle img { width: 22px; height: 22px; object-fit: contain; }
-  .np-principle span { font-size: 13px; }
-  .np-thumb-input { display: flex; align-items: center; gap: 12px; }
-  .np-actions { display: flex; gap: 10px; margin-top: 24px; }
-  .np-submit { padding: 14px 28px; background: var(--color-accent); color: #fff; border: 0; border-radius: 999px;
-               font-family: var(--font-display); font-weight: 600; font-size: 15px; cursor: pointer;
-               transition: background .2s; }
+  .np-input:hover, .np-textarea:hover { background: rgba(14,15,17,.025); }
+  .np-input:focus, .np-textarea:focus {
+    outline: none; background: rgba(14,15,17,.035);
+    box-shadow: 0 0 0 1px var(--color-accent-light);
+  }
+  .np-input::placeholder, .np-textarea::placeholder { color: var(--color-neutral-60); font-style: italic; }
+  .np-input-title {
+    font-family: var(--font-display); font-weight: 700; font-size: 44px; line-height: 46px;
+    letter-spacing: -.005em;
+  }
+  .np-input-year {
+    width: 7ch; font-family: var(--font-display); font-weight: 400;
+    color: var(--color-neutral-60); font-size: 28px; text-align: center;
+  }
+  .np-input-summary {
+    font-family: var(--font-text); font-size: 21px; line-height: 35px;
+    color: var(--color-neutral-80);
+  }
+  .np-textarea-description {
+    font-family: var(--font-text); font-size: 17px; line-height: 30px;
+    color: var(--color-neutral-90);
+    min-height: 120px; resize: vertical;
+  }
+
+  /* Title row — h1 + year input side by side, like the static page. */
+  .np-title-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .np-title-sep { color: var(--color-neutral-40); font-weight: 400; }
+
+  /* Thumbnail card — clickable label that wraps a hidden file input.
+     Shows the live preview once a file is chosen. */
+  .np-thumb-frame {
+    position: relative; aspect-ratio: 16 / 11; overflow: hidden;
+    border-radius: var(--radius-lg); background: var(--color-neutral-30);
+    cursor: pointer; transition: opacity .2s;
+  }
+  .np-thumb-frame:hover { opacity: .92; }
+  .np-thumb-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .np-thumb-input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .np-thumb-empty {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 10px; color: rgba(255,255,255,.85);
+    background: linear-gradient(135deg, var(--color-neutral-30), var(--color-neutral-40));
+  }
+  .np-thumb-empty svg { width: 48px; height: 48px; opacity: .8; }
+  .np-thumb-empty .np-thumb-cta { font-family: var(--font-display); font-weight: 600; font-size: 14px; }
+  .np-thumb-empty .np-thumb-hint { font-size: 11px; opacity: .8; max-width: 220px; text-align: center; line-height: 1.4; }
+  .np-thumb-frame.has-image .np-thumb-empty { display: none; }
+  .np-thumb-replace {
+    position: absolute; bottom: 12px; right: 12px; padding: 6px 12px;
+    background: rgba(0,0,0,.5); color: #fff; font-size: 12px; font-weight: 600;
+    border-radius: 999px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    pointer-events: none; opacity: 0; transition: opacity .2s;
+  }
+  .np-thumb-frame.has-image:hover .np-thumb-replace { opacity: 1; }
+
+  /* Principle chips — same look as the static page's principle bar
+     but each chip is a checkbox label that toggles on click. */
+  .np-principles-row {
+    margin-top: 20px; padding: 14px 18px;
+    background: var(--color-neutral-20); border-radius: var(--radius);
+    display: flex; flex-wrap: wrap; gap: 12px;
+  }
+  .np-principle-chip {
+    display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px;
+    border: 1px solid transparent; border-radius: 999px; cursor: pointer;
+    font-family: var(--font-display); font-weight: 600; font-size: 13px;
+    color: var(--color-neutral-70);
+    transition: background .2s, color .2s, border-color .2s;
+    user-select: none;
+  }
+  .np-principle-chip input { display: none; }
+  .np-principle-chip .np-principle-icon { width: 20px; height: 20px; transition: opacity .2s; }
+  .np-principle-chip .np-principle-icon-hover { width: 20px; height: 20px; position: absolute; opacity: 0; transition: opacity .2s; margin-left: -28px; }
+  .np-principle-chip:hover { background: var(--color-neutral-30); }
+  .np-principle-chip:has(input:checked) {
+    background: var(--color-accent); color: #fff;
+    border-color: var(--color-accent);
+  }
+  .np-principle-chip:has(input:checked) .np-principle-icon { opacity: 0; }
+  .np-principle-chip:has(input:checked) .np-principle-icon-hover { opacity: 1; }
+
+  /* Section labels (Description, Team) — small uppercase tag matching
+     project body sections. */
+  .np-section-label {
+    font-family: var(--font-display); font-weight: 700; font-size: 11px;
+    letter-spacing: 1.4px; text-transform: uppercase;
+    color: var(--color-neutral-60); margin-bottom: 12px; padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-neutral-30);
+  }
+
+  /* Creator-as-team-member chip seeded into the team row. */
+  .np-team-row { margin-top: 60px; }
+  .np-team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 24px 16px; }
+  .np-team-member { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+  .np-team-avatar {
+    width: 72px; height: 72px; border-radius: 50%; padding: 2px;
+    background: var(--gradient); position: relative; overflow: hidden;
+  }
+  .np-team-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
+  .np-team-name { font-family: var(--font-text); font-weight: 600; font-size: 13px; color: var(--color-neutral-100); }
+  .np-team-creator-badge {
+    font-family: var(--font-display); font-weight: 700; font-size: 9px; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--color-accent); margin-top: 2px;
+  }
+
+  /* Submit row */
+  .np-actions {
+    margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--color-neutral-30);
+    display: flex; gap: 12px; align-items: center; justify-content: flex-end;
+  }
+  .np-submit {
+    padding: 14px 32px; background: var(--color-accent); color: #fff; border: 0;
+    border-radius: 999px;
+    font-family: var(--font-display); font-weight: 600; font-size: 15px;
+    cursor: pointer; transition: background .2s;
+  }
   .np-submit:hover { background: var(--color-accent-dark); }
-  .np-submit:disabled { opacity: .5; cursor: not-allowed; }
-  .np-cancel { padding: 14px 24px; background: transparent; color: var(--color-neutral-70);
-               border: 1px solid var(--color-neutral-30); border-radius: 999px;
-               text-decoration: none; font-weight: 500; font-size: 14px; }
+  .np-submit:disabled { opacity: .55; cursor: not-allowed; }
+  .np-cancel {
+    padding: 14px 24px; background: transparent; color: var(--color-neutral-70);
+    border: 1px solid var(--color-neutral-30); border-radius: 999px;
+    text-decoration: none; font-family: var(--font-text); font-weight: 500; font-size: 14px;
+    transition: background .2s;
+  }
   .np-cancel:hover { background: var(--color-neutral-20); }
-  .np-signed-out a { display: inline-block; margin-top: 16px; padding: 12px 24px;
-                     background: var(--color-accent); color: #fff; border-radius: 999px;
-                     text-decoration: none; font-weight: 500; }
+
+  .np-signed-out h1 { font-family: var(--font-display); font-weight: 700; font-size: 28px; margin-bottom: 12px; }
+  .np-signed-out p { color: var(--color-neutral-70); font-size: 15px; line-height: 1.5; margin-bottom: 16px; }
+  .np-signed-out a { display: inline-block; padding: 12px 24px; background: var(--color-accent);
+                     color: #fff; border-radius: 999px; text-decoration: none; font-weight: 500; }
 </style>
 </head><body data-auth-state="signed-out">
 
@@ -62,57 +179,120 @@
   <a href="#" id="np-signin">Sign in</a>
 </div>
 
-<div class="np-wrap" id="np-wrap" hidden data-myahl-add-section
-     data-myahl-submit="project-create">
-  <h1>New project</h1>
-  <p class="lead">Submitted projects go through a brief moderator review before they appear publicly. Members on the new project will see it as "Pending" in their <a href="/my-ahl/">My AHL</a> dashboard until then.</p>
-
-  <div class="np-form">
-    <input type="text" class="np-input np-input-title" data-field="title" placeholder="Project title" required>
-    <div class="np-row">
-      <input type="text" class="np-input" data-field="year" placeholder="Year (e.g. 2026 or Current)">
-      <input type="text" class="np-input" data-field="slug" placeholder="Slug (auto from title if blank)">
+<div class="np-page" data-myahl-add-section data-myahl-submit="project-create">
+  <div class="container">
+    <div class="np-banner">
+      You're creating a new project. After you submit, a moderator
+      will review and approve before it appears publicly. Members
+      listed on it will see it as "Pending" in their
+      <a href="/my-ahl/">My AHL</a> dashboard until then.
     </div>
 
-    <div class="np-label">Description</div>
-    <textarea class="np-textarea" data-field="description" placeholder="What is this project about? Paragraphs separated by blank lines."></textarea>
+    <!-- Hero -->
+    <section class="project-hero rv vis">
+      <div class="project-hero-grid">
+        <div class="project-hero-image">
+          <label class="np-thumb-frame" id="np-thumb">
+            <input type="file" class="np-thumb-input" data-field="thumbnail" data-image-policy="project" accept="image/*" id="np-thumb-input">
+            <img id="np-thumb-preview" alt="" hidden>
+            <div class="np-thumb-empty">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <circle cx="9" cy="9" r="2"/>
+                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+              </svg>
+              <div class="np-thumb-cta">Click to add a thumbnail</div>
+              <div class="np-thumb-hint">Auto-resized to 1600 px on the long side; re-encoded as JPEG.</div>
+            </div>
+            <span class="np-thumb-replace">Click to replace</span>
+          </label>
+        </div>
+        <div class="project-hero-text">
+          <div class="np-title-row">
+            <input type="text" class="np-input np-input-title" data-field="title"
+                   placeholder="Project title…" required>
+            <span class="project-title-year">
+              <span class="project-title-sep np-title-sep" aria-hidden="true">·</span>
+              <input type="text" class="np-input np-input-year" data-field="year"
+                     placeholder="2026" maxlength="12">
+            </span>
+          </div>
 
-    <div class="np-label">Assistive Augmentation principles</div>
-    <div class="np-principles"><label class="np-principle">
+          <input type="text" class="np-input np-input-summary" data-field="summary"
+                 placeholder="One-line summary (optional)…">
+
+          <div class="project-description" style="margin-top:24px">
+            <textarea class="np-textarea np-textarea-description" data-field="description"
+                      placeholder="What is this project about? Two or three short paragraphs work well — separate paragraphs with a blank line."></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principles -->
+    <div class="np-principles-row"><label class="np-principle-chip">
      <input type="checkbox" data-principle="body">
-     <img src="https://cdn.ahlab.org/media/site/icon-body-1.png" alt="" loading="lazy">
+     <img class="np-principle-icon" src="https://cdn.ahlab.org/media/site/icon-body-1.png" alt="">
+     <img class="np-principle-icon-hover" src="https://cdn.ahlab.org/media/site/icon-body-hl.png" alt="">
      <span>Body</span>
-   </label><label class="np-principle">
+   </label><label class="np-principle-chip">
      <input type="checkbox" data-principle="cognitive">
-     <img src="https://cdn.ahlab.org/media/site/icon-cognitive-1.png" alt="" loading="lazy">
+     <img class="np-principle-icon" src="https://cdn.ahlab.org/media/site/icon-cognitive-1.png" alt="">
+     <img class="np-principle-icon-hover" src="https://cdn.ahlab.org/media/site/icon-cognitive-hl.png" alt="">
      <span>Cognitive</span>
-   </label><label class="np-principle">
+   </label><label class="np-principle-chip">
      <input type="checkbox" data-principle="perceptual">
-     <img src="https://cdn.ahlab.org/media/site/icon-perceptual-1.png" alt="" loading="lazy">
+     <img class="np-principle-icon" src="https://cdn.ahlab.org/media/site/icon-perceptual-1.png" alt="">
+     <img class="np-principle-icon-hover" src="https://cdn.ahlab.org/media/site/icon-perceptual-hl.png" alt="">
      <span>Perceptual</span>
-   </label><label class="np-principle">
+   </label><label class="np-principle-chip">
      <input type="checkbox" data-principle="physical">
-     <img src="https://cdn.ahlab.org/media/site/icon-physical-1.png" alt="" loading="lazy">
+     <img class="np-principle-icon" src="https://cdn.ahlab.org/media/site/icon-physical-1.png" alt="">
+     <img class="np-principle-icon-hover" src="https://cdn.ahlab.org/media/site/icon-physical-hl.png" alt="">
      <span>Physical</span>
-   </label><label class="np-principle">
+   </label><label class="np-principle-chip">
      <input type="checkbox" data-principle="identity">
-     <img src="https://cdn.ahlab.org/media/site/icon-identity.png" alt="" loading="lazy">
+     <img class="np-principle-icon" src="https://cdn.ahlab.org/media/site/icon-identity.png" alt="">
+     <img class="np-principle-icon-hover" src="https://cdn.ahlab.org/media/site/icon-identity-hl.png" alt="">
      <span>Identity</span>
-   </label><label class="np-principle">
+   </label><label class="np-principle-chip">
      <input type="checkbox" data-principle="sociocultural">
-     <img src="https://cdn.ahlab.org/media/site/icon-sociocultural-1.png" alt="" loading="lazy">
+     <img class="np-principle-icon" src="https://cdn.ahlab.org/media/site/icon-sociocultural-1.png" alt="">
+     <img class="np-principle-icon-hover" src="https://cdn.ahlab.org/media/site/icon-sociocultural-hl.png" alt="">
      <span>Sociocultural</span>
    </label></div>
 
-    <div class="np-label">Thumbnail (optional)</div>
-    <div class="np-thumb-input">
-      <input type="file" data-field="thumbnail" data-image-policy="project" accept="image/*">
-      <span style="font-size:12px;color:var(--color-neutral-70)">Auto-resized to 1600 px on the longer side. JPEG re-encoded.</span>
-    </div>
+    <!-- Slug (advanced, collapsible) -->
+    <details style="margin-top:32px;font-size:13px;color:var(--color-neutral-70)">
+      <summary style="cursor:pointer">Advanced: custom URL slug</summary>
+      <div style="margin-top:8px">
+        <input type="text" class="np-input" data-field="slug"
+               placeholder="auto-generated-from-title"
+               style="font-family:ui-monospace,Menlo,monospace;background:rgba(14,15,17,.025);padding:8px 12px;margin:0">
+        <div style="margin-top:6px;font-size:12px;color:var(--color-neutral-60)">/projects/<span id="np-slug-preview">your-slug</span>/</div>
+      </div>
+    </details>
+
+    <!-- Team — seeded with the creator's avatar -->
+    <section class="project-people-row np-team-row">
+      <div class="np-section-label">Team</div>
+      <div class="np-team-grid">
+        <div class="np-team-member">
+          <div class="np-team-avatar">
+            <img id="np-creator-photo" src="" alt="">
+          </div>
+          <div class="np-team-name" id="np-creator-name">You</div>
+          <div class="np-team-creator-badge">Creator</div>
+        </div>
+        <!-- Future: + Add more members. For v1 the creator is the
+             only seed; co-members can self-claim later via the project
+             page once it's published. -->
+      </div>
+    </section>
 
     <div class="np-actions">
-      <button type="button" class="np-submit" data-myahl-submit-trigger>Submit for review</button>
       <a class="np-cancel" href="/projects/">Cancel</a>
+      <button type="button" class="np-submit" data-myahl-submit-trigger>Submit for review</button>
     </div>
   </div>
 </div>
@@ -125,20 +305,54 @@
 <script src="/js/myahl-forms.js" defer></script>
 
 <script>
-// Toggle between signed-out / signed-in views via auth.js. Also wire
-// the inline "Sign in" link to AHLAuth.login() so it triggers the
-// usual redirect flow.
 (function () {
+  // Show/hide based on auth + seed creator's avatar/name in the team chip.
   function setState(user) {
     document.body.setAttribute('data-auth-state', user ? 'signed-in' : 'signed-out');
-    var wrap = document.getElementById('np-wrap');
-    if (wrap) wrap.hidden = !user;
+    if (user) {
+      var photo = document.getElementById('np-creator-photo');
+      var name  = document.getElementById('np-creator-name');
+      if (user.picture) photo.src = user.picture;
+      if (user.name)    name.textContent = user.name;
+    }
   }
   if (window.AHLAuth) window.AHLAuth.onChange(setState);
   document.getElementById('np-signin')?.addEventListener('click', function (e) {
     e.preventDefault();
     window.AHLAuth && window.AHLAuth.login();
   });
+
+  // Live thumbnail preview — show the picked image immediately so the
+  // creator sees roughly what the published hero will look like even
+  // before submitting.
+  var fileInput = document.getElementById('np-thumb-input');
+  var previewImg = document.getElementById('np-thumb-preview');
+  var thumbFrame = document.getElementById('np-thumb');
+  if (fileInput) {
+    fileInput.addEventListener('change', function () {
+      var f = fileInput.files && fileInput.files[0];
+      if (!f) return;
+      var url = URL.createObjectURL(f);
+      previewImg.src = url;
+      previewImg.hidden = false;
+      thumbFrame.classList.add('has-image');
+    });
+  }
+
+  // Live slug preview — slugify the title input as the user types.
+  var titleInput = document.querySelector('[data-field="title"]');
+  var slugInput  = document.querySelector('[data-field="slug"]');
+  var slugPreview = document.getElementById('np-slug-preview');
+  function slugify(s) {
+    return String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  }
+  function refreshSlugPreview() {
+    var manual = (slugInput && slugInput.value || '').trim();
+    var auto = slugify(titleInput && titleInput.value || '');
+    slugPreview.textContent = manual || auto || 'your-slug';
+  }
+  titleInput && titleInput.addEventListener('input', refreshSlugPreview);
+  slugInput  && slugInput.addEventListener('input', refreshSlugPreview);
 })();
 </script>
 </body></html>
