@@ -16,6 +16,15 @@
         "cognitive",
         "perceptual"
       ]
+    },
+    {
+      "slug": "test-proj2",
+      "title": "Test Proj2",
+      "year": "Current",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/test-proj2/1_321329_leyard.jpg",
+      "principles": [
+        "sociocultural"
+      ]
     }
   ],
   "publications": [],
