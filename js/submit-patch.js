@@ -57,7 +57,11 @@
     addField('targetSlug',  opts.targetSlug  || '');
     addField('actionType',  opts.action      || '');
     addField('patch',       JSON.stringify(opts.patch || {}));
-    addField('returnUrl',   opts.returnUrl   || (location.pathname + location.search + location.hash));
+    // returnUrl MUST be absolute. The Continue button on the
+    // broker's receipt page is hosted on script.googleusercontent.com;
+    // a relative href like "/my-ahl/" would resolve against THAT
+    // origin (404 → Google Drive's "Sorry, unable to open" page).
+    addField('returnUrl',   opts.returnUrl   || (location.origin + location.pathname + location.search + location.hash));
 
     (opts.files || []).forEach(function (f, i) {
       addField('file_' + i + '_name',         f.name || ('file' + i));
