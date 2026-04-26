@@ -95,6 +95,15 @@
       "principles": [
         "sociocultural"
       ]
+    },
+    {
+      "slug": "test-proj3",
+      "title": "Test Proj3",
+      "year": "2025",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/test-proj3/1_321329_leyard.jpg",
+      "principles": [
+        "perceptual"
+      ]
     }
   ],
   "publications": [
