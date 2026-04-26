@@ -67,6 +67,16 @@
         "cognitive",
         "physical"
       ]
+    },
+    {
+      "slug": "test-project-addition",
+      "title": "Test Project Addition",
+      "year": "2026",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/test-project-addition/Screenshot_2026-04-24_at_12.02.40_AM.jpg",
+      "principles": [
+        "body",
+        "cognitive"
+      ]
     }
   ],
   "publications": [
