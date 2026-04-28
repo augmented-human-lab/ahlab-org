@@ -115,12 +115,11 @@
   align-items: start;
   padding: 22px 0;
   border-top: 1px solid var(--color-neutral-30);
-  transition: background .25s ease, padding-left .3s ease;
+  transition: background .25s ease;
 }
 .press-item:last-child { border-bottom: 1px solid var(--color-neutral-30); }
 .press-item.is-linked { cursor: pointer; }
 .press-item.is-linked:hover {
-  padding-left: 12px;
   background: linear-gradient(90deg, var(--color-neutral-20) 0%, transparent 80%);
 }
 .press-item.is-linked:hover .press-title { color: var(--color-accent); }
@@ -319,7 +318,6 @@
   .press-icon svg { width: 15px; height: 15px; }
   .press-title { font-size: 15px; }
   .press-outlet { font-size: 13px; }
-  .press-item.is-linked:hover { padding-left: 0; }
 }
 
 /* ── Empty state ─────────────────────────────────────────── */
