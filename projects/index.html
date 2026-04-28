@@ -2400,6 +2400,7 @@
 <div id="site-footer-mount"></div>
 <script src="/js/footer-include.js"></script>
 <script src="/js/claim-buttons.js" defer></script>
+<script src="/js/quick-search.js" defer></script>
 
 <script>
 // ── Principle filter (hero chips) ─────────────────────────
@@ -2483,6 +2484,56 @@ principlePills?.addEventListener('keydown', e => {
   applyPrincipleFilter(chip.dataset.group);
 });
 filterReset?.addEventListener('click', () => applyPrincipleFilter('all'));
+
+// ── Quick title search (auto mode) ────────────────────────
+// Type any letter anywhere on the page to open the floating palette.
+// Tokens are AND-substring-matched against each card's project title
+// (h3); composes with the principle chip filter via `.qs-hidden` and
+// `.hidden`. After every keystroke we also collapse year sections /
+// nav links that have nothing visible left.
+// We exclude the "Add new project" card from search — it's a UI
+// affordance, not a real project, and matching it via title would be
+// noisy.
+document.addEventListener('DOMContentLoaded', () => {
+  if (!window.QuickSearch) return;
+  window.QuickSearch.attach({
+    placeholder: 'Search projects…',
+    items: document.querySelectorAll('.project-card:not(.project-card-add)'),
+    getText: el => el.querySelector('h3')?.textContent || '',
+    onAfterFilter: () => {
+      document.querySelectorAll('.year-section').forEach(sec => {
+        const visible = sec.querySelectorAll('.project-card:not(.project-card-add):not(.hidden):not(.qs-hidden)').length;
+        sec.classList.toggle('qs-hidden', visible === 0);
+        const link = document.querySelector(`.year-nav a[href="#${sec.id}"]`);
+        if (link) link.classList.toggle('qs-hidden', visible === 0);
+      });
+
+      // Recount principle chips against the search needle. Cards
+      // carry data-principles="body cognitive perceptual" — a SET, so
+      // membership is "principle ∈ split(' ')" rather than equality.
+      // Chip text shows search-narrowed counts during search;
+      // restored on clear.
+      document.querySelectorAll('#principlePills .hero-chip').forEach(chip => {
+        if (!chip.dataset.origText) chip.dataset.origText = chip.textContent;
+        const needle = window.QuickSearch.needle;
+        if (!needle) {
+          chip.textContent = chip.dataset.origText;
+          chip.classList.remove('qs-empty');
+          return;
+        }
+        const grp = chip.dataset.group;
+        let n = 0;
+        document.querySelectorAll('.project-card:not(.project-card-add)').forEach(it => {
+          if (it.classList.contains('qs-hidden')) return;
+          const set = (it.dataset.principles || '').split(/\s+/).filter(Boolean);
+          if (set.indexOf(grp) !== -1) n++;
+        });
+        chip.textContent = `${n} ${chip.dataset.label}`;
+        chip.classList.toggle('qs-empty', n === 0);
+      });
+    },
+  });
+});
 
 // Reveal on scroll
 const obs = new IntersectionObserver(entries => {

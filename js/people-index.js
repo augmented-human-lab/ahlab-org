@@ -49,6 +49,8 @@
     year: 'all',                                    // 'all' or integer year string
     segments: new Set(['team', 'collaborators', 'alumni']), // active segments
     view: 'grid',                                   // 'grid' | 'honeycomb'
+    // Name-search needle lives in QuickSearch (window.QuickSearch.needle);
+    // matchesName() reads it via QuickSearch.matches().
   };
 
   // ── Filter predicates ────────────────────────────────────
@@ -83,6 +85,14 @@
     return card.dataset.roleGroup === state.role;
   }
 
+  // Quick-search integration runs in MANUAL mode: the component owns
+  // the palette UI + needle, but the page decides visibility because we
+  // need the search to AND with the chip/year/segment filters. Each
+  // keystroke calls applyFilters() via the onChange hook below.
+  function matchesName(card) {
+    return window.QuickSearch ? window.QuickSearch.matches(card.dataset.name || '') : true;
+  }
+
   // Stash each card's original parent grid so we can restore the DOM
   // when leaving year-scoped mode. Year-scoped renders pool every active
   // person into the team section's grid (so an alumnus active in the
@@ -100,7 +110,7 @@
   const teamGrid    = teamSection?.querySelector('.people-grid') || null;
 
   function cardVisible(card) {
-    return matchesYear(card) && matchesSegment(card) && matchesRole(card);
+    return matchesYear(card) && matchesSegment(card) && matchesRole(card) && matchesName(card);
   }
 
   // ── Render: Grid view ────────────────────────────────────
@@ -376,6 +386,34 @@
     if (state.view === 'honeycomb') renderHoneycomb();
     else                             renderGrid();
     syncHeroChipClasses();
+    syncRoleChipCounts();
+  }
+
+  // Recount role-group chips ("4 Students", "12 Researchers", …) against
+  // the current search needle. Each chip's count answers "if I clicked
+  // this, how many people would I see?" — so we count cards in the role
+  // group that match the search, ignoring the *currently active* role
+  // chip and ignoring year/segment filters. Build-time text is stashed
+  // on first run and restored when the needle clears.
+  function syncRoleChipCounts() {
+    const QS = window.QuickSearch;
+    document.querySelectorAll('#rolePills .hero-chip').forEach(chip => {
+      if (!chip.dataset.origText) chip.dataset.origText = chip.textContent;
+      const needle = QS && QS.needle;
+      if (!needle) {
+        chip.textContent = chip.dataset.origText;
+        chip.classList.remove('qs-empty');
+        return;
+      }
+      const grp = chip.dataset.group;
+      let n = 0;
+      allCards.forEach(card => {
+        if (card.dataset.roleGroup !== grp) return;
+        if (QS.matches(card.dataset.name || '')) n++;
+      });
+      chip.textContent = n + ' ' + chip.dataset.label;
+      chip.classList.toggle('qs-empty', n === 0);
+    });
   }
 
   // Hero segment chips disable when a year is selected (year-view is
@@ -490,6 +528,25 @@
     e.preventDefault();
     toggleSegment(chip.dataset.segment);
   });
+
+  // ── Quick name search ────────────────────────────────────
+  // Manual-mode integration with the shared QuickSearch component
+  // (/js/quick-search.js). The component owns the floating palette,
+  // the global keyboard, and the needle state; we just hand it an
+  // onChange callback that re-runs our combined filter pass and a
+  // countItems hook that returns the post-filter visible count for
+  // the palette's "N matches" badge.
+  if (window.QuickSearch) {
+    window.QuickSearch.attach({
+      placeholder: 'Type a name…',
+      onChange:    () => applyFilters(),
+      countItems:  () => {
+        let n = 0;
+        allCards.forEach(c => { if (cardVisible(c)) n++; });
+        return n;
+      },
+    });
+  }
 
   // Relayout hives on resize (grid view needs no resize handling).
   // Passes animate=false — resize shouldn't trigger the bloom on every

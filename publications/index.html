@@ -1410,7 +1410,7 @@
     </div>
     <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
-        
+        <div class="pub-award">★ Steve Howard Best Long Paper Award</div>
         <div class="pub-title">MuSS-Bits: Sensor-Display Blocks for Deaf People to Explore Musical Sounds</div>
         <div class="pub-citation">Petry, B., Illandara, T. and Nanayakkara, S.C., 2016, November. MuSS-bits: sensor-display blocks for deaf people to explore musical sounds. In Proceedings of the 28th Australian Conference on Computer-Human Interaction (pp. 72-80).</div>
         
@@ -2036,6 +2036,7 @@
 <script src="/js/submit-patch.js" defer></script>
 <script src="/js/pending-cache.js" defer></script>
 <script src="/js/myahl-forms.js" defer></script>
+<script src="/js/quick-search.js" defer></script>
 
 <script>
 // Reveal on scroll
@@ -2154,6 +2155,55 @@ venuePills?.addEventListener('keydown', e => {
   applyVenueFilter(chip.dataset.group);
 });
 filterReset?.addEventListener('click', () => applyVenueFilter('all'));
+
+// ── Quick title search (auto mode) ────────────────────────
+// Type any letter anywhere on the page to open the floating search
+// palette; tokens are AND-substring-matched against title + citation
+// (which usually contains authors + venue + year). Hidden items get
+// `.qs-hidden`; this composes with the chip filter's `.hidden` so an
+// item is shown only when both filters pass. After each keystroke
+// we collapse year sections / nav links that have nothing visible
+// left in them — keeps the layout from showing empty year headers.
+document.addEventListener('DOMContentLoaded', () => {
+  if (!window.QuickSearch) return;
+  window.QuickSearch.attach({
+    placeholder: 'Search publications…',
+    items: document.querySelectorAll('.pub-item:not(.pub-item-add-trigger):not(.pub-item-add-form)'),
+    getText: el =>
+      (el.querySelector('.pub-title')?.textContent || '') + ' ' +
+      (el.querySelector('.pub-citation')?.textContent || '') + ' ' +
+      (el.dataset.venue || ''),
+    onAfterFilter: () => {
+      document.querySelectorAll('.year-section').forEach(sec => {
+        const visible = sec.querySelectorAll('.pub-item:not(.hidden):not(.qs-hidden)').length;
+        sec.classList.toggle('qs-hidden', visible === 0);
+        const link = document.querySelector(`.year-nav a[href="#${sec.id}"]`);
+        if (link) link.classList.toggle('qs-hidden', visible === 0);
+      });
+
+      // Recount venue chips against the search needle. Chip text shows
+      // narrowed counts during search ("5 CHI"); restored on clear.
+      // Counts ignore the chip filter's own `.hidden` so the chip
+      // answers "if I clicked this, how many would I see?".
+      document.querySelectorAll('#venuePills .hero-chip').forEach(chip => {
+        if (!chip.dataset.origText) chip.dataset.origText = chip.textContent;
+        const needle = window.QuickSearch.needle;
+        if (!needle) {
+          chip.textContent = chip.dataset.origText;
+          chip.classList.remove('qs-empty');
+          return;
+        }
+        const grp = chip.dataset.group;
+        let n = 0;
+        document.querySelectorAll(`.pub-item[data-venue-group="${grp}"]`).forEach(it => {
+          if (!it.classList.contains('qs-hidden')) n++;
+        });
+        chip.textContent = `${n} ${chip.dataset.label}`;
+        chip.classList.toggle('qs-empty', n === 0);
+      });
+    },
+  });
+});
 </script>
 </body>
 </html>

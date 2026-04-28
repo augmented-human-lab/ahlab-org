@@ -31,6 +31,23 @@
   color: var(--color-neutral-70);
 }
 
+/* ── Header row: profile tile + member ID card ─────────────
+   Profile (left) flexes to fill; ID card (right) holds a fixed
+   380px so it keeps true credit-card proportions. Stacks under
+   992px because below that the profile-tile's photo + info +
+   edit-button trio gets squeezed. */
+.myahl-header-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 24px;
+  align-items: stretch;
+  margin-bottom: 12px;
+}
+.myahl-header-row > .myahl-profile-tile { margin-bottom: 0; }
+@media (max-width: 991px) {
+  .myahl-header-row { grid-template-columns: 1fr; }
+}
+
 /* ── Profile tile (top of dashboard) ───────────────────────── */
 .myahl-profile-tile {
   display: grid;
@@ -97,6 +114,262 @@
   .myahl-profile-photo { width: 64px; height: 64px; }
   .myahl-profile-edit  { grid-column: 1 / -1; justify-self: start; }
   .myahl-profile-info h2 { font-size: 18px; }
+}
+
+/* ── Member ID card ─────────────────────────────────────────
+   Credit-card form factor (ISO/IEC 7810 ID-1: 85.60 × 53.98 mm
+   → 1.586:1). Corner radius matches the spec's 3.18 mm: at the
+   380 px desktop width that's ~14 px (3.7 % of width). Inset
+   highlight + soft drop shadow give it a physical-card feel.
+
+   The card has two faces (front + back) that flip in 3D when
+   clicked, mimicking turning a real card over. Structure:
+
+     .myahl-idcard         ← outer wrapper, holds perspective
+       .myahl-idcard-inner ← rotates around Y; preserves 3-D
+         .myahl-idcard-face.myahl-idcard-front
+         .myahl-idcard-face.myahl-idcard-back   (rotated 180°)
+
+   Box-shadow lives on the outer wrapper so it stays put while
+   the inner rotates; per-face inset highlight + sheen live on
+   each face since those are the surfaces that visibly turn.
+
+   Front: logo, label, name, role, QR. Back: magnetic stripe,
+   member-id row, signature panel, lab affiliation. */
+.myahl-idcard {
+  position: relative;
+  aspect-ratio: 1.586 / 1;
+  border-radius: 14px;
+  perspective: 1200px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  /* Outer is fully transparent — no bg, no shadow. The drop
+     shadow lives on each face instead so it tracks the actually
+     rendered card and disappears with it mid-flip (when faces
+     are edge-on), leaving no card-shaped rectangle behind. */
+}
+.myahl-idcard:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+.myahl-idcard-inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform .7s cubic-bezier(.4, 0, .2, 1);
+  border-radius: 14px;
+}
+.myahl-idcard.is-flipped .myahl-idcard-inner {
+  transform: rotateY(180deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .myahl-idcard-inner { transition: none; }
+}
+
+.myahl-idcard-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  color: #fff;
+  /* Drop shadow rotates with the face (rather than sitting on
+     the static outer wrapper), so it vanishes naturally at the
+     mid-flip point and never paints a card-shaped silhouette
+     behind transparent / edge-on geometry. Only one face is
+     visible at a time, so the shadows never stack. */
+  box-shadow:
+    0 12px 28px rgba(20, 8, 50, .22),
+    0 2px 4px rgba(20, 8, 50, .12),
+    inset 0 0 0 1px rgba(255, 255, 255, .14);
+}
+
+/* ── Front face ─────────────────────────────────────────── */
+.myahl-idcard-front {
+  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.myahl-idcard-front::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 85% -10%, rgba(255, 255, 255, .22), transparent 55%),
+    linear-gradient(135deg, rgba(255, 255, 255, .06) 0%, transparent 35%, transparent 65%, rgba(255, 255, 255, .04) 100%);
+  pointer-events: none;
+}
+.myahl-idcard-front > * { position: relative; z-index: 1; }
+
+.myahl-idcard-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.myahl-idcard-logo {
+  height: 22px;
+  width: auto;
+  display: block;
+}
+.myahl-idcard-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  opacity: .85;
+}
+
+.myahl-idcard-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+}
+.myahl-idcard-info { min-width: 0; }
+.myahl-idcard-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.1;
+  letter-spacing: -.01em;
+}
+.myahl-idcard-role {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: .92;
+  margin-top: 6px;
+}
+.myahl-idcard-qr {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 6px;
+  padding: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
+}
+.myahl-idcard-qr img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── Back face ──────────────────────────────────────────── */
+/* Darker palette than the front so flipping reads as turning
+   the card over. Magnetic stripe is full-bleed across the top;
+   below it sits the body padded to match the front's gutter. */
+.myahl-idcard-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(160deg, #15171c 0%, #1f222a 100%);
+  display: flex;
+  flex-direction: column;
+}
+.myahl-idcard-stripe {
+  height: 38px;
+  background: #000;
+  margin-top: 18px;
+  flex-shrink: 0;
+  position: relative;
+}
+.myahl-idcard-stripe::after {
+  /* faint highlight along the bottom edge of the stripe — the
+     glossy lacquer line you see on real magnetic stripes */
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, .07);
+}
+.myahl-idcard-back-body {
+  flex: 1;
+  padding: 12px 22px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  color: rgba(255, 255, 255, .85);
+}
+.myahl-idcard-back-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.myahl-idcard-back-label {
+  font-family: var(--font-display);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  opacity: .55;
+}
+.myahl-idcard-back-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: .03em;
+  color: #fff;
+}
+.myahl-idcard-signature {
+  background: linear-gradient(90deg, #ece5d4 0%, #f4ede0 50%, #ece5d4 100%);
+  padding: 6px 12px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  color: #2a2418;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .25);
+}
+.myahl-idcard-sig-name {
+  font-family: 'Snell Roundhand', 'Brush Script MT', 'Apple Chancery', cursive;
+  font-size: 18px;
+  line-height: 1;
+  color: #1c2851;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.myahl-idcard-sig-label {
+  font-family: var(--font-display);
+  font-size: 7px;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  opacity: .5;
+  flex-shrink: 0;
+}
+.myahl-idcard-back-footer {
+  font-size: 9px;
+  line-height: 1.55;
+  opacity: .8;
+}
+.myahl-idcard-back-org {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 11px;
+  color: #fff;
+  opacity: 1;
+  margin-bottom: 1px;
+}
+.myahl-idcard-back-url {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 9px;
+  opacity: .75;
+  margin-top: 2px;
+}
+
+@media (max-width: 991px) {
+  .myahl-idcard {
+    width: 100%;
+    max-width: 380px;
+  }
 }
 
 /* ── Edit-pencil button ─────────────────────────────────────

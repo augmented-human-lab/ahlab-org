@@ -3094,7 +3094,7 @@
       "title": "MuSS-Bits: Sensor-Display Blocks for Deaf People to Explore Musical Sounds",
       "year": "2016",
       "citation": "Petry, B., Illandara, T. and Nanayakkara, S.C., 2016, November. MuSS-bits: sensor-display blocks for deaf people to explore musical sounds. In Proceedings of the 28th Australian Conference on Computer-Human Interaction (pp. 72-80).",
-      "award": null,
+      "award": "Steve Howard Best Long Paper Award",
       "links": [
         {
           "label": "DOI",
@@ -3916,6 +3916,28 @@
       ]
     },
     {
+      "slug": "zenflow-chi-2026-honorable-mention",
+      "title": "Zenflow: Investigating MR Transitions for Enhancing Sleep and Relaxation | Honorable Mention",
+      "year": "2026",
+      "type": "award",
+      "outlet": "ACM CHI",
+      "url": null,
+      "projects": [
+        "zenflow"
+      ]
+    },
+    {
+      "slug": "viscerohaptics-chi-2026-honorable-mention",
+      "title": "VisceroHaptics: Investigating the Effects of Gut-based Audio-Haptic Feedback on Gastric Feelings and Gastric Interoceptive Behaviors | Honorable Mention",
+      "year": "2026",
+      "type": "award",
+      "outlet": "ACM CHI",
+      "url": null,
+      "projects": [
+        "gutio"
+      ]
+    },
+    {
       "slug": "how-aisee-can-make-the-blind-see",
       "title": "How AiSee Can Make the Blind 'See'",
       "year": "2025",
@@ -4070,6 +4092,17 @@
       ]
     },
     {
+      "slug": "players-and-performance-acm-iss-2022-honorable-mention",
+      "title": "Players and Performance: Opportunities for Social Interaction with Augmented Tabletop Games at Centres for Children with Autism | Honorable Mention",
+      "year": "2022",
+      "type": "award",
+      "outlet": "ACM ISS",
+      "url": null,
+      "projects": [
+        "magicblocks"
+      ]
+    },
+    {
       "slug": "watch-a-foot-tickling-machine-discover-the-most-ticklish-spot-on-feet",
       "title": "Watch a foot-tickling machine discover the most ticklish spot on feet",
       "year": "2022",
@@ -4111,6 +4144,39 @@
       "url": "https://www.prototypesforhumanity.com/project/kinvoice/",
       "projects": [
         "kinvoice"
+      ]
+    },
+    {
+      "slug": "stressshoe-mobilehci-2021-honorable-mention",
+      "title": "StressShoe: A DIY Toolkit for just-in-time Personalised Stress Interventions for Office Workers Performing Sedentary Tasks | Honorable Mention",
+      "year": "2021",
+      "type": "award",
+      "outlet": "ACM MobileHCI",
+      "url": null,
+      "projects": [
+        "stressshoe"
+      ]
+    },
+    {
+      "slug": "sensor-based-interactive-worksheets-idc-2021-best-short-paper",
+      "title": "Sensor-Based Interactive Worksheets to Support Guided Scientific Inquiry | Best Short Paper Award",
+      "year": "2021",
+      "type": "award",
+      "outlet": "ACM IDC",
+      "url": null,
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "gymsoles-petra-2021-best-student-paper",
+      "title": "GymSoles++: Combining Google Glass with Smart Insoles to Improve Body Posture when Performing Squats | Best Student Paper Award",
+      "year": "2021",
+      "type": "award",
+      "outlet": "ACM PETRA",
+      "url": null,
+      "projects": [
+        "gymsoles"
       ]
     },
     {
@@ -4719,6 +4785,17 @@
       ]
     },
     {
+      "slug": "insight-augmented-human-2017-best-short-paper",
+      "title": "InSight: A Systematic Approach to Create Dynamic Human-Controller-Interactions | Best Short Paper Award",
+      "year": "2017",
+      "type": "award",
+      "outlet": "Augmented Human International Conference",
+      "url": null,
+      "projects": [
+        "insight"
+      ]
+    },
+    {
       "slug": "zsense-most-promising-technology-award-at-ihl-tech-pitching-event",
       "title": "zSense: Most Promising Technology Award at IHL Tech Pitching Event",
       "year": "2016",
@@ -4765,6 +4842,17 @@
       "projects": [
         "fingerreader",
         "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "steve-howard-award-for-the-best-long-paper-by-a-student-presented-during-ozchi-chisigs-annual-conference-muss-bits-sensor-display-blocks-for-deaf-people-to-explore-musical-sounds",
+      "title": "Steve Howard Award - for the best long paper by a student presented during OZCHI, CHISIG's Annual Conference: MuSS-Bits: Sensor-Display Blocks for Deaf People to Explore Musical Sounds",
+      "year": "2016",
+      "type": "award",
+      "outlet": "OZCHI",
+      "url": null,
+      "projects": [
+        "muss-bits"
       ]
     },
     {

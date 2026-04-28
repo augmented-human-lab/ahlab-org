@@ -168,12 +168,34 @@
   "events": [],
   "press": [
     {
+      "slug": "players-and-performance-acm-iss-2022-honorable-mention",
+      "title": "Players and Performance: Opportunities for Social Interaction with Augmented Tabletop Games at Centres for Children with Autism | Honorable Mention",
+      "year": "2022",
+      "type": "award",
+      "outlet": "ACM ISS",
+      "url": null,
+      "projects": [
+        "magicblocks"
+      ]
+    },
+    {
       "slug": "research-team-boosts-science-learning-for-children-the-kiwrious-project",
       "title": "Research Team Boosts Science Learning for Children: The Kiwrious Project",
       "year": "2022",
       "type": "news",
       "outlet": "United Nations",
       "url": "https://www.un.org/en/academic-impact/research-team-boosts-science-learning-children-kiwrious-project",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "sensor-based-interactive-worksheets-idc-2021-best-short-paper",
+      "title": "Sensor-Based Interactive Worksheets to Support Guided Scientific Inquiry | Best Short Paper Award",
+      "year": "2021",
+      "type": "award",
+      "outlet": "ACM IDC",
+      "url": null,
       "projects": [
         "kiwrious"
       ]

@@ -442,6 +442,75 @@
         '<button type="button" class="myahl-profile-edit" disabled title="Coming soon — the editing pipeline is being wired up.">Edit profile</button>' +
       '</div>';
 
+    // ── Member ID card ───────────────────────────────────────
+    // Credit-card-shaped (ISO/IEC 7810 ID-1, 1.586:1) membership
+    // card. Two faces — front and back — that flip in 3D when
+    // clicked, mimicking turning a real card over.
+    //
+    // Front: AHL logo, "Member" label, name + role, and a QR
+    //        code linking to the member's public profile.
+    // Back:  magnetic stripe + slug-derived member ID + a
+    //        signature panel with the member's name in a script
+    //        font + lab affiliation + canonical profile URL.
+    //        Mirrors what's printed on the back of a real ID
+    //        card (member-of-record info), no expiry — membership
+    //        is open-ended.
+    //
+    // The QR encodes only the public profile URL we already
+    // publish; back-side data is also strictly public (name,
+    // slug, lab name).
+    var profileUrlAbs = d.profile_url
+      ? (window.location.origin + d.profile_url)
+      : window.location.origin;
+    var qrSrc = 'https://api.qrserver.com/v1/create-qr-code/?size=240x240&format=svg&margin=0&data=' +
+      encodeURIComponent(profileUrlAbs);
+    var memberId = 'AHL · ' + String(d.slug || '').toUpperCase();
+    var profilePathHuman = (d.profile_url || '').replace(/^\/+/, '');
+    var idCardHTML =
+      '<div class="myahl-idcard" id="myahl-idcard" role="button" tabindex="0" ' +
+        'aria-pressed="false" aria-label="AHLab membership card for ' + escapeHtml(d.name) +
+        '. Click to flip.">' +
+        '<div class="myahl-idcard-inner">' +
+          '<div class="myahl-idcard-face myahl-idcard-front">' +
+            '<div class="myahl-idcard-top">' +
+              '<img class="myahl-idcard-logo" src="https://cdn.ahlab.org/media/site/ahllogo_white.png" alt="AHLab" loading="lazy">' +
+              '<div class="myahl-idcard-label">Member</div>' +
+            '</div>' +
+            '<div class="myahl-idcard-bottom">' +
+              '<div class="myahl-idcard-info">' +
+                '<div class="myahl-idcard-name">' + escapeHtml(d.name) + '</div>' +
+                (d.role ? '<div class="myahl-idcard-role">' + escapeHtml(d.role) + '</div>' : '') +
+              '</div>' +
+              '<div class="myahl-idcard-qr" aria-hidden="true">' +
+                '<img src="' + escapeHtml(qrSrc) + '" alt="" loading="lazy">' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="myahl-idcard-face myahl-idcard-back" aria-hidden="true">' +
+            '<div class="myahl-idcard-stripe"></div>' +
+            '<div class="myahl-idcard-back-body">' +
+              '<div class="myahl-idcard-back-row">' +
+                '<div class="myahl-idcard-back-label">Member ID</div>' +
+                '<div class="myahl-idcard-back-mono">' + escapeHtml(memberId) + '</div>' +
+              '</div>' +
+              '<div class="myahl-idcard-signature">' +
+                '<span class="myahl-idcard-sig-name">' + escapeHtml(d.name) + '</span>' +
+                '<span class="myahl-idcard-sig-label">Member signature</span>' +
+              '</div>' +
+              '<div class="myahl-idcard-back-footer">' +
+                '<div class="myahl-idcard-back-org">Augmented Human Lab</div>' +
+                '<div>NUS School of Computing · Singapore</div>' +
+                (profilePathHuman
+                  ? '<div class="myahl-idcard-back-url">ahlab.org/' + escapeHtml(profilePathHuman) + '</div>'
+                  : '') +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    var headerRowHTML = '<div class="myahl-header-row">' + profileHTML + idCardHTML + '</div>';
+
     // Each section leads with its add-new tile, sized to match the
     // shape of the cards/tiles that follow.
     var projectsHTML =
@@ -500,10 +569,30 @@
         '<button class="myahl-logout" type="button" id="myahl-signout">Sign out</button>' +
       '</div>';
 
-    root.innerHTML = profileHTML + projectsHTML + pubsHTML + eventsHTML + pressHTML + resourcesHTML + logoutHTML;
+    root.innerHTML = headerRowHTML + projectsHTML + pubsHTML + eventsHTML + pressHTML + resourcesHTML + logoutHTML;
 
     var signoutBtn = document.getElementById('myahl-signout');
     if (signoutBtn) signoutBtn.addEventListener('click', function () { window.AHLAuth.logout(); });
+
+    // ── ID-card flip ─────────────────────────────────────────
+    // Click anywhere on the card (or Space/Enter when focused)
+    // to flip between front and back faces. aria-pressed tracks
+    // state so a screen reader announces "card front / card
+    // back" each time it toggles.
+    var idcard = document.getElementById('myahl-idcard');
+    if (idcard) {
+      var toggleFlip = function () {
+        var flipped = idcard.classList.toggle('is-flipped');
+        idcard.setAttribute('aria-pressed', flipped ? 'true' : 'false');
+      };
+      idcard.addEventListener('click', toggleFlip);
+      idcard.addEventListener('keydown', function (e) {
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          toggleFlip();
+        }
+      });
+    }
 
     // Anything that's now in the user's authoritative dashboard
     // already published — drop matching entries from the local

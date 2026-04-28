@@ -114,5 +114,17 @@
       "summary": "AHLab presents 5 papers and 2 posters at CHI 2026 in Barcelona."
     }
   ],
-  "press": []
+  "press": [
+    {
+      "slug": "viscerohaptics-chi-2026-honorable-mention",
+      "title": "VisceroHaptics: Investigating the Effects of Gut-based Audio-Haptic Feedback on Gastric Feelings and Gastric Interoceptive Behaviors | Honorable Mention",
+      "year": "2026",
+      "type": "award",
+      "outlet": "ACM CHI",
+      "url": null,
+      "projects": [
+        "gutio"
+      ]
+    }
+  ]
 }

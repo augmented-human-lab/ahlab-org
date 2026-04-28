@@ -215,6 +215,17 @@
   ],
   "press": [
     {
+      "slug": "viscerohaptics-chi-2026-honorable-mention",
+      "title": "VisceroHaptics: Investigating the Effects of Gut-based Audio-Haptic Feedback on Gastric Feelings and Gastric Interoceptive Behaviors | Honorable Mention",
+      "year": "2026",
+      "type": "award",
+      "outlet": "ACM CHI",
+      "url": null,
+      "projects": [
+        "gutio"
+      ]
+    },
+    {
       "slug": "toro-prototypes-for-humanity",
       "title": "Toro | Prototypes for Humanity",
       "year": "2023",

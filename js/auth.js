@@ -206,12 +206,15 @@
     //   isolation is correct for a "session," wrong for in-flight flow
     //   state.
 
-    // (1) Stash return path. Use pathname+search+hash so query strings
-    //     and scroll anchors are preserved. If we're already on the
-    //     callback itself (shouldn't happen, but defensive), skip to /.
-    var returnPath = location.pathname + location.search + location.hash;
-    if (returnPath.indexOf('/auth-callback/') === 0) {
-      returnPath = '/';
+    // (1) Stash return path. Members always land on /my-ahl/ after
+    //     sign-in — that's their dashboard, the page they almost
+    //     certainly wanted to reach by clicking "Member login". The
+    //     only exception is when they ALREADY clicked from /my-ahl/
+    //     itself — then there's nothing to override and we just send
+    //     them home (preserves search/hash on that page).
+    var returnPath = '/my-ahl/';
+    if (location.pathname.indexOf('/my-ahl') === 0) {
+      returnPath = location.pathname + location.search + location.hash;
     }
     try { localStorage.setItem(RETURN_KEY, returnPath); }
     catch (e) { /* quota / privacy mode — proceed anyway; /auth-callback/
