@@ -1,20 +1,26 @@
 // event-chip-live.js
 // ==================
-// Runtime refresher for .event-chip elements. The build step emits
-// chips inside a generous window (14 days before start → 1 day after
-// end) so a site built "yesterday" still carries the chip into
-// today's visitors. This script narrows that window to the real
-// display policy:
+// Runtime visibility refresher for time-bounded event UI:
 //
-//   • Visible:     7 days before `starts` → end of `ends` day
-//   • LIVE state:  during `starts` → end of `ends` day
+//   • .event-chip      — small inline pills on person/project/
+//                        publication detail pages. Window: 7 days
+//                        before `starts` → end of `ends` day. Adds
+//                        `is-live` class while the event is in progress.
+//   • .event-row       — cards in the home-page events strip. Window:
+//                        STRIP_LEAD_DAYS before `starts` → end of
+//                        `ends` + STRIP_TRAIL_DAYS day. Keep these
+//                        constants in sync with build-pages.js.
 //
-// Each chip carries data-starts and data-ends (ISO YYYY-MM-DD). The
-// script toggles `hidden` and the `is-live` class purely from those.
-// No network calls, no dependencies — included as a plain <script>
-// on any page that may carry chips (person, project, publications).
+// The build step emits these elements inside a slightly generous
+// window so a site built "yesterday" still carries the right items
+// into today's visitors. This script narrows them to the real
+// runtime policy and toggles `hidden` purely from data-starts /
+// data-ends. No network calls, no dependencies.
 (function () {
-  var SHOW_LEAD_DAYS = 7;
+  var DAY = 24 * 60 * 60 * 1000;
+  var CHIP_LEAD_DAYS  = 7;
+  var STRIP_LEAD_DAYS  = 7;
+  var STRIP_TRAIL_DAYS = 7;
 
   function parseDate(s) {
     if (!s) return null;
@@ -24,37 +30,60 @@
 
   function refresh(now) {
     now = now || new Date();
+
+    // ── Chips ──────────────────────────────────────────────
     var chips = document.querySelectorAll('.event-chip[data-starts]');
     for (var i = 0; i < chips.length; i++) {
       var chip = chips[i];
-      var s = parseDate(chip.getAttribute('data-starts'));
-      var e = parseDate(chip.getAttribute('data-ends')) || s;
-      if (!s) continue;
+      var cs = parseDate(chip.getAttribute('data-starts'));
+      var ce = parseDate(chip.getAttribute('data-ends')) || cs;
+      if (!cs) continue;
       // End-of-day for `ends` so the chip stays visible through the
       // full final day rather than flipping off at midnight of the
       // day itself.
-      var endOfDay = new Date(e.getTime() + 24 * 60 * 60 * 1000 - 1);
-      var showFrom = new Date(s.getTime() - SHOW_LEAD_DAYS * 24 * 60 * 60 * 1000);
-
-      var visible = now >= showFrom && now <= endOfDay;
-      var live    = now >= s        && now <= endOfDay;
-
-      if (!visible) {
+      var chipEnd   = new Date(ce.getTime() + DAY - 1);
+      var chipStart = new Date(cs.getTime() - CHIP_LEAD_DAYS * DAY);
+      var chipVisible = now >= chipStart && now <= chipEnd;
+      var chipLive    = now >= cs        && now <= chipEnd;
+      if (!chipVisible) {
         chip.hidden = true;
       } else {
         chip.hidden = false;
-        chip.classList.toggle('is-live', live);
+        chip.classList.toggle('is-live', chipLive);
       }
     }
 
     // If a chip row ended up with zero visible chips, hide its label
     // and the row container so we don't leave an orphaned "Presenting
     // at" heading with nothing beside it.
-    var rows = document.querySelectorAll('[data-event-chip-row]');
-    for (var j = 0; j < rows.length; j++) {
-      var row = rows[j];
-      var anyVisible = row.querySelector('.event-chip:not([hidden])');
-      row.style.display = anyVisible ? '' : 'none';
+    var chipRows = document.querySelectorAll('[data-event-chip-row]');
+    for (var j = 0; j < chipRows.length; j++) {
+      var crow = chipRows[j];
+      var anyChipVisible = crow.querySelector('.event-chip:not([hidden])');
+      crow.style.display = anyChipVisible ? '' : 'none';
+    }
+
+    // ── Home-strip event rows ──────────────────────────────
+    var rows = document.querySelectorAll('.event-row[data-starts]');
+    for (var k = 0; k < rows.length; k++) {
+      var row = rows[k];
+      var rs = parseDate(row.getAttribute('data-starts'));
+      var re = parseDate(row.getAttribute('data-ends')) || rs;
+      if (!rs) continue;
+      var rowStart = new Date(rs.getTime() - STRIP_LEAD_DAYS * DAY);
+      var rowEnd   = new Date(re.getTime() + (STRIP_TRAIL_DAYS + 1) * DAY - 1);
+      row.hidden = !(now >= rowStart && now <= rowEnd);
+    }
+
+    // Hide the whole "Recent & upcoming events" section (header
+    // included) when no rows are visible. Covers both the
+    // build-empty case (no rows at all) and the runtime-empty case
+    // (build had rows but they all aged out before the visitor
+    // loaded the page).
+    var section = document.querySelector('.events-feed-section');
+    if (section) {
+      var anyRowVisible = section.querySelector('.event-row:not([hidden])');
+      section.hidden = !anyRowVisible;
     }
   }
 
