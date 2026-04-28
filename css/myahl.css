@@ -33,32 +33,63 @@
 
 /* ── Header row: profile tile + member ID card ─────────────
    Profile (left) flexes to fill; ID card (right) holds a fixed
-   380px so it keeps true credit-card proportions. Stacks under
-   992px because below that the profile-tile's photo + info +
-   edit-button trio gets squeezed. */
+   380 px so it keeps true credit-card proportions. The row is
+   pinned to the card's natural aspect-ratio height (380 / 1.586
+   ≈ 240 px) — without this, the profile tile's expertise strip
+   could push the row taller, which would in turn stretch the
+   card off-ratio (and on Safari has been observed to widen the
+   card itself, overflowing to the right). Pinning the row height
+   means the expertise bar adapts to fill the remaining space
+   inside the profile tile, while the card stays exactly its
+   natural 380 × 240 size.
+
+   Stacks under 992 px (where the row height pin is dropped) —
+   below that the profile tile's photo + info + edit-button trio
+   gets squeezed too tight to share a row with the card. */
 .myahl-header-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 380px;
+  grid-template-rows: calc(380px / 1.586);
   gap: 24px;
   align-items: stretch;
   margin-bottom: 12px;
 }
 .myahl-header-row > .myahl-profile-tile { margin-bottom: 0; }
 @media (max-width: 991px) {
-  .myahl-header-row { grid-template-columns: 1fr; }
+  .myahl-header-row {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
 }
 
-/* ── Profile tile (top of dashboard) ───────────────────────── */
+/* ── Profile tile (top of dashboard) ─────────────────────────
+   Outer is a flex column so the expertise strip can pin to the
+   bottom (margin-top:auto) and fill the vertical space the tile
+   inherits from matching the ID-card's height inside .myahl-
+   header-row. The original photo / info / edit-button row lives
+   inside .myahl-profile-tile-main, kept as a 3-col grid. */
 .myahl-profile-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--color-neutral-10);
+  border: 1px solid var(--color-neutral-30);
+  border-radius: var(--radius-lg);
+  /* 20 px (vs the previous 24) to free up vertical room for
+     the expertise strip inside the row's pinned height. */
+  padding: 20px;
+  margin-bottom: 12px;
+  /* Keeps the strip from blowing out the row in any rendering
+     edge case where flex-children try to expand past their
+     container. Pairs with the row's grid-template-rows pin. */
+  overflow: hidden;
+}
+.myahl-profile-tile-main {
   display: grid;
   grid-template-columns: 96px 1fr auto;
   gap: 24px;
   align-items: center;
-  background: var(--color-neutral-10);
-  border: 1px solid var(--color-neutral-30);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  margin-bottom: 12px;
+  flex-shrink: 0;
 }
 .myahl-profile-photo {
   width: 96px;
@@ -106,14 +137,106 @@
   opacity: .55;
 }
 @media (max-width: 767px) {
-  .myahl-profile-tile {
+  .myahl-profile-tile { padding: 16px; }
+  .myahl-profile-tile-main {
     grid-template-columns: 64px 1fr;
     gap: 16px;
-    padding: 16px;
   }
   .myahl-profile-photo { width: 64px; height: 64px; }
   .myahl-profile-edit  { grid-column: 1 / -1; justify-self: start; }
   .myahl-profile-info h2 { font-size: 18px; }
+}
+
+/* ── Expertise strip (inside profile tile) ──────────────────
+   Mirrors people.css's .expertise-bar but smaller and adaptive
+   — the strip is `flex: 1` so it fills whatever vertical space
+   is left after the top row, never forcing the row taller than
+   the ID card's pinned height. Segment widths come from flex-
+   grow with `count` as the growth factor (proportional bar
+   without JS). The standalone "Assistive Augmentation Expertise"
+   title from people.css is dropped here to save vertical room;
+   the segment names + percentages self-describe.  */
+.myahl-expertise {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+.myahl-expertise-bar {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  min-height: 60px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-neutral-20);
+  gap: 2px;
+}
+.myahl-expertise-segment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 0;
+  padding: 8px 6px;
+  overflow: hidden;
+  cursor: default;
+  transition: filter .2s;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .18);
+}
+.myahl-expertise-segment:hover { filter: brightness(1.08); }
+.myahl-expertise-segment-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+  /* Source icons are dark-on-transparent — invert + slight
+     opacity dip so they read as soft white over the segment
+     colour without out-shouting the label/count. */
+  filter: brightness(0) invert(1);
+  opacity: .95;
+}
+.myahl-expertise-segment-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  max-width: 100%;
+}
+.myahl-expertise-segment-count {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1;
+  opacity: .92;
+}
+@media (max-width: 991px) {
+  /* Tile no longer matches the card's height once the row
+     stacks. Drop the flex-fill so the strip takes a sensible
+     fixed height, and let the tile size to its content. */
+  .myahl-profile-tile { overflow: visible; }
+  .myahl-expertise {
+    margin-top: 0;
+    flex: 0 0 auto;
+  }
+  .myahl-expertise-bar {
+    flex: 0 0 auto;
+    height: 80px;
+    min-height: 0;
+  }
+}
+@media (max-width: 567px) {
+  .myahl-expertise-bar { height: 72px; }
+  .myahl-expertise-segment-icon { width: 20px; height: 20px; }
+  .myahl-expertise-segment-name { font-size: 10px; }
+  .myahl-expertise-segment-count { font-size: 11px; }
 }
 
 /* ── Member ID card ─────────────────────────────────────────

@@ -230,14 +230,60 @@
   // Same six principles + CDN icon URLs used by build-people.js. Kept
   // in sync manually — short list, low churn. Cards render an icon
   // strip on the glass overlay; hover swaps to the highlighted variant.
-  var PRINCIPLE_BY_KEY = {
-    body:         { name: 'Body',         icon: 'https://cdn.ahlab.org/media/site/icon-body-1.png',         iconHover: 'https://cdn.ahlab.org/media/site/icon-body-hl.png' },
-    cognitive:    { name: 'Cognitive',    icon: 'https://cdn.ahlab.org/media/site/icon-cognitive-1.png',    iconHover: 'https://cdn.ahlab.org/media/site/icon-cognitive-hl.png' },
-    perceptual:   { name: 'Perceptual',   icon: 'https://cdn.ahlab.org/media/site/icon-perceptual-1.png',   iconHover: 'https://cdn.ahlab.org/media/site/icon-perceptual-hl.png' },
-    physical:     { name: 'Physical',     icon: 'https://cdn.ahlab.org/media/site/icon-physical-1.png',     iconHover: 'https://cdn.ahlab.org/media/site/icon-physical-hl.png' },
-    identity:     { name: 'Identity',     icon: 'https://cdn.ahlab.org/media/site/icon-identity.png',       iconHover: 'https://cdn.ahlab.org/media/site/icon-identity-hl.png' },
-    sociocultural:{ name: 'Sociocultural',icon: 'https://cdn.ahlab.org/media/site/icon-sociocultural-1.png',iconHover: 'https://cdn.ahlab.org/media/site/icon-sociocultural-hl.png' }
-  };
+  // `color` is used by the expertise bar segments (same hex values as
+  // PRINCIPLES in build-people.js — keep these in sync).
+  var PRINCIPLES = [
+    { key: 'body',         name: 'Body',         color: '#00d7ee', icon: 'https://cdn.ahlab.org/media/site/icon-body-1.png',         iconHover: 'https://cdn.ahlab.org/media/site/icon-body-hl.png' },
+    { key: 'cognitive',    name: 'Cognitive',    color: '#6100ff', icon: 'https://cdn.ahlab.org/media/site/icon-cognitive-1.png',    iconHover: 'https://cdn.ahlab.org/media/site/icon-cognitive-hl.png' },
+    { key: 'perceptual',   name: 'Perceptual',   color: '#3366ff', icon: 'https://cdn.ahlab.org/media/site/icon-perceptual-1.png',   iconHover: 'https://cdn.ahlab.org/media/site/icon-perceptual-hl.png' },
+    { key: 'physical',     name: 'Physical',     color: '#0e0f11', icon: 'https://cdn.ahlab.org/media/site/icon-physical-1.png',     iconHover: 'https://cdn.ahlab.org/media/site/icon-physical-hl.png' },
+    { key: 'identity',     name: 'Identity',     color: '#a200d5', icon: 'https://cdn.ahlab.org/media/site/icon-identity.png',       iconHover: 'https://cdn.ahlab.org/media/site/icon-identity-hl.png' },
+    { key: 'sociocultural',name: 'Sociocultural',color: '#1a2b7a', icon: 'https://cdn.ahlab.org/media/site/icon-sociocultural-1.png',iconHover: 'https://cdn.ahlab.org/media/site/icon-sociocultural-hl.png' }
+  ];
+  var PRINCIPLE_BY_KEY = PRINCIPLES.reduce(function (acc, p) { acc[p.key] = p; return acc; }, {});
+
+  // Segmented horizontal bar showing the member's mix of assistive-
+  // augmentation expertise. Mirrors buildExpertiseBar() in
+  // build-people.js: count tags across all projects (multi-tagged
+  // projects count once per tag), normalise per-person, and lay out
+  // segments biggest-first using flex-grow with the count as the
+  // growth factor. Returns '' when the member has no tagged projects.
+  function buildExpertiseBar(projects) {
+    if (!Array.isArray(projects) || !projects.length) return '';
+    var counts = {};
+    PRINCIPLES.forEach(function (p) { counts[p.key] = 0; });
+    projects.forEach(function (proj) {
+      (Array.isArray(proj.principles) ? proj.principles : []).forEach(function (t) {
+        if (counts[t] != null) counts[t]++;
+      });
+    });
+    var total = 0;
+    Object.keys(counts).forEach(function (k) { total += counts[k]; });
+    if (total === 0) return '';
+
+    var segments = PRINCIPLES
+      .map(function (p) { return { p: p, count: counts[p.key] }; })
+      .filter(function (s) { return s.count > 0; })
+      .sort(function (a, b) { return b.count - a.count; });
+
+    var segmentsHTML = segments.map(function (s) {
+      var pct = Math.round((s.count / total) * 100);
+      var label = s.p.name + ' — ' + s.count + (s.count === 1 ? ' project' : ' projects') + ' (' + pct + '%)';
+      return '<div class="myahl-expertise-segment" ' +
+        'style="flex: ' + s.count + ' ' + s.count + ' 0; background: ' + s.p.color + ';" ' +
+        'title="' + escapeHtml(label) + '">' +
+        '<img class="myahl-expertise-segment-icon" src="' + escapeHtml(s.p.icon) + '" alt="" loading="lazy">' +
+        '<span class="myahl-expertise-segment-name">' + escapeHtml(s.p.name) + '</span>' +
+        '<span class="myahl-expertise-segment-count">' + pct + '%</span>' +
+      '</div>';
+    }).join('');
+
+    return '<div class="myahl-expertise">' +
+      '<div class="myahl-expertise-bar" role="img" aria-label="Assistive augmentation expertise across ' + total + ' principle tags">' +
+        segmentsHTML +
+      '</div>' +
+    '</div>';
+  }
 
   function renderPrincipleTags(tags) {
     if (!Array.isArray(tags) || !tags.length) return '';
@@ -429,17 +475,23 @@
   }
 
   function renderDashboard(d) {
+    // Profile tile is laid out as a flex column so the expertise bar
+    // can pin to the bottom (margin-top: auto) and fill the vertical
+    // space the tile inherits from matching the ID card's height.
     var profileHTML =
       '<div class="myahl-profile-tile">' +
-        '<div class="myahl-profile-photo">' +
-          (d.profile_image ? '<img src="' + escapeHtml(d.profile_image) + '" alt="' + escapeHtml(d.name) + '">' : '') +
+        '<div class="myahl-profile-tile-main">' +
+          '<div class="myahl-profile-photo">' +
+            (d.profile_image ? '<img src="' + escapeHtml(d.profile_image) + '" alt="' + escapeHtml(d.name) + '">' : '') +
+          '</div>' +
+          '<div class="myahl-profile-info">' +
+            '<h2>' + escapeHtml(d.name) + '</h2>' +
+            (d.role ? '<div class="role">' + escapeHtml(d.role) + '</div>' : '') +
+            (d.profile_url ? '<a class="public-link" href="' + escapeHtml(d.profile_url) + '">View public profile</a>' : '') +
+          '</div>' +
+          '<button type="button" class="myahl-profile-edit" disabled title="Coming soon — the editing pipeline is being wired up.">Edit profile</button>' +
         '</div>' +
-        '<div class="myahl-profile-info">' +
-          '<h2>' + escapeHtml(d.name) + '</h2>' +
-          (d.role ? '<div class="role">' + escapeHtml(d.role) + '</div>' : '') +
-          (d.profile_url ? '<a class="public-link" href="' + escapeHtml(d.profile_url) + '">View public profile</a>' : '') +
-        '</div>' +
-        '<button type="button" class="myahl-profile-edit" disabled title="Coming soon — the editing pipeline is being wired up.">Edit profile</button>' +
+        buildExpertiseBar(d.projects) +
       '</div>';
 
     // ── Member ID card ───────────────────────────────────────
