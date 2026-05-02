@@ -82,7 +82,7 @@
       "title": "Feeling the Facts: Real-time Wearable Fact-checkers Can Use Nudges to Reduce User Belief in False Information",
       "year": "2026",
       "citation": "Gupta, C.*, Aritonang, N.*, Rajendran D., Danry, V., Maes, P., and Nanayakkara, S. C., 2026. Feeling the Facts: Real-time Wearable Fact-checkers Can Use Nudges to Reduce User Belief in False Information. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI 2026).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "doi",
@@ -100,7 +100,7 @@
       "title": "Beyond Descriptions: A Generative Scene2Audio Framework for Blind and Low-Vision Users to Experience Vista Landscapes",
       "year": "2026",
       "citation": "Gupta, C., Peng, J., Ram, A., Sridhar, S., Jouffrais, C., Nanayakkara, S.C., 2026. Beyond Descriptions: A Generative Scene2Audio Framework for Blind and Low-Vision Users to Experience Vista Landscapes. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI 2026).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "doi",
@@ -118,7 +118,7 @@
       "title": "VRSense: An Explainable System to Help Mitigate Cybersickness in VR Games",
       "year": "2025",
       "citation": "Dissanayake, D., Gupta, C., Sasikumar, P. and Nanayakkara, S.C., 2025, April. VRSense: An Explainable System to Help Mitigate Cybersickness in VR Games. In Proceedings of the Extended Abstracts of the CHI Conference on Human Factors in Computing Systems (pp. 1-7).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -136,7 +136,7 @@
       "title": "Towards Temporally Explainable Dysarthric Speech Clarity Assessment",
       "year": "2025",
       "citation": "Park, S., Gupta, C., Kwan, M.K.Y., Fung, X., Yip, A.W. and Nanayakkara, S. C., 2025. Towards Temporally Explainable Dysarthric Speech Clarity Assessment. Interspeech 2025.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -154,7 +154,7 @@
       "title": "Scene-to-Audio: Distant Scene Sonification for Blind and Low Vision People",
       "year": "2025",
       "citation": "Gupta, C., Ram, A., Sridhar, S., Jouffrais, C. and Nanayakkara, S. C., 2025, April. Scene-to-Audio: Distant Scene Sonification for Blind and Low Vision People. In Proceedings of the Extended Abstracts of the CHI Conference on Human Factors in Computing Systems (pp. 1-9).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -172,7 +172,7 @@
       "title": "Human Robot Interaction for People with Visual Impairments: A Systematic Literature Review",
       "year": "2025",
       "citation": "Wei, Y., Rocher, N., Gupta, C., Nguyen, M.H., Zimmermann, R., Ooi, W.T., Jouffrais, C. and Nanayakkara, S.C., 2025. Human Robot Interaction for Blind and Low Vision People: A Systematic Literature Review. In: Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems (CHI '25). New York, NY, USA: Association for Computing Machinery, Article 276, pp.1–19.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -190,7 +190,7 @@
       "title": "GutIO: Toward Sensing and Inducing Gut Feelings with Abdominal Sounds",
       "year": "2025",
       "citation": "Nguyen, M.H., Messerschmidt, M.A, Gupta, C. and Nanayakkara, S.C., 2025. GutIO: Toward Sensing and Inducing Gut Feelings with Abdominal Sounds. Extended Abstracts of the CHI Conference on Human Factors in Computing Systems. CHI EA '25",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -208,7 +208,7 @@
       "title": "DroneAudioset: An Audio Dataset for Drone-based Search and Rescue",
       "year": "2025",
       "citation": "Gupta, C.*, Ramesh, S.*, Sasikumar, P., Yeo, K. P., & Nanayakkara, S. C., \"DroneAudioset: An Audio Dataset for Drone-based Search and Rescue,\" NeurIPS 2025.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -222,7 +222,9 @@
       "title": "VR.net: A Real-world Dataset for Virtual Reality Motion Sickness Research",
       "year": "2024",
       "citation": "Wen, E., Gupta, C., Sasikumar, P., Billinghurst, M., Wilmott, J., Skow, E., Dey, A., Nanayakkara, S.C. VR.net: A Real-world Dataset for Virtual Reality Motion Sickness Research. The 31st IEEE Conference on Virtual Reality and 3D User Interfaces, 2024. Best Paper Award!",
-      "award": "Best Paper Award",
+      "awards": [
+        "Best Paper Award"
+      ],
       "links": [
         {
           "label": "DOI",
@@ -240,7 +242,7 @@
       "title": "SonicVista: Towards Creating Awareness of Distant Scenes through Sonification",
       "year": "2024",
       "citation": "Gupta, C., Sridhar, S., Matthies, D.J., Jouffrais, C. and Nanayakkara, S.C., 2024. SonicVista: Towards Creating Awareness of Distant Scenes through Sonification. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 8(2), pp.1-32.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -258,7 +260,7 @@
       "title": "Towards Controllable Audio Texture Morphing",
       "year": "2023",
       "citation": "Gupta C*., Kamath P*., Wei. Y., Li, Z., Nanayakkara S.C., Wyse L. 2023. Towards Controllable Audio Texture Morphing. In 48th IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP '23), 4-10 June, 2023, Rhodes Island, Greece.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -272,7 +274,7 @@
       "title": "Evaluating Descriptive Quality of AI-Generated Audio Using Image-Schemas",
       "year": "2023",
       "citation": "Kamath, P., Li, Z., Gupta, C., Jaidka, K., Nanayakkara, S.C. and Wyse, L. 2023. Evaluating Descriptive Quality of AI Generated Audio Using Image-Schemas. In 28th International Conference on Intelligent User Interfaces (IUI ’23), March 27–31, 2023, Sydney, NSW, Australia.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -290,7 +292,7 @@
       "title": "EMO-KNOW: A Large Scale Dataset on Emotion-Cause",
       "year": "2023",
       "citation": "Nguyen, M., Samaradivakara, Y., Sasikumar, P., Gupta, C. and Nanayakkara, S.C., 2023, December. EMO-KNOW: A Large Scale Dataset on Emotion-Cause. In Findings of the Association for Computational Linguistics: EMNLP 2023 (pp. 11043-11051).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -308,7 +310,7 @@
       "title": "Can AI Models Summarize Your Diary Entries? Investigating Utility of Abstractive Summarization for Autobiographical Text.",
       "year": "2023",
       "citation": "Siriwardhana, S*., Gupta, C.*, Kaluarachchi, T., Dissanayake, V., Ellawela, S., & Nanayakkara, S.C. (2023). Can AI Models Summarize Your Diary Entries? Investigating Utility of Abstractive Summarization for Autobiographical Text. International Journal of Human–Computer Interaction, 1–19.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -326,7 +328,7 @@
       "title": "Computational Music Systems for Emotional Health and Wellbeing: A Review",
       "year": "2022",
       "citation": "Chua, P., Gupta, C., R Agres, K. and Nanayakkara, S., 2022. Computational Music Systems for Emotional Health and Wellbeing: A Review.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",

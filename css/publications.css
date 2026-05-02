@@ -133,6 +133,12 @@
   color: var(--color-neutral-70);
   margin-bottom: 10px;
 }
+/* .pub-awards wraps one .pub-award chip per entry — flex/wrap so
+   pubs with multiple honors lay out cleanly on narrow screens. */
+.pub-awards {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 10px;
+}
 .pub-award {
   display: inline-flex; align-items: center; gap: 6px;
   font-family: var(--font-display); font-weight: 700;
@@ -140,7 +146,6 @@
   color: var(--color-accent);
   background: rgba(97,0,255,.08);
   padding: 4px 10px; border-radius: var(--radius-sm);
-  margin-bottom: 10px;
 }
 .pub-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
 .pub-link {

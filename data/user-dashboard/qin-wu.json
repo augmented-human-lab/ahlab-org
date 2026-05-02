@@ -43,7 +43,7 @@
       "title": "Augmented Tabletop Interaction as an Assistive Tool: Tidd’s Role in Daily Life Skills Training for Autistic Children",
       "year": "2025",
       "citation": "Wu, Q., Wang, W., Liu, Q., Zhang, R., Pai, Y.S., Billinghurst, M. and Nanayakkara, S.C., 2025. Augmented tabletop interaction as an assistive tool: Tidd’s role in daily life skills training for autistic children. International Journal of Human-Computer Studies, p.103517.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -61,7 +61,7 @@
       "title": "Early Autism Screening in Children Using Facial Recognition",
       "year": "2024",
       "citation": "Wu, Q., Xiao, X., Liu, Y., Billinghurst, M. and Nanayakkara, S.C., 2024, May. Early autism screening in children using facial recognition. In Extended Abstracts of the CHI Conference on Human Factors in Computing Systems (pp. 1-7)",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -79,7 +79,7 @@
       "title": "Designing Interactive Technology to Support Children with Autism",
       "year": "2024",
       "citation": "Wu., Q. 2024. Designing Interactive Technology to Support Children with Autism. In Extended Abstracts of the CHI Conference on Human Factors in Computing Systems (CHI EA ’24), May 11–16, 2024, Honolulu, HI, USA.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -97,7 +97,7 @@
       "title": "Tidd: Augmented Tabletop Interaction Supports Children with Autism to Train Daily Living Skills",
       "year": "2023",
       "citation": "Wu, Q., Wang, W., Liu, Q., Cao, J., Xu, D. and Nanayakkara, S.C., 2023. Tidd: Augmented Tabletop Interaction Supports Children with Autism to Train Daily Living Skills. In ACM SIGGRAPH 2023 Posters (pp. 1-2).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -115,7 +115,7 @@
       "title": "Striving for Authentic and Sustained Technology Use in the Classroom: Lessons Learned from a Longitudinal Evaluation of a Sensor-Based Science Education Platform",
       "year": "2023",
       "citation": "Chua, Y., Cooray, S., Cortes, J.P.F., Denny, P., Dupuch, S., Garbett, D.L., Nassani, A., Cao, J., Qiao, H., Reis, A, Reis, D., Scholl, P.M., Sridhar, P.K., Suriyaarachchi, H., Taimana, F., Tang, V., Weerasinghe, C., Wen, E., Wu, M., Wu, Q., Zhang, H., Nanayakkara, S.C. 2023. Striving for Authentic and Sustained Technology Use In the Classroom: Lessons Learned from a Longitudinal Evaluation of a Sensor-based Science Education Platform. International Journal of Human–Computer Interaction (IJHCI).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -133,7 +133,9 @@
       "title": "Players and performance: opportunities for social interaction with augmented tabletop games at centres for children with autism",
       "year": "2022",
       "citation": "Wu, Q., Xu, R., Liu, V., Lottridge, Danielle., and Nanayakkara, S.C. 2022. Players and performance: opportunities for social interaction with augmented tabletop games at centres for children with autism. Proc. ACM Hum.-Comput. Interact. 6, ISS, Article 563 (December 2022), 24 pages. Honorable Mention Award!",
-      "award": "Honorable Mention Award",
+      "awards": [
+        "Honorable Mention Award"
+      ],
       "links": [
         {
           "label": "DOI",
@@ -151,7 +153,7 @@
       "title": "Jammify: Interactive Multi-Sensory System for Digital Art Jamming",
       "year": "2021",
       "citation": "Muthukumarana S., Elvitigala D.S., Wu Q., Pai Y.S., Nanayakkara S.C. 2021. Jammify: Interactive Multi-sensory System for Digital Art Jamming. In Human-Computer-Interaction – INTERACT 2021, Springer International Publishing, Cham, 23–41",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",

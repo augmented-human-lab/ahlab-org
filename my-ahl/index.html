@@ -4,10 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My AHL — Augmented Human Lab</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Member dashboard for Augmented Human Lab researchers.">
+<meta name="theme-color" content="#6100FF">
+<link rel="icon" href="https://ahlab.org/wp-content/uploads/2021/05/cropped-Group@2x-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="https://ahlab.org/wp-content/uploads/2021/05/cropped-Group@2x-192x192.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="https://use.typekit.net/zws2qzx.css">
 <link rel="stylesheet" href="/css/theme.css">
 <link rel="stylesheet" href="/css/auth.css">
 <link rel="stylesheet" href="/css/myahl.css">
+<link rel="stylesheet" href="/css/publication-add.css">
 <link rel="stylesheet" href="/css/event-chip.css">
 <style>
 /* ── Hero (signed-out + signed-in) ─────────────────────────
@@ -149,11 +156,40 @@
   <symbol id="i-myahl-edit" viewBox="0 0 24 24">
     <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
   </symbol>
+  <!-- Trash — Feather-style. Used by the delete button on every
+       my-ahl card (project, publication, event, press). -->
+  <symbol id="i-myahl-trash" viewBox="0 0 24 24">
+    <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+    <path d="M10 11v6M14 11v6"/>
+  </symbol>
   <symbol id="i-myahl-wiki" viewBox="0 0 24 24">
     <!-- Open book — universal "knowledge / docs" glyph, sized to read
          clearly inside the 84px app-icon tile. -->
     <path d="M2 5h6.5A3.5 3.5 0 0 1 12 8.5V21a3 3 0 0 0-3-3H2z"/>
     <path d="M22 5h-6.5A3.5 3.5 0 0 0 12 8.5V21a3 3 0 0 1 3-3h7z"/>
+  </symbol>
+  <!-- Link / chain — used by the "Add publication" form's DOI status
+       line. Two interlinked oval segments, Feather-style. -->
+  <symbol id="i-myahl-link" viewBox="0 0 24 24">
+    <path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 1 0-7.07-7.07l-1.5 1.5"/>
+    <path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 1 0 7.07 7.07l1.5-1.5"/>
+  </symbol>
+  <!-- Document / file — used for the "Add PDF" picker affordance. -->
+  <symbol id="i-myahl-file" viewBox="0 0 24 24">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <path d="M14 2v6h6M9 13h6M9 17h6"/>
+  </symbol>
+  <!-- X / close — used by the award and PDF "remove" controls. -->
+  <symbol id="i-myahl-x" viewBox="0 0 24 24">
+    <path d="M6 6l12 12M18 6L6 18"/>
+  </symbol>
+  <!-- Project — Feather-style "layers / stack" glyph used by the
+       "+ Tag project" button and project chips in the publication-add
+       form. Reads as "grouped work / collection". -->
+  <symbol id="i-myahl-project" viewBox="0 0 24 24">
+    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+    <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
   </symbol>
 </svg>
 
@@ -179,6 +215,10 @@
 <script src="/js/pending-cache.js" defer></script>
 <script src="/js/myahl-forms.js" defer></script>
 <script src="/js/myahl-patches.js" defer></script>
+<script src="/js/harvard-cite.js" defer></script>
+<script src="/js/publication-add.js" defer></script>
+<script src="/js/press-add.js" defer></script>
+<script src="/js/event-add.js" defer></script>
 
 <script>
 /*
@@ -311,6 +351,19 @@
     '</button>';
   }
 
+  // Delete-trash button — visible on every card. Carries
+  // data-myahl-delete with the targetType + slug so a single
+  // delegated click handler (further down) can pick it up.
+  // Broker isn't wired yet; click currently confirms then shows
+  // a "coming soon" notice.
+  function deleteButton(targetType, slug, extraClass) {
+    var cls = 'myahl-delete' + (extraClass ? ' ' + extraClass : '');
+    return '<button type="button" class="' + cls + '" aria-label="Delete" title="Delete" ' +
+      'data-myahl-delete="' + escapeHtml(targetType) + '" data-myahl-slug="' + escapeHtml(slug) + '">' +
+      '<svg aria-hidden="true"><use href="#i-myahl-trash"/></svg>' +
+    '</button>';
+  }
+
   // ── Section renderers ─────────────────────────────────────
   // Each returns a fragment of HTML. The "add new" tile is included
   // as the last element of the grid/list so it shows up at the end
@@ -329,6 +382,7 @@
         '</div>' +
       '</a>' +
       editButton() +
+      deleteButton('project', p.slug) +
     '</div>';
   }
 
@@ -339,7 +393,14 @@
   function pubItemHTML(p) {
     var url = '/publications/#' + encodeURIComponent(p.slug);
     var titleEl = '<a href="' + escapeHtml(url) + '" class="myahl-pub-title">' + escapeHtml(p.title) + '</a>';
-    var awardHTML = p.award ? '<div class="myahl-pub-award">★ ' + escapeHtml(p.award) + '</div>' : '';
+    // awards[] schema (post-migration). Render one chip per entry;
+    // empty arrays render nothing.
+    var awardsList = Array.isArray(p.awards) ? p.awards : [];
+    var awardHTML = awardsList.length
+      ? '<div class="myahl-pub-awards">' +
+          awardsList.map(function (a) { return '<span class="myahl-pub-award">★ ' + escapeHtml(a) + '</span>'; }).join('') +
+        '</div>'
+      : '';
     var citationHTML = p.citation ? '<div class="myahl-pub-citation">' + escapeHtml(p.citation) + '</div>' : '';
     var linksHTML = '';
     if (Array.isArray(p.links) && p.links.length) {
@@ -354,6 +415,7 @@
       citationHTML +
       linksHTML +
       editButton('myahl-pub-edit') +
+      deleteButton('publication', p.slug, 'myahl-pub-delete') +
     '</li>';
   }
 
@@ -362,7 +424,10 @@
   // matching <symbol id="i-myahl-<type>"> defined inline at the top of
   // the body provides the SVG glyph.
   function tileHTML(opts) {
-    // opts: { iconType, href, target, title, meta, summary }
+    // opts: { iconType, href, target, title, meta, summary,
+    //         targetType, slug }
+    // targetType + slug power the delete button so the same tileHTML
+    // can render either an event ('event') or a press item ('press').
     var titleEl = opts.href
       ? '<a class="myahl-tile-title" href="' + escapeHtml(opts.href) + '"' + (opts.target || '') + '>' + escapeHtml(opts.title) + '</a>'
       : '<div class="myahl-tile-title">' + escapeHtml(opts.title) + '</div>';
@@ -376,6 +441,7 @@
         (opts.summary ? '<div class="myahl-tile-summary">' + escapeHtml(opts.summary) + '</div>' : '') +
       '</div>' +
       editButton() +
+      (opts.targetType && opts.slug ? deleteButton(opts.targetType, opts.slug) : '') +
     '</div>';
   }
 
@@ -389,7 +455,9 @@
       target: isExternal ? ' target="_blank" rel="noopener"' : '',
       title: e.title,
       meta: [e.location, dateStr].filter(Boolean).join(' · '),
-      summary: e.summary || ''
+      summary: e.summary || '',
+      targetType: 'event',
+      slug: e.slug
     });
   }
 
@@ -402,7 +470,9 @@
       target: p.url ? ' target="_blank" rel="noopener"' : '',
       title: p.title,
       meta: meta,
-      summary: ''
+      summary: '',
+      targetType: 'press',
+      slug: p.slug
     });
   }
 
@@ -438,15 +508,29 @@
   }
 
   function addNewProjectCard(label) {
-    return '<button type="button" class="myahl-addnew-base myahl-addnew-project" disabled title="' + ADDNEW_TIP + '">' +
+    // Anchor (not button) — navigates to the dedicated /projects/new/
+    // page that already hosts the project-create flow. Same dashed
+    // tile chrome as the other addnew variants so it slots into the
+    // grid identically.
+    return '<a href="/projects/new/" class="myahl-addnew-base myahl-addnew-project">' +
       '<span class="myahl-addnew-plus" aria-hidden="true">+</span>' +
       '<span>' + escapeHtml(label) + '</span>' +
-    '</button>';
+    '</a>';
   }
 
-  function addNewTile(label) {
+  function addNewTile(label, triggerAttr) {
     // Same shape as .myahl-tile (44px icon + body) so it slots into
-    // the 2-column tile grid as just another tile.
+    // the 2-column tile grid as just another tile. `triggerAttr` is
+    // the data-* attribute name (e.g. "data-event-add-trigger") that
+    // event-add.js / press-add.js scan for. When provided, the button
+    // is enabled (no disabled, no tooltip); otherwise the legacy
+    // "coming soon" placeholder remains.
+    if (triggerAttr) {
+      return '<button type="button" class="myahl-addnew-base myahl-addnew-tile" ' + triggerAttr + '>' +
+        '<span class="myahl-addnew-plus-circle" aria-hidden="true">+</span>' +
+        '<span>' + escapeHtml(label) + '</span>' +
+      '</button>';
+    }
     return '<button type="button" class="myahl-addnew-base myahl-addnew-tile" disabled title="' + ADDNEW_TIP + '">' +
       '<span class="myahl-addnew-plus-circle" aria-hidden="true">+</span>' +
       '<span>' + escapeHtml(label) + '</span>' +
@@ -459,8 +543,13 @@
     // the .myahl-pub-item class — and the counter-increment is on
     // .myahl-pub-item, not on every li — so the numbering stays clean
     // (real publications still read as 01, 02, 03 …).
+    //
+    // The button is rendered enabled and carries data-pub-add-trigger;
+    // myahl-publication-add.js binds a click handler that swaps it for
+    // an editable card. If that script hasn't loaded yet, the click is
+    // a no-op (rare — script is in <head> with defer).
     return '<li>' +
-      '<button type="button" class="myahl-addnew-base myahl-addnew-pub" disabled title="' + ADDNEW_TIP + '">' +
+      '<button type="button" class="myahl-addnew-base myahl-addnew-pub" data-pub-add-trigger>' +
         '<span class="myahl-addnew-plus" aria-hidden="true">+</span>' +
         '<span>' + escapeHtml(label) + '</span>' +
       '</button>' +
@@ -589,7 +678,7 @@
       '<section class="myahl-section">' +
         sectionHeaderHTML('My Events', d.events.length) +
         '<div class="myahl-tile-grid">' +
-          addNewTile('Add new event') +
+          addNewTile('Add new event', 'data-event-add-trigger') +
           d.events.map(eventTileHTML).join('') +
         '</div>' +
       '</section>';
@@ -598,7 +687,7 @@
       '<section class="myahl-section">' +
         sectionHeaderHTML('My Press', d.press.length) +
         '<div class="myahl-tile-grid">' +
-          addNewTile('Add new press mention') +
+          addNewTile('Add new press mention', 'data-press-add-trigger') +
           d.press.map(pressTileHTML).join('') +
         '</div>' +
       '</section>';
@@ -625,6 +714,31 @@
 
     var signoutBtn = document.getElementById('myahl-signout');
     if (signoutBtn) signoutBtn.addEventListener('click', function () { window.AHLAuth.logout(); });
+
+    // Delegated delete handler — every .myahl-delete button carries
+    // data-myahl-delete (targetType) + data-myahl-slug. Broker isn't
+    // wired yet; for now we confirm + show a toast and visually mark
+    // the card as pending-delete (faded) to demonstrate the flow.
+    root.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-myahl-delete]');
+      if (!btn) return;
+      e.preventDefault();
+      var targetType = btn.getAttribute('data-myahl-delete');
+      var slug       = btn.getAttribute('data-myahl-slug');
+      var card       = btn.closest('.myahl-pub-item, .myahl-project-wrap, .myahl-tile');
+      var title      = (card && (card.querySelector('.myahl-pub-title, h5, .myahl-tile-title') || {}).textContent) || slug;
+      if (!confirm('Delete "' + title + '"?\n\nThis will be sent for review (broker pipeline not yet wired — visual change only).')) return;
+      // Visual feedback only — fades the card. Reload restores it.
+      if (card) {
+        card.style.opacity = '.4';
+        card.style.pointerEvents = 'none';
+        var note = document.createElement('div');
+        note.className = 'myahl-pending-delete-note';
+        note.textContent = 'Pending review (delete pipeline not yet wired)';
+        card.appendChild(note);
+      }
+      console.info('[myahl] delete request:', targetType, slug);
+    });
 
     // ── ID-card flip ─────────────────────────────────────────
     // Click anywhere on the card (or Space/Enter when focused)

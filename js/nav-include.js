@@ -2,6 +2,20 @@
 // then wires up scrolled class, active link, mobile carousel centering,
 // and hamburger drawer toggle (fullscreen, hamburger morphs into X via CSS).
 (function () {
+  // ── Site-wide analytics bootstrap ─────────────────────────
+  // Loaded here (rather than tagged into every page <head>) so a single
+  // file owns the include and pages stay free of analytics boilerplate.
+  // The /js/analytics.js file is a no-op until its MEASUREMENT_ID is
+  // filled in, so this is safe to ship before the GA property exists.
+  // Trade-off: gtag.js loads ~50–200ms later than a head-tagged script,
+  // which is invisible for visitor counts — fine for our use case.
+  (function loadAnalytics() {
+    var s = document.createElement('script');
+    s.src = '/js/analytics.js';
+    s.async = true;
+    document.head.appendChild(s);
+  })();
+
   var mount = document.getElementById('site-nav-mount');
   if (!mount) return;
   fetch('/nav.html', { cache: 'no-cache' })

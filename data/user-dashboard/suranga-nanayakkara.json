@@ -1058,7 +1058,9 @@
       "title": "VisceroHaptics: Investigating the Effects of Gut-based Audio-Haptic Feedback on Gastric Feelings and Gastric Interoceptive Behaviors",
       "year": "2026",
       "citation": "Nguyen, M.H., Messerschmidt, M.A., Huber, J. and Nanayakkara, S. C., 2026. VisceroHaptics: Investigating the Effects of Gut-based Audio-Haptic Feedback on Gastric Feelings and Gastric Interoceptive Behaviors. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI 2026).",
-      "award": "Honorable Mention Award",
+      "awards": [
+        "Honorable Mention Award"
+      ],
       "links": [
         {
           "label": "doi",
@@ -1076,7 +1078,7 @@
       "title": "Interrupting Autopilot: Evaluating Sensory Interventions for Momentary Self-Regulation",
       "year": "2026",
       "citation": "Dissanayake, D., Mysan, M., Luo, Y., Antoni, T., Cleveland, P., Sasikumar, P., Nanayakkara, S. C., 2026. Interrupting Autopilot: Evaluating Sensory Interventions for Momentary Self-Regulation. In Extended Abstracts of the 2026 CHI Conference on Human Factors in Computing Systems (CHI EA ’26)",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "doi",
@@ -1094,7 +1096,7 @@
       "title": "Feeling the Facts: Real-time Wearable Fact-checkers Can Use Nudges to Reduce User Belief in False Information",
       "year": "2026",
       "citation": "Gupta, C.*, Aritonang, N.*, Rajendran D., Danry, V., Maes, P., and Nanayakkara, S. C., 2026. Feeling the Facts: Real-time Wearable Fact-checkers Can Use Nudges to Reduce User Belief in False Information. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI 2026).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "doi",
@@ -1112,7 +1114,7 @@
       "title": "Beyond Descriptions: A Generative Scene2Audio Framework for Blind and Low-Vision Users to Experience Vista Landscapes",
       "year": "2026",
       "citation": "Gupta, C., Peng, J., Ram, A., Sridhar, S., Jouffrais, C., Nanayakkara, S.C., 2026. Beyond Descriptions: A Generative Scene2Audio Framework for Blind and Low-Vision Users to Experience Vista Landscapes. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI 2026).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "doi",
@@ -1130,7 +1132,7 @@
       "title": "VRSense: An Explainable System to Help Mitigate Cybersickness in VR Games",
       "year": "2025",
       "citation": "Dissanayake, D., Gupta, C., Sasikumar, P. and Nanayakkara, S.C., 2025, April. VRSense: An Explainable System to Help Mitigate Cybersickness in VR Games. In Proceedings of the Extended Abstracts of the CHI Conference on Human Factors in Computing Systems (pp. 1-7).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1148,7 +1150,7 @@
       "title": "Towards Temporally Explainable Dysarthric Speech Clarity Assessment",
       "year": "2025",
       "citation": "Park, S., Gupta, C., Kwan, M.K.Y., Fung, X., Yip, A.W. and Nanayakkara, S. C., 2025. Towards Temporally Explainable Dysarthric Speech Clarity Assessment. Interspeech 2025.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1166,7 +1168,7 @@
       "title": "Scene-to-Audio: Distant Scene Sonification for Blind and Low Vision People",
       "year": "2025",
       "citation": "Gupta, C., Ram, A., Sridhar, S., Jouffrais, C. and Nanayakkara, S. C., 2025, April. Scene-to-Audio: Distant Scene Sonification for Blind and Low Vision People. In Proceedings of the Extended Abstracts of the CHI Conference on Human Factors in Computing Systems (pp. 1-9).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1184,7 +1186,7 @@
       "title": "Investigating the Use of Productive Failure as a Design Paradigm for Learning Introductory Python Programming",
       "year": "2025",
       "citation": "Suriyaarachchi, H., Denny, P. and Nanayakkara, S.C., 2025. Investigating the Use of Productive Failure as a Design Paradigm for Learning Introductory Python Programming. In: Proceedings of the 56th ACM Technical Symposium on Computer Science Education V. 1 (SIGCSETS 2025). New York, NY, USA: Association for Computing Machinery, pp.1085–1091.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1202,7 +1204,7 @@
       "title": "Human Robot Interaction for People with Visual Impairments: A Systematic Literature Review",
       "year": "2025",
       "citation": "Wei, Y., Rocher, N., Gupta, C., Nguyen, M.H., Zimmermann, R., Ooi, W.T., Jouffrais, C. and Nanayakkara, S.C., 2025. Human Robot Interaction for Blind and Low Vision People: A Systematic Literature Review. In: Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems (CHI '25). New York, NY, USA: Association for Computing Machinery, Article 276, pp.1–19.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1220,7 +1222,7 @@
       "title": "GutIO: Toward Sensing and Inducing Gut Feelings with Abdominal Sounds",
       "year": "2025",
       "citation": "Nguyen, M.H., Messerschmidt, M.A, Gupta, C. and Nanayakkara, S.C., 2025. GutIO: Toward Sensing and Inducing Gut Feelings with Abdominal Sounds. Extended Abstracts of the CHI Conference on Human Factors in Computing Systems. CHI EA '25",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1238,7 +1240,7 @@
       "title": "DroneAudioset: An Audio Dataset for Drone-based Search and Rescue",
       "year": "2025",
       "citation": "Gupta, C.*, Ramesh, S.*, Sasikumar, P., Yeo, K. P., & Nanayakkara, S. C., \"DroneAudioset: An Audio Dataset for Drone-based Search and Rescue,\" NeurIPS 2025.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -1252,7 +1254,7 @@
       "title": "Curious Shorts: Curiosity-Driven Exploration and Learning on Short-Form Video Platforms",
       "year": "2025",
       "citation": "Tan, F.F., Ram, A., Messerschmidt, A.M., Dissanayake, H.A., and Nanayakkara, S.C. 2025. Curious Shorts: Curiosity-Driven Exploration and Learning on Short-Form Video Platforms. Accepted to the Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI ’25).",
-      "award": null,
+      "awards": [],
       "links": [],
       "venue": "CHI"
     },
@@ -1261,7 +1263,7 @@
       "title": "Augmented Tabletop Interaction as an Assistive Tool: Tidd’s Role in Daily Life Skills Training for Autistic Children",
       "year": "2025",
       "citation": "Wu, Q., Wang, W., Liu, Q., Zhang, R., Pai, Y.S., Billinghurst, M. and Nanayakkara, S.C., 2025. Augmented tabletop interaction as an assistive tool: Tidd’s role in daily life skills training for autistic children. International Journal of Human-Computer Studies, p.103517.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1279,7 +1281,9 @@
       "title": "VR.net: A Real-world Dataset for Virtual Reality Motion Sickness Research",
       "year": "2024",
       "citation": "Wen, E., Gupta, C., Sasikumar, P., Billinghurst, M., Wilmott, J., Skow, E., Dey, A., Nanayakkara, S.C. VR.net: A Real-world Dataset for Virtual Reality Motion Sickness Research. The 31st IEEE Conference on Virtual Reality and 3D User Interfaces, 2024. Best Paper Award!",
-      "award": "Best Paper Award",
+      "awards": [
+        "Best Paper Award"
+      ],
       "links": [
         {
           "label": "DOI",
@@ -1297,7 +1301,7 @@
       "title": "Sound Designer-Generative AI Interactions: Towards Designing Creative Support Tools for Professional Sound Designers",
       "year": "2024",
       "citation": "Kamath, P., Morreale, F., Bagaskara, P.L., Wei, Y., and Nanayakkara, S.C. 2024. Sound Designer-Generative AI Interactions: Towards Designing Creative Support Tools for Professional Sound Designers. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI ’24), May 11–16, 2024, Honolulu, HI, USA.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1315,7 +1319,7 @@
       "title": "SonicVista: Towards Creating Awareness of Distant Scenes through Sonification",
       "year": "2024",
       "citation": "Gupta, C., Sridhar, S., Matthies, D.J., Jouffrais, C. and Nanayakkara, S.C., 2024. SonicVista: Towards Creating Awareness of Distant Scenes through Sonification. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 8(2), pp.1-32.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1333,7 +1337,7 @@
       "title": "SeEar: Tailoring Real-time AR Caption Interfaces for Deaf and Hard-of-Hearing (DHH) Students in Specialized Educational Settings",
       "year": "2024",
       "citation": "Samaradivakara, Y., Ushan, T., Pathirage, A., Sasikumar, P., Karunanayaka, K., Keppitiyagama, C., Nanayakkara, S.C, 2024. SeEar: Tailoring Real-time AR Caption Interfaces for Deaf and Hard-of-Hearing (DHH) Students in Specialized Educational Settings. In Extended Abstracts of the CHI Conference on Human Factors in Computing Systems (CHI EA ’24), May 11–16, 2024, Honolulu, HI, USA.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1351,7 +1355,7 @@
       "title": "Kavy: Fostering Language Speaking Skills and Self-Confidence Through Conversational AI",
       "year": "2024",
       "citation": "Cooray, S., Hettiarachchi, C., Nanayakkara, V., Matthies, D., Samaradivakara, Y. and Nanayakkara, S., 2024, April. Kavy: Fostering Language Speaking Skills and Self-Confidence Through Conversational AI. In Proceedings of the Augmented Humans International Conference 2024 (pp. 226-236).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1365,7 +1369,7 @@
       "title": "Exploring an Extended Reality Floatation Tank Experience to Reduce the Fear of Being in Water",
       "year": "2024",
       "citation": "Montoya, M.F., Qiao, H., Sasikumar, P., Elvitigala, D.S., Pell, S.J., Nanayakkara, S.C, Mueller, F. ‘Floyd’, 2024. Exploring an Extended Reality Floatation Tank Experience to Reduce the Fear of Being in Water. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI ’24), May 11–16, 2024, Honolulu, HI, USA.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1383,7 +1387,7 @@
       "title": "Example-Based Framework for Perceptually Guided Audio Texture Generation",
       "year": "2024",
       "citation": "Kamath, P., Gupta, C., Wyse, L., and Nanayakkara, S.C., “Example-Based Framework for Perceptually Guided Audio Texture Generation,” in IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 32, pp. 2555-2565, 2024.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1401,7 +1405,7 @@
       "title": "Early Autism Screening in Children Using Facial Recognition",
       "year": "2024",
       "citation": "Wu, Q., Xiao, X., Liu, Y., Billinghurst, M. and Nanayakkara, S.C., 2024, May. Early autism screening in children using facial recognition. In Extended Abstracts of the CHI Conference on Human Factors in Computing Systems (pp. 1-7)",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1419,7 +1423,7 @@
       "title": "CoTacs: A Haptic Toolkit to Explore Effective On-Body Haptic Feedback by Ideating, Designing, Evaluating and Refining Haptic Designs Using Group Collaboration",
       "year": "2024",
       "citation": "Messerschmidt, M. A., Cortes, J. P. F., & Nanayakkara, S.C. (2024). CoTacs: A Haptic Toolkit to Explore Effective On-Body Haptic Feedback by Ideating, Designing, Evaluating and Refining Haptic Designs Using Group Collaboration. International Journal of Human–Computer Interaction, 1–21.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1437,7 +1441,7 @@
       "title": "Using Sensor-Based Programming to Improve Self-Efficacy and Outcome Expectancy for Students from Underrepresented Groups",
       "year": "2023",
       "citation": "Suriyaarachchi, H., Nassani, A., Denny, P. and Nanayakkara, S.C. 2023. Using Sensor-Based Programming to Improve Self-Efficacy and Outcome Expectancy for Students from Underrepresented Groups. In Proceedings of the 2023 Conference on Innovation and Technology in Computer Science Education V. 1 (ITiCSE 2023). Association for Computing Machinery, New York, NY, USA, 187–193.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1455,7 +1459,7 @@
       "title": "Towards Controllable Audio Texture Morphing",
       "year": "2023",
       "citation": "Gupta C*., Kamath P*., Wei. Y., Li, Z., Nanayakkara S.C., Wyse L. 2023. Towards Controllable Audio Texture Morphing. In 48th IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP '23), 4-10 June, 2023, Rhodes Island, Greece.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -1469,7 +1473,7 @@
       "title": "Tidd: Augmented Tabletop Interaction Supports Children with Autism to Train Daily Living Skills",
       "year": "2023",
       "citation": "Wu, Q., Wang, W., Liu, Q., Cao, J., Xu, D. and Nanayakkara, S.C., 2023. Tidd: Augmented Tabletop Interaction Supports Children with Autism to Train Daily Living Skills. In ACM SIGGRAPH 2023 Posters (pp. 1-2).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1487,7 +1491,7 @@
       "title": "Striving for Authentic and Sustained Technology Use in the Classroom: Lessons Learned from a Longitudinal Evaluation of a Sensor-Based Science Education Platform",
       "year": "2023",
       "citation": "Chua, Y., Cooray, S., Cortes, J.P.F., Denny, P., Dupuch, S., Garbett, D.L., Nassani, A., Cao, J., Qiao, H., Reis, A, Reis, D., Scholl, P.M., Sridhar, P.K., Suriyaarachchi, H., Taimana, F., Tang, V., Weerasinghe, C., Wen, E., Wu, M., Wu, Q., Zhang, H., Nanayakkara, S.C. 2023. Striving for Authentic and Sustained Technology Use In the Classroom: Lessons Learned from a Longitudinal Evaluation of a Sensor-based Science Education Platform. International Journal of Human–Computer Interaction (IJHCI).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1505,7 +1509,7 @@
       "title": "Snatch and hatch: Improving receptivity towards a nature of science with a playful mobile application",
       "year": "2023",
       "citation": "Qiao, H., Suriyaarachchi, H., Cooray, S. and Nanayakkara, S.C. 2023, June. Snatch and hatch: Improving receptivity towards a nature of science with a playful mobile application. In Proceedings of the 22nd Annual ACM Interaction Design and Children Conference (pp. 278-288).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1523,7 +1527,7 @@
       "title": "Know Thyself: Improving Interoceptive Ability Through Ambient Biofeedback in the Workplace",
       "year": "2023",
       "citation": "Chua, P., Agres, K. and Nanayakkara, S.C., 2023. Know Thyself: Improving Interoceptive Ability Through Ambient Biofeedback in the Workplace.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1541,7 +1545,7 @@
       "title": "Improving the Domain Adaptation of Retrieval Augmented Generation (RAG) Models for Open Domain Question Answering",
       "year": "2023",
       "citation": "Siriwardhana, S., Weerasekera, R., Wen, E., Kaluarachchi, T., Rana, R. and Nanayakkara, S.C., 2023. Improving the Domain Adaptation of Retrieval Augmented Generation (RAG) Models for Open Domain Question Answering. Transactions of the Association for Computational Linguistics.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1559,7 +1563,7 @@
       "title": "Evaluating Descriptive Quality of AI-Generated Audio Using Image-Schemas",
       "year": "2023",
       "citation": "Kamath, P., Li, Z., Gupta, C., Jaidka, K., Nanayakkara, S.C. and Wyse, L. 2023. Evaluating Descriptive Quality of AI Generated Audio Using Image-Schemas. In 28th International Conference on Intelligent User Interfaces (IUI ’23), March 27–31, 2023, Sydney, NSW, Australia.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1577,7 +1581,7 @@
       "title": "EMO-KNOW: A Large Scale Dataset on Emotion-Cause",
       "year": "2023",
       "citation": "Nguyen, M., Samaradivakara, Y., Sasikumar, P., Gupta, C. and Nanayakkara, S.C., 2023, December. EMO-KNOW: A Large Scale Dataset on Emotion-Cause. In Findings of the Association for Computational Linguistics: EMNLP 2023 (pp. 11043-11051).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1595,7 +1599,7 @@
       "title": "Can AI Models Summarize Your Diary Entries? Investigating Utility of Abstractive Summarization for Autobiographical Text.",
       "year": "2023",
       "citation": "Siriwardhana, S*., Gupta, C.*, Kaluarachchi, T., Dissanayake, V., Ellawela, S., & Nanayakkara, S.C. (2023). Can AI Models Summarize Your Diary Entries? Investigating Utility of Abstractive Summarization for Autobiographical Text. International Journal of Human–Computer Interaction, 1–19.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1613,7 +1617,7 @@
       "title": "A Corneal Surface Reflections-Based Intelligent System for Lifelogging Applications",
       "year": "2023",
       "citation": "Kaluarachchi, T., Siriwardhana, S., Wen, E., & Nanayakkara, S.C. 2023. A Corneal Surface Reflections-Based Intelligent System for Lifelogging Applications. In International Journal of Human–Computer Interaction.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1631,7 +1635,7 @@
       "title": "XRtic: A Prototyping Toolkit for XR Applications using Cloth Deformation",
       "year": "2022",
       "citation": "Muthukumarana, S., Nassani, A., Park, N., Steimle, J., Billinghurst, B., and Nanayakkara, S.C., XRtic: A Prototyping Toolkit for XR Applications using Cloth Deformation. In 2022 IEEE International Symposium on Mixed and Augmented Reality (ISMAR), IEEE, 2022.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1649,7 +1653,7 @@
       "title": "WasmAndroid: A Cross-Platform Runtime for Native Programming Languages on Android",
       "year": "2022",
       "citation": "Wen, E., Weber, G. and Nanayakkara, S.C., 2022. WasmAndroid: A Cross-Platform Runtime for Native Programming Languages on Android. ACM Transactions on Embedded Computing Systems (TECS).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1667,7 +1671,7 @@
       "title": "VRhook: A Data Collection Tool for VR Motion Sickness Research",
       "year": "2022",
       "citation": "Wen, E., Kaluarachchi, T., Siriwardhana, S., Tang, V., Billinghurst, M., Lindeman, R.W., Yao, R., Lin, J. and Nanayakkara, S.C., 2022. VRhook: A Data Collection Tool for VR Motion Sickness Research. In The 35th Annual ACM Symposium on User Interface Software and Technology (UIST ’22), October 29-November 2, 2022, Bend, OR, USA.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1685,7 +1689,7 @@
       "title": "Troi: Towards Understanding Users Perspectives to Mobile Automatic Emotion Recognition System in Their Natural Setting",
       "year": "2022",
       "citation": "Dissanayake V., Tang V., Elvitigala D.S., Wen E., Wu M., Nanayakkara S.C. 2022. Troi: Towards Understanding Users Perspectives to Mobile Automatic Emotion Recognition System in Their Natural Setting. In Proceedings of the 24th International Conference on Mobile Human-Computer Interaction.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -1703,7 +1707,7 @@
       "title": "Toro: A Web-based Tool to Search, Explore, Screen, Compare and Visualize Literature",
       "year": "2022",
       "citation": "Messerschmidt, M., Chan, S., Wen, E. and Nanayakkara, S.C., 2022. Toro: A Web-based Tool to Search, Explore, Screen, Compare and Visualize Literature.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1721,7 +1725,7 @@
       "title": "TickleFoot: Design, Development and Evaluation of a Novel Foot-tickling Mechanism that Can Evoke Laughter",
       "year": "2022",
       "citation": "Elvitigala D.S., Boldu R., Nanayakkara S.C., and Matthies D.J.C. 2022. TickleFoot: Design, Development and Evaluation of a Novel Foot-Tickling Mechanism That Can Evoke Laughter. ACM Trans. Comput.-Hum. Interact. 29, 3, Article 20 (June 2022), 23 pages.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1735,7 +1739,7 @@
       "title": "SigRep: Towards Robust Wearable Emotion Recognition with Contrastive Representation Learning.",
       "year": "2022",
       "citation": "Dissanayake, V., Seneviratne, S., Rana, R., Wen, E., Kaluarachchi, T., Nanayakkara, S.C., (2022). SigRep: Towards Robust Wearable Emotion Recognition with Contrastive Representation Learning. IEEE Access",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1753,7 +1757,7 @@
       "title": "Self-supervised Representation Fusion for Speech and Wearable Based Emotion Recognition",
       "year": "2022",
       "citation": "Dissanayake V., Seneviratne S., Suriyaarachchi H., Wen E., Nanayakkara S.C. 2022. Self-supervised Representation Fusion for Speech and Wearable Based Emotion Recognition. In Proceedings of Interspeech 2022",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1771,7 +1775,7 @@
       "title": "Scratch and Sense: Using Real-Time Sensor Data to Motivate Students Learning Scratch",
       "year": "2022",
       "citation": "Suriyaarachchi, H., Denny, P. and Nanayakkara, S.C., 2022. Scratch and Sense: Using Real-Time Sensor Data to Motivate Students Learning Scratch. In Proceedings of the 53rd ACM Technical Symposium on Computer Science Education V. 1 (SIGCSE 2022), March 3–5, 2022, Providence, RI, USA.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1789,7 +1793,7 @@
       "title": "Primary School Students Programming with Real-Time Environmental Sensor Data",
       "year": "2022",
       "citation": "Suriyaarachchi, H., Denny, P., Cortés, J.P.F., Weerasinghe, C. and Nanayakkara, S.C., 2022. Primary School Students Programming with Real-Time Environmental Sensor Data. In Australasian Computing Education Conference (ACE ’22), February 14–18, 2022, Virtual Event, Australia.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1807,7 +1811,9 @@
       "title": "Players and performance: opportunities for social interaction with augmented tabletop games at centres for children with autism",
       "year": "2022",
       "citation": "Wu, Q., Xu, R., Liu, V., Lottridge, Danielle., and Nanayakkara, S.C. 2022. Players and performance: opportunities for social interaction with augmented tabletop games at centres for children with autism. Proc. ACM Hum.-Comput. Interact. 6, ISS, Article 563 (December 2022), 24 pages. Honorable Mention Award!",
-      "award": "Honorable Mention Award",
+      "awards": [
+        "Honorable Mention Award"
+      ],
       "links": [
         {
           "label": "DOI",
@@ -1825,7 +1831,7 @@
       "title": "Human–Computer Integration: Towards Integrating the Human Body with the Computational Machine",
       "year": "2022",
       "citation": "Mueller, F.F., Semertzidis, N., Andres, J., Weigel, M., Nanayakkara, S.C., Patibanda, R., Li, Z., Strohmeier, P., Knibbe, J., Greuter, S., Obrist, M., Maes, P., Wang, D., Wolf, K., Gerber, L., Marshall, J., Kunze, Kai., Grudin, J., Reiterer, H. and Byrne, R. 2022. Human–Computer Integration: Towards Integrating the Human Body with the Computational Machine. Foundations and Trends® in Human-Computer Interaction, 16(1), pp.1-64.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1839,7 +1845,7 @@
       "title": "Design and Evaluation of a Mobile Sensing Platform for Water Conductivity",
       "year": "2022",
       "citation": "Weerasinghe, C., Padhye, L.P. and Nanayakkara, S.C., 2022, October. Design and Evaluation of a Mobile Sensing Platform for Water Conductivity. In 2022 IEEE Sensors (pp. 1-4). IEEE.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1857,7 +1863,7 @@
       "title": "Computational Music Systems for Emotional Health and Wellbeing: A Review",
       "year": "2022",
       "citation": "Chua, P., Gupta, C., R Agres, K. and Nanayakkara, S., 2022. Computational Music Systems for Emotional Health and Wellbeing: A Review.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1875,7 +1881,7 @@
       "title": "ANISMA: A Prototyping Toolkit to Explore Haptic Skin Deformation Applications Using Shape-Memory Alloys",
       "year": "2022",
       "citation": "Messerschmidt M.A., Muthukumarana S., Hamdan N.A., Wagner A., Zhang H., Borchers J., and Nanayakkara S.C. 2022. ANISMA: A Prototyping Toolkit to Explore Haptic Skin Deformation Applications Using Shape-Memory Alloys. ACM Trans. Comput.-Hum. Interact. 29, 3, Article 19 (June 2022), 34 pages.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1889,7 +1895,7 @@
       "title": "WasmAndroid: A Cross-Platform Runtime for Native Programming Languages on Android",
       "year": "2021",
       "citation": "Wen, E., Weber, G. and Nanayakkara, S.C., 2021. WasmAndroid: A Cross-Platform Runtime for Native Programming Languages on Android (WIP Paper). In Proceedings of the 22nd ACM SIGPLAN/SIGBED International Conference on Languages, Compilers, and Tools for Embedded Systems (LCTES ’21)",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1907,7 +1913,9 @@
       "title": "StressShoe: A DIY Toolkit for just-in-time Personalised Stress Interventions for Office Workers Performing Sedentary Tasks",
       "year": "2021",
       "citation": "Elvitigala, D.S., Scholl, P.M., Suriyaarachchi, H., Dissanayake, V. and Nanayakkara, S.C., 2021. StressShoe: A DIY Toolkit for just-in-time Personalised Stress Interventions for Office Workers Performing Sedentary Tasks. In MobileHCI ’21: The ACM International Conference on Mobile Human-Computer Interaction, September 27–30, 2021, Touluse, France. Honorable Mention Award!",
-      "award": "Honorable Mention Award",
+      "awards": [
+        "Honorable Mention Award"
+      ],
       "links": [
         {
           "label": "DOI",
@@ -1925,7 +1933,9 @@
       "title": "Sensor-Based Interactive Worksheets to Support Guided Scientific Inquiry",
       "year": "2021",
       "citation": "Cao, J., Chan, S.W.T., Garbett, D.L., Denny, P., Nassani, A., Scholl, P.M. and Nanayakkara, S.C., 2021. Sensor-Based Interactive Worksheets to Support Guided Scientific Inquiry. In Interaction Design and Children (IDC ’21), June 24–30, 2021, Athens, Greece. ACM, New York, NY, USA, 7 pages. Best Short Paper Award!",
-      "award": "Best Short Paper Award",
+      "awards": [
+        "Best Short Paper Award"
+      ],
       "links": [
         {
           "label": "DOI",
@@ -1943,7 +1953,7 @@
       "title": "OM: A Comprehensive Tool to Elicit Subjective Vibrotactile Expressions Associated with Contextualised Meaning in Our Everyday Lives",
       "year": "2021",
       "citation": "Cortés, J.P.F., Suriyaarachchi, H., Nassani, A., Zhang, H. and Nanayakkara, S.C., 2021. OM: A Comprehensive Tool to Elicit Subjective Vibrotactile Expressions Associated with Contextualised Meaning in Our Everyday Lives. In MobileHCI ’21: The ACM International Conference on Mobile Human Computer Interaction, Sept. 27- Oct. 1, 2021, Touluse, France.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1961,7 +1971,7 @@
       "title": "mobiLLD: Exploring the Detection of Leg Length Discrepancy and Altering Gait with Mobile Smart Insoles",
       "year": "2021",
       "citation": "Matthies, D.J.C., Elvitigala, D.S., Fu, A., Yin, D. and Nanayakkara, S.C., 2021. mobiLLD: Exploring the Detection of Leg Length Discrepancy and Altering Gait with Mobile Smart Insoles. In The 14th PErvasive Technologies Related to Assistive Environments Conference (PETRA 2021), June 29-July 2, 2021, Corfu, Greece.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1979,7 +1989,7 @@
       "title": "KinVoices: Using Voices of Friends and Family in Voice Interfaces",
       "year": "2021",
       "citation": "Chan, S. W. T., Gunasekaran, T., Pai, Y. S., Zhang, H. and Nanayakkara, S.C. 2021. KinVoices: Using Voices of Friends and Family in Voice Interfaces. Proc. ACM Hum.-Comput. Interact. 5, CSCW2, Article 446 (October 2021), 25 pages.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -1997,7 +2007,7 @@
       "title": "Jammify: Interactive Multi-Sensory System for Digital Art Jamming",
       "year": "2021",
       "citation": "Muthukumarana S., Elvitigala D.S., Wu Q., Pai Y.S., Nanayakkara S.C. 2021. Jammify: Interactive Multi-sensory System for Digital Art Jamming. In Human-Computer-Interaction – INTERACT 2021, Springer International Publishing, Cham, 23–41",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2015,7 +2025,9 @@
       "title": "GymSoles++: Combining Google Glass with Smart Insoles to Improve Body Posture when Performing Squats",
       "year": "2021",
       "citation": "Elvitigala, D.S., Matthies, D.J.C, Weerasinghe, C. and Nanayakkara, S.C., 2021. GymSoles++: Combining Google Glass with Smart Insoles to Improve Body Posture when Performing Squats. In The 14th PErvasive Technologies Related to Assistive Environments Conference (PETRA 2021), June 29-July 2, 2021, Corfu, Greece. Best Student Paper Award!",
-      "award": "Best Student Paper Award",
+      "awards": [
+        "Best Student Paper Award"
+      ],
       "links": [
         {
           "label": "DOI",
@@ -2033,7 +2045,7 @@
       "title": "EyeKnowYou: A DIY Toolkit to Support Monitoring Cognitive Load and Actual Screen Time using a Head-Mounted Webcam",
       "year": "2021",
       "citation": "Kaluarachchi, T., Sapkota, S., Taradel, J., Thevenon, A., Matthies, D.J.C., and Nanayakkara, S.C., 2021. EyeKnowYou: A DIY Toolkit to Support Monitoring Cognitive Load and Actual Screen Time using a Head-Mounted Webcam. In MobileHCI ’21 Extended Abstracts: The ACM International Conference on Mobile Human Computer Interaction, Sept. 27- Oct. 1, 2021, Touluse, France.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -2047,7 +2059,7 @@
       "title": "ClothTiles: A Prototyping Platform to Fabricate Customized Actuators on Clothing using 3D Printing and Shape-Memory Alloys",
       "year": "2021",
       "citation": "Muthukumarana, S., Messerschmidt, M.A., Matthies, D.J.C., Steimle, J., Scholl, P.M., and Nanayakkara, S.C., 2021. ClothTiles: A Prototyping Platform to Fabricate Customized Actuators on Clothing using 3D Printing and Shape-Memory Alloys. In CHI Conference on Human Factors in Computing Systems (CHI ’21), May 8–13, 2021, Yokohama, Japan.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2065,7 +2077,7 @@
       "title": "CapGlasses: Untethered Capacitive Sensing with Smart Glasses",
       "year": "2021",
       "citation": "Matthies, D.J.C., Weerasinghe, C., Urban, B., and Nanayakkara, S.C., 2021. CapGlasses: Untethered Capacitive Sensing with SmartGlasses. In Augmented Humans International Conference 2021 (AHs ’21), February 22–24, 2021, Rovaniemi, Finland.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2083,7 +2095,7 @@
       "title": "Augmented Foot: A Comprehensive Survey of Augmented Foot Interfaces",
       "year": "2021",
       "citation": "Elvitigala, D.S., Nanayakkara, S.C., and Huber, J., 2021. Augmented Foot: A Comprehensive Survey of Augmented Foot Interfaces. In Augmented Humans International Conference 2021 (AHs ’21), February 22–24, 2021, Rovaniemi, Finland.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2101,7 +2113,7 @@
       "title": "A Review of Recent Deep Learning Approaches in Human-Centered Machine Learning",
       "year": "2021",
       "citation": "Kaluarachchi, T., Reis, A., and Nanayakkara, S.C., 2021. A Review of Recent Deep Learning Approaches in Human-Centered Machine Learning. Sensors. 21(7):2514.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2119,7 +2131,7 @@
       "title": "WaveSense: Low Power Voxel-tracking Technique for Resource Limited Devices",
       "year": "2020",
       "citation": "Withana, A., Kaluarachchi, T., Singhabahu, C., Ransiri, S., Shi, Y. and Nanayakkara, S.C., 2020. waveSense: Low Power Voxel-tracking Technique for Resource Limited Devices. In AHs ’20: Augmented Humans International Conference (AHs ’20), March 16–17, 2020, Kaiserslautern, Germany.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2137,7 +2149,7 @@
       "title": "VersaTouch: A Versatile Plug-and-Play System that Enables Touch Interactions on Everyday Passive Surfaces.",
       "year": "2020",
       "citation": "Shi, Y., Zhang, H., Cao, J., and Nanayakkara, S.C., 2020. VersaTouch: A Versatile Plug-and-Play System that Enables Touch Interactions on Everyday Passive Surfaces. In AHs ’20: Augmented Humans International Conference (AHs ’20), March 16–17, 2020, Kaiserslautern, Germany.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2155,7 +2167,7 @@
       "title": "Touch me Gently: Recreating the Perception of Touch using a Shape-Memory Alloy Matrix",
       "year": "2020",
       "citation": "Muthukumarana, S., Elvitigala, D.S., Cortes, J.P.F., Matthies, D.J. and Nanayakkara, S.C., 2020, April. Touch me gently: recreating the perception of touch using a shape-memory alloy matrix. In Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems (CHI '20), April 25–30, 2020, Honolulu, Hawai'i, USA. ACM.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2173,7 +2185,7 @@
       "title": "StressFoot: Uncovering the Potential of the Foot for Acute Stress Sensing in Sitting Posture",
       "year": "2020",
       "citation": "Elvitigala, D.S., Matthies, D.J.C., and Nanayakkara, S.C., 2020. StressFoot: Uncovering the Potential of the Foot for Acute Stress Sensing in Sitting Posture. Sensors, 20(10), p.2882.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2191,7 +2203,7 @@
       "title": "Speech Emotion Recognition ‘in the Wild’ Using an Autoencoder",
       "year": "2020",
       "citation": "Dissanayake, V., Zhang, H., Billinghurst, M. and Nanayakkara, S.C., 2020. Speech Emotion Recognition ‘in the wild' using an Autoencoder. Proc. Interspeech 2020, pp.526-530.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2209,7 +2221,7 @@
       "title": "Ready, Steady, Touch!: Sensing Physical Contact with a Finger-Mounted IMU",
       "year": "2020",
       "citation": "Shi, Y., Zhang, H., Zhao, K., Cao, J., Sun, M. and Nanayakkara, S.C., 2020. Ready, steady, touch! sensing physical contact with a finger-mounted IMU. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 4(2), pp.1-25.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2227,7 +2239,7 @@
       "title": "Prompto: Investigating Receptivity to Prompts Based on Cognitive Load from Memory Training Conversational Agent",
       "year": "2020",
       "citation": "Chan, S. W. T., Sapkota, S., Mathews, R., Zhang, H. and Nanayakkara, S. C., 2020. Prompto: Investigating Receptivity to Prompts Based on Cognitive Load from Memory Training Conversational Agent. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 4(4), pp.1-23.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2245,7 +2257,7 @@
       "title": "Progression of Cognitive-Affective States During Learning in Kindergarteners: Bringing Together Physiological, Observational and Performance Data",
       "year": "2020",
       "citation": "Sridhar, P.K. and Nanayakkara, S.C., 2020. Progression of Cognitive-Affective States During Learning in Kindergarteners: Bringing Together Physiological, Observational and Performance Data. Education Sciences, 10(7), p.177.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2263,7 +2275,7 @@
       "title": "Next Steps in Human-Computer Integration",
       "year": "2020",
       "citation": "Mueller, F.F., Lopes, P., Strohmeier, P., Ju, W., Seim, C., Weigel, M., Nanayakkara, S.C., Obrist, M., Li, Z., Delfa, J. and Nishida, J., 2020, April. Next Steps for Human-Computer Integration. In Conference on Human Factors in Computing Systems Proceedings (CHI 2020), April 25-30, 2020, Honolulu, Hawai'i, USA. ACM",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2281,7 +2293,7 @@
       "title": "Multimodal Emotion Recognition With Transformer-Based Self Supervised Feature Fusion",
       "year": "2020",
       "citation": "Siriwardhana, S., Kaluarachchi, T., Billinghurst, M. and Nanayakkara, S.C., 2020. Multimodal Emotion Recognition With Transformer-Based Self Supervised Feature Fusion. IEEE Access, 8, pp.176274-176285.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2299,7 +2311,7 @@
       "title": "MAGHair: A Wearable System to Create Unique Tactile Feedback by Stimulating Only the Body Hair",
       "year": "2020",
       "citation": "Boldu, R., Wijewardena, M., Zhang, H. and Nanayakkara, S.C., 2020, October. MAGHair: A Wearable System to Create Unique Tactile Feedback by Stimulating Only the Body Hair. In 22nd International Conference on Human-Computer Interaction with Mobile Devices and Services (pp. 1-10).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2317,7 +2329,7 @@
       "title": "LightTank",
       "year": "2020",
       "citation": "Rieger, U., Liu, Y., Boldu, R., Zhang, H., Alwani, H. and Nanayakkara, S.C., 2020. LightTank. In SIGGRAPH Asia 2020 Art Gallery (pp. 1-1).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2331,7 +2343,7 @@
       "title": "Jointly Fine-Tuning \"BERT-like\" Self Supervised Models to Improve Multimodal Speech Emotion Recognition",
       "year": "2020",
       "citation": "Siriwardhana, S., Reis, A., Weerasekera, R., and Nanayakkara, S.C., 2020 Jointly Fine-Tuning “BERT-Like” Self Supervised Models to Improve Multimodal Speech Emotion Recognition. Proc. Interspeech 2020, 3755-3759",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2349,7 +2361,7 @@
       "title": "GymSoles++: Using Smart Wearables to Improve Body Posture when Performing Squats and Dead-Lifts.",
       "year": "2020",
       "citation": "Elvitigala D. S., Matthies D. J. C., Weerasinghe C., Shi Y., and Nanayakkara S.C., 2020. GymSoles++: Using Smart Wearables to Improve Body Posture when Performing Squats and Dead-Lifts. In AHs ’20: Augmented Humans International Conference (AHs ’20), March 16–17, 2020, Kaiserslautern, Germany.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2367,7 +2379,7 @@
       "title": "AiSee: An Assistive Wearable Device to Support Visually Impaired Grocery Shoppers",
       "year": "2020",
       "citation": "Boldu, R., Matthies, D.J., Zhang, H. and Nanayakkara, S.C., 2020. AiSee: An Assistive Wearable Device to Support Visually Impaired Grocery Shoppers. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 4(4), pp.1-25.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2385,7 +2397,7 @@
       "title": "Prospero: A Personal Wearable Memory Coach",
       "year": "2019",
       "citation": "Chan, S. W. T., Zhang, H. and Nanayakkara, S. C., 2019, March. Prospero: A Personal Wearable Memory Coach. In Proceedings of the 10th Augmented Human International Conference 2019 (pp. 1-5).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2403,7 +2415,7 @@
       "title": "ProspecFit: In Situ Evaluation of Digital Prospective Memory Training for Older Adults",
       "year": "2019",
       "citation": "Chan, S. W. T., Buddhika, T., Zhang, H. and Nanayakkara, S. C., 2019. ProspecFit: In Situ Evaluation of Digital Prospective Memory Training for Older Adults. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 3(3), pp.1-20.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2421,7 +2433,7 @@
       "title": "PhantomTouch: Creating an Extended Reality by the Illusion of Touch using a Shape-Memory Alloy Matrix",
       "year": "2019",
       "citation": "Muthukumarana, S., Elvitigala, D.S., Cortes, J.P.F., Matthies, D.J. and Nanayakkara, S.C., 2019, November. PhantomTouch: Creating an Extended Reality by the Illusion of Touch using a Shape-Memory Alloy Matrix. In SIGGRAPH Asia 2019 XR (pp. 29-30). ACM.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2439,7 +2451,7 @@
       "title": "oSense: Object-Activity Identification Based on Gasping Posture and Motion",
       "year": "2019",
       "citation": "Buddhika, T., Zhang, H., Weerasinghe, C., Nanayakkara, S.C. and Zimmermann, R., 2019, March. OSense: Object-activity identification based on gasping posture and motion. In Proceedings of the 10th Augmented Human International Conference 2019 (pp. 1-5).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2457,7 +2469,7 @@
       "title": "M-Hair: Extended Reality by Stimulating the Body Hair",
       "year": "2019",
       "citation": "Boldu, R., Jain, S., Cortes, J.P.F., Zhang, H. and Nanayakkara, S.C., 2019. M-Hair: Extended Reality by Stimulating the Body Hair. In SIGGRAPH Asia 2019 XR (pp. 27-28).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2475,7 +2487,7 @@
       "title": "M-Hair: Creating Novel Tactile Feedback by Augmenting the Body Hair to Respond to Magnetic Field",
       "year": "2019",
       "citation": "Boldu, R., Jain, S., Forero Cortes, J.P., Zhang, H. and Nanayakkara, S.C., 2019, October. M-Hair: Creating Novel Tactile Feedback by Augmenting the Body Hair to Respond to Magnetic Field. In Proceedings of the 32nd Annual ACM Symposium on User Interface Software and Technology (pp. 323-328).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2493,7 +2505,7 @@
       "title": "GymSoles: Improving Squats and Dead-Lifts by Visualizing the User’s Centre of Pressure",
       "year": "2019",
       "citation": "Elvitigala, D.S., Matthies, D.J., David, L., Weerasinghe, C. and Nanayakkara, S.C., 2019, May. GymSoles: Improving Squats and Dead-Lifts by Visualizing the User's Center of Pressure. In Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems (pp. 1-12).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2511,7 +2523,7 @@
       "title": "Going beyond performance scores: Understanding cognitive-affective states in Kindergarteners and application of framework in classrooms",
       "year": "2019",
       "citation": "Sridhar, P. K., Chan, S. W. T., Chua, Y., Quin, Y. W. and Nanayakkara, S. C., 2019. Going beyond performance scores: Understanding cognitive-affective states in Kindergarteners and application of framework in classrooms. International Journal of Child-Computer Interaction, 21, pp.37-53.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2529,7 +2541,7 @@
       "title": "fSense: Unlocking the Dimension of Force for Gestural Interactions using Smartwatch PPG Sensor",
       "year": "2019",
       "citation": "Buddhika, T., Zhang, H., Chan, S. W. T., Dissanayake, V., Nanayakkara, S.C. and Zimmermann, R., 2019, March. fSense: unlocking the dimension of force for gestural interactions using smartwatch PPG sensor. In Proceedings of the 10th Augmented Human International Conference 2019 (pp. 1-5).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2547,7 +2559,7 @@
       "title": "Evaluating IVR in Primary School Classrooms",
       "year": "2019",
       "citation": "Chua, Y., Sridhar, P.K., Zhang, H., Dissanayake, V. and Nanayakkara, S.C., 2019, October. Evaluating IVR in Primary School Classrooms. In 2019 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct) (pp. 169-174). IEEE.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2565,7 +2577,7 @@
       "title": "CricketCoach: Towards Creating a Better Awareness of Gripping Forces for Cricketers",
       "year": "2019",
       "citation": "Muthukumarana, S., Matthies, D.J., Weerasinghe, C., Elvitigala, D.S. and Nanayakkara, S.C., 2019, March. CricketCoach: Towards Creating a Better Awareness of Gripping Forces for Cricketers. In Proceedings of the 10th Augmented Human International Conference 2019 (pp. 1-2).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2583,7 +2595,7 @@
       "title": "CompRate: Power Efficient Heart Rate and Heart Rate Variability Monitoring on Smart Wearables",
       "year": "2019",
       "citation": "Dissanayake, V., Elvitigala, D.S., Zhang, H., Weerasinghe, C. and Nanayakkara, S.C., 2019, November. CompRate: Power Efficient Heart Rate and Heart Rate Variability Monitoring on Smart Wearables. In 25th ACM Symposium on Virtual Reality Software and Technology (pp. 1-8).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2601,7 +2613,7 @@
       "title": "ChewIt. An Intraoral Interface for Discreet Interactions.",
       "year": "2019",
       "citation": "Cascón, P.C., Matthies, D.J., Muthukumarana, S. and Nanayakkara, S.C, 2019, May. ChewIt. An Intraoral Interface for Discreet Interactions. In Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems (pp. 1-13).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2619,7 +2631,7 @@
       "title": "CapMat: A Smart Foot Mat for User Authentication",
       "year": "2019",
       "citation": "Matthies, D.J., Elvitigala, D.S., Muthukumarana, S., Huber, J. and Nanayakkara, S.C., 2019, March. CapMat: a smart foot mat for user authentication. In Proceedings of the 10th Augmented Human International Conference 2019 (pp. 1-2).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2637,7 +2649,7 @@
       "title": "2bit-TactileHand: Evaluating Tactons for Nobody Vibrotactile Displays on the Hand and Wrist.",
       "year": "2019",
       "citation": "Elvitigala, D.S., Matthies, D.J., Dissanayaka, V., Weerasinghe, C. and Nanayakkara, S.C., 2019, March. 2bit-TactileHand: Evaluating Tactons for On-Body Vibrotactile Displays on the Hand and Wrist. In Proceedings of the 10th Augmented Human International Conference 2019 (pp. 1-8).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2655,7 +2667,7 @@
       "title": "Visual Field Visualizer: Easier & Scalable way to be Aware of the Visual Field",
       "year": "2018",
       "citation": "Nguyen, N.T., Nanayakkara, S.C. and Lee, H., 2018, February. Visual field visualizer: easier & scalable way to be aware of the visual field. In Proceedings of the 9th Augmented Human International Conference (pp. 1-3).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2673,7 +2685,7 @@
       "title": "Triangulation of Physiological, Behavioural and Observational Data offers better insights into cognitive-emotional states in learning",
       "year": "2018",
       "citation": "Sridhar, P.K., Quin, Y.W., and Nanayakkara, S.C., 2018. Triangulation of Physiological, Behavioural and Observational Data offers better insights into cognitive-emotional states in learning. Presented in the Annual Convention of Association for Psychological Science. San Francisco.",
-      "award": null,
+      "awards": [],
       "links": [],
       "venue": "Other"
     },
@@ -2682,7 +2694,7 @@
       "title": "Thumb-In-Motion: Evaluating Thumb to Ring Microgestures for Athletic Activity",
       "year": "2018",
       "citation": "Boldu, R., Dancu, A., Matthies, D.J., Cascón, P.G., Ransir, S. and Nanayakkara, S.C., 2018, October. Thumb-In-Motion: Evaluating Thumb-to-Ring Microgestures for Athletic Activity. In Proceedings of the Symposium on Spatial User Interaction (pp. 150-157).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2696,7 +2708,7 @@
       "title": "Target Driven Visual Navigation with Hybrid Asynchronous Universal Successor Representations",
       "year": "2018",
       "citation": "Siriwardhana, S., Weerasekera, R. and Nanayakkara, S.C, 2018, Target Driven Visual Navigation with Hybrid Asynchronous Universal Successor Representations. Deep RL Workshop NeurIPS 2018.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "URL",
@@ -2714,7 +2726,7 @@
       "title": "Supporting Rhythm Activities of Deaf Children using Music-Sensory-Substitution Systems.",
       "year": "2018",
       "citation": "Petry, B., Illandara, T., Elvitigala, D.S. and Nanayakkara, S.C., 2018, April. Supporting rhythm activities of deaf children using music-sensory-substitution systems. In Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems (pp. 1-10).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2732,7 +2744,7 @@
       "title": "Step Detection for Rollator Users with Smartwatches",
       "year": "2018",
       "citation": "Matthies, D.J., Haescher, M., Nanayakkara, S.C. and Bieber, G., 2018, October. Step detection for rollator users with smartwatches. In Proceedings of the Symposium on Spatial User Interaction (pp. 163-167).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2750,7 +2762,7 @@
       "title": "Hand Range Interface: Information Always at Hand with a Body-Centric Mid-Air Input Surface",
       "year": "2018",
       "citation": "Xu, X., Dancu, A., Maes, P. and Nanayakkara, S.C., 2018, September. Hand range interface: Information always at hand with a body-centric mid-air input surface. In Proceedings of the 20th International Conference on Human-Computer Interaction with Mobile Devices and Services (pp. 1-12).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2768,7 +2780,7 @@
       "title": "Going beyond performance scores: understanding cognitive-affective states in kindergarteners",
       "year": "2018",
       "citation": "Sridhar, P. K., Chan, S. W. T. and Nanayakkara, S.C., 2018. Going beyond performance scores: understanding cognitive-affective states in kindergarteners. In Proceedings of the 17th ACM Conference on Interaction Design and Children (pp. 253-265). ACM.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2790,7 +2802,7 @@
       "title": "GestAKey: Touch Interaction on Individual Keycaps.",
       "year": "2018",
       "citation": "Shi, Y., Zhang, H., Rajapakse, H., Perera, N.T., Vega Gálvez, T. and Nanayakkara, S.C., 2018, April. Gestakey: Touch interaction on individual keycaps. In Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems (pp. 1-12).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "URL",
@@ -2808,7 +2820,7 @@
       "title": "FingerReader2.0: Designing and Evaluating a Wearable Finger-WornCamera to Assist People with Visual Impairments while Shopping,",
       "year": "2018",
       "citation": "Boldu, R., Dancu, A., Matthies, D. J.C., Buddhika, T., Siriwardhana, S., & Nanayakkara, S.C., 2018. FingerReader2. 0: Designing and Evaluating a Wearable Finger-Worn Camera to Assist People with Visual Impairments while Shopping. In Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 2(3), 94. ACM.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2822,7 +2834,7 @@
       "title": "Doodle Daydream: An Interactive Display to Support Playful and Creative Interactions Between Co-workers",
       "year": "2018",
       "citation": "Elvitigala, S., Chan, S. W. T., Howell, N., Matthies, D. J. and Nanayakkara, S. C., 2018, October. Doodle Daydream: An Interactive Display to Support Playful and Creative Interactions Between Co-workers. In Proceedings of the Symposium on Spatial User Interaction (pp. 186-186).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2840,7 +2852,7 @@
       "title": "Development of a Triangulated Framework Understand Cognitive-Emotional States during Learning in Children",
       "year": "2018",
       "citation": "Sridhar, P.K., Nanayakkara S.C., 2018. Development of a Triangulated Framework Understand Cognitive-Emotional States during Learning in Children. In Proceedings of International Conference of Learning Sciences and Early Childhood Education.",
-      "award": null,
+      "awards": [],
       "links": [],
       "venue": "Other"
     },
@@ -2849,7 +2861,7 @@
       "title": "Assistive Augmentation",
       "year": "2018",
       "citation": "Huber, J., Shilkrot, R., Maes, P. and Nanayakkara, S.C. eds., 2018. Assistive augmentation. Springer.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "URL",
@@ -2863,7 +2875,7 @@
       "title": "UTAP-Unique Topographies for Acoustic Propagation: Designing Algorithmic Waveguides for Sensing in Interactive Malleable Interfaces",
       "year": "2017",
       "citation": "Rod, J., Collins, D., Wessolek, D., Ilandara, T., Ai, Y., Lee, H. and Nanayakkara, S.C., 2017, March. UTAP-Unique Topographies for Acoustic Propagation: Designing Algorithmic Waveguides for Sensing in Interactive Malleable Interfaces. In Proceedings of the Eleventh International Conference on Tangible, Embedded, and Embodied Interaction (pp. 141-152).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2881,7 +2893,7 @@
       "title": "Towards Understanding of Play with Augmented Toys",
       "year": "2017",
       "citation": "Sridhar, P.K., Nanayakkara, S.C. and Huber, J., 2017, March. Towards understanding of play with augmented toys. In Proceedings of the 8th Augmented Human International Conference (pp. 1-4).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2899,7 +2911,7 @@
       "title": "SonicSG: From Floating to Sounding Pixels",
       "year": "2017",
       "citation": "Nanayakkara, S.C., Schroepfer, T., Wyse, L., Lian, A. and Withana, A., 2017, March. SonicSG: from floating to sounding pixels. In Proceedings of the 8th Augmented Human International Conference (pp. 1-5).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2917,7 +2929,7 @@
       "title": "Scaffolding the Music Listening and Music Making Experience for the Deaf",
       "year": "2017",
       "citation": "Petry, B., Huber, J. and Nanayakkara, S.C., 2018. Scaffolding the Music Listening and Music Making Experience for the Deaf. In Assistive Augmentation (pp. 23-48). Springer, Singapore.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "Link",
@@ -2931,7 +2943,9 @@
       "title": "InSight: A Systematic Approach to Create Dynamic Human-Controller-Interactions",
       "year": "2017",
       "citation": "Boldu, R., Zhang, H., Cortés, J.P.F., Muthukumarana, S. and Nanayakkara, S.C., 2017, March. Insight: a systematic approach to create dynamic human-controller-interactions. In Proceedings of the 8th Augmented Human International Conference (pp. 1-5). Best Short Paper Award!",
-      "award": "Best Short Paper Award",
+      "awards": [
+        "Best Short Paper Award"
+      ],
       "links": [
         {
           "label": "DOI",
@@ -2949,7 +2963,7 @@
       "title": "GrabAmps: Grab a Wire to Sense the Current Flow",
       "year": "2017",
       "citation": "Elvitigala, D.S., Peiris, R., Wilhelm, E., Foong, S. and Nanayakkara, S.C., 2017, March. GrabAmps: grab a wire to sense the current flow. In Proceedings of the 8th Augmented Human International Conference (pp. 1-4).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -2967,7 +2981,7 @@
       "title": "GestAKey: Get More Done with Just-a-Key on a Keyboard",
       "year": "2017",
       "citation": "Shi, Y., Vega Gálvez, T., Zhang, H. and Nanayakkara, S.C., 2017, October. Gestakey: Get more done with just-a-key on a keyboard. In Adjunct Publication of the 30th Annual ACM Symposium on User Interface Software and Technology (pp. 73-75).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "URL",
@@ -2985,7 +2999,7 @@
       "title": "GesCAD: an Intuitive Interface for Conceptual Architectural Design",
       "year": "2017",
       "citation": "Khan, S., Rajapakse, H., Zhang, H., Nanayakkara, S.C., Tuncer, B. and Blessing, L., 2017, November. GesCAD: an intuitive interface for conceptual architectural design. In Proceedings of the 29th Australian conference on computer-human interaction (pp. 402-406).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "URL",
@@ -3003,7 +3017,7 @@
       "title": "Working with physiotherapists: Lessons learned from project SHRUG.",
       "year": "2016",
       "citation": "Shridhar, P. and Nanayakkara, S.C., Working with physiotherapists: Lessons learned from project shrug. In Workshop paper in Annual Meeting of the Australian Special Interest Group for Computer Human Interaction (OzCHI’16), NY, USA.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3017,7 +3031,7 @@
       "title": "waveSense: Ultra Low Power Gesture Sensing Based on Selective Volumetric Illumination",
       "year": "2016",
       "citation": "Withana, A., Ransiri, S., Kaluarachchi, T., Singhabahu, C., Shi, Y., Elvitigala, S., Nanayakkara, S.C., 2016. waveSense: Ultra Low Power Gesture Sensing Based on Selective Volumetric Illumination, In proceedings of the 29th Annual Symposium on User Interface Software and Technology (UIST '16)",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "URL",
@@ -3035,7 +3049,7 @@
       "title": "Towards One-Pixel-Displays for Sound Information Visualization",
       "year": "2016",
       "citation": "Sridhar, P.K., Petry, B., Pakianathan, P.V., Kartolo, A.S. and Nanayakkara, S.C., 2016, November. Towards one-pixel-displays for sound information visualization. In Proceedings of the 28th Australian Conference on Computer-Human Interaction (pp. 91-95).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3053,7 +3067,7 @@
       "title": "Towards Development and Evaluation of Tangible Interfaces that Support Learning in Children.",
       "year": "2016",
       "citation": "Sridhar, P.K., Nanayakkara, S.C., 2016. Towards Development and Evaluation of Tangible Interfaces that Support Learning in Children. In Proceedings of Annual Meeting of the Australian Special Interest Group for Computer Human Interaction (OzCHI '16). ACM, New York, NY, USA.",
-      "award": null,
+      "awards": [],
       "links": [],
       "venue": "ACM"
     },
@@ -3062,7 +3076,7 @@
       "title": "SwimSight: Supporting Deaf Users to Participate in Swimming Games",
       "year": "2016",
       "citation": "Elvitigala, D.S., Wessolek, D., Achenbach, A.V., Singhabahu, C. and Nanayakkara, S.C., 2016, November. SwimSight: Supporting deaf users to participate in swimming games. In Proceedings of the 28th Australian Conference on Computer-Human Interaction (pp. 567-570).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3080,7 +3094,7 @@
       "title": "PostBits: using contextual locations for embedding cloud information in the home",
       "year": "2016",
       "citation": "Pablo, J., Fernando, P., Sridhar, P., Withana, A., Nanayakkara, S.C., Steimle, J. and Maes, P., 2016. PostBits: using contextual locations for embedding cloud information in the home. Personal and Ubiquitous Computing, 20(6), pp.1001-1014.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3094,7 +3108,9 @@
       "title": "MuSS-Bits: Sensor-Display Blocks for Deaf People to Explore Musical Sounds",
       "year": "2016",
       "citation": "Petry, B., Illandara, T. and Nanayakkara, S.C., 2016, November. MuSS-bits: sensor-display blocks for deaf people to explore musical sounds. In Proceedings of the 28th Australian Conference on Computer-Human Interaction (pp. 72-80).",
-      "award": "Steve Howard Best Long Paper Award",
+      "awards": [
+        "Steve Howard Best Long Paper Award"
+      ],
       "links": [
         {
           "label": "DOI",
@@ -3112,7 +3128,7 @@
       "title": "MuSS-Bits Provisional Patent",
       "year": "2016",
       "citation": "Petry, B., Forero, J.P., Nanayakkara, S.C., 2016, Muss-bits – music-sensory-substitution bits. Singapore Provisional Patent Application: 10201610020P. Filing Date: 29 November 2016.",
-      "award": null,
+      "awards": [],
       "links": [],
       "venue": "Other"
     },
@@ -3121,7 +3137,7 @@
       "title": "Electrosmog Visualization through Augmented Blurry Vision",
       "year": "2016",
       "citation": "Fan, K., Seigneur, J.M., Nanayakkara, S.C. and Inami, M., 2016, February. Electrosmog visualization through augmented blurry vision. In Proceedings of the 7th Augmented Human International Conference 2016 (pp. 1-2).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3135,7 +3151,7 @@
       "title": "Augmented Winter Ski with AR HMD",
       "year": "2016",
       "citation": "Fan, K., Seigneur, J.M., Guislain, J., Nanayakkara, S.C. and Inami, M., 2016, February. Augmented winter ski with ar hmd. In Proceedings of the 7th Augmented Human International Conference 2016 (pp. 1-2).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3149,7 +3165,7 @@
       "title": "ArmSleeve: A Patient Monitoring System to Support Occupational Therapists in Stroke Rehabilitation",
       "year": "2016",
       "citation": "Ploderer, B., Fong, J., Withana, A., Klaic, M., Nair, S., Crocher, V., Vetere, F. and Nanayakkara, S.C., 2016, June. ArmSleeve: a patient monitoring system to support occupational therapists in stroke rehabilitation. In Proceedings of the 2016 ACM Conference on Designing Interactive Systems (pp. 700-711).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3167,7 +3183,7 @@
       "title": "Ad-Hoc Access to Musical Sound for Deaf Individuals",
       "year": "2016",
       "citation": "Petry, B., Illandara, T., Forero, J.P. and Nanayakkara, S.C., 2016, October. Ad-Hoc Access to Musical Sound for Deaf Individuals. In Proceedings of the 18th International ACM SIGACCESS Conference on Computers and Accessibility (pp. 285-286).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3189,7 +3205,7 @@
       "title": "zSense: Enabling Shallow Depth Gesture Recognition for Greater Input Expressivity on Smart Wearables",
       "year": "2015",
       "citation": "Withana, A., Peiris, R., Samarasekara, N. and Nanayakkara, S.C., 2015, April. zsense: Enabling shallow depth gesture recognition for greater input expressivity on smart wearables. In Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems (pp. 3661-3670).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3207,7 +3223,7 @@
       "title": "SHRUG: stroke haptic rehabilitation using gaming",
       "year": "2015",
       "citation": "Peiris, R.L., Wijesinghe, V., and Nanayakkara, S.C., 2015, SHRUG: stroke haptic rehabilitation using gaming. In Proceedings of the 6th Augmented Human International Conference (AH '15). ACM, New York, NY, USA, 213-214.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3225,7 +3241,7 @@
       "title": "RippleTouch: Initial Exploration of a Wave Resonant Based Full Body Haptic Interface",
       "year": "2015",
       "citation": "Withana, A., Koyama, S., Saakes, D., Minamizawa, K., Inami, M. and Nanayakkara, S.C., 2015, March. RippleTouch: initial exploration of a wave resonant based full body haptic interface. In Proceedings of the 6th Augmented Human International Conference (pp. 61-68).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3243,7 +3259,7 @@
       "title": "FootNote: designing a cost effective plantar pressure monitoring system for diabetic foot ulcer prevention",
       "year": "2015",
       "citation": "Yong, K.F., Forero, J.P., Foong, S. and Nanayakkara, S.C., 2015, March. FootNote: designing a cost effective plantar pressure monitoring system for diabetic foot ulcer prevention. In Proceedings of the 6th Augmented Human International Conference (pp. 167-168).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3257,7 +3273,7 @@
       "title": "FingerReader: A Wearable Device to Explore Printed Text on the Go",
       "year": "2015",
       "citation": "Shilkrot, R., Huber, J., Meng Ee, W., Maes, P. and Nanayakkara, S.C., 2015, April. FingerReader: a wearable device to explore printed text on the go. In Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems (pp. 2363-2372).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3275,7 +3291,7 @@
       "title": "Feel & See the Globe: A Thermal, Interactive Installation",
       "year": "2015",
       "citation": "Huber, J., Malavipathirana, H., Wang, Y., Li, X., Fu, J.C., Maes, P. and Nanayakkara, S.C., 2015, March. Feel & see the globe: a thermal, interactive installation. In Proceedings of the 6th Augmented Human International Conference (pp. 215-216).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3289,7 +3305,7 @@
       "title": "BWard: An Optical Approach for Reliable in-situ Early Blood Leakage Detection at Catheter Extraction Points",
       "year": "2015",
       "citation": "Cortés, J.P., Ching, T.H., Wu, C., Chionh, C.Y., Nanayakkara, S.C. and Foong, S., 2015, July. Bward: An optical approach for reliable in-situ early blood leakage detection at catheter extraction points. In 2015 IEEE 7th International Conference on Cybernetics and Intelligent Systems (CIS) and IEEE Conference on Robotics, Automation and Mechatronics (RAM) (pp. 232-237). IEEE.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3307,7 +3323,7 @@
       "title": "Workshop on Assistive Augmentation",
       "year": "2014",
       "citation": "Huber, J., Rekimoto, J., Inami, M., Shilkrot, R., Maes, P., Meng Ee, W., Pullin, G. and Nanayakkara, S.C., 2014. Workshop on assistive augmentation. In CHI'14 Extended Abstracts on Human Factors in Computing Systems (pp. 103-106).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3325,7 +3341,7 @@
       "title": "SpiderVision: Extending the Human Field of View for Augmented Awareness",
       "year": "2014",
       "citation": "Fan, K., Huber, J., Nanayakkara, S.C. and Inami, M., 2014, March. SpiderVision: extending the human field of view for augmented awareness. In Proceedings of the 5th augmented human international conference (pp. 1-8).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3339,7 +3355,7 @@
       "title": "SparKubes: Exploring the Interplay between Digital and Physical Spaces with Minimalistic Interfaces",
       "year": "2014",
       "citation": "Ortega-Avila, S., Huber, J., Janaka, N., Withana, A., Fernando, P. and Nanayakkara, S.C., 2014, December. SparKubes: exploring the interplay between digital and physical spaces with minimalistic interfaces. In Proceedings of the 26th Australian Computer-Human Interaction Conference on Designing Futures: the Future of Design (pp. 204-207).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3353,7 +3369,7 @@
       "title": "SHRUG: stroke haptic rehabilitation using gaming",
       "year": "2014",
       "citation": "Peiris, R.L., Janaka, N., De Silva, D. and Nanayakkara, S.C, 2014, December. SHRUG: stroke haptic rehabilitation using gaming. In Proceedings of the 26th Australian Computer-Human Interaction Conference on Designing Futures: the Future of Design (pp. 380-383).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3371,7 +3387,7 @@
       "title": "PaperPixels: a Toolkit to Create Paper Based Displays",
       "year": "2014",
       "citation": "Peiris, R.L. and Nanayakkara, S.C., 2014, December. PaperPixels: a toolkit to create paper-based displays. In Proceedings of the 26th Australian Computer-Human Interaction Conference on Designing Futures: the Future of Design (pp. 498-504).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3389,7 +3405,7 @@
       "title": "nZwarm: a swarm of luminous sea creatures that interact with passers-by",
       "year": "2014",
       "citation": "Nanayakkara, S.C., Schroepfer, T., Withana, A., Wortmann, T. and Pablo, J., 2014. nZwarm: a swarm of luminous sea creatures that interact with passers-by. Wellington LUX.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "Lux",
@@ -3403,7 +3419,7 @@
       "title": "Keepers & Bees: an interactive light-art installation of interactive critters that visitors can interact with in real time via their smartphones",
       "year": "2014",
       "citation": "Schroepfer, T., Nanayakkara, S. C., Withana, A., Wortmann, T. , Cornelius, A., Khew, Y.N., Lian, A. 2014. Keepers & Bees: an interactive light-art installation of interactive critters that visitors can interact with in real time via their smartphones. In Singapore, Archifest 2014 (Keepers: Singapore Designer Collaborative, Orchard Green,Singapore, 26 Sep - 11 October, 2014).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "ArchiFest14",
@@ -3417,7 +3433,7 @@
       "title": "iSwarm: a swarm of luminous sea creatures that interact with passers-by",
       "year": "2014",
       "citation": "Schroepfer, T., Nanayakkara, S. C., A., Wortmann, T., Cornelius, A., Khew, Y.N. and Lian, A., Yeo K.P., Peiris, R.L., Withana, A., Werry. I., Petry, B., Otega, S., Janaka, N., Elvitigala, S., Fernando, P., Samarasekara, N., 2014. iSwarm: a swarm of luminous sea creatures that interact with passers-by. In Singapore iLight 2014 (Marina Bay, Singapore, 7- 30 March, 2014). ​",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "webpage",
@@ -3431,7 +3447,7 @@
       "title": "I-Draw: Towards a Freehand Drawing Assistant",
       "year": "2014",
       "citation": "Fernando, P., Peiris, R.L. and Nanayakkara, S.C., 2014, December. I-draw: Towards a freehand drawing assistant. In Proceedings of the 26th Australian Computer-Human Interaction Conference on Designing Futures: the Future of Design (pp. 208-211).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3445,7 +3461,7 @@
       "title": "FingerReader: A Wearable Device to Support Text-Reading on the Go",
       "year": "2014",
       "citation": "Shilkrot, R., Huber, J., Liu, C., Maes, P. and Nanayakkara, S.C., 2014. FingerReader: a wearable device to support text reading on the go. In CHI'14 Extended Abstracts on Human Factors in Computing Systems (pp. 2359-2364).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3463,7 +3479,7 @@
       "title": "EarPut: Augmenting Ear-worn Devices for Ear-based Interaction",
       "year": "2014",
       "citation": "Lissermann, R., Huber, J., Hadjakos, A., Nanayakkara, S.C. and Mühlhäuser, M., 2014, December. EarPut: augmenting ear-worn devices for ear-based interaction. In Proceedings of the 26th Australian Computer-Human Interaction Conference on Designing Futures: the Future of Design (pp. 300-307).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3481,7 +3497,7 @@
       "title": "Birdie: Towards a true flying experience",
       "year": "2014",
       "citation": "Petry, B., Ortega-Avila, S., Nanayakkara, S.C., and Foong, S., 2014, Birdie: Towards a true flying experience. In Workshop on Assistive Augmentation, Extended Abstracts of the 32nd Annual SIGCHI Conference on Human Factors in Computing Systems (CHI14). Toronto, Canada.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3495,7 +3511,7 @@
       "title": "A Wearable Text-Reading Device for the Visually-Impaired",
       "year": "2014",
       "citation": "Shilkrot, R., Huber, J., Liu, C., Maes, P. and Nanayakkara, S.C., 2014. A wearable text-reading device for the visually-impaired. In CHI'14 Extended Abstracts on Human Factors in Computing Systems (pp. 193-194).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3509,7 +3525,7 @@
       "title": "StickEar: Making Everyday Objects Respond to Sound",
       "year": "2013",
       "citation": "Yeo, K.P., Nanayakkara, S.C. and Ransiri, S., 2013, October. StickEar: making everyday objects respond to sound. In Proceedings of the 26th annual ACM symposium on User interface software and technology (pp. 221-226).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3527,7 +3543,7 @@
       "title": "StickEar: Augmenting Objects and Places Wherever Whenever",
       "year": "2013",
       "citation": "Yeo, K.P. and Nanayakkara, S.C., 2013. StickEar: augmenting objects and places wherever whenever. In CHI'13 Extended Abstracts on Human Factors in Computing Systems (pp. 751-756).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3541,7 +3557,7 @@
       "title": "SpeechPlay: Composing and Sharing Expressive Speech Through Visually Augmented Text.",
       "year": "2013",
       "citation": "Yeo, K.P. and Nanayakkara, S.C., 2013, November. SpeechPlay: composing and sharing expressive speech through visually augmented text. In Proceedings of the 25th Australian Computer-Human Interaction Conference: Augmentation, Application, Innovation, Collaboration (pp. 565-568).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3555,7 +3571,7 @@
       "title": "SmartFinger: Connecting Devices, Objects and People seamlessly",
       "year": "2013",
       "citation": "Ransiri, S., Peiris, R.L., Yeo, K.P. and Nanayakkara, S.C., 2013, November. SmartFinger: connecting devices, objects and people seamlessly. In Proceedings of the 25th Australian Computer-Human Interaction Conference: Augmentation, Application, Innovation, Collaboration (pp. 359-362).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3573,7 +3589,7 @@
       "title": "SmartFinger: An Augmented Finger as a Seamless ‘Channel’ between Digital and Physical Objects",
       "year": "2013",
       "citation": "Ransiri, S. and Nanayakkara, S.C., 2013, March. SmartFinger: an augmented finger as a seamless 'channel' between digital and physical objects. In Proceedings of the 4th Augmented Human International Conference (pp. 5-8).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3587,7 +3603,7 @@
       "title": "FingerDraw: More than a Digital Paintbrush",
       "year": "2013",
       "citation": "Hettiarachchi A., Nanayakkara S. C., Yeo K.P., Shilkrot R. and Maes P. ”FingerDraw: More than a Digital Paintbrush”, ACM SIGCHI Augmented Human, March, 2013.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3601,7 +3617,7 @@
       "title": "EyeRing: A Finger Worn Input Device for Seamless Interactions with our Surroundings",
       "year": "2013",
       "citation": "Nanayakkara S. C., Shilkrot R. Yeo K.P. and Maes P.”EyeRing: A Finger Worn Input Device for Seamless Interactions with our Surroundings”, ACM SIGCHI Augmented Human, March, 2013.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3615,7 +3631,7 @@
       "title": "Enhancing Musical Experience for the Hearing-impaired using Visual and Haptic Displays",
       "year": "2013",
       "citation": "Nanayakkara S.C., Wyse L., Ong S.H. and Taylor E. “Enhancing Musical Experience for the Hearing-impaired using Visual and Haptic Inputs”, Human-Computer Interaction, 28 (2), pp.115-160, 2013.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3633,7 +3649,7 @@
       "title": "AugmentedForearm: Exploring the Design Space of a Display-enhanced Forearm",
       "year": "2013",
       "citation": "Olberding S., Yeo K.P., Nanayakkara S.C. and Steimle J. “AugmentedForearm: Exploring the Design Space of a Display-enhanced Forearm”, ACM SIGCHI Augmented Human, March, 2013.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3647,7 +3663,7 @@
       "title": "WatchMe: Wrist-worn interface that makes remote monitoring seamless",
       "year": "2012",
       "citation": "Ransiri S. and Nanayakkara S. C. “WatchMe: Wrist-worn interface that makes remote monitoring seamless”, ASSETS, 2012.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3661,7 +3677,7 @@
       "title": "The Haptic Chair as a Speech Training Aid for the Deaf",
       "year": "2012",
       "citation": "Nanayakkara, S.C., Wyse, L. and Taylor, E.A., 2012, November. The haptic chair as a speech training aid for the deaf. In Proceedings of the 24th Australian Computer-Human Interaction Conference (pp. 405-410).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3675,7 +3691,7 @@
       "title": "Palm-area sensitivity to vibrotactile stimuli above 1 kHz",
       "year": "2012",
       "citation": "Wyse L., Nanayakkara S.C., Seekings, P., Ong S.H. and Taylor E. “Palm-area sensitivity to vibrotactile stimuli above 1 kHz”, NIME’12.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3689,7 +3705,7 @@
       "title": "EyeRing: An Eye on a Finger",
       "year": "2012",
       "citation": "Nanayakkara S. C., Shilkrot R. and Maes P., 2012, EyeRing: An Eye on a Finger, CHI Interactivity (Research), May. 2012.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3703,7 +3719,7 @@
       "title": "EyeRing: A Finger-worn Assistant",
       "year": "2012",
       "citation": "Nanayakkara, S.C., Shilkrot, R. and Maes, P., 2012. EyeRing: a finger-worn assistant. In CHI'12 extended abstracts on human factors in computing systems (pp. 1961-1966).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3717,7 +3733,7 @@
       "title": "Effectiveness of the Haptic Chair in Speech Training",
       "year": "2012",
       "citation": "Nanayakkara, S.C., Wyse, L. and Taylor, E.A., 2012, October. Effectiveness of the haptic chair in speech training. In Proceedings of the 14th international ACM SIGACCESS conference on Computers and accessibility (pp. 235-236).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3735,7 +3751,7 @@
       "title": "Touch and Copy, Touch and Paste",
       "year": "2011",
       "citation": "Mistry, P., Nanayakkara, S.C., and Maes, P., 2011. Touch and copy, touch and paste. In CHI'11 Extended Abstracts on Human Factors in Computing Systems (pp. 1095-1098).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3753,7 +3769,7 @@
       "title": "The effect of visualizing audio targets in a musical listening and performance task",
       "year": "2011",
       "citation": "Wyse, L., Mitani, N. and Nanayakkara, S.C., 2011. The Effect of Visualizing Audio Targets in a Musical Listening and Performance Task. In NIME (pp. 304-307).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "PDF",
@@ -3767,7 +3783,7 @@
       "title": "SPARSH: Passing Data using the Body as a Medium",
       "year": "2011",
       "citation": "Mistry, P., Nanayakkara, S.C. and Maes, P., 2011, March. Sparsh: Passing data using the body as a medium. In Proceedings of the ACM 2011 conference on Computer supported cooperative work (pp. 689-692).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3785,7 +3801,7 @@
       "title": "Biases and interaction effects in gestural acquisition of auditory targets using a hand-held device",
       "year": "2011",
       "citation": "Wyse, L., Nanayakkara, S.C. and Mitani, N., 2011, November. Biases and interaction effects in gestural acquisition of auditory targets using a hand-held device. In Proceedings of the 23rd Australian Computer-Human Interaction Conference (pp. 315-318).",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -3803,7 +3819,7 @@
       "title": "An enhanced musical experience for the deaf: design and evaluation of a music display and a haptic chair",
       "year": "2009",
       "citation": "Nanayakkara, S. C., Taylor, E., Wyse, L. and Ong, S. H. 2009. An enhanced musical experience for the deaf: design and evaluation of a music display and a haptic chair. In Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI '09). Association for Computing Machinery, New York, NY, USA, 337–346.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",

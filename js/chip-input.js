@@ -226,8 +226,11 @@
       chip = document.createElement('div');
       chip.className = 'pub-item np-pub-chip';
       chip.setAttribute('data-slug', item.slug);
-      var awardHTML = item.award
-        ? '<div class="pub-award">★ ' + escHTML(item.award) + '</div>'
+      var awardsList = Array.isArray(item.awards) ? item.awards : [];
+      var awardHTML = awardsList.length
+        ? '<div class="pub-awards">' + awardsList.map(function (a) {
+            return '<span class="pub-award">★ ' + escHTML(a) + '</span>';
+          }).join('') + '</div>'
         : '';
       var linksHTML = (item.links && item.links.length)
         ? '<div class="pub-links">' + item.links.map(function (l) {

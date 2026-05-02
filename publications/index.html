@@ -4,13 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Publications — Augmented Human Lab</title>
+
+<!-- ── SEO ─────────────────────────────────────────────────── -->
+<meta name="description" content="Peer-reviewed publications from the Augmented Human Lab — papers in HCI, accessibility, sensory augmentation, and wearable technology.">
+<meta name="author" content="Augmented Human Lab">
+<meta name="theme-color" content="#6100FF">
+<meta name="color-scheme" content="light">
+<link rel="canonical" href="https://ahlab.org/publications/">
+
+<link rel="icon" href="https://ahlab.org/wp-content/uploads/2021/05/cropped-Group@2x-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="https://ahlab.org/wp-content/uploads/2021/05/cropped-Group@2x-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="https://ahlab.org/wp-content/uploads/2021/05/cropped-Group@2x-192x192.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Augmented Human Lab">
+<meta property="og:title" content="Publications — Augmented Human Lab">
+<meta property="og:description" content="Peer-reviewed publications — papers in HCI, accessibility, sensory augmentation, and wearable technology.">
+<meta property="og:url" content="https://ahlab.org/publications/">
+<meta property="og:image" content="https://cdn.ahlab.org/media/site/home_hero.png">
+<meta property="og:image:alt" content="Augmented Human Lab — Publications">
+<meta property="og:locale" content="en_US">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Publications — Augmented Human Lab">
+<meta name="twitter:description" content="Peer-reviewed publications — papers in HCI, accessibility, sensory augmentation, and wearable technology.">
+<meta name="twitter:image" content="https://cdn.ahlab.org/media/site/home_hero.png">
+
 <link rel="stylesheet" href="https://use.typekit.net/zws2qzx.css">
 <link rel="stylesheet" href="/css/theme.css">
 <link rel="stylesheet" href="/css/publications.css">
+<link rel="stylesheet" href="/css/publication-add.css">
 <link rel="stylesheet" href="/css/event-chip.css">
 <link rel="stylesheet" href="/css/auth.css">
-<link rel="icon" href="https://ahlab.org/wp-content/uploads/2021/05/cropped-Group@2x-32x32.png" sizes="32x32">
-<meta name="description" content="Peer-reviewed publications from the Augmented Human Lab.">
 </head>
 <body>
 
@@ -121,9 +147,9 @@
   <main class="pubs-content">
     <div id="pubsContent">
       
-  <section class="pub-add-section rv" data-myahl-add-section data-myahl-claim="self" hidden>
+  <section class="pub-add-section rv" data-myahl-claim="self" hidden>
     <div class="pub-list pub-list-solo">
-      <button type="button" class="pub-item pub-item-add-trigger" data-myahl-add-trigger>
+      <button type="button" class="pub-item pub-item-add-trigger" data-pub-add-trigger>
         <div class="pub-body">
           <div class="pub-add-trigger-label">
             <span class="pub-add-plus" aria-hidden="true">+</span>
@@ -131,29 +157,6 @@
           </div>
         </div>
       </button>
-      <div class="pub-item pub-item-add-form" data-myahl-add-form hidden data-myahl-submit="publication-create">
-        <div class="pub-body">
-          <input type="text" class="pub-input pub-input-title" data-field="title" placeholder="Title" required>
-          <textarea class="pub-input pub-input-citation" data-field="citation" rows="3" placeholder="Citation"></textarea>
-          <div class="pub-input-row">
-            <input type="text" class="pub-input pub-input-year"  data-field="year"  placeholder="Year">
-            <input type="text" class="pub-input pub-input-venue" data-field="venue" placeholder="Venue (e.g. CHI)">
-            <input type="text" class="pub-input pub-input-award" data-field="award" placeholder="Award (optional)">
-          </div>
-          <div class="pub-input-row">
-            <input type="url" class="pub-input" data-field="link-doi" placeholder="DOI URL">
-            <input type="url" class="pub-input" data-field="link-pdf" placeholder="PDF URL">
-          </div>
-          <input type="text" class="pub-input" data-field="projectSlug"
-                 list="pub-related-project-suggest"
-                 placeholder="Related project slug (optional)">
-          <datalist id="pub-related-project-suggest"><option value="blind-drone">Blind Drone</option><option value="emodrink">EmoDrink</option><option value="factually">Factually</option><option value="gutio">GutIO</option><option value="zenflow">Zenflow</option><option value="soniphy">SoniPhy</option><option value="sonicvista">SonicVista</option><option value="dysalytics">Dysalytics</option><option value="dronebuddy">DroneBuddy</option><option value="curious-shorts">Curious Shorts</option><option value="aisee">AiSee</option><option value="xr-floatation-therapy">XR Floatation Therapy</option><option value="ubipen">UbiPen</option><option value="toro">Toro</option><option value="stakco">Stakco</option><option value="sound-designer-generative-ai-interactions">Sound Designer-Generative AI Interactions</option><option value="seear">SeEar</option><option value="kavy">Kavy</option><option value="itiles">iTILES</option><option value="emo-know">EMO-KNOW</option><option value="cotacs">CoTacs</option><option value="hopu">Hopu</option><option value="crowd-eval-audio">Crowd-Eval-Audio</option><option value="audio-morph-gan">Audio-Morph GAN</option><option value="xrtic">XRtic</option><option value="vrhook">VRHook</option><option value="scratch-and-sense">Scratch and Sense</option><option value="kiwrious">Kiwrious</option><option value="affect-in-the-wild">Affect in the Wild</option><option value="ticklefoot">TickleFoot</option><option value="stressshoe">StressShoe</option><option value="om">OM</option><option value="magicblocks">MagicBLOCKS</option><option value="lightsense">LightSense</option><option value="kinvoice">KinVoice</option><option value="eyeknowyou">EyeKnowYou</option><option value="clothtiles">ClothTiles</option><option value="anisma">ANISMA</option><option value="versatouch">VersaTouch</option><option value="stressfoot">StressFoot</option><option value="rainbowhub">RainbowHub</option><option value="prompto">Prompto</option><option value="phantomtouch">PhantomTouch</option><option value="jammify">Jammify</option><option value="actualtouch">ActualTouch</option><option value="prospero">Prospero</option><option value="m-hair">M-Hair</option><option value="gymsoles">GymSoles</option><option value="chewit">ChewIt</option><option value="target-driven-navigation">Target Driven Navigation</option><option value="step-detection-algorithm">Step Detection Algorithm</option><option value="prospecfit">ProspecFit</option><option value="osense">oSense</option><option value="lighttank">LightTank</option><option value="fsense">fSense</option><option value="evaluating-ivr-in-schools">Evaluating IVR in schools</option><option value="cricketcoach">CricketCoach</option><option value="comprate">CompRate</option><option value="capmat">CapMat</option><option value="abi-foodcam">ABI FoodCam</option><option value="2bit-tactile-hand">2bit-Tactile Hand</option><option value="thumb-in-motion">Thumb in Motion</option><option value="muss-bits">MuSS-Bits</option><option value="kyanite">Kyanite</option><option value="insight">InSight</option><option value="gestakey">GestAKey</option><option value="gescad">GesCAD</option><option value="fingerreader">FingerReader</option><option value="doodle-daydream">Doodle Daydream</option><option value="chaddybuddy">ChaddyBuddy</option><option value="zsense">zSense</option><option value="wavesense">WaveSense</option><option value="swimsight">SwimSight</option><option value="stickamps">StickAmps</option><option value="postbits">PostBits</option><option value="knoctify">Knoctify</option><option value="armsleeve">ArmSleeve</option><option value="the-ribbon">The RIBbon</option><option value="sonicsg">SonicSG</option><option value="shrug">SHRUG</option><option value="rippletouch">RippleTouch</option><option value="mobile-360-video-interaction">Mobile 360° Video Interaction</option><option value="fingerreader-v0">FingerReader-v0</option><option value="feel-the-globe">Feel the Globe</option><option value="bward">BWard</option><option value="sparkubes">SparKubes</option><option value="paperpixels">PaperPixels</option><option value="nzwarm">nZwarm</option><option value="keepers-bees">Keepers &amp; Bees</option><option value="iswarm">iSwarm</option><option value="ircx">ircX</option><option value="i-draw">I-Draw</option><option value="foot-note">Foot.Note</option><option value="earput">EarPut</option><option value="stickear">StickEar</option><option value="spidervision">SpiderVision</option><option value="smartfinger">SmartFinger</option><option value="fingerdraw">FingerDraw</option><option value="birdie">Birdie</option><option value="augmented-forearm">Augmented Forearm</option><option value="watchme">WatchMe</option><option value="speechplay">SpeechPlay</option><option value="sparsh">Sparsh</option><option value="eyering">EyeRing</option><option value="sutdfoodcam">SUTDFoodCam</option><option value="soundfloor">SoundFloor</option><option value="sensei">Sensei</option><option value="hapticchair">HapticChair</option><option value="autopilot">Autopilot</option><option value="test-project-addition">Test Project Addition</option><option value="test-project">Test Project</option><option value="test-proj2">Test Proj2</option><option value="test-proj3">Test Proj3</option></datalist>
-          <div class="pub-form-actions">
-            <button type="button" class="pub-submit-btn" data-myahl-submit-trigger>Submit for review</button>
-          </div>
-        </div>
-        <button type="button" class="pub-add-close" data-myahl-add-close aria-label="Cancel">×</button>
-      </div>
     </div>
   </section>
   <section class="year-section" id="year-2026" data-year="2026">
@@ -162,7 +165,7 @@
       
     <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
-        <div class="pub-award">★ Honorable Mention Award</div>
+        <div class="pub-awards"><span class="pub-award">★ Honorable Mention Award</span></div>
         <div class="pub-title">Zenflow: Investigating MR Transitions for Enhancing Sleep and Relaxation</div>
         <div class="pub-citation">Sasikumar, P., Sasikumar, P., Ramesh, S., Masuda, T., Qiao, H., and Nanayakkara, S. C., 2026. Zenflow: Investigating MR Transitions for Enhancing Sleep and Relaxation. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI 2026).</div>
         
@@ -171,7 +174,7 @@
     </div>
     <div class="pub-item rv" data-venue="CHI" data-venue-group="CHI">
       <div class="pub-body">
-        <div class="pub-award">★ Honorable Mention Award</div>
+        <div class="pub-awards"><span class="pub-award">★ Honorable Mention Award</span></div>
         <div class="pub-title">VisceroHaptics: Investigating the Effects of Gut-based Audio-Haptic Feedback on Gastric Feelings and Gastric Interoceptive Behaviors</div>
         <div class="pub-citation">Nguyen, M.H., Messerschmidt, M.A., Huber, J. and Nanayakkara, S. C., 2026. VisceroHaptics: Investigating the Effects of Gut-based Audio-Haptic Feedback on Gastric Feelings and Gastric Interoceptive Behaviors. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI 2026).</div>
         
@@ -309,7 +312,7 @@
       
     <div class="pub-item rv" data-venue="VR" data-venue-group="other">
       <div class="pub-body">
-        <div class="pub-award">★ Best Paper Award</div>
+        <div class="pub-awards"><span class="pub-award">★ Best Paper Award</span></div>
         <div class="pub-title">VR.net: A Real-world Dataset for Virtual Reality Motion Sickness Research</div>
         <div class="pub-citation">Wen, E., Gupta, C., Sasikumar, P., Billinghurst, M., Wilmott, J., Skow, E., Dey, A., Nanayakkara, S.C. VR.net: A Real-world Dataset for Virtual Reality Motion Sickness Research. The 31st IEEE Conference on Virtual Reality and 3D User Interfaces, 2024. Best Paper Award!</div>
         
@@ -609,7 +612,7 @@
     </div>
     <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
-        <div class="pub-award">★ Honorable Mention Award</div>
+        <div class="pub-awards"><span class="pub-award">★ Honorable Mention Award</span></div>
         <div class="pub-title">Players and performance: opportunities for social interaction with augmented tabletop games at centres for children with autism</div>
         <div class="pub-citation">Wu, Q., Xu, R., Liu, V., Lottridge, Danielle., and Nanayakkara, S.C. 2022. Players and performance: opportunities for social interaction with augmented tabletop games at centres for children with autism. Proc. ACM Hum.-Comput. Interact. 6, ISS, Article 563 (December 2022), 24 pages. Honorable Mention Award!</div>
         
@@ -669,7 +672,7 @@
     </div>
     <div class="pub-item rv" data-venue="MobileHCI" data-venue-group="other">
       <div class="pub-body">
-        <div class="pub-award">★ Honorable Mention Award</div>
+        <div class="pub-awards"><span class="pub-award">★ Honorable Mention Award</span></div>
         <div class="pub-title">StressShoe: A DIY Toolkit for just-in-time Personalised Stress Interventions for Office Workers Performing Sedentary Tasks</div>
         <div class="pub-citation">Elvitigala, D.S., Scholl, P.M., Suriyaarachchi, H., Dissanayake, V. and Nanayakkara, S.C., 2021. StressShoe: A DIY Toolkit for just-in-time Personalised Stress Interventions for Office Workers Performing Sedentary Tasks. In MobileHCI ’21: The ACM International Conference on Mobile Human-Computer Interaction, September 27–30, 2021, Touluse, France. Honorable Mention Award!</div>
         
@@ -678,7 +681,7 @@
     </div>
     <div class="pub-item rv" data-venue="ACM" data-venue-group="ACM">
       <div class="pub-body">
-        <div class="pub-award">★ Best Short Paper Award</div>
+        <div class="pub-awards"><span class="pub-award">★ Best Short Paper Award</span></div>
         <div class="pub-title">Sensor-Based Interactive Worksheets to Support Guided Scientific Inquiry</div>
         <div class="pub-citation">Cao, J., Chan, S.W.T., Garbett, D.L., Denny, P., Nassani, A., Scholl, P.M. and Nanayakkara, S.C., 2021. Sensor-Based Interactive Worksheets to Support Guided Scientific Inquiry. In Interaction Design and Children (IDC ’21), June 24–30, 2021, Athens, Greece. ACM, New York, NY, USA, 7 pages. Best Short Paper Award!</div>
         
@@ -723,7 +726,7 @@
     </div>
     <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
-        <div class="pub-award">★ Best Student Paper Award</div>
+        <div class="pub-awards"><span class="pub-award">★ Best Student Paper Award</span></div>
         <div class="pub-title">GymSoles++: Combining Google Glass with Smart Insoles to Improve Body Posture when Performing Squats</div>
         <div class="pub-citation">Elvitigala, D.S., Matthies, D.J.C, Weerasinghe, C. and Nanayakkara, S.C., 2021. GymSoles++: Combining Google Glass with Smart Insoles to Improve Body Posture when Performing Squats. In The 14th PErvasive Technologies Related to Assistive Environments Conference (PETRA 2021), June 29-July 2, 2021, Corfu, Greece. Best Student Paper Award!</div>
         
@@ -1110,7 +1113,7 @@
     </div>
     <div class="pub-item rv" data-venue="ISWC" data-venue-group="other">
       <div class="pub-body">
-        <div class="pub-award">★ Best Presentation Runners Up Award</div>
+        <div class="pub-awards"><span class="pub-award">★ Best Presentation Runners Up Award</span></div>
         <div class="pub-title">Uncovering the Potential of the Foot as a Source of User Information</div>
         <div class="pub-citation">Elvitigala, D.S., 2018, October. Uncovering the Potential of the Foot as a Source of User Information. In Proceedings of the 2018 ACM International Joint Conference and 2018 International Symposium on Pervasive and Ubiquitous Computing and Wearable Computers (pp. 541-546). Doctoral Colloquium Best Presentation Runners Up Award!</div>
         
@@ -1227,7 +1230,7 @@
     </div>
     <div class="pub-item rv" data-venue="ISWC" data-venue-group="other">
       <div class="pub-body">
-        <div class="pub-award">★ Best Presentation Runners-Up</div>
+        <div class="pub-awards"><span class="pub-award">★ Best Presentation Runners-Up</span></div>
         <div class="pub-title">Exploring the Potential of the Foot to Infer on User Information</div>
         <div class="pub-citation">Elvitigala, D.S., 2018, October. Exploring the Potential of the Foot to Infer on User Information. In Proceedings of the 2018 ACM International Joint Conference and 2018 International Symposium on Pervasive and Ubiquitous Computing and Wearable Computers (pp. 1805-1808). Best Presentation Runners-Up!</div>
         
@@ -1314,7 +1317,7 @@
     </div>
     <div class="pub-item rv" data-venue="AH" data-venue-group="AH">
       <div class="pub-body">
-        <div class="pub-award">★ Best Short Paper Award</div>
+        <div class="pub-awards"><span class="pub-award">★ Best Short Paper Award</span></div>
         <div class="pub-title">InSight: A Systematic Approach to Create Dynamic Human-Controller-Interactions</div>
         <div class="pub-citation">Boldu, R., Zhang, H., Cortés, J.P.F., Muthukumarana, S. and Nanayakkara, S.C., 2017, March. Insight: a systematic approach to create dynamic human-controller-interactions. In Proceedings of the 8th Augmented Human International Conference (pp. 1-5). Best Short Paper Award!</div>
         
@@ -1410,7 +1413,7 @@
     </div>
     <div class="pub-item rv" data-venue="Other" data-venue-group="other">
       <div class="pub-body">
-        <div class="pub-award">★ Steve Howard Best Long Paper Award</div>
+        <div class="pub-awards"><span class="pub-award">★ Steve Howard Best Long Paper Award</span></div>
         <div class="pub-title">MuSS-Bits: Sensor-Display Blocks for Deaf People to Explore Musical Sounds</div>
         <div class="pub-citation">Petry, B., Illandara, T. and Nanayakkara, S.C., 2016, November. MuSS-bits: sensor-display blocks for deaf people to explore musical sounds. In Proceedings of the 28th Australian Conference on Computer-Human Interaction (pp. 72-80).</div>
         
@@ -2036,6 +2039,8 @@
 <script src="/js/submit-patch.js" defer></script>
 <script src="/js/pending-cache.js" defer></script>
 <script src="/js/myahl-forms.js" defer></script>
+<script src="/js/harvard-cite.js" defer></script>
+<script src="/js/publication-add.js" defer></script>
 <script src="/js/quick-search.js" defer></script>
 
 <script>

@@ -1,0 +1,912 @@
+/* publication-add.css
+   ===================
+   Self-contained styles for the inline add-publication form. Loaded
+   on every page that wants to host the form (currently /my-ahl/ and
+   the public /publications/). The card uses its own .myahl-pa-card
+   class — no extends — so layout is identical wherever it's dropped. */
+
+.myahl-pa-card {
+  background: var(--color-neutral-10, rgba(97, 0, 255, .03));
+  border: 1px dashed var(--color-neutral-30);
+  border-radius: var(--radius);
+  padding: 24px;
+  position: relative;
+  margin-bottom: 16px;
+  font-family: var(--font-text);
+  color: var(--color-neutral-100);
+}
+.myahl-pa-card .myahl-pa-preview-title {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  color: var(--color-neutral-100);
+  margin-bottom: 8px;
+}
+.myahl-pa-card .myahl-pa-preview-citation {
+  font-family: var(--font-text);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--color-neutral-70);
+  margin-bottom: 12px;
+}
+/* Once the citation parses, hide the input textarea — the preview
+   shows what we extracted, so the raw paste is redundant. To correct
+   a bad paste, the user cancels and re-opens the card. */
+.myahl-pa-card.has-parsed .myahl-pa-input { display: none; }
+.myahl-pa-card.has-parsed .myahl-pa-preview {
+  border-top: none;
+  padding-top: 0;
+}
+.myahl-pa-input { margin-bottom: 12px; }
+.myahl-pa-textarea {
+  width: 100%;
+  min-height: 72px;
+  font-family: var(--font-text);
+  font-size: 14px;
+  line-height: 22px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  resize: vertical;
+}
+.myahl-pa-textarea:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+.myahl-pa-banner {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--color-neutral-70);
+  min-height: 16px;
+}
+.myahl-pa-banner.is-error { color: #c2410c; }
+
+.myahl-pa-preview {
+  margin-bottom: 12px;
+  padding: 12px 0 0;
+  border-top: 1px dashed var(--color-neutral-30);
+}
+.myahl-pa-preview.is-empty { display: none; }
+.myahl-pa-preview-title:empty::before {
+  content: '(title will appear after parsing)';
+  color: var(--color-neutral-60);
+  font-style: italic;
+  font-weight: 400;
+}
+.myahl-pa-preview-citation:empty { display: none; }
+/* Inline author highlights inside the parsed citation.
+   .is-tagged is rendered as an <a> linking to /people/<slug>/ — the
+   purple background is the affordance ("this is a clickable lab
+   person"). .is-outsider is a faint dotted underline — the author
+   was extracted but isn't a lab person, no interaction. */
+.myahl-pa-mention {
+  border-radius: 3px;
+  padding: 0 2px;
+  transition: background .15s, color .15s;
+}
+a.myahl-pa-mention.is-tagged {
+  background: rgba(97, 0, 255, .10);
+  color: var(--color-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+a.myahl-pa-mention.is-tagged:hover {
+  background: rgba(97, 0, 255, .20);
+  text-decoration: underline;
+}
+.myahl-pa-mention.is-outsider {
+  border-bottom: 1px dotted var(--color-neutral-50);
+  color: inherit;
+}
+/* Year — vivid AHL gradient pill (cyan→purple) so it pops as a date
+   chip, clearly distinct from the purple author highlights and the
+   cyan venue highlight. Same style is used for the standalone year
+   AND any year occurrence embedded inside the venue title. */
+.myahl-pa-mention.is-year {
+  background: var(--gradient);
+  color: #fff;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: .9em;
+  margin: 0 1px;
+}
+/* Venue — cyan from the AHL gradient palette. The contrast vs. the
+   purples is what carries the "this is the conference, not an author"
+   signal, so the meta line below the citation is no longer needed. */
+.myahl-pa-mention.is-venue {
+  background: rgba(0, 215, 238, .18);
+  color: #0a8595;
+  font-weight: 600;
+}
+
+/* DOI status + PDF picker share one inline row below the citation.
+   Both pieces use the same chip-like baseline so they read as related
+   metadata, not separate sections. */
+.myahl-pa-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-text);
+  font-size: 12px;
+  margin: 10px 0 14px;
+}
+.myahl-pa-pdf-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-neutral-70);
+}
+.myahl-pa-pdf-status.is-attached  { color: var(--color-accent); font-weight: 600; }
+
+/* ── DOI zone — same multi-face pattern as the award zone ───
+   Faces: searching / found / not-found / editing. The verified
+   value is itself click-to-edit (in case CrossRef auto-matched the
+   wrong DOI), and not-found surfaces a "+ Add DOI" button so the
+   user can fill it in manually. */
+.myahl-pa-doi-zone {
+  display: inline-flex;
+  align-items: center;
+}
+.myahl-pa-doi-zone[data-state="searching"] .myahl-pa-doi-found,
+.myahl-pa-doi-zone[data-state="searching"] .myahl-pa-doi-add,
+.myahl-pa-doi-zone[data-state="searching"] .myahl-pa-doi-edit { display: none; }
+.myahl-pa-doi-zone[data-state="found"]     .myahl-pa-doi-searching,
+.myahl-pa-doi-zone[data-state="found"]     .myahl-pa-doi-add,
+.myahl-pa-doi-zone[data-state="found"]     .myahl-pa-doi-edit { display: none; }
+.myahl-pa-doi-zone[data-state="not-found"] .myahl-pa-doi-searching,
+.myahl-pa-doi-zone[data-state="not-found"] .myahl-pa-doi-found,
+.myahl-pa-doi-zone[data-state="not-found"] .myahl-pa-doi-edit { display: none; }
+.myahl-pa-doi-zone[data-state="editing"]   .myahl-pa-doi-searching,
+.myahl-pa-doi-zone[data-state="editing"]   .myahl-pa-doi-found,
+.myahl-pa-doi-zone[data-state="editing"]   .myahl-pa-doi-add { display: none; }
+
+.myahl-pa-doi-searching {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-neutral-70);
+}
+/* Found face — purple, bold, click-to-edit. Hover hint suggests it. */
+.myahl-pa-doi-found {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: text;
+  color: var(--color-accent);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  padding: 0 2px;
+}
+.myahl-pa-doi-found:hover { background: rgba(97, 0, 255, .06); }
+.myahl-pa-doi-found:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+/* Mismatch — DOI resolves on CrossRef but its title doesn't match
+   the citation we're adding. Eligibility-for-auto-approval is gated
+   on .match in JS; this styling is the user-visible signal. */
+.myahl-pa-doi-found.is-mismatch { color: #c2410c; }
+.myahl-pa-doi-found.is-mismatch:hover { background: rgba(194, 65, 12, .08); }
+/* "+ Add DOI" button — same dashed-border look as PDF / award. */
+.myahl-pa-doi-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-text);
+  font-size: 12px;
+  background: none;
+  border: 1px dashed var(--color-neutral-40);
+  border-radius: var(--radius-sm);
+  color: var(--color-accent);
+  padding: 2px 8px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+}
+.myahl-pa-doi-add:hover {
+  background: rgba(97, 0, 255, .06);
+  border-color: var(--color-accent);
+  border-style: solid;
+}
+
+.myahl-pa-doi-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.myahl-pa-doi-input {
+  padding: 3px 8px;
+  font-size: 12px;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-text);
+  width: 280px;
+  max-width: 60vw;
+}
+.myahl-pa-doi-input:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+.myahl-pa-doi-x {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--color-neutral-70);
+  cursor: pointer;
+  padding: 2px;
+  border-radius: var(--radius-sm);
+}
+.myahl-pa-doi-x:hover {
+  background: var(--color-neutral-20);
+  color: var(--color-neutral-100);
+}
+
+/* Inline SVG icon — matches the Feather/Lucide stroke conventions
+   used elsewhere in /my-ahl/. Sized to baseline-align with 12px text. */
+.myahl-pa-icon {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+/* "+ Add PDF" button — dashed-border affordance that lifts on hover. */
+.myahl-pa-pdf-pick {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-text);
+  font-size: 12px;
+  background: none;
+  border: 1px dashed var(--color-neutral-40);
+  border-radius: var(--radius-sm);
+  color: var(--color-accent);
+  padding: 2px 8px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+}
+.myahl-pa-pdf-pick:hover {
+  background: rgba(97, 0, 255, .06);
+  border-color: var(--color-accent);
+  border-style: solid;
+}
+/* Close (✕) controls — all three (PDF clear, award clear in edit
+   mode, award clear in display mode) share one borderless look. */
+.myahl-pa-pdf-clear,
+.myahl-pa-award-x,
+.myahl-pa-award-x-display {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--color-neutral-70);
+  cursor: pointer;
+  padding: 2px;
+  border-radius: var(--radius-sm);
+}
+.myahl-pa-pdf-clear:hover,
+.myahl-pa-award-x:hover,
+.myahl-pa-award-x-display:hover {
+  background: var(--color-neutral-20);
+  color: var(--color-neutral-100);
+}
+
+/* ── Project tag zone ───────────────────────────────────────
+   "+ Tag project" button + searchable dropdown picker. Selected
+   projects render as chips next to the button (left-aligned). */
+.myahl-pa-project-zone {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+.myahl-pa-project-chips {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.myahl-pa-project-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-text);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-accent);
+  background: rgba(97, 0, 255, .08);
+  border-radius: 999px;
+  padding: 2px 4px 2px 10px;
+}
+.myahl-pa-project-x {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 999px;
+  opacity: .7;
+}
+.myahl-pa-project-x:hover { opacity: 1; background: rgba(97, 0, 255, .14); }
+.myahl-pa-project-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-text);
+  font-size: 12px;
+  background: none;
+  border: 1px dashed var(--color-neutral-40);
+  border-radius: var(--radius-sm);
+  color: var(--color-accent);
+  padding: 2px 8px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+}
+.myahl-pa-project-add:hover {
+  background: rgba(97, 0, 255, .06);
+  border-color: var(--color-accent);
+  border-style: solid;
+}
+/* Picker dropdown — anchored to the bottom-left of the button via
+   the relative-positioned zone. */
+.myahl-pa-project-picker {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 240px;
+  max-width: 360px;
+  background: #fff;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 8px 24px rgba(14, 15, 17, .14);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+/* The [hidden] attribute toggle in JS would normally hide via the UA
+   stylesheet's `[hidden]{display:none}`, but our `.class { display:
+   flex }` above overrides that. This attribute-bumped selector
+   restores the hidden state with higher specificity. */
+.myahl-pa-project-picker[hidden] { display: none; }
+.myahl-pa-project-search {
+  padding: 4px 8px;
+  font-size: 12px;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-text);
+}
+.myahl-pa-project-search:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+.myahl-pa-project-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.myahl-pa-project-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  padding: 6px 8px;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+}
+.myahl-pa-project-list li:hover { background: rgba(97, 0, 255, .06); }
+.myahl-pa-project-li-title { color: var(--color-neutral-100); }
+.myahl-pa-project-li-year  { color: var(--color-neutral-70); font-size: 11px; }
+.myahl-pa-project-empty {
+  padding: 8px;
+  font-size: 12px;
+  color: var(--color-neutral-70);
+  font-style: italic;
+  text-align: center;
+}
+
+/* ── Award multi-chip zone ──────────────────────────────────
+   Each award is a chip with its own ✕. "+ Add award" toggles an
+   inline input. Enter commits a chip and clears the input for
+   another; click-outside also commits; Escape (or empty Enter)
+   closes. The <input> is reused; submit() always reads its current
+   value too, so a typed-but-uncommitted entry isn't lost. */
+.myahl-pa-award-zone {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.myahl-pa-award-chips {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.myahl-pa-award-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-text);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-accent);
+  background: rgba(97, 0, 255, .08);
+  border-radius: 999px;
+  padding: 2px 4px 2px 10px;
+}
+.myahl-pa-award-x-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 999px;
+  opacity: .7;
+}
+.myahl-pa-award-x-chip:hover { opacity: 1; background: rgba(97, 0, 255, .14); }
+
+/* "+ Add award" button — same dashed-border look as "+ Add PDF". */
+.myahl-pa-award-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-text);
+  font-size: 12px;
+  background: none;
+  border: 1px dashed var(--color-neutral-40);
+  border-radius: var(--radius-sm);
+  color: var(--color-accent);
+  padding: 2px 8px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+}
+.myahl-pa-award-add:hover {
+  background: rgba(97, 0, 255, .06);
+  border-color: var(--color-accent);
+  border-style: solid;
+}
+/* Same gotcha as the project picker / award edit: explicit display
+   above outranks the UA's `[hidden]{display:none}`. Restore. */
+.myahl-pa-award-add[hidden] { display: none; }
+
+.myahl-pa-award-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+/* Same gotcha as the project picker: explicit `display:inline-flex`
+   above outranks the UA's `[hidden]{display:none}`. Restore via an
+   attribute-bumped selector so JS-toggling `hidden` actually hides. */
+.myahl-pa-award-edit[hidden] { display: none; }
+.myahl-pa-award-input {
+  padding: 3px 8px;
+  font-size: 12px;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-text);
+  width: 220px;
+  max-width: 50vw;
+}
+.myahl-pa-award-input:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.myahl-pa-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-end;
+  border-top: 1px solid var(--color-neutral-30);
+  padding-top: 10px;
+}
+.myahl-pa-submit-hint {
+  flex: 1;
+  font-size: 12px;
+  color: var(--color-neutral-70);
+  text-align: left;
+}
+/* Auto-approval badge: shown only when the citation parses, the
+   submitter is among the matched authors, the lab PI is too, and
+   the year is >= AHL_START_YEAR (see myahl-publication-add.js).
+   Hidden by default — `.is-shown` reveals. */
+.myahl-pa-eligibility {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--color-accent);
+  position: relative;
+  cursor: help;
+}
+.myahl-pa-eligibility.is-shown { display: inline-flex; }
+.myahl-pa-eligibility-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+}
+/* When eligibility is shown the hint is suppressed (mutually
+   exclusive — eligibility implies submitter is matched, so the
+   hint about missing match is empty anyway). Keep this rule in
+   case future changes re-introduce hint copy in the eligible state. */
+.myahl-pa-eligibility.is-shown ~ .myahl-pa-submit-hint { display: none; }
+
+/* Tooltip listing the five auto-approval conditions. Pure CSS —
+   shown on hover OR keyboard focus of the eligibility span. Anchored
+   above-left so it doesn't push the actions row when it appears. */
+.myahl-pa-eligibility-tip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  width: 320px;
+  max-width: 90vw;
+  background: #fff;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  box-shadow: 0 8px 24px rgba(14, 15, 17, .14);
+  z-index: 10;
+  font-weight: 400;
+  color: var(--color-neutral-100);
+  text-align: left;
+  cursor: default;
+}
+.myahl-pa-eligibility:hover .myahl-pa-eligibility-tip,
+.myahl-pa-eligibility:focus-visible .myahl-pa-eligibility-tip,
+.myahl-pa-eligibility:focus-within .myahl-pa-eligibility-tip {
+  display: block;
+}
+.myahl-pa-tip-head {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--color-neutral-100);
+  margin-bottom: 8px;
+}
+.myahl-pa-tip-list {
+  margin: 0 0 8px;
+  padding-left: 20px;
+  font-family: var(--font-text);
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--color-neutral-80);
+  font-weight: 400;
+}
+.myahl-pa-tip-list li { margin-bottom: 3px; }
+.myahl-pa-tip-foot {
+  display: block;
+  font-family: var(--font-text);
+  font-size: 11px;
+  font-style: italic;
+  color: var(--color-neutral-70);
+  border-top: 1px solid var(--color-neutral-30);
+  padding-top: 8px;
+}
+.myahl-pa-cancel,
+.myahl-pa-submit {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  border: 1px solid var(--color-neutral-30);
+  background: #fff;
+}
+.myahl-pa-submit {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+.myahl-pa-submit:disabled {
+  background: var(--color-neutral-30);
+  border-color: var(--color-neutral-30);
+  color: var(--color-neutral-70);
+  cursor: not-allowed;
+}
+
+
+/* ───────────────────────────────────────────────────────────
+   Press-add and event-add forms — share the .myahl-pa-card
+   chrome above, plus their own small set of field/row rules
+   below. Kept in this file so the three add-forms have one CSS
+   source of truth.
+   ─────────────────────────────────────────────────────────── */
+
+/* ── Press-add: minimalist inline-edit press card ─────────────
+   The form mirrors a real .press-item card. Title row hosts a
+   title input AND a URL input toggled by a small link button on
+   the right. Once a URL is added, the title gets a link-style
+   underline and the link button glows. A single bottom-aligned
+   hint line shows the highest-priority issue (priority order in
+   priorityHint() — title → outlet → year → URL). */
+
+.press-add-card {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 14px;
+  align-items: start;
+  border: 1px dashed var(--color-neutral-40);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  background: rgba(97, 0, 255, .02);
+  margin-bottom: 12px;
+}
+.press-add-body { min-width: 0; }
+
+/* Type icon — clicking cycles news → award → video → news. */
+.press-add-icon {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  transition: transform .15s, background .25s;
+}
+.press-add-icon svg {
+  width: 18px; height: 18px;
+  fill: none; stroke: currentColor;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+.press-add-icon.news  { background: var(--color-neutral-20); color: var(--color-neutral-80); }
+.press-add-icon.award {
+  background: linear-gradient(135deg, rgba(0,215,238,.18), rgba(97,0,255,.18));
+  color: var(--color-accent);
+}
+.press-add-icon.video { background: var(--color-neutral-100); color: #fff; }
+.press-add-icon:hover { transform: scale(1.06); }
+
+/* Title row — title input + URL input + link button.
+   data-mode="title" shows the title input; "url" swaps in the URL
+   input. Both inputs occupy the same flex slot so the row never
+   shifts width. */
+.press-add-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.press-add-title-row .press-add-title,
+.press-add-title-row .press-add-url {
+  flex: 1; min-width: 0;
+}
+.press-add-title-row[data-mode="title"] .press-add-url   { display: none; }
+.press-add-title-row[data-mode="url"]   .press-add-title { display: none; }
+
+/* Inline editable text fields — placeholder = italic muted, dashed
+   underline only when empty. Once typed, the underline disappears
+   so it reads as plain text. */
+.press-add-field {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px dashed var(--color-neutral-40);
+  padding: 2px 0;
+  border-radius: 0;
+  outline: none;
+}
+.press-add-field:focus {
+  border-bottom-style: solid;
+  border-bottom-color: var(--color-accent);
+}
+.press-add-field:not(:placeholder-shown):not(:focus) {
+  border-bottom-color: transparent;
+}
+.press-add-field::placeholder {
+  color: var(--color-neutral-60);
+  font-style: italic;
+}
+
+/* Title — same visual weight as the rendered .press-title. When the
+   row has-url, give the title a link-style underline so it reads as
+   clickable. url-bad → orange underline (broken link). */
+.press-add-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--color-neutral-100);
+}
+.press-add-title-row.has-url .press-add-title {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(97, 0, 255, .35);
+}
+.press-add-title-row.url-bad .press-add-title {
+  color: #c2410c;
+  text-decoration: underline wavy;
+  text-decoration-color: rgba(194, 65, 12, .6);
+}
+
+/* Link button — small icon at the right end of the title row. Grey
+   when no URL set, purple-glow when URL is verified, orange when bad. */
+.press-add-link-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--color-neutral-30);
+  color: var(--color-neutral-70);
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.press-add-link-btn svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.press-add-link-btn:hover { background: var(--color-neutral-20); color: var(--color-neutral-100); }
+.press-add-link-btn.is-active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+.press-add-link-btn.is-active:hover { background: var(--color-accent-dark); }
+.press-add-link-btn.is-bad {
+  background: rgba(194, 65, 12, .12);
+  border-color: rgba(194, 65, 12, .4);
+  color: #c2410c;
+}
+
+/* Meta row — outlet · year only (type chip removed; icon conveys it). */
+.press-add-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-family: var(--font-text);
+  font-size: 14px;
+  color: var(--color-neutral-70);
+  margin-bottom: 8px;
+}
+.press-add-meta .press-add-outlet { width: 18ch; }
+.press-add-meta .press-add-year   { width: 5ch; text-align: center; }
+.press-add-meta .press-add-dot    { color: var(--color-neutral-40); }
+
+/* Project picker row — slim. */
+.press-add-projects-row { margin-top: 4px; }
+.press-add-tag-btn { font-size: 11px; padding: 1px 8px; }
+
+/* Action row — bottom-aligned, hosts the shared priority hint. */
+.press-add-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 14px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--color-neutral-30);
+}
+.press-add-hint {
+  flex: 1;
+  font-size: 11px;
+  color: var(--color-neutral-70);
+  text-align: left;
+  min-height: 14px;
+}
+.press-add-hint.is-error { color: #c2410c; font-weight: 600; }
+.press-add-cancel,
+.press-add-submit {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  border: 1px solid var(--color-neutral-30);
+  background: #fff;
+}
+.press-add-submit {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+.press-add-submit:disabled {
+  background: var(--color-neutral-30);
+  border-color: var(--color-neutral-30);
+  color: var(--color-neutral-70);
+  cursor: not-allowed;
+}
+
+/* ── Event-add: piggy-backs on .press-add-card layout above ──
+   Same icon-left + body-right grid, same .press-add-title-row
+   link-button toggle, same .press-add-meta inline row, same
+   shared-hint pattern. Only the icon styling and the date-input
+   themeing differ. */
+
+/* Event icon — purple gradient pill, distinct from the press
+   type icons (news/award/video) but matches the AHL theme. */
+.event-add-icon {
+  background: linear-gradient(135deg, rgba(0, 215, 238, .18), rgba(97, 0, 255, .18));
+  color: var(--color-accent);
+  /* Not a button — overrides the cursor:pointer from .press-add-icon. */
+  cursor: default;
+}
+.event-add-icon:hover { transform: none; }
+
+/* Date inputs — native <input type="date"> with theme-coherent
+   chrome. Browsers paint the calendar picker themselves; we just
+   normalize the field's box and underline. */
+.event-add-date {
+  font-family: var(--font-text);
+  font-size: 14px;
+  color: var(--color-neutral-100);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px dashed var(--color-neutral-40);
+  padding: 2px 4px;
+  border-radius: 0;
+  outline: none;
+  width: 13ch;
+}
+.event-add-date:focus {
+  border-bottom-style: solid;
+  border-bottom-color: var(--color-accent);
+}
+.event-add-date:valid:not(:focus) {
+  border-bottom-color: transparent;
+}
+/* Calendar-picker icon: tint to match the field color, hide the
+   default outset spacing. WebKit-only; other browsers ignore. */
+.event-add-date::-webkit-calendar-picker-indicator {
+  opacity: .5;
+  cursor: pointer;
+  filter: invert(.4);
+}
+.event-add-date::-webkit-calendar-picker-indicator:hover { opacity: 1; }
+
+/* Event meta row width — date inputs are wider than outlet/year. */
+.event-add-meta .event-add-location { flex: 1; min-width: 12ch; }
+
+/* Event summary — slim textarea, auto-grows on focus. */
+.event-add-summary {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  resize: vertical;
+  min-height: 24px;
+  line-height: 1.45;
+  font-size: 13px;
+  color: var(--color-neutral-80);
+}
+.event-add-summary:focus { min-height: 56px; }

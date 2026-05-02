@@ -1,0 +1,567 @@
+[
+  {
+    "slug": "autopilot",
+    "title": "Autopilot",
+    "year": "Current"
+  },
+  {
+    "slug": "blind-drone",
+    "title": "Blind Drone",
+    "year": "Current"
+  },
+  {
+    "slug": "emodrink",
+    "title": "EmoDrink",
+    "year": "Current"
+  },
+  {
+    "slug": "factually",
+    "title": "Factually",
+    "year": "Current"
+  },
+  {
+    "slug": "gutio",
+    "title": "GutIO",
+    "year": "Current"
+  },
+  {
+    "slug": "test-proj2",
+    "title": "Test Proj2",
+    "year": "Current"
+  },
+  {
+    "slug": "test-project",
+    "title": "Test Project",
+    "year": "Current"
+  },
+  {
+    "slug": "zenflow",
+    "title": "Zenflow",
+    "year": "Current"
+  },
+  {
+    "slug": "test-project-addition",
+    "title": "Test Project Addition",
+    "year": "2026"
+  },
+  {
+    "slug": "aisee",
+    "title": "AiSee",
+    "year": "2025"
+  },
+  {
+    "slug": "curious-shorts",
+    "title": "Curious Shorts",
+    "year": "2025"
+  },
+  {
+    "slug": "dronebuddy",
+    "title": "DroneBuddy",
+    "year": "2025"
+  },
+  {
+    "slug": "dysalytics",
+    "title": "Dysalytics",
+    "year": "2025"
+  },
+  {
+    "slug": "sonicvista",
+    "title": "SonicVista",
+    "year": "2025"
+  },
+  {
+    "slug": "soniphy",
+    "title": "SoniPhy",
+    "year": "2025"
+  },
+  {
+    "slug": "test-proj3",
+    "title": "Test Proj3",
+    "year": "2025"
+  },
+  {
+    "slug": "cotacs",
+    "title": "CoTacs",
+    "year": "2024"
+  },
+  {
+    "slug": "emo-know",
+    "title": "EMO-KNOW",
+    "year": "2024"
+  },
+  {
+    "slug": "itiles",
+    "title": "iTILES",
+    "year": "2024"
+  },
+  {
+    "slug": "kavy",
+    "title": "Kavy",
+    "year": "2024"
+  },
+  {
+    "slug": "seear",
+    "title": "SeEar",
+    "year": "2024"
+  },
+  {
+    "slug": "sound-designer-generative-ai-interactions",
+    "title": "Sound Designer-Generative AI Interactions",
+    "year": "2024"
+  },
+  {
+    "slug": "stakco",
+    "title": "Stakco",
+    "year": "2024"
+  },
+  {
+    "slug": "toro",
+    "title": "Toro",
+    "year": "2024"
+  },
+  {
+    "slug": "ubipen",
+    "title": "UbiPen",
+    "year": "2024"
+  },
+  {
+    "slug": "xr-floatation-therapy",
+    "title": "XR Floatation Therapy",
+    "year": "2024"
+  },
+  {
+    "slug": "audio-morph-gan",
+    "title": "Audio-Morph GAN",
+    "year": "2023"
+  },
+  {
+    "slug": "crowd-eval-audio",
+    "title": "Crowd-Eval-Audio",
+    "year": "2023"
+  },
+  {
+    "slug": "hopu",
+    "title": "Hopu",
+    "year": "2023"
+  },
+  {
+    "slug": "affect-in-the-wild",
+    "title": "Affect in the Wild",
+    "year": "2022"
+  },
+  {
+    "slug": "kiwrious",
+    "title": "Kiwrious",
+    "year": "2022"
+  },
+  {
+    "slug": "scratch-and-sense",
+    "title": "Scratch and Sense",
+    "year": "2022"
+  },
+  {
+    "slug": "vrhook",
+    "title": "VRHook",
+    "year": "2022"
+  },
+  {
+    "slug": "xrtic",
+    "title": "XRtic",
+    "year": "2022"
+  },
+  {
+    "slug": "anisma",
+    "title": "ANISMA",
+    "year": "2021"
+  },
+  {
+    "slug": "clothtiles",
+    "title": "ClothTiles",
+    "year": "2021"
+  },
+  {
+    "slug": "eyeknowyou",
+    "title": "EyeKnowYou",
+    "year": "2021"
+  },
+  {
+    "slug": "kinvoice",
+    "title": "KinVoice",
+    "year": "2021"
+  },
+  {
+    "slug": "lightsense",
+    "title": "LightSense",
+    "year": "2021"
+  },
+  {
+    "slug": "magicblocks",
+    "title": "MagicBLOCKS",
+    "year": "2021"
+  },
+  {
+    "slug": "om",
+    "title": "OM",
+    "year": "2021"
+  },
+  {
+    "slug": "stressshoe",
+    "title": "StressShoe",
+    "year": "2021"
+  },
+  {
+    "slug": "ticklefoot",
+    "title": "TickleFoot",
+    "year": "2021"
+  },
+  {
+    "slug": "actualtouch",
+    "title": "ActualTouch",
+    "year": "2020"
+  },
+  {
+    "slug": "jammify",
+    "title": "Jammify",
+    "year": "2020"
+  },
+  {
+    "slug": "phantomtouch",
+    "title": "PhantomTouch",
+    "year": "2020"
+  },
+  {
+    "slug": "prompto",
+    "title": "Prompto",
+    "year": "2020"
+  },
+  {
+    "slug": "rainbowhub",
+    "title": "RainbowHub",
+    "year": "2020"
+  },
+  {
+    "slug": "stressfoot",
+    "title": "StressFoot",
+    "year": "2020"
+  },
+  {
+    "slug": "versatouch",
+    "title": "VersaTouch",
+    "year": "2020"
+  },
+  {
+    "slug": "chewit",
+    "title": "ChewIt",
+    "year": "2019"
+  },
+  {
+    "slug": "gymsoles",
+    "title": "GymSoles",
+    "year": "2019"
+  },
+  {
+    "slug": "m-hair",
+    "title": "M-Hair",
+    "year": "2019"
+  },
+  {
+    "slug": "prospero",
+    "title": "Prospero",
+    "year": "2019"
+  },
+  {
+    "slug": "2bit-tactile-hand",
+    "title": "2bit-Tactile Hand",
+    "year": "2018"
+  },
+  {
+    "slug": "abi-foodcam",
+    "title": "ABI FoodCam",
+    "year": "2018"
+  },
+  {
+    "slug": "capmat",
+    "title": "CapMat",
+    "year": "2018"
+  },
+  {
+    "slug": "comprate",
+    "title": "CompRate",
+    "year": "2018"
+  },
+  {
+    "slug": "cricketcoach",
+    "title": "CricketCoach",
+    "year": "2018"
+  },
+  {
+    "slug": "evaluating-ivr-in-schools",
+    "title": "Evaluating IVR in schools",
+    "year": "2018"
+  },
+  {
+    "slug": "fsense",
+    "title": "fSense",
+    "year": "2018"
+  },
+  {
+    "slug": "lighttank",
+    "title": "LightTank",
+    "year": "2018"
+  },
+  {
+    "slug": "osense",
+    "title": "oSense",
+    "year": "2018"
+  },
+  {
+    "slug": "prospecfit",
+    "title": "ProspecFit",
+    "year": "2018"
+  },
+  {
+    "slug": "step-detection-algorithm",
+    "title": "Step Detection Algorithm",
+    "year": "2018"
+  },
+  {
+    "slug": "target-driven-navigation",
+    "title": "Target Driven Navigation",
+    "year": "2018"
+  },
+  {
+    "slug": "chaddybuddy",
+    "title": "ChaddyBuddy",
+    "year": "2017"
+  },
+  {
+    "slug": "doodle-daydream",
+    "title": "Doodle Daydream",
+    "year": "2017"
+  },
+  {
+    "slug": "fingerreader",
+    "title": "FingerReader",
+    "year": "2017"
+  },
+  {
+    "slug": "gescad",
+    "title": "GesCAD",
+    "year": "2017"
+  },
+  {
+    "slug": "gestakey",
+    "title": "GestAKey",
+    "year": "2017"
+  },
+  {
+    "slug": "insight",
+    "title": "InSight",
+    "year": "2017"
+  },
+  {
+    "slug": "kyanite",
+    "title": "Kyanite",
+    "year": "2017"
+  },
+  {
+    "slug": "muss-bits",
+    "title": "MuSS-Bits",
+    "year": "2017"
+  },
+  {
+    "slug": "thumb-in-motion",
+    "title": "Thumb in Motion",
+    "year": "2017"
+  },
+  {
+    "slug": "armsleeve",
+    "title": "ArmSleeve",
+    "year": "2016"
+  },
+  {
+    "slug": "knoctify",
+    "title": "Knoctify",
+    "year": "2016"
+  },
+  {
+    "slug": "postbits",
+    "title": "PostBits",
+    "year": "2016"
+  },
+  {
+    "slug": "stickamps",
+    "title": "StickAmps",
+    "year": "2016"
+  },
+  {
+    "slug": "swimsight",
+    "title": "SwimSight",
+    "year": "2016"
+  },
+  {
+    "slug": "wavesense",
+    "title": "WaveSense",
+    "year": "2016"
+  },
+  {
+    "slug": "zsense",
+    "title": "zSense",
+    "year": "2016"
+  },
+  {
+    "slug": "bward",
+    "title": "BWard",
+    "year": "2015"
+  },
+  {
+    "slug": "feel-the-globe",
+    "title": "Feel the Globe",
+    "year": "2015"
+  },
+  {
+    "slug": "fingerreader-v0",
+    "title": "FingerReader-v0",
+    "year": "2015"
+  },
+  {
+    "slug": "mobile-360-video-interaction",
+    "title": "Mobile 360° Video Interaction",
+    "year": "2015"
+  },
+  {
+    "slug": "rippletouch",
+    "title": "RippleTouch",
+    "year": "2015"
+  },
+  {
+    "slug": "shrug",
+    "title": "SHRUG",
+    "year": "2015"
+  },
+  {
+    "slug": "sonicsg",
+    "title": "SonicSG",
+    "year": "2015"
+  },
+  {
+    "slug": "the-ribbon",
+    "title": "The RIBbon",
+    "year": "2015"
+  },
+  {
+    "slug": "earput",
+    "title": "EarPut",
+    "year": "2014"
+  },
+  {
+    "slug": "foot-note",
+    "title": "Foot.Note",
+    "year": "2014"
+  },
+  {
+    "slug": "i-draw",
+    "title": "I-Draw",
+    "year": "2014"
+  },
+  {
+    "slug": "ircx",
+    "title": "ircX",
+    "year": "2014"
+  },
+  {
+    "slug": "iswarm",
+    "title": "iSwarm",
+    "year": "2014"
+  },
+  {
+    "slug": "keepers-bees",
+    "title": "Keepers & Bees",
+    "year": "2014"
+  },
+  {
+    "slug": "nzwarm",
+    "title": "nZwarm",
+    "year": "2014"
+  },
+  {
+    "slug": "paperpixels",
+    "title": "PaperPixels",
+    "year": "2014"
+  },
+  {
+    "slug": "sparkubes",
+    "title": "SparKubes",
+    "year": "2014"
+  },
+  {
+    "slug": "augmented-forearm",
+    "title": "Augmented Forearm",
+    "year": "2013"
+  },
+  {
+    "slug": "birdie",
+    "title": "Birdie",
+    "year": "2013"
+  },
+  {
+    "slug": "fingerdraw",
+    "title": "FingerDraw",
+    "year": "2013"
+  },
+  {
+    "slug": "smartfinger",
+    "title": "SmartFinger",
+    "year": "2013"
+  },
+  {
+    "slug": "spidervision",
+    "title": "SpiderVision",
+    "year": "2013"
+  },
+  {
+    "slug": "stickear",
+    "title": "StickEar",
+    "year": "2013"
+  },
+  {
+    "slug": "eyering",
+    "title": "EyeRing",
+    "year": "2012"
+  },
+  {
+    "slug": "sparsh",
+    "title": "Sparsh",
+    "year": "2012"
+  },
+  {
+    "slug": "speechplay",
+    "title": "SpeechPlay",
+    "year": "2012"
+  },
+  {
+    "slug": "watchme",
+    "title": "WatchMe",
+    "year": "2012"
+  },
+  {
+    "slug": "hapticchair",
+    "title": "HapticChair",
+    "year": "2011"
+  },
+  {
+    "slug": "sensei",
+    "title": "Sensei",
+    "year": "2011"
+  },
+  {
+    "slug": "soundfloor",
+    "title": "SoundFloor",
+    "year": "2011"
+  },
+  {
+    "slug": "sutdfoodcam",
+    "title": "SUTDFoodCam",
+    "year": "2011"
+  }
+]

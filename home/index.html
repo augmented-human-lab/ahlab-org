@@ -3,7 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About — Augmented Human Lab</title>
+<title>Augmented Human Lab — Assistive Augmentation Research</title>
+
+<!-- ── SEO ─────────────────────────────────────────────────── -->
+<meta name="description" content="The Augmented Human Lab designs assistive augmentation technologies that extend human perceptual, cognitive, and physical capability. Research projects, publications, and people based at the National University of Singapore.">
+<meta name="keywords" content="augmented human, assistive augmentation, human-computer interaction, HCI, wearable technology, accessibility, sensory augmentation, AHLab, NUS, Suranga Nanayakkara">
+<meta name="author" content="Augmented Human Lab">
+<meta name="theme-color" content="#6100FF">
+<meta name="color-scheme" content="light">
+<link rel="canonical" href="https://ahlab.org/">
+
+<!-- Icons + manifest -->
+<link rel="icon" href="https://ahlab.org/wp-content/uploads/2021/05/cropped-Group@2x-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="https://ahlab.org/wp-content/uploads/2021/05/cropped-Group@2x-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="https://ahlab.org/wp-content/uploads/2021/05/cropped-Group@2x-192x192.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Augmented Human Lab">
+<meta property="og:title" content="Augmented Human Lab — Assistive Augmentation Research">
+<meta property="og:description" content="Research extending human perceptual, cognitive, and physical capability through assistive augmentation. Based at the National University of Singapore.">
+<meta property="og:url" content="https://ahlab.org/">
+<meta property="og:image" content="https://cdn.ahlab.org/media/site/home_hero.png">
+<meta property="og:image:alt" content="Augmented Human Lab">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Augmented Human Lab — Assistive Augmentation Research">
+<meta name="twitter:description" content="Research extending human perceptual, cognitive, and physical capability through assistive augmentation.">
+<meta name="twitter:image" content="https://cdn.ahlab.org/media/site/home_hero.png">
+
+<!-- Structured data: Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ResearchOrganization",
+  "name": "Augmented Human Lab",
+  "alternateName": "AHLab",
+  "url": "https://ahlab.org/",
+  "logo": "https://cdn.ahlab.org/media/site/ahllogo_white.png",
+  "description": "Research lab designing assistive augmentation technologies that extend human perceptual, cognitive, and physical capability.",
+  "parentOrganization": {
+    "@type": "CollegeOrUniversity",
+    "name": "National University of Singapore",
+    "url": "https://www.nus.edu.sg/"
+  },
+  "sameAs": [
+    "https://www.youtube.com/@augmentedhumanlab",
+    "https://github.com/augmented-human-lab"
+  ]
+}
+</script>
+
 <link rel="stylesheet" href="/css/auth.css">
 <link rel="stylesheet" href="https://use.typekit.net/zws2qzx.css">
   <link rel="stylesheet" href="/css/theme.css">
@@ -1260,6 +1313,69 @@ a.event-row:hover .event-row-title {
     </div>
   </div>
 </section>
+
+
+<!-- ==================== LIVE ACTIVITY ====================
+     Compact live-visitor strip — a quiet status line, not a feature.
+     Fetched from the ahl-analytics-appscript proxy (see that repo's
+     README). The proxy holds GA Data API credentials server-side and
+     returns aggregated, cached numbers — the browser never sees auth
+     tokens. Hides itself if the proxy URL isn't configured. -->
+<style>
+  .section-live-activity {
+    padding: 18px 0;
+    background: var(--color-neutral-20);
+    border-top: 1px solid var(--color-neutral-30);
+    border-bottom: 1px solid var(--color-neutral-30);
+  }
+  .ahl-stats-widget {
+    text-align: center;
+    font-family: var(--font-text);
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--color-neutral-80);
+  }
+  .ahl-stats-widget[data-state="loading"] { opacity: .5; }
+  .ahl-stats-strip {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    letter-spacing: .005em;
+  }
+  .ahl-stats-strip strong {
+    color: var(--color-neutral-100);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .ahl-stats-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #10b981;
+    display: inline-block;
+    flex-shrink: 0;
+    animation: ahl-stats-pulse 2s ease-in-out infinite;
+  }
+  @keyframes ahl-stats-pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: .35; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ahl-stats-dot { animation: none; }
+  }
+  @media (max-width: 640px) {
+    .section-live-activity { padding: 14px 0; }
+    .ahl-stats-widget { font-size: 13px; }
+  }
+</style>
+<section class="section-live-activity">
+  <div class="container">
+    <div id="ahl-stats-widget" class="ahl-stats-widget" data-state="loading">Loading…</div>
+  </div>
+</section>
+<script src="/js/analytics-widget.js" defer></script>
 
 
 <!-- ==================== EVENTS FEED ==================== -->

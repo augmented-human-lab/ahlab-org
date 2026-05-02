@@ -91,7 +91,9 @@
       "title": "VisceroHaptics: Investigating the Effects of Gut-based Audio-Haptic Feedback on Gastric Feelings and Gastric Interoceptive Behaviors",
       "year": "2026",
       "citation": "Nguyen, M.H., Messerschmidt, M.A., Huber, J. and Nanayakkara, S. C., 2026. VisceroHaptics: Investigating the Effects of Gut-based Audio-Haptic Feedback on Gastric Feelings and Gastric Interoceptive Behaviors. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI 2026).",
-      "award": "Honorable Mention Award",
+      "awards": [
+        "Honorable Mention Award"
+      ],
       "links": [
         {
           "label": "doi",
@@ -109,7 +111,7 @@
       "title": "GutIO: Toward Sensing and Inducing Gut Feelings with Abdominal Sounds",
       "year": "2025",
       "citation": "Nguyen, M.H., Messerschmidt, M.A, Gupta, C. and Nanayakkara, S.C., 2025. GutIO: Toward Sensing and Inducing Gut Feelings with Abdominal Sounds. Extended Abstracts of the CHI Conference on Human Factors in Computing Systems. CHI EA '25",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -127,7 +129,7 @@
       "title": "Curious Shorts: Curiosity-Driven Exploration and Learning on Short-Form Video Platforms",
       "year": "2025",
       "citation": "Tan, F.F., Ram, A., Messerschmidt, A.M., Dissanayake, H.A., and Nanayakkara, S.C. 2025. Curious Shorts: Curiosity-Driven Exploration and Learning on Short-Form Video Platforms. Accepted to the Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI ’25).",
-      "award": null,
+      "awards": [],
       "links": [],
       "venue": "CHI"
     },
@@ -136,7 +138,7 @@
       "title": "CoTacs: A Haptic Toolkit to Explore Effective On-Body Haptic Feedback by Ideating, Designing, Evaluating and Refining Haptic Designs Using Group Collaboration",
       "year": "2024",
       "citation": "Messerschmidt, M. A., Cortes, J. P. F., & Nanayakkara, S.C. (2024). CoTacs: A Haptic Toolkit to Explore Effective On-Body Haptic Feedback by Ideating, Designing, Evaluating and Refining Haptic Designs Using Group Collaboration. International Journal of Human–Computer Interaction, 1–21.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -154,7 +156,7 @@
       "title": "Toro: A Web-based Tool to Search, Explore, Screen, Compare and Visualize Literature",
       "year": "2022",
       "citation": "Messerschmidt, M., Chan, S., Wen, E. and Nanayakkara, S.C., 2022. Toro: A Web-based Tool to Search, Explore, Screen, Compare and Visualize Literature.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -172,7 +174,7 @@
       "title": "ANISMA: A Prototyping Toolkit to Explore Haptic Skin Deformation Applications Using Shape-Memory Alloys",
       "year": "2022",
       "citation": "Messerschmidt M.A., Muthukumarana S., Hamdan N.A., Wagner A., Zhang H., Borchers J., and Nanayakkara S.C. 2022. ANISMA: A Prototyping Toolkit to Explore Haptic Skin Deformation Applications Using Shape-Memory Alloys. ACM Trans. Comput.-Hum. Interact. 29, 3, Article 19 (June 2022), 34 pages.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",
@@ -186,7 +188,7 @@
       "title": "ClothTiles: A Prototyping Platform to Fabricate Customized Actuators on Clothing using 3D Printing and Shape-Memory Alloys",
       "year": "2021",
       "citation": "Muthukumarana, S., Messerschmidt, M.A., Matthies, D.J.C., Steimle, J., Scholl, P.M., and Nanayakkara, S.C., 2021. ClothTiles: A Prototyping Platform to Fabricate Customized Actuators on Clothing using 3D Printing and Shape-Memory Alloys. In CHI Conference on Human Factors in Computing Systems (CHI ’21), May 8–13, 2021, Yokohama, Japan.",
-      "award": null,
+      "awards": [],
       "links": [
         {
           "label": "DOI",

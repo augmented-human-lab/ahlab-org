@@ -1,0 +1,38 @@
+{
+  "name": "Augmented Human Lab",
+  "short_name": "AHLab",
+  "description": "Augmented Human Lab — research extending human perceptual, cognitive, and physical capability through assistive augmentation.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["education", "science", "research"],
+  "background_color": "#FFFFFF",
+  "theme_color": "#6100FF",
+  "icons": [
+    {
+      "src": "https://ahlab.org/wp-content/uploads/2021/05/cropped-Group@2x-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "https://ahlab.org/wp-content/uploads/2021/05/cropped-Group@2x-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://ahlab.org/wp-content/uploads/2021/05/cropped-Group@2x-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://ahlab.org/wp-content/uploads/2021/05/cropped-Group@2x-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

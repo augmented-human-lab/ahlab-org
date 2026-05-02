@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /my-ahl/
+Disallow: /auth-callback/
+
+Sitemap: https://ahlab.org/sitemap.xml

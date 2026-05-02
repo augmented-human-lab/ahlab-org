@@ -539,6 +539,69 @@
   stroke-linejoin: round;
 }
 
+/* Delete button — same chrome as .myahl-edit, sits to the LEFT of
+   it, clickable (broker pipeline lands later). Hover paints red so
+   destructive intent is visible at a glance. */
+.myahl-delete {
+  position: absolute;
+  top: 10px;
+  right: 50px;
+  z-index: 3;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, .9);
+  color: var(--color-neutral-80);
+  border: 1px solid var(--color-neutral-30);
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  opacity: .8;
+  transition: opacity .2s, background .2s, color .2s, border-color .2s;
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+}
+.myahl-delete:hover {
+  opacity: 1;
+  background: #fff;
+  color: #c2410c;
+  border-color: #c2410c;
+}
+.myahl-delete svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* Pub-list rows already give .myahl-pub-edit a different position
+   (right:0, top:22px) to align with the counter slot. The matching
+   delete button sits just left of it. */
+.myahl-pub-delete {
+  top: 22px;
+  right: 40px;
+}
+
+/* "Pending review" overlay shown after the user clicks delete (broker
+   isn't wired yet — purely visual demo). */
+.myahl-pending-delete-note {
+  position: absolute;
+  inset: auto 8px 8px 8px;
+  background: rgba(194, 65, 12, .12);
+  color: #c2410c;
+  font-family: var(--font-text);
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+}
+
 /* ── Add-new tiles (disabled placeholders) ────────────────────
    Three shape variants — each mirrors the matching content card so
    the "+ Add" tile slots in as the leading item of the grid/list
@@ -559,15 +622,26 @@
   font-family: var(--font-text);
   font-weight: 500;
   font-size: 14px;
-  cursor: not-allowed;
-  opacity: .65;
+  cursor: pointer;
+  opacity: 1;
   text-align: left;
-  transition: opacity .2s, border-color .2s, background .2s;
+  transition: opacity .2s, border-color .2s, background .2s, color .2s;
 }
 .myahl-addnew-base:hover {
-  opacity: .85;
-  border-color: var(--color-neutral-60);
-  background: rgba(0, 0, 0, .015);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: rgba(97, 0, 255, .04);
+}
+/* Disabled placeholder state (for add-tiles whose pipeline isn't
+   wired yet). The .myahl-addnew-pub / -press / -event / -project
+   buttons rendered with `data-*-trigger` attributes are NOT disabled
+   and inherit the active rules above. */
+.myahl-addnew-base:disabled {
+  cursor: not-allowed;
+  opacity: .65;
+  color: var(--color-neutral-70);
+  background: transparent;
+  border-color: var(--color-neutral-40);
 }
 .myahl-addnew-plus {
   color: var(--color-accent-light);
@@ -575,7 +649,9 @@
 }
 
 /* Project variant — same 16/11 aspect-ratio as a real card so the
-   grid stays even regardless of which slot it occupies. */
+   grid stays even regardless of which slot it occupies.
+   Rendered as an <a> linking to /projects/new/, so we strip the
+   default underline + inherit text color from .myahl-addnew-base. */
 .myahl-addnew-project {
   display: flex;
   align-items: center;
@@ -585,6 +661,8 @@
   aspect-ratio: 16 / 11;
   padding: 24px;
   border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: inherit;
 }
 .myahl-addnew-project .myahl-addnew-plus {
   font-size: 36px;
@@ -792,6 +870,12 @@
   transition: color .25s;
 }
 a.myahl-pub-title:hover { color: var(--color-accent); }
+/* .myahl-pub-awards wraps one .myahl-pub-award chip per entry — flex
+   so multi-award rows wrap cleanly on narrow widths. */
+.myahl-pub-awards {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 8px;
+}
 .myahl-pub-award {
   display: inline-block;
   font-size: 12px;
@@ -800,7 +884,6 @@ a.myahl-pub-title:hover { color: var(--color-accent); }
   background: rgba(97, 0, 255, .08);
   padding: 2px 10px;
   border-radius: 999px;
-  margin-bottom: 8px;
 }
 .myahl-pub-citation {
   font-family: var(--font-text);

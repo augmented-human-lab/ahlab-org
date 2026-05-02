@@ -1,0 +1,8 @@
+/* TEAM */
+Lab: Augmented Human Lab
+Site: https://ahlab.org
+Contact: contact [at] ahlab.org
+
+/* SITE */
+Built with: vanilla HTML, CSS, JS — JSON-driven static build
+Source: https://github.com/augmented-human-lab
