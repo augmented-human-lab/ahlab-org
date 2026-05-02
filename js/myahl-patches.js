@@ -49,19 +49,48 @@
     // De-dupe across multiple dashboard renders within one tab.
     if (ranOnce) clearCachedTiles();
     ranOnce = true;
-    fetch(url, { credentials: 'omit' })
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (data) {
-        if (!data || data.error) return;
-        // Server has caught up — drop covered entries from the
-        // local cache, then clear any cached tiles and re-render
-        // from authoritative data.
-        var allServer = (data.own || []).concat(data.coMember || []);
-        if (window.AHLPendingCache) window.AHLPendingCache.pruneCovered(allServer);
-        if (cachedRendered) clearCachedTiles();
-        renderPending(data);
-      })
-      .catch(function () {});
+    // Apps Script web apps don't honour CORS for fetch(); a
+    // cross-origin fetch returns a 302 to the Apps Script login page
+    // (since `credentials: 'omit'` strips the user's cookies).
+    // JSONP via <script> tag is the only viable read pattern: the tag
+    // is allowed cross-origin AND carries cookies, so the broker can
+    // identify the user via Session.getActiveUser. Broker emits
+    // `<callback>(<json>);` when ?callback=… is present.
+    fetchJsonp(url).then(function (data) {
+      if (!data || data.error) return;
+      // Server has caught up — drop covered entries from the local
+      // cache, then clear any cached tiles and re-render from
+      // authoritative data.
+      var allServer = (data.own || []).concat(data.coMember || []);
+      if (window.AHLPendingCache) window.AHLPendingCache.pruneCovered(allServer);
+      if (cachedRendered) clearCachedTiles();
+      renderPending(data);
+    }).catch(function () {});
+  }
+
+  // Tiny JSONP loader. Generates a unique global callback name,
+  // injects a <script src="…&callback=cb">, resolves with whatever
+  // the script invokes the callback with. Cleans up + times out at
+  // 15s so a missing/blocked response doesn't leak globals forever.
+  var _jsonpSeq = 0;
+  function fetchJsonp(url) {
+    return new Promise(function (resolve, reject) {
+      var cb = '__ahlp_jsonp_' + (++_jsonpSeq) + '_' + Date.now().toString(36);
+      var script = document.createElement('script');
+      var timer;
+      function cleanup() {
+        try { delete window[cb]; } catch (e) { window[cb] = undefined; }
+        if (script && script.parentNode) script.parentNode.removeChild(script);
+        clearTimeout(timer);
+      }
+      window[cb] = function (data) { cleanup(); resolve(data); };
+      script.onerror = function () { cleanup(); reject(new Error('JSONP load failed')); };
+      script.src = url + (url.indexOf('?') === -1 ? '?' : '&') + 'callback=' + cb;
+      document.head.appendChild(script);
+      timer = setTimeout(function () {
+        if (window[cb]) { cleanup(); reject(new Error('JSONP timeout')); }
+      }, 15000);
+    });
   }
 
   // Re-shape cached entries to look like the server response, so we
