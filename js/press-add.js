@@ -105,22 +105,56 @@
     });
   }
 
-  function openCard(button) {
+  // `prefill` (optional) supports EDIT mode — pre-populate fields
+  // from an existing press record, stamp `editSlug` so submit sends
+  // action='edit'.
+  function openCard(button, prefill) {
     var originalEl =
       button.closest('[data-press-add-wrap]') ||
       button.closest('li') ||
       button;
     var card = buildCard();
+    if (prefill && prefill.editSlug) card.el.classList.add('is-edit-mode');
     originalEl.replaceWith(card.el);
+
+    // Pre-fill simple text fields BEFORE wiring handlers (which call
+    // renderState, reading these values).
+    if (prefill) {
+      if (prefill.title)  card.title.value  = prefill.title;
+      if (prefill.outlet) card.outlet.value = prefill.outlet;
+      if (prefill.year)   card.year.value   = prefill.year;
+    }
 
     var session = {
       el:          card,
-      type:        'news',                    // default
+      type:        (prefill && prefill.type) || 'news',
       submitter:   getSubmitterSlug(),
       projectsIdx: [],
-      project:     null,                      // {slug, title} or null
-      url:         { value: '', status: 'idle' } // idle | checking | alive | dead | invalid
+      project:     prefill && prefill.project ? prefill.project : null,
+      // Pre-seed URL as "alive" since the existing record's URL was
+      // accepted at submission time. Skip re-pinging on open.
+      url:         (prefill && prefill.url)
+        ? { value: prefill.url, status: 'alive' }
+        : { value: '', status: 'idle' },
+      editSlug:    prefill && prefill.editSlug ? prefill.editSlug : null
     };
+    if (session.editSlug) {
+      card.submit.textContent = 'Submit edit for review';
+      // Reflect the seeded type in the icon + tag immediately.
+      if (session.type !== 'news') {
+        card.iconUse.setAttribute('href', '#i-myahl-' + session.type);
+        card.iconBtn.className = 'press-add-icon ' + session.type;
+        card.iconBtn.setAttribute('aria-label', 'Press type: ' + session.type);
+        var tag = card.el.querySelector('.press-type-tag');
+        if (tag) {
+          tag.className = 'press-type-tag ' + session.type;
+          tag.textContent = session.type;
+        }
+        card.el.classList.remove('is-news', 'is-award', 'is-video');
+        card.el.classList.add('is-' + session.type);
+        card.el.dataset.pressType = session.type;
+      }
+    }
 
     loadProjectsIndex().then(function (idx) { session.projectsIdx = idx || []; });
 
@@ -362,8 +396,8 @@
 
     window.AHLPatch.submit({
       targetType: 'press',
-      targetSlug: '<new>',
-      action:     'create',
+      targetSlug: session.editSlug || '<new>',
+      action:     session.editSlug ? 'edit' : 'create',
       patch:      patch,
       returnUrl:  location.origin + (location.pathname.indexOf('/press') === 0 ? '/press/' : '/my-ahl/')
     });
@@ -466,10 +500,60 @@
   function mountAll(scope) {
     var triggers = (scope || document).querySelectorAll('[data-press-add-trigger]');
     Array.prototype.forEach.call(triggers, mount);
+    var editTriggers = (scope || document).querySelectorAll('[data-press-add-edit]');
+    Array.prototype.forEach.call(editTriggers, mountEdit);
   }
   document.addEventListener('myahl:dashboard-rendered', function () { mountAll(); });
   if (document.readyState !== 'loading') mountAll();
   else document.addEventListener('DOMContentLoaded', function () { mountAll(); });
 
-  window.AHLPressAdd = { mount: mount };
+  // Edit-mode mounter — same fetch + pre-fill pattern as
+  // publication-add.js. Press records also carry projects[] (multi)
+  // but the form is single-project; we surface the FIRST project as
+  // a chip if present.
+  function mountEdit(button) {
+    if (!button || button.__pressEditMounted) return;
+    button.__pressEditMounted = true;
+    button.disabled = false;
+    ensureSvgDefs();
+    button.addEventListener('click', function (e) {
+      e.preventDefault();
+      var slug = button.getAttribute('data-press-add-edit');
+      if (!slug) return;
+      openEditCard(button, slug);
+    });
+  }
+
+  function openEditCard(button, slug) {
+    fetch('/data/press/' + encodeURIComponent(slug) + '.json', { cache: 'default' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (record) {
+        if (!record) {
+          alert('Couldn\'t load this press item for editing.');
+          return;
+        }
+        var firstProject = (Array.isArray(record.projects) && record.projects[0]) || null;
+        // Look up the project title for the chip label. If projects-
+        // index hasn't loaded yet, fall back to the slug as label —
+        // not pretty, but the chip still works.
+        loadProjectsIndex().then(function (idx) {
+          var title = firstProject;
+          if (firstProject && Array.isArray(idx)) {
+            var hit = idx.find(function (p) { return p.slug === firstProject; });
+            if (hit) title = hit.title;
+          }
+          openCard(button, {
+            editSlug: slug,
+            title:    record.title || '',
+            type:     record.type || 'news',
+            outlet:   record.outlet || '',
+            year:     record.year || '',
+            url:      record.url || '',
+            project:  firstProject ? { slug: firstProject, title: title } : null
+          });
+        });
+      });
+  }
+
+  window.AHLPressAdd = { mount: mount, mountEdit: mountEdit };
 })();

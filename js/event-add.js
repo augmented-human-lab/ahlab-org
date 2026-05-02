@@ -74,19 +74,38 @@
     });
   }
 
-  function openCard(button) {
+  // `prefill` (optional) supports EDIT mode — pre-populate fields
+  // from an existing event record, stamp `editSlug` so submit sends
+  // action='edit'.
+  function openCard(button, prefill) {
     var originalEl =
       button.closest('[data-event-add-wrap]') ||
       button.closest('li') ||
       button;
     var card = buildCard();
+    if (prefill && prefill.editSlug) card.el.classList.add('is-edit-mode');
     originalEl.replaceWith(card.el);
+
+    if (prefill) {
+      if (prefill.title)    card.title.value    = prefill.title;
+      if (prefill.starts)   card.starts.value   = prefill.starts;
+      if (prefill.ends)     card.ends.value     = prefill.ends;
+      if (prefill.location) card.location.value = prefill.location;
+      if (prefill.summary)  card.summary.value  = prefill.summary;
+    }
 
     var session = {
       el:        card,
       submitter: getSubmitterSlug(),
-      url:       { value: '', status: 'idle' }  // idle | checking | alive | dead | invalid
+      // Pre-seed URL "alive" — accepted at original submission time.
+      url:       (prefill && prefill.url)
+        ? { value: prefill.url, status: 'alive' }
+        : { value: '', status: 'idle' },
+      editSlug:  prefill && prefill.editSlug ? prefill.editSlug : null
     };
+    if (session.editSlug) {
+      card.submit.textContent = 'Submit edit for review';
+    }
 
     card.title.addEventListener('input',    function () { renderState(session); });
     card.starts.addEventListener('input',   function () { renderState(session); });
@@ -225,8 +244,8 @@
 
     window.AHLPatch.submit({
       targetType: 'event',
-      targetSlug: '<new>',
-      action:     'create',
+      targetSlug: session.editSlug || '<new>',
+      action:     session.editSlug ? 'edit' : 'create',
       patch:      patch,
       returnUrl:  location.origin + '/my-ahl/'
     });
@@ -300,10 +319,46 @@
   function mountAll(scope) {
     var triggers = (scope || document).querySelectorAll('[data-event-add-trigger]');
     Array.prototype.forEach.call(triggers, mount);
+    var editTriggers = (scope || document).querySelectorAll('[data-event-add-edit]');
+    Array.prototype.forEach.call(editTriggers, mountEdit);
   }
   document.addEventListener('myahl:dashboard-rendered', function () { mountAll(); });
   if (document.readyState !== 'loading') mountAll();
   else document.addEventListener('DOMContentLoaded', function () { mountAll(); });
 
-  window.AHLEventAdd = { mount: mount };
+  // Edit-mode mounter — fetches event record by slug, opens card prefilled.
+  function mountEdit(button) {
+    if (!button || button.__eventEditMounted) return;
+    button.__eventEditMounted = true;
+    button.disabled = false;
+    ensureSvgDefs();
+    button.addEventListener('click', function (e) {
+      e.preventDefault();
+      var slug = button.getAttribute('data-event-add-edit');
+      if (!slug) return;
+      openEditCard(button, slug);
+    });
+  }
+
+  function openEditCard(button, slug) {
+    fetch('/data/events/' + encodeURIComponent(slug) + '.json', { cache: 'default' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (record) {
+        if (!record) {
+          alert('Couldn\'t load this event for editing.');
+          return;
+        }
+        openCard(button, {
+          editSlug: slug,
+          title:    record.title || '',
+          starts:   record.starts || '',
+          ends:     record.ends || '',
+          location: record.location || '',
+          url:      record.url || '',
+          summary:  record.summary || ''
+        });
+      });
+  }
+
+  window.AHLEventAdd = { mount: mount, mountEdit: mountEdit };
 })();

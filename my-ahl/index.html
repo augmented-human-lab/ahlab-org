@@ -340,13 +340,28 @@
     return icons ? '<div class="myahl-project-tags">' + icons + '</div>' : '';
   }
 
-  // Edit-pencil button — disabled state, same tooltip across all cards
-  // until the edit pipeline ships. The optional `extraClass` lets the
-  // pub list override its absolute positioning to align with its counter.
-  function editButton(extraClass) {
+  // Edit-pencil button. For publication / press / event we now have
+  // full inline-edit forms wired up — clicking the pencil opens the
+  // same add card pre-filled with the existing record. Project edits
+  // still flow through the legacy project-edit.js (full-page hero
+  // edit), so the project pencil is left disabled here.
+  function editButton(targetType, slug, extraClass) {
     var cls = 'myahl-edit' + (extraClass ? ' ' + extraClass : '');
-    return '<button type="button" class="' + cls + '" disabled aria-label="Edit" ' +
-      'title="Coming soon — the editing pipeline is being wired up.">' +
+    var EDIT_ATTR = {
+      publication: 'data-pub-add-edit',
+      press:       'data-press-add-edit',
+      event:       'data-event-add-edit'
+    };
+    var attr = EDIT_ATTR[targetType];
+    if (!attr) {
+      // Project / profile / other — no inline edit yet.
+      return '<button type="button" class="' + cls + '" disabled aria-label="Edit" ' +
+        'title="Coming soon — the editing pipeline is being wired up.">' +
+        '<svg aria-hidden="true"><use href="#i-myahl-edit"/></svg>' +
+      '</button>';
+    }
+    return '<button type="button" class="' + cls + '" aria-label="Edit" title="Edit" ' +
+      attr + '="' + escapeHtml(slug) + '">' +
       '<svg aria-hidden="true"><use href="#i-myahl-edit"/></svg>' +
     '</button>';
   }
@@ -381,7 +396,7 @@
           renderPrincipleTags(p.principles) +
         '</div>' +
       '</a>' +
-      editButton() +
+      editButton('project', p.slug) +
       deleteButton('project', p.slug) +
     '</div>';
   }
@@ -414,7 +429,7 @@
       titleEl +
       citationHTML +
       linksHTML +
-      editButton('myahl-pub-edit') +
+      editButton('publication', p.slug, 'myahl-pub-edit') +
       deleteButton('publication', p.slug, 'myahl-pub-delete') +
     '</li>';
   }
@@ -440,7 +455,7 @@
         (opts.meta    ? '<div class="myahl-tile-meta">' + escapeHtml(opts.meta) + '</div>' : '') +
         (opts.summary ? '<div class="myahl-tile-summary">' + escapeHtml(opts.summary) + '</div>' : '') +
       '</div>' +
-      editButton() +
+      (opts.targetType && opts.slug ? editButton(opts.targetType, opts.slug) : '') +
       (opts.targetType && opts.slug ? deleteButton(opts.targetType, opts.slug) : '') +
     '</div>';
   }

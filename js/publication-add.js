@@ -179,13 +179,32 @@
   //   • inside an <li> (back-compat — replaces the <li>),
   //   • or standalone (replaces just the button).
   // Cancel restores whatever element was replaced.
-  function openCard(button) {
+  //
+  // `prefill` (optional) lets the same code path support EDIT mode:
+  // pre-populate textarea + awards + DOI + projects from an existing
+  // record, and stamp `editSlug` so submit() sends action='edit'.
+  function openCard(button, prefill) {
     var originalEl =
       button.closest('[data-pub-add-wrap]') ||
       button.closest('li') ||
       button;
     var card = buildCard();
+    if (prefill && prefill.editSlug) card.el.classList.add('is-edit-mode');
     originalEl.replaceWith(card.el);
+
+    // Pre-fill textarea BEFORE the parser kicks off so the first
+    // reparse has the citation text to work with.
+    if (prefill && prefill.citation) card.textarea.value = prefill.citation;
+
+    // Seed DOI as "found" using the existing record's DOI link so
+    // the auto-CrossRef-by-title in maybeLookupDOI doesn't overwrite
+    // it. Stamping `key = title|year` short-circuits the lookup.
+    var seededDoi = { value: '', status: 'idle', match: false, key: '' };
+    if (prefill && prefill.doi) {
+      seededDoi = { value: prefill.doi, status: 'found', match: true,
+                    key: (prefill.title || '') + '|' + (prefill.year || '') };
+    }
+
     var session = {
       el:        card,
       parsed:    null,
@@ -197,18 +216,28 @@
       // 'idle' | 'searching' | 'found' | 'not-found'. `match` is
       // only meaningful when status='found' — true if the DOI's
       // CrossRef title fuzzy-matches the parsed citation title.
-      doi: { value: '', status: 'idle', match: false, key: '' },
+      doi: seededDoi,
       // PDF state — populated by the file picker. dataB64 is read
       // lazily (we only encode once on submit, not at pick time, to
       // keep the form responsive on large files).
       pdf: null,   // null | { name, size, file }
       // Project tags — list of {slug, title} the user has picked from
       // the projects-index. Sent on submit as patch.projectSlugs[].
-      projects:    [],
+      projects:    prefill && prefill.projects ? prefill.projects.slice() : [],
       projectsIdx: [],
       // Awards — multi-string. Each entry is one chip in the meta row.
-      awards:      []
+      awards:      prefill && prefill.awards   ? prefill.awards.slice()   : [],
+      // Edit mode: stamp the existing slug so submit() sends
+      // action='edit' + targetSlug=<slug>. Null/absent → create.
+      editSlug:    prefill && prefill.editSlug ? prefill.editSlug : null
     };
+    if (session.editSlug) {
+      card.submit.textContent = 'Submit edit for review';
+    }
+    // Paint pre-filled chips immediately (before peopleIdx loads).
+    if (session.awards.length)   renderAwardChips(session);
+    if (session.projects.length) renderProjectChips(session);
+
     loadIndex().then(function (idx) {
       session.peopleIdx = idx || [];
       reparse(session);
@@ -918,7 +947,14 @@
       hasPdf:              !!session.pdf,
       authorSlugs:         tagSlugsInOrder(session),
       projectSlugs:        session.projects.map(function (p) { return p.slug; }),
-      citationFormUpdates: citationFormUpdatesFor(session)
+      citationFormUpdates: citationFormUpdatesFor(session),
+      // Auto-approval signal — broker will skip the review queue and
+      // immediately publish if true. We compute it here using the
+      // same 5-condition gate that powers the eligibility badge UI;
+      // the broker trusts this value (see autoApprovePublication_).
+      // Edits never auto-approve — we always want a moderator to
+      // catch unintended overwrites.
+      eligibleForAutoApproval: !session.editSlug && isEligibleForAutoApproval(session)
     };
 
     el.submit.disabled = true;
@@ -948,8 +984,8 @@
 
         window.AHLPatch.submit({
           targetType: 'publication',
-          targetSlug: '<new>',
-          action:     'create',
+          targetSlug: session.editSlug || '<new>',
+          action:     session.editSlug ? 'edit' : 'create',
           patch:      patch,
           files:      files,
           returnUrl:  location.origin + '/my-ahl/'
@@ -1128,10 +1164,64 @@
   function mountAll(scope) {
     var triggers = (scope || document).querySelectorAll('[data-pub-add-trigger]');
     Array.prototype.forEach.call(triggers, mount);
+    var editTriggers = (scope || document).querySelectorAll('[data-pub-add-edit]');
+    Array.prototype.forEach.call(editTriggers, mountEdit);
   }
   document.addEventListener('myahl:dashboard-rendered', function () { mountAll(); });
   if (document.readyState !== 'loading') mountAll();
   else document.addEventListener('DOMContentLoaded', function () { mountAll(); });
 
-  window.AHLPubAdd = { mount: mount };
+  // ── Edit-mode mounter ───────────────────────────────────────
+  // Each [data-pub-add-edit="<slug>"] button (e.g. the edit pencil
+  // on a /my-ahl/ publication row) opens the same card pre-filled
+  // from /data/publications/<slug>.json. The card's submit then
+  // sends action='edit' + targetSlug=<slug>.
+  function mountEdit(button) {
+    if (!button || button.__pubEditMounted) return;
+    button.__pubEditMounted = true;
+    button.disabled = false;
+    ensureSvgDefs();
+    button.addEventListener('click', function (e) {
+      e.preventDefault();
+      var slug = button.getAttribute('data-pub-add-edit');
+      if (!slug) return;
+      openEditCard(button, slug);
+    });
+  }
+
+  function openEditCard(button, slug) {
+    fetch('/data/publications/' + encodeURIComponent(slug) + '.json', { cache: 'default' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (record) {
+        if (!record) {
+          alert('Couldn\'t load this publication for editing.');
+          return;
+        }
+        // Extract DOI from existing links[] (broker stores DOI as a
+        // link with label 'DOI' or 'doi'; sometimes the URL is the
+        // full https://doi.org/... form).
+        var doi = '';
+        (record.links || []).forEach(function (l) {
+          if (doi) return;
+          if (!/doi/i.test(l.label || '')) return;
+          var m = String(l.url || '').match(/10\.\d{4,9}\/[^\s"']+/);
+          if (m) doi = m[0].replace(/[.,)]+$/, '');
+        });
+        openCard(button, {
+          editSlug: slug,
+          citation: record.citation || '',
+          title:    record.title || '',
+          year:     record.year || '',
+          awards:   Array.isArray(record.awards) ? record.awards : [],
+          doi:      doi,
+          // projects[] cross-ref is project→publications, not pub→
+          // projects, so we don't have it on the record. The user
+          // can re-tag manually if they want to add/remove projects
+          // during the edit.
+          projects: []
+        });
+      });
+  }
+
+  window.AHLPubAdd = { mount: mount, mountEdit: mountEdit };
 })();
