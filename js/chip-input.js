@@ -227,23 +227,25 @@
       chip.className = 'pub-item np-pub-chip';
       chip.setAttribute('data-slug', item.slug);
       var awardsList = Array.isArray(item.awards) ? item.awards : [];
-      var awardHTML = awardsList.length
-        ? '<div class="pub-awards">' + awardsList.map(function (a) {
-            return '<span class="pub-award">★ ' + escHTML(a) + '</span>';
-          }).join('') + '</div>'
-        : '';
-      var linksHTML = (item.links && item.links.length)
-        ? '<div class="pub-links">' + item.links.map(function (l) {
+      var linkChips = (item.links && item.links.length)
+        ? item.links.map(function (l) {
             return '<a href="' + escAttr(l.url) + '" target="_blank" rel="noopener" class="pub-link">' +
                    escHTML((l.label || 'link').toUpperCase()) + '</a>';
-          }).join('') + '</div>'
+          }).join('')
+        : '';
+      var awardChips = awardsList.length
+        ? awardsList.map(function (a) {
+            return '<span class="pub-award">★ ' + escHTML(a) + '</span>';
+          }).join('')
+        : '';
+      var actionsHTML = (linkChips || awardChips)
+        ? '<div class="pub-actions">' + linkChips + awardChips + '</div>'
         : '';
       chip.innerHTML =
         '<div class="pub-body">' +
-          awardHTML +
           '<div class="pub-title">' + escHTML(item.label) + '</div>' +
           (item.citation ? '<div class="pub-citation">' + escHTML(item.citation) + '</div>' : '') +
-          linksHTML +
+          actionsHTML +
         '</div>' +
         (locked ? '' :
          '<button type="button" class="np-card-chip-remove" data-chip-remove ' +

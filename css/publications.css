@@ -133,8 +133,14 @@
   color: var(--color-neutral-70);
   margin-bottom: 10px;
 }
-/* .pub-awards wraps one .pub-award chip per entry — flex/wrap so
-   pubs with multiple honors lay out cleanly on narrow screens. */
+/* .pub-actions packs link buttons (DOI, PDF, …) and award chips into
+   a single wrapping row to save vertical space — links first, then
+   awards. .pub-awards/.pub-links remain styled for legacy/preview
+   contexts (chip-input.js consumers). */
+.pub-actions {
+  display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+  margin-top: 6px;
+}
 .pub-awards {
   display: flex; flex-wrap: wrap; gap: 6px;
   margin-bottom: 10px;
@@ -148,6 +154,22 @@
   padding: 4px 10px; border-radius: var(--radius-sm);
 }
 .pub-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+/* Project cross-link: first chip pushes itself (and any siblings) to
+   the right edge of the action row. Wraps below on narrow screens. */
+.pub-project-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-display); font-weight: 600; font-size: 13px;
+  color: var(--color-neutral-70);
+  padding: 6px 0;
+  transition: color .2s;
+}
+.pub-project-link.is-first { margin-left: auto; }
+.pub-project-link:hover { color: var(--color-accent); }
+.pub-project-icon {
+  width: 14px; height: 14px; flex: none;
+  fill: none; stroke: currentColor;
+  stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round;
+}
 .pub-link {
   font-family: var(--font-display); font-weight: 600; font-size: 13px;
   color: var(--color-accent);
