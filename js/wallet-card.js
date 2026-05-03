@@ -110,18 +110,26 @@
       slot.textContent = 'QR library missing';
       return;
     }
-    // QRCode renders into the host element; sized in CSS via the
-    // generated <canvas>/<img>. correctLevel:H gives us robustness
-    // against the screenshot/print loss that someone might do with
-    // their phone wallet.
-    new QRCode(slot, {
-      text: url,
-      width: 200,
-      height: 200,
-      colorDark: '#000000',
-      colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.H
-    });
+    // correctLevel must be L for wallet save URLs — the JWT they wrap
+    // is ~1500–2000 bytes, which exceeds H's ~1273-byte capacity.
+    // L gives us ~2953 bytes, comfortably fitting current URLs with
+    // headroom for richer pass objects later. Phone cameras decode
+    // these reliably; printed/photographed scenarios aren't a use
+    // case here (the QR is shown live on a desktop screen).
+    try {
+      new QRCode(slot, {
+        text: url,
+        width: 200,
+        height: 200,
+        colorDark: '#000000',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.L
+      });
+    } catch (err) {
+      slot.textContent = 'QR too large';
+      // eslint-disable-next-line no-console
+      console.error('wallet-card: QR render failed', err, 'url length =', url.length);
+    }
   }
 
   function renderButton(card, url) {
