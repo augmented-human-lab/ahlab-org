@@ -65,8 +65,9 @@
       }
       renderQr(card, data.url);
       renderButton(card, data.url);
-    }).catch(function () {
-      renderError(card, 'Could not reach the wallet service.');
+    }).catch(function (err) {
+      var detail = err && err.message ? ' (' + err.message + ')' : '';
+      renderError(card, 'Could not reach the wallet service' + detail + '.');
     });
   }
 
@@ -169,9 +170,13 @@
       script.onerror = function () { cleanup(); reject(new Error('JSONP load failed')); };
       script.src = url + (url.indexOf('?') === -1 ? '?' : '&') + 'callback=' + cb;
       document.head.appendChild(script);
+      // 30s — matches Apps Script's max web-app execution time. The
+      // wallet endpoint can take longer than the 15s used elsewhere
+      // because doGet may be serialised behind another concurrent
+      // broker call (e.g. list-my-patches firing on the same event).
       timer = setTimeout(function () {
         if (window[cb]) { cleanup(); reject(new Error('JSONP timeout')); }
-      }, 15000);
+      }, 30000);
     });
   }
 
