@@ -68,9 +68,9 @@
       '<div class="myahl-wallet-text">' +
         '<h3 class="myahl-wallet-title">Add to phone wallet</h3>' +
         '<p class="myahl-wallet-desc">Add this membership card to Google Wallet on your phone. On desktop, Google will offer to send it to your signed-in phone.</p>' +
-        '<div class="myahl-wallet-btn-slot">' +
-          '<div class="myahl-wallet-qr-spinner" role="status" aria-label="Loading"></div>' +
-        '</div>' +
+      '</div>' +
+      '<div class="myahl-wallet-btn-slot">' +
+        '<div class="myahl-wallet-qr-spinner" role="status" aria-label="Loading"></div>' +
       '</div>';
     return card;
   }

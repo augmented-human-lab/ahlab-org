@@ -1187,26 +1187,35 @@ a.myahl-tile-title:hover { color: var(--color-accent); }
    /js/wallet-card.js after the broker returns a save URL, so this
    card only appears for signed-in members. */
 .myahl-wallet-card {
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
   background: var(--color-neutral-10);
   border: 1px solid var(--color-neutral-30);
   border-radius: var(--radius-lg);
-  padding: 20px 24px;
+  padding: 18px 24px;
   margin-bottom: 32px;
+}
+@media (max-width: 640px) {
+  .myahl-wallet-card {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
 }
 .myahl-wallet-title {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 18px;
   color: var(--color-neutral-100);
-  margin: 0 0 6px;
+  margin: 0 0 4px;
 }
 .myahl-wallet-desc {
   font-family: var(--font-text);
   font-size: 14px;
   line-height: 1.5;
   color: var(--color-neutral-70);
-  margin: 0 0 14px;
+  margin: 0;
   max-width: 64ch;
 }
 .myahl-wallet-btn-slot {
