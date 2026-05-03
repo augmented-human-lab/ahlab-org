@@ -1182,29 +1182,17 @@ a.myahl-tile-title:hover { color: var(--color-accent); }
 
 
 /* ── "Add to phone wallet" card ───────────────────────────────
-   Slots in below .myahl-header-row. Two-column on desktop:
-   left = title + description + Add-to-Wallet badge, right = QR.
-   Stacks on narrow screens.
-
-   Injected by /js/wallet-card.js after the broker returns a save
-   URL, so this card only appears for signed-in members. */
+   Slots in below .myahl-header-row. Single block: title +
+   description + Add-to-Google-Wallet button. Injected by
+   /js/wallet-card.js after the broker returns a save URL, so this
+   card only appears for signed-in members. */
 .myahl-wallet-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 24px;
-  align-items: center;
+  display: block;
   background: var(--color-neutral-10);
   border: 1px solid var(--color-neutral-30);
   border-radius: var(--radius-lg);
   padding: 20px 24px;
   margin-bottom: 32px;
-}
-@media (max-width: 640px) {
-  .myahl-wallet-card {
-    grid-template-columns: 1fr;
-    text-align: center;
-    justify-items: center;
-  }
 }
 .myahl-wallet-title {
   font-family: var(--font-display);
@@ -1219,42 +1207,60 @@ a.myahl-tile-title:hover { color: var(--color-accent); }
   line-height: 1.5;
   color: var(--color-neutral-70);
   margin: 0 0 14px;
-  max-width: 56ch;
+  max-width: 64ch;
 }
 .myahl-wallet-btn-slot {
   font-family: var(--font-text);
   font-size: 13px;
   color: var(--color-neutral-70);
-}
-.myahl-wallet-btn { display: inline-block; transition: opacity .2s; }
-.myahl-wallet-btn:hover { opacity: .85; }
-.myahl-wallet-btn img {
-  display: block;
-  height: 48px;
-  width: auto;
-}
-.myahl-wallet-qr-slot {
+  min-height: 48px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 200px;
-  height: 200px;
-  background: #fff;
-  border: 1px solid var(--color-neutral-30);
-  border-radius: 12px;
-  padding: 8px;
-  flex-shrink: 0;
 }
-/* qrcodejs renders either <canvas> or <img>; size them to the slot. */
-.myahl-wallet-qr-slot canvas,
-.myahl-wallet-qr-slot img {
-  width: 100% !important;
-  height: 100% !important;
-  display: block;
+/* Self-contained Google-Wallet-style button: black pill, white text,
+   inline wallet glyph. No external image dependency, so the button
+   can never break from a stale Google CDN URL. */
+.myahl-wallet-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 22px 10px 18px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  transition: background .2s, transform .15s;
+}
+.myahl-wallet-btn:hover { background: #1f1f1f; }
+.myahl-wallet-btn:active { transform: translateY(1px); }
+.myahl-wallet-btn-icon {
+  width: 26px;
+  height: 26px;
+  fill: #fff;
+  flex: none;
+}
+.myahl-wallet-btn-text {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.myahl-wallet-btn-line1 {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .02em;
+  opacity: .9;
+}
+.myahl-wallet-btn-line2 {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: .01em;
 }
 .myahl-wallet-qr-spinner {
-  width: 28px;
-  height: 28px;
+  width: 22px;
+  height: 22px;
   border: 3px solid var(--color-neutral-30);
   border-top-color: var(--color-accent, #6100FF);
   border-radius: 50%;

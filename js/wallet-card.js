@@ -2,25 +2,20 @@
  * wallet-card.js — "Add to Google Wallet" surface on /my-ahl/.
  * ============================================================
  *
- * Fetches a signed save-to-wallet URL from the broker and renders:
- *   • a QR code (so desktop users can scan with their phone camera)
- *   • an "Add to Google Wallet" button (one-tap path on mobile/Android)
+ * Fetches a signed save-to-wallet URL from the broker and renders an
+ * "Add to Google Wallet" button. The button resolves to
+ * https://pay.google.com/gp/v/save/<jwt>, which Google handles natively
+ * on Android and via a web preview on iOS / desktop.
  *
- * Both routes resolve to https://pay.google.com/gp/v/save/<jwt>, which
- * Google Wallet handles natively on Android and via the web flow on
- * iOS / desktop.
- *
- * Why a QR code on desktop
- *   Clicking "Add to Wallet" on a desktop tries to add the pass to the
- *   browser's logged-in Google account, but the pass actually needs to
- *   land on the user's phone. The QR transfers the action: scan with
- *   the phone camera → phone opens the URL → Wallet on the phone shows
- *   the Add prompt. Direct, no account-mismatch surprises.
+ * On desktop, Google's web preview offers to send the pass to the
+ * user's signed-in phone. (We tried embedding the URL as a QR for
+ * scan-from-desktop transfer, but the JWT is ~1500–2000 bytes — too
+ * dense for a 200×200 QR to be camera-readable. Until we add a
+ * shortener-style redirect, button-only is the cleanest path.)
  *
  * Privacy
- *   The save URL contains a JWT carrying member identity. We render the
- *   QR client-side via the vendored qrcode.min.js — no third-party QR
- *   service, no leak.
+ *   The save URL contains a JWT carrying member identity. The page
+ *   never exposes it to a third-party service.
  *
  * Surface
  *   Renders into a sibling element next to .myahl-idcard. If the ID
@@ -29,12 +24,6 @@
  */
 (function () {
   'use strict';
-
-  // Google's official "Add to Google Wallet" badge (hosted by Google).
-  // Brand guidelines require the official asset; using the hosted URL
-  // means we always pick up Google's latest revision.
-  var ADD_TO_WALLET_BADGE =
-    'https://developers.google.com/static/wallet/generic/resources/enUS_add_to_google_wallet_add-wallet-badge.png';
 
   function init() {
     if (!window.AHLAuth) return;
@@ -63,7 +52,6 @@
         renderError(card, (data && data.error) || 'Could not load wallet pass.');
         return;
       }
-      renderQr(card, data.url);
       renderButton(card, data.url);
     }).catch(function (err) {
       var detail = err && err.message ? ' (' + err.message + ')' : '';
@@ -79,11 +67,10 @@
     card.innerHTML =
       '<div class="myahl-wallet-text">' +
         '<h3 class="myahl-wallet-title">Add to phone wallet</h3>' +
-        '<p class="myahl-wallet-desc">Scan the code with your phone camera to add this card to Google Wallet, or tap the button below if you\'re already on your phone.</p>' +
-        '<div class="myahl-wallet-btn-slot"></div>' +
-      '</div>' +
-      '<div class="myahl-wallet-qr-slot" aria-hidden="true">' +
-        '<div class="myahl-wallet-qr-spinner" role="status" aria-label="Loading wallet code"></div>' +
+        '<p class="myahl-wallet-desc">Add this membership card to Google Wallet on your phone. On desktop, Google will offer to send it to your signed-in phone.</p>' +
+        '<div class="myahl-wallet-btn-slot">' +
+          '<div class="myahl-wallet-qr-spinner" role="status" aria-label="Loading"></div>' +
+        '</div>' +
       '</div>';
     return card;
   }
@@ -101,38 +88,8 @@
     }
   }
 
-  function renderQr(card, url) {
-    card.classList.remove('is-loading');
-    var slot = card.querySelector('.myahl-wallet-qr-slot');
-    if (!slot) return;
-    slot.innerHTML = '';
-    if (typeof QRCode !== 'function') {
-      slot.textContent = 'QR library missing';
-      return;
-    }
-    // correctLevel must be L for wallet save URLs — the JWT they wrap
-    // is ~1500–2000 bytes, which exceeds H's ~1273-byte capacity.
-    // L gives us ~2953 bytes, comfortably fitting current URLs with
-    // headroom for richer pass objects later. Phone cameras decode
-    // these reliably; printed/photographed scenarios aren't a use
-    // case here (the QR is shown live on a desktop screen).
-    try {
-      new QRCode(slot, {
-        text: url,
-        width: 200,
-        height: 200,
-        colorDark: '#000000',
-        colorLight: '#ffffff',
-        correctLevel: QRCode.CorrectLevel.L
-      });
-    } catch (err) {
-      slot.textContent = 'QR too large';
-      // eslint-disable-next-line no-console
-      console.error('wallet-card: QR render failed', err, 'url length =', url.length);
-    }
-  }
-
   function renderButton(card, url) {
+    card.classList.remove('is-loading');
     var slot = card.querySelector('.myahl-wallet-btn-slot');
     if (!slot) return;
     slot.innerHTML = '';
@@ -142,11 +99,16 @@
     a.rel = 'noopener';
     a.className = 'myahl-wallet-btn';
     a.setAttribute('aria-label', 'Add card to Google Wallet');
-    var img = document.createElement('img');
-    img.src = ADD_TO_WALLET_BADGE;
-    img.alt = 'Add to Google Wallet';
-    img.height = 48;
-    a.appendChild(img);
+    // Inline SVG of a wallet glyph — no external image dependency, so
+    // the button can never break from a stale CDN URL.
+    a.innerHTML =
+      '<svg class="myahl-wallet-btn-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+        '<path d="M21 7H5a1 1 0 0 1 0-2h13.5a.75.75 0 0 0 0-1.5H5a2.5 2.5 0 0 0-2.5 2.5v12A2.5 2.5 0 0 0 5 20.5h16a1.5 1.5 0 0 0 1.5-1.5V8.5A1.5 1.5 0 0 0 21 7Zm-3 7.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Z"/>' +
+      '</svg>' +
+      '<span class="myahl-wallet-btn-text">' +
+        '<span class="myahl-wallet-btn-line1">Add to</span>' +
+        '<span class="myahl-wallet-btn-line2">Google Wallet</span>' +
+      '</span>';
     slot.appendChild(a);
   }
 
