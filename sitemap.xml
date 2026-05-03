@@ -697,30 +697,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ahlab.org/projects/test-project-addition/</loc>
-    <lastmod>2026-01-01</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ahlab.org/projects/test-project/</loc>
-    <lastmod>NaN-01-01</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ahlab.org/projects/test-proj2/</loc>
-    <lastmod>NaN-01-01</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ahlab.org/projects/test-proj3/</loc>
-    <lastmod>2025-01-01</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://ahlab.org/people/suranga-nanayakkara/</loc>
     <lastmod>2026-05-03</lastmod>
     <changefreq>yearly</changefreq>

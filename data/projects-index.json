@@ -25,24 +25,9 @@
     "year": "Current"
   },
   {
-    "slug": "test-proj2",
-    "title": "Test Proj2",
-    "year": "Current"
-  },
-  {
-    "slug": "test-project",
-    "title": "Test Project",
-    "year": "Current"
-  },
-  {
     "slug": "zenflow",
     "title": "Zenflow",
     "year": "Current"
-  },
-  {
-    "slug": "test-project-addition",
-    "title": "Test Project Addition",
-    "year": "2026"
   },
   {
     "slug": "aisee",
@@ -72,11 +57,6 @@
   {
     "slug": "soniphy",
     "title": "SoniPhy",
-    "year": "2025"
-  },
-  {
-    "slug": "test-proj3",
-    "title": "Test Proj3",
     "year": "2025"
   },
   {

@@ -67,43 +67,6 @@
         "cognitive",
         "physical"
       ]
-    },
-    {
-      "slug": "test-project-addition",
-      "title": "Test Project Addition",
-      "year": "2026",
-      "thumbnail": "https://cdn.ahlab.org/media/site/projects/test-project-addition/Screenshot_2026-04-24_at_12.02.40_AM.jpg",
-      "principles": [
-        "body",
-        "cognitive"
-      ]
-    },
-    {
-      "slug": "test-project",
-      "title": "Test Project",
-      "year": "Current",
-      "thumbnail": "https://cdn.ahlab.org/media/site/projects/test-project/1_321329_leyard.jpg",
-      "principles": [
-        "cognitive"
-      ]
-    },
-    {
-      "slug": "test-proj2",
-      "title": "Test Proj2",
-      "year": "Current",
-      "thumbnail": "https://cdn.ahlab.org/media/site/projects/test-proj2/1_321329_leyard.jpg",
-      "principles": [
-        "sociocultural"
-      ]
-    },
-    {
-      "slug": "test-proj3",
-      "title": "Test Proj3",
-      "year": "2025",
-      "thumbnail": "https://cdn.ahlab.org/media/site/projects/test-proj3/1_321329_leyard.jpg",
-      "principles": [
-        "perceptual"
-      ]
     }
   ],
   "publications": [
