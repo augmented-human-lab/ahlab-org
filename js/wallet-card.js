@@ -68,9 +68,26 @@
         'Google Wallet unavailable' + detail);
     });
 
-    // ── Apple: render button immediately (on-click fetches)
+    // ── Apple: pre-fetch a short signed URL pointing at the Cloud
+    // Function. We deliberately don't ship the pkpass binary through
+    // JSONP — large cross-site script payloads are unreliable under
+    // iOS Safari's tracking prevention. The signed URL is a tiny
+    // string and works as a normal anchor click on every platform.
     if (IS_APPLE_PLATFORM) {
-      renderAppleButton(card, token, broker);
+      var appleUrl = broker + (broker.indexOf('?') === -1 ? '?' : '&') +
+        'action=apple-pass-link&token=' + encodeURIComponent(token);
+      fetchJsonp(appleUrl).then(function (data) {
+        if (!data || data.error || !data.url) {
+          renderSlotError(card, '.myahl-wallet-btn-slot-apple',
+            (data && data.error) || 'Could not load Apple pass.');
+          return;
+        }
+        renderAppleButton(card, data.url);
+      }).catch(function (err) {
+        var detail = err && err.message ? ' (' + err.message + ')' : '';
+        renderSlotError(card, '.myahl-wallet-btn-slot-apple',
+          'Apple Wallet unavailable' + detail);
+      });
     } else {
       // Hide the apple slot entirely on non-Apple platforms — keeps
       // the layout tight rather than showing a useless second button.
@@ -131,18 +148,21 @@
     slot.appendChild(a);
   }
 
-  function renderAppleButton(card, token, broker) {
+  function renderAppleButton(card, url) {
     card.classList.remove('is-loading');
     var slot = card.querySelector('.myahl-wallet-btn-slot-apple');
     if (!slot) return;
     slot.innerHTML = '';
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'myahl-wallet-btn';
-    btn.setAttribute('aria-label', 'Add card to Apple Wallet');
-    // Ticket-stub glyph — visually distinct from the Google wallet
-    // glyph and instantly recognisable as a "pass".
-    btn.innerHTML =
+    var a = document.createElement('a');
+    a.href = url;
+    a.className = 'myahl-wallet-btn';
+    a.setAttribute('aria-label', 'Add card to Apple Wallet');
+    // Don't set target="_blank" — iOS Safari handles the
+    // application/vnd.apple.pkpass response inline (Wallet preview)
+    // and a new tab interferes with that handoff. Same-tab nav lets
+    // Safari intercept the MIME and route to Wallet without leaving
+    // a stray tab behind.
+    a.innerHTML =
       '<svg class="myahl-wallet-btn-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
         '<path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3a2 2 0 0 0 0-4V7Zm12.5 1a.75.75 0 0 0-1.5 0v8a.75.75 0 0 0 1.5 0V8Z"/>' +
       '</svg>' +
@@ -150,50 +170,7 @@
         '<span class="myahl-wallet-btn-line1">Add to</span>' +
         '<span class="myahl-wallet-btn-line2">Apple Wallet</span>' +
       '</span>';
-
-    btn.addEventListener('click', function () {
-      if (btn.classList.contains('is-loading')) return;
-      btn.classList.add('is-loading');
-      btn.disabled = true;
-      var url = broker + (broker.indexOf('?') === -1 ? '?' : '&') +
-        'action=apple-pass&token=' + encodeURIComponent(token);
-      fetchJsonp(url).then(function (data) {
-        btn.classList.remove('is-loading');
-        btn.disabled = false;
-        if (!data || data.error || !data.pkpass) {
-          alert('Could not generate Apple pass: ' + ((data && data.error) || 'unknown error'));
-          return;
-        }
-        triggerPkpassDownload(data.pkpass, data.filename || 'ahl_member.pkpass');
-      }).catch(function (err) {
-        btn.classList.remove('is-loading');
-        btn.disabled = false;
-        var detail = err && err.message ? ' (' + err.message + ')' : '';
-        alert('Apple Wallet unavailable' + detail);
-      });
-    });
-
-    slot.appendChild(btn);
-  }
-
-  // base64 → Uint8Array → Blob → programmatic download. iOS Safari
-  // sees the application/vnd.apple.pkpass MIME and opens the system
-  // Wallet preview directly; macOS does the same.
-  function triggerPkpassDownload(base64, filename) {
-    var bin = atob(base64);
-    var arr = new Uint8Array(bin.length);
-    for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
-    var blob = new Blob([arr], { type: 'application/vnd.apple.pkpass' });
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(function () {
-      URL.revokeObjectURL(url);
-      if (a.parentNode) a.parentNode.removeChild(a);
-    }, 100);
+    slot.appendChild(a);
   }
 
   function renderSlotError(card, slotSelector, msg) {
