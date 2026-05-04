@@ -225,12 +225,13 @@
       script.onerror = function () { cleanup(); reject(new Error('JSONP load failed')); };
       script.src = url + (url.indexOf('?') === -1 ? '?' : '&') + 'callback=' + cb;
       document.head.appendChild(script);
-      // 30s — Apple-pass requests round-trip through Cloud Functions
-      // and can take 5–10s on cold start; matches Apps Script's max
-      // web-app execution time.
+      // 60s — Apple-pass requests round-trip through Cloud Functions
+      // (cold start can be 5–10s on first hit) and the broker also
+      // takes its own time. On cellular this can stretch; 30s was
+      // too tight in practice.
       timer = setTimeout(function () {
         if (window[cb]) { cleanup(); reject(new Error('JSONP timeout')); }
-      }, 30000);
+      }, 60000);
     });
   }
 
