@@ -1,29 +1,36 @@
 /**
- * wallet-card.js — "Add to Google Wallet" surface on /my-ahl/.
+ * wallet-card.js — phone-wallet enrollment surface on /my-ahl/.
  * ============================================================
  *
- * Fetches a signed save-to-wallet URL from the broker and renders an
- * "Add to Google Wallet" button. The button resolves to
- * https://pay.google.com/gp/v/save/<jwt>, which Google handles natively
- * on Android and via a web preview on iOS / desktop.
+ * Renders one or two buttons next to the existing membership card:
+ *   • Google Wallet — works on every platform (web preview on iOS/desktop)
+ *   • Apple Wallet  — Apple platforms only (iPhone, iPad, Mac)
  *
- * On desktop, Google's web preview offers to send the pass to the
- * user's signed-in phone. (We tried embedding the URL as a QR for
- * scan-from-desktop transfer, but the JWT is ~1500–2000 bytes — too
- * dense for a 200×200 QR to be camera-readable. Until we add a
- * shortener-style redirect, button-only is the cleanest path.)
+ * Flows
+ *   Google:  page-load JSONP fetch → `<a href="pay.google.com/.../<jwt>">`
+ *            (button is a real link; click goes through immediately)
+ *   Apple:   on-click JSONP fetch → broker proxies to Cloud Function →
+ *            base64 .pkpass returned in JSON envelope → decode to Blob →
+ *            programmatic download. iOS Safari recognises the
+ *            application/vnd.apple.pkpass MIME type and opens Wallet.
+ *
+ * Why pre-fetch Google but on-click for Apple
+ *   Google flow signs a small JWT, ~100 ms broker work — cheap to do
+ *   on every page load. Apple flow runs through a Cloud Function that
+ *   does CMS signing + zip bundling, ~500 ms — only worth doing if the
+ *   user actually clicks. Plus the Apple button only appears for Apple
+ *   platforms, so the slowest action is also the rarest in aggregate.
  *
  * Privacy
- *   The save URL contains a JWT carrying member identity. The page
- *   never exposes it to a third-party service.
- *
- * Surface
- *   Renders into a sibling element next to .myahl-idcard. If the ID
- *   card isn't on the page (auth missing, render hasn't fired), this
- *   module is a no-op.
+ *   Both URLs/payloads carry member identity. Page never sends them
+ *   to a third-party service.
  */
 (function () {
   'use strict';
+
+  // /Macintosh/ catches both macOS Safari and Chrome — both let the
+  // user open .pkpass via Wallet preview, so it's worth offering.
+  var IS_APPLE_PLATFORM = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent || '');
 
   function init() {
     if (!window.AHLAuth) return;
@@ -44,19 +51,32 @@
     insertNextToIdCard(idCard, card);
 
     var broker = window.AHLAuth.getBrokerUrl();
-    var url = broker + (broker.indexOf('?') === -1 ? '?' : '&') +
-      'action=wallet-pass-url&token=' + encodeURIComponent(token);
 
-    fetchJsonp(url).then(function (data) {
+    // ── Google: pre-fetch URL on page load
+    var googleUrl = broker + (broker.indexOf('?') === -1 ? '?' : '&') +
+      'action=wallet-pass-url&token=' + encodeURIComponent(token);
+    fetchJsonp(googleUrl).then(function (data) {
       if (!data || data.error || !data.url) {
-        renderError(card, (data && data.error) || 'Could not load wallet pass.');
+        renderSlotError(card, '.myahl-wallet-btn-slot-google',
+          (data && data.error) || 'Could not load Google pass.');
         return;
       }
-      renderButton(card, data.url);
+      renderGoogleButton(card, data.url);
     }).catch(function (err) {
       var detail = err && err.message ? ' (' + err.message + ')' : '';
-      renderError(card, 'Could not reach the wallet service' + detail + '.');
+      renderSlotError(card, '.myahl-wallet-btn-slot-google',
+        'Google Wallet unavailable' + detail);
     });
+
+    // ── Apple: render button immediately (on-click fetches)
+    if (IS_APPLE_PLATFORM) {
+      renderAppleButton(card, token, broker);
+    } else {
+      // Hide the apple slot entirely on non-Apple platforms — keeps
+      // the layout tight rather than showing a useless second button.
+      var appleSlot = card.querySelector('.myahl-wallet-btn-slot-apple');
+      if (appleSlot && appleSlot.parentNode) appleSlot.parentNode.removeChild(appleSlot);
+    }
   }
 
   // ── DOM construction ─────────────────────────────────────────
@@ -67,19 +87,20 @@
     card.innerHTML =
       '<div class="myahl-wallet-text">' +
         '<h3 class="myahl-wallet-title">Add to phone wallet</h3>' +
-        '<p class="myahl-wallet-desc">Add this membership card to Google Wallet on your phone. On desktop, Google will offer to send it to your signed-in phone.</p>' +
+        '<p class="myahl-wallet-desc">Add this membership card to your phone\'s wallet — handy at conferences and events. Works on Android (Google Wallet) and on iPhone / Mac (Apple Wallet).</p>' +
       '</div>' +
-      '<div class="myahl-wallet-btn-slot">' +
-        '<div class="myahl-wallet-qr-spinner" role="status" aria-label="Loading"></div>' +
+      '<div class="myahl-wallet-btn-stack">' +
+        '<div class="myahl-wallet-btn-slot myahl-wallet-btn-slot-apple">' +
+          '<div class="myahl-wallet-spinner" role="status" aria-label="Loading"></div>' +
+        '</div>' +
+        '<div class="myahl-wallet-btn-slot myahl-wallet-btn-slot-google">' +
+          '<div class="myahl-wallet-spinner" role="status" aria-label="Loading"></div>' +
+        '</div>' +
       '</div>';
     return card;
   }
 
   function insertNextToIdCard(idCard, card) {
-    // The id card lives inside .myahl-header-row — a flex row of
-    // [profile][idcard]. The wallet card slots in after the header
-    // row as its own block, so it lays out as a wide horizontal
-    // strip below the row on desktop and stacks naturally on mobile.
     var headerRow = idCard.closest('.myahl-header-row');
     if (headerRow && headerRow.parentNode) {
       headerRow.parentNode.insertBefore(card, headerRow.nextSibling);
@@ -88,9 +109,9 @@
     }
   }
 
-  function renderButton(card, url) {
+  function renderGoogleButton(card, url) {
     card.classList.remove('is-loading');
-    var slot = card.querySelector('.myahl-wallet-btn-slot');
+    var slot = card.querySelector('.myahl-wallet-btn-slot-google');
     if (!slot) return;
     slot.innerHTML = '';
     var a = document.createElement('a');
@@ -99,8 +120,6 @@
     a.rel = 'noopener';
     a.className = 'myahl-wallet-btn';
     a.setAttribute('aria-label', 'Add card to Google Wallet');
-    // Inline SVG of a wallet glyph — no external image dependency, so
-    // the button can never break from a stale CDN URL.
     a.innerHTML =
       '<svg class="myahl-wallet-btn-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
         '<path d="M21 7H5a1 1 0 0 1 0-2h13.5a.75.75 0 0 0 0-1.5H5a2.5 2.5 0 0 0-2.5 2.5v12A2.5 2.5 0 0 0 5 20.5h16a1.5 1.5 0 0 0 1.5-1.5V8.5A1.5 1.5 0 0 0 21 7Zm-3 7.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Z"/>' +
@@ -112,19 +131,85 @@
     slot.appendChild(a);
   }
 
-  function renderError(card, msg) {
+  function renderAppleButton(card, token, broker) {
     card.classList.remove('is-loading');
-    card.classList.add('is-error');
-    var slot = card.querySelector('.myahl-wallet-qr-slot');
-    if (slot) slot.innerHTML = '';
-    var btnSlot = card.querySelector('.myahl-wallet-btn-slot');
-    if (btnSlot) btnSlot.textContent = msg;
+    var slot = card.querySelector('.myahl-wallet-btn-slot-apple');
+    if (!slot) return;
+    slot.innerHTML = '';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'myahl-wallet-btn';
+    btn.setAttribute('aria-label', 'Add card to Apple Wallet');
+    // Ticket-stub glyph — visually distinct from the Google wallet
+    // glyph and instantly recognisable as a "pass".
+    btn.innerHTML =
+      '<svg class="myahl-wallet-btn-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+        '<path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3a2 2 0 0 0 0-4V7Zm12.5 1a.75.75 0 0 0-1.5 0v8a.75.75 0 0 0 1.5 0V8Z"/>' +
+      '</svg>' +
+      '<span class="myahl-wallet-btn-text">' +
+        '<span class="myahl-wallet-btn-line1">Add to</span>' +
+        '<span class="myahl-wallet-btn-line2">Apple Wallet</span>' +
+      '</span>';
+
+    btn.addEventListener('click', function () {
+      if (btn.classList.contains('is-loading')) return;
+      btn.classList.add('is-loading');
+      btn.disabled = true;
+      var url = broker + (broker.indexOf('?') === -1 ? '?' : '&') +
+        'action=apple-pass&token=' + encodeURIComponent(token);
+      fetchJsonp(url).then(function (data) {
+        btn.classList.remove('is-loading');
+        btn.disabled = false;
+        if (!data || data.error || !data.pkpass) {
+          alert('Could not generate Apple pass: ' + ((data && data.error) || 'unknown error'));
+          return;
+        }
+        triggerPkpassDownload(data.pkpass, data.filename || 'ahl_member.pkpass');
+      }).catch(function (err) {
+        btn.classList.remove('is-loading');
+        btn.disabled = false;
+        var detail = err && err.message ? ' (' + err.message + ')' : '';
+        alert('Apple Wallet unavailable' + detail);
+      });
+    });
+
+    slot.appendChild(btn);
+  }
+
+  // base64 → Uint8Array → Blob → programmatic download. iOS Safari
+  // sees the application/vnd.apple.pkpass MIME and opens the system
+  // Wallet preview directly; macOS does the same.
+  function triggerPkpassDownload(base64, filename) {
+    var bin = atob(base64);
+    var arr = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+    var blob = new Blob([arr], { type: 'application/vnd.apple.pkpass' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () {
+      URL.revokeObjectURL(url);
+      if (a.parentNode) a.parentNode.removeChild(a);
+    }, 100);
+  }
+
+  function renderSlotError(card, slotSelector, msg) {
+    card.classList.remove('is-loading');
+    var slot = card.querySelector(slotSelector);
+    if (!slot) return;
+    slot.innerHTML = '<span class="myahl-wallet-slot-error">' + escapeHtml(msg) + '</span>';
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
+    });
   }
 
   // ── JSONP helper (mirror of myahl-patches.js) ────────────────
-  // Apps Script web apps don't honour CORS for fetch(); a <script>
-  // tag is the only viable cross-origin read pattern. The broker
-  // emits `<callback>(<json>);` when ?callback=… is present.
   var _jsonpSeq = 0;
   function fetchJsonp(url) {
     return new Promise(function (resolve, reject) {
@@ -140,10 +225,9 @@
       script.onerror = function () { cleanup(); reject(new Error('JSONP load failed')); };
       script.src = url + (url.indexOf('?') === -1 ? '?' : '&') + 'callback=' + cb;
       document.head.appendChild(script);
-      // 30s — matches Apps Script's max web-app execution time. The
-      // wallet endpoint can take longer than the 15s used elsewhere
-      // because doGet may be serialised behind another concurrent
-      // broker call (e.g. list-my-patches firing on the same event).
+      // 30s — Apple-pass requests round-trip through Cloud Functions
+      // and can take 5–10s on cold start; matches Apps Script's max
+      // web-app execution time.
       timer = setTimeout(function () {
         if (window[cb]) { cleanup(); reject(new Error('JSONP timeout')); }
       }, 30000);

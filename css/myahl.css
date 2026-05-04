@@ -1218,6 +1218,12 @@ a.myahl-tile-title:hover { color: var(--color-accent); }
   margin: 0;
   max-width: 64ch;
 }
+.myahl-wallet-btn-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: stretch;
+}
 .myahl-wallet-btn-slot {
   font-family: var(--font-text);
   font-size: 13px;
@@ -1226,6 +1232,10 @@ a.myahl-tile-title:hover { color: var(--color-accent); }
   display: flex;
   align-items: center;
 }
+.myahl-wallet-btn { width: 100%; box-sizing: border-box; justify-content: center; }
+.myahl-wallet-btn[disabled],
+.myahl-wallet-btn.is-loading { opacity: .55; cursor: progress; pointer-events: none; }
+.myahl-wallet-slot-error { font-size: 12px; color: #b91c1c; padding: 6px 0; }
 /* Self-contained Google-Wallet-style button: black pill, white text,
    inline wallet glyph. No external image dependency, so the button
    can never break from a stale Google CDN URL. */
@@ -1267,13 +1277,15 @@ a.myahl-tile-title:hover { color: var(--color-accent); }
   font-weight: 600;
   letter-spacing: .01em;
 }
-.myahl-wallet-qr-spinner {
+.myahl-wallet-qr-spinner,
+.myahl-wallet-spinner {
   width: 22px;
   height: 22px;
   border: 3px solid var(--color-neutral-30);
   border-top-color: var(--color-accent, #6100FF);
   border-radius: 50%;
   animation: myahl-wallet-spin 0.9s linear infinite;
+  margin: 0 auto;
 }
 @keyframes myahl-wallet-spin { to { transform: rotate(360deg); } }
 .myahl-wallet-card.is-error .myahl-wallet-btn-slot { color: #b91c1c; }
