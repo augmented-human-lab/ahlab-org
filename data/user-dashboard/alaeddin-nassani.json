@@ -1,0 +1,469 @@
+{
+  "slug": "alaeddin-nassani",
+  "name": "Alaeddin Nassani",
+  "role": "Research Fellow",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/alaeddin-nassani/alaeddin-nassani.jpg",
+  "profile_url": "/people/alaeddin-nassani/",
+  "projects": [
+    {
+      "slug": "aisee",
+      "title": "AiSee",
+      "year": "2025",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/aisee/aisee.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual",
+        "identity"
+      ]
+    },
+    {
+      "slug": "xrtic",
+      "title": "XRtic",
+      "year": "2022",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/xrtic/xrtic.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "kiwrious",
+      "title": "Kiwrious",
+      "year": "2022",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/kiwrious/kiwrious.jpg",
+      "principles": [
+        "cognitive",
+        "physical"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "using-sensor-based-programming-to-improve-self-efficacy-and-outcome-expectancy-for-students-from-underrepresented-groups",
+      "title": "Using Sensor-Based Programming to Improve Self-Efficacy and Outcome Expectancy for Students from Underrepresented Groups",
+      "year": "2023",
+      "citation": "Suriyaarachchi, H., Nassani, A., Denny, P. and Nanayakkara, S.C. 2023. Using Sensor-Based Programming to Improve Self-Efficacy and Outcome Expectancy for Students from Underrepresented Groups. In Proceedings of the 2023 Conference on Innovation and Technology in Computer Science Education V. 1 (ITiCSE 2023). Association for Computing Machinery, New York, NY, USA, 187–193.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3587102.3588854"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1Z1oDWS8r8P8ZdoY94MWnmYqAaOxGbE4_/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "striving-for-authentic-and-sustained-technology-use-in-the-classroom-lessons-learned-from-a-longitudinal-evaluation-of-a-sensor-based-science-education-platform",
+      "title": "Striving for Authentic and Sustained Technology Use in the Classroom: Lessons Learned from a Longitudinal Evaluation of a Sensor-Based Science Education Platform",
+      "year": "2023",
+      "citation": "Chua, Y., Cooray, S., Cortes, J.P.F., Denny, P., Dupuch, S., Garbett, D.L., Nassani, A., Cao, J., Qiao, H., Reis, A, Reis, D., Scholl, P.M., Sridhar, P.K., Suriyaarachchi, H., Taimana, F., Tang, V., Weerasinghe, C., Wen, E., Wu, M., Wu, Q., Zhang, H., Nanayakkara, S.C. 2023. Striving for Authentic and Sustained Technology Use In the Classroom: Lessons Learned from a Longitudinal Evaluation of a Sensor-based Science Education Platform. International Journal of Human–Computer Interaction (IJHCI).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1080/10447318.2023.2229485"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1fhABNfB6965rV6NJCIXlgrVl0Bgn6e6n/view?usp=sharing"
+        }
+      ],
+      "venue": "IJHCI"
+    },
+    {
+      "slug": "xrtic-a-prototyping-toolkit-for-xr-applications-using-cloth-deformation",
+      "title": "XRtic: A Prototyping Toolkit for XR Applications using Cloth Deformation",
+      "year": "2022",
+      "citation": "Muthukumarana, S., Nassani, A., Park, N., Steimle, J., Billinghurst, B., and Nanayakkara, S.C., XRtic: A Prototyping Toolkit for XR Applications using Cloth Deformation. In 2022 IEEE International Symposium on Mixed and Augmented Reality (ISMAR), IEEE, 2022.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1109/ISMAR55827.2022.00071"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1m1irQX5MT0JKANEgfIncgX2kCWCJPDE0/view?usp=sharing"
+        }
+      ],
+      "venue": "ISMAR"
+    },
+    {
+      "slug": "sensor-based-interactive-worksheets-to-support-guided-scientific-inquiry",
+      "title": "Sensor-Based Interactive Worksheets to Support Guided Scientific Inquiry",
+      "year": "2021",
+      "citation": "Cao, J., Chan, S.W.T., Garbett, D.L., Denny, P., Nassani, A., Scholl, P.M. and Nanayakkara, S.C., 2021. Sensor-Based Interactive Worksheets to Support Guided Scientific Inquiry. In Interaction Design and Children (IDC ’21), June 24–30, 2021, Athens, Greece. ACM, New York, NY, USA, 7 pages. Best Short Paper Award!",
+      "awards": [
+        "Best Short Paper Award"
+      ],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3459990.3460716"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1PePtQbU4Qquk1UpyIv9DXGpejZnoNlbf/view?usp=sharing"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "om-a-comprehensive-tool-to-elicit-subjective-vibrotactile-expressions-associated-with-contextualised-meaning-in-our-everyday-lives",
+      "title": "OM: A Comprehensive Tool to Elicit Subjective Vibrotactile Expressions Associated with Contextualised Meaning in Our Everyday Lives",
+      "year": "2021",
+      "citation": "Cortés, J.P.F., Suriyaarachchi, H., Nassani, A., Zhang, H. and Nanayakkara, S.C., 2021. OM: A Comprehensive Tool to Elicit Subjective Vibrotactile Expressions Associated with Contextualised Meaning in Our Everyday Lives. In MobileHCI ’21: The ACM International Conference on Mobile Human Computer Interaction, Sept. 27- Oct. 1, 2021, Touluse, France.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://dl.acm.org/doi/10.1145/3447526.3472028"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/16yAh6Mru7uMSg7MCGP5XHNFUKh-Yy9fb/view?usp=sharing"
+        }
+      ],
+      "venue": "MobileHCI"
+    }
+  ],
+  "events": [],
+  "press": [
+    {
+      "slug": "i-wont-have-to-trouble-anyone-when-i-visit",
+      "title": "'I won't have to trouble anyone when I visit': How AiSee helps visitors with visual impairment at Gardens by the Bay",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/i-wont-have-to-trouble-",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "gardens-by-the-bay-to-offer-robot-guide-dog-online-sensory-map-2026",
+      "title": "Gardens by the Bay to offer robot guide dog, online sensory map for visitors with disabilities",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/gardens-by-the-bay-to-offer-robot-guide-dog-online-sensory-map-for-visitors-with-disabilities",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "straits-times-facebook-aisee-wearable-headset-2026",
+      "title": "A wearable AI-powered headset is also in the works to help individuals with visual impairment",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times (Facebook)",
+      "url": "https://www.facebook.com/TheStraitsTimes/posts/a-wearable-ai-powered-headset-is-also-in-the-works-to-help-individuals-with-visu/1234420202178471/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "straits-times-x-aisee-gardens-by-the-bay-2026",
+      "title": "Gardens by the Bay to offer robot guide dog and AiSee headset (The Straits Times on X)",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times (X)",
+      "url": "https://x.com/straits_times/status/2035688344785412588",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "cna-robot-guide-dog-inclusive-innovations-gardens-by-the-bay-2026",
+      "title": "Robot guide dog among inclusive innovations to help visitors with disabilities at Gardens by the Bay",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Channel NewsAsia (CNA)",
+      "url": "https://www.channelnewsasia.com/watch/robot-guide-dog-among-inclusive-innovations-help-visitors-disabilities-gardens-bay-6009986",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "mothership-youtube-aisee-robot-guide-dog-2026",
+      "title": "Robot guide dog and AiSee at Gardens by the Bay (Mothership)",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Mothership (YouTube)",
+      "url": "https://www.youtube.com/shorts/q1csBHJOxzI",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "mothership-facebook-aisee-gardens-by-the-bay-2026",
+      "title": "Robot guide dog and AiSee at Gardens by the Bay (Mothership)",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Mothership (Facebook)",
+      "url": "https://www.facebook.com/watch/?v=960598809644633",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "mothership-instagram-aisee-gardens-by-the-bay-2026",
+      "title": "Robot guide dog and AiSee at Gardens by the Bay (Mothership)",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Mothership (Instagram)",
+      "url": "https://www.instagram.com/reel/DWMSdFFCm1a/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "how-aisee-can-make-the-blind-see",
+      "title": "How AiSee Can Make the Blind 'See'",
+      "year": "2025",
+      "type": "news",
+      "outlet": "Tech Briefs",
+      "url": "https://www.techbriefs.com/component/content/article/52354-how-aisee-can-make-the-blind-see",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "researchers-develop-ai-powered-eye-for-visually-impaired-people-to-see-objects",
+      "title": "Researchers develop AI-powered 'eye' for visually impaired people to 'see' objects",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Tech Xplore",
+      "url": "https://techxplore.com/news/2024-02-ai-powered-eye-visually-impaired.html",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-team-develops-affordable-headset-to-help-visually-impaired-see",
+      "title": "NUS team develops affordable headset to help visually impaired 'see'",
+      "year": "2024",
+      "type": "news",
+      "outlet": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/nus-team-develops-affordable-headset-to-help-visually-impaired-see",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-researchers-launch-aisee-to-help-the-visually-impaired-see-with-the-help-of-ai",
+      "title": "NUS researchers launch AiSee to help the visually impaired \"see\" with the help of AI",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Hardware Zone Singapore",
+      "url": "https://www.hardwarezone.com.sg/tech-news-nus-researchers-aisee-help-visually-impaired-see-ai",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-researchers-develop-ai-powered-headset-to-help-visually-impaired-see",
+      "title": "NUS researchers develop AI-powered headset to help visually impaired \"see\"",
+      "year": "2024",
+      "type": "video",
+      "outlet": "Channel NewsAsia (CNA)",
+      "url": "https://youtu.be/pHmUeN-ALUg",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-researchers-develop-ai-powered-eye-for-visually-impaired-people-to-see-objects",
+      "title": "NUS researchers develop AI-powered 'eye' for visually impaired people to 'see' objects",
+      "year": "2024",
+      "type": "news",
+      "outlet": "National University of Singapore",
+      "url": "https://news.nus.edu.sg/ai-powered-eye-for-visually-impaired-people/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "i-was-blind-but-now-aisee",
+      "title": "I Was Blind, But Now AiSee",
+      "year": "2024",
+      "type": "news",
+      "outlet": "hackster.io",
+      "url": "https://www.hackster.io/news/i-was-blind-but-now-aisee-997ed7e95610",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "an-experimental-ai-wearable-recognises-objects-and-tells-visually-impaired-users-details-of-what-theyre-holding",
+      "title": "An experimental AI wearable recognises objects and tells visually-impaired users details of what they're holding",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Yahoo News",
+      "url": "https://uk.news.yahoo.com/experimental-ai-wearable-recognises-objects-173329887.html",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-wearable-lets-visually-impaired-users-see",
+      "title": "AiSee: Wearable lets visually impaired users 'see'",
+      "year": "2024",
+      "type": "news",
+      "outlet": "FocusTechnica",
+      "url": "https://www.focustechnica.com/aisee-wearable-lets-visually-impaired-users-see/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-ai-powered-eye-for-visually-impaired-people-to-see-objects",
+      "title": "AiSee: AI-powered 'eye' for visually impaired people to 'see' objects",
+      "year": "2024",
+      "type": "video",
+      "outlet": "National University of Singapore",
+      "url": "https://youtu.be/81grB7BtN9k",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-ai-powered-eye-for-visually-impaired-people-to-see-objects-2",
+      "title": "AiSee: AI-Powered 'Eye' for Visually Impaired People to 'See' Objects",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Adafruit",
+      "url": "https://blog.adafruit.com/2024/02/12/aisee-ai-powered-eye-for-visually-impaired-people-to-see-objects/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-wearable-tells-blind-users-what-theyre-holding-in-their-hand",
+      "title": "AiSee wearable tells blind users what they're holding in their hand",
+      "year": "2024",
+      "type": "news",
+      "outlet": "News Atlas",
+      "url": "https://newatlas.com/wearables/aisee-wearable-blind-object-recognition/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "research-team-boosts-science-learning-for-children-the-kiwrious-project",
+      "title": "Research Team Boosts Science Learning for Children: The Kiwrious Project",
+      "year": "2022",
+      "type": "news",
+      "outlet": "United Nations",
+      "url": "https://www.un.org/en/academic-impact/research-team-boosts-science-learning-children-kiwrious-project",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "sensor-based-interactive-worksheets-idc-2021-best-short-paper",
+      "title": "Sensor-Based Interactive Worksheets to Support Guided Scientific Inquiry | Best Short Paper Award",
+      "year": "2021",
+      "type": "award",
+      "outlet": "ACM IDC",
+      "url": null,
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "world-changing-ideas-awards-2021-education-finalist-kiwrious",
+      "title": "World Changing Ideas Awards 2021: Education | Finalist | Kiwrious",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Fast Company",
+      "url": "https://www.fastcompany.com/90623632/world-changing-ideas-awards-2021-education-finalists-and-honorable-mentions",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "world-changing-ideas-awards-2021-asia-pacific-honorable-mention-kiwrious",
+      "title": "World Changing Ideas Awards 2021: Asia-Pacific | Honorable Mention | Kiwrious",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Fast Company",
+      "url": "https://www.fastcompany.com/90624522/world-changing-ideas-awards-2021-asia-pacific-finalists-and-honorable-mentions",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "novel-interactive-science-kits-sent-out-free-to-schools-kiwrious",
+      "title": "Novel interactive science kits sent out free to schools | Kiwrious",
+      "year": "2021",
+      "type": "news",
+      "outlet": "The University of Auckland",
+      "url": "https://www.auckland.ac.nz/en/news/2021/05/12/Interactive-science-kits-sent-to-schools.html",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "kiwrious-social-impact-winner",
+      "title": "Kiwrious | Social Impact Winner",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Good Design Australia",
+      "url": "https://good-design.org/projects/kiwrious/",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "kiwrious-best-design-awards-value-of-design-bronze",
+      "title": "Kiwrious | Best Design Awards | Value of Design : Bronze",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/value-of-design-award/augmented-human-lab/kiwrious-2/",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "kiwrious-best-design-awards-user-experience-bronze",
+      "title": "Kiwrious | Best Design Awards | User Experience: Bronze",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/digital/user-experience/augmented-human-lab/kiwrious-1/",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "kiwrious-best-design-awards-public-good-award-silver",
+      "title": "Kiwrious | Best Design Awards | Public Good Award: Silver",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/public-good-award/public-good-award/augmented-human-lab/kiwrious/",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "inspiring-curiosity-for-science-in-kids-with-google-cloud-solutions",
+      "title": "Inspiring curiosity for science in kids with Google Cloud solutions",
+      "year": "2021",
+      "type": "news",
+      "outlet": "Google Cloud",
+      "url": "https://cloud.google.com/customers/augmented-human-lab",
+      "projects": [
+        "kiwrious"
+      ]
+    }
+  ]
+}

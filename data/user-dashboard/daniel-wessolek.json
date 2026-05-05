@@ -1,0 +1,90 @@
+{
+  "slug": "daniel-wessolek",
+  "name": "Daniel Wessolek",
+  "role": "Research Fellow",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/daniel-wessolek/daniel-wessolek.jpg",
+  "profile_url": "/people/daniel-wessolek/",
+  "projects": [
+    {
+      "slug": "swimsight",
+      "title": "SwimSight",
+      "year": "2016",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/swimsight/swimsight.jpg",
+      "principles": [
+        "perceptual",
+        "identity"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "swimsight-supporting-deaf-users-to-participate-in-swimming-games",
+      "title": "SwimSight: Supporting Deaf Users to Participate in Swimming Games",
+      "year": "2016",
+      "citation": "Elvitigala, D.S., Wessolek, D., Achenbach, A.V., Singhabahu, C. and Nanayakkara, S.C., 2016, November. SwimSight: Supporting deaf users to participate in swimming games. In Proceedings of the 28th Australian Conference on Computer-Human Interaction (pp. 567-570).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3010915.3010969"
+        },
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/05/paper1591.pdf"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "body-as-display-augmenting-the-face-through-transillumination",
+      "title": "Body as Display: Augmenting the Face through Transillumination",
+      "year": "2015",
+      "citation": "Wessolek, D., Huber, J. and Maes, P., 2015, March. Body as display: augmenting the face through transillumination. In Proceedings of the 6th Augmented Human International Conference (pp. 193-194).",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/03/p193-wessolek.pdf"
+        }
+      ],
+      "venue": "AH"
+    }
+  ],
+  "events": [],
+  "press": [
+    {
+      "slug": "swimsight-a-sound-of-hope-for-deaf-swimmers",
+      "title": "SwimSight: a Sound of Hope for Deaf Swimmers",
+      "year": "2018",
+      "type": "news",
+      "outlet": "The Sunday Times",
+      "url": "http://www.sundaytimes.lk/180422/mediscene/swimsight-a-sound-of-hope-for-deaf-swimmers-290191.html",
+      "projects": [
+        "swimsight"
+      ]
+    },
+    {
+      "slug": "swimming-sight-based-starting-system-a-green-signal-for-deaf-swimmers",
+      "title": "Swimming: Sight-based starting system a green signal for deaf swimmers",
+      "year": "2017",
+      "type": "news",
+      "outlet": "Straits Times",
+      "url": "http://www.straitstimes.com/sport/sight-based-starting-system-a-green-signal-for-deaf-swimmers",
+      "projects": [
+        "swimsight"
+      ]
+    },
+    {
+      "slug": "sight-based-starting-system-a-green-signal-for-deaf-swimmers",
+      "title": "Sight-based starting system a green signal for deaf swimmers",
+      "year": "2017",
+      "type": "news",
+      "outlet": "Sunday Times",
+      "url": "#",
+      "projects": [
+        "swimsight"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+{
+  "slug": "shi-yilei",
+  "name": "Shi Yilei",
+  "role": "PhD Candidate",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/shi-yilei/shi-yilei.jpg",
+  "profile_url": "/people/shi-yilei/",
+  "projects": [
+    {
+      "slug": "ubipen",
+      "title": "UbiPen",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/ubipen/ubipen.jpg",
+      "principles": [
+        "body",
+        "physical"
+      ]
+    },
+    {
+      "slug": "versatouch",
+      "title": "VersaTouch",
+      "year": "2020",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/versatouch/versatouch.jpg",
+      "principles": [
+        "perceptual",
+        "physical"
+      ]
+    },
+    {
+      "slug": "actualtouch",
+      "title": "ActualTouch",
+      "year": "2020",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/actualtouch/actualtouch.jpg",
+      "principles": [
+        "body"
+      ]
+    },
+    {
+      "slug": "gestakey",
+      "title": "GestAKey",
+      "year": "2017",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/gestakey/gestakey.jpg",
+      "principles": [
+        "body"
+      ]
+    },
+    {
+      "slug": "wavesense",
+      "title": "WaveSense",
+      "year": "2016",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/wavesense/wavesense.jpg",
+      "principles": [
+        "body",
+        "physical"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "wavesense-low-power-voxel-tracking-technique-for-resource-limited-devices",
+      "title": "WaveSense: Low Power Voxel-tracking Technique for Resource Limited Devices",
+      "year": "2020",
+      "citation": "Withana, A., Kaluarachchi, T., Singhabahu, C., Ransiri, S., Shi, Y. and Nanayakkara, S.C., 2020. waveSense: Low Power Voxel-tracking Technique for Resource Limited Devices. In AHs ’20: Augmented Humans International Conference (AHs ’20), March 16–17, 2020, Kaiserslautern, Germany.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3384657.3384790"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1Ug6C2P7oOwuX8aUGQGA_UgnKDhhWpV2p/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "versatouch-a-versatile-plug-and-play-system-that-enables-touch-interactions-on-everyday-passive-surfaces",
+      "title": "VersaTouch: A Versatile Plug-and-Play System that Enables Touch Interactions on Everyday Passive Surfaces.",
+      "year": "2020",
+      "citation": "Shi, Y., Zhang, H., Cao, J., and Nanayakkara, S.C., 2020. VersaTouch: A Versatile Plug-and-Play System that Enables Touch Interactions on Everyday Passive Surfaces. In AHs ’20: Augmented Humans International Conference (AHs ’20), March 16–17, 2020, Kaiserslautern, Germany.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3384657.3384778"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1i34JQbLRvwYGth08m3AjH6Avwgia_CxB/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "ready-steady-touch-sensing-physical-contact-with-a-finger-mounted-imu",
+      "title": "Ready, Steady, Touch!: Sensing Physical Contact with a Finger-Mounted IMU",
+      "year": "2020",
+      "citation": "Shi, Y., Zhang, H., Zhao, K., Cao, J., Sun, M. and Nanayakkara, S.C., 2020. Ready, steady, touch! sensing physical contact with a finger-mounted IMU. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 4(2), pp.1-25.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3397309"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1gEpRp35i_nJgMMf_RYiQBI7aKKMGmcpQ/view?usp=sharing"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "gymsoles-using-smart-wearables-to-improve-body-posture-when-performing-squats-and-dead-lifts",
+      "title": "GymSoles++: Using Smart Wearables to Improve Body Posture when Performing Squats and Dead-Lifts.",
+      "year": "2020",
+      "citation": "Elvitigala D. S., Matthies D. J. C., Weerasinghe C., Shi Y., and Nanayakkara S.C., 2020. GymSoles++: Using Smart Wearables to Improve Body Posture when Performing Squats and Dead-Lifts. In AHs ’20: Augmented Humans International Conference (AHs ’20), March 16–17, 2020, Kaiserslautern, Germany.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3384657.3385331"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/12-8uucgREP_yWssj9ufwEj6o7FshtQ_d/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "gestakey-touch-interaction-on-individual-keycaps",
+      "title": "GestAKey: Touch Interaction on Individual Keycaps.",
+      "year": "2018",
+      "citation": "Shi, Y., Zhang, H., Rajapakse, H., Perera, N.T., Vega Gálvez, T. and Nanayakkara, S.C., 2018, April. Gestakey: Touch interaction on individual keycaps. In Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems (pp. 1-12).",
+      "awards": [],
+      "links": [
+        {
+          "label": "URL",
+          "url": "https://dl.acm.org/citation.cfm?id=3174170"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/uc?export=download&id=1sSfqPj_lSe-cPTs-1nJLLJkQVoHZY_WN"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "gestakey-get-more-done-with-just-a-key-on-a-keyboard",
+      "title": "GestAKey: Get More Done with Just-a-Key on a Keyboard",
+      "year": "2017",
+      "citation": "Shi, Y., Vega Gálvez, T., Zhang, H. and Nanayakkara, S.C., 2017, October. Gestakey: Get more done with just-a-key on a keyboard. In Adjunct Publication of the 30th Annual ACM Symposium on User Interface Software and Technology (pp. 73-75).",
+      "awards": [],
+      "links": [
+        {
+          "label": "URL",
+          "url": "https://dl.acm.org/citation.cfm?id=3131786"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/uc?export=download&id=1TSiXd5f0Exdo4udT2vb8JW854lDdTro6"
+        }
+      ],
+      "venue": "UIST"
+    },
+    {
+      "slug": "wavesense-ultra-low-power-gesture-sensing-based-on-selective-volumetric-illumination",
+      "title": "waveSense: Ultra Low Power Gesture Sensing Based on Selective Volumetric Illumination",
+      "year": "2016",
+      "citation": "Withana, A., Ransiri, S., Kaluarachchi, T., Singhabahu, C., Shi, Y., Elvitigala, S., Nanayakkara, S.C., 2016. waveSense: Ultra Low Power Gesture Sensing Based on Selective Volumetric Illumination, In proceedings of the 29th Annual Symposium on User Interface Software and Technology (UIST '16)",
+      "awards": [],
+      "links": [
+        {
+          "label": "URL",
+          "url": "http://dl.acm.org/citation.cfm?id=2985734"
+        },
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/05/p139-withana_0.pdf"
+        }
+      ],
+      "venue": "UIST"
+    }
+  ],
+  "events": [],
+  "press": []
+}

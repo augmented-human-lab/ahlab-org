@@ -1,0 +1,24 @@
+{
+  "slug": "anubhaw-xess",
+  "name": "Anubhaw Xess",
+  "role": "Master Student",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/anubhaw-xess/anubhaw-xess.jpg",
+  "profile_url": "/people/anubhaw-xess/",
+  "projects": [
+    {
+      "slug": "itiles",
+      "title": "iTILES",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/itiles/itiles.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "physical"
+      ]
+    }
+  ],
+  "publications": [],
+  "events": [],
+  "press": []
+}

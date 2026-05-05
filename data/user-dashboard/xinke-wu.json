@@ -1,0 +1,47 @@
+{
+  "slug": "xinke-wu",
+  "name": "Xinke Wu",
+  "role": "Visiting Student",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/xinke-wu/xinke-wu.jpg",
+  "profile_url": "/people/xinke-wu/",
+  "projects": [
+    {
+      "slug": "om",
+      "title": "OM",
+      "year": "2021",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/om/om.jpg",
+      "principles": [
+        "body",
+        "perceptual",
+        "identity"
+      ]
+    }
+  ],
+  "publications": [],
+  "events": [],
+  "press": [
+    {
+      "slug": "om-best-design-awards-user-experience-finalist",
+      "title": "OM | Best Design Awards | User Experience: Finalist",
+      "year": "2020",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/digital/user-experience/augmented-human-lab/om/",
+      "projects": [
+        "om"
+      ]
+    },
+    {
+      "slug": "om-best-design-awards-public-good-award-finalist",
+      "title": "OM | Best Design Awards | Public Good Award: Finalist",
+      "year": "2020",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/public-good-award/public-good-award/augmented-human-lab/om-2/",
+      "projects": [
+        "om"
+      ]
+    }
+  ]
+}

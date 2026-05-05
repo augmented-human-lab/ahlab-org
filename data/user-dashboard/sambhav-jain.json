@@ -1,0 +1,60 @@
+{
+  "slug": "sambhav-jain",
+  "name": "Sambhav Jain",
+  "role": "Research Attachment",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/sambhav-jain/sambhav-jain.jpg",
+  "profile_url": "/people/sambhav-jain/",
+  "projects": [
+    {
+      "slug": "m-hair",
+      "title": "M-Hair",
+      "year": "2019",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/m-hair/m-hair.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "m-hair-extended-reality-by-stimulating-the-body-hair",
+      "title": "M-Hair: Extended Reality by Stimulating the Body Hair",
+      "year": "2019",
+      "citation": "Boldu, R., Jain, S., Cortes, J.P.F., Zhang, H. and Nanayakkara, S.C., 2019. M-Hair: Extended Reality by Stimulating the Body Hair. In SIGGRAPH Asia 2019 XR (pp. 27-28).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3355355.3361881"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1uUG4MHtBsoGzp76JsQTtgxu8l90pXgfC/view?usp=sharing"
+        }
+      ],
+      "venue": "SIGGRAPH"
+    },
+    {
+      "slug": "m-hair-creating-novel-tactile-feedback-by-augmenting-the-body-hair-to-respond-to-magnetic-field",
+      "title": "M-Hair: Creating Novel Tactile Feedback by Augmenting the Body Hair to Respond to Magnetic Field",
+      "year": "2019",
+      "citation": "Boldu, R., Jain, S., Forero Cortes, J.P., Zhang, H. and Nanayakkara, S.C., 2019, October. M-Hair: Creating Novel Tactile Feedback by Augmenting the Body Hair to Respond to Magnetic Field. In Proceedings of the 32nd Annual ACM Symposium on User Interface Software and Technology (pp. 323-328).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3332165.3347955"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1UMlbIudlZv0bViid-U7XafGVuZMWl5Vl/view?usp=sharing"
+        }
+      ],
+      "venue": "UIST"
+    }
+  ],
+  "events": [],
+  "press": []
+}

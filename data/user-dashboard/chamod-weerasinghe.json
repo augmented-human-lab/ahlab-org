@@ -1,0 +1,669 @@
+{
+  "slug": "chamod-weerasinghe",
+  "name": "Chamod Weerasinghe",
+  "role": "Research Engineer",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/chamod-weerasinghe/chamod-weerasinghe.jpg",
+  "profile_url": "/people/chamod-weerasinghe/",
+  "projects": [
+    {
+      "slug": "aisee",
+      "title": "AiSee",
+      "year": "2025",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/aisee/aisee.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual",
+        "identity"
+      ]
+    },
+    {
+      "slug": "kiwrious",
+      "title": "Kiwrious",
+      "year": "2022",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/kiwrious/kiwrious.jpg",
+      "principles": [
+        "cognitive",
+        "physical"
+      ]
+    },
+    {
+      "slug": "gymsoles",
+      "title": "GymSoles",
+      "year": "2019",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/gymsoles/gymsoles.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "osense",
+      "title": "oSense",
+      "year": "2018",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/osense/osense.jpg",
+      "principles": [
+        "body",
+        "physical"
+      ]
+    },
+    {
+      "slug": "cricketcoach",
+      "title": "CricketCoach",
+      "year": "2018",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/cricketcoach/cricketcoach.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "comprate",
+      "title": "CompRate",
+      "year": "2018",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/comprate/comprate.jpg",
+      "principles": [
+        "body"
+      ]
+    },
+    {
+      "slug": "2bit-tactile-hand",
+      "title": "2bit-Tactile Hand",
+      "year": "2018",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/2bit-tactile-hand/2bit-tactile-hand.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "armsleeve",
+      "title": "ArmSleeve",
+      "year": "2016",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/armsleeve/armsleeve.jpg",
+      "principles": [
+        "body",
+        "identity"
+      ]
+    },
+    {
+      "slug": "shrug",
+      "title": "SHRUG",
+      "year": "2015",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/shrug/shrug.jpg",
+      "principles": [
+        "body",
+        "identity"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "striving-for-authentic-and-sustained-technology-use-in-the-classroom-lessons-learned-from-a-longitudinal-evaluation-of-a-sensor-based-science-education-platform",
+      "title": "Striving for Authentic and Sustained Technology Use in the Classroom: Lessons Learned from a Longitudinal Evaluation of a Sensor-Based Science Education Platform",
+      "year": "2023",
+      "citation": "Chua, Y., Cooray, S., Cortes, J.P.F., Denny, P., Dupuch, S., Garbett, D.L., Nassani, A., Cao, J., Qiao, H., Reis, A, Reis, D., Scholl, P.M., Sridhar, P.K., Suriyaarachchi, H., Taimana, F., Tang, V., Weerasinghe, C., Wen, E., Wu, M., Wu, Q., Zhang, H., Nanayakkara, S.C. 2023. Striving for Authentic and Sustained Technology Use In the Classroom: Lessons Learned from a Longitudinal Evaluation of a Sensor-based Science Education Platform. International Journal of Human–Computer Interaction (IJHCI).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1080/10447318.2023.2229485"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1fhABNfB6965rV6NJCIXlgrVl0Bgn6e6n/view?usp=sharing"
+        }
+      ],
+      "venue": "IJHCI"
+    },
+    {
+      "slug": "primary-school-students-programming-with-real-time-environmental-sensor-data",
+      "title": "Primary School Students Programming with Real-Time Environmental Sensor Data",
+      "year": "2022",
+      "citation": "Suriyaarachchi, H., Denny, P., Cortés, J.P.F., Weerasinghe, C. and Nanayakkara, S.C., 2022. Primary School Students Programming with Real-Time Environmental Sensor Data. In Australasian Computing Education Conference (ACE ’22), February 14–18, 2022, Virtual Event, Australia.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3511861.3511871"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/12H6A0apCmvWOAB66L2-fCa3nGPjrT9n8/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "design-and-evaluation-of-a-mobile-sensing-platform-for-water-conductivity",
+      "title": "Design and Evaluation of a Mobile Sensing Platform for Water Conductivity",
+      "year": "2022",
+      "citation": "Weerasinghe, C., Padhye, L.P. and Nanayakkara, S.C., 2022, October. Design and Evaluation of a Mobile Sensing Platform for Water Conductivity. In 2022 IEEE Sensors (pp. 1-4). IEEE.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1109/SENSORS52175.2022.9967052"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1DFSQ28YIKzc-50XFIw-b9eA9IAkg1bUu/view?usp=sharing"
+        }
+      ],
+      "venue": "IEEE"
+    },
+    {
+      "slug": "gymsoles-combining-google-glass-with-smart-insoles-to-improve-body-posture-when-performing-squats",
+      "title": "GymSoles++: Combining Google Glass with Smart Insoles to Improve Body Posture when Performing Squats",
+      "year": "2021",
+      "citation": "Elvitigala, D.S., Matthies, D.J.C, Weerasinghe, C. and Nanayakkara, S.C., 2021. GymSoles++: Combining Google Glass with Smart Insoles to Improve Body Posture when Performing Squats. In The 14th PErvasive Technologies Related to Assistive Environments Conference (PETRA 2021), June 29-July 2, 2021, Corfu, Greece. Best Student Paper Award!",
+      "awards": [
+        "Best Student Paper Award"
+      ],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3453892.3453898"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1EPAO5dtUngEmLXIoWB_ydB6bzsfDvIMR/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "capglasses-untethered-capacitive-sensing-with-smart-glasses",
+      "title": "CapGlasses: Untethered Capacitive Sensing with Smart Glasses",
+      "year": "2021",
+      "citation": "Matthies, D.J.C., Weerasinghe, C., Urban, B., and Nanayakkara, S.C., 2021. CapGlasses: Untethered Capacitive Sensing with SmartGlasses. In Augmented Humans International Conference 2021 (AHs ’21), February 22–24, 2021, Rovaniemi, Finland.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3458709.3458945"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1E6hMfadLmb9L06GaV1Xpe_HQbUzIXBin/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "gymsoles-using-smart-wearables-to-improve-body-posture-when-performing-squats-and-dead-lifts",
+      "title": "GymSoles++: Using Smart Wearables to Improve Body Posture when Performing Squats and Dead-Lifts.",
+      "year": "2020",
+      "citation": "Elvitigala D. S., Matthies D. J. C., Weerasinghe C., Shi Y., and Nanayakkara S.C., 2020. GymSoles++: Using Smart Wearables to Improve Body Posture when Performing Squats and Dead-Lifts. In AHs ’20: Augmented Humans International Conference (AHs ’20), March 16–17, 2020, Kaiserslautern, Germany.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3384657.3385331"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/12-8uucgREP_yWssj9ufwEj6o7FshtQ_d/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "osense-object-activity-identification-based-on-gasping-posture-and-motion",
+      "title": "oSense: Object-Activity Identification Based on Gasping Posture and Motion",
+      "year": "2019",
+      "citation": "Buddhika, T., Zhang, H., Weerasinghe, C., Nanayakkara, S.C. and Zimmermann, R., 2019, March. OSense: Object-activity identification based on gasping posture and motion. In Proceedings of the 10th Augmented Human International Conference 2019 (pp. 1-5).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3311823.3311841"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1jYB9EbB5Ew_xlRgF5zZ2smbUTe1lz9ij/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "gymsoles-improving-squats-and-dead-lifts-by-visualizing-the-users-centre-of-pressure",
+      "title": "GymSoles: Improving Squats and Dead-Lifts by Visualizing the User’s Centre of Pressure",
+      "year": "2019",
+      "citation": "Elvitigala, D.S., Matthies, D.J., David, L., Weerasinghe, C. and Nanayakkara, S.C., 2019, May. GymSoles: Improving Squats and Dead-Lifts by Visualizing the User's Center of Pressure. In Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems (pp. 1-12).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://dl.acm.org/doi/fullHtml/10.1145/3290605.3300404"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1TxCTJcmr2k7xQLOp69HbGCyi6WaTZoIa/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "cricketcoach-towards-creating-a-better-awareness-of-gripping-forces-for-cricketers",
+      "title": "CricketCoach: Towards Creating a Better Awareness of Gripping Forces for Cricketers",
+      "year": "2019",
+      "citation": "Muthukumarana, S., Matthies, D.J., Weerasinghe, C., Elvitigala, D.S. and Nanayakkara, S.C., 2019, March. CricketCoach: Towards Creating a Better Awareness of Gripping Forces for Cricketers. In Proceedings of the 10th Augmented Human International Conference 2019 (pp. 1-2).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3311823.3311833"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1MizLM_-FhsL3H1D2T07_8nX8L9LGlDqe/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "comprate-power-efficient-heart-rate-and-heart-rate-variability-monitoring-on-smart-wearables",
+      "title": "CompRate: Power Efficient Heart Rate and Heart Rate Variability Monitoring on Smart Wearables",
+      "year": "2019",
+      "citation": "Dissanayake, V., Elvitigala, D.S., Zhang, H., Weerasinghe, C. and Nanayakkara, S.C., 2019, November. CompRate: Power Efficient Heart Rate and Heart Rate Variability Monitoring on Smart Wearables. In 25th ACM Symposium on Virtual Reality Software and Technology (pp. 1-8).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3359996.3364239"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1OC0qHFuRFRBxF1gUHwpiOUKGXz3OfP68/view?usp=sharing"
+        }
+      ],
+      "venue": "VR"
+    },
+    {
+      "slug": "2bit-tactilehand-evaluating-tactons-for-nobody-vibrotactile-displays-on-the-hand-and-wrist",
+      "title": "2bit-TactileHand: Evaluating Tactons for Nobody Vibrotactile Displays on the Hand and Wrist.",
+      "year": "2019",
+      "citation": "Elvitigala, D.S., Matthies, D.J., Dissanayaka, V., Weerasinghe, C. and Nanayakkara, S.C., 2019, March. 2bit-TactileHand: Evaluating Tactons for On-Body Vibrotactile Displays on the Hand and Wrist. In Proceedings of the 10th Augmented Human International Conference 2019 (pp. 1-8).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3311823.3311832"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1Qvl1pDiOsk53wmYLPkYrtj1pVqgTBLpR/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    }
+  ],
+  "events": [],
+  "press": [
+    {
+      "slug": "i-wont-have-to-trouble-anyone-when-i-visit",
+      "title": "'I won't have to trouble anyone when I visit': How AiSee helps visitors with visual impairment at Gardens by the Bay",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/i-wont-have-to-trouble-",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "gardens-by-the-bay-to-offer-robot-guide-dog-online-sensory-map-2026",
+      "title": "Gardens by the Bay to offer robot guide dog, online sensory map for visitors with disabilities",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/gardens-by-the-bay-to-offer-robot-guide-dog-online-sensory-map-for-visitors-with-disabilities",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "straits-times-facebook-aisee-wearable-headset-2026",
+      "title": "A wearable AI-powered headset is also in the works to help individuals with visual impairment",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times (Facebook)",
+      "url": "https://www.facebook.com/TheStraitsTimes/posts/a-wearable-ai-powered-headset-is-also-in-the-works-to-help-individuals-with-visu/1234420202178471/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "straits-times-x-aisee-gardens-by-the-bay-2026",
+      "title": "Gardens by the Bay to offer robot guide dog and AiSee headset (The Straits Times on X)",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times (X)",
+      "url": "https://x.com/straits_times/status/2035688344785412588",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "cna-robot-guide-dog-inclusive-innovations-gardens-by-the-bay-2026",
+      "title": "Robot guide dog among inclusive innovations to help visitors with disabilities at Gardens by the Bay",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Channel NewsAsia (CNA)",
+      "url": "https://www.channelnewsasia.com/watch/robot-guide-dog-among-inclusive-innovations-help-visitors-disabilities-gardens-bay-6009986",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "mothership-youtube-aisee-robot-guide-dog-2026",
+      "title": "Robot guide dog and AiSee at Gardens by the Bay (Mothership)",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Mothership (YouTube)",
+      "url": "https://www.youtube.com/shorts/q1csBHJOxzI",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "mothership-facebook-aisee-gardens-by-the-bay-2026",
+      "title": "Robot guide dog and AiSee at Gardens by the Bay (Mothership)",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Mothership (Facebook)",
+      "url": "https://www.facebook.com/watch/?v=960598809644633",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "mothership-instagram-aisee-gardens-by-the-bay-2026",
+      "title": "Robot guide dog and AiSee at Gardens by the Bay (Mothership)",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Mothership (Instagram)",
+      "url": "https://www.instagram.com/reel/DWMSdFFCm1a/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "how-aisee-can-make-the-blind-see",
+      "title": "How AiSee Can Make the Blind 'See'",
+      "year": "2025",
+      "type": "news",
+      "outlet": "Tech Briefs",
+      "url": "https://www.techbriefs.com/component/content/article/52354-how-aisee-can-make-the-blind-see",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "researchers-develop-ai-powered-eye-for-visually-impaired-people-to-see-objects",
+      "title": "Researchers develop AI-powered 'eye' for visually impaired people to 'see' objects",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Tech Xplore",
+      "url": "https://techxplore.com/news/2024-02-ai-powered-eye-visually-impaired.html",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-team-develops-affordable-headset-to-help-visually-impaired-see",
+      "title": "NUS team develops affordable headset to help visually impaired 'see'",
+      "year": "2024",
+      "type": "news",
+      "outlet": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/nus-team-develops-affordable-headset-to-help-visually-impaired-see",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-researchers-launch-aisee-to-help-the-visually-impaired-see-with-the-help-of-ai",
+      "title": "NUS researchers launch AiSee to help the visually impaired \"see\" with the help of AI",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Hardware Zone Singapore",
+      "url": "https://www.hardwarezone.com.sg/tech-news-nus-researchers-aisee-help-visually-impaired-see-ai",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-researchers-develop-ai-powered-headset-to-help-visually-impaired-see",
+      "title": "NUS researchers develop AI-powered headset to help visually impaired \"see\"",
+      "year": "2024",
+      "type": "video",
+      "outlet": "Channel NewsAsia (CNA)",
+      "url": "https://youtu.be/pHmUeN-ALUg",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-researchers-develop-ai-powered-eye-for-visually-impaired-people-to-see-objects",
+      "title": "NUS researchers develop AI-powered 'eye' for visually impaired people to 'see' objects",
+      "year": "2024",
+      "type": "news",
+      "outlet": "National University of Singapore",
+      "url": "https://news.nus.edu.sg/ai-powered-eye-for-visually-impaired-people/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "i-was-blind-but-now-aisee",
+      "title": "I Was Blind, But Now AiSee",
+      "year": "2024",
+      "type": "news",
+      "outlet": "hackster.io",
+      "url": "https://www.hackster.io/news/i-was-blind-but-now-aisee-997ed7e95610",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "an-experimental-ai-wearable-recognises-objects-and-tells-visually-impaired-users-details-of-what-theyre-holding",
+      "title": "An experimental AI wearable recognises objects and tells visually-impaired users details of what they're holding",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Yahoo News",
+      "url": "https://uk.news.yahoo.com/experimental-ai-wearable-recognises-objects-173329887.html",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-wearable-lets-visually-impaired-users-see",
+      "title": "AiSee: Wearable lets visually impaired users 'see'",
+      "year": "2024",
+      "type": "news",
+      "outlet": "FocusTechnica",
+      "url": "https://www.focustechnica.com/aisee-wearable-lets-visually-impaired-users-see/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-ai-powered-eye-for-visually-impaired-people-to-see-objects",
+      "title": "AiSee: AI-powered 'eye' for visually impaired people to 'see' objects",
+      "year": "2024",
+      "type": "video",
+      "outlet": "National University of Singapore",
+      "url": "https://youtu.be/81grB7BtN9k",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-ai-powered-eye-for-visually-impaired-people-to-see-objects-2",
+      "title": "AiSee: AI-Powered 'Eye' for Visually Impaired People to 'See' Objects",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Adafruit",
+      "url": "https://blog.adafruit.com/2024/02/12/aisee-ai-powered-eye-for-visually-impaired-people-to-see-objects/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-wearable-tells-blind-users-what-theyre-holding-in-their-hand",
+      "title": "AiSee wearable tells blind users what they're holding in their hand",
+      "year": "2024",
+      "type": "news",
+      "outlet": "News Atlas",
+      "url": "https://newatlas.com/wearables/aisee-wearable-blind-object-recognition/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "research-team-boosts-science-learning-for-children-the-kiwrious-project",
+      "title": "Research Team Boosts Science Learning for Children: The Kiwrious Project",
+      "year": "2022",
+      "type": "news",
+      "outlet": "United Nations",
+      "url": "https://www.un.org/en/academic-impact/research-team-boosts-science-learning-children-kiwrious-project",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "sensor-based-interactive-worksheets-idc-2021-best-short-paper",
+      "title": "Sensor-Based Interactive Worksheets to Support Guided Scientific Inquiry | Best Short Paper Award",
+      "year": "2021",
+      "type": "award",
+      "outlet": "ACM IDC",
+      "url": null,
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "gymsoles-petra-2021-best-student-paper",
+      "title": "GymSoles++: Combining Google Glass with Smart Insoles to Improve Body Posture when Performing Squats | Best Student Paper Award",
+      "year": "2021",
+      "type": "award",
+      "outlet": "ACM PETRA",
+      "url": null,
+      "projects": [
+        "gymsoles"
+      ]
+    },
+    {
+      "slug": "world-changing-ideas-awards-2021-education-finalist-kiwrious",
+      "title": "World Changing Ideas Awards 2021: Education | Finalist | Kiwrious",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Fast Company",
+      "url": "https://www.fastcompany.com/90623632/world-changing-ideas-awards-2021-education-finalists-and-honorable-mentions",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "world-changing-ideas-awards-2021-asia-pacific-honorable-mention-kiwrious",
+      "title": "World Changing Ideas Awards 2021: Asia-Pacific | Honorable Mention | Kiwrious",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Fast Company",
+      "url": "https://www.fastcompany.com/90624522/world-changing-ideas-awards-2021-asia-pacific-finalists-and-honorable-mentions",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "novel-interactive-science-kits-sent-out-free-to-schools-kiwrious",
+      "title": "Novel interactive science kits sent out free to schools | Kiwrious",
+      "year": "2021",
+      "type": "news",
+      "outlet": "The University of Auckland",
+      "url": "https://www.auckland.ac.nz/en/news/2021/05/12/Interactive-science-kits-sent-to-schools.html",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "kiwrious-social-impact-winner",
+      "title": "Kiwrious | Social Impact Winner",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Good Design Australia",
+      "url": "https://good-design.org/projects/kiwrious/",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "kiwrious-best-design-awards-value-of-design-bronze",
+      "title": "Kiwrious | Best Design Awards | Value of Design : Bronze",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/value-of-design-award/augmented-human-lab/kiwrious-2/",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "kiwrious-best-design-awards-user-experience-bronze",
+      "title": "Kiwrious | Best Design Awards | User Experience: Bronze",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/digital/user-experience/augmented-human-lab/kiwrious-1/",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "kiwrious-best-design-awards-public-good-award-silver",
+      "title": "Kiwrious | Best Design Awards | Public Good Award: Silver",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/public-good-award/public-good-award/augmented-human-lab/kiwrious/",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "inspiring-curiosity-for-science-in-kids-with-google-cloud-solutions",
+      "title": "Inspiring curiosity for science in kids with Google Cloud solutions",
+      "year": "2021",
+      "type": "news",
+      "outlet": "Google Cloud",
+      "url": "https://cloud.google.com/customers/augmented-human-lab",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "gymsoles-best-design-awards-student-digital-bronze",
+      "title": "GymSoles | Best Design Awards | Student Digital: Bronze",
+      "year": "2020",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/digital/student-digital/samitha-1/gymsoles-1/",
+      "projects": [
+        "gymsoles"
+      ]
+    },
+    {
+      "slug": "gymsoles-help-you-improve-your-squats-and-deadlifts-by-monitoring-and-correcting-your-form",
+      "title": "GymSoles Help You Improve Your Squats and Deadlifts by Monitoring and Correcting Your Form",
+      "year": "2019",
+      "type": "news",
+      "outlet": "hackster.io",
+      "url": "https://blog.hackster.io/gymsoles-help-you-improve-your-squats-and-deadlifts-by-monitoring-and-correcting-your-form-ad55c03131f2",
+      "projects": [
+        "gymsoles"
+      ]
+    }
+  ]
+}

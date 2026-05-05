@@ -1,0 +1,1018 @@
+{
+  "slug": "roger-boldu",
+  "name": "Roger Boldu",
+  "role": "PhD Candidate",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/roger-boldu/roger-boldu.jpg",
+  "profile_url": "/people/roger-boldu/",
+  "projects": [
+    {
+      "slug": "aisee",
+      "title": "AiSee",
+      "year": "2025",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/aisee/aisee.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual",
+        "identity"
+      ]
+    },
+    {
+      "slug": "ticklefoot",
+      "title": "TickleFoot",
+      "year": "2021",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/ticklefoot/ticklefoot.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "m-hair",
+      "title": "M-Hair",
+      "year": "2019",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/m-hair/m-hair.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "lighttank",
+      "title": "LightTank",
+      "year": "2018",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/lighttank/lighttank.jpg",
+      "principles": [
+        "perceptual",
+        "sociocultural"
+      ]
+    },
+    {
+      "slug": "thumb-in-motion",
+      "title": "Thumb in Motion",
+      "year": "2017",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/thumb-in-motion/thumb-in-motion.jpg",
+      "principles": [
+        "body",
+        "physical"
+      ]
+    },
+    {
+      "slug": "kyanite",
+      "title": "Kyanite",
+      "year": "2017",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/kyanite/kyanite.jpg",
+      "principles": [
+        "cognitive",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "insight",
+      "title": "InSight",
+      "year": "2017",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/insight/insight.jpg",
+      "principles": [
+        "body",
+        "physical"
+      ]
+    },
+    {
+      "slug": "fingerreader",
+      "title": "FingerReader",
+      "year": "2017",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/fingerreader/fingerreader.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual",
+        "identity"
+      ]
+    },
+    {
+      "slug": "the-ribbon",
+      "title": "The RIBbon",
+      "year": "2015",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/the-ribbon/the-ribbon.jpg",
+      "principles": [
+        "sociocultural"
+      ]
+    },
+    {
+      "slug": "fingerreader-v0",
+      "title": "FingerReader-v0",
+      "year": "2015",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/fingerreader-v0/fingerreader-v0.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual",
+        "identity"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "ticklefoot-design-development-and-evaluation-of-a-novel-foot-tickling-mechanism-that-can-evoke-laughter",
+      "title": "TickleFoot: Design, Development and Evaluation of a Novel Foot-tickling Mechanism that Can Evoke Laughter",
+      "year": "2022",
+      "citation": "Elvitigala D.S., Boldu R., Nanayakkara S.C., and Matthies D.J.C. 2022. TickleFoot: Design, Development and Evaluation of a Novel Foot-Tickling Mechanism That Can Evoke Laughter. ACM Trans. Comput.-Hum. Interact. 29, 3, Article 20 (June 2022), 23 pages.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3490496"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "maghair-a-wearable-system-to-create-unique-tactile-feedback-by-stimulating-only-the-body-hair",
+      "title": "MAGHair: A Wearable System to Create Unique Tactile Feedback by Stimulating Only the Body Hair",
+      "year": "2020",
+      "citation": "Boldu, R., Wijewardena, M., Zhang, H. and Nanayakkara, S.C., 2020, October. MAGHair: A Wearable System to Create Unique Tactile Feedback by Stimulating Only the Body Hair. In 22nd International Conference on Human-Computer Interaction with Mobile Devices and Services (pp. 1-10).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3379503.3403545"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1Yzptyr2NabyuRqgJEuxv28mVEzLbqmMN/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "lighttank",
+      "title": "LightTank",
+      "year": "2020",
+      "citation": "Rieger, U., Liu, Y., Boldu, R., Zhang, H., Alwani, H. and Nanayakkara, S.C., 2020. LightTank. In SIGGRAPH Asia 2020 Art Gallery (pp. 1-1).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3414686.3427113"
+        }
+      ],
+      "venue": "SIGGRAPH"
+    },
+    {
+      "slug": "aisee-an-assistive-wearable-device-to-support-visually-impaired-grocery-shoppers",
+      "title": "AiSee: An Assistive Wearable Device to Support Visually Impaired Grocery Shoppers",
+      "year": "2020",
+      "citation": "Boldu, R., Matthies, D.J., Zhang, H. and Nanayakkara, S.C., 2020. AiSee: An Assistive Wearable Device to Support Visually Impaired Grocery Shoppers. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 4(4), pp.1-25.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3432196"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/177bq2QQ2R957Mc_fa77Erk108vbO5x9O/view?usp=sharing"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "m-hair-extended-reality-by-stimulating-the-body-hair",
+      "title": "M-Hair: Extended Reality by Stimulating the Body Hair",
+      "year": "2019",
+      "citation": "Boldu, R., Jain, S., Cortes, J.P.F., Zhang, H. and Nanayakkara, S.C., 2019. M-Hair: Extended Reality by Stimulating the Body Hair. In SIGGRAPH Asia 2019 XR (pp. 27-28).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3355355.3361881"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1uUG4MHtBsoGzp76JsQTtgxu8l90pXgfC/view?usp=sharing"
+        }
+      ],
+      "venue": "SIGGRAPH"
+    },
+    {
+      "slug": "m-hair-creating-novel-tactile-feedback-by-augmenting-the-body-hair-to-respond-to-magnetic-field",
+      "title": "M-Hair: Creating Novel Tactile Feedback by Augmenting the Body Hair to Respond to Magnetic Field",
+      "year": "2019",
+      "citation": "Boldu, R., Jain, S., Forero Cortes, J.P., Zhang, H. and Nanayakkara, S.C., 2019, October. M-Hair: Creating Novel Tactile Feedback by Augmenting the Body Hair to Respond to Magnetic Field. In Proceedings of the 32nd Annual ACM Symposium on User Interface Software and Technology (pp. 323-328).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3332165.3347955"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1UMlbIudlZv0bViid-U7XafGVuZMWl5Vl/view?usp=sharing"
+        }
+      ],
+      "venue": "UIST"
+    },
+    {
+      "slug": "thumb-in-motion-evaluating-thumb-to-ring-microgestures-for-athletic-activity",
+      "title": "Thumb-In-Motion: Evaluating Thumb to Ring Microgestures for Athletic Activity",
+      "year": "2018",
+      "citation": "Boldu, R., Dancu, A., Matthies, D.J., Cascón, P.G., Ransir, S. and Nanayakkara, S.C., 2018, October. Thumb-In-Motion: Evaluating Thumb-to-Ring Microgestures for Athletic Activity. In Proceedings of the Symposium on Spatial User Interaction (pp. 150-157).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3267782.3267796"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "revealing-inaccessible-information-on-the-go-by-augmenting-humans",
+      "title": "Revealing Inaccessible Information on-the-go, by Augmenting Humans",
+      "year": "2018",
+      "citation": "Busquets, R.B., 2018, October. Revealing Inaccessible Information on-the-go, by Augmenting Humans. In Proceedings of the 2018 ACM International Joint Conference and 2018 International Symposium on Pervasive and Ubiquitous Computing and Wearable Computers (pp. 1802-1804).",
+      "awards": [],
+      "links": [
+        {
+          "label": "URL",
+          "url": "https://dl-acm-org.ezproxy.auckland.ac.nz/citation.cfm?doid=3267305.3277823"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1jDRyCVMLqjw4zzLdnmmEjs2b22doG8aW/view?usp=sharing"
+        }
+      ],
+      "venue": "ISWC"
+    },
+    {
+      "slug": "fingerreader2-0-designing-and-evaluating-a-wearable-finger-worncamera-to-assist-people-with-visual-impairments-while-shopping",
+      "title": "FingerReader2.0: Designing and Evaluating a Wearable Finger-WornCamera to Assist People with Visual Impairments while Shopping,",
+      "year": "2018",
+      "citation": "Boldu, R., Dancu, A., Matthies, D. J.C., Buddhika, T., Siriwardhana, S., & Nanayakkara, S.C., 2018. FingerReader2. 0: Designing and Evaluating a Wearable Finger-Worn Camera to Assist People with Visual Impairments while Shopping. In Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 2(3), 94. ACM.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3264904"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "insight-a-systematic-approach-to-create-dynamic-human-controller-interactions",
+      "title": "InSight: A Systematic Approach to Create Dynamic Human-Controller-Interactions",
+      "year": "2017",
+      "citation": "Boldu, R., Zhang, H., Cortés, J.P.F., Muthukumarana, S. and Nanayakkara, S.C., 2017, March. Insight: a systematic approach to create dynamic human-controller-interactions. In Proceedings of the 8th Augmented Human International Conference (pp. 1-5). Best Short Paper Award!",
+      "awards": [
+        "Best Short Paper Award"
+      ],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3041164.3041195"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1VctHLqYA8VrCwAZVTuy_G_e3GaUWx3td/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    }
+  ],
+  "events": [],
+  "press": [
+    {
+      "slug": "i-wont-have-to-trouble-anyone-when-i-visit",
+      "title": "'I won't have to trouble anyone when I visit': How AiSee helps visitors with visual impairment at Gardens by the Bay",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/i-wont-have-to-trouble-",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "gardens-by-the-bay-to-offer-robot-guide-dog-online-sensory-map-2026",
+      "title": "Gardens by the Bay to offer robot guide dog, online sensory map for visitors with disabilities",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/gardens-by-the-bay-to-offer-robot-guide-dog-online-sensory-map-for-visitors-with-disabilities",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "straits-times-facebook-aisee-wearable-headset-2026",
+      "title": "A wearable AI-powered headset is also in the works to help individuals with visual impairment",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times (Facebook)",
+      "url": "https://www.facebook.com/TheStraitsTimes/posts/a-wearable-ai-powered-headset-is-also-in-the-works-to-help-individuals-with-visu/1234420202178471/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "straits-times-x-aisee-gardens-by-the-bay-2026",
+      "title": "Gardens by the Bay to offer robot guide dog and AiSee headset (The Straits Times on X)",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times (X)",
+      "url": "https://x.com/straits_times/status/2035688344785412588",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "cna-robot-guide-dog-inclusive-innovations-gardens-by-the-bay-2026",
+      "title": "Robot guide dog among inclusive innovations to help visitors with disabilities at Gardens by the Bay",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Channel NewsAsia (CNA)",
+      "url": "https://www.channelnewsasia.com/watch/robot-guide-dog-among-inclusive-innovations-help-visitors-disabilities-gardens-bay-6009986",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "mothership-youtube-aisee-robot-guide-dog-2026",
+      "title": "Robot guide dog and AiSee at Gardens by the Bay (Mothership)",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Mothership (YouTube)",
+      "url": "https://www.youtube.com/shorts/q1csBHJOxzI",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "mothership-facebook-aisee-gardens-by-the-bay-2026",
+      "title": "Robot guide dog and AiSee at Gardens by the Bay (Mothership)",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Mothership (Facebook)",
+      "url": "https://www.facebook.com/watch/?v=960598809644633",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "mothership-instagram-aisee-gardens-by-the-bay-2026",
+      "title": "Robot guide dog and AiSee at Gardens by the Bay (Mothership)",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Mothership (Instagram)",
+      "url": "https://www.instagram.com/reel/DWMSdFFCm1a/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "how-aisee-can-make-the-blind-see",
+      "title": "How AiSee Can Make the Blind 'See'",
+      "year": "2025",
+      "type": "news",
+      "outlet": "Tech Briefs",
+      "url": "https://www.techbriefs.com/component/content/article/52354-how-aisee-can-make-the-blind-see",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "researchers-develop-ai-powered-eye-for-visually-impaired-people-to-see-objects",
+      "title": "Researchers develop AI-powered 'eye' for visually impaired people to 'see' objects",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Tech Xplore",
+      "url": "https://techxplore.com/news/2024-02-ai-powered-eye-visually-impaired.html",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-team-develops-affordable-headset-to-help-visually-impaired-see",
+      "title": "NUS team develops affordable headset to help visually impaired 'see'",
+      "year": "2024",
+      "type": "news",
+      "outlet": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/nus-team-develops-affordable-headset-to-help-visually-impaired-see",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-researchers-launch-aisee-to-help-the-visually-impaired-see-with-the-help-of-ai",
+      "title": "NUS researchers launch AiSee to help the visually impaired \"see\" with the help of AI",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Hardware Zone Singapore",
+      "url": "https://www.hardwarezone.com.sg/tech-news-nus-researchers-aisee-help-visually-impaired-see-ai",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-researchers-develop-ai-powered-headset-to-help-visually-impaired-see",
+      "title": "NUS researchers develop AI-powered headset to help visually impaired \"see\"",
+      "year": "2024",
+      "type": "video",
+      "outlet": "Channel NewsAsia (CNA)",
+      "url": "https://youtu.be/pHmUeN-ALUg",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-researchers-develop-ai-powered-eye-for-visually-impaired-people-to-see-objects",
+      "title": "NUS researchers develop AI-powered 'eye' for visually impaired people to 'see' objects",
+      "year": "2024",
+      "type": "news",
+      "outlet": "National University of Singapore",
+      "url": "https://news.nus.edu.sg/ai-powered-eye-for-visually-impaired-people/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "i-was-blind-but-now-aisee",
+      "title": "I Was Blind, But Now AiSee",
+      "year": "2024",
+      "type": "news",
+      "outlet": "hackster.io",
+      "url": "https://www.hackster.io/news/i-was-blind-but-now-aisee-997ed7e95610",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "an-experimental-ai-wearable-recognises-objects-and-tells-visually-impaired-users-details-of-what-theyre-holding",
+      "title": "An experimental AI wearable recognises objects and tells visually-impaired users details of what they're holding",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Yahoo News",
+      "url": "https://uk.news.yahoo.com/experimental-ai-wearable-recognises-objects-173329887.html",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-wearable-lets-visually-impaired-users-see",
+      "title": "AiSee: Wearable lets visually impaired users 'see'",
+      "year": "2024",
+      "type": "news",
+      "outlet": "FocusTechnica",
+      "url": "https://www.focustechnica.com/aisee-wearable-lets-visually-impaired-users-see/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-ai-powered-eye-for-visually-impaired-people-to-see-objects",
+      "title": "AiSee: AI-powered 'eye' for visually impaired people to 'see' objects",
+      "year": "2024",
+      "type": "video",
+      "outlet": "National University of Singapore",
+      "url": "https://youtu.be/81grB7BtN9k",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-ai-powered-eye-for-visually-impaired-people-to-see-objects-2",
+      "title": "AiSee: AI-Powered 'Eye' for Visually Impaired People to 'See' Objects",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Adafruit",
+      "url": "https://blog.adafruit.com/2024/02/12/aisee-ai-powered-eye-for-visually-impaired-people-to-see-objects/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-wearable-tells-blind-users-what-theyre-holding-in-their-hand",
+      "title": "AiSee wearable tells blind users what they're holding in their hand",
+      "year": "2024",
+      "type": "news",
+      "outlet": "News Atlas",
+      "url": "https://newatlas.com/wearables/aisee-wearable-blind-object-recognition/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "watch-a-foot-tickling-machine-discover-the-most-ticklish-spot-on-feet",
+      "title": "Watch a foot-tickling machine discover the most ticklish spot on feet",
+      "year": "2022",
+      "type": "news",
+      "outlet": "NewScientist",
+      "url": "https://www.newscientist.com/article/2312816-watch-a-foot-tickling-machine-discover-the-most-ticklish-spot-on-feet/",
+      "projects": [
+        "ticklefoot"
+      ]
+    },
+    {
+      "slug": "lighttank",
+      "title": "LightTank",
+      "year": "2020",
+      "type": "news",
+      "outlet": "SIGGRAPH Asia",
+      "url": "https://sa2020.siggraph.org/en/attend/art-gallery/session_slot/215/2",
+      "projects": [
+        "lighttank"
+      ]
+    },
+    {
+      "slug": "light-tank-best-design-awards-installation-exhibition-gold-2020",
+      "title": "Light Tank| Best Design Awards | Installation & Exhibition: Gold. 2020.",
+      "year": "2020",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/digital/installation-exhibition/arc-sec-lab/lighttank/",
+      "projects": [
+        "lighttank"
+      ]
+    },
+    {
+      "slug": "the-six-innovations-at-the-global-grad-show-in-dubai",
+      "title": "The Six: Innovations at the Global Grad Show in Dubai",
+      "year": "2018",
+      "type": "news",
+      "outlet": "Arab News",
+      "url": "http://www.arabnews.com/node/1403986/art-culture",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "the-finger-reader",
+      "title": "The Finger Reader",
+      "year": "2018",
+      "type": "news",
+      "outlet": "TVNZ",
+      "url": "https://www.tvnz.co.nz/one-news/new-zealand/ring-your-finger-snaps-text-and-reads-back-offering-help-visually-impaired",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "futuristic-solutions-revealed-at-global-grad-show-at-dubai-design-week-finger-reader",
+      "title": "Futuristic solutions revealed at Global Grad Show at Dubai Design Week: Finger Reader",
+      "year": "2018",
+      "type": "news",
+      "outlet": "GULF News",
+      "url": "https://gulfnews.com/uae/science/futuristic-solutions-revealed-at-global-grad-show-at-dubai-design-week-1.60340376",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "fingerreader-world-changing-ideas-award-finalist",
+      "title": "FingerReader: World Changing Ideas Award Finalist",
+      "year": "2018",
+      "type": "award",
+      "outlet": "FastCompany",
+      "url": "https://www.fastcompany.com/40546728/the-2018-world-changing-ideas-awards-finalists",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "finger-reader",
+      "title": "Finger Reader",
+      "year": "2018",
+      "type": "video",
+      "outlet": "Channel NewsAsia",
+      "url": "https://www.facebook.com/Suranga.Nanayakkara/videos/10156575822909477/",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "fingerreader-winner-of-accelerator-program",
+      "title": "FingerReader: Winner of Accelerator Program",
+      "year": "2017",
+      "type": "award",
+      "outlet": "Modern Aging Singapore",
+      "url": null,
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "fingerreader-golden-pin-concept-design-award",
+      "title": "FingerReader: Golden Pin Concept Design Award",
+      "year": "2017",
+      "type": "award",
+      "outlet": "Design Center Taiwan",
+      "url": null,
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "insight-augmented-human-2017-best-short-paper",
+      "title": "InSight: A Systematic Approach to Create Dynamic Human-Controller-Interactions | Best Short Paper Award",
+      "year": "2017",
+      "type": "award",
+      "outlet": "Augmented Human International Conference",
+      "url": null,
+      "projects": [
+        "insight"
+      ]
+    },
+    {
+      "slug": "universal-design-enables-everyone-suranga-nanayakkara",
+      "title": "Universal Design Enables Everyone | Suranga Nanayakkara",
+      "year": "2016",
+      "type": "video",
+      "outlet": "TEDxYouth@Palmerston",
+      "url": "http://tedxtalks.ted.com/video/Universal-Design-Enables-Everyo",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0",
+        "fingerdraw",
+        "sparsh",
+        "eyering"
+      ]
+    },
+    {
+      "slug": "technology-enables-people-with-disabilities",
+      "title": "Technology enables people with disabilities",
+      "year": "2016",
+      "type": "news",
+      "outlet": "CCTV.com",
+      "url": "http://english.cntv.cn/2016/02/23/VIDEADIxyUqgEQ0Ya9RRn9Pj160223.shtml",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "singapore-design-award-2016-for-fingerreader",
+      "title": "Singapore Design Award 2016 for FingerReader",
+      "year": "2016",
+      "type": "award",
+      "outlet": "Design Business Chamber Singapore",
+      "url": "http://www.dbcsingapore.org/sda-winners-2016/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "sharper-senses-devices-mimicking-our-natural-senses",
+      "title": "Sharper Senses - Devices mimicking our natural senses",
+      "year": "2016",
+      "type": "video",
+      "outlet": "BBC",
+      "url": "http://www.bbc.com/specialfeatures/horizonsbusiness/seriessix/sharper-senses/?vid=p03xpgvm",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0",
+        "stickear"
+      ]
+    },
+    {
+      "slug": "ring-helps-people-see-thanks-to-grant",
+      "title": "Ring helps people 'see', thanks to grant",
+      "year": "2016",
+      "type": "news",
+      "outlet": "Straits Times",
+      "url": "http://www.straitstimes.com/singapore/ring-helps-people-see-thanks-to-grant",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "el-lector-de-libros-artificial",
+      "title": "El lector de libros artificial",
+      "year": "2016",
+      "type": "video",
+      "outlet": "Antena3.com",
+      "url": "http://www.antena3.com/programas/el-hormiguero/secciones/ciencia-marron/lector-libros-artificial_2016040700345.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "wear-to-read-it",
+      "title": "Wear to Read it",
+      "year": "2015",
+      "type": "news",
+      "outlet": null,
+      "url": null,
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "singapore-designers-create-lights-for-the-deaf-and-rings-for-the-blind",
+      "title": "Singapore designers create lights for the deaf and rings for the blind",
+      "year": "2015",
+      "type": "news",
+      "outlet": "Hilary Whiteman, CNN",
+      "url": "http://edition.cnn.com/2015/11/16/asia/singapore-stickear-technology/index.html",
+      "projects": [
+        "fingerreader",
+        "zsense",
+        "fingerreader-v0",
+        "stickear"
+      ]
+    },
+    {
+      "slug": "read-bridge-lights-up-for-the-festive-season",
+      "title": "Read Bridge lights up for the festive season",
+      "year": "2015",
+      "type": "news",
+      "outlet": "Shivaanan Selvasevaran, Channel NewsAsia",
+      "url": "http://www.channelnewsasia.com/news/singapore/read-bridge-lights-up-for/2320110.html",
+      "projects": [
+        "the-ribbon"
+      ]
+    },
+    {
+      "slug": "wearable-device-helps-you-read-with-your-finger",
+      "title": "Wearable device helps you read with your finger",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Fox Business News",
+      "url": "http://video.foxbusiness.com/v/3261393774001/wearable-device-helps-you-read-with-your-finger",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "wear-this-ring-to-hear-whats-written",
+      "title": "Wear this ring to hear what's written",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Hoe Pei Shan, Straits Times",
+      "url": "https://cloud.asghub.sutd.edu.sg/public.php?service=files&t=fa5ebeba820ac255844914d055a3c91d",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "tomorrow-daily-reading-with-your-finger",
+      "title": "Tomorrow Daily: Reading with Your Finger",
+      "year": "2014",
+      "type": "video",
+      "outlet": "c|net",
+      "url": "http://www.cnet.com/videos/tomorrow-daily-016-rolling-up-your-tv-reading-with-your-finger-haptic-shirts-tom-merritt/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "this-ring-scans-text-and-reads-it-aloud-for-visually-impaired-people",
+      "title": "This Ring Scans Text And Reads It Aloud For Visually Impaired People",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Jordan Kushins, Gizmodo",
+      "url": "http://gizmodo.com/this-ring-scans-text-and-reads-it-aloud-for-visually-im-1525373479",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "this-ring-reads-books-and-magazines-to-the-blind",
+      "title": "This Ring Reads Books And Magazines To The Blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Huffington Post",
+      "url": "http://www.huffingtonpost.com/2014/07/08/fingerreader-read-blind-mit_n_5565898.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "this-decoder-ring-helps-the-blind-read-without-braille",
+      "title": "This Decoder Ring Helps The Blind Read Without Braille",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Sydney Brownstone, Fast Company",
+      "url": "http://www.fastcoexist.com/3032889/this-decoder-ring-helps-the-blind-read-without-braille",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "the-ring-that-reads-for-you-finger-worn-gadget-reads-aloud-when-you-point-at-words",
+      "title": "The ring that READS for you: Finger-worn gadget reads aloud when you point at words",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Ellie Zolfagharifard, Daily Mail",
+      "url": "http://www.dailymail.co.uk/sciencetech/article-2563759/The-ring-READS-Finger-worn-gadget-reads-aloud-point-words-translate-books.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "new-invention-fingerreader",
+      "title": "New Invention: FingerReader",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Fox 10",
+      "url": "http://up.anv.bz/latest/anvload.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "new-finger-device-reads-books-to-the-blind",
+      "title": "New Finger Device Reads Books To The Blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Janet Fang, IFL Science!",
+      "url": "http://www.iflscience.com/health-and-medicine/new-finger-device-reads-books-blind",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "mits-fingerreader-helps-the-blind-read-with-a-swipe-of-a-digit",
+      "title": "MIT's FingerReader Helps The Blind Read With A Swipe Of A Digit",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Evan Fleischer, TechCrunch",
+      "url": "http://techcrunch.com/2014/04/17/mits-fingerreader-helps-the-blind-read-with-a-swipe-of-a-digit/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "mits-fingerreader-could-make-life-easier-for-the-blind",
+      "title": "MIT's FingerReader Could Make Life Easier For The Blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Federico Guerrini, Forbes",
+      "url": "http://www.forbes.com/sites/federicoguerrini/2014/07/14/mits-fingerreader-could-make-life-easier-for-the-blind/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "mit-researchers-design-ring-to-help-visually-impaired-people-read",
+      "title": "MIT Researchers Design Ring To Help Visually-Impaired People Read",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Olivia B. Waxman, TIME",
+      "url": "http://newsfeed.time.com/2014/02/20/mit-scientists-design-ring-to-help-visually-impaired-people-read/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "mit-finger-device-reads-to-the-blind-in-real-time-2",
+      "title": "MIT Finger Device Reads to the Blind in Real Time",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Rodrique Ngowi, Associated Press (ABC, CBC and others)",
+      "url": "http://abcnews.go.com/Technology/wireStory/mit-finger-device-reads-blind-real-time-24461528",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "fingerreader-is-a-3d-printed-device-that-reads-text-aloud-to-the-blind",
+      "title": "FingerReader Is a 3D-Printed Device That Reads Text Aloud to the Blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Kari Paul, Mashable",
+      "url": "http://mashable.com/2014/07/13/blind-fingerreader/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "finger-reader-for-the-blind",
+      "title": "Finger reader for the blind",
+      "year": "2014",
+      "type": "video",
+      "outlet": "SPH Razor TV",
+      "url": "http://www.razor.tv/video/932701/finger-reader-for-the-blind",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "finger-computer-reads-books-aloud",
+      "title": "Finger Computer Reads Books Aloud",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Nic Halverson, Discovery News",
+      "url": "http://news.discovery.com/tech/gear-and-gadgets/finger-computer-reads-books-aloud-140221.htm",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "der-ring-der-lesen-kann-the-ring-that-can-read",
+      "title": "Der Ring, der lesen kann [The ring that can read]",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Christina Endruschat, RTL",
+      "url": "http://www.rtl.de/video/index/showvid/id/335757",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "a-ring-that-reads-text-for-the-blind",
+      "title": "A ring that reads text for the blind",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Reuters Videos",
+      "url": "https://sg.news.yahoo.com/video/ring-reads-text-blind-154953381.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "a-new-type-of-ring-worn-on-the-finger-eliminates-the-need-for-the-blind-to-learn-braille",
+      "title": "A New Type Of Ring Worn On The Finger Eliminates The Need For The Blind To Learn Braille",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Dylan Love, Business Insider",
+      "url": "http://www.businessinsider.com/mit-fingerreader-ring-for-the-blind-2014-7",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "a-device-that-could-help-the-blind-read",
+      "title": "A device that could help the blind read",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Craig Melvin, MSNBC",
+      "url": "http://www.msnbc.com/craig-melvin/watch/a-device-that-could-help-the-blind-read-314710083732",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "5-amazing-gadgets-that-are-helping-the-blind-see-again",
+      "title": "5 amazing gadgets that are helping the blind see again",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Simon Hill, Digital Trends",
+      "url": "http://www.digitaltrends.com/mobile/blind-technologies/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "3d-printed-ring-reads-out-text-in-real-time-for-the-blind",
+      "title": "3D-printed ring reads out text in real-time for the blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Liat Clark, Wired (UK)",
+      "url": "http://www.wired.co.uk/news/archive/2014-07/08/fingerreader",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "haptic-chair-rupavahini-interview-part-1",
+      "title": "Haptic Chair - rupavahini interview Part 1",
+      "year": "2010",
+      "type": "video",
+      "outlet": "Sri Lanka Rupavahini, 2010",
+      "url": "http://www.youtube.com/watch?v=yDPutKutT1I",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0",
+        "stickear",
+        "hapticchair"
+      ]
+    }
+  ]
+}

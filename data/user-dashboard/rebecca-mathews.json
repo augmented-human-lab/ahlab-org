@@ -1,0 +1,97 @@
+{
+  "slug": "rebecca-mathews",
+  "name": "Rebecca Mathews",
+  "role": "Research Attachment",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/rebecca-mathews/rebecca-mathews.jpg",
+  "profile_url": "/people/rebecca-mathews/",
+  "projects": [
+    {
+      "slug": "prompto",
+      "title": "Prompto",
+      "year": "2020",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/prompto/prompto.jpg",
+      "principles": [
+        "body",
+        "cognitive"
+      ]
+    },
+    {
+      "slug": "prospero",
+      "title": "Prospero",
+      "year": "2019",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/prospero/prospero.jpg",
+      "principles": [
+        "body",
+        "cognitive"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "prompto-investigating-receptivity-to-prompts-based-on-cognitive-load-from-memory-training-conversational-agent",
+      "title": "Prompto: Investigating Receptivity to Prompts Based on Cognitive Load from Memory Training Conversational Agent",
+      "year": "2020",
+      "citation": "Chan, S. W. T., Sapkota, S., Mathews, R., Zhang, H. and Nanayakkara, S. C., 2020. Prompto: Investigating Receptivity to Prompts Based on Cognitive Load from Memory Training Conversational Agent. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 4(4), pp.1-23.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3432190"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1Yw-HUkFRsdeuHzvP14rxq5RMq03kENsy/view?usp=sharing"
+        }
+      ],
+      "venue": "ACM"
+    }
+  ],
+  "events": [],
+  "press": [
+    {
+      "slug": "prospero-best-design-awards-student-digital-gold",
+      "title": "Prospero | Best Design Awards | Student Digital: Gold",
+      "year": "2020",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/digital/student-digital/samantha/prospero-2/",
+      "projects": [
+        "prospero"
+      ]
+    },
+    {
+      "slug": "propsero-best-design-awards-public-good-award-finalist",
+      "title": "Propsero | Best Design Awards | Public Good Award: Finalist",
+      "year": "2020",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/public-good-award/student-public-good/samantha/prospero/",
+      "projects": [
+        "prospero"
+      ]
+    },
+    {
+      "slug": "fast-company-2020-world-changing-ideas-awards-honorable-mention-prospero-a-biosignal-sensitive-memory-assistant",
+      "title": "Fast Company 2020 World Changing Ideas Awards | Honorable Mention | Prospero: A Biosignal-Sensitive Memory Assistant",
+      "year": "2020",
+      "type": "award",
+      "outlet": "FastCompany",
+      "url": "https://www.fastcompany.com/90492112/world-changing-ideas-awards-2020-students-finalists-and-honorable-mentions",
+      "projects": [
+        "prospero"
+      ]
+    },
+    {
+      "slug": "velocity-innovation-challenge-2019-female-founders-prize-by-uniservices-prospero",
+      "title": "Velocity Innovation Challenge 2019 | Female Founders Prize by UniServices | Prospero",
+      "year": "2019",
+      "type": "award",
+      "outlet": "Velocity",
+      "url": "https://www.velocity.auckland.ac.nz/2019/08/05/innovation-challenge-final-2019/",
+      "projects": [
+        "prospero"
+      ]
+    }
+  ]
+}

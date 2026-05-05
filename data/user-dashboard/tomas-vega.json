@@ -1,0 +1,59 @@
+{
+  "slug": "tomas-vega",
+  "name": "Tomás Vega",
+  "role": "Research Attachment",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/tomas-vega/tomas-vega.jpg",
+  "profile_url": "/people/tomas-vega/",
+  "projects": [
+    {
+      "slug": "gestakey",
+      "title": "GestAKey",
+      "year": "2017",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/gestakey/gestakey.jpg",
+      "principles": [
+        "body"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "gestakey-touch-interaction-on-individual-keycaps",
+      "title": "GestAKey: Touch Interaction on Individual Keycaps.",
+      "year": "2018",
+      "citation": "Shi, Y., Zhang, H., Rajapakse, H., Perera, N.T., Vega Gálvez, T. and Nanayakkara, S.C., 2018, April. Gestakey: Touch interaction on individual keycaps. In Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems (pp. 1-12).",
+      "awards": [],
+      "links": [
+        {
+          "label": "URL",
+          "url": "https://dl.acm.org/citation.cfm?id=3174170"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/uc?export=download&id=1sSfqPj_lSe-cPTs-1nJLLJkQVoHZY_WN"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "gestakey-get-more-done-with-just-a-key-on-a-keyboard",
+      "title": "GestAKey: Get More Done with Just-a-Key on a Keyboard",
+      "year": "2017",
+      "citation": "Shi, Y., Vega Gálvez, T., Zhang, H. and Nanayakkara, S.C., 2017, October. Gestakey: Get more done with just-a-key on a keyboard. In Adjunct Publication of the 30th Annual ACM Symposium on User Interface Software and Technology (pp. 73-75).",
+      "awards": [],
+      "links": [
+        {
+          "label": "URL",
+          "url": "https://dl.acm.org/citation.cfm?id=3131786"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/uc?export=download&id=1TSiXd5f0Exdo4udT2vb8JW854lDdTro6"
+        }
+      ],
+      "venue": "UIST"
+    }
+  ],
+  "events": [],
+  "press": []
+}

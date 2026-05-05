@@ -1,0 +1,921 @@
+{
+  "slug": "jochen-huber",
+  "name": "Jochen Huber",
+  "role": "Research Fellow",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/jochen-huber/jochen-huber.jpg",
+  "profile_url": "/people/jochen-huber/",
+  "projects": [
+    {
+      "slug": "gutio",
+      "title": "GutIO",
+      "year": "Current",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/gutio/gutio.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "capmat",
+      "title": "CapMat",
+      "year": "2018",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/capmat/capmat.jpg",
+      "principles": [
+        "body",
+        "physical"
+      ]
+    },
+    {
+      "slug": "fingerreader",
+      "title": "FingerReader",
+      "year": "2017",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/fingerreader/fingerreader.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual",
+        "identity"
+      ]
+    },
+    {
+      "slug": "mobile-360-video-interaction",
+      "title": "Mobile 360° Video Interaction",
+      "year": "2015",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/mobile-360-video-interaction/mobile-360-video-interaction.jpg",
+      "principles": [
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "fingerreader-v0",
+      "title": "FingerReader-v0",
+      "year": "2015",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/fingerreader-v0/fingerreader-v0.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual",
+        "identity"
+      ]
+    },
+    {
+      "slug": "feel-the-globe",
+      "title": "Feel the Globe",
+      "year": "2015",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/feel-the-globe/feel-the-globe.jpg",
+      "principles": [
+        "perceptual",
+        "sociocultural"
+      ]
+    },
+    {
+      "slug": "sparkubes",
+      "title": "SparKubes",
+      "year": "2014",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/sparkubes/sparkubes.jpg",
+      "principles": [
+        "physical"
+      ]
+    },
+    {
+      "slug": "earput",
+      "title": "EarPut",
+      "year": "2014",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/earput/earput.jpg",
+      "principles": [
+        "body",
+        "physical"
+      ]
+    },
+    {
+      "slug": "spidervision",
+      "title": "SpiderVision",
+      "year": "2013",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/spidervision/spidervision.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "viscerohaptics-investigating-the-effects-of-gut-based-audio-haptic-feedback-on-gastric-feelings-and-gastric-interoceptive-behaviors",
+      "title": "VisceroHaptics: Investigating the Effects of Gut-based Audio-Haptic Feedback on Gastric Feelings and Gastric Interoceptive Behaviors",
+      "year": "2026",
+      "citation": "Nguyen, M.H., Messerschmidt, M.A., Huber, J. and Nanayakkara, S. C., 2026. VisceroHaptics: Investigating the Effects of Gut-based Audio-Haptic Feedback on Gastric Feelings and Gastric Interoceptive Behaviors. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI 2026).",
+      "awards": [
+        "Honorable Mention Award"
+      ],
+      "links": [
+        {
+          "label": "doi",
+          "url": "https://doi.org/10.1145/3772318.3790268"
+        },
+        {
+          "label": "pdf",
+          "url": "https://drive.google.com/file/d/1OOsKm4M93YY_RcSgehTZLIb6kYRX4Gr8/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "augmented-foot-a-comprehensive-survey-of-augmented-foot-interfaces",
+      "title": "Augmented Foot: A Comprehensive Survey of Augmented Foot Interfaces",
+      "year": "2021",
+      "citation": "Elvitigala, D.S., Nanayakkara, S.C., and Huber, J., 2021. Augmented Foot: A Comprehensive Survey of Augmented Foot Interfaces. In Augmented Humans International Conference 2021 (AHs ’21), February 22–24, 2021, Rovaniemi, Finland.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3458709.3458958"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1KP1pV-9GWdhdWfqGX3RqeiBIyG2M6hBD/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "capmat-a-smart-foot-mat-for-user-authentication",
+      "title": "CapMat: A Smart Foot Mat for User Authentication",
+      "year": "2019",
+      "citation": "Matthies, D.J., Elvitigala, D.S., Muthukumarana, S., Huber, J. and Nanayakkara, S.C., 2019, March. CapMat: a smart foot mat for user authentication. In Proceedings of the 10th Augmented Human International Conference 2019 (pp. 1-2).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3311823.3311874"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1mHYxzlv5xAb_RaQvLQrWkwnJt0_yUctz/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "assistive-augmentation",
+      "title": "Assistive Augmentation",
+      "year": "2018",
+      "citation": "Huber, J., Shilkrot, R., Maes, P. and Nanayakkara, S.C. eds., 2018. Assistive augmentation. Springer.",
+      "awards": [],
+      "links": [
+        {
+          "label": "URL",
+          "url": "http://www.springer.com/gp/book/9789811064029"
+        }
+      ],
+      "venue": "Springer"
+    },
+    {
+      "slug": "scaffolding-the-music-listening-and-music-making-experience-for-the-deaf",
+      "title": "Scaffolding the Music Listening and Music Making Experience for the Deaf",
+      "year": "2017",
+      "citation": "Petry, B., Huber, J. and Nanayakkara, S.C., 2018. Scaffolding the Music Listening and Music Making Experience for the Deaf. In Assistive Augmentation (pp. 23-48). Springer, Singapore.",
+      "awards": [],
+      "links": [
+        {
+          "label": "Link",
+          "url": "https://link.springer.com/chapter/10.1007/978-981-10-6404-3_3"
+        }
+      ],
+      "venue": "Springer"
+    },
+    {
+      "slug": "towards-effective-interaction-with-omnidirectional-videos-using-immersive-virtual-reality-headsets",
+      "title": "Towards Effective Interaction with Omnidirectional Videos Using Immersive Virtual Reality Headsets",
+      "year": "2015",
+      "citation": "Petry, B. and Huber, J., 2015, March. Towards effective interaction with omnidirectional videos using immersive virtual reality headsets. In Proceedings of the 6th Augmented Human International Conference (pp. 217-218).",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/03/Petry-and-Huber-2015-Towards-Effective-Interaction-with-Omnidirectional.pdf"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "smartobjects-fourth-workshop-on-interacting-with-smart-objects",
+      "title": "SmartObjects: fourth workshop on interacting with smart objects",
+      "year": "2015",
+      "citation": "Schnelle-Walka, D., Mühlhäuser, M., Radomski, S., Brdiczka, O., Huber, J., Luyten, K. and Grosse-Puppendahl, T., 2015, March. SmartObjects: Fourth Workshop on Interacting with Smart Objects. In Proceedings of the 20th International Conference on Intelligent User Interfaces (pp. 453-454).",
+      "awards": [],
+      "links": [
+        {
+          "label": "Webpage",
+          "url": "http://www.smart-objects.org/"
+        },
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/03/p453-schnelle-walka.pdf"
+        }
+      ],
+      "venue": "IUI"
+    },
+    {
+      "slug": "fingerreader-a-wearable-device-to-explore-printed-text-on-the-go",
+      "title": "FingerReader: A Wearable Device to Explore Printed Text on the Go",
+      "year": "2015",
+      "citation": "Shilkrot, R., Huber, J., Meng Ee, W., Maes, P. and Nanayakkara, S.C., 2015, April. FingerReader: a wearable device to explore printed text on the go. In Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems (pp. 2363-2372).",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "http://fluid.media.mit.edu/sites/default/files/FingerReaderCHI15%20Camera%20Ready-fonts%20embedded.pdf"
+        },
+        {
+          "label": "DOI",
+          "url": "https://dl.acm.org/doi/10.1145/2702123.2702421"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "feel-see-the-globe-a-thermal-interactive-installation",
+      "title": "Feel & See the Globe: A Thermal, Interactive Installation",
+      "year": "2015",
+      "citation": "Huber, J., Malavipathirana, H., Wang, Y., Li, X., Fu, J.C., Maes, P. and Nanayakkara, S.C., 2015, March. Feel & see the globe: a thermal, interactive installation. In Proceedings of the 6th Augmented Human International Conference (pp. 215-216).",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/03/p215-huber.pdf"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "body-as-display-augmenting-the-face-through-transillumination",
+      "title": "Body as Display: Augmenting the Face through Transillumination",
+      "year": "2015",
+      "citation": "Wessolek, D., Huber, J. and Maes, P., 2015, March. Body as display: augmenting the face through transillumination. In Proceedings of the 6th Augmented Human International Conference (pp. 193-194).",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/03/p193-wessolek.pdf"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "workshop-on-assistive-augmentation",
+      "title": "Workshop on Assistive Augmentation",
+      "year": "2014",
+      "citation": "Huber, J., Rekimoto, J., Inami, M., Shilkrot, R., Maes, P., Meng Ee, W., Pullin, G. and Nanayakkara, S.C., 2014. Workshop on assistive augmentation. In CHI'14 Extended Abstracts on Human Factors in Computing Systems (pp. 103-106).",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "http://fluid.media.mit.edu/sites/default/files/abstract.pdf"
+        },
+        {
+          "label": "URL",
+          "url": "http://assistaugment.xvm.mit.edu/"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "spidervision-extending-the-human-field-of-view-for-augmented-awareness",
+      "title": "SpiderVision: Extending the Human Field of View for Augmented Awareness",
+      "year": "2014",
+      "citation": "Fan, K., Huber, J., Nanayakkara, S.C. and Inami, M., 2014, March. SpiderVision: extending the human field of view for augmented awareness. In Proceedings of the 5th augmented human international conference (pp. 1-8).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "http://doi.acm.org/10.1145/2582051.2582100"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "sparkubes-exploring-the-interplay-between-digital-and-physical-spaces-with-minimalistic-interfaces",
+      "title": "SparKubes: Exploring the Interplay between Digital and Physical Spaces with Minimalistic Interfaces",
+      "year": "2014",
+      "citation": "Ortega-Avila, S., Huber, J., Janaka, N., Withana, A., Fernando, P. and Nanayakkara, S.C., 2014, December. SparKubes: exploring the interplay between digital and physical spaces with minimalistic interfaces. In Proceedings of the 26th Australian Computer-Human Interaction Conference on Designing Futures: the Future of Design (pp. 204-207).",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/03/p204-ortega-avila.pdf"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "smartobjects-third-workshop-on-interacting-with-smart-objects",
+      "title": "SmartObjects: Third Workshop on Interacting with Smart Objects",
+      "year": "2014",
+      "citation": "Schnelle-Walka, D., Huber, J., Radomski, S., Brdiczka, O., Luyten, K. and Mühlhäuser, M., 2014, February. Smartobjects: third workshop on interacting with smart objects. In Proceedings of the companion publication of the 19th international conference on Intelligent User Interfaces (pp. 45-46).",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/05/p45-schnelle-walka.pdf"
+        }
+      ],
+      "venue": "IUI"
+    },
+    {
+      "slug": "permulin-mixed-focus-collaboration-on-multi-view-tabletops",
+      "title": "Permulin: Mixed-Focus Collaboration on Multi-View Tabletops",
+      "year": "2014",
+      "citation": "Lissermann, R., Huber, J., Schmitz, M., Steimle, J. and Mühlhäuser, M., 2014, April. Permulin: mixed-focus collaboration on multi-view tabletops. In Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (pp. 3191-3200).",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "http://fluid.media.mit.edu/sites/default/files/2014-CHI-Permulin.pdf"
+        },
+        {
+          "label": "Video",
+          "url": "http://www.youtube.com/watch?v=3qVOMvOsAv0"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "paint-with-your-voice-an-interactive-sonic-installation",
+      "title": "Paint with Your Voice: An Interactive, Sonic Installation",
+      "year": "2014",
+      "citation": "Böhm, B., Hermann, J., Rizzo, T., Stöffler, A. and Huber, J., 2014, Paint with Your Voice: An Interactive, Sonic Installation. In International Conference on Tangible and Embedded Interaction.",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "http://fluid.media.mit.edu/sites/default/files/stimmmaler-CR.pdf"
+        },
+        {
+          "label": "Video",
+          "url": "http://vimeo.com/78633545"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "fingerreader-a-wearable-device-to-support-text-reading-on-the-go",
+      "title": "FingerReader: A Wearable Device to Support Text-Reading on the Go",
+      "year": "2014",
+      "citation": "Shilkrot, R., Huber, J., Liu, C., Maes, P. and Nanayakkara, S.C., 2014. FingerReader: a wearable device to support text reading on the go. In CHI'14 Extended Abstracts on Human Factors in Computing Systems (pp. 2359-2364).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "http://doi.acm.org/10.1145/2559206.2581220"
+        },
+        {
+          "label": "PDF",
+          "url": "http://fluid.media.mit.edu/sites/default/files/paper317.pdf"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "earput-augmenting-ear-worn-devices-for-ear-based-interaction",
+      "title": "EarPut: Augmenting Ear-worn Devices for Ear-based Interaction",
+      "year": "2014",
+      "citation": "Lissermann, R., Huber, J., Hadjakos, A., Nanayakkara, S.C. and Mühlhäuser, M., 2014, December. EarPut: augmenting ear-worn devices for ear-based interaction. In Proceedings of the 26th Australian Computer-Human Interaction Conference on Designing Futures: the Future of Design (pp. 300-307).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://dl.acm.org/doi/10.1145/2686612.2686655"
+        },
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/03/p300-lissermann.pdf"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "a-wearable-text-reading-device-for-the-visually-impaired",
+      "title": "A Wearable Text-Reading Device for the Visually-Impaired",
+      "year": "2014",
+      "citation": "Shilkrot, R., Huber, J., Liu, C., Maes, P. and Nanayakkara, S.C., 2014. A wearable text-reading device for the visually-impaired. In CHI'14 Extended Abstracts on Human Factors in Computing Systems (pp. 193-194).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "http://doi.acm.org/10.1145/2559206.2579520"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "a-research-overview-of-mobile-projected-user-interfaces",
+      "title": "A Research Overview of Mobile Projected User Interfaces",
+      "year": "2014",
+      "citation": "Huber, J., 2014. A research overview of mobile projected user interfaces. Informatik-Spektrum, 37(5), pp.464-473.",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/05/art3A10.10072Fs00287-014-0819-z.pdf"
+        }
+      ],
+      "venue": "Other"
+    }
+  ],
+  "events": [
+    {
+      "slug": "chi-2026",
+      "title": "CHI 2026",
+      "subtitle": "ACM Conference on Human Factors in Computing Systems",
+      "kind": "conference",
+      "location": "Barcelona, Spain",
+      "starts": "2026-04-13",
+      "ends": "2026-04-17",
+      "url": "https://chi2026.ahlab.org",
+      "summary": "AHLab presents 5 papers and 2 posters at CHI 2026 in Barcelona."
+    }
+  ],
+  "press": [
+    {
+      "slug": "viscerohaptics-chi-2026-honorable-mention",
+      "title": "VisceroHaptics: Investigating the Effects of Gut-based Audio-Haptic Feedback on Gastric Feelings and Gastric Interoceptive Behaviors | Honorable Mention",
+      "year": "2026",
+      "type": "award",
+      "outlet": "ACM CHI",
+      "url": null,
+      "projects": [
+        "gutio"
+      ]
+    },
+    {
+      "slug": "this-doormat-can-tell-who-you-are-for-multi-factor-authentication",
+      "title": "This Doormat Can Tell Who You Are for Multi-Factor Authentication",
+      "year": "2019",
+      "type": "news",
+      "outlet": "hackter.io",
+      "url": "https://blog.hackster.io/this-doormat-can-tell-who-you-are-for-multi-factor-authentication-1f01928897a8",
+      "projects": [
+        "capmat"
+      ]
+    },
+    {
+      "slug": "the-six-innovations-at-the-global-grad-show-in-dubai",
+      "title": "The Six: Innovations at the Global Grad Show in Dubai",
+      "year": "2018",
+      "type": "news",
+      "outlet": "Arab News",
+      "url": "http://www.arabnews.com/node/1403986/art-culture",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "the-finger-reader",
+      "title": "The Finger Reader",
+      "year": "2018",
+      "type": "news",
+      "outlet": "TVNZ",
+      "url": "https://www.tvnz.co.nz/one-news/new-zealand/ring-your-finger-snaps-text-and-reads-back-offering-help-visually-impaired",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "futuristic-solutions-revealed-at-global-grad-show-at-dubai-design-week-finger-reader",
+      "title": "Futuristic solutions revealed at Global Grad Show at Dubai Design Week: Finger Reader",
+      "year": "2018",
+      "type": "news",
+      "outlet": "GULF News",
+      "url": "https://gulfnews.com/uae/science/futuristic-solutions-revealed-at-global-grad-show-at-dubai-design-week-1.60340376",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "fingerreader-world-changing-ideas-award-finalist",
+      "title": "FingerReader: World Changing Ideas Award Finalist",
+      "year": "2018",
+      "type": "award",
+      "outlet": "FastCompany",
+      "url": "https://www.fastcompany.com/40546728/the-2018-world-changing-ideas-awards-finalists",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "finger-reader",
+      "title": "Finger Reader",
+      "year": "2018",
+      "type": "video",
+      "outlet": "Channel NewsAsia",
+      "url": "https://www.facebook.com/Suranga.Nanayakkara/videos/10156575822909477/",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "fingerreader-winner-of-accelerator-program",
+      "title": "FingerReader: Winner of Accelerator Program",
+      "year": "2017",
+      "type": "award",
+      "outlet": "Modern Aging Singapore",
+      "url": null,
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "fingerreader-golden-pin-concept-design-award",
+      "title": "FingerReader: Golden Pin Concept Design Award",
+      "year": "2017",
+      "type": "award",
+      "outlet": "Design Center Taiwan",
+      "url": null,
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "universal-design-enables-everyone-suranga-nanayakkara",
+      "title": "Universal Design Enables Everyone | Suranga Nanayakkara",
+      "year": "2016",
+      "type": "video",
+      "outlet": "TEDxYouth@Palmerston",
+      "url": "http://tedxtalks.ted.com/video/Universal-Design-Enables-Everyo",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0",
+        "fingerdraw",
+        "sparsh",
+        "eyering"
+      ]
+    },
+    {
+      "slug": "technology-enables-people-with-disabilities",
+      "title": "Technology enables people with disabilities",
+      "year": "2016",
+      "type": "news",
+      "outlet": "CCTV.com",
+      "url": "http://english.cntv.cn/2016/02/23/VIDEADIxyUqgEQ0Ya9RRn9Pj160223.shtml",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "singapore-design-award-2016-for-fingerreader",
+      "title": "Singapore Design Award 2016 for FingerReader",
+      "year": "2016",
+      "type": "award",
+      "outlet": "Design Business Chamber Singapore",
+      "url": "http://www.dbcsingapore.org/sda-winners-2016/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "sharper-senses-devices-mimicking-our-natural-senses",
+      "title": "Sharper Senses - Devices mimicking our natural senses",
+      "year": "2016",
+      "type": "video",
+      "outlet": "BBC",
+      "url": "http://www.bbc.com/specialfeatures/horizonsbusiness/seriessix/sharper-senses/?vid=p03xpgvm",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0",
+        "stickear"
+      ]
+    },
+    {
+      "slug": "ring-helps-people-see-thanks-to-grant",
+      "title": "Ring helps people 'see', thanks to grant",
+      "year": "2016",
+      "type": "news",
+      "outlet": "Straits Times",
+      "url": "http://www.straitstimes.com/singapore/ring-helps-people-see-thanks-to-grant",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "el-lector-de-libros-artificial",
+      "title": "El lector de libros artificial",
+      "year": "2016",
+      "type": "video",
+      "outlet": "Antena3.com",
+      "url": "http://www.antena3.com/programas/el-hormiguero/secciones/ciencia-marron/lector-libros-artificial_2016040700345.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "wear-to-read-it",
+      "title": "Wear to Read it",
+      "year": "2015",
+      "type": "news",
+      "outlet": null,
+      "url": null,
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "singapore-designers-create-lights-for-the-deaf-and-rings-for-the-blind",
+      "title": "Singapore designers create lights for the deaf and rings for the blind",
+      "year": "2015",
+      "type": "news",
+      "outlet": "Hilary Whiteman, CNN",
+      "url": "http://edition.cnn.com/2015/11/16/asia/singapore-stickear-technology/index.html",
+      "projects": [
+        "fingerreader",
+        "zsense",
+        "fingerreader-v0",
+        "stickear"
+      ]
+    },
+    {
+      "slug": "wearable-device-helps-you-read-with-your-finger",
+      "title": "Wearable device helps you read with your finger",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Fox Business News",
+      "url": "http://video.foxbusiness.com/v/3261393774001/wearable-device-helps-you-read-with-your-finger",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "wear-this-ring-to-hear-whats-written",
+      "title": "Wear this ring to hear what's written",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Hoe Pei Shan, Straits Times",
+      "url": "https://cloud.asghub.sutd.edu.sg/public.php?service=files&t=fa5ebeba820ac255844914d055a3c91d",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "tomorrow-daily-reading-with-your-finger",
+      "title": "Tomorrow Daily: Reading with Your Finger",
+      "year": "2014",
+      "type": "video",
+      "outlet": "c|net",
+      "url": "http://www.cnet.com/videos/tomorrow-daily-016-rolling-up-your-tv-reading-with-your-finger-haptic-shirts-tom-merritt/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "this-ring-scans-text-and-reads-it-aloud-for-visually-impaired-people",
+      "title": "This Ring Scans Text And Reads It Aloud For Visually Impaired People",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Jordan Kushins, Gizmodo",
+      "url": "http://gizmodo.com/this-ring-scans-text-and-reads-it-aloud-for-visually-im-1525373479",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "this-ring-reads-books-and-magazines-to-the-blind",
+      "title": "This Ring Reads Books And Magazines To The Blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Huffington Post",
+      "url": "http://www.huffingtonpost.com/2014/07/08/fingerreader-read-blind-mit_n_5565898.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "this-decoder-ring-helps-the-blind-read-without-braille",
+      "title": "This Decoder Ring Helps The Blind Read Without Braille",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Sydney Brownstone, Fast Company",
+      "url": "http://www.fastcoexist.com/3032889/this-decoder-ring-helps-the-blind-read-without-braille",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "the-ring-that-reads-for-you-finger-worn-gadget-reads-aloud-when-you-point-at-words",
+      "title": "The ring that READS for you: Finger-worn gadget reads aloud when you point at words",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Ellie Zolfagharifard, Daily Mail",
+      "url": "http://www.dailymail.co.uk/sciencetech/article-2563759/The-ring-READS-Finger-worn-gadget-reads-aloud-point-words-translate-books.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "new-invention-fingerreader",
+      "title": "New Invention: FingerReader",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Fox 10",
+      "url": "http://up.anv.bz/latest/anvload.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "new-finger-device-reads-books-to-the-blind",
+      "title": "New Finger Device Reads Books To The Blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Janet Fang, IFL Science!",
+      "url": "http://www.iflscience.com/health-and-medicine/new-finger-device-reads-books-blind",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "mits-fingerreader-helps-the-blind-read-with-a-swipe-of-a-digit",
+      "title": "MIT's FingerReader Helps The Blind Read With A Swipe Of A Digit",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Evan Fleischer, TechCrunch",
+      "url": "http://techcrunch.com/2014/04/17/mits-fingerreader-helps-the-blind-read-with-a-swipe-of-a-digit/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "mits-fingerreader-could-make-life-easier-for-the-blind",
+      "title": "MIT's FingerReader Could Make Life Easier For The Blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Federico Guerrini, Forbes",
+      "url": "http://www.forbes.com/sites/federicoguerrini/2014/07/14/mits-fingerreader-could-make-life-easier-for-the-blind/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "mit-researchers-design-ring-to-help-visually-impaired-people-read",
+      "title": "MIT Researchers Design Ring To Help Visually-Impaired People Read",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Olivia B. Waxman, TIME",
+      "url": "http://newsfeed.time.com/2014/02/20/mit-scientists-design-ring-to-help-visually-impaired-people-read/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "mit-finger-device-reads-to-the-blind-in-real-time-2",
+      "title": "MIT Finger Device Reads to the Blind in Real Time",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Rodrique Ngowi, Associated Press (ABC, CBC and others)",
+      "url": "http://abcnews.go.com/Technology/wireStory/mit-finger-device-reads-blind-real-time-24461528",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "fingerreader-is-a-3d-printed-device-that-reads-text-aloud-to-the-blind",
+      "title": "FingerReader Is a 3D-Printed Device That Reads Text Aloud to the Blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Kari Paul, Mashable",
+      "url": "http://mashable.com/2014/07/13/blind-fingerreader/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "finger-reader-for-the-blind",
+      "title": "Finger reader for the blind",
+      "year": "2014",
+      "type": "video",
+      "outlet": "SPH Razor TV",
+      "url": "http://www.razor.tv/video/932701/finger-reader-for-the-blind",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "finger-computer-reads-books-aloud",
+      "title": "Finger Computer Reads Books Aloud",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Nic Halverson, Discovery News",
+      "url": "http://news.discovery.com/tech/gear-and-gadgets/finger-computer-reads-books-aloud-140221.htm",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "der-ring-der-lesen-kann-the-ring-that-can-read",
+      "title": "Der Ring, der lesen kann [The ring that can read]",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Christina Endruschat, RTL",
+      "url": "http://www.rtl.de/video/index/showvid/id/335757",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "a-ring-that-reads-text-for-the-blind",
+      "title": "A ring that reads text for the blind",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Reuters Videos",
+      "url": "https://sg.news.yahoo.com/video/ring-reads-text-blind-154953381.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "a-new-type-of-ring-worn-on-the-finger-eliminates-the-need-for-the-blind-to-learn-braille",
+      "title": "A New Type Of Ring Worn On The Finger Eliminates The Need For The Blind To Learn Braille",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Dylan Love, Business Insider",
+      "url": "http://www.businessinsider.com/mit-fingerreader-ring-for-the-blind-2014-7",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "a-device-that-could-help-the-blind-read",
+      "title": "A device that could help the blind read",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Craig Melvin, MSNBC",
+      "url": "http://www.msnbc.com/craig-melvin/watch/a-device-that-could-help-the-blind-read-314710083732",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "5-amazing-gadgets-that-are-helping-the-blind-see-again",
+      "title": "5 amazing gadgets that are helping the blind see again",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Simon Hill, Digital Trends",
+      "url": "http://www.digitaltrends.com/mobile/blind-technologies/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "3d-printed-ring-reads-out-text-in-real-time-for-the-blind",
+      "title": "3D-printed ring reads out text in real-time for the blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Liat Clark, Wired (UK)",
+      "url": "http://www.wired.co.uk/news/archive/2014-07/08/fingerreader",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "haptic-chair-rupavahini-interview-part-1",
+      "title": "Haptic Chair - rupavahini interview Part 1",
+      "year": "2010",
+      "type": "video",
+      "outlet": "Sri Lanka Rupavahini, 2010",
+      "url": "http://www.youtube.com/watch?v=yDPutKutT1I",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0",
+        "stickear",
+        "hapticchair"
+      ]
+    }
+  ]
+}

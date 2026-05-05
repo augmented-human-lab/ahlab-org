@@ -1,0 +1,492 @@
+{
+  "slug": "adrian-robertson",
+  "name": "Adrian Robertson",
+  "role": "Research Attachment",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/adrian-robertson/adrian-robertson.jpg",
+  "profile_url": "/people/adrian-robertson/",
+  "projects": [
+    {
+      "slug": "prospecfit",
+      "title": "ProspecFit",
+      "year": "2018",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/prospecfit/prospecfit.jpg",
+      "principles": [
+        "cognitive"
+      ]
+    },
+    {
+      "slug": "fingerreader",
+      "title": "FingerReader",
+      "year": "2017",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/fingerreader/fingerreader.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual",
+        "identity"
+      ]
+    }
+  ],
+  "publications": [],
+  "events": [],
+  "press": [
+    {
+      "slug": "the-six-innovations-at-the-global-grad-show-in-dubai",
+      "title": "The Six: Innovations at the Global Grad Show in Dubai",
+      "year": "2018",
+      "type": "news",
+      "outlet": "Arab News",
+      "url": "http://www.arabnews.com/node/1403986/art-culture",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "the-finger-reader",
+      "title": "The Finger Reader",
+      "year": "2018",
+      "type": "news",
+      "outlet": "TVNZ",
+      "url": "https://www.tvnz.co.nz/one-news/new-zealand/ring-your-finger-snaps-text-and-reads-back-offering-help-visually-impaired",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "futuristic-solutions-revealed-at-global-grad-show-at-dubai-design-week-finger-reader",
+      "title": "Futuristic solutions revealed at Global Grad Show at Dubai Design Week: Finger Reader",
+      "year": "2018",
+      "type": "news",
+      "outlet": "GULF News",
+      "url": "https://gulfnews.com/uae/science/futuristic-solutions-revealed-at-global-grad-show-at-dubai-design-week-1.60340376",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "fingerreader-world-changing-ideas-award-finalist",
+      "title": "FingerReader: World Changing Ideas Award Finalist",
+      "year": "2018",
+      "type": "award",
+      "outlet": "FastCompany",
+      "url": "https://www.fastcompany.com/40546728/the-2018-world-changing-ideas-awards-finalists",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "finger-reader",
+      "title": "Finger Reader",
+      "year": "2018",
+      "type": "video",
+      "outlet": "Channel NewsAsia",
+      "url": "https://www.facebook.com/Suranga.Nanayakkara/videos/10156575822909477/",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "fingerreader-winner-of-accelerator-program",
+      "title": "FingerReader: Winner of Accelerator Program",
+      "year": "2017",
+      "type": "award",
+      "outlet": "Modern Aging Singapore",
+      "url": null,
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "fingerreader-golden-pin-concept-design-award",
+      "title": "FingerReader: Golden Pin Concept Design Award",
+      "year": "2017",
+      "type": "award",
+      "outlet": "Design Center Taiwan",
+      "url": null,
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "universal-design-enables-everyone-suranga-nanayakkara",
+      "title": "Universal Design Enables Everyone | Suranga Nanayakkara",
+      "year": "2016",
+      "type": "video",
+      "outlet": "TEDxYouth@Palmerston",
+      "url": "http://tedxtalks.ted.com/video/Universal-Design-Enables-Everyo",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0",
+        "fingerdraw",
+        "sparsh",
+        "eyering"
+      ]
+    },
+    {
+      "slug": "technology-enables-people-with-disabilities",
+      "title": "Technology enables people with disabilities",
+      "year": "2016",
+      "type": "news",
+      "outlet": "CCTV.com",
+      "url": "http://english.cntv.cn/2016/02/23/VIDEADIxyUqgEQ0Ya9RRn9Pj160223.shtml",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "singapore-design-award-2016-for-fingerreader",
+      "title": "Singapore Design Award 2016 for FingerReader",
+      "year": "2016",
+      "type": "award",
+      "outlet": "Design Business Chamber Singapore",
+      "url": "http://www.dbcsingapore.org/sda-winners-2016/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "sharper-senses-devices-mimicking-our-natural-senses",
+      "title": "Sharper Senses - Devices mimicking our natural senses",
+      "year": "2016",
+      "type": "video",
+      "outlet": "BBC",
+      "url": "http://www.bbc.com/specialfeatures/horizonsbusiness/seriessix/sharper-senses/?vid=p03xpgvm",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0",
+        "stickear"
+      ]
+    },
+    {
+      "slug": "ring-helps-people-see-thanks-to-grant",
+      "title": "Ring helps people 'see', thanks to grant",
+      "year": "2016",
+      "type": "news",
+      "outlet": "Straits Times",
+      "url": "http://www.straitstimes.com/singapore/ring-helps-people-see-thanks-to-grant",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "el-lector-de-libros-artificial",
+      "title": "El lector de libros artificial",
+      "year": "2016",
+      "type": "video",
+      "outlet": "Antena3.com",
+      "url": "http://www.antena3.com/programas/el-hormiguero/secciones/ciencia-marron/lector-libros-artificial_2016040700345.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "wear-to-read-it",
+      "title": "Wear to Read it",
+      "year": "2015",
+      "type": "news",
+      "outlet": null,
+      "url": null,
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "singapore-designers-create-lights-for-the-deaf-and-rings-for-the-blind",
+      "title": "Singapore designers create lights for the deaf and rings for the blind",
+      "year": "2015",
+      "type": "news",
+      "outlet": "Hilary Whiteman, CNN",
+      "url": "http://edition.cnn.com/2015/11/16/asia/singapore-stickear-technology/index.html",
+      "projects": [
+        "fingerreader",
+        "zsense",
+        "fingerreader-v0",
+        "stickear"
+      ]
+    },
+    {
+      "slug": "wearable-device-helps-you-read-with-your-finger",
+      "title": "Wearable device helps you read with your finger",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Fox Business News",
+      "url": "http://video.foxbusiness.com/v/3261393774001/wearable-device-helps-you-read-with-your-finger",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "wear-this-ring-to-hear-whats-written",
+      "title": "Wear this ring to hear what's written",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Hoe Pei Shan, Straits Times",
+      "url": "https://cloud.asghub.sutd.edu.sg/public.php?service=files&t=fa5ebeba820ac255844914d055a3c91d",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "tomorrow-daily-reading-with-your-finger",
+      "title": "Tomorrow Daily: Reading with Your Finger",
+      "year": "2014",
+      "type": "video",
+      "outlet": "c|net",
+      "url": "http://www.cnet.com/videos/tomorrow-daily-016-rolling-up-your-tv-reading-with-your-finger-haptic-shirts-tom-merritt/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "this-ring-scans-text-and-reads-it-aloud-for-visually-impaired-people",
+      "title": "This Ring Scans Text And Reads It Aloud For Visually Impaired People",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Jordan Kushins, Gizmodo",
+      "url": "http://gizmodo.com/this-ring-scans-text-and-reads-it-aloud-for-visually-im-1525373479",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "this-ring-reads-books-and-magazines-to-the-blind",
+      "title": "This Ring Reads Books And Magazines To The Blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Huffington Post",
+      "url": "http://www.huffingtonpost.com/2014/07/08/fingerreader-read-blind-mit_n_5565898.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "this-decoder-ring-helps-the-blind-read-without-braille",
+      "title": "This Decoder Ring Helps The Blind Read Without Braille",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Sydney Brownstone, Fast Company",
+      "url": "http://www.fastcoexist.com/3032889/this-decoder-ring-helps-the-blind-read-without-braille",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "the-ring-that-reads-for-you-finger-worn-gadget-reads-aloud-when-you-point-at-words",
+      "title": "The ring that READS for you: Finger-worn gadget reads aloud when you point at words",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Ellie Zolfagharifard, Daily Mail",
+      "url": "http://www.dailymail.co.uk/sciencetech/article-2563759/The-ring-READS-Finger-worn-gadget-reads-aloud-point-words-translate-books.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "new-invention-fingerreader",
+      "title": "New Invention: FingerReader",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Fox 10",
+      "url": "http://up.anv.bz/latest/anvload.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "new-finger-device-reads-books-to-the-blind",
+      "title": "New Finger Device Reads Books To The Blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Janet Fang, IFL Science!",
+      "url": "http://www.iflscience.com/health-and-medicine/new-finger-device-reads-books-blind",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "mits-fingerreader-helps-the-blind-read-with-a-swipe-of-a-digit",
+      "title": "MIT's FingerReader Helps The Blind Read With A Swipe Of A Digit",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Evan Fleischer, TechCrunch",
+      "url": "http://techcrunch.com/2014/04/17/mits-fingerreader-helps-the-blind-read-with-a-swipe-of-a-digit/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "mits-fingerreader-could-make-life-easier-for-the-blind",
+      "title": "MIT's FingerReader Could Make Life Easier For The Blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Federico Guerrini, Forbes",
+      "url": "http://www.forbes.com/sites/federicoguerrini/2014/07/14/mits-fingerreader-could-make-life-easier-for-the-blind/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "mit-researchers-design-ring-to-help-visually-impaired-people-read",
+      "title": "MIT Researchers Design Ring To Help Visually-Impaired People Read",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Olivia B. Waxman, TIME",
+      "url": "http://newsfeed.time.com/2014/02/20/mit-scientists-design-ring-to-help-visually-impaired-people-read/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "mit-finger-device-reads-to-the-blind-in-real-time-2",
+      "title": "MIT Finger Device Reads to the Blind in Real Time",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Rodrique Ngowi, Associated Press (ABC, CBC and others)",
+      "url": "http://abcnews.go.com/Technology/wireStory/mit-finger-device-reads-blind-real-time-24461528",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "fingerreader-is-a-3d-printed-device-that-reads-text-aloud-to-the-blind",
+      "title": "FingerReader Is a 3D-Printed Device That Reads Text Aloud to the Blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Kari Paul, Mashable",
+      "url": "http://mashable.com/2014/07/13/blind-fingerreader/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "finger-reader-for-the-blind",
+      "title": "Finger reader for the blind",
+      "year": "2014",
+      "type": "video",
+      "outlet": "SPH Razor TV",
+      "url": "http://www.razor.tv/video/932701/finger-reader-for-the-blind",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "finger-computer-reads-books-aloud",
+      "title": "Finger Computer Reads Books Aloud",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Nic Halverson, Discovery News",
+      "url": "http://news.discovery.com/tech/gear-and-gadgets/finger-computer-reads-books-aloud-140221.htm",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "der-ring-der-lesen-kann-the-ring-that-can-read",
+      "title": "Der Ring, der lesen kann [The ring that can read]",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Christina Endruschat, RTL",
+      "url": "http://www.rtl.de/video/index/showvid/id/335757",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "a-ring-that-reads-text-for-the-blind",
+      "title": "A ring that reads text for the blind",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Reuters Videos",
+      "url": "https://sg.news.yahoo.com/video/ring-reads-text-blind-154953381.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "a-new-type-of-ring-worn-on-the-finger-eliminates-the-need-for-the-blind-to-learn-braille",
+      "title": "A New Type Of Ring Worn On The Finger Eliminates The Need For The Blind To Learn Braille",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Dylan Love, Business Insider",
+      "url": "http://www.businessinsider.com/mit-fingerreader-ring-for-the-blind-2014-7",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "a-device-that-could-help-the-blind-read",
+      "title": "A device that could help the blind read",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Craig Melvin, MSNBC",
+      "url": "http://www.msnbc.com/craig-melvin/watch/a-device-that-could-help-the-blind-read-314710083732",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "5-amazing-gadgets-that-are-helping-the-blind-see-again",
+      "title": "5 amazing gadgets that are helping the blind see again",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Simon Hill, Digital Trends",
+      "url": "http://www.digitaltrends.com/mobile/blind-technologies/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "3d-printed-ring-reads-out-text-in-real-time-for-the-blind",
+      "title": "3D-printed ring reads out text in real-time for the blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Liat Clark, Wired (UK)",
+      "url": "http://www.wired.co.uk/news/archive/2014-07/08/fingerreader",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "haptic-chair-rupavahini-interview-part-1",
+      "title": "Haptic Chair - rupavahini interview Part 1",
+      "year": "2010",
+      "type": "video",
+      "outlet": "Sri Lanka Rupavahini, 2010",
+      "url": "http://www.youtube.com/watch?v=yDPutKutT1I",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0",
+        "stickear",
+        "hapticchair"
+      ]
+    }
+  ]
+}

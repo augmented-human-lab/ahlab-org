@@ -1,0 +1,265 @@
+{
+  "slug": "suveen-ellawela",
+  "name": "Suveen Ellawela",
+  "role": "Undergraduate Student",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/suveen-ellawela/suveen-ellawela.jpg",
+  "profile_url": "/people/suveen-ellawela/",
+  "projects": [
+    {
+      "slug": "aisee",
+      "title": "AiSee",
+      "year": "2025",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/aisee/aisee.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual",
+        "identity"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "can-ai-models-summarize-your-diary-entries-investigating-utility-of-abstractive-summarization-for-autobiographical-text",
+      "title": "Can AI Models Summarize Your Diary Entries? Investigating Utility of Abstractive Summarization for Autobiographical Text.",
+      "year": "2023",
+      "citation": "Siriwardhana, S*., Gupta, C.*, Kaluarachchi, T., Dissanayake, V., Ellawela, S., & Nanayakkara, S.C. (2023). Can AI Models Summarize Your Diary Entries? Investigating Utility of Abstractive Summarization for Autobiographical Text. International Journal of Human–Computer Interaction, 1–19.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1080/10447318.2023.2286090"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1FOiydcfVylDTV_LxLYRazstuyXhrN0hZ/view?usp=drive_link"
+        }
+      ],
+      "venue": "IJHCI"
+    }
+  ],
+  "events": [],
+  "press": [
+    {
+      "slug": "i-wont-have-to-trouble-anyone-when-i-visit",
+      "title": "'I won't have to trouble anyone when I visit': How AiSee helps visitors with visual impairment at Gardens by the Bay",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/i-wont-have-to-trouble-",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "gardens-by-the-bay-to-offer-robot-guide-dog-online-sensory-map-2026",
+      "title": "Gardens by the Bay to offer robot guide dog, online sensory map for visitors with disabilities",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/gardens-by-the-bay-to-offer-robot-guide-dog-online-sensory-map-for-visitors-with-disabilities",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "straits-times-facebook-aisee-wearable-headset-2026",
+      "title": "A wearable AI-powered headset is also in the works to help individuals with visual impairment",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times (Facebook)",
+      "url": "https://www.facebook.com/TheStraitsTimes/posts/a-wearable-ai-powered-headset-is-also-in-the-works-to-help-individuals-with-visu/1234420202178471/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "straits-times-x-aisee-gardens-by-the-bay-2026",
+      "title": "Gardens by the Bay to offer robot guide dog and AiSee headset (The Straits Times on X)",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times (X)",
+      "url": "https://x.com/straits_times/status/2035688344785412588",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "cna-robot-guide-dog-inclusive-innovations-gardens-by-the-bay-2026",
+      "title": "Robot guide dog among inclusive innovations to help visitors with disabilities at Gardens by the Bay",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Channel NewsAsia (CNA)",
+      "url": "https://www.channelnewsasia.com/watch/robot-guide-dog-among-inclusive-innovations-help-visitors-disabilities-gardens-bay-6009986",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "mothership-youtube-aisee-robot-guide-dog-2026",
+      "title": "Robot guide dog and AiSee at Gardens by the Bay (Mothership)",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Mothership (YouTube)",
+      "url": "https://www.youtube.com/shorts/q1csBHJOxzI",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "mothership-facebook-aisee-gardens-by-the-bay-2026",
+      "title": "Robot guide dog and AiSee at Gardens by the Bay (Mothership)",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Mothership (Facebook)",
+      "url": "https://www.facebook.com/watch/?v=960598809644633",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "mothership-instagram-aisee-gardens-by-the-bay-2026",
+      "title": "Robot guide dog and AiSee at Gardens by the Bay (Mothership)",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Mothership (Instagram)",
+      "url": "https://www.instagram.com/reel/DWMSdFFCm1a/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "how-aisee-can-make-the-blind-see",
+      "title": "How AiSee Can Make the Blind 'See'",
+      "year": "2025",
+      "type": "news",
+      "outlet": "Tech Briefs",
+      "url": "https://www.techbriefs.com/component/content/article/52354-how-aisee-can-make-the-blind-see",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "researchers-develop-ai-powered-eye-for-visually-impaired-people-to-see-objects",
+      "title": "Researchers develop AI-powered 'eye' for visually impaired people to 'see' objects",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Tech Xplore",
+      "url": "https://techxplore.com/news/2024-02-ai-powered-eye-visually-impaired.html",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-team-develops-affordable-headset-to-help-visually-impaired-see",
+      "title": "NUS team develops affordable headset to help visually impaired 'see'",
+      "year": "2024",
+      "type": "news",
+      "outlet": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/nus-team-develops-affordable-headset-to-help-visually-impaired-see",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-researchers-launch-aisee-to-help-the-visually-impaired-see-with-the-help-of-ai",
+      "title": "NUS researchers launch AiSee to help the visually impaired \"see\" with the help of AI",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Hardware Zone Singapore",
+      "url": "https://www.hardwarezone.com.sg/tech-news-nus-researchers-aisee-help-visually-impaired-see-ai",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-researchers-develop-ai-powered-headset-to-help-visually-impaired-see",
+      "title": "NUS researchers develop AI-powered headset to help visually impaired \"see\"",
+      "year": "2024",
+      "type": "video",
+      "outlet": "Channel NewsAsia (CNA)",
+      "url": "https://youtu.be/pHmUeN-ALUg",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-researchers-develop-ai-powered-eye-for-visually-impaired-people-to-see-objects",
+      "title": "NUS researchers develop AI-powered 'eye' for visually impaired people to 'see' objects",
+      "year": "2024",
+      "type": "news",
+      "outlet": "National University of Singapore",
+      "url": "https://news.nus.edu.sg/ai-powered-eye-for-visually-impaired-people/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "i-was-blind-but-now-aisee",
+      "title": "I Was Blind, But Now AiSee",
+      "year": "2024",
+      "type": "news",
+      "outlet": "hackster.io",
+      "url": "https://www.hackster.io/news/i-was-blind-but-now-aisee-997ed7e95610",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "an-experimental-ai-wearable-recognises-objects-and-tells-visually-impaired-users-details-of-what-theyre-holding",
+      "title": "An experimental AI wearable recognises objects and tells visually-impaired users details of what they're holding",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Yahoo News",
+      "url": "https://uk.news.yahoo.com/experimental-ai-wearable-recognises-objects-173329887.html",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-wearable-lets-visually-impaired-users-see",
+      "title": "AiSee: Wearable lets visually impaired users 'see'",
+      "year": "2024",
+      "type": "news",
+      "outlet": "FocusTechnica",
+      "url": "https://www.focustechnica.com/aisee-wearable-lets-visually-impaired-users-see/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-ai-powered-eye-for-visually-impaired-people-to-see-objects",
+      "title": "AiSee: AI-powered 'eye' for visually impaired people to 'see' objects",
+      "year": "2024",
+      "type": "video",
+      "outlet": "National University of Singapore",
+      "url": "https://youtu.be/81grB7BtN9k",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-ai-powered-eye-for-visually-impaired-people-to-see-objects-2",
+      "title": "AiSee: AI-Powered 'Eye' for Visually Impaired People to 'See' Objects",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Adafruit",
+      "url": "https://blog.adafruit.com/2024/02/12/aisee-ai-powered-eye-for-visually-impaired-people-to-see-objects/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-wearable-tells-blind-users-what-theyre-holding-in-their-hand",
+      "title": "AiSee wearable tells blind users what they're holding in their hand",
+      "year": "2024",
+      "type": "news",
+      "outlet": "News Atlas",
+      "url": "https://newatlas.com/wearables/aisee-wearable-blind-object-recognition/",
+      "projects": [
+        "aisee"
+      ]
+    }
+  ]
+}

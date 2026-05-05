@@ -1,0 +1,361 @@
+{
+  "slug": "samantha-chan",
+  "name": "Samantha Chan",
+  "role": "PhD Candidate",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/samantha-chan/samantha-chan.jpg",
+  "profile_url": "/people/samantha-chan/",
+  "projects": [
+    {
+      "slug": "toro",
+      "title": "Toro",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/toro/toro.jpg",
+      "principles": [
+        "cognitive"
+      ]
+    },
+    {
+      "slug": "kinvoice",
+      "title": "KinVoice",
+      "year": "2021",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/kinvoice/kinvoice.jpg",
+      "principles": [
+        "cognitive",
+        "identity",
+        "sociocultural"
+      ]
+    },
+    {
+      "slug": "prompto",
+      "title": "Prompto",
+      "year": "2020",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/prompto/prompto.jpg",
+      "principles": [
+        "body",
+        "cognitive"
+      ]
+    },
+    {
+      "slug": "prospero",
+      "title": "Prospero",
+      "year": "2019",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/prospero/prospero.jpg",
+      "principles": [
+        "body",
+        "cognitive"
+      ]
+    },
+    {
+      "slug": "prospecfit",
+      "title": "ProspecFit",
+      "year": "2018",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/prospecfit/prospecfit.jpg",
+      "principles": [
+        "cognitive"
+      ]
+    },
+    {
+      "slug": "fsense",
+      "title": "fSense",
+      "year": "2018",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/fsense/fsense.jpg",
+      "principles": [
+        "body"
+      ]
+    },
+    {
+      "slug": "doodle-daydream",
+      "title": "Doodle Daydream",
+      "year": "2017",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/doodle-daydream/doodle-daydream.jpg",
+      "principles": [
+        "sociocultural"
+      ]
+    },
+    {
+      "slug": "chaddybuddy",
+      "title": "ChaddyBuddy",
+      "year": "2017",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/chaddybuddy/chaddybuddy.jpg",
+      "principles": [
+        "cognitive"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "toro-a-web-based-tool-to-search-explore-screen-compare-and-visualize-literature",
+      "title": "Toro: A Web-based Tool to Search, Explore, Screen, Compare and Visualize Literature",
+      "year": "2022",
+      "citation": "Messerschmidt, M., Chan, S., Wen, E. and Nanayakkara, S.C., 2022. Toro: A Web-based Tool to Search, Explore, Screen, Compare and Visualize Literature.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://aisel.aisnet.org/sighci2022/13"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1iVWCo4Jh_fFHOr6wy8NUh_V55HOA7GLi/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "sensor-based-interactive-worksheets-to-support-guided-scientific-inquiry",
+      "title": "Sensor-Based Interactive Worksheets to Support Guided Scientific Inquiry",
+      "year": "2021",
+      "citation": "Cao, J., Chan, S.W.T., Garbett, D.L., Denny, P., Nassani, A., Scholl, P.M. and Nanayakkara, S.C., 2021. Sensor-Based Interactive Worksheets to Support Guided Scientific Inquiry. In Interaction Design and Children (IDC ’21), June 24–30, 2021, Athens, Greece. ACM, New York, NY, USA, 7 pages. Best Short Paper Award!",
+      "awards": [
+        "Best Short Paper Award"
+      ],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3459990.3460716"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1PePtQbU4Qquk1UpyIv9DXGpejZnoNlbf/view?usp=sharing"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "kinvoices-using-voices-of-friends-and-family-in-voice-interfaces",
+      "title": "KinVoices: Using Voices of Friends and Family in Voice Interfaces",
+      "year": "2021",
+      "citation": "Chan, S. W. T., Gunasekaran, T., Pai, Y. S., Zhang, H. and Nanayakkara, S.C. 2021. KinVoices: Using Voices of Friends and Family in Voice Interfaces. Proc. ACM Hum.-Comput. Interact. 5, CSCW2, Article 446 (October 2021), 25 pages.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3479590"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1_Bp0ShrTKy81zvguDyOgrgdBunsin8iX/view?usp=sharing"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "prompto-investigating-receptivity-to-prompts-based-on-cognitive-load-from-memory-training-conversational-agent",
+      "title": "Prompto: Investigating Receptivity to Prompts Based on Cognitive Load from Memory Training Conversational Agent",
+      "year": "2020",
+      "citation": "Chan, S. W. T., Sapkota, S., Mathews, R., Zhang, H. and Nanayakkara, S. C., 2020. Prompto: Investigating Receptivity to Prompts Based on Cognitive Load from Memory Training Conversational Agent. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 4(4), pp.1-23.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3432190"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1Yw-HUkFRsdeuHzvP14rxq5RMq03kENsy/view?usp=sharing"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "biosignal-sensitive-memory-improvement-and-support-systems",
+      "title": "Biosignal-Sensitive Memory Improvement and Support Systems",
+      "year": "2020",
+      "citation": "Chan, S. W. T. 2020. Biosignal-Sensitive Memory Improvement and Support Systems. In Extended Abstracts of the 2020 CHI Conference on Human Factors in Computing Systems Extended Abstracts (CHI ’20). Association for Computing Machinery, New York, NY, USA, 1–7.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi-org.ezproxy.auckland.ac.nz/10.1145/3334480.3375031"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1TGUGp3DP9wQEccPRk8bo-OHiqdWnUkwd/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI EA"
+    },
+    {
+      "slug": "prospero-a-personal-wearable-memory-coach",
+      "title": "Prospero: A Personal Wearable Memory Coach",
+      "year": "2019",
+      "citation": "Chan, S. W. T., Zhang, H. and Nanayakkara, S. C., 2019, March. Prospero: A Personal Wearable Memory Coach. In Proceedings of the 10th Augmented Human International Conference 2019 (pp. 1-5).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3311823.3311870"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1gzCAH8kVmlWjIDkt-ZBpCOT79vwFsf0Y/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "prospecfit-in-situ-evaluation-of-digital-prospective-memory-training-for-older-adults",
+      "title": "ProspecFit: In Situ Evaluation of Digital Prospective Memory Training for Older Adults",
+      "year": "2019",
+      "citation": "Chan, S. W. T., Buddhika, T., Zhang, H. and Nanayakkara, S. C., 2019. ProspecFit: In Situ Evaluation of Digital Prospective Memory Training for Older Adults. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 3(3), pp.1-20.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3351235"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1tpwydWe6sRgWyFJ6K_H5b4hA7vgv25Kq/view?usp=sharing"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "going-beyond-performance-scores-understanding-cognitive-affective-states-in-kindergarteners-and-application-of-framework-in-classrooms",
+      "title": "Going beyond performance scores: Understanding cognitive-affective states in Kindergarteners and application of framework in classrooms",
+      "year": "2019",
+      "citation": "Sridhar, P. K., Chan, S. W. T., Chua, Y., Quin, Y. W. and Nanayakkara, S. C., 2019. Going beyond performance scores: Understanding cognitive-affective states in Kindergarteners and application of framework in classrooms. International Journal of Child-Computer Interaction, 21, pp.37-53.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.ijcci.2019.04.002"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1aYqvW4oLe6eqmZiCOaRpLs9clSm56OSb/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "fsense-unlocking-the-dimension-of-force-for-gestural-interactions-using-smartwatch-ppg-sensor",
+      "title": "fSense: Unlocking the Dimension of Force for Gestural Interactions using Smartwatch PPG Sensor",
+      "year": "2019",
+      "citation": "Buddhika, T., Zhang, H., Chan, S. W. T., Dissanayake, V., Nanayakkara, S.C. and Zimmermann, R., 2019, March. fSense: unlocking the dimension of force for gestural interactions using smartwatch PPG sensor. In Proceedings of the 10th Augmented Human International Conference 2019 (pp. 1-5).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3311823.3311839"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1kRU90YDIfXAg9X-cYnv2kneE25gbTwcH/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "going-beyond-performance-scores-understanding-cognitive-affective-states-in-kindergarteners",
+      "title": "Going beyond performance scores: understanding cognitive-affective states in kindergarteners",
+      "year": "2018",
+      "citation": "Sridhar, P. K., Chan, S. W. T. and Nanayakkara, S.C., 2018. Going beyond performance scores: understanding cognitive-affective states in kindergarteners. In Proceedings of the 17th ACM Conference on Interaction Design and Children (pp. 253-265). ACM.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3202185.3202739"
+        },
+        {
+          "label": "URL",
+          "url": "https://dl.acm.org/citation.cfm?id=3202739"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1-h8ju4A8yx_7zxEfnlQWi1vC99gVB8Mj/view?usp=sharing"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "doodle-daydream-an-interactive-display-to-support-playful-and-creative-interactions-between-co-workers",
+      "title": "Doodle Daydream: An Interactive Display to Support Playful and Creative Interactions Between Co-workers",
+      "year": "2018",
+      "citation": "Elvitigala, S., Chan, S. W. T., Howell, N., Matthies, D. J. and Nanayakkara, S. C., 2018, October. Doodle Daydream: An Interactive Display to Support Playful and Creative Interactions Between Co-workers. In Proceedings of the Symposium on Spatial User Interaction (pp. 186-186).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3267782.3274681"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1f1HKVvNJUjm2ZmrDFBJb09M2RK6g_swO/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    }
+  ],
+  "events": [],
+  "press": [
+    {
+      "slug": "toro-prototypes-for-humanity",
+      "title": "Toro | Prototypes for Humanity",
+      "year": "2023",
+      "type": "award",
+      "outlet": null,
+      "url": "https://www.prototypesforhumanity.com/project/toro/",
+      "projects": [
+        "toro"
+      ]
+    },
+    {
+      "slug": "kinvoice-prototypes-for-humanity",
+      "title": "KinVoice | Prototypes for Humanity",
+      "year": "2022",
+      "type": "award",
+      "outlet": null,
+      "url": "https://www.prototypesforhumanity.com/project/kinvoice/",
+      "projects": [
+        "kinvoice"
+      ]
+    },
+    {
+      "slug": "prospero-best-design-awards-student-digital-gold",
+      "title": "Prospero | Best Design Awards | Student Digital: Gold",
+      "year": "2020",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/digital/student-digital/samantha/prospero-2/",
+      "projects": [
+        "prospero"
+      ]
+    },
+    {
+      "slug": "propsero-best-design-awards-public-good-award-finalist",
+      "title": "Propsero | Best Design Awards | Public Good Award: Finalist",
+      "year": "2020",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/public-good-award/student-public-good/samantha/prospero/",
+      "projects": [
+        "prospero"
+      ]
+    },
+    {
+      "slug": "fast-company-2020-world-changing-ideas-awards-honorable-mention-prospero-a-biosignal-sensitive-memory-assistant",
+      "title": "Fast Company 2020 World Changing Ideas Awards | Honorable Mention | Prospero: A Biosignal-Sensitive Memory Assistant",
+      "year": "2020",
+      "type": "award",
+      "outlet": "FastCompany",
+      "url": "https://www.fastcompany.com/90492112/world-changing-ideas-awards-2020-students-finalists-and-honorable-mentions",
+      "projects": [
+        "prospero"
+      ]
+    },
+    {
+      "slug": "velocity-innovation-challenge-2019-female-founders-prize-by-uniservices-prospero",
+      "title": "Velocity Innovation Challenge 2019 | Female Founders Prize by UniServices | Prospero",
+      "year": "2019",
+      "type": "award",
+      "outlet": "Velocity",
+      "url": "https://www.velocity.auckland.ac.nz/2019/08/05/innovation-challenge-final-2019/",
+      "projects": [
+        "prospero"
+      ]
+    }
+  ]
+}

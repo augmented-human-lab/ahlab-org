@@ -1,0 +1,263 @@
+{
+  "slug": "hannah-qiao",
+  "name": "Hannah Qiao",
+  "role": "Designer",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/hannah-qiao/hannah-qiao.jpg",
+  "profile_url": "/people/hannah-qiao/",
+  "projects": [
+    {
+      "slug": "zenflow",
+      "title": "Zenflow",
+      "year": "Current",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/zenflow/zenflow.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "xr-floatation-therapy",
+      "title": "XR Floatation Therapy",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/xr-floatation-therapy/xr-floatation-therapy.jpg",
+      "principles": [
+        "cognitive",
+        "perceptual",
+        "identity"
+      ]
+    },
+    {
+      "slug": "stakco",
+      "title": "Stakco",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/stakco/stakco.jpg",
+      "principles": [
+        "cognitive",
+        "sociocultural"
+      ]
+    },
+    {
+      "slug": "kavy",
+      "title": "Kavy",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/kavy/kavy.jpg",
+      "principles": [
+        "cognitive",
+        "sociocultural"
+      ]
+    },
+    {
+      "slug": "itiles",
+      "title": "iTILES",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/itiles/itiles.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "physical"
+      ]
+    },
+    {
+      "slug": "hopu",
+      "title": "Hopu",
+      "year": "2023",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/hopu/hopu.jpg",
+      "principles": [
+        "cognitive",
+        "physical"
+      ]
+    },
+    {
+      "slug": "kiwrious",
+      "title": "Kiwrious",
+      "year": "2022",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/kiwrious/kiwrious.jpg",
+      "principles": [
+        "cognitive",
+        "physical"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "exploring-an-extended-reality-floatation-tank-experience-to-reduce-the-fear-of-being-in-water",
+      "title": "Exploring an Extended Reality Floatation Tank Experience to Reduce the Fear of Being in Water",
+      "year": "2024",
+      "citation": "Montoya, M.F., Qiao, H., Sasikumar, P., Elvitigala, D.S., Pell, S.J., Nanayakkara, S.C, Mueller, F. ‘Floyd’, 2024. Exploring an Extended Reality Floatation Tank Experience to Reduce the Fear of Being in Water. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI ’24), May 11–16, 2024, Honolulu, HI, USA.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3613904.3642285"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1kFNShCVypGn7mNFvkka4nwg2KH-qgEDN/view?usp=drive_link"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "striving-for-authentic-and-sustained-technology-use-in-the-classroom-lessons-learned-from-a-longitudinal-evaluation-of-a-sensor-based-science-education-platform",
+      "title": "Striving for Authentic and Sustained Technology Use in the Classroom: Lessons Learned from a Longitudinal Evaluation of a Sensor-Based Science Education Platform",
+      "year": "2023",
+      "citation": "Chua, Y., Cooray, S., Cortes, J.P.F., Denny, P., Dupuch, S., Garbett, D.L., Nassani, A., Cao, J., Qiao, H., Reis, A, Reis, D., Scholl, P.M., Sridhar, P.K., Suriyaarachchi, H., Taimana, F., Tang, V., Weerasinghe, C., Wen, E., Wu, M., Wu, Q., Zhang, H., Nanayakkara, S.C. 2023. Striving for Authentic and Sustained Technology Use In the Classroom: Lessons Learned from a Longitudinal Evaluation of a Sensor-based Science Education Platform. International Journal of Human–Computer Interaction (IJHCI).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1080/10447318.2023.2229485"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1fhABNfB6965rV6NJCIXlgrVl0Bgn6e6n/view?usp=sharing"
+        }
+      ],
+      "venue": "IJHCI"
+    },
+    {
+      "slug": "snatch-and-hatch-improving-receptivity-towards-a-nature-of-science-with-a-playful-mobile-application",
+      "title": "Snatch and hatch: Improving receptivity towards a nature of science with a playful mobile application",
+      "year": "2023",
+      "citation": "Qiao, H., Suriyaarachchi, H., Cooray, S. and Nanayakkara, S.C. 2023, June. Snatch and hatch: Improving receptivity towards a nature of science with a playful mobile application. In Proceedings of the 22nd Annual ACM Interaction Design and Children Conference (pp. 278-288).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://dl.acm.org/doi/abs/10.1145/3585088.3589384"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1xuGj3bQoTBCrW1i7V2UbRLTxacpA1EsL/view?usp=drive_link"
+        }
+      ],
+      "venue": "ACM"
+    }
+  ],
+  "events": [],
+  "press": [
+    {
+      "slug": "zenflow-chi-2026-honorable-mention",
+      "title": "Zenflow: Investigating MR Transitions for Enhancing Sleep and Relaxation | Honorable Mention",
+      "year": "2026",
+      "type": "award",
+      "outlet": "ACM CHI",
+      "url": null,
+      "projects": [
+        "zenflow"
+      ]
+    },
+    {
+      "slug": "research-team-boosts-science-learning-for-children-the-kiwrious-project",
+      "title": "Research Team Boosts Science Learning for Children: The Kiwrious Project",
+      "year": "2022",
+      "type": "news",
+      "outlet": "United Nations",
+      "url": "https://www.un.org/en/academic-impact/research-team-boosts-science-learning-children-kiwrious-project",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "sensor-based-interactive-worksheets-idc-2021-best-short-paper",
+      "title": "Sensor-Based Interactive Worksheets to Support Guided Scientific Inquiry | Best Short Paper Award",
+      "year": "2021",
+      "type": "award",
+      "outlet": "ACM IDC",
+      "url": null,
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "world-changing-ideas-awards-2021-education-finalist-kiwrious",
+      "title": "World Changing Ideas Awards 2021: Education | Finalist | Kiwrious",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Fast Company",
+      "url": "https://www.fastcompany.com/90623632/world-changing-ideas-awards-2021-education-finalists-and-honorable-mentions",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "world-changing-ideas-awards-2021-asia-pacific-honorable-mention-kiwrious",
+      "title": "World Changing Ideas Awards 2021: Asia-Pacific | Honorable Mention | Kiwrious",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Fast Company",
+      "url": "https://www.fastcompany.com/90624522/world-changing-ideas-awards-2021-asia-pacific-finalists-and-honorable-mentions",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "novel-interactive-science-kits-sent-out-free-to-schools-kiwrious",
+      "title": "Novel interactive science kits sent out free to schools | Kiwrious",
+      "year": "2021",
+      "type": "news",
+      "outlet": "The University of Auckland",
+      "url": "https://www.auckland.ac.nz/en/news/2021/05/12/Interactive-science-kits-sent-to-schools.html",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "kiwrious-social-impact-winner",
+      "title": "Kiwrious | Social Impact Winner",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Good Design Australia",
+      "url": "https://good-design.org/projects/kiwrious/",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "kiwrious-best-design-awards-value-of-design-bronze",
+      "title": "Kiwrious | Best Design Awards | Value of Design : Bronze",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/value-of-design-award/augmented-human-lab/kiwrious-2/",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "kiwrious-best-design-awards-user-experience-bronze",
+      "title": "Kiwrious | Best Design Awards | User Experience: Bronze",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/digital/user-experience/augmented-human-lab/kiwrious-1/",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "kiwrious-best-design-awards-public-good-award-silver",
+      "title": "Kiwrious | Best Design Awards | Public Good Award: Silver",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/public-good-award/public-good-award/augmented-human-lab/kiwrious/",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "inspiring-curiosity-for-science-in-kids-with-google-cloud-solutions",
+      "title": "Inspiring curiosity for science in kids with Google Cloud solutions",
+      "year": "2021",
+      "type": "news",
+      "outlet": "Google Cloud",
+      "url": "https://cloud.google.com/customers/augmented-human-lab",
+      "projects": [
+        "kiwrious"
+      ]
+    }
+  ]
+}

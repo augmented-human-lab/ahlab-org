@@ -1,0 +1,67 @@
+{
+  "slug": "andrew-reis",
+  "name": "Andrew Reis",
+  "role": "Master Student",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/andrew-reis/andrew-reis.jpg",
+  "profile_url": "/people/andrew-reis/",
+  "projects": [],
+  "publications": [
+    {
+      "slug": "striving-for-authentic-and-sustained-technology-use-in-the-classroom-lessons-learned-from-a-longitudinal-evaluation-of-a-sensor-based-science-education-platform",
+      "title": "Striving for Authentic and Sustained Technology Use in the Classroom: Lessons Learned from a Longitudinal Evaluation of a Sensor-Based Science Education Platform",
+      "year": "2023",
+      "citation": "Chua, Y., Cooray, S., Cortes, J.P.F., Denny, P., Dupuch, S., Garbett, D.L., Nassani, A., Cao, J., Qiao, H., Reis, A, Reis, D., Scholl, P.M., Sridhar, P.K., Suriyaarachchi, H., Taimana, F., Tang, V., Weerasinghe, C., Wen, E., Wu, M., Wu, Q., Zhang, H., Nanayakkara, S.C. 2023. Striving for Authentic and Sustained Technology Use In the Classroom: Lessons Learned from a Longitudinal Evaluation of a Sensor-based Science Education Platform. International Journal of Human–Computer Interaction (IJHCI).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1080/10447318.2023.2229485"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1fhABNfB6965rV6NJCIXlgrVl0Bgn6e6n/view?usp=sharing"
+        }
+      ],
+      "venue": "IJHCI"
+    },
+    {
+      "slug": "a-review-of-recent-deep-learning-approaches-in-human-centered-machine-learning",
+      "title": "A Review of Recent Deep Learning Approaches in Human-Centered Machine Learning",
+      "year": "2021",
+      "citation": "Kaluarachchi, T., Reis, A., and Nanayakkara, S.C., 2021. A Review of Recent Deep Learning Approaches in Human-Centered Machine Learning. Sensors. 21(7):2514.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.3390/s21072514"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1nYpzCuuCe7nth0Q6C-ebAg9WHGpOsQKK/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "jointly-fine-tuning-bert-like-self-supervised-models-to-improve-multimodal-speech-emotion-recognition",
+      "title": "Jointly Fine-Tuning \"BERT-like\" Self Supervised Models to Improve Multimodal Speech Emotion Recognition",
+      "year": "2020",
+      "citation": "Siriwardhana, S., Reis, A., Weerasekera, R., and Nanayakkara, S.C., 2020 Jointly Fine-Tuning “BERT-Like” Self Supervised Models to Improve Multimodal Speech Emotion Recognition. Proc. Interspeech 2020, 3755-3759",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "http://dx.doi.org/10.21437/Interspeech.2020-1212"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1wIWsr_58uAD_D6PCq2pQKOFw7CORBLWE/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    }
+  ],
+  "events": [],
+  "press": []
+}

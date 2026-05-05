@@ -1,0 +1,583 @@
+{
+  "slug": "yeo-kian-peen",
+  "name": "Yeo Kian Peen",
+  "role": "Senior Embedded Engineer",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/yeo-kian-peen/yeo-kian-peen.jpg",
+  "profile_url": "/people/yeo-kian-peen/",
+  "projects": [
+    {
+      "slug": "blind-drone",
+      "title": "Blind Drone",
+      "year": "Current",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/blind-drone/blind-drone.jpg",
+      "principles": [
+        "perceptual",
+        "physical"
+      ]
+    },
+    {
+      "slug": "aisee",
+      "title": "AiSee",
+      "year": "2025",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/aisee/aisee.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual",
+        "identity"
+      ]
+    },
+    {
+      "slug": "knoctify",
+      "title": "Knoctify",
+      "year": "2016",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/knoctify/knoctify.jpg",
+      "principles": [
+        "perceptual",
+        "identity"
+      ]
+    },
+    {
+      "slug": "iswarm",
+      "title": "iSwarm",
+      "year": "2014",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/iswarm/iswarm.jpg",
+      "principles": [
+        "sociocultural"
+      ]
+    },
+    {
+      "slug": "stickear",
+      "title": "StickEar",
+      "year": "2013",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/stickear/stickear.jpg",
+      "principles": [
+        "physical"
+      ]
+    },
+    {
+      "slug": "fingerdraw",
+      "title": "FingerDraw",
+      "year": "2013",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/fingerdraw/fingerdraw.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "physical"
+      ]
+    },
+    {
+      "slug": "augmented-forearm",
+      "title": "Augmented Forearm",
+      "year": "2013",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/augmented-forearm/augmented-forearm.jpg",
+      "principles": [
+        "body",
+        "physical"
+      ]
+    },
+    {
+      "slug": "speechplay",
+      "title": "SpeechPlay",
+      "year": "2012",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/speechplay/speechplay.jpg",
+      "principles": [
+        "cognitive",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "eyering",
+      "title": "EyeRing",
+      "year": "2012",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/eyering/eyering.jpg",
+      "principles": [
+        "body",
+        "perceptual",
+        "identity"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "droneaudioset-an-audio-dataset-for-drone-based-search-and-rescue",
+      "title": "DroneAudioset: An Audio Dataset for Drone-based Search and Rescue",
+      "year": "2025",
+      "citation": "Gupta, C.*, Ramesh, S.*, Sasikumar, P., Yeo, K. P., & Nanayakkara, S. C., \"DroneAudioset: An Audio Dataset for Drone-based Search and Rescue,\" NeurIPS 2025.",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1x4HXEwWi_6E0Gsgy3if_DDc23ilCI4ji/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "iswarm-a-swarm-of-luminous-sea-creatures-that-interact-with-passers-by",
+      "title": "iSwarm: a swarm of luminous sea creatures that interact with passers-by",
+      "year": "2014",
+      "citation": "Schroepfer, T., Nanayakkara, S. C., A., Wortmann, T., Cornelius, A., Khew, Y.N. and Lian, A., Yeo K.P., Peiris, R.L., Withana, A., Werry. I., Petry, B., Otega, S., Janaka, N., Elvitigala, S., Fernando, P., Samarasekara, N., 2014. iSwarm: a swarm of luminous sea creatures that interact with passers-by. In Singapore iLight 2014 (Marina Bay, Singapore, 7- 30 March, 2014). ​",
+      "awards": [],
+      "links": [
+        {
+          "label": "webpage",
+          "url": "http://2014.ilightmarinabay.sg/installation/iswarm/"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "stickear-making-everyday-objects-respond-to-sound",
+      "title": "StickEar: Making Everyday Objects Respond to Sound",
+      "year": "2013",
+      "citation": "Yeo, K.P., Nanayakkara, S.C. and Ransiri, S., 2013, October. StickEar: making everyday objects respond to sound. In Proceedings of the 26th annual ACM symposium on User interface software and technology (pp. 221-226).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://dl.acm.org/doi/10.1145/2501988.2502019"
+        },
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/03/StickEar_UIST2013.pdf"
+        }
+      ],
+      "venue": "UIST"
+    },
+    {
+      "slug": "stickear-augmenting-objects-and-places-wherever-whenever",
+      "title": "StickEar: Augmenting Objects and Places Wherever Whenever",
+      "year": "2013",
+      "citation": "Yeo, K.P. and Nanayakkara, S.C., 2013. StickEar: augmenting objects and places wherever whenever. In CHI'13 Extended Abstracts on Human Factors in Computing Systems (pp. 751-756).",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/03/p_peen_2013.pdf"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "speechplay-composing-and-sharing-expressive-speech-through-visually-augmented-text",
+      "title": "SpeechPlay: Composing and Sharing Expressive Speech Through Visually Augmented Text.",
+      "year": "2013",
+      "citation": "Yeo, K.P. and Nanayakkara, S.C., 2013, November. SpeechPlay: composing and sharing expressive speech through visually augmented text. In Proceedings of the 25th Australian Computer-Human Interaction Conference: Augmentation, Application, Innovation, Collaboration (pp. 565-568).",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/03/SpeechPlay_OZCHI13_CameraReady.pdf"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "smartfinger-connecting-devices-objects-and-people-seamlessly",
+      "title": "SmartFinger: Connecting Devices, Objects and People seamlessly",
+      "year": "2013",
+      "citation": "Ransiri, S., Peiris, R.L., Yeo, K.P. and Nanayakkara, S.C., 2013, November. SmartFinger: connecting devices, objects and people seamlessly. In Proceedings of the 25th Australian Computer-Human Interaction Conference: Augmentation, Application, Innovation, Collaboration (pp. 359-362).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/2541016.2541064"
+        },
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/03/ozchi13_SmartFinger_ShortPaper.pdf"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "fingerdraw-more-than-a-digital-paintbrush",
+      "title": "FingerDraw: More than a Digital Paintbrush",
+      "year": "2013",
+      "citation": "Hettiarachchi A., Nanayakkara S. C., Yeo K.P., Shilkrot R. and Maes P. ”FingerDraw: More than a Digital Paintbrush”, ACM SIGCHI Augmented Human, March, 2013.",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/03/p_hettiarachchi_2013.pdf"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "eyering-a-finger-worn-input-device-for-seamless-interactions-with-our-surroundings",
+      "title": "EyeRing: A Finger Worn Input Device for Seamless Interactions with our Surroundings",
+      "year": "2013",
+      "citation": "Nanayakkara S. C., Shilkrot R. Yeo K.P. and Maes P.”EyeRing: A Finger Worn Input Device for Seamless Interactions with our Surroundings”, ACM SIGCHI Augmented Human, March, 2013.",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/03/p_nanayakkara_2013.pdf"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "augmentedforearm-exploring-the-design-space-of-a-display-enhanced-forearm",
+      "title": "AugmentedForearm: Exploring the Design Space of a Display-enhanced Forearm",
+      "year": "2013",
+      "citation": "Olberding S., Yeo K.P., Nanayakkara S.C. and Steimle J. “AugmentedForearm: Exploring the Design Space of a Display-enhanced Forearm”, ACM SIGCHI Augmented Human, March, 2013.",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/03/p_olberding_2013.pdf"
+        }
+      ],
+      "venue": "AH"
+    }
+  ],
+  "events": [],
+  "press": [
+    {
+      "slug": "i-wont-have-to-trouble-anyone-when-i-visit",
+      "title": "'I won't have to trouble anyone when I visit': How AiSee helps visitors with visual impairment at Gardens by the Bay",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/i-wont-have-to-trouble-",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "gardens-by-the-bay-to-offer-robot-guide-dog-online-sensory-map-2026",
+      "title": "Gardens by the Bay to offer robot guide dog, online sensory map for visitors with disabilities",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/gardens-by-the-bay-to-offer-robot-guide-dog-online-sensory-map-for-visitors-with-disabilities",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "straits-times-facebook-aisee-wearable-headset-2026",
+      "title": "A wearable AI-powered headset is also in the works to help individuals with visual impairment",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times (Facebook)",
+      "url": "https://www.facebook.com/TheStraitsTimes/posts/a-wearable-ai-powered-headset-is-also-in-the-works-to-help-individuals-with-visu/1234420202178471/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "straits-times-x-aisee-gardens-by-the-bay-2026",
+      "title": "Gardens by the Bay to offer robot guide dog and AiSee headset (The Straits Times on X)",
+      "year": "2026",
+      "type": "news",
+      "outlet": "The Straits Times (X)",
+      "url": "https://x.com/straits_times/status/2035688344785412588",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "cna-robot-guide-dog-inclusive-innovations-gardens-by-the-bay-2026",
+      "title": "Robot guide dog among inclusive innovations to help visitors with disabilities at Gardens by the Bay",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Channel NewsAsia (CNA)",
+      "url": "https://www.channelnewsasia.com/watch/robot-guide-dog-among-inclusive-innovations-help-visitors-disabilities-gardens-bay-6009986",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "mothership-youtube-aisee-robot-guide-dog-2026",
+      "title": "Robot guide dog and AiSee at Gardens by the Bay (Mothership)",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Mothership (YouTube)",
+      "url": "https://www.youtube.com/shorts/q1csBHJOxzI",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "mothership-facebook-aisee-gardens-by-the-bay-2026",
+      "title": "Robot guide dog and AiSee at Gardens by the Bay (Mothership)",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Mothership (Facebook)",
+      "url": "https://www.facebook.com/watch/?v=960598809644633",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "mothership-instagram-aisee-gardens-by-the-bay-2026",
+      "title": "Robot guide dog and AiSee at Gardens by the Bay (Mothership)",
+      "year": "2026",
+      "type": "video",
+      "outlet": "Mothership (Instagram)",
+      "url": "https://www.instagram.com/reel/DWMSdFFCm1a/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "how-aisee-can-make-the-blind-see",
+      "title": "How AiSee Can Make the Blind 'See'",
+      "year": "2025",
+      "type": "news",
+      "outlet": "Tech Briefs",
+      "url": "https://www.techbriefs.com/component/content/article/52354-how-aisee-can-make-the-blind-see",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "researchers-develop-ai-powered-eye-for-visually-impaired-people-to-see-objects",
+      "title": "Researchers develop AI-powered 'eye' for visually impaired people to 'see' objects",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Tech Xplore",
+      "url": "https://techxplore.com/news/2024-02-ai-powered-eye-visually-impaired.html",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-team-develops-affordable-headset-to-help-visually-impaired-see",
+      "title": "NUS team develops affordable headset to help visually impaired 'see'",
+      "year": "2024",
+      "type": "news",
+      "outlet": "The Straits Times",
+      "url": "https://www.straitstimes.com/singapore/nus-team-develops-affordable-headset-to-help-visually-impaired-see",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-researchers-launch-aisee-to-help-the-visually-impaired-see-with-the-help-of-ai",
+      "title": "NUS researchers launch AiSee to help the visually impaired \"see\" with the help of AI",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Hardware Zone Singapore",
+      "url": "https://www.hardwarezone.com.sg/tech-news-nus-researchers-aisee-help-visually-impaired-see-ai",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-researchers-develop-ai-powered-headset-to-help-visually-impaired-see",
+      "title": "NUS researchers develop AI-powered headset to help visually impaired \"see\"",
+      "year": "2024",
+      "type": "video",
+      "outlet": "Channel NewsAsia (CNA)",
+      "url": "https://youtu.be/pHmUeN-ALUg",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "nus-researchers-develop-ai-powered-eye-for-visually-impaired-people-to-see-objects",
+      "title": "NUS researchers develop AI-powered 'eye' for visually impaired people to 'see' objects",
+      "year": "2024",
+      "type": "news",
+      "outlet": "National University of Singapore",
+      "url": "https://news.nus.edu.sg/ai-powered-eye-for-visually-impaired-people/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "i-was-blind-but-now-aisee",
+      "title": "I Was Blind, But Now AiSee",
+      "year": "2024",
+      "type": "news",
+      "outlet": "hackster.io",
+      "url": "https://www.hackster.io/news/i-was-blind-but-now-aisee-997ed7e95610",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "an-experimental-ai-wearable-recognises-objects-and-tells-visually-impaired-users-details-of-what-theyre-holding",
+      "title": "An experimental AI wearable recognises objects and tells visually-impaired users details of what they're holding",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Yahoo News",
+      "url": "https://uk.news.yahoo.com/experimental-ai-wearable-recognises-objects-173329887.html",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-wearable-lets-visually-impaired-users-see",
+      "title": "AiSee: Wearable lets visually impaired users 'see'",
+      "year": "2024",
+      "type": "news",
+      "outlet": "FocusTechnica",
+      "url": "https://www.focustechnica.com/aisee-wearable-lets-visually-impaired-users-see/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-ai-powered-eye-for-visually-impaired-people-to-see-objects",
+      "title": "AiSee: AI-powered 'eye' for visually impaired people to 'see' objects",
+      "year": "2024",
+      "type": "video",
+      "outlet": "National University of Singapore",
+      "url": "https://youtu.be/81grB7BtN9k",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-ai-powered-eye-for-visually-impaired-people-to-see-objects-2",
+      "title": "AiSee: AI-Powered 'Eye' for Visually Impaired People to 'See' Objects",
+      "year": "2024",
+      "type": "news",
+      "outlet": "Adafruit",
+      "url": "https://blog.adafruit.com/2024/02/12/aisee-ai-powered-eye-for-visually-impaired-people-to-see-objects/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "aisee-wearable-tells-blind-users-what-theyre-holding-in-their-hand",
+      "title": "AiSee wearable tells blind users what they're holding in their hand",
+      "year": "2024",
+      "type": "news",
+      "outlet": "News Atlas",
+      "url": "https://newatlas.com/wearables/aisee-wearable-blind-object-recognition/",
+      "projects": [
+        "aisee"
+      ]
+    },
+    {
+      "slug": "universal-design-enables-everyone-suranga-nanayakkara",
+      "title": "Universal Design Enables Everyone | Suranga Nanayakkara",
+      "year": "2016",
+      "type": "video",
+      "outlet": "TEDxYouth@Palmerston",
+      "url": "http://tedxtalks.ted.com/video/Universal-Design-Enables-Everyo",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0",
+        "fingerdraw",
+        "sparsh",
+        "eyering"
+      ]
+    },
+    {
+      "slug": "sharper-senses-devices-mimicking-our-natural-senses",
+      "title": "Sharper Senses - Devices mimicking our natural senses",
+      "year": "2016",
+      "type": "video",
+      "outlet": "BBC",
+      "url": "http://www.bbc.com/specialfeatures/horizonsbusiness/seriessix/sharper-senses/?vid=p03xpgvm",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0",
+        "stickear"
+      ]
+    },
+    {
+      "slug": "singapore-designers-create-lights-for-the-deaf-and-rings-for-the-blind",
+      "title": "Singapore designers create lights for the deaf and rings for the blind",
+      "year": "2015",
+      "type": "news",
+      "outlet": "Hilary Whiteman, CNN",
+      "url": "http://edition.cnn.com/2015/11/16/asia/singapore-stickear-technology/index.html",
+      "projects": [
+        "fingerreader",
+        "zsense",
+        "fingerreader-v0",
+        "stickear"
+      ]
+    },
+    {
+      "slug": "interactive-lighting-experiences-at-i-light-marina-bay-2014",
+      "title": "Interactive lighting experiences at 'i Light Marina Bay 2014'",
+      "year": "2014",
+      "type": "news",
+      "outlet": "The Singapore Engineer Magazine",
+      "url": null,
+      "projects": [
+        "iswarm"
+      ]
+    },
+    {
+      "slug": "300-students-unite-to-light-up-marina-bay",
+      "title": "300 Students Unite To Light-up Marina Bay",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Lianhe Zaobao, Singapore",
+      "url": null,
+      "projects": [
+        "iswarm"
+      ]
+    },
+    {
+      "slug": "wireless-device-lends-a-listening-ear",
+      "title": "\"Wireless device lends a listening ear\"",
+      "year": "2013",
+      "type": "news",
+      "outlet": "Straits Times, Singapore",
+      "url": null,
+      "projects": [
+        "stickear"
+      ]
+    },
+    {
+      "slug": "eyering-finger-mounted-connected-cam-captures-signs-and-dollar-bills-identifies-them-with-ocr",
+      "title": "EyeRing finger-mounted connected cam captures signs and dollar bills, identifies them with OCR",
+      "year": "2012",
+      "type": "news",
+      "outlet": "Engadget",
+      "url": "http://www.engadget.com/2012/04/25/mit-media-lab-eyering-camera-hands-on/",
+      "projects": [
+        "eyering"
+      ]
+    },
+    {
+      "slug": "camera-toting-eyering-could-help-blind-people-to-see-objects",
+      "title": "Camera-toting EyeRing could help blind people to \"see\" objects",
+      "year": "2012",
+      "type": "news",
+      "outlet": "Gizmag",
+      "url": "http://www.gizmag.com/eyering-object-recognition-aural-feedback-mit/23677/",
+      "projects": [
+        "eyering"
+      ]
+    },
+    {
+      "slug": "augmented-reality-wrapped-around-your-finger",
+      "title": "Augmented Reality, Wrapped Around Your Finger",
+      "year": "2012",
+      "type": "news",
+      "outlet": "Technology Review",
+      "url": "http://www.technologyreview.com/news/428773/augmented-reality-wrapped-around-your-finger/",
+      "projects": [
+        "eyering"
+      ]
+    },
+    {
+      "slug": "haptic-chair-rupavahini-interview-part-1",
+      "title": "Haptic Chair - rupavahini interview Part 1",
+      "year": "2010",
+      "type": "video",
+      "outlet": "Sri Lanka Rupavahini, 2010",
+      "url": "http://www.youtube.com/watch?v=yDPutKutT1I",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0",
+        "stickear",
+        "hapticchair"
+      ]
+    }
+  ]
+}

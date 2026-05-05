@@ -1,0 +1,780 @@
+{
+  "slug": "priyashri-sridhar",
+  "name": "Priyashri Sridhar",
+  "role": "PhD Candidate",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/priyashri-sridhar/priyashri-sridhar.jpg",
+  "profile_url": "/people/priyashri-sridhar/",
+  "projects": [
+    {
+      "slug": "evaluating-ivr-in-schools",
+      "title": "Evaluating IVR in schools",
+      "year": "2018",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/evaluating-ivr-in-schools/evaluating-ivr-in-schools.jpg",
+      "principles": [
+        "cognitive",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "fingerreader",
+      "title": "FingerReader",
+      "year": "2017",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/fingerreader/fingerreader.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual",
+        "identity"
+      ]
+    },
+    {
+      "slug": "chaddybuddy",
+      "title": "ChaddyBuddy",
+      "year": "2017",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/chaddybuddy/chaddybuddy.jpg",
+      "principles": [
+        "cognitive"
+      ]
+    },
+    {
+      "slug": "postbits",
+      "title": "PostBits",
+      "year": "2016",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/postbits/postbits.jpg",
+      "principles": [
+        "cognitive",
+        "physical"
+      ]
+    },
+    {
+      "slug": "shrug",
+      "title": "SHRUG",
+      "year": "2015",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/shrug/shrug.jpg",
+      "principles": [
+        "body",
+        "identity"
+      ]
+    },
+    {
+      "slug": "sparkubes",
+      "title": "SparKubes",
+      "year": "2014",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/sparkubes/sparkubes.jpg",
+      "principles": [
+        "physical"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "striving-for-authentic-and-sustained-technology-use-in-the-classroom-lessons-learned-from-a-longitudinal-evaluation-of-a-sensor-based-science-education-platform",
+      "title": "Striving for Authentic and Sustained Technology Use in the Classroom: Lessons Learned from a Longitudinal Evaluation of a Sensor-Based Science Education Platform",
+      "year": "2023",
+      "citation": "Chua, Y., Cooray, S., Cortes, J.P.F., Denny, P., Dupuch, S., Garbett, D.L., Nassani, A., Cao, J., Qiao, H., Reis, A, Reis, D., Scholl, P.M., Sridhar, P.K., Suriyaarachchi, H., Taimana, F., Tang, V., Weerasinghe, C., Wen, E., Wu, M., Wu, Q., Zhang, H., Nanayakkara, S.C. 2023. Striving for Authentic and Sustained Technology Use In the Classroom: Lessons Learned from a Longitudinal Evaluation of a Sensor-based Science Education Platform. International Journal of Human–Computer Interaction (IJHCI).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1080/10447318.2023.2229485"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1fhABNfB6965rV6NJCIXlgrVl0Bgn6e6n/view?usp=sharing"
+        }
+      ],
+      "venue": "IJHCI"
+    },
+    {
+      "slug": "progression-of-cognitive-affective-states-during-learning-in-kindergarteners-bringing-together-physiological-observational-and-performance-data",
+      "title": "Progression of Cognitive-Affective States During Learning in Kindergarteners: Bringing Together Physiological, Observational and Performance Data",
+      "year": "2020",
+      "citation": "Sridhar, P.K. and Nanayakkara, S.C., 2020. Progression of Cognitive-Affective States During Learning in Kindergarteners: Bringing Together Physiological, Observational and Performance Data. Education Sciences, 10(7), p.177.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.3390/educsci10070177"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1q8FJqFhE4j5UDbQivqHO3KePXEwlMb6L/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "going-beyond-performance-scores-understanding-cognitive-affective-states-in-kindergarteners-and-application-of-framework-in-classrooms",
+      "title": "Going beyond performance scores: Understanding cognitive-affective states in Kindergarteners and application of framework in classrooms",
+      "year": "2019",
+      "citation": "Sridhar, P. K., Chan, S. W. T., Chua, Y., Quin, Y. W. and Nanayakkara, S. C., 2019. Going beyond performance scores: Understanding cognitive-affective states in Kindergarteners and application of framework in classrooms. International Journal of Child-Computer Interaction, 21, pp.37-53.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1016/j.ijcci.2019.04.002"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1aYqvW4oLe6eqmZiCOaRpLs9clSm56OSb/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "evaluating-ivr-in-primary-school-classrooms",
+      "title": "Evaluating IVR in Primary School Classrooms",
+      "year": "2019",
+      "citation": "Chua, Y., Sridhar, P.K., Zhang, H., Dissanayake, V. and Nanayakkara, S.C., 2019, October. Evaluating IVR in Primary School Classrooms. In 2019 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct) (pp. 169-174). IEEE.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1109/ISMAR-Adjunct.2019.00-53"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/129Cpb0ZeVpfS2MKo33IkvmF7HKV2z44J/view?usp=sharing"
+        }
+      ],
+      "venue": "ISMAR"
+    },
+    {
+      "slug": "triangulation-of-physiological-behavioural-and-observational-data-offers-better-insights-into-cognitive-emotional-states-in-learning",
+      "title": "Triangulation of Physiological, Behavioural and Observational Data offers better insights into cognitive-emotional states in learning",
+      "year": "2018",
+      "citation": "Sridhar, P.K., Quin, Y.W., and Nanayakkara, S.C., 2018. Triangulation of Physiological, Behavioural and Observational Data offers better insights into cognitive-emotional states in learning. Presented in the Annual Convention of Association for Psychological Science. San Francisco.",
+      "awards": [],
+      "links": [],
+      "venue": "Other"
+    },
+    {
+      "slug": "going-beyond-performance-scores-understanding-cognitive-affective-states-in-kindergarteners",
+      "title": "Going beyond performance scores: understanding cognitive-affective states in kindergarteners",
+      "year": "2018",
+      "citation": "Sridhar, P. K., Chan, S. W. T. and Nanayakkara, S.C., 2018. Going beyond performance scores: understanding cognitive-affective states in kindergarteners. In Proceedings of the 17th ACM Conference on Interaction Design and Children (pp. 253-265). ACM.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3202185.3202739"
+        },
+        {
+          "label": "URL",
+          "url": "https://dl.acm.org/citation.cfm?id=3202739"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1-h8ju4A8yx_7zxEfnlQWi1vC99gVB8Mj/view?usp=sharing"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "development-of-a-triangulated-framework-understand-cognitive-emotional-states-during-learning-in-children",
+      "title": "Development of a Triangulated Framework Understand Cognitive-Emotional States during Learning in Children",
+      "year": "2018",
+      "citation": "Sridhar, P.K., Nanayakkara S.C., 2018. Development of a Triangulated Framework Understand Cognitive-Emotional States during Learning in Children. In Proceedings of International Conference of Learning Sciences and Early Childhood Education.",
+      "awards": [],
+      "links": [],
+      "venue": "Other"
+    },
+    {
+      "slug": "towards-understanding-of-play-with-augmented-toys",
+      "title": "Towards Understanding of Play with Augmented Toys",
+      "year": "2017",
+      "citation": "Sridhar, P.K., Nanayakkara, S.C. and Huber, J., 2017, March. Towards understanding of play with augmented toys. In Proceedings of the 8th Augmented Human International Conference (pp. 1-4).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3041164.3041191"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1lT6tByaqoIPscG6ylBk68xMSvMdwrQEU/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "working-with-physiotherapists-lessons-learned-from-project-shrug",
+      "title": "Working with physiotherapists: Lessons learned from project SHRUG.",
+      "year": "2016",
+      "citation": "Shridhar, P. and Nanayakkara, S.C., Working with physiotherapists: Lessons learned from project shrug. In Workshop paper in Annual Meeting of the Australian Special Interest Group for Computer Human Interaction (OzCHI’16), NY, USA.",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/uc?&id=1YozASx4reT8huotCiwjP3jYobL4ijZ-r"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "towards-one-pixel-displays-for-sound-information-visualization",
+      "title": "Towards One-Pixel-Displays for Sound Information Visualization",
+      "year": "2016",
+      "citation": "Sridhar, P.K., Petry, B., Pakianathan, P.V., Kartolo, A.S. and Nanayakkara, S.C., 2016, November. Towards one-pixel-displays for sound information visualization. In Proceedings of the 28th Australian Conference on Computer-Human Interaction (pp. 91-95).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3010915.3010980"
+        },
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/05/OzCHI-Peri.pdf"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "towards-development-and-evaluation-of-tangible-interfaces-that-support-learning-in-children",
+      "title": "Towards Development and Evaluation of Tangible Interfaces that Support Learning in Children.",
+      "year": "2016",
+      "citation": "Sridhar, P.K., Nanayakkara, S.C., 2016. Towards Development and Evaluation of Tangible Interfaces that Support Learning in Children. In Proceedings of Annual Meeting of the Australian Special Interest Group for Computer Human Interaction (OzCHI '16). ACM, New York, NY, USA.",
+      "awards": [],
+      "links": [],
+      "venue": "ACM"
+    },
+    {
+      "slug": "postbits-using-contextual-locations-for-embedding-cloud-information-in-the-home",
+      "title": "PostBits: using contextual locations for embedding cloud information in the home",
+      "year": "2016",
+      "citation": "Pablo, J., Fernando, P., Sridhar, P., Withana, A., Nanayakkara, S.C., Steimle, J. and Maes, P., 2016. PostBits: using contextual locations for embedding cloud information in the home. Personal and Ubiquitous Computing, 20(6), pp.1001-1014.",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/05/PostBits-PDF.pdf"
+        }
+      ],
+      "venue": "UbiComp"
+    },
+    {
+      "slug": "neural-changes-induced-by-behavioural-stuttering-therapies-in-persons-with-stuttering",
+      "title": "Neural changes induced by behavioural stuttering therapies in persons with stuttering",
+      "year": "2012",
+      "citation": "Priyashri, S., Mallik, J., Geetha, Y.V. (2012, July). Neural changes induced by behavioural stuttering therapies in persons with stuttering – Accepted for presentation in the 7th World Congress on Fluency Disorders, Tours, France.",
+      "awards": [],
+      "links": [],
+      "venue": "Other"
+    },
+    {
+      "slug": "dysfluency-characteristics-in-persons-with-dementia",
+      "title": "Dysfluency Characteristics in Persons with Dementia",
+      "year": "2011",
+      "citation": "Sridhar P.K., Mallik, J. and Yelimeli, G., 2011, Dysfluency Characteristics in Persons with Dementia, Presented at 9th Oxford Elseiver Dysfluency Conference.",
+      "awards": [],
+      "links": [],
+      "venue": "Other"
+    },
+    {
+      "slug": "clinical-implications-of-neuroimaging-studies-on-stuttering-a-review",
+      "title": "Clinical Implications Of Neuroimaging Studies On Stuttering: A Review",
+      "year": "2011",
+      "citation": "Sridhar, P., Mallik, J., and Yelimeli, G., 2011, Clinical Implications Of Neuroimaging Studies On Stuttering: A Review, Presented at 9th Oxford Elseiver Dysfluency Conference.",
+      "awards": [],
+      "links": [],
+      "venue": "Other"
+    },
+    {
+      "slug": "effect-of-culture-on-non-verbal-communication",
+      "title": "Effect of culture on non-verbal communication",
+      "year": "2010",
+      "citation": "Sridhar, P.K., Krishnan, G. and Priyadarshi, B., 2010, Effect of culture on non-verbal communication, South Asian Conference for Linguistics.",
+      "awards": [],
+      "links": [],
+      "venue": "Other"
+    },
+    {
+      "slug": "effect-of-speaking-rate-on-nasality",
+      "title": "Effect of Speaking Rate on Nasality",
+      "year": "2008",
+      "citation": "Sridhar, P.K., Ramprasad, S., and Pushpavathi, 2008, Effect of Speaking Rate on Nasality, International Frontiers of Speech and Music.",
+      "awards": [],
+      "links": [],
+      "venue": "Other"
+    },
+    {
+      "slug": "effect-of-hearing-loss-on-cognition",
+      "title": "Effect of Hearing Loss on Cognition",
+      "year": "2008",
+      "citation": "Sridhar P.K., and Vinay, Effect of Hearing Loss on Cognition, 2008, Indian Speech and Hearing Association Conference.",
+      "awards": [],
+      "links": [],
+      "venue": "Other"
+    },
+    {
+      "slug": "comparison-of-attitudes-of-mothers-and-fathers-of-typically-developing-children-with-those-of-children-with-mental-retardation-and-hearing-impairment",
+      "title": "Comparison of Attitudes of Mothers and Fathers of Typically Developing Children with those of Children with Mental Retardation and Hearing Impairment",
+      "year": null,
+      "citation": "Sridhar P.K., and Rajanna, M., 2009, Comparison of Attitudes of Mothers and Fathers of Typically Developing Children with those of Children with Mental Retardation and Hearing Impairment, National Science Women’s Congress.",
+      "awards": [],
+      "links": [],
+      "venue": "Other"
+    }
+  ],
+  "events": [],
+  "press": [
+    {
+      "slug": "the-six-innovations-at-the-global-grad-show-in-dubai",
+      "title": "The Six: Innovations at the Global Grad Show in Dubai",
+      "year": "2018",
+      "type": "news",
+      "outlet": "Arab News",
+      "url": "http://www.arabnews.com/node/1403986/art-culture",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "the-finger-reader",
+      "title": "The Finger Reader",
+      "year": "2018",
+      "type": "news",
+      "outlet": "TVNZ",
+      "url": "https://www.tvnz.co.nz/one-news/new-zealand/ring-your-finger-snaps-text-and-reads-back-offering-help-visually-impaired",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "futuristic-solutions-revealed-at-global-grad-show-at-dubai-design-week-finger-reader",
+      "title": "Futuristic solutions revealed at Global Grad Show at Dubai Design Week: Finger Reader",
+      "year": "2018",
+      "type": "news",
+      "outlet": "GULF News",
+      "url": "https://gulfnews.com/uae/science/futuristic-solutions-revealed-at-global-grad-show-at-dubai-design-week-1.60340376",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "fingerreader-world-changing-ideas-award-finalist",
+      "title": "FingerReader: World Changing Ideas Award Finalist",
+      "year": "2018",
+      "type": "award",
+      "outlet": "FastCompany",
+      "url": "https://www.fastcompany.com/40546728/the-2018-world-changing-ideas-awards-finalists",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "finger-reader",
+      "title": "Finger Reader",
+      "year": "2018",
+      "type": "video",
+      "outlet": "Channel NewsAsia",
+      "url": "https://www.facebook.com/Suranga.Nanayakkara/videos/10156575822909477/",
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "fingerreader-winner-of-accelerator-program",
+      "title": "FingerReader: Winner of Accelerator Program",
+      "year": "2017",
+      "type": "award",
+      "outlet": "Modern Aging Singapore",
+      "url": null,
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "fingerreader-golden-pin-concept-design-award",
+      "title": "FingerReader: Golden Pin Concept Design Award",
+      "year": "2017",
+      "type": "award",
+      "outlet": "Design Center Taiwan",
+      "url": null,
+      "projects": [
+        "fingerreader"
+      ]
+    },
+    {
+      "slug": "universal-design-enables-everyone-suranga-nanayakkara",
+      "title": "Universal Design Enables Everyone | Suranga Nanayakkara",
+      "year": "2016",
+      "type": "video",
+      "outlet": "TEDxYouth@Palmerston",
+      "url": "http://tedxtalks.ted.com/video/Universal-Design-Enables-Everyo",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0",
+        "fingerdraw",
+        "sparsh",
+        "eyering"
+      ]
+    },
+    {
+      "slug": "technology-enables-people-with-disabilities",
+      "title": "Technology enables people with disabilities",
+      "year": "2016",
+      "type": "news",
+      "outlet": "CCTV.com",
+      "url": "http://english.cntv.cn/2016/02/23/VIDEADIxyUqgEQ0Ya9RRn9Pj160223.shtml",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "singapore-design-award-2016-for-fingerreader",
+      "title": "Singapore Design Award 2016 for FingerReader",
+      "year": "2016",
+      "type": "award",
+      "outlet": "Design Business Chamber Singapore",
+      "url": "http://www.dbcsingapore.org/sda-winners-2016/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "sharper-senses-devices-mimicking-our-natural-senses",
+      "title": "Sharper Senses - Devices mimicking our natural senses",
+      "year": "2016",
+      "type": "video",
+      "outlet": "BBC",
+      "url": "http://www.bbc.com/specialfeatures/horizonsbusiness/seriessix/sharper-senses/?vid=p03xpgvm",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0",
+        "stickear"
+      ]
+    },
+    {
+      "slug": "ring-helps-people-see-thanks-to-grant",
+      "title": "Ring helps people 'see', thanks to grant",
+      "year": "2016",
+      "type": "news",
+      "outlet": "Straits Times",
+      "url": "http://www.straitstimes.com/singapore/ring-helps-people-see-thanks-to-grant",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "el-lector-de-libros-artificial",
+      "title": "El lector de libros artificial",
+      "year": "2016",
+      "type": "video",
+      "outlet": "Antena3.com",
+      "url": "http://www.antena3.com/programas/el-hormiguero/secciones/ciencia-marron/lector-libros-artificial_2016040700345.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "wear-to-read-it",
+      "title": "Wear to Read it",
+      "year": "2015",
+      "type": "news",
+      "outlet": null,
+      "url": null,
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "singapore-designers-create-lights-for-the-deaf-and-rings-for-the-blind",
+      "title": "Singapore designers create lights for the deaf and rings for the blind",
+      "year": "2015",
+      "type": "news",
+      "outlet": "Hilary Whiteman, CNN",
+      "url": "http://edition.cnn.com/2015/11/16/asia/singapore-stickear-technology/index.html",
+      "projects": [
+        "fingerreader",
+        "zsense",
+        "fingerreader-v0",
+        "stickear"
+      ]
+    },
+    {
+      "slug": "wearable-device-helps-you-read-with-your-finger",
+      "title": "Wearable device helps you read with your finger",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Fox Business News",
+      "url": "http://video.foxbusiness.com/v/3261393774001/wearable-device-helps-you-read-with-your-finger",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "wear-this-ring-to-hear-whats-written",
+      "title": "Wear this ring to hear what's written",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Hoe Pei Shan, Straits Times",
+      "url": "https://cloud.asghub.sutd.edu.sg/public.php?service=files&t=fa5ebeba820ac255844914d055a3c91d",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "tomorrow-daily-reading-with-your-finger",
+      "title": "Tomorrow Daily: Reading with Your Finger",
+      "year": "2014",
+      "type": "video",
+      "outlet": "c|net",
+      "url": "http://www.cnet.com/videos/tomorrow-daily-016-rolling-up-your-tv-reading-with-your-finger-haptic-shirts-tom-merritt/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "this-ring-scans-text-and-reads-it-aloud-for-visually-impaired-people",
+      "title": "This Ring Scans Text And Reads It Aloud For Visually Impaired People",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Jordan Kushins, Gizmodo",
+      "url": "http://gizmodo.com/this-ring-scans-text-and-reads-it-aloud-for-visually-im-1525373479",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "this-ring-reads-books-and-magazines-to-the-blind",
+      "title": "This Ring Reads Books And Magazines To The Blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Huffington Post",
+      "url": "http://www.huffingtonpost.com/2014/07/08/fingerreader-read-blind-mit_n_5565898.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "this-decoder-ring-helps-the-blind-read-without-braille",
+      "title": "This Decoder Ring Helps The Blind Read Without Braille",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Sydney Brownstone, Fast Company",
+      "url": "http://www.fastcoexist.com/3032889/this-decoder-ring-helps-the-blind-read-without-braille",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "the-ring-that-reads-for-you-finger-worn-gadget-reads-aloud-when-you-point-at-words",
+      "title": "The ring that READS for you: Finger-worn gadget reads aloud when you point at words",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Ellie Zolfagharifard, Daily Mail",
+      "url": "http://www.dailymail.co.uk/sciencetech/article-2563759/The-ring-READS-Finger-worn-gadget-reads-aloud-point-words-translate-books.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "new-invention-fingerreader",
+      "title": "New Invention: FingerReader",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Fox 10",
+      "url": "http://up.anv.bz/latest/anvload.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "new-finger-device-reads-books-to-the-blind",
+      "title": "New Finger Device Reads Books To The Blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Janet Fang, IFL Science!",
+      "url": "http://www.iflscience.com/health-and-medicine/new-finger-device-reads-books-blind",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "mits-fingerreader-helps-the-blind-read-with-a-swipe-of-a-digit",
+      "title": "MIT's FingerReader Helps The Blind Read With A Swipe Of A Digit",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Evan Fleischer, TechCrunch",
+      "url": "http://techcrunch.com/2014/04/17/mits-fingerreader-helps-the-blind-read-with-a-swipe-of-a-digit/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "mits-fingerreader-could-make-life-easier-for-the-blind",
+      "title": "MIT's FingerReader Could Make Life Easier For The Blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Federico Guerrini, Forbes",
+      "url": "http://www.forbes.com/sites/federicoguerrini/2014/07/14/mits-fingerreader-could-make-life-easier-for-the-blind/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "mit-researchers-design-ring-to-help-visually-impaired-people-read",
+      "title": "MIT Researchers Design Ring To Help Visually-Impaired People Read",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Olivia B. Waxman, TIME",
+      "url": "http://newsfeed.time.com/2014/02/20/mit-scientists-design-ring-to-help-visually-impaired-people-read/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "mit-finger-device-reads-to-the-blind-in-real-time-2",
+      "title": "MIT Finger Device Reads to the Blind in Real Time",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Rodrique Ngowi, Associated Press (ABC, CBC and others)",
+      "url": "http://abcnews.go.com/Technology/wireStory/mit-finger-device-reads-blind-real-time-24461528",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "fingerreader-is-a-3d-printed-device-that-reads-text-aloud-to-the-blind",
+      "title": "FingerReader Is a 3D-Printed Device That Reads Text Aloud to the Blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Kari Paul, Mashable",
+      "url": "http://mashable.com/2014/07/13/blind-fingerreader/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "finger-reader-for-the-blind",
+      "title": "Finger reader for the blind",
+      "year": "2014",
+      "type": "video",
+      "outlet": "SPH Razor TV",
+      "url": "http://www.razor.tv/video/932701/finger-reader-for-the-blind",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "finger-computer-reads-books-aloud",
+      "title": "Finger Computer Reads Books Aloud",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Nic Halverson, Discovery News",
+      "url": "http://news.discovery.com/tech/gear-and-gadgets/finger-computer-reads-books-aloud-140221.htm",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "der-ring-der-lesen-kann-the-ring-that-can-read",
+      "title": "Der Ring, der lesen kann [The ring that can read]",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Christina Endruschat, RTL",
+      "url": "http://www.rtl.de/video/index/showvid/id/335757",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "a-ring-that-reads-text-for-the-blind",
+      "title": "A ring that reads text for the blind",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Reuters Videos",
+      "url": "https://sg.news.yahoo.com/video/ring-reads-text-blind-154953381.html",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "a-new-type-of-ring-worn-on-the-finger-eliminates-the-need-for-the-blind-to-learn-braille",
+      "title": "A New Type Of Ring Worn On The Finger Eliminates The Need For The Blind To Learn Braille",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Dylan Love, Business Insider",
+      "url": "http://www.businessinsider.com/mit-fingerreader-ring-for-the-blind-2014-7",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "a-device-that-could-help-the-blind-read",
+      "title": "A device that could help the blind read",
+      "year": "2014",
+      "type": "video",
+      "outlet": "Craig Melvin, MSNBC",
+      "url": "http://www.msnbc.com/craig-melvin/watch/a-device-that-could-help-the-blind-read-314710083732",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "5-amazing-gadgets-that-are-helping-the-blind-see-again",
+      "title": "5 amazing gadgets that are helping the blind see again",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Simon Hill, Digital Trends",
+      "url": "http://www.digitaltrends.com/mobile/blind-technologies/",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "3d-printed-ring-reads-out-text-in-real-time-for-the-blind",
+      "title": "3D-printed ring reads out text in real-time for the blind",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Liat Clark, Wired (UK)",
+      "url": "http://www.wired.co.uk/news/archive/2014-07/08/fingerreader",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0"
+      ]
+    },
+    {
+      "slug": "haptic-chair-rupavahini-interview-part-1",
+      "title": "Haptic Chair - rupavahini interview Part 1",
+      "year": "2010",
+      "type": "video",
+      "outlet": "Sri Lanka Rupavahini, 2010",
+      "url": "http://www.youtube.com/watch?v=yDPutKutT1I",
+      "projects": [
+        "fingerreader",
+        "fingerreader-v0",
+        "stickear",
+        "hapticchair"
+      ]
+    }
+  ]
+}

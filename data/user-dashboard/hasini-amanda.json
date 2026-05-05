@@ -1,0 +1,43 @@
+{
+  "slug": "hasini-amanda",
+  "name": "Hasini Amanda",
+  "role": "Intern",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/hasini-amanda/hasini-amanda.jpg",
+  "profile_url": "/people/hasini-amanda/",
+  "projects": [
+    {
+      "slug": "curious-shorts",
+      "title": "Curious Shorts",
+      "year": "2025",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/curious-shorts/curious-shorts.jpg",
+      "principles": [
+        "cognitive"
+      ]
+    },
+    {
+      "slug": "itiles",
+      "title": "iTILES",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/itiles/itiles.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "physical"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "curious-shorts-curiosity-driven-exploration-and-learning-on-short-form-video-platforms",
+      "title": "Curious Shorts: Curiosity-Driven Exploration and Learning on Short-Form Video Platforms",
+      "year": "2025",
+      "citation": "Tan, F.F., Ram, A., Messerschmidt, A.M., Dissanayake, H.A., and Nanayakkara, S.C. 2025. Curious Shorts: Curiosity-Driven Exploration and Learning on Short-Form Video Platforms. Accepted to the Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI ’25).",
+      "awards": [],
+      "links": [],
+      "venue": "CHI"
+    }
+  ],
+  "events": [],
+  "press": []
+}

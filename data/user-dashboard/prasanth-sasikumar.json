@@ -1,0 +1,215 @@
+{
+  "slug": "prasanth-sasikumar",
+  "name": "Prasanth Sasikumar",
+  "role": "Research Fellow",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/prasanth-sasikumar/prasanth-sasikumar.jpg",
+  "profile_url": "/people/prasanth-sasikumar/",
+  "projects": [
+    {
+      "slug": "zenflow",
+      "title": "Zenflow",
+      "year": "Current",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/zenflow/zenflow.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "emodrink",
+      "title": "EmoDrink",
+      "year": "Current",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/emodrink/emodrink.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "xr-floatation-therapy",
+      "title": "XR Floatation Therapy",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/xr-floatation-therapy/xr-floatation-therapy.jpg",
+      "principles": [
+        "cognitive",
+        "perceptual",
+        "identity"
+      ]
+    },
+    {
+      "slug": "seear",
+      "title": "SeEar",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/seear/seear.jpg",
+      "principles": [
+        "cognitive",
+        "perceptual",
+        "sociocultural"
+      ]
+    },
+    {
+      "slug": "emo-know",
+      "title": "EMO-KNOW",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/emo-know/emo-know.jpg",
+      "principles": [
+        "cognitive"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "interrupting-autopilot-evaluating-sensory-interventions-for-momentary-self-regulation",
+      "title": "Interrupting Autopilot: Evaluating Sensory Interventions for Momentary Self-Regulation",
+      "year": "2026",
+      "citation": "Dissanayake, D., Mysan, M., Luo, Y., Antoni, T., Cleveland, P., Sasikumar, P., Nanayakkara, S. C., 2026. Interrupting Autopilot: Evaluating Sensory Interventions for Momentary Self-Regulation. In Extended Abstracts of the 2026 CHI Conference on Human Factors in Computing Systems (CHI EA ’26)",
+      "awards": [],
+      "links": [
+        {
+          "label": "doi",
+          "url": "https://doi.org/10.1145/3772363.3798497"
+        },
+        {
+          "label": "pdf",
+          "url": "https://drive.google.com/file/d/1BNkKoR87_0D8bzfsWDP0wxX5draRdKu2/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI EA"
+    },
+    {
+      "slug": "vrsense-an-explainable-system-to-help-mitigate-cybersickness-in-vr-games",
+      "title": "VRSense: An Explainable System to Help Mitigate Cybersickness in VR Games",
+      "year": "2025",
+      "citation": "Dissanayake, D., Gupta, C., Sasikumar, P. and Nanayakkara, S.C., 2025, April. VRSense: An Explainable System to Help Mitigate Cybersickness in VR Games. In Proceedings of the Extended Abstracts of the CHI Conference on Human Factors in Computing Systems (pp. 1-7).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://dl.acm.org/doi/abs/10.1145/3706599.3719891"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1LZDUh0bsjSQCEu32ka_tnmEJczgguyEW/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI EA"
+    },
+    {
+      "slug": "vr-net-a-real-world-dataset-for-virtual-reality-motion-sickness-research",
+      "title": "VR.net: A Real-world Dataset for Virtual Reality Motion Sickness Research",
+      "year": "2024",
+      "citation": "Wen, E., Gupta, C., Sasikumar, P., Billinghurst, M., Wilmott, J., Skow, E., Dey, A., Nanayakkara, S.C. VR.net: A Real-world Dataset for Virtual Reality Motion Sickness Research. The 31st IEEE Conference on Virtual Reality and 3D User Interfaces, 2024. Best Paper Award!",
+      "awards": [
+        "Best Paper Award"
+      ],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1109/TVCG.2024.3372044"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1eTlLX4o3eOzI7aPUcRHMiWoCrRe1aDqF/view?usp=drive_link"
+        }
+      ],
+      "venue": "VR"
+    },
+    {
+      "slug": "seear-tailoring-real-time-ar-caption-interfaces-for-deaf-and-hard-of-hearing-dhh-students-in-specialized-educational-settings",
+      "title": "SeEar: Tailoring Real-time AR Caption Interfaces for Deaf and Hard-of-Hearing (DHH) Students in Specialized Educational Settings",
+      "year": "2024",
+      "citation": "Samaradivakara, Y., Ushan, T., Pathirage, A., Sasikumar, P., Karunanayaka, K., Keppitiyagama, C., Nanayakkara, S.C, 2024. SeEar: Tailoring Real-time AR Caption Interfaces for Deaf and Hard-of-Hearing (DHH) Students in Specialized Educational Settings. In Extended Abstracts of the CHI Conference on Human Factors in Computing Systems (CHI EA ’24), May 11–16, 2024, Honolulu, HI, USA.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3613905.3650974"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1Lea70xKlKilhKwF3W31LFrolj7sBZ5ri/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI EA"
+    },
+    {
+      "slug": "exploring-an-extended-reality-floatation-tank-experience-to-reduce-the-fear-of-being-in-water",
+      "title": "Exploring an Extended Reality Floatation Tank Experience to Reduce the Fear of Being in Water",
+      "year": "2024",
+      "citation": "Montoya, M.F., Qiao, H., Sasikumar, P., Elvitigala, D.S., Pell, S.J., Nanayakkara, S.C, Mueller, F. ‘Floyd’, 2024. Exploring an Extended Reality Floatation Tank Experience to Reduce the Fear of Being in Water. In Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI ’24), May 11–16, 2024, Honolulu, HI, USA.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3613904.3642285"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1kFNShCVypGn7mNFvkka4nwg2KH-qgEDN/view?usp=drive_link"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "a-user-study-on-sharing-physiological-cues-in-vr-assembly-tasks",
+      "title": "A User Study on Sharing Physiological Cues in VR Assembly Tasks",
+      "year": "2024",
+      "citation": "Sasikumar, P., Hajika, R., Gupta, K., Selvan, T., Pai, Y.S., Bai, H., Nanayakkara, S.C., and Billinghurst, M. 2024. Title of the Article. In IEEE Conference on Virtual Reality and 3D User Interfaces, 2024.",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1M7seP_4dbj9O4xGWd6oXtl2RrWy3D07b/view?usp=drive_link"
+        }
+      ],
+      "venue": "VR"
+    },
+    {
+      "slug": "emo-know-a-large-scale-dataset-on-emotion-cause",
+      "title": "EMO-KNOW: A Large Scale Dataset on Emotion-Cause",
+      "year": "2023",
+      "citation": "Nguyen, M., Samaradivakara, Y., Sasikumar, P., Gupta, C. and Nanayakkara, S.C., 2023, December. EMO-KNOW: A Large Scale Dataset on Emotion-Cause. In Findings of the Association for Computational Linguistics: EMNLP 2023 (pp. 11043-11051).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.18653/v1/2023.findings-emnlp.737"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1NsFaWPwX-DO21d_BEpvfUs5Ri8BMoOjb/view?usp=drive_link"
+        }
+      ],
+      "venue": "Other"
+    }
+  ],
+  "events": [
+    {
+      "slug": "chi-2026",
+      "title": "CHI 2026",
+      "subtitle": "ACM Conference on Human Factors in Computing Systems",
+      "kind": "conference",
+      "location": "Barcelona, Spain",
+      "starts": "2026-04-13",
+      "ends": "2026-04-17",
+      "url": "https://chi2026.ahlab.org",
+      "summary": "AHLab presents 5 papers and 2 posters at CHI 2026 in Barcelona."
+    }
+  ],
+  "press": [
+    {
+      "slug": "zenflow-chi-2026-honorable-mention",
+      "title": "Zenflow: Investigating MR Transitions for Enhancing Sleep and Relaxation | Honorable Mention",
+      "year": "2026",
+      "type": "award",
+      "outlet": "ACM CHI",
+      "url": null,
+      "projects": [
+        "zenflow"
+      ]
+    }
+  ]
+}

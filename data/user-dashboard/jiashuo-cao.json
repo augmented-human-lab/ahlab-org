@@ -1,0 +1,246 @@
+{
+  "slug": "jiashuo-cao",
+  "name": "Jiashuo Cao",
+  "role": "Master Student",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/jiashuo-cao/jiashuo-cao.jpg",
+  "profile_url": "/people/jiashuo-cao/",
+  "projects": [
+    {
+      "slug": "kiwrious",
+      "title": "Kiwrious",
+      "year": "2022",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/kiwrious/kiwrious.jpg",
+      "principles": [
+        "cognitive",
+        "physical"
+      ]
+    },
+    {
+      "slug": "versatouch",
+      "title": "VersaTouch",
+      "year": "2020",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/versatouch/versatouch.jpg",
+      "principles": [
+        "perceptual",
+        "physical"
+      ]
+    },
+    {
+      "slug": "actualtouch",
+      "title": "ActualTouch",
+      "year": "2020",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/actualtouch/actualtouch.jpg",
+      "principles": [
+        "body"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "tidd-augmented-tabletop-interaction-supports-children-with-autism-to-train-daily-living-skills",
+      "title": "Tidd: Augmented Tabletop Interaction Supports Children with Autism to Train Daily Living Skills",
+      "year": "2023",
+      "citation": "Wu, Q., Wang, W., Liu, Q., Cao, J., Xu, D. and Nanayakkara, S.C., 2023. Tidd: Augmented Tabletop Interaction Supports Children with Autism to Train Daily Living Skills. In ACM SIGGRAPH 2023 Posters (pp. 1-2).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3588028.3603674"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1FCysSYe5KHNdxMQS5Mq7m84Q_a7ygOzs/view?usp=sharing"
+        }
+      ],
+      "venue": "SIGGRAPH"
+    },
+    {
+      "slug": "striving-for-authentic-and-sustained-technology-use-in-the-classroom-lessons-learned-from-a-longitudinal-evaluation-of-a-sensor-based-science-education-platform",
+      "title": "Striving for Authentic and Sustained Technology Use in the Classroom: Lessons Learned from a Longitudinal Evaluation of a Sensor-Based Science Education Platform",
+      "year": "2023",
+      "citation": "Chua, Y., Cooray, S., Cortes, J.P.F., Denny, P., Dupuch, S., Garbett, D.L., Nassani, A., Cao, J., Qiao, H., Reis, A, Reis, D., Scholl, P.M., Sridhar, P.K., Suriyaarachchi, H., Taimana, F., Tang, V., Weerasinghe, C., Wen, E., Wu, M., Wu, Q., Zhang, H., Nanayakkara, S.C. 2023. Striving for Authentic and Sustained Technology Use In the Classroom: Lessons Learned from a Longitudinal Evaluation of a Sensor-based Science Education Platform. International Journal of Human–Computer Interaction (IJHCI).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1080/10447318.2023.2229485"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1fhABNfB6965rV6NJCIXlgrVl0Bgn6e6n/view?usp=sharing"
+        }
+      ],
+      "venue": "IJHCI"
+    },
+    {
+      "slug": "sensor-based-interactive-worksheets-to-support-guided-scientific-inquiry",
+      "title": "Sensor-Based Interactive Worksheets to Support Guided Scientific Inquiry",
+      "year": "2021",
+      "citation": "Cao, J., Chan, S.W.T., Garbett, D.L., Denny, P., Nassani, A., Scholl, P.M. and Nanayakkara, S.C., 2021. Sensor-Based Interactive Worksheets to Support Guided Scientific Inquiry. In Interaction Design and Children (IDC ’21), June 24–30, 2021, Athens, Greece. ACM, New York, NY, USA, 7 pages. Best Short Paper Award!",
+      "awards": [
+        "Best Short Paper Award"
+      ],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3459990.3460716"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1PePtQbU4Qquk1UpyIv9DXGpejZnoNlbf/view?usp=sharing"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "versatouch-a-versatile-plug-and-play-system-that-enables-touch-interactions-on-everyday-passive-surfaces",
+      "title": "VersaTouch: A Versatile Plug-and-Play System that Enables Touch Interactions on Everyday Passive Surfaces.",
+      "year": "2020",
+      "citation": "Shi, Y., Zhang, H., Cao, J., and Nanayakkara, S.C., 2020. VersaTouch: A Versatile Plug-and-Play System that Enables Touch Interactions on Everyday Passive Surfaces. In AHs ’20: Augmented Humans International Conference (AHs ’20), March 16–17, 2020, Kaiserslautern, Germany.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3384657.3384778"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1i34JQbLRvwYGth08m3AjH6Avwgia_CxB/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "ready-steady-touch-sensing-physical-contact-with-a-finger-mounted-imu",
+      "title": "Ready, Steady, Touch!: Sensing Physical Contact with a Finger-Mounted IMU",
+      "year": "2020",
+      "citation": "Shi, Y., Zhang, H., Zhao, K., Cao, J., Sun, M. and Nanayakkara, S.C., 2020. Ready, steady, touch! sensing physical contact with a finger-mounted IMU. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 4(2), pp.1-25.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3397309"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1gEpRp35i_nJgMMf_RYiQBI7aKKMGmcpQ/view?usp=sharing"
+        }
+      ],
+      "venue": "ACM"
+    }
+  ],
+  "events": [],
+  "press": [
+    {
+      "slug": "research-team-boosts-science-learning-for-children-the-kiwrious-project",
+      "title": "Research Team Boosts Science Learning for Children: The Kiwrious Project",
+      "year": "2022",
+      "type": "news",
+      "outlet": "United Nations",
+      "url": "https://www.un.org/en/academic-impact/research-team-boosts-science-learning-children-kiwrious-project",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "sensor-based-interactive-worksheets-idc-2021-best-short-paper",
+      "title": "Sensor-Based Interactive Worksheets to Support Guided Scientific Inquiry | Best Short Paper Award",
+      "year": "2021",
+      "type": "award",
+      "outlet": "ACM IDC",
+      "url": null,
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "world-changing-ideas-awards-2021-education-finalist-kiwrious",
+      "title": "World Changing Ideas Awards 2021: Education | Finalist | Kiwrious",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Fast Company",
+      "url": "https://www.fastcompany.com/90623632/world-changing-ideas-awards-2021-education-finalists-and-honorable-mentions",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "world-changing-ideas-awards-2021-asia-pacific-honorable-mention-kiwrious",
+      "title": "World Changing Ideas Awards 2021: Asia-Pacific | Honorable Mention | Kiwrious",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Fast Company",
+      "url": "https://www.fastcompany.com/90624522/world-changing-ideas-awards-2021-asia-pacific-finalists-and-honorable-mentions",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "novel-interactive-science-kits-sent-out-free-to-schools-kiwrious",
+      "title": "Novel interactive science kits sent out free to schools | Kiwrious",
+      "year": "2021",
+      "type": "news",
+      "outlet": "The University of Auckland",
+      "url": "https://www.auckland.ac.nz/en/news/2021/05/12/Interactive-science-kits-sent-to-schools.html",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "kiwrious-social-impact-winner",
+      "title": "Kiwrious | Social Impact Winner",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Good Design Australia",
+      "url": "https://good-design.org/projects/kiwrious/",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "kiwrious-best-design-awards-value-of-design-bronze",
+      "title": "Kiwrious | Best Design Awards | Value of Design : Bronze",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/value-of-design-award/augmented-human-lab/kiwrious-2/",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "kiwrious-best-design-awards-user-experience-bronze",
+      "title": "Kiwrious | Best Design Awards | User Experience: Bronze",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/digital/user-experience/augmented-human-lab/kiwrious-1/",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "kiwrious-best-design-awards-public-good-award-silver",
+      "title": "Kiwrious | Best Design Awards | Public Good Award: Silver",
+      "year": "2021",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/public-good-award/public-good-award/augmented-human-lab/kiwrious/",
+      "projects": [
+        "kiwrious"
+      ]
+    },
+    {
+      "slug": "inspiring-curiosity-for-science-in-kids-with-google-cloud-solutions",
+      "title": "Inspiring curiosity for science in kids with Google Cloud solutions",
+      "year": "2021",
+      "type": "news",
+      "outlet": "Google Cloud",
+      "url": "https://cloud.google.com/customers/augmented-human-lab",
+      "projects": [
+        "kiwrious"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "slug": "malsha-de-zoysa",
+  "name": "Malsha de Zoysa",
+  "role": "Research Engineer",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/malsha-de-zoysa/malsha-de-zoysa.jpg",
+  "profile_url": "/people/malsha-de-zoysa/",
+  "projects": [
+    {
+      "slug": "dronebuddy",
+      "title": "DroneBuddy",
+      "year": "2025",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/dronebuddy/dronebuddy.jpg",
+      "principles": [
+        "perceptual",
+        "physical",
+        "identity"
+      ]
+    },
+    {
+      "slug": "itiles",
+      "title": "iTILES",
+      "year": "2024",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/itiles/itiles.jpg",
+      "principles": [
+        "body",
+        "cognitive",
+        "physical"
+      ]
+    }
+  ],
+  "publications": [],
+  "events": [],
+  "press": []
+}

@@ -1,0 +1,283 @@
+{
+  "slug": "benjamin-petry",
+  "name": "Benjamin Petry",
+  "role": "PhD Candidate",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/benjamin-petry/benjamin-petry.jpg",
+  "profile_url": "/people/benjamin-petry/",
+  "projects": [
+    {
+      "slug": "muss-bits",
+      "title": "MuSS-Bits",
+      "year": "2017",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/muss-bits/muss-bits.jpg",
+      "principles": [
+        "body",
+        "perceptual",
+        "identity"
+      ]
+    },
+    {
+      "slug": "mobile-360-video-interaction",
+      "title": "Mobile 360° Video Interaction",
+      "year": "2015",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/mobile-360-video-interaction/mobile-360-video-interaction.jpg",
+      "principles": [
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "iswarm",
+      "title": "iSwarm",
+      "year": "2014",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/iswarm/iswarm.jpg",
+      "principles": [
+        "sociocultural"
+      ]
+    },
+    {
+      "slug": "ircx",
+      "title": "ircX",
+      "year": "2014",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/ircx/ircx.jpg",
+      "principles": [
+        "sociocultural"
+      ]
+    },
+    {
+      "slug": "birdie",
+      "title": "Birdie",
+      "year": "2013",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/birdie/birdie.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "supporting-rhythm-activities-of-deaf-children-using-music-sensory-substitution-systems",
+      "title": "Supporting Rhythm Activities of Deaf Children using Music-Sensory-Substitution Systems.",
+      "year": "2018",
+      "citation": "Petry, B., Illandara, T., Elvitigala, D.S. and Nanayakkara, S.C., 2018, April. Supporting rhythm activities of deaf children using music-sensory-substitution systems. In Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems (pp. 1-10).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3173574.3174060"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/114srp0L-VRv_cMyNHAm6rVli-x-Z3FS2/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "scaffolding-the-music-listening-and-music-making-experience-for-the-deaf",
+      "title": "Scaffolding the Music Listening and Music Making Experience for the Deaf",
+      "year": "2017",
+      "citation": "Petry, B., Huber, J. and Nanayakkara, S.C., 2018. Scaffolding the Music Listening and Music Making Experience for the Deaf. In Assistive Augmentation (pp. 23-48). Springer, Singapore.",
+      "awards": [],
+      "links": [
+        {
+          "label": "Link",
+          "url": "https://link.springer.com/chapter/10.1007/978-981-10-6404-3_3"
+        }
+      ],
+      "venue": "Springer"
+    },
+    {
+      "slug": "towards-one-pixel-displays-for-sound-information-visualization",
+      "title": "Towards One-Pixel-Displays for Sound Information Visualization",
+      "year": "2016",
+      "citation": "Sridhar, P.K., Petry, B., Pakianathan, P.V., Kartolo, A.S. and Nanayakkara, S.C., 2016, November. Towards one-pixel-displays for sound information visualization. In Proceedings of the 28th Australian Conference on Computer-Human Interaction (pp. 91-95).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3010915.3010980"
+        },
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/05/OzCHI-Peri.pdf"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "muss-bits-sensor-display-blocks-for-deaf-people-to-explore-musical-sounds",
+      "title": "MuSS-Bits: Sensor-Display Blocks for Deaf People to Explore Musical Sounds",
+      "year": "2016",
+      "citation": "Petry, B., Illandara, T. and Nanayakkara, S.C., 2016, November. MuSS-bits: sensor-display blocks for deaf people to explore musical sounds. In Proceedings of the 28th Australian Conference on Computer-Human Interaction (pp. 72-80).",
+      "awards": [
+        "Steve Howard Best Long Paper Award"
+      ],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3010915.3010939"
+        },
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/05/OzCHI-MuSS-Bits.pdf"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "muss-bits-provisional-patent",
+      "title": "MuSS-Bits Provisional Patent",
+      "year": "2016",
+      "citation": "Petry, B., Forero, J.P., Nanayakkara, S.C., 2016, Muss-bits – music-sensory-substitution bits. Singapore Provisional Patent Application: 10201610020P. Filing Date: 29 November 2016.",
+      "awards": [],
+      "links": [],
+      "venue": "Other"
+    },
+    {
+      "slug": "ad-hoc-access-to-musical-sound-for-deaf-individuals",
+      "title": "Ad-Hoc Access to Musical Sound for Deaf Individuals",
+      "year": "2016",
+      "citation": "Petry, B., Illandara, T., Forero, J.P. and Nanayakkara, S.C., 2016, October. Ad-Hoc Access to Musical Sound for Deaf Individuals. In Proceedings of the 18th International ACM SIGACCESS Conference on Computers and Accessibility (pp. 285-286).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "http://dx.doi.org/10.1145/2982142.2982213"
+        },
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/05/pd072-petryA.pdf"
+        },
+        {
+          "label": "Poster",
+          "url": "http://bpetry.de/sites/default/files/ASSETS2016_MuSS-Bits_Poster.pdf"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "towards-effective-interaction-with-omnidirectional-videos-using-immersive-virtual-reality-headsets",
+      "title": "Towards Effective Interaction with Omnidirectional Videos Using Immersive Virtual Reality Headsets",
+      "year": "2015",
+      "citation": "Petry, B. and Huber, J., 2015, March. Towards effective interaction with omnidirectional videos using immersive virtual reality headsets. In Proceedings of the 6th Augmented Human International Conference (pp. 217-218).",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/03/Petry-and-Huber-2015-Towards-Effective-Interaction-with-Omnidirectional.pdf"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "iswarm-a-swarm-of-luminous-sea-creatures-that-interact-with-passers-by",
+      "title": "iSwarm: a swarm of luminous sea creatures that interact with passers-by",
+      "year": "2014",
+      "citation": "Schroepfer, T., Nanayakkara, S. C., A., Wortmann, T., Cornelius, A., Khew, Y.N. and Lian, A., Yeo K.P., Peiris, R.L., Withana, A., Werry. I., Petry, B., Otega, S., Janaka, N., Elvitigala, S., Fernando, P., Samarasekara, N., 2014. iSwarm: a swarm of luminous sea creatures that interact with passers-by. In Singapore iLight 2014 (Marina Bay, Singapore, 7- 30 March, 2014). ​",
+      "awards": [],
+      "links": [
+        {
+          "label": "webpage",
+          "url": "http://2014.ilightmarinabay.sg/installation/iswarm/"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "birdie-towards-a-true-flying-experience",
+      "title": "Birdie: Towards a true flying experience",
+      "year": "2014",
+      "citation": "Petry, B., Ortega-Avila, S., Nanayakkara, S.C., and Foong, S., 2014, Birdie: Towards a true flying experience. In Workshop on Assistive Augmentation, Extended Abstracts of the 32nd Annual SIGCHI Conference on Human Factors in Computing Systems (CHI14). Toronto, Canada.",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://ahlab.org/wp-content/uploads/2021/03/Birdie-Towards-a-true-flying-experience.pdf"
+        }
+      ],
+      "venue": "CHI EA"
+    }
+  ],
+  "events": [],
+  "press": [
+    {
+      "slug": "how-an-auckland-lab-is-using-tech-to-help-deaf-people-experience-music",
+      "title": "How an Auckland lab is using tech to help deaf people experience music",
+      "year": "2019",
+      "type": "news",
+      "outlet": "Noted",
+      "url": "https://www.noted.co.nz/health/health-health/deaf-people-experience-music-auckland-lab-technology",
+      "projects": [
+        "muss-bits"
+      ]
+    },
+    {
+      "slug": "best-design-awards-public-good-award-mussbits",
+      "title": "Best Design Awards | Public Good Award | MussBits",
+      "year": "2019",
+      "type": "award",
+      "outlet": "Designer Institute of New Zealand",
+      "url": "https://bestawards.co.nz/public-good-award/student-public-good/juan-pablo-forero-cortes/mussbits/",
+      "projects": [
+        "muss-bits"
+      ]
+    },
+    {
+      "slug": "a-watch-like-device-that-helps-people-feel-the-music",
+      "title": "A watch-like device that helps people feel the music",
+      "year": "2019",
+      "type": "news",
+      "outlet": "The University of Auckland",
+      "url": "https://www.auckland.ac.nz/en/news/2019/08/28/a-watch-like-device-that-helps-people-feel-the-music.html",
+      "projects": [
+        "muss-bits"
+      ]
+    },
+    {
+      "slug": "a-watch-like-device-that-helps-people-feel-the-music-2",
+      "title": "A watch-like device that helps people feel the music",
+      "year": "2019",
+      "type": "news",
+      "outlet": "prweb",
+      "url": "https://www.prweb.com/releases/a_watch_like_device_that_helps_people_feel_the_music/prweb16575097.htm",
+      "projects": [
+        "muss-bits"
+      ]
+    },
+    {
+      "slug": "steve-howard-award-for-the-best-long-paper-by-a-student-presented-during-ozchi-chisigs-annual-conference-muss-bits-sensor-display-blocks-for-deaf-people-to-explore-musical-sounds",
+      "title": "Steve Howard Award - for the best long paper by a student presented during OZCHI, CHISIG's Annual Conference: MuSS-Bits: Sensor-Display Blocks for Deaf People to Explore Musical Sounds",
+      "year": "2016",
+      "type": "award",
+      "outlet": "OZCHI",
+      "url": null,
+      "projects": [
+        "muss-bits"
+      ]
+    },
+    {
+      "slug": "interactive-lighting-experiences-at-i-light-marina-bay-2014",
+      "title": "Interactive lighting experiences at 'i Light Marina Bay 2014'",
+      "year": "2014",
+      "type": "news",
+      "outlet": "The Singapore Engineer Magazine",
+      "url": null,
+      "projects": [
+        "iswarm"
+      ]
+    },
+    {
+      "slug": "300-students-unite-to-light-up-marina-bay",
+      "title": "300 Students Unite To Light-up Marina Bay",
+      "year": "2014",
+      "type": "news",
+      "outlet": "Lianhe Zaobao, Singapore",
+      "url": null,
+      "projects": [
+        "iswarm"
+      ]
+    }
+  ]
+}

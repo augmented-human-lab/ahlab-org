@@ -1,0 +1,69 @@
+{
+  "slug": "tamil-selvan",
+  "name": "Tamil Selvan",
+  "role": "Research Attachment",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/tamil-selvan/tamil-selvan.jpg",
+  "profile_url": "/people/tamil-selvan/",
+  "projects": [
+    {
+      "slug": "kinvoice",
+      "title": "KinVoice",
+      "year": "2021",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/kinvoice/kinvoice.jpg",
+      "principles": [
+        "cognitive",
+        "identity",
+        "sociocultural"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "a-user-study-on-sharing-physiological-cues-in-vr-assembly-tasks",
+      "title": "A User Study on Sharing Physiological Cues in VR Assembly Tasks",
+      "year": "2024",
+      "citation": "Sasikumar, P., Hajika, R., Gupta, K., Selvan, T., Pai, Y.S., Bai, H., Nanayakkara, S.C., and Billinghurst, M. 2024. Title of the Article. In IEEE Conference on Virtual Reality and 3D User Interfaces, 2024.",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1M7seP_4dbj9O4xGWd6oXtl2RrWy3D07b/view?usp=drive_link"
+        }
+      ],
+      "venue": "VR"
+    },
+    {
+      "slug": "kinvoices-using-voices-of-friends-and-family-in-voice-interfaces",
+      "title": "KinVoices: Using Voices of Friends and Family in Voice Interfaces",
+      "year": "2021",
+      "citation": "Chan, S. W. T., Gunasekaran, T., Pai, Y. S., Zhang, H. and Nanayakkara, S.C. 2021. KinVoices: Using Voices of Friends and Family in Voice Interfaces. Proc. ACM Hum.-Comput. Interact. 5, CSCW2, Article 446 (October 2021), 25 pages.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3479590"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1_Bp0ShrTKy81zvguDyOgrgdBunsin8iX/view?usp=sharing"
+        }
+      ],
+      "venue": "ACM"
+    }
+  ],
+  "events": [],
+  "press": [
+    {
+      "slug": "kinvoice-prototypes-for-humanity",
+      "title": "KinVoice | Prototypes for Humanity",
+      "year": "2022",
+      "type": "award",
+      "outlet": null,
+      "url": "https://www.prototypesforhumanity.com/project/kinvoice/",
+      "projects": [
+        "kinvoice"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "slug": "felicia-tan",
+  "name": "Felicia Tan",
+  "role": "Research Assistant",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/felicia-tan/felicia-tan.jpg",
+  "profile_url": "/people/felicia-tan/",
+  "projects": [
+    {
+      "slug": "curious-shorts",
+      "title": "Curious Shorts",
+      "year": "2025",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/curious-shorts/curious-shorts.jpg",
+      "principles": [
+        "cognitive"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "curious-shorts-curiosity-driven-exploration-and-learning-on-short-form-video-platforms",
+      "title": "Curious Shorts: Curiosity-Driven Exploration and Learning on Short-Form Video Platforms",
+      "year": "2025",
+      "citation": "Tan, F.F., Ram, A., Messerschmidt, A.M., Dissanayake, H.A., and Nanayakkara, S.C. 2025. Curious Shorts: Curiosity-Driven Exploration and Learning on Short-Form Video Platforms. Accepted to the Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI ’25).",
+      "awards": [],
+      "links": [],
+      "venue": "CHI"
+    }
+  ],
+  "events": [],
+  "press": []
+}

@@ -1,0 +1,54 @@
+{
+  "slug": "yifei-luo",
+  "name": "Yifei Luo",
+  "role": "Intern",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/yifei-luo/yifei-luo.jpg",
+  "profile_url": "/people/yifei-luo/",
+  "projects": [
+    {
+      "slug": "blind-drone",
+      "title": "Blind Drone",
+      "year": "Current",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/blind-drone/blind-drone.jpg",
+      "principles": [
+        "perceptual",
+        "physical"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "interrupting-autopilot-evaluating-sensory-interventions-for-momentary-self-regulation",
+      "title": "Interrupting Autopilot: Evaluating Sensory Interventions for Momentary Self-Regulation",
+      "year": "2026",
+      "citation": "Dissanayake, D., Mysan, M., Luo, Y., Antoni, T., Cleveland, P., Sasikumar, P., Nanayakkara, S. C., 2026. Interrupting Autopilot: Evaluating Sensory Interventions for Momentary Self-Regulation. In Extended Abstracts of the 2026 CHI Conference on Human Factors in Computing Systems (CHI EA ’26)",
+      "awards": [],
+      "links": [
+        {
+          "label": "doi",
+          "url": "https://doi.org/10.1145/3772363.3798497"
+        },
+        {
+          "label": "pdf",
+          "url": "https://drive.google.com/file/d/1BNkKoR87_0D8bzfsWDP0wxX5draRdKu2/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI EA"
+    }
+  ],
+  "events": [
+    {
+      "slug": "chi-2026",
+      "title": "CHI 2026",
+      "subtitle": "ACM Conference on Human Factors in Computing Systems",
+      "kind": "conference",
+      "location": "Barcelona, Spain",
+      "starts": "2026-04-13",
+      "ends": "2026-04-17",
+      "url": "https://chi2026.ahlab.org",
+      "summary": "AHLab presents 5 papers and 2 posters at CHI 2026 in Barcelona."
+    }
+  ],
+  "press": []
+}

@@ -1,0 +1,76 @@
+{
+  "slug": "loic-david",
+  "name": "Loïc David",
+  "role": "Research Attachment",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/loic-david/loic-david.jpg",
+  "profile_url": "/people/loic-david/",
+  "projects": [
+    {
+      "slug": "gymsoles",
+      "title": "GymSoles",
+      "year": "2019",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/gymsoles/gymsoles.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "gymsoles-improving-squats-and-dead-lifts-by-visualizing-the-users-centre-of-pressure",
+      "title": "GymSoles: Improving Squats and Dead-Lifts by Visualizing the User’s Centre of Pressure",
+      "year": "2019",
+      "citation": "Elvitigala, D.S., Matthies, D.J., David, L., Weerasinghe, C. and Nanayakkara, S.C., 2019, May. GymSoles: Improving Squats and Dead-Lifts by Visualizing the User's Center of Pressure. In Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems (pp. 1-12).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://dl.acm.org/doi/fullHtml/10.1145/3290605.3300404"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1TxCTJcmr2k7xQLOp69HbGCyi6WaTZoIa/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    }
+  ],
+  "events": [],
+  "press": [
+    {
+      "slug": "gymsoles-petra-2021-best-student-paper",
+      "title": "GymSoles++: Combining Google Glass with Smart Insoles to Improve Body Posture when Performing Squats | Best Student Paper Award",
+      "year": "2021",
+      "type": "award",
+      "outlet": "ACM PETRA",
+      "url": null,
+      "projects": [
+        "gymsoles"
+      ]
+    },
+    {
+      "slug": "gymsoles-best-design-awards-student-digital-bronze",
+      "title": "GymSoles | Best Design Awards | Student Digital: Bronze",
+      "year": "2020",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/digital/student-digital/samitha-1/gymsoles-1/",
+      "projects": [
+        "gymsoles"
+      ]
+    },
+    {
+      "slug": "gymsoles-help-you-improve-your-squats-and-deadlifts-by-monitoring-and-correcting-your-form",
+      "title": "GymSoles Help You Improve Your Squats and Deadlifts by Monitoring and Correcting Your Form",
+      "year": "2019",
+      "type": "news",
+      "outlet": "hackster.io",
+      "url": "https://blog.hackster.io/gymsoles-help-you-improve-your-squats-and-deadlifts-by-monitoring-and-correcting-your-form-ad55c03131f2",
+      "projects": [
+        "gymsoles"
+      ]
+    }
+  ]
+}

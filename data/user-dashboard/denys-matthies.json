@@ -1,0 +1,815 @@
+{
+  "slug": "denys-matthies",
+  "name": "Denys Matthies",
+  "role": "Research Fellow",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/denys-matthies/denys-matthies.jpg",
+  "profile_url": "/people/denys-matthies/",
+  "projects": [
+    {
+      "slug": "sonicvista",
+      "title": "SonicVista",
+      "year": "2025",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/sonicvista/sonicvista.jpg",
+      "principles": [
+        "cognitive",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "ticklefoot",
+      "title": "TickleFoot",
+      "year": "2021",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/ticklefoot/ticklefoot.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "eyeknowyou",
+      "title": "EyeKnowYou",
+      "year": "2021",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/eyeknowyou/eyeknowyou.jpg",
+      "principles": [
+        "body",
+        "cognitive"
+      ]
+    },
+    {
+      "slug": "clothtiles",
+      "title": "ClothTiles",
+      "year": "2021",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/clothtiles/clothtiles.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "stressfoot",
+      "title": "StressFoot",
+      "year": "2020",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/stressfoot/stressfoot.jpg",
+      "principles": [
+        "body",
+        "cognitive"
+      ]
+    },
+    {
+      "slug": "phantomtouch",
+      "title": "PhantomTouch",
+      "year": "2020",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/phantomtouch/phantomtouch.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "gymsoles",
+      "title": "GymSoles",
+      "year": "2019",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/gymsoles/gymsoles.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "chewit",
+      "title": "ChewIt",
+      "year": "2019",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/chewit/chewit.jpg",
+      "principles": [
+        "body",
+        "physical",
+        "identity"
+      ]
+    },
+    {
+      "slug": "target-driven-navigation",
+      "title": "Target Driven Navigation",
+      "year": "2018",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/target-driven-navigation/target-driven-navigation.jpg",
+      "principles": [
+        "physical"
+      ]
+    },
+    {
+      "slug": "step-detection-algorithm",
+      "title": "Step Detection Algorithm",
+      "year": "2018",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/step-detection-algorithm/step-detection-algorithm.jpg",
+      "principles": [
+        "body",
+        "identity"
+      ]
+    },
+    {
+      "slug": "cricketcoach",
+      "title": "CricketCoach",
+      "year": "2018",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/cricketcoach/cricketcoach.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "capmat",
+      "title": "CapMat",
+      "year": "2018",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/capmat/capmat.jpg",
+      "principles": [
+        "body",
+        "physical"
+      ]
+    },
+    {
+      "slug": "2bit-tactile-hand",
+      "title": "2bit-Tactile Hand",
+      "year": "2018",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/2bit-tactile-hand/2bit-tactile-hand.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "thumb-in-motion",
+      "title": "Thumb in Motion",
+      "year": "2017",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/thumb-in-motion/thumb-in-motion.jpg",
+      "principles": [
+        "body",
+        "physical"
+      ]
+    },
+    {
+      "slug": "doodle-daydream",
+      "title": "Doodle Daydream",
+      "year": "2017",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/doodle-daydream/doodle-daydream.jpg",
+      "principles": [
+        "sociocultural"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "sonicvista-towards-creating-awareness-of-distant-scenes-through-sonification",
+      "title": "SonicVista: Towards Creating Awareness of Distant Scenes through Sonification",
+      "year": "2024",
+      "citation": "Gupta, C., Sridhar, S., Matthies, D.J., Jouffrais, C. and Nanayakkara, S.C., 2024. SonicVista: Towards Creating Awareness of Distant Scenes through Sonification. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 8(2), pp.1-32.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3659609"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1VgtLBPs03dJodsN6_7-yPfqLuceCGBSj/view?usp=sharing"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "kavy-fostering-language-speaking-skills-and-self-confidence-through-conversational-ai",
+      "title": "Kavy: Fostering Language Speaking Skills and Self-Confidence Through Conversational AI",
+      "year": "2024",
+      "citation": "Cooray, S., Hettiarachchi, C., Nanayakkara, V., Matthies, D., Samaradivakara, Y. and Nanayakkara, S., 2024, April. Kavy: Fostering Language Speaking Skills and Self-Confidence Through Conversational AI. In Proceedings of the Augmented Humans International Conference 2024 (pp. 226-236).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3652920.3652944"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "ticklefoot-design-development-and-evaluation-of-a-novel-foot-tickling-mechanism-that-can-evoke-laughter",
+      "title": "TickleFoot: Design, Development and Evaluation of a Novel Foot-tickling Mechanism that Can Evoke Laughter",
+      "year": "2022",
+      "citation": "Elvitigala D.S., Boldu R., Nanayakkara S.C., and Matthies D.J.C. 2022. TickleFoot: Design, Development and Evaluation of a Novel Foot-Tickling Mechanism That Can Evoke Laughter. ACM Trans. Comput.-Hum. Interact. 29, 3, Article 20 (June 2022), 23 pages.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3490496"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "mobilld-exploring-the-detection-of-leg-length-discrepancy-and-altering-gait-with-mobile-smart-insoles",
+      "title": "mobiLLD: Exploring the Detection of Leg Length Discrepancy and Altering Gait with Mobile Smart Insoles",
+      "year": "2021",
+      "citation": "Matthies, D.J.C., Elvitigala, D.S., Fu, A., Yin, D. and Nanayakkara, S.C., 2021. mobiLLD: Exploring the Detection of Leg Length Discrepancy and Altering Gait with Mobile Smart Insoles. In The 14th PErvasive Technologies Related to Assistive Environments Conference (PETRA 2021), June 29-July 2, 2021, Corfu, Greece.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3453892.3453896"
+        },
+        {
+          "label": "PDF",
+          "url": "http://www.denysmatthies.com/downloads/Matthies_mobiLLD_PETRA2021.pdf"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "gymsoles-combining-google-glass-with-smart-insoles-to-improve-body-posture-when-performing-squats",
+      "title": "GymSoles++: Combining Google Glass with Smart Insoles to Improve Body Posture when Performing Squats",
+      "year": "2021",
+      "citation": "Elvitigala, D.S., Matthies, D.J.C, Weerasinghe, C. and Nanayakkara, S.C., 2021. GymSoles++: Combining Google Glass with Smart Insoles to Improve Body Posture when Performing Squats. In The 14th PErvasive Technologies Related to Assistive Environments Conference (PETRA 2021), June 29-July 2, 2021, Corfu, Greece. Best Student Paper Award!",
+      "awards": [
+        "Best Student Paper Award"
+      ],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3453892.3453898"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1EPAO5dtUngEmLXIoWB_ydB6bzsfDvIMR/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "eyeknowyou-a-diy-toolkit-to-support-monitoring-cognitive-load-and-actual-screen-time-using-a-head-mounted-webcam",
+      "title": "EyeKnowYou: A DIY Toolkit to Support Monitoring Cognitive Load and Actual Screen Time using a Head-Mounted Webcam",
+      "year": "2021",
+      "citation": "Kaluarachchi, T., Sapkota, S., Taradel, J., Thevenon, A., Matthies, D.J.C., and Nanayakkara, S.C., 2021. EyeKnowYou: A DIY Toolkit to Support Monitoring Cognitive Load and Actual Screen Time using a Head-Mounted Webcam. In MobileHCI ’21 Extended Abstracts: The ACM International Conference on Mobile Human Computer Interaction, Sept. 27- Oct. 1, 2021, Touluse, France.",
+      "awards": [],
+      "links": [
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1fxUMUGfoCUhy4GOb0qLt-o0BbSIzZQRv/view?usp=sharing"
+        }
+      ],
+      "venue": "MobileHCI"
+    },
+    {
+      "slug": "clothtiles-a-prototyping-platform-to-fabricate-customized-actuators-on-clothing-using-3d-printing-and-shape-memory-alloys",
+      "title": "ClothTiles: A Prototyping Platform to Fabricate Customized Actuators on Clothing using 3D Printing and Shape-Memory Alloys",
+      "year": "2021",
+      "citation": "Muthukumarana, S., Messerschmidt, M.A., Matthies, D.J.C., Steimle, J., Scholl, P.M., and Nanayakkara, S.C., 2021. ClothTiles: A Prototyping Platform to Fabricate Customized Actuators on Clothing using 3D Printing and Shape-Memory Alloys. In CHI Conference on Human Factors in Computing Systems (CHI ’21), May 8–13, 2021, Yokohama, Japan.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3411764.3445613"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1UX7Q9UYPImpNHmt_FnGlT8p34sMy2UC0/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "capglasses-untethered-capacitive-sensing-with-smart-glasses",
+      "title": "CapGlasses: Untethered Capacitive Sensing with Smart Glasses",
+      "year": "2021",
+      "citation": "Matthies, D.J.C., Weerasinghe, C., Urban, B., and Nanayakkara, S.C., 2021. CapGlasses: Untethered Capacitive Sensing with SmartGlasses. In Augmented Humans International Conference 2021 (AHs ’21), February 22–24, 2021, Rovaniemi, Finland.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3458709.3458945"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1E6hMfadLmb9L06GaV1Xpe_HQbUzIXBin/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "touch-me-gently-recreating-the-perception-of-touch-using-a-shape-memory-alloy-matrix",
+      "title": "Touch me Gently: Recreating the Perception of Touch using a Shape-Memory Alloy Matrix",
+      "year": "2020",
+      "citation": "Muthukumarana, S., Elvitigala, D.S., Cortes, J.P.F., Matthies, D.J. and Nanayakkara, S.C., 2020, April. Touch me gently: recreating the perception of touch using a shape-memory alloy matrix. In Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems (CHI '20), April 25–30, 2020, Honolulu, Hawai'i, USA. ACM.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "http://dx.doi.org/10.1145/3313831.3376491"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1QUbXiFQhbaoTaWZdWwOF_P1BAeVCbpJs/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "stressfoot-uncovering-the-potential-of-the-foot-for-acute-stress-sensing-in-sitting-posture",
+      "title": "StressFoot: Uncovering the Potential of the Foot for Acute Stress Sensing in Sitting Posture",
+      "year": "2020",
+      "citation": "Elvitigala, D.S., Matthies, D.J.C., and Nanayakkara, S.C., 2020. StressFoot: Uncovering the Potential of the Foot for Acute Stress Sensing in Sitting Posture. Sensors, 20(10), p.2882.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.3390/s20102882"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1uNy7VxU7r78HUmD-ioSQmAou_vjKV_d2/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "gymsoles-using-smart-wearables-to-improve-body-posture-when-performing-squats-and-dead-lifts",
+      "title": "GymSoles++: Using Smart Wearables to Improve Body Posture when Performing Squats and Dead-Lifts.",
+      "year": "2020",
+      "citation": "Elvitigala D. S., Matthies D. J. C., Weerasinghe C., Shi Y., and Nanayakkara S.C., 2020. GymSoles++: Using Smart Wearables to Improve Body Posture when Performing Squats and Dead-Lifts. In AHs ’20: Augmented Humans International Conference (AHs ’20), March 16–17, 2020, Kaiserslautern, Germany.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3384657.3385331"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/12-8uucgREP_yWssj9ufwEj6o7FshtQ_d/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "aisee-an-assistive-wearable-device-to-support-visually-impaired-grocery-shoppers",
+      "title": "AiSee: An Assistive Wearable Device to Support Visually Impaired Grocery Shoppers",
+      "year": "2020",
+      "citation": "Boldu, R., Matthies, D.J., Zhang, H. and Nanayakkara, S.C., 2020. AiSee: An Assistive Wearable Device to Support Visually Impaired Grocery Shoppers. Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 4(4), pp.1-25.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3432196"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/177bq2QQ2R957Mc_fa77Erk108vbO5x9O/view?usp=sharing"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "reflexive-interaction-extending-the-concept-of-peripheral-interaction",
+      "title": "Reflexive Interaction - Extending the concept of Peripheral Interaction",
+      "year": "2019",
+      "citation": "Matthies, D.J.C., Urban, B., Wolf, K., & Schmidt, A. 2019. Reflexive Interaction - Extending the concept of Peripheral Interaction. In Proceedings of the 31st Australian Conference On Human- Computer-Interaction (OzCHI 2019), Fremantle, Australia.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3369457.3369478"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1Kg3BKGJiR4bZhfxJF5dEDfTdK7jqFek4/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "presenting-a-data-imputation-concept-to-support-the-continuous-assessment-of-human-vital-data-and-activities",
+      "title": "Presenting a Data Imputation Concept to Support the Continuous Assessment of Human Vital Data and Activities",
+      "year": "2019",
+      "citation": "Haescher, M., Matthies, D.J.C., Krause, S., & Bieber, G. 2019. Presenting a Data Imputation Concept to Support the Continuous Assessment of Human Vital Data and Activities. In Proceedings of the 12th International Conference on PErvasive Technologies Related to Assistive Environments (PETRAE 2019), Corfu, Greece.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3316782.3322785"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1vvPtgX41BxC8Km3rExOR4mHTzfwN9P98/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "phantomtouch-creating-an-extended-reality-by-the-illusion-of-touch-using-a-shape-memory-alloy-matrix",
+      "title": "PhantomTouch: Creating an Extended Reality by the Illusion of Touch using a Shape-Memory Alloy Matrix",
+      "year": "2019",
+      "citation": "Muthukumarana, S., Elvitigala, D.S., Cortes, J.P.F., Matthies, D.J. and Nanayakkara, S.C., 2019, November. PhantomTouch: Creating an Extended Reality by the Illusion of Touch using a Shape-Memory Alloy Matrix. In SIGGRAPH Asia 2019 XR (pp. 29-30). ACM.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3355355.3361877"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/16BtIPNFhPXG83RBdOGvcfTQoRYnFG-7R/view?usp=sharing"
+        }
+      ],
+      "venue": "SIGGRAPH"
+    },
+    {
+      "slug": "hand-arm-vibration-estimation-using-a-commercial-smartwatch",
+      "title": "Hand-Arm Vibration Estimation using A Commercial Smartwatch",
+      "year": "2019",
+      "citation": "Matthies, D.J.C., Haescher, M., Bieber, G., and Nanayakkara, S.C., 2019. Hand-Arm Vibration Estimation using A Commercial Smartwatch. In 14th International Conference on Hand-Arm-Vibration, 21-24 May 2019, Bonn, Germany.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.13140/RG.2.2.20412.28809"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1PoQSyRCr5aOTHuKpSOQ8Fb7dEZPgq9eQ/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "gymsoles-improving-squats-and-dead-lifts-by-visualizing-the-users-centre-of-pressure",
+      "title": "GymSoles: Improving Squats and Dead-Lifts by Visualizing the User’s Centre of Pressure",
+      "year": "2019",
+      "citation": "Elvitigala, D.S., Matthies, D.J., David, L., Weerasinghe, C. and Nanayakkara, S.C., 2019, May. GymSoles: Improving Squats and Dead-Lifts by Visualizing the User's Center of Pressure. In Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems (pp. 1-12).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://dl.acm.org/doi/fullHtml/10.1145/3290605.3300404"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1TxCTJcmr2k7xQLOp69HbGCyi6WaTZoIa/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "cricketcoach-towards-creating-a-better-awareness-of-gripping-forces-for-cricketers",
+      "title": "CricketCoach: Towards Creating a Better Awareness of Gripping Forces for Cricketers",
+      "year": "2019",
+      "citation": "Muthukumarana, S., Matthies, D.J., Weerasinghe, C., Elvitigala, D.S. and Nanayakkara, S.C., 2019, March. CricketCoach: Towards Creating a Better Awareness of Gripping Forces for Cricketers. In Proceedings of the 10th Augmented Human International Conference 2019 (pp. 1-2).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3311823.3311833"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1MizLM_-FhsL3H1D2T07_8nX8L9LGlDqe/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "chewit-an-intraoral-interface-for-discreet-interactions",
+      "title": "ChewIt. An Intraoral Interface for Discreet Interactions.",
+      "year": "2019",
+      "citation": "Cascón, P.C., Matthies, D.J., Muthukumarana, S. and Nanayakkara, S.C, 2019, May. ChewIt. An Intraoral Interface for Discreet Interactions. In Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems (pp. 1-13).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://dl.acm.org/doi/10.1145/3290605.3300556"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1uIUaPa2ktYIwhM9RoYvikVWJmPnS8JwB/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "capmat-a-smart-foot-mat-for-user-authentication",
+      "title": "CapMat: A Smart Foot Mat for User Authentication",
+      "year": "2019",
+      "citation": "Matthies, D.J., Elvitigala, D.S., Muthukumarana, S., Huber, J. and Nanayakkara, S.C., 2019, March. CapMat: a smart foot mat for user authentication. In Proceedings of the 10th Augmented Human International Conference 2019 (pp. 1-2).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3311823.3311874"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1mHYxzlv5xAb_RaQvLQrWkwnJt0_yUctz/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "2bit-tactilehand-evaluating-tactons-for-nobody-vibrotactile-displays-on-the-hand-and-wrist",
+      "title": "2bit-TactileHand: Evaluating Tactons for Nobody Vibrotactile Displays on the Hand and Wrist.",
+      "year": "2019",
+      "citation": "Elvitigala, D.S., Matthies, D.J., Dissanayaka, V., Weerasinghe, C. and Nanayakkara, S.C., 2019, March. 2bit-TactileHand: Evaluating Tactons for On-Body Vibrotactile Displays on the Hand and Wrist. In Proceedings of the 10th Augmented Human International Conference 2019 (pp. 1-8).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3311823.3311832"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1Qvl1pDiOsk53wmYLPkYrtj1pVqgTBLpR/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "thumb-in-motion-evaluating-thumb-to-ring-microgestures-for-athletic-activity",
+      "title": "Thumb-In-Motion: Evaluating Thumb to Ring Microgestures for Athletic Activity",
+      "year": "2018",
+      "citation": "Boldu, R., Dancu, A., Matthies, D.J., Cascón, P.G., Ransir, S. and Nanayakkara, S.C., 2018, October. Thumb-In-Motion: Evaluating Thumb-to-Ring Microgestures for Athletic Activity. In Proceedings of the Symposium on Spatial User Interaction (pp. 150-157).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3267782.3267796"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "step-detection-for-rollator-users-with-smartwatches",
+      "title": "Step Detection for Rollator Users with Smartwatches",
+      "year": "2018",
+      "citation": "Matthies, D.J., Haescher, M., Nanayakkara, S.C. and Bieber, G., 2018, October. Step detection for rollator users with smartwatches. In Proceedings of the Symposium on Spatial User Interaction (pp. 163-167).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3267782.3267784"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1PMW_SE18hsZsarSNhy9u5TyC7RdaBw_X/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "scaling-notifications-beyond-alerts-from-subtly-drawing-attention-up-to-forcing-the-user-to-take-action",
+      "title": "Scaling Notifications Beyond Alerts: From Subtly Drawing Attention up to Forcing the User to Take Action",
+      "year": "2018",
+      "citation": "Matthies, D.J., Parra, L.M.D. and Urban, B., 2018, October. Scaling notifications beyond alerts: from subtly drawing attention up to forcing the user to take action. In The 31st Annual ACM Symposium on User Interface Software and Technology Adjunct Proceedings (pp. 45-47).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3266037.3266096"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1Oak3j-ZL-pjoGJeA5sr6HeRl7vbiW-3r/view?usp=sharing"
+        }
+      ],
+      "venue": "UIST"
+    },
+    {
+      "slug": "mobile-assisted-living-smartwatch-based-fall-risk-assessment-for-elderly-people",
+      "title": "Mobile Assisted Living: Smartwatch-based Fall Risk Assessment for Elderly People",
+      "year": "2018",
+      "citation": "Haescher, M., Matthies, D.J., Srinivasan, K. and Bieber, G., 2018, September. Mobile assisted living: smartwatch-based fall risk assessment for elderly people. In Proceedings of the 5th international Workshop on Sensor-based Activity Recognition and Interaction (pp. 1-10).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3266157.3266210"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1S0XphfYdY7cK0A0laXiLxTbonVg9Ixj8/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "fingerreader2-0-designing-and-evaluating-a-wearable-finger-worncamera-to-assist-people-with-visual-impairments-while-shopping",
+      "title": "FingerReader2.0: Designing and Evaluating a Wearable Finger-WornCamera to Assist People with Visual Impairments while Shopping,",
+      "year": "2018",
+      "citation": "Boldu, R., Dancu, A., Matthies, D. J.C., Buddhika, T., Siriwardhana, S., & Nanayakkara, S.C., 2018. FingerReader2. 0: Designing and Evaluating a Wearable Finger-Worn Camera to Assist People with Visual Impairments while Shopping. In Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 2(3), 94. ACM.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3264904"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "exploring-accelerometer-based-step-detection-by-using-a-wheeled-walking-frame",
+      "title": "Exploring Accelerometer-based Step Detection by using a Wheeled Walking Frame",
+      "year": "2018",
+      "citation": "Bieber, G., Haescher, M., Hanschmann, P. and Matthies, D.J., 2018, September. Exploring accelerometer-based step detection by using a wheeled walking frame. In Proceedings of the 5th international Workshop on Sensor-based Activity Recognition and Interaction (pp. 1-6).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3266157.3266212"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1pDtfv91TFJ0n6KPGQXHJVqydc6BKmx0P/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    },
+    {
+      "slug": "doodle-daydream-an-interactive-display-to-support-playful-and-creative-interactions-between-co-workers",
+      "title": "Doodle Daydream: An Interactive Display to Support Playful and Creative Interactions Between Co-workers",
+      "year": "2018",
+      "citation": "Elvitigala, S., Chan, S. W. T., Howell, N., Matthies, D. J. and Nanayakkara, S. C., 2018, October. Doodle Daydream: An Interactive Display to Support Playful and Creative Interactions Between Co-workers. In Proceedings of the Symposium on Spatial User Interaction (pp. 186-186).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3267782.3274681"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1f1HKVvNJUjm2ZmrDFBJb09M2RK6g_swO/view?usp=sharing"
+        }
+      ],
+      "venue": "Other"
+    }
+  ],
+  "events": [],
+  "press": [
+    {
+      "slug": "watch-a-foot-tickling-machine-discover-the-most-ticklish-spot-on-feet",
+      "title": "Watch a foot-tickling machine discover the most ticklish spot on feet",
+      "year": "2022",
+      "type": "news",
+      "outlet": "NewScientist",
+      "url": "https://www.newscientist.com/article/2312816-watch-a-foot-tickling-machine-discover-the-most-ticklish-spot-on-feet/",
+      "projects": [
+        "ticklefoot"
+      ]
+    },
+    {
+      "slug": "gymsoles-petra-2021-best-student-paper",
+      "title": "GymSoles++: Combining Google Glass with Smart Insoles to Improve Body Posture when Performing Squats | Best Student Paper Award",
+      "year": "2021",
+      "type": "award",
+      "outlet": "ACM PETRA",
+      "url": null,
+      "projects": [
+        "gymsoles"
+      ]
+    },
+    {
+      "slug": "clothtiles-a-prototyping-platform-to-fabricate-customized-actuators-on-clothing",
+      "title": "ClothTiles: A Prototyping Platform to Fabricate Customized Actuators on Clothing",
+      "year": "2021",
+      "type": "news",
+      "outlet": "Ars Electronica",
+      "url": "https://www.ars.nz/clothtiles/",
+      "projects": [
+        "clothtiles"
+      ]
+    },
+    {
+      "slug": "touch-me-gently-recreates-natural-touch-sensation-using-shape-memory-alloy-matrix",
+      "title": "Touch me Gently Recreates Natural Touch Sensation Using Shape-Memory Alloy Matrix",
+      "year": "2020",
+      "type": "news",
+      "outlet": "hackster.io",
+      "url": "https://www.hackster.io/news/touch-me-gently-recreates-natural-touch-sensation-using-shape-memory-alloy-matrix-ca9b1eee4c36",
+      "projects": [
+        "phantomtouch"
+      ]
+    },
+    {
+      "slug": "touch-me-gently-global-grad-show",
+      "title": "Touch me Gently | Global Grad Show",
+      "year": "2020",
+      "type": "news",
+      "outlet": null,
+      "url": "https://globalgradshow.com/project/touch-me-gently/",
+      "projects": [
+        "phantomtouch"
+      ]
+    },
+    {
+      "slug": "touch-me-gently-best-design-awards-student-digital-finalist",
+      "title": "Touch me Gently | Best Design Awards | Student Digital: Finalist",
+      "year": "2020",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/digital/student-digital/sachith-3/touch-me-gently/",
+      "projects": [
+        "phantomtouch"
+      ]
+    },
+    {
+      "slug": "phantomtouch-global-grad-show",
+      "title": "PhantomTouch | Global Grad Show",
+      "year": "2020",
+      "type": "news",
+      "outlet": "MediaGrab",
+      "url": "https://mediagrab.press/view/package/316",
+      "projects": [
+        "phantomtouch"
+      ]
+    },
+    {
+      "slug": "gymsoles-best-design-awards-student-digital-bronze",
+      "title": "GymSoles | Best Design Awards | Student Digital: Bronze",
+      "year": "2020",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/digital/student-digital/samitha-1/gymsoles-1/",
+      "projects": [
+        "gymsoles"
+      ]
+    },
+    {
+      "slug": "this-doormat-can-tell-who-you-are-for-multi-factor-authentication",
+      "title": "This Doormat Can Tell Who You Are for Multi-Factor Authentication",
+      "year": "2019",
+      "type": "news",
+      "outlet": "hackter.io",
+      "url": "https://blog.hackster.io/this-doormat-can-tell-who-you-are-for-multi-factor-authentication-1f01928897a8",
+      "projects": [
+        "capmat"
+      ]
+    },
+    {
+      "slug": "the-interactive-device-you-can-stick-in-your-mouth",
+      "title": "The interactive device you can stick in your mouth",
+      "year": "2019",
+      "type": "news",
+      "outlet": null,
+      "url": "https://www.auckland.ac.nz/en/news/2019/02/18/interactive-device-stick-in-your-mouth.html",
+      "projects": [
+        "chewit"
+      ]
+    },
+    {
+      "slug": "gymsoles-help-you-improve-your-squats-and-deadlifts-by-monitoring-and-correcting-your-form",
+      "title": "GymSoles Help You Improve Your Squats and Deadlifts by Monitoring and Correcting Your Form",
+      "year": "2019",
+      "type": "news",
+      "outlet": "hackster.io",
+      "url": "https://blog.hackster.io/gymsoles-help-you-improve-your-squats-and-deadlifts-by-monitoring-and-correcting-your-form-ad55c03131f2",
+      "projects": [
+        "gymsoles"
+      ]
+    },
+    {
+      "slug": "go-hands-free-with-mobile-devices-using-chewit-intraoral-input-interface",
+      "title": "Go Hands Free with Mobile Devices Using ChewIt Intraoral Input Interface",
+      "year": "2019",
+      "type": "news",
+      "outlet": "Hackster.io",
+      "url": "https://blog.hackster.io/go-hands-free-with-mobile-devices-using-chewit-intraoral-input-interface-210b5a62391f",
+      "projects": [
+        "chewit"
+      ]
+    },
+    {
+      "slug": "chewit-novel-way-to-answer-your-mobile",
+      "title": "ChewIt - novel way to answer your mobile",
+      "year": "2019",
+      "type": "news",
+      "outlet": "RadioNZ",
+      "url": "https://www.radionz.co.nz/national/programmes/ninetonoon/audio/2018694791/chewit-novel-way-to-answer-your-mobile",
+      "projects": [
+        "chewit"
+      ]
+    },
+    {
+      "slug": "bite-sized-device-a-new-take-on-wearable-tech",
+      "title": "Bite-sized device a new take on wearable tech",
+      "year": "2019",
+      "type": "news",
+      "outlet": "NZ Herald",
+      "url": "https://www.nzherald.co.nz/technology/news/article.cfm?c_id=5&objectid=12205190",
+      "projects": [
+        "chewit"
+      ]
+    },
+    {
+      "slug": "a-new-way-to-answer-your-phone-by-biting-a-piece-of-tech",
+      "title": "A new way to answer your phone by biting a piece of tech",
+      "year": "2019",
+      "type": "news",
+      "outlet": "Springwise",
+      "url": "https://www.springwise.com/a-new-way-to-answer-your-phone-by-biting-a-piece-of-tech/",
+      "projects": [
+        "chewit"
+      ]
+    }
+  ]
+}

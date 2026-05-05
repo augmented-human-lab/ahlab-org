@@ -1,0 +1,522 @@
+{
+  "slug": "sachith-muthukumarana",
+  "name": "Sachith Muthukumarana",
+  "role": "PhD Candidate",
+  "section": "Alumni",
+  "profile_image": "https://cdn.ahlab.org/media/site/people/sachith-muthukumarana/sachith-muthukumarana.jpg",
+  "profile_url": "/people/sachith-muthukumarana/",
+  "projects": [
+    {
+      "slug": "xrtic",
+      "title": "XRtic",
+      "year": "2022",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/xrtic/xrtic.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "clothtiles",
+      "title": "ClothTiles",
+      "year": "2021",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/clothtiles/clothtiles.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "anisma",
+      "title": "ANISMA",
+      "year": "2021",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/anisma/anisma.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "rainbowhub",
+      "title": "RainbowHub",
+      "year": "2020",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/rainbowhub/rainbowhub.jpg",
+      "principles": [
+        "sociocultural"
+      ]
+    },
+    {
+      "slug": "phantomtouch",
+      "title": "PhantomTouch",
+      "year": "2020",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/phantomtouch/phantomtouch.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "jammify",
+      "title": "Jammify",
+      "year": "2020",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/jammify/jammify.jpg",
+      "principles": [
+        "body",
+        "sociocultural"
+      ]
+    },
+    {
+      "slug": "chewit",
+      "title": "ChewIt",
+      "year": "2019",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/chewit/chewit.jpg",
+      "principles": [
+        "body",
+        "physical",
+        "identity"
+      ]
+    },
+    {
+      "slug": "cricketcoach",
+      "title": "CricketCoach",
+      "year": "2018",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/cricketcoach/cricketcoach.jpg",
+      "principles": [
+        "body",
+        "perceptual"
+      ]
+    },
+    {
+      "slug": "capmat",
+      "title": "CapMat",
+      "year": "2018",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/capmat/capmat.jpg",
+      "principles": [
+        "body",
+        "physical"
+      ]
+    },
+    {
+      "slug": "insight",
+      "title": "InSight",
+      "year": "2017",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/insight/insight.jpg",
+      "principles": [
+        "body",
+        "physical"
+      ]
+    },
+    {
+      "slug": "the-ribbon",
+      "title": "The RIBbon",
+      "year": "2015",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/the-ribbon/the-ribbon.jpg",
+      "principles": [
+        "sociocultural"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "slug": "xrtic-a-prototyping-toolkit-for-xr-applications-using-cloth-deformation",
+      "title": "XRtic: A Prototyping Toolkit for XR Applications using Cloth Deformation",
+      "year": "2022",
+      "citation": "Muthukumarana, S., Nassani, A., Park, N., Steimle, J., Billinghurst, B., and Nanayakkara, S.C., XRtic: A Prototyping Toolkit for XR Applications using Cloth Deformation. In 2022 IEEE International Symposium on Mixed and Augmented Reality (ISMAR), IEEE, 2022.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1109/ISMAR55827.2022.00071"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1m1irQX5MT0JKANEgfIncgX2kCWCJPDE0/view?usp=sharing"
+        }
+      ],
+      "venue": "ISMAR"
+    },
+    {
+      "slug": "anisma-a-prototyping-toolkit-to-explore-haptic-skin-deformation-applications-using-shape-memory-alloys",
+      "title": "ANISMA: A Prototyping Toolkit to Explore Haptic Skin Deformation Applications Using Shape-Memory Alloys",
+      "year": "2022",
+      "citation": "Messerschmidt M.A., Muthukumarana S., Hamdan N.A., Wagner A., Zhang H., Borchers J., and Nanayakkara S.C. 2022. ANISMA: A Prototyping Toolkit to Explore Haptic Skin Deformation Applications Using Shape-Memory Alloys. ACM Trans. Comput.-Hum. Interact. 29, 3, Article 19 (June 2022), 34 pages.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3490497"
+        }
+      ],
+      "venue": "ACM"
+    },
+    {
+      "slug": "jammify-interactive-multi-sensory-system-for-digital-art-jamming",
+      "title": "Jammify: Interactive Multi-Sensory System for Digital Art Jamming",
+      "year": "2021",
+      "citation": "Muthukumarana S., Elvitigala D.S., Wu Q., Pai Y.S., Nanayakkara S.C. 2021. Jammify: Interactive Multi-sensory System for Digital Art Jamming. In Human-Computer-Interaction – INTERACT 2021, Springer International Publishing, Cham, 23–41",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1007/978-3-030-85607-6_2"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1IYyGOWazrK5HxzO-s2Bx687PW2n6E-JH/view?usp=sharing"
+        }
+      ],
+      "venue": "Springer"
+    },
+    {
+      "slug": "clothtiles-a-prototyping-platform-to-fabricate-customized-actuators-on-clothing-using-3d-printing-and-shape-memory-alloys",
+      "title": "ClothTiles: A Prototyping Platform to Fabricate Customized Actuators on Clothing using 3D Printing and Shape-Memory Alloys",
+      "year": "2021",
+      "citation": "Muthukumarana, S., Messerschmidt, M.A., Matthies, D.J.C., Steimle, J., Scholl, P.M., and Nanayakkara, S.C., 2021. ClothTiles: A Prototyping Platform to Fabricate Customized Actuators on Clothing using 3D Printing and Shape-Memory Alloys. In CHI Conference on Human Factors in Computing Systems (CHI ’21), May 8–13, 2021, Yokohama, Japan.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3411764.3445613"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1UX7Q9UYPImpNHmt_FnGlT8p34sMy2UC0/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "touch-me-gently-recreating-the-perception-of-touch-using-a-shape-memory-alloy-matrix",
+      "title": "Touch me Gently: Recreating the Perception of Touch using a Shape-Memory Alloy Matrix",
+      "year": "2020",
+      "citation": "Muthukumarana, S., Elvitigala, D.S., Cortes, J.P.F., Matthies, D.J. and Nanayakkara, S.C., 2020, April. Touch me gently: recreating the perception of touch using a shape-memory alloy matrix. In Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems (CHI '20), April 25–30, 2020, Honolulu, Hawai'i, USA. ACM.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "http://dx.doi.org/10.1145/3313831.3376491"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1QUbXiFQhbaoTaWZdWwOF_P1BAeVCbpJs/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "phantomtouch-creating-an-extended-reality-by-the-illusion-of-touch-using-a-shape-memory-alloy-matrix",
+      "title": "PhantomTouch: Creating an Extended Reality by the Illusion of Touch using a Shape-Memory Alloy Matrix",
+      "year": "2019",
+      "citation": "Muthukumarana, S., Elvitigala, D.S., Cortes, J.P.F., Matthies, D.J. and Nanayakkara, S.C., 2019, November. PhantomTouch: Creating an Extended Reality by the Illusion of Touch using a Shape-Memory Alloy Matrix. In SIGGRAPH Asia 2019 XR (pp. 29-30). ACM.",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3355355.3361877"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/16BtIPNFhPXG83RBdOGvcfTQoRYnFG-7R/view?usp=sharing"
+        }
+      ],
+      "venue": "SIGGRAPH"
+    },
+    {
+      "slug": "cricketcoach-towards-creating-a-better-awareness-of-gripping-forces-for-cricketers",
+      "title": "CricketCoach: Towards Creating a Better Awareness of Gripping Forces for Cricketers",
+      "year": "2019",
+      "citation": "Muthukumarana, S., Matthies, D.J., Weerasinghe, C., Elvitigala, D.S. and Nanayakkara, S.C., 2019, March. CricketCoach: Towards Creating a Better Awareness of Gripping Forces for Cricketers. In Proceedings of the 10th Augmented Human International Conference 2019 (pp. 1-2).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3311823.3311833"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1MizLM_-FhsL3H1D2T07_8nX8L9LGlDqe/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "chewit-an-intraoral-interface-for-discreet-interactions",
+      "title": "ChewIt. An Intraoral Interface for Discreet Interactions.",
+      "year": "2019",
+      "citation": "Cascón, P.C., Matthies, D.J., Muthukumarana, S. and Nanayakkara, S.C, 2019, May. ChewIt. An Intraoral Interface for Discreet Interactions. In Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems (pp. 1-13).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://dl.acm.org/doi/10.1145/3290605.3300556"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1uIUaPa2ktYIwhM9RoYvikVWJmPnS8JwB/view?usp=sharing"
+        }
+      ],
+      "venue": "CHI"
+    },
+    {
+      "slug": "capmat-a-smart-foot-mat-for-user-authentication",
+      "title": "CapMat: A Smart Foot Mat for User Authentication",
+      "year": "2019",
+      "citation": "Matthies, D.J., Elvitigala, D.S., Muthukumarana, S., Huber, J. and Nanayakkara, S.C., 2019, March. CapMat: a smart foot mat for user authentication. In Proceedings of the 10th Augmented Human International Conference 2019 (pp. 1-2).",
+      "awards": [],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3311823.3311874"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1mHYxzlv5xAb_RaQvLQrWkwnJt0_yUctz/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    },
+    {
+      "slug": "insight-a-systematic-approach-to-create-dynamic-human-controller-interactions",
+      "title": "InSight: A Systematic Approach to Create Dynamic Human-Controller-Interactions",
+      "year": "2017",
+      "citation": "Boldu, R., Zhang, H., Cortés, J.P.F., Muthukumarana, S. and Nanayakkara, S.C., 2017, March. Insight: a systematic approach to create dynamic human-controller-interactions. In Proceedings of the 8th Augmented Human International Conference (pp. 1-5). Best Short Paper Award!",
+      "awards": [
+        "Best Short Paper Award"
+      ],
+      "links": [
+        {
+          "label": "DOI",
+          "url": "https://doi.org/10.1145/3041164.3041195"
+        },
+        {
+          "label": "PDF",
+          "url": "https://drive.google.com/file/d/1VctHLqYA8VrCwAZVTuy_G_e3GaUWx3td/view?usp=sharing"
+        }
+      ],
+      "venue": "AH"
+    }
+  ],
+  "events": [],
+  "press": [
+    {
+      "slug": "clothtiles-a-prototyping-platform-to-fabricate-customized-actuators-on-clothing",
+      "title": "ClothTiles: A Prototyping Platform to Fabricate Customized Actuators on Clothing",
+      "year": "2021",
+      "type": "news",
+      "outlet": "Ars Electronica",
+      "url": "https://www.ars.nz/clothtiles/",
+      "projects": [
+        "clothtiles"
+      ]
+    },
+    {
+      "slug": "touch-me-gently-recreates-natural-touch-sensation-using-shape-memory-alloy-matrix",
+      "title": "Touch me Gently Recreates Natural Touch Sensation Using Shape-Memory Alloy Matrix",
+      "year": "2020",
+      "type": "news",
+      "outlet": "hackster.io",
+      "url": "https://www.hackster.io/news/touch-me-gently-recreates-natural-touch-sensation-using-shape-memory-alloy-matrix-ca9b1eee4c36",
+      "projects": [
+        "phantomtouch"
+      ]
+    },
+    {
+      "slug": "touch-me-gently-global-grad-show",
+      "title": "Touch me Gently | Global Grad Show",
+      "year": "2020",
+      "type": "news",
+      "outlet": null,
+      "url": "https://globalgradshow.com/project/touch-me-gently/",
+      "projects": [
+        "phantomtouch"
+      ]
+    },
+    {
+      "slug": "touch-me-gently-best-design-awards-student-digital-finalist",
+      "title": "Touch me Gently | Best Design Awards | Student Digital: Finalist",
+      "year": "2020",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/digital/student-digital/sachith-3/touch-me-gently/",
+      "projects": [
+        "phantomtouch"
+      ]
+    },
+    {
+      "slug": "pride-in-lights-best-design-awards-lighting-design-gold",
+      "title": "Pride in Lights | Best Design Awards | Lighting Design: Gold",
+      "year": "2020",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/spatial/lighting-design/run/pride-in-lights-2/",
+      "projects": [
+        "rainbowhub"
+      ]
+    },
+    {
+      "slug": "pride-in-lights-best-design-awards-exhibitions-temporary-structures-gold",
+      "title": "Pride in Lights | Best Design Awards | Exhibitions & Temporary Structures: Gold",
+      "year": "2020",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/spatial/exhibition-temporary-structures/run/pride-in-lights-1/",
+      "projects": [
+        "rainbowhub"
+      ]
+    },
+    {
+      "slug": "phantomtouch-global-grad-show",
+      "title": "PhantomTouch | Global Grad Show",
+      "year": "2020",
+      "type": "news",
+      "outlet": "MediaGrab",
+      "url": "https://mediagrab.press/view/package/316",
+      "projects": [
+        "phantomtouch"
+      ]
+    },
+    {
+      "slug": "lighting-up-the-foyer-of-the-abi",
+      "title": "Lighting up the foyer of the ABI",
+      "year": "2020",
+      "type": "news",
+      "outlet": "University of Auckland",
+      "url": "https://www.auckland.ac.nz/en/news/2020/03/16/lighting-up-the-foyer-of-the-abi.html",
+      "projects": [
+        "jammify"
+      ]
+    },
+    {
+      "slug": "jammify-best-design-awards-student-spatial-bronze",
+      "title": "Jammify | Best Design Awards | Student Spatial: Bronze",
+      "year": "2020",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/spatial/student-spatial/sachith-3/jammify-1/",
+      "projects": [
+        "jammify"
+      ]
+    },
+    {
+      "slug": "jammify-best-design-awards-student-digital-silver",
+      "title": "Jammify | Best Design Awards | Student Digital: Silver",
+      "year": "2020",
+      "type": "award",
+      "outlet": "Designers Institute of New Zealand",
+      "url": "https://bestawards.co.nz/digital/student-digital/sachith-3/jammify",
+      "projects": [
+        "jammify"
+      ]
+    },
+    {
+      "slug": "jammify",
+      "title": "Jammify",
+      "year": "2020",
+      "type": "news",
+      "outlet": "ARS Electronica",
+      "url": "https://www.ars.nz/jammify/",
+      "projects": [
+        "jammify"
+      ]
+    },
+    {
+      "slug": "abi-and-cai-work-together-to-show-their-arty-science-side",
+      "title": "ABI and CAI work together to show their arty-science side",
+      "year": "2020",
+      "type": "news",
+      "outlet": "The university of Auckland",
+      "url": "https://www.auckland.ac.nz/en/news/2020/09/10/abi-researchers-show-their-arty-side.html",
+      "projects": [
+        "jammify"
+      ]
+    },
+    {
+      "slug": "this-doormat-can-tell-who-you-are-for-multi-factor-authentication",
+      "title": "This Doormat Can Tell Who You Are for Multi-Factor Authentication",
+      "year": "2019",
+      "type": "news",
+      "outlet": "hackter.io",
+      "url": "https://blog.hackster.io/this-doormat-can-tell-who-you-are-for-multi-factor-authentication-1f01928897a8",
+      "projects": [
+        "capmat"
+      ]
+    },
+    {
+      "slug": "the-interactive-device-you-can-stick-in-your-mouth",
+      "title": "The interactive device you can stick in your mouth",
+      "year": "2019",
+      "type": "news",
+      "outlet": null,
+      "url": "https://www.auckland.ac.nz/en/news/2019/02/18/interactive-device-stick-in-your-mouth.html",
+      "projects": [
+        "chewit"
+      ]
+    },
+    {
+      "slug": "go-hands-free-with-mobile-devices-using-chewit-intraoral-input-interface",
+      "title": "Go Hands Free with Mobile Devices Using ChewIt Intraoral Input Interface",
+      "year": "2019",
+      "type": "news",
+      "outlet": "Hackster.io",
+      "url": "https://blog.hackster.io/go-hands-free-with-mobile-devices-using-chewit-intraoral-input-interface-210b5a62391f",
+      "projects": [
+        "chewit"
+      ]
+    },
+    {
+      "slug": "chewit-novel-way-to-answer-your-mobile",
+      "title": "ChewIt - novel way to answer your mobile",
+      "year": "2019",
+      "type": "news",
+      "outlet": "RadioNZ",
+      "url": "https://www.radionz.co.nz/national/programmes/ninetonoon/audio/2018694791/chewit-novel-way-to-answer-your-mobile",
+      "projects": [
+        "chewit"
+      ]
+    },
+    {
+      "slug": "bite-sized-device-a-new-take-on-wearable-tech",
+      "title": "Bite-sized device a new take on wearable tech",
+      "year": "2019",
+      "type": "news",
+      "outlet": "NZ Herald",
+      "url": "https://www.nzherald.co.nz/technology/news/article.cfm?c_id=5&objectid=12205190",
+      "projects": [
+        "chewit"
+      ]
+    },
+    {
+      "slug": "a-new-way-to-answer-your-phone-by-biting-a-piece-of-tech",
+      "title": "A new way to answer your phone by biting a piece of tech",
+      "year": "2019",
+      "type": "news",
+      "outlet": "Springwise",
+      "url": "https://www.springwise.com/a-new-way-to-answer-your-phone-by-biting-a-piece-of-tech/",
+      "projects": [
+        "chewit"
+      ]
+    },
+    {
+      "slug": "insight-augmented-human-2017-best-short-paper",
+      "title": "InSight: A Systematic Approach to Create Dynamic Human-Controller-Interactions | Best Short Paper Award",
+      "year": "2017",
+      "type": "award",
+      "outlet": "Augmented Human International Conference",
+      "url": null,
+      "projects": [
+        "insight"
+      ]
+    },
+    {
+      "slug": "read-bridge-lights-up-for-the-festive-season",
+      "title": "Read Bridge lights up for the festive season",
+      "year": "2015",
+      "type": "news",
+      "outlet": "Shivaanan Selvasevaran, Channel NewsAsia",
+      "url": "http://www.channelnewsasia.com/news/singapore/read-bridge-lights-up-for/2320110.html",
+      "projects": [
+        "the-ribbon"
+      ]
+    }
+  ]
+}
