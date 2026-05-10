@@ -1337,7 +1337,7 @@ a.event-row:hover .event-row-title {
     color: var(--color-neutral-80);
   }
   .ahl-stats-widget[data-state="loading"] { opacity: .5; }
-  .ahl-stats-strip {
+  .ahl-stats-row {
     display: inline-flex;
     align-items: center;
     flex-wrap: wrap;
@@ -1345,7 +1345,7 @@ a.event-row:hover .event-row-title {
     gap: 10px;
     letter-spacing: .005em;
   }
-  .ahl-stats-strip strong {
+  .ahl-stats-row strong {
     color: var(--color-neutral-100);
     font-weight: 600;
     font-variant-numeric: tabular-nums;
@@ -1359,9 +1359,7 @@ a.event-row:hover .event-row-title {
     flex-shrink: 0;
     animation: ahl-stats-pulse 2s ease-in-out infinite;
   }
-  .ahl-stats-text {
-    transition: opacity 220ms ease;
-  }
+  .ahl-stats-text { transition: opacity 220ms ease; }
   .ahl-stats-pips {
     display: inline-flex;
     align-items: center;
@@ -1380,13 +1378,151 @@ a.event-row:hover .event-row-title {
   }
   .ahl-stats-pip:hover { border-color: var(--color-neutral-80); }
   .ahl-stats-pip:focus-visible {
-    outline: 2px solid var(--color-accent, #10b981);
+    outline: 2px solid var(--color-accent, #6100FF);
     outline-offset: 2px;
   }
   .ahl-stats-pip.is-active {
     background: var(--color-neutral-80);
     border-color: var(--color-neutral-80);
   }
+  /* Toggle button (wraps the rotating text + chevron). Resets the
+     default <button> chrome so it reads as inline text. */
+  .ahl-stats-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    background: transparent;
+    border: 0;
+    border-radius: 6px;
+    color: inherit;
+    font: inherit;
+    line-height: inherit;
+    cursor: pointer;
+    transition: background 160ms ease;
+  }
+  .ahl-stats-toggle:hover { background: rgba(0, 0, 0, .04); }
+  .ahl-stats-toggle:focus-visible {
+    outline: 2px solid var(--color-accent, #6100FF);
+    outline-offset: 2px;
+  }
+  .ahl-stats-chevron {
+    width: 0; height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid var(--color-neutral-80);
+    transition: transform 220ms ease;
+    flex-shrink: 0;
+  }
+  .ahl-stats-widget.is-expanded .ahl-stats-chevron { transform: rotate(180deg); }
+
+  /* Smooth height animation via grid-template-rows trick (no JS). */
+  .ahl-stats-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 320ms ease, margin-top 320ms ease;
+    margin-top: 0;
+  }
+  .ahl-stats-widget.is-expanded .ahl-stats-panel {
+    grid-template-rows: 1fr;
+    margin-top: 16px;
+  }
+  .ahl-stats-panel-inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* Map */
+  .ahl-stats-mapwrap {
+    position: relative;
+    max-width: 880px;
+    margin: 0 auto;
+    background: var(--color-neutral-20);
+    border: 1px solid var(--color-neutral-30);
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .ahl-stats-map {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .ahl-stats-map path { transition: fill 160ms ease; }
+  .ahl-stats-map path[data-users]:hover { fill: var(--color-accent-dark, #4400B3) !important; cursor: default; }
+  .ahl-stats-map-loading {
+    text-align: center;
+    color: var(--color-neutral-80);
+    font-size: 13px;
+    padding: 40px 0;
+  }
+  .ahl-stats-tip {
+    position: absolute;
+    pointer-events: none;
+    background: var(--color-neutral-100);
+    color: #fff;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 120ms ease;
+    z-index: 2;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Country list */
+  .ahl-stats-countries {
+    list-style: none;
+    margin: 16px auto 0;
+    padding: 0;
+    max-width: 880px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 8px;
+    text-align: left;
+  }
+  .ahl-stats-country {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    background: var(--color-neutral-20);
+    border-radius: 6px;
+    font-size: 13px;
+  }
+  .ahl-stats-flag { font-size: 16px; line-height: 1; }
+  .ahl-stats-cname {
+    flex: 1;
+    color: var(--color-neutral-100);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .ahl-stats-cnum {
+    color: var(--color-neutral-80);
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+  }
+  .ahl-stats-foot {
+    margin: 12px auto 0;
+    max-width: 880px;
+    color: var(--color-neutral-80);
+    font-size: 12px;
+    text-align: center;
+  }
+  .ahl-stats-attrib {
+    margin: 8px auto 0;
+    max-width: 880px;
+    color: var(--color-neutral-50, #99a1b1);
+    font-size: 11px;
+    text-align: center;
+  }
+  .ahl-stats-attrib a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: rgba(0, 0, 0, .15);
+  }
+
   @keyframes ahl-stats-pulse {
     0%, 100% { opacity: 1; }
     50%      { opacity: .35; }
@@ -1394,10 +1530,15 @@ a.event-row:hover .event-row-title {
   @media (prefers-reduced-motion: reduce) {
     .ahl-stats-dot { animation: none; }
     .ahl-stats-text { transition: none; }
+    .ahl-stats-panel { transition: none; }
+    .ahl-stats-chevron { transition: none; }
+    .ahl-stats-map path { transition: none; }
   }
   @media (max-width: 640px) {
     .section-live-activity { padding: 14px 0; }
     .ahl-stats-widget { font-size: 13px; }
+    .ahl-stats-mapwrap { padding: 8px; }
+    .ahl-stats-countries { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; }
   }
 </style>
 <section class="section-live-activity">
