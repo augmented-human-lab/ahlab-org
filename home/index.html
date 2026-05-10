@@ -1359,12 +1359,41 @@ a.event-row:hover .event-row-title {
     flex-shrink: 0;
     animation: ahl-stats-pulse 2s ease-in-out infinite;
   }
+  .ahl-stats-text {
+    transition: opacity 220ms ease;
+  }
+  .ahl-stats-pips {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .ahl-stats-pip {
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid var(--color-neutral-50, #b3b3b3);
+    cursor: pointer;
+    transition: background 160ms ease, border-color 160ms ease;
+  }
+  .ahl-stats-pip:hover { border-color: var(--color-neutral-80); }
+  .ahl-stats-pip:focus-visible {
+    outline: 2px solid var(--color-accent, #10b981);
+    outline-offset: 2px;
+  }
+  .ahl-stats-pip.is-active {
+    background: var(--color-neutral-80);
+    border-color: var(--color-neutral-80);
+  }
   @keyframes ahl-stats-pulse {
     0%, 100% { opacity: 1; }
     50%      { opacity: .35; }
   }
   @media (prefers-reduced-motion: reduce) {
     .ahl-stats-dot { animation: none; }
+    .ahl-stats-text { transition: none; }
   }
   @media (max-width: 640px) {
     .section-live-activity { padding: 14px 0; }
