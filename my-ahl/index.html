@@ -170,6 +170,11 @@
     <path d="M2 5h6.5A3.5 3.5 0 0 1 12 8.5V21a3 3 0 0 0-3-3H2z"/>
     <path d="M22 5h-6.5A3.5 3.5 0 0 0 12 8.5V21a3 3 0 0 1 3-3h7z"/>
   </symbol>
+  <!-- Chat bubble — Feather "message-square" glyph, used by the
+       "Chat" resource tile linking to the AHLab Chat web app. -->
+  <symbol id="i-myahl-chat" viewBox="0 0 24 24">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </symbol>
   <!-- Link / chain — used by the "Add publication" form's DOI status
        line. Two interlinked oval segments, Feather-style. -->
   <symbol id="i-myahl-link" viewBox="0 0 24 24">
@@ -505,7 +510,8 @@
   // pin their own resources, hence the disabled "Add new" tile.
   // SVG glyph maps to a <symbol> defined inline at the top of <body>.
   var RESOURCES = [
-    { label: 'Wiki', href: 'https://wiki.ahlab.org', symbol: 'i-myahl-wiki' }
+    { label: 'Wiki', href: 'https://wiki.ahlab.org', symbol: 'i-myahl-wiki' },
+    { label: 'Chat', href: 'https://script.google.com/macros/s/AKfycbwkWOky_8R4W-gfCJYN5UKxK2hAdRgxHDEQoz06LXIRA6XblCJl6YsfBwJlnwkonk05/exec', symbol: 'i-myahl-chat' }
   ];
 
   function resourceCardHTML(r) {
@@ -715,7 +721,7 @@
     // pinned resources land here later via the edit pipeline.
     var resourcesHTML =
       '<section class="myahl-section">' +
-        sectionHeaderHTML('Our Resources', RESOURCES.length) +
+        sectionHeaderHTML('AHL Resources', RESOURCES.length) +
         '<div class="myahl-resources-grid">' +
           addNewResource('Add new') +
           RESOURCES.map(resourceCardHTML).join('') +
