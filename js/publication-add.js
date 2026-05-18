@@ -99,73 +99,6 @@
     return projectsPromise;
   }
 
-  // Publication slug index — every published publication's slug, in
-  // display order. Used here only for duplicate detection when the
-  // user pastes a citation that resolves to a title we already have
-  // on file. The fetch is lazy (triggered when the first card opens)
-  // and cached for the lifetime of the page.
-  //
-  // Why this URL (not cdn-ahlab-org/data/publications/_order.json):
-  //   The canonical _order.json lives in cdn-ahlab-org, but Jekyll
-  //   on GitHub Pages strips any file whose name starts with `_`,
-  //   so it 404s on both ahlab.org and cdn.ahlab.org. The build
-  //   (build-publications.js) emits a Jekyll-safe copy at
-  //   /data/publications-index.json for us to fetch.
-  //
-  // Why slug-only (not titles/DOIs): the slug is the canonical
-  // lookup key the broker uses for duplicate detection too
-  // (PUB_E004). Same title slugifies the same way deterministically,
-  // so checking by slug catches every user-pasted-their-own-pub case
-  // we care about.
-  var PUBLICATIONS_INDEX_URL = '/data/publications-index.json';
-  var publicationsOrderPromise = null;
-  function loadPublicationsOrder() {
-    if (publicationsOrderPromise) return publicationsOrderPromise;
-    publicationsOrderPromise = fetch(PUBLICATIONS_INDEX_URL, { cache: 'default' })
-      .then(function (r) { return r.ok ? r.json() : []; })
-      .then(function (arr) {
-        // Convert array → Set-like lookup for O(1) membership tests.
-        var set = Object.create(null);
-        (Array.isArray(arr) ? arr : []).forEach(function (s) { set[s] = true; });
-        return set;
-      })
-      .catch(function () { return Object.create(null); });
-    return publicationsOrderPromise;
-  }
-
-  // Mirror of the broker's slugify_ in submit.js / helpers.js. Keep
-  // these in lockstep — if the server changes its rule, the
-  // client-side duplicate check will silently drift and let users
-  // submit a publication that the broker will then reject with
-  // PUB_E004. Server logic (helpers.js slugify_):
-  //   String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
-  function pubSlugify(s) {
-    return String(s || '')
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-|-$/g, '');
-  }
-
-  // Returns the existing slug if the parsed citation's title would
-  // collide with one already on file, else null. Skipped entirely
-  // when the session is in edit mode (the user is editing THAT exact
-  // record by definition, so a match is expected). Also returns null
-  // when the order index hasn't loaded yet — the broker still
-  // enforces duplicate-detection server-side (PUB_E004) so the worst
-  // case is the user clicks Submit and gets the friendly broker
-  // rejection page; the client-side check is a UX nicety, not a
-  // gatekeeper.
-  function findDuplicateSlug(session) {
-    if (session.editSlug) return null;
-    if (!session.parsed || !session.parsed.ok) return null;
-    var title = session.parsed.title || '';
-    var slug = pubSlugify(title);
-    if (!slug) return null;
-    var set = session.publicationsSet;
-    if (!set) return null;  // still loading
-    return set[slug] ? slug : null;
-  }
-
   // ── DOI lookup / validate (CrossRef) ────────────────────────
   // Extract a bare DOI from any user input — accepts both
   // "10.1145/foo.bar" and "https://doi.org/10.1145/foo.bar".
@@ -311,13 +244,6 @@
     });
     loadProjectsIndex().then(function (idx) {
       session.projectsIdx = idx || [];
-    });
-    // Publications-order lookup for duplicate detection. Re-renders
-    // the preview once the set lands so the duplicate banner can
-    // appear on the same paste that triggered the load.
-    loadPublicationsOrder().then(function (set) {
-      session.publicationsSet = set;
-      if (session.parsed) renderPreview(session);
     });
 
     card.textarea.addEventListener('input', debounce(function () { reparse(session); }, DEBOUNCE_MS));
@@ -730,7 +656,6 @@
       el.submit.disabled = true;
       el.submitHint.textContent = '';
       el.eligibility.classList.remove('is-shown');
-      if (el.dupBanner) el.dupBanner.hidden = true;
       return;
     }
 
@@ -744,7 +669,6 @@
       el.submit.disabled = true;
       el.submitHint.textContent = '';
       el.eligibility.classList.remove('is-shown');
-      if (el.dupBanner) el.dupBanner.hidden = true;
       return;
     }
 
@@ -760,20 +684,9 @@
     var authorRanges = window.HarvardCite.findAuthorRanges(raw, parsed.authors);
     el.previewCitation.innerHTML = renderHighlightedCitation(raw, parsed, authorRanges, session);
 
-    // Duplicate banner — appears between the title and citation when
-    // the slugified parsed title collides with a record already on
-    // file. The submit button is gated on the same check via
-    // canSubmit, so the banner explains WHY submit is disabled.
-    var dupSlug = findDuplicateSlug(session);
-    if (el.dupBanner) el.dupBanner.hidden = !dupSlug;
-
     el.submit.disabled = !canSubmit(session);
     el.submitHint.textContent = submitHint(session);
-    // Hide the auto-approval badge when we already know we're going
-    // to refuse the submission — showing "eligible for auto-approval"
-    // next to a disabled-because-it's-a-duplicate button is jarring.
-    el.eligibility.classList.toggle('is-shown',
-      !dupSlug && isEligibleForAutoApproval(session));
+    el.eligibility.classList.toggle('is-shown', isEligibleForAutoApproval(session));
     renderDoiStatus(session);
   }
 
@@ -947,14 +860,7 @@
   function canSubmit(session) {
     if (!session.parsed || !session.parsed.ok) return false;
     if (!session.submitter) return false;
-    if (tagSlugsInOrder(session).indexOf(session.submitter) !== -1) {
-      // Submitter is a matched author — last gate is the duplicate
-      // check. We block client-side too (not just server-side) so the
-      // user gets immediate visual feedback instead of a round-trip
-      // to the broker.
-      return !findDuplicateSlug(session);
-    }
-    return false;
+    return tagSlugsInOrder(session).indexOf(session.submitter) !== -1;
   }
 
   function submitHint(session) {
@@ -963,12 +869,6 @@
     var tagged = tagSlugsInOrder(session);
     if (tagged.indexOf(session.submitter) === -1) {
       return 'Your name wasn\'t auto-detected as an author of this citation. Re-paste with your name in Harvard form.';
-    }
-    // Duplicate hint takes priority over the (rare) empty state. The
-    // dup-banner inside the preview is the primary surface for this
-    // — the hint here is the inline echo next to the disabled button.
-    if (findDuplicateSlug(session)) {
-      return 'This publication is already on ahlab.org.';
     }
     return '';
   }
@@ -1112,18 +1012,6 @@
         '<div class="myahl-pa-banner" role="status" aria-live="polite"></div>' +
       '</div>' +
       '<div class="myahl-pa-preview is-empty">' +
-        // Duplicate banner — shown when the parsed title's slug
-        // already exists in /data/publications/_order.json. Hidden
-        // by default; renderPreview toggles the `hidden` attr when a
-        // dup is detected. Pre-empts the submit button (canSubmit
-        // returns false too) so the user can't paste their own
-        // already-recorded pub and create a second copy.
-        '<div class="myahl-pa-dup-banner" role="status" aria-live="polite" hidden>' +
-          '<strong>Already on ahlab.org.</strong> ' +
-          'This publication is in the lab\'s records. ' +
-          'To change its details, use the Edit button on its row in your ' +
-          'My-AHL dashboard or on the Publications page.' +
-        '</div>' +
         '<div class="myahl-pa-preview-title"></div>' +
         '<div class="myahl-pa-preview-citation"></div>' +
         // One inline meta row holds DOI status + PDF picker + award zone.
@@ -1220,7 +1108,6 @@
       preview:           el.querySelector('.myahl-pa-preview'),
       previewTitle:      el.querySelector('.myahl-pa-preview-title'),
       previewCitation:   el.querySelector('.myahl-pa-preview-citation'),
-      dupBanner:         el.querySelector('.myahl-pa-dup-banner'),
       metaRow:           el.querySelector('.myahl-pa-meta-row'),
       doiZone:           el.querySelector('.myahl-pa-doi-zone'),
       doiFound:          el.querySelector('.myahl-pa-doi-found'),
