@@ -65,24 +65,6 @@
 }
 .myahl-pa-banner.is-error { color: #c2410c; }
 
-/* Duplicate-publication banner — shown inside the preview area when
-   the parsed citation's slug collides with one already on file.
-   Amber-tinted card so it reads as a warning, not an error (the
-   citation parsed fine; the user just doesn't need to submit it
-   because we already have it). */
-.myahl-pa-dup-banner {
-  margin-bottom: 12px;
-  padding: 10px 14px;
-  background: #fff7ed;
-  border: 1px solid #fed7aa;
-  border-radius: 8px;
-  color: #9a3412;
-  font-size: 13px;
-  line-height: 1.5;
-}
-.myahl-pa-dup-banner strong { color: #7c2d12; }
-.myahl-pa-dup-banner[hidden] { display: none; }
-
 .myahl-pa-preview {
   margin-bottom: 12px;
   padding: 12px 0 0;
