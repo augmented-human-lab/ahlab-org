@@ -1,24 +1,12 @@
 /**
- * publication-add.js — reusable inline expand-in-place form for
- * adding a publication. Used on /my-ahl/ and on the public
- * /publications/ page (logged-in users only).
+ * myahl-publication-add.js — inline expand-in-place form for adding
+ * a publication from /my-ahl/.
  *
  * Wiring:
- *   This module auto-mounts a click handler on every
- *   [data-pub-add-trigger] button it finds, on DOMContentLoaded and
- *   on the custom `myahl:dashboard-rendered` event (the /my-ahl/
- *   dashboard re-renders dynamically on auth changes). On click the
- *   trigger element (or its closest [data-pub-add-wrap] ancestor) is
- *   replaced with the editable card; Cancel restores the original.
- *
- *   Pages must:
- *     • load /js/harvard-cite.js + /js/publication-add.js (defer)
- *     • load /css/publication-add.css
- *     • have a button with [data-pub-add-trigger] somewhere logged-in
- *       users can see (use [data-myahl-claim="self"] for visibility)
- *
- *   No SVG defs needed in the page — the module injects its own
- *   `<svg>` symbol library on first mount (idempotent).
+ *   The /my-ahl/ dashboard render dispatches `myahl:dashboard-rendered`;
+ *   this module listens and mounts a click handler on every
+ *   [data-myahl-addpub-trigger] button it finds. On click the original
+ *   <li> is replaced with an editable card.
  *
  * UX contract:
  *   • single textarea — paste a Google-Scholar Harvard citation.
@@ -99,73 +87,6 @@
     return projectsPromise;
   }
 
-  // Publication slug index — every published publication's slug, in
-  // display order. Used here only for duplicate detection when the
-  // user pastes a citation that resolves to a title we already have
-  // on file. The fetch is lazy (triggered when the first card opens)
-  // and cached for the lifetime of the page.
-  //
-  // Why this URL (not cdn-ahlab-org/data/publications/_order.json):
-  //   The canonical _order.json lives in cdn-ahlab-org, but Jekyll
-  //   on GitHub Pages strips any file whose name starts with `_`,
-  //   so it 404s on both ahlab.org and cdn.ahlab.org. The build
-  //   (build-publications.js) emits a Jekyll-safe copy at
-  //   /data/publications-index.json for us to fetch.
-  //
-  // Why slug-only (not titles/DOIs): the slug is the canonical
-  // lookup key the broker uses for duplicate detection too
-  // (PUB_E004). Same title slugifies the same way deterministically,
-  // so checking by slug catches every user-pasted-their-own-pub case
-  // we care about.
-  var PUBLICATIONS_INDEX_URL = '/data/publications-index.json';
-  var publicationsOrderPromise = null;
-  function loadPublicationsOrder() {
-    if (publicationsOrderPromise) return publicationsOrderPromise;
-    publicationsOrderPromise = fetch(PUBLICATIONS_INDEX_URL, { cache: 'default' })
-      .then(function (r) { return r.ok ? r.json() : []; })
-      .then(function (arr) {
-        // Convert array → Set-like lookup for O(1) membership tests.
-        var set = Object.create(null);
-        (Array.isArray(arr) ? arr : []).forEach(function (s) { set[s] = true; });
-        return set;
-      })
-      .catch(function () { return Object.create(null); });
-    return publicationsOrderPromise;
-  }
-
-  // Mirror of the broker's slugify_ in submit.js / helpers.js. Keep
-  // these in lockstep — if the server changes its rule, the
-  // client-side duplicate check will silently drift and let users
-  // submit a publication that the broker will then reject with
-  // PUB_E004. Server logic (helpers.js slugify_):
-  //   String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
-  function pubSlugify(s) {
-    return String(s || '')
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-|-$/g, '');
-  }
-
-  // Returns the existing slug if the parsed citation's title would
-  // collide with one already on file, else null. Skipped entirely
-  // when the session is in edit mode (the user is editing THAT exact
-  // record by definition, so a match is expected). Also returns null
-  // when the order index hasn't loaded yet — the broker still
-  // enforces duplicate-detection server-side (PUB_E004) so the worst
-  // case is the user clicks Submit and gets the friendly broker
-  // rejection page; the client-side check is a UX nicety, not a
-  // gatekeeper.
-  function findDuplicateSlug(session) {
-    if (session.editSlug) return null;
-    if (!session.parsed || !session.parsed.ok) return null;
-    var title = session.parsed.title || '';
-    var slug = pubSlugify(title);
-    if (!slug) return null;
-    var set = session.publicationsSet;
-    if (!set) return null;  // still loading
-    return set[slug] ? slug : null;
-  }
-
   // ── DOI lookup / validate (CrossRef) ────────────────────────
   // Extract a bare DOI from any user input — accepts both
   // "10.1145/foo.bar" and "https://doi.org/10.1145/foo.bar".
@@ -231,7 +152,6 @@
     button.__pubAddMounted = true;
     button.disabled = false;
     button.removeAttribute('title');
-    ensureSvgDefs();
     button.addEventListener('click', function (e) {
       e.preventDefault();
       openCard(button);
@@ -239,39 +159,11 @@
   }
 
   // ── Card open / close ────────────────────────────────────────
-  // The trigger button can sit either:
-  //   • inside an opt-in [data-pub-add-wrap] wrapper (preferred — the
-  //     wrapper is what gets replaced; useful on /my-ahl/ where the
-  //     button lives inside an <li> we want to swap),
-  //   • inside an <li> (back-compat — replaces the <li>),
-  //   • or standalone (replaces just the button).
-  // Cancel restores whatever element was replaced.
-  //
-  // `prefill` (optional) lets the same code path support EDIT mode:
-  // pre-populate textarea + awards + DOI + projects from an existing
-  // record, and stamp `editSlug` so submit() sends action='edit'.
-  function openCard(button, prefill) {
-    var originalEl =
-      button.closest('[data-pub-add-wrap]') ||
-      button.closest('li') ||
-      button;
+  function openCard(button) {
+    var originalLi = button.closest('li');
+    if (!originalLi) return;
     var card = buildCard();
-    if (prefill && prefill.editSlug) card.el.classList.add('is-edit-mode');
-    originalEl.replaceWith(card.el);
-
-    // Pre-fill textarea BEFORE the parser kicks off so the first
-    // reparse has the citation text to work with.
-    if (prefill && prefill.citation) card.textarea.value = prefill.citation;
-
-    // Seed DOI as "found" using the existing record's DOI link so
-    // the auto-CrossRef-by-title in maybeLookupDOI doesn't overwrite
-    // it. Stamping `key = title|year` short-circuits the lookup.
-    var seededDoi = { value: '', status: 'idle', match: false, key: '' };
-    if (prefill && prefill.doi) {
-      seededDoi = { value: prefill.doi, status: 'found', match: true,
-                    key: (prefill.title || '') + '|' + (prefill.year || '') };
-    }
-
+    originalLi.replaceWith(card.li);
     var session = {
       el:        card,
       parsed:    null,
@@ -283,28 +175,18 @@
       // 'idle' | 'searching' | 'found' | 'not-found'. `match` is
       // only meaningful when status='found' — true if the DOI's
       // CrossRef title fuzzy-matches the parsed citation title.
-      doi: seededDoi,
+      doi: { value: '', status: 'idle', match: false, key: '' },
       // PDF state — populated by the file picker. dataB64 is read
       // lazily (we only encode once on submit, not at pick time, to
       // keep the form responsive on large files).
       pdf: null,   // null | { name, size, file }
       // Project tags — list of {slug, title} the user has picked from
       // the projects-index. Sent on submit as patch.projectSlugs[].
-      projects:    prefill && prefill.projects ? prefill.projects.slice() : [],
+      projects:    [],
       projectsIdx: [],
       // Awards — multi-string. Each entry is one chip in the meta row.
-      awards:      prefill && prefill.awards   ? prefill.awards.slice()   : [],
-      // Edit mode: stamp the existing slug so submit() sends
-      // action='edit' + targetSlug=<slug>. Null/absent → create.
-      editSlug:    prefill && prefill.editSlug ? prefill.editSlug : null
+      awards:      []
     };
-    if (session.editSlug) {
-      card.submit.textContent = 'Submit edit for review';
-    }
-    // Paint pre-filled chips immediately (before peopleIdx loads).
-    if (session.awards.length)   renderAwardChips(session);
-    if (session.projects.length) renderProjectChips(session);
-
     loadIndex().then(function (idx) {
       session.peopleIdx = idx || [];
       reparse(session);
@@ -312,16 +194,9 @@
     loadProjectsIndex().then(function (idx) {
       session.projectsIdx = idx || [];
     });
-    // Publications-order lookup for duplicate detection. Re-renders
-    // the preview once the set lands so the duplicate banner can
-    // appear on the same paste that triggered the load.
-    loadPublicationsOrder().then(function (set) {
-      session.publicationsSet = set;
-      if (session.parsed) renderPreview(session);
-    });
 
     card.textarea.addEventListener('input', debounce(function () { reparse(session); }, DEBOUNCE_MS));
-    card.cancel.addEventListener('click', function () { card.el.replaceWith(originalEl); });
+    card.cancel.addEventListener('click', function () { card.li.replaceWith(originalLi); });
     card.submit.addEventListener('click', function () { submit(session); });
     card.pdfPick.addEventListener('click', function () { card.pdfInput.click(); });
     card.pdfInput.addEventListener('change', function (e) { onPdfPicked(session, e.target.files && e.target.files[0]); });
@@ -594,51 +469,12 @@
     }).join('');
   }
 
-  // Inline SVG icon helper. References symbols by id; the first
-  // mount injects the symbol library if it isn't already in the page
-  // (it IS already, on /my-ahl/). currentColor + stroke-width come
-  // from CSS. Use href="#i-myahl-<name>" so the same symbol IDs work
-  // whether the defs come from my-ahl's static <svg> or from
-  // ensureSvgDefs() below.
+  // Inline SVG icon helper. Mirrors the existing tile-icon pattern in
+  // my-ahl.html — references the <symbol> defs inlined at the top of
+  // the page. currentColor + stroke-width come from CSS.
   function svgIcon(name) {
     return '<svg class="myahl-pa-icon" aria-hidden="true"><use href="#i-myahl-' + name + '"/></svg>';
   }
-
-  // Idempotently insert the symbol library at the top of <body> if
-  // no element with id="i-myahl-link" already exists (the canonical
-  // probe). Lets pages outside /my-ahl/ host the form without copy-
-  // pasting the defs.
-  function ensureSvgDefs() {
-    if (document.getElementById('i-myahl-link')) return;
-    var defs = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    defs.setAttribute('aria-hidden', 'true');
-    defs.style.display = 'none';
-    defs.innerHTML = SVG_DEFS;
-    document.body.insertBefore(defs, document.body.firstChild);
-  }
-
-  // Mirrors the inline defs in my-ahl.html. Kept here so any page
-  // can host the form by loading this script alone.
-  var SVG_DEFS =
-    '<symbol id="i-myahl-link" viewBox="0 0 24 24">' +
-      '<path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 1 0-7.07-7.07l-1.5 1.5"/>' +
-      '<path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 1 0 7.07 7.07l1.5-1.5"/>' +
-    '</symbol>' +
-    '<symbol id="i-myahl-file" viewBox="0 0 24 24">' +
-      '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>' +
-      '<path d="M14 2v6h6M9 13h6M9 17h6"/>' +
-    '</symbol>' +
-    '<symbol id="i-myahl-x" viewBox="0 0 24 24">' +
-      '<path d="M6 6l12 12M18 6L6 18"/>' +
-    '</symbol>' +
-    '<symbol id="i-myahl-award" viewBox="0 0 24 24">' +
-      '<circle cx="12" cy="9" r="6"/>' +
-      '<path d="M8.5 14.5L7 22l5-3 5 3-1.5-7.5"/>' +
-    '</symbol>' +
-    '<symbol id="i-myahl-project" viewBox="0 0 24 24">' +
-      '<path d="M12 2L2 7l10 5 10-5-10-5z"/>' +
-      '<path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>' +
-    '</symbol>';
 
   // ── Project picker ──────────────────────────────────────────
   function openProjectPicker(session) {
@@ -722,7 +558,7 @@
 
     if (!parsed) {
       el.preview.classList.add('is-empty');
-      el.el.classList.remove('has-parsed');
+      el.li.classList.remove('has-parsed');
       el.previewTitle.textContent = '';
       el.previewCitation.innerHTML = '';
       el.banner.textContent = '';
@@ -730,13 +566,12 @@
       el.submit.disabled = true;
       el.submitHint.textContent = '';
       el.eligibility.classList.remove('is-shown');
-      if (el.dupBanner) el.dupBanner.hidden = true;
       return;
     }
 
     if (!parsed.ok) {
       el.preview.classList.add('is-empty');
-      el.el.classList.remove('has-parsed');
+      el.li.classList.remove('has-parsed');
       el.previewTitle.textContent = '';
       el.previewCitation.innerHTML = '';
       el.banner.textContent = parsed.reason;
@@ -744,14 +579,13 @@
       el.submit.disabled = true;
       el.submitHint.textContent = '';
       el.eligibility.classList.remove('is-shown');
-      if (el.dupBanner) el.dupBanner.hidden = true;
       return;
     }
 
     el.preview.classList.remove('is-empty');
     // Successful parse — hide the input textarea. To correct a bad
     // paste, the user cancels and re-opens the card.
-    el.el.classList.add('has-parsed');
+    el.li.classList.add('has-parsed');
     el.previewTitle.textContent = parsed.title || '(title not detected)';
     el.banner.textContent = '';
     el.banner.classList.remove('is-error');
@@ -760,20 +594,9 @@
     var authorRanges = window.HarvardCite.findAuthorRanges(raw, parsed.authors);
     el.previewCitation.innerHTML = renderHighlightedCitation(raw, parsed, authorRanges, session);
 
-    // Duplicate banner — appears between the title and citation when
-    // the slugified parsed title collides with a record already on
-    // file. The submit button is gated on the same check via
-    // canSubmit, so the banner explains WHY submit is disabled.
-    var dupSlug = findDuplicateSlug(session);
-    if (el.dupBanner) el.dupBanner.hidden = !dupSlug;
-
     el.submit.disabled = !canSubmit(session);
     el.submitHint.textContent = submitHint(session);
-    // Hide the auto-approval badge when we already know we're going
-    // to refuse the submission — showing "eligible for auto-approval"
-    // next to a disabled-because-it's-a-duplicate button is jarring.
-    el.eligibility.classList.toggle('is-shown',
-      !dupSlug && isEligibleForAutoApproval(session));
+    el.eligibility.classList.toggle('is-shown', isEligibleForAutoApproval(session));
     renderDoiStatus(session);
   }
 
@@ -947,14 +770,7 @@
   function canSubmit(session) {
     if (!session.parsed || !session.parsed.ok) return false;
     if (!session.submitter) return false;
-    if (tagSlugsInOrder(session).indexOf(session.submitter) !== -1) {
-      // Submitter is a matched author — last gate is the duplicate
-      // check. We block client-side too (not just server-side) so the
-      // user gets immediate visual feedback instead of a round-trip
-      // to the broker.
-      return !findDuplicateSlug(session);
-    }
-    return false;
+    return tagSlugsInOrder(session).indexOf(session.submitter) !== -1;
   }
 
   function submitHint(session) {
@@ -963,12 +779,6 @@
     var tagged = tagSlugsInOrder(session);
     if (tagged.indexOf(session.submitter) === -1) {
       return 'Your name wasn\'t auto-detected as an author of this citation. Re-paste with your name in Harvard form.';
-    }
-    // Duplicate hint takes priority over the (rare) empty state. The
-    // dup-banner inside the preview is the primary surface for this
-    // — the hint here is the inline echo next to the disabled button.
-    if (findDuplicateSlug(session)) {
-      return 'This publication is already on ahlab.org.';
     }
     return '';
   }
@@ -1047,14 +857,7 @@
       hasPdf:              !!session.pdf,
       authorSlugs:         tagSlugsInOrder(session),
       projectSlugs:        session.projects.map(function (p) { return p.slug; }),
-      citationFormUpdates: citationFormUpdatesFor(session),
-      // Auto-approval signal — broker will skip the review queue and
-      // immediately publish if true. We compute it here using the
-      // same 5-condition gate that powers the eligibility badge UI;
-      // the broker trusts this value (see autoApprovePublication_).
-      // Edits never auto-approve — we always want a moderator to
-      // catch unintended overwrites.
-      eligibleForAutoApproval: !session.editSlug && isEligibleForAutoApproval(session)
+      citationFormUpdates: citationFormUpdatesFor(session)
     };
 
     el.submit.disabled = true;
@@ -1084,8 +887,8 @@
 
         window.AHLPatch.submit({
           targetType: 'publication',
-          targetSlug: session.editSlug || '<new>',
-          action:     session.editSlug ? 'edit' : 'create',
+          targetSlug: '<new>',
+          action:     'create',
           patch:      patch,
           files:      files,
           returnUrl:  location.origin + '/my-ahl/'
@@ -1099,33 +902,17 @@
   }
 
   // ── DOM construction ─────────────────────────────────────────
-  // The card is a <div>, not <li> — both /my-ahl/ (originally inside
-  // <ol>) and /publications/ (inside <div class="pub-list">) accept
-  // it. Using a single tag means the same DOM is valid wherever the
-  // form is dropped.
   function buildCard() {
-    var el = document.createElement('div');
-    el.className = 'myahl-pa-card';
-    el.innerHTML =
+    var li = document.createElement('li');
+    li.className = 'myahl-pub-item myahl-pub-item--add';
+    li.innerHTML =
       '<div class="myahl-pa-input">' +
         '<textarea class="myahl-pa-textarea" rows="3" placeholder="Paste a Harvard-style citation from Google Scholar — e.g.&#10;Surname, A.B. and Other, C., 2026. Paper title. In Venue (pp. 1-10)."></textarea>' +
         '<div class="myahl-pa-banner" role="status" aria-live="polite"></div>' +
       '</div>' +
       '<div class="myahl-pa-preview is-empty">' +
-        // Duplicate banner — shown when the parsed title's slug
-        // already exists in /data/publications/_order.json. Hidden
-        // by default; renderPreview toggles the `hidden` attr when a
-        // dup is detected. Pre-empts the submit button (canSubmit
-        // returns false too) so the user can't paste their own
-        // already-recorded pub and create a second copy.
-        '<div class="myahl-pa-dup-banner" role="status" aria-live="polite" hidden>' +
-          '<strong>Already on ahlab.org.</strong> ' +
-          'This publication is in the lab\'s records. ' +
-          'To change its details, use the Edit button on its row in your ' +
-          'My-AHL dashboard or on the Publications page.' +
-        '</div>' +
-        '<div class="myahl-pa-preview-title"></div>' +
-        '<div class="myahl-pa-preview-citation"></div>' +
+        '<div class="myahl-pub-title myahl-pa-preview-title"></div>' +
+        '<div class="myahl-pub-citation myahl-pa-preview-citation"></div>' +
         // One inline meta row holds DOI status + PDF picker + award zone.
         // All three pieces share the same chip/icon vocabulary so they
         // read as a single strip of metadata, not separate widgets.
@@ -1214,41 +1001,40 @@
       '</div>';
 
     return {
-      el:                el,
-      textarea:          el.querySelector('.myahl-pa-textarea'),
-      banner:            el.querySelector('.myahl-pa-banner'),
-      preview:           el.querySelector('.myahl-pa-preview'),
-      previewTitle:      el.querySelector('.myahl-pa-preview-title'),
-      previewCitation:   el.querySelector('.myahl-pa-preview-citation'),
-      dupBanner:         el.querySelector('.myahl-pa-dup-banner'),
-      metaRow:           el.querySelector('.myahl-pa-meta-row'),
-      doiZone:           el.querySelector('.myahl-pa-doi-zone'),
-      doiFound:          el.querySelector('.myahl-pa-doi-found'),
-      doiValue:          el.querySelector('.myahl-pa-doi-value'),
-      doiFoundLabel:     el.querySelector('.myahl-pa-doi-found-label'),
-      doiAdd:            el.querySelector('.myahl-pa-doi-add'),
-      doiInput:          el.querySelector('.myahl-pa-doi-input'),
-      doiX:              el.querySelector('.myahl-pa-doi-x'),
-      pdfStatus:         el.querySelector('.myahl-pa-pdf-status'),
-      pdfPick:           el.querySelector('.myahl-pa-pdf-pick'),
-      pdfClear:          el.querySelector('.myahl-pa-pdf-clear'),
-      pdfInput:          el.querySelector('.myahl-pa-pdf-input'),
-      awardZone:         el.querySelector('.myahl-pa-award-zone'),
-      awardChips:        el.querySelector('.myahl-pa-award-chips'),
-      awardAdd:          el.querySelector('.myahl-pa-award-add'),
-      awardEdit:         el.querySelector('.myahl-pa-award-edit'),
-      awardInput:        el.querySelector('.myahl-pa-award-input'),
-      awardX:            el.querySelector('.myahl-pa-award-x'),
-      projectZone:       el.querySelector('.myahl-pa-project-zone'),
-      projectChips:      el.querySelector('.myahl-pa-project-chips'),
-      projectAdd:        el.querySelector('.myahl-pa-project-add'),
-      projectPicker:     el.querySelector('.myahl-pa-project-picker'),
-      projectSearch:     el.querySelector('.myahl-pa-project-search'),
-      projectList:       el.querySelector('.myahl-pa-project-list'),
-      cancel:            el.querySelector('.myahl-pa-cancel'),
-      submit:            el.querySelector('.myahl-pa-submit'),
-      submitHint:        el.querySelector('.myahl-pa-submit-hint'),
-      eligibility:       el.querySelector('.myahl-pa-eligibility')
+      li:                li,
+      textarea:          li.querySelector('.myahl-pa-textarea'),
+      banner:            li.querySelector('.myahl-pa-banner'),
+      preview:           li.querySelector('.myahl-pa-preview'),
+      previewTitle:      li.querySelector('.myahl-pa-preview-title'),
+      previewCitation:   li.querySelector('.myahl-pa-preview-citation'),
+      metaRow:           li.querySelector('.myahl-pa-meta-row'),
+      doiZone:           li.querySelector('.myahl-pa-doi-zone'),
+      doiFound:          li.querySelector('.myahl-pa-doi-found'),
+      doiValue:          li.querySelector('.myahl-pa-doi-value'),
+      doiFoundLabel:     li.querySelector('.myahl-pa-doi-found-label'),
+      doiAdd:            li.querySelector('.myahl-pa-doi-add'),
+      doiInput:          li.querySelector('.myahl-pa-doi-input'),
+      doiX:              li.querySelector('.myahl-pa-doi-x'),
+      pdfStatus:         li.querySelector('.myahl-pa-pdf-status'),
+      pdfPick:           li.querySelector('.myahl-pa-pdf-pick'),
+      pdfClear:          li.querySelector('.myahl-pa-pdf-clear'),
+      pdfInput:          li.querySelector('.myahl-pa-pdf-input'),
+      awardZone:         li.querySelector('.myahl-pa-award-zone'),
+      awardChips:        li.querySelector('.myahl-pa-award-chips'),
+      awardAdd:          li.querySelector('.myahl-pa-award-add'),
+      awardEdit:         li.querySelector('.myahl-pa-award-edit'),
+      awardInput:        li.querySelector('.myahl-pa-award-input'),
+      awardX:            li.querySelector('.myahl-pa-award-x'),
+      projectZone:       li.querySelector('.myahl-pa-project-zone'),
+      projectChips:      li.querySelector('.myahl-pa-project-chips'),
+      projectAdd:        li.querySelector('.myahl-pa-project-add'),
+      projectPicker:     li.querySelector('.myahl-pa-project-picker'),
+      projectSearch:     li.querySelector('.myahl-pa-project-search'),
+      projectList:       li.querySelector('.myahl-pa-project-list'),
+      cancel:            li.querySelector('.myahl-pa-cancel'),
+      submit:            li.querySelector('.myahl-pa-submit'),
+      submitHint:        li.querySelector('.myahl-pa-submit-hint'),
+      eligibility:       li.querySelector('.myahl-pa-eligibility')
     };
   }
 
@@ -1275,66 +1061,12 @@
 
   // Self-mount on every dashboard render. mount() is idempotent.
   function mountAll(scope) {
-    var triggers = (scope || document).querySelectorAll('[data-pub-add-trigger]');
+    var triggers = (scope || document).querySelectorAll('[data-myahl-addpub-trigger]');
     Array.prototype.forEach.call(triggers, mount);
-    var editTriggers = (scope || document).querySelectorAll('[data-pub-add-edit]');
-    Array.prototype.forEach.call(editTriggers, mountEdit);
   }
   document.addEventListener('myahl:dashboard-rendered', function () { mountAll(); });
   if (document.readyState !== 'loading') mountAll();
   else document.addEventListener('DOMContentLoaded', function () { mountAll(); });
 
-  // ── Edit-mode mounter ───────────────────────────────────────
-  // Each [data-pub-add-edit="<slug>"] button (e.g. the edit pencil
-  // on a /my-ahl/ publication row) opens the same card pre-filled
-  // from /data/publications/<slug>.json. The card's submit then
-  // sends action='edit' + targetSlug=<slug>.
-  function mountEdit(button) {
-    if (!button || button.__pubEditMounted) return;
-    button.__pubEditMounted = true;
-    button.disabled = false;
-    ensureSvgDefs();
-    button.addEventListener('click', function (e) {
-      e.preventDefault();
-      var slug = button.getAttribute('data-pub-add-edit');
-      if (!slug) return;
-      openEditCard(button, slug);
-    });
-  }
-
-  function openEditCard(button, slug) {
-    fetch('/data/publications/' + encodeURIComponent(slug) + '.json', { cache: 'default' })
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (record) {
-        if (!record) {
-          alert('Couldn\'t load this publication for editing.');
-          return;
-        }
-        // Extract DOI from existing links[] (broker stores DOI as a
-        // link with label 'DOI' or 'doi'; sometimes the URL is the
-        // full https://doi.org/... form).
-        var doi = '';
-        (record.links || []).forEach(function (l) {
-          if (doi) return;
-          if (!/doi/i.test(l.label || '')) return;
-          var m = String(l.url || '').match(/10\.\d{4,9}\/[^\s"']+/);
-          if (m) doi = m[0].replace(/[.,)]+$/, '');
-        });
-        openCard(button, {
-          editSlug: slug,
-          citation: record.citation || '',
-          title:    record.title || '',
-          year:     record.year || '',
-          awards:   Array.isArray(record.awards) ? record.awards : [],
-          doi:      doi,
-          // projects[] cross-ref is project→publications, not pub→
-          // projects, so we don't have it on the record. The user
-          // can re-tag manually if they want to add/remove projects
-          // during the edit.
-          projects: []
-        });
-      });
-  }
-
-  window.AHLPubAdd = { mount: mount, mountEdit: mountEdit };
+  window.AHLPubAdd = { mount: mount };
 })();
