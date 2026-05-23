@@ -217,6 +217,60 @@
       action:     'edit',
       targetSlugFrom: function (payload, user) {
         return user.person && user.person.slug;
+      },
+      finalize: function (payload, form) {
+        // 1. Collect external_links from dynamic rows.
+        //    Row shape: [data-external-link] wrapping
+        //    [data-link-label] + [data-link-url]. Empty-URL rows
+        //    are skipped (label without URL is meaningless).
+        var rowsWrap = form.querySelector('.profile-edit-links-rows');
+        if (rowsWrap) {
+          var rows  = rowsWrap.querySelectorAll('[data-external-link]');
+          var links = [];
+          Array.prototype.forEach.call(rows, function (row) {
+            var label = ((row.querySelector('[data-link-label]') || {}).value || '').trim();
+            var url   = ((row.querySelector('[data-link-url]')   || {}).value || '').trim();
+            if (!url) return;
+            links.push({ label: label || url, url: url });
+          });
+
+          // Only include external_links in the payload if the
+          // current set differs from the baseline snapshot taken
+          // when the card pre-filled. Prevents a no-op save from
+          // overwriting a parallel admin edit (and keeps the
+          // diff-email render tight — it skips fields it sees
+          // listed in patchObj).
+          var current = window.AHLProfileEditCard
+            ? window.AHLProfileEditCard.serializeLinkRows(rowsWrap)
+            : '';
+          var baseline = rowsWrap.dataset.original || '';
+          if (current !== baseline) payload.external_links = links;
+
+          // Make sure we don't accidentally smuggle a stray
+          // "links" array from the generic data-field="link-…"
+          // collector — profiles don't use that shape.
+          delete payload.links;
+        }
+
+        // 2. Drop scalar fields whose value matches their
+        //    data-original (i.e. the user didn't touch them).
+        //    Without this we'd round-trip every pre-filled value
+        //    through the validator → applier on every submit,
+        //    even if the user only changed bio. Apart from being
+        //    wasteful, it blows out the moderator diff email
+        //    with no-op rows.
+        var fieldEls = form.querySelectorAll('[data-field]');
+        Array.prototype.forEach.call(fieldEls, function (el) {
+          var name = el.getAttribute('data-field');
+          if (el.type === 'file') return;     // file path is decided
+                                              // at submit time, not
+                                              // pre-fillable.
+          if (!Object.prototype.hasOwnProperty.call(payload, name)) return;
+          if (el.dataset.original === undefined) return;
+          if (String(payload[name]) === el.dataset.original) {
+            delete payload[name];
+          }
+        });
       }
     }
   };

@@ -133,8 +133,131 @@
   font-family: var(--font-text);
   font-weight: 500;
   font-size: 14px;
-  cursor: not-allowed;
-  opacity: .55;
+  cursor: pointer;
+}
+.myahl-profile-edit:hover { background: var(--color-neutral-20); }
+.myahl-profile-edit[disabled] { cursor: not-allowed; opacity: .55; }
+
+/* ── Profile edit card (inline expand-in-place) ────────────────
+   Replaces the .myahl-profile-tile when the user clicks Edit
+   profile. Same outer width as the tile so the layout doesn't
+   jump. Cancel restores the tile. */
+.profile-edit-card {
+  background: var(--color-neutral-10);
+  border: 1px solid var(--color-neutral-30);
+  border-radius: 14px;
+  padding: 24px;
+}
+.profile-edit-header h2 {
+  margin: 0 0 4px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--color-neutral-100);
+}
+.profile-edit-sub {
+  margin: 0 0 18px;
+  font-size: 13px;
+  color: var(--color-neutral-70);
+}
+.profile-edit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 18px;
+}
+.profile-edit-field { display: flex; flex-direction: column; gap: 4px; }
+.profile-edit-bio-field,
+.profile-edit-photo-field,
+.profile-edit-links-field { grid-column: 1 / -1; }
+.profile-edit-label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-neutral-70);
+}
+.profile-edit-hint {
+  font-size: 11px;
+  color: var(--color-neutral-60);
+}
+.profile-edit-field input[type="text"],
+.profile-edit-field input[type="url"],
+.profile-edit-field input[type="file"],
+.profile-edit-field select,
+.profile-edit-field textarea {
+  padding: 8px 10px;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: 8px;
+  font-family: var(--font-text);
+  font-size: 14px;
+  color: var(--color-neutral-100);
+  background: #fff;
+}
+.profile-edit-field textarea { resize: vertical; min-height: 110px; line-height: 1.5; }
+.profile-edit-field input:focus,
+.profile-edit-field select:focus,
+.profile-edit-field textarea:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+.profile-edit-link-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.profile-edit-link-row input { padding: 7px 10px; }
+.profile-edit-link-remove {
+  background: transparent;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: 8px;
+  width: 32px;
+  color: var(--color-neutral-70);
+  cursor: pointer;
+}
+.profile-edit-link-remove:hover { background: var(--color-neutral-20); }
+.profile-edit-link-add {
+  align-self: flex-start;
+  margin-top: 4px;
+  background: transparent;
+  border: 1px dashed var(--color-neutral-30);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: var(--color-neutral-80);
+  cursor: pointer;
+}
+.profile-edit-link-add:hover { border-style: solid; }
+.profile-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+  border-top: 1px solid var(--color-neutral-30);
+  padding-top: 16px;
+}
+.profile-edit-cancel,
+.profile-edit-submit {
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid var(--color-neutral-30);
+}
+.profile-edit-cancel { background: transparent; color: var(--color-neutral-70); }
+.profile-edit-cancel:hover { background: var(--color-neutral-20); }
+.profile-edit-submit {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+.profile-edit-submit:hover { filter: brightness(1.08); }
+.profile-edit-submit:disabled { opacity: .55; cursor: not-allowed; }
+
+@media (max-width: 767px) {
+  .profile-edit-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 767px) {
   .myahl-profile-tile { padding: 16px; }
