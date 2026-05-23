@@ -50,6 +50,55 @@
     return projectsPromise;
   }
 
+  // Press slug index — flat list of every press item already on
+  // file. Used here only for duplicate detection when the user types
+  // a title that slugifies to a record we already have. Same shape
+  // as /data/publications-index.json. Emitted by build-press.js.
+  //
+  // Why not cdn-ahlab-org/data/press/_order.json: Jekyll strips
+  // files whose name starts with `_`, so it 404s on GitHub Pages.
+  // The build emits a Jekyll-safe copy at /data/press-index.json.
+  var PRESS_INDEX_URL = '/data/press-index.json';
+  var pressOrderPromise = null;
+  function loadPressIndex() {
+    if (pressOrderPromise) return pressOrderPromise;
+    pressOrderPromise = fetch(PRESS_INDEX_URL, { cache: 'default' })
+      .then(function (r) { return r.ok ? r.json() : []; })
+      .then(function (arr) {
+        var set = Object.create(null);
+        (Array.isArray(arr) ? arr : []).forEach(function (s) { set[s] = true; });
+        return set;
+      })
+      .catch(function () { return Object.create(null); });
+    return pressOrderPromise;
+  }
+
+  // Mirror of the broker's slugify_ in helpers.js (server) and the
+  // matching client copies in publication-add.js + projects/new/
+  // inline script. Keep in lockstep — if any one drifts the
+  // duplicate check silently lets through (or wrongly blocks)
+  // titles the broker accepts.
+  function pressSlugify(s) {
+    return String(s || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+  }
+
+  // Returns the existing slug if the typed title would collide with
+  // a press record already on file, else null. Skipped during edit
+  // mode — the slug match is expected then.
+  function findDuplicateSlug(session) {
+    if (session.editSlug) return null;
+    var title = (session.el.title.value || '').trim();
+    if (!title) return null;
+    var slug = pressSlugify(title);
+    if (!slug) return null;
+    var set = session.pressSet;
+    if (!set) return null;   // still loading
+    return set[slug] ? slug : null;
+  }
+
   function ensureSvgDefs() {
     if (document.getElementById('i-myahl-link')) return;
     var defs = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -157,6 +206,13 @@
     }
 
     loadProjectsIndex().then(function (idx) { session.projectsIdx = idx || []; });
+    // Press-slug lookup for duplicate detection. Re-render once the
+    // set lands so the disabled-button state can appear on the same
+    // title the user already typed (race-safe).
+    loadPressIndex().then(function (set) {
+      session.pressSet = set;
+      renderState(session);
+    });
 
     // Type cycle — clicking the icon advances news → award → video → news.
     // Updates the icon symbol, the .press-type-tag text+colour, and the
@@ -305,15 +361,22 @@
     if (!(el.outlet.value || '').trim()) return false;
     if (!isValidYear((el.year.value || '').trim())) return false;
     if (session.url.status !== 'alive') return false;
+    if (findDuplicateSlug(session)) return false;
     return true;
   }
 
   // Priority-ordered single-message hint. Highest-importance issue
-  // wins; once everything passes, we show no message at all.
+  // wins; once everything passes, we show no message at all. The
+  // duplicate-title check is placed AFTER the field-required hints
+  // (so an empty form doesn't immediately read as "already exists")
+  // but BEFORE the URL hints (so the user sees the dup warning even
+  // while the URL is still being checked — no point pinging a link
+  // for a record we won't accept).
   function priorityHint(session) {
     var el = session.el;
     if (!session.submitter)                            return { text: 'Sign in required to submit.', isError: true };
     if (!(el.title.value  || '').trim())               return { text: 'Title is required.', isError: false };
+    if (findDuplicateSlug(session))                    return { text: 'This press item is already on ahlab.org.', isError: true };
     if (!(el.outlet.value || '').trim())               return { text: 'Outlet is required (e.g. BBC News).', isError: false };
     if (!isValidYear((el.year.value || '').trim()))    return { text: 'Year must be a 4-digit year (1900–2099).', isError: false };
     if (session.url.status === 'idle')                 return { text: 'Add a link via the link button at the right.', isError: false };
