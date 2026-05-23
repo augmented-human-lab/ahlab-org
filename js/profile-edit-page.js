@@ -7,42 +7,51 @@
  *   emitted by build-people.js at /people/<slug>/edit/index.html.
  *   It's byte-identical to the public page EXCEPT:
  *     • <body data-edit-mode-page data-person-slug="…">
- *     • noindex meta
- *     • this script loaded at the bottom
+ *     • noindex meta + edited <title>
+ *     • this script + profile-edit.css loaded at the bottom
  *
  *   Visiting the URL while NOT signed in as the owner → page
  *   shows a small banner ("Sign in as <name> to edit") and the
  *   pencils never appear; the rest of the page renders as the
- *   public read-only profile. So the URL is shareable without
- *   leaking edit affordances.
+ *   public read-only profile minus the sections we hide via CSS
+ *   (expertise / projects grid / publications / events row are
+ *   off-topic for editing).
  *
  * Per-field model:
  *   Each editable field gets its own pencil button injected via
- *   JS. Clicking a pencil swaps the field's rendered DOM for an
- *   input (or textarea / select / mini-form) pre-populated from
- *   the canonical /data/people/<slug>.json record. Multiple
- *   pencils can be open simultaneously. Each input remembers
- *   data-original; the sticky submit bar at the bottom only
- *   appears when ≥1 field is dirty.
+ *   JS. Click pencil → that field enters edit mode:
+ *     • pencil hidden
+ *     • check icon appears
+ *     • input / textarea / picker takes over the visible value
+ *   Exit edit mode by either:
+ *     • clicking the check icon, or
+ *     • clicking anywhere outside that field's block.
+ *   On exit we commit the typed value to the local dirty map and
+ *   re-render the field's view-mode DOM with the new value, so
+ *   the user sees their pending change immediately. The check
+ *   icon disappears and the pencil comes back.
  *
  * Fields wired:
- *   profile_image       (photo overlay pencil → file picker)
- *   role                (next to .profile-role)
- *   bio                 (top-right of .profile-content)
- *   featured_project    (top-right of .profile-featured)
+ *   profile_image       (overlay pencil → file picker)
+ *   role                (inline <input>)
+ *   bio                 (<textarea>; multi-paragraph split on
+ *                        \n\n preserved on commit)
+ *   featured_project    (search-as-you-type picker; on pick we
+ *                        fetch the project record from cdn so we
+ *                        can re-render the featured card with the
+ *                        new thumbnail)
  *   linkedin / github / google_scholar
- *                       (single "Edit social links" pencil at end
- *                        of .profile-socials → mini-panel with the
- *                        three URL inputs)
- *   external_links      (separate pencil near the socials → list
- *                        editor with repeatable {label, url} rows)
+ *                       (single pencil on .profile-socials →
+ *                        floating panel with the three URL inputs;
+ *                        committed together by outside-click or ✓)
  *
  * Submit:
- *   On Submit, collects every dirty field, runs the photo through
- *   AHLImage.process (greyscale policy for profile photos), and
- *   calls window.AHLPatch.submit({targetType: 'profile', ...}).
- *   The broker validates + queues for moderator review; the
- *   moderator email renders the diff (email.js renderEmailProfileCard_).
+ *   Sticky bar at the bottom of the viewport, visible only when
+ *   the dirty map is non-empty. Click → AHLImage.process the
+ *   photo file if present (greyscale policy), then
+ *   AHLPatch.submit({targetType:'profile', …}). The broker
+ *   validates + queues for moderator review; the diff email
+ *   (renderEmailProfileCard_ in email.js) renders the changes.
  */
 (function () {
   'use strict';
@@ -53,12 +62,9 @@
   var pageSlug = body.getAttribute('data-person-slug') || '';
   var record   = null;     // canonical record from cdn
   var dirty    = {};       // map: field name → current value (or File)
-  var pencils  = {};       // map: field name → injected pencil button
+  var editing  = null;     // currently-editing field key, or null
 
   // ── Auth gate ───────────────────────────────────────────────
-  // Wait for AHLAuth to attach + report the user. The auth.js
-  // script's onChange fires immediately with current state on
-  // subscribe, then on every login/logout change.
   function whenAuthReady(cb) {
     if (window.AHLAuth) { window.AHLAuth.onChange(cb); return; }
     var t = setInterval(function () {
@@ -82,7 +88,6 @@
     activateOwnerMode();
   });
 
-  // ── Owner mode: fetch record, mount pencils, show submit bar ──
   function activateOwnerMode() {
     document.documentElement.classList.add('is-edit-mode');
     showBanner('Editing your profile. Changes require moderator approval.',
@@ -93,14 +98,75 @@
       injectSubmitBar();
     });
   }
-
   function fetchRecord(slug) {
-    // CDN serves with permissive CORS; the site domain doesn't
-    // have per-record files in dist/.
     return fetch('https://cdn.ahlab.org/data/people/' + encodeURIComponent(slug) + '.json',
         { cache: 'default' })
       .then(function (r) { return r.ok ? r.json() : null; })
       .catch(function () { return null; });
+  }
+
+  // ── Pencil + check icons ────────────────────────────────────
+  function pencilSVG() {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" ' +
+      'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+      '<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>' +
+      '</svg>';
+  }
+  function checkSVG() {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" ' +
+      'stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">' +
+      '<path d="M5 13l4 4L19 7"/></svg>';
+  }
+  function makePencil(label, onClick) {
+    return makeIconBtn('pe-pencil', label, pencilSVG(), onClick);
+  }
+  function makeCheck(label, onClick) {
+    return makeIconBtn('pe-check', label, checkSVG(), onClick);
+  }
+  function makeIconBtn(cls, label, svg, onClick) {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = cls;
+    btn.setAttribute('aria-label', label);
+    btn.title = label;
+    btn.innerHTML = svg;
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();   // outside-click handler shouldn't
+                             // immediately re-commit
+      onClick(e);
+    });
+    return btn;
+  }
+
+  // ── Outside-click commit machinery ──────────────────────────
+  // One global mousedown listener; if we're in edit mode and the
+  // click target is outside the editing block, commit the field.
+  // Using mousedown (not click) so the commit happens before any
+  // focus / blur side-effects that follow a click.
+  document.addEventListener('mousedown', function (e) {
+    if (!editing) return;
+    var blockEl = editing.blockEl;
+    if (!blockEl) return;
+    if (blockEl.contains(e.target)) return;        // click inside
+    editing.commit();
+  });
+
+  // Helper for fields to enter edit mode. The caller passes:
+  //   key       — field name (matches the broker's schema)
+  //   blockEl   — the DOM region the user is editing (the outside-click
+  //               handler treats clicks INSIDE this as "still editing")
+  //   render    — function that mutates blockEl to show the editing UI
+  //               and returns a `commit()` callback
+  function enterEditMode(key, blockEl, render) {
+    if (editing) editing.commit();   // commit whatever's in flight
+    var commit = render();
+    editing = { key: key, blockEl: blockEl, commit: function () {
+      // Idempotent — multiple outside-clicks/check-clicks shouldn't
+      // double-fire the per-field commit.
+      if (!editing || editing.key !== key) return;
+      editing = null;
+      try { commit(); } catch (e) { /* swallow */ }
+    } };
   }
 
   // ── Pencil injection per field ──────────────────────────────
@@ -110,27 +176,14 @@
     addBioPencil();
     addFeaturedProjectPencil();
     addSocialsPencil();
-    addExternalLinksPencil();
-  }
-
-  function pencilSVG() {
-    return '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" ' +
-      'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-      '<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>' +
-      '</svg>';
-  }
-  function makePencil(label, onClick) {
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'pe-pencil';
-    btn.setAttribute('aria-label', label);
-    btn.title = label;
-    btn.innerHTML = pencilSVG();
-    btn.addEventListener('click', onClick);
-    return btn;
+    // (external_links pencil removed per UX spec — bio/role/social
+    // cover the visible editing surface; if we want to bring it
+    // back, restore addExternalLinksPencil from git history.)
   }
 
   // ── Photo ───────────────────────────────────────────────────
+  // No real "edit mode" — click the pencil → file picker → image
+  // preview replaces the current src + dirty.profile_image set.
   function addPhotoPencil() {
     var wrap = document.querySelector('.profile-photo');
     if (!wrap) return;
@@ -143,13 +196,7 @@
       var f = input.files && input.files[0];
       if (!f) return;
       var reader = new FileReader();
-      reader.onload = function () {
-        // Preview immediately so the user can confirm the right
-        // file. The actual greyscale processing happens at submit
-        // time via AHLImage.process so we don't burn CPU on every
-        // pick.
-        if (img) img.src = reader.result;
-      };
+      reader.onload = function () { if (img) img.src = reader.result; };
       reader.readAsDataURL(f);
       dirty.profile_image = f;
       refreshSubmitBar();
@@ -159,90 +206,129 @@
     btn.classList.add('pe-pencil-photo');
     wrap.appendChild(btn);
     wrap.classList.add('pe-has-pencil');
-    pencils.profile_image = btn;
   }
 
   // ── Role ────────────────────────────────────────────────────
   function addRolePencil() {
     var el = document.querySelector('.profile-role');
     if (!el) return;
-    var original = (el.textContent || '').trim();
-    var btn = makePencil('Edit role', function () {
-      if (el.querySelector('input')) return;  // already in edit mode
-      var input = document.createElement('input');
-      input.type = 'text';
-      input.value = original;
-      input.maxLength = 80;
-      input.className = 'pe-inline-input';
-      input.addEventListener('input', function () {
-        var v = input.value.trim();
-        if (v === original) delete dirty.role; else dirty.role = v;
-        refreshSubmitBar();
-      });
-      input.addEventListener('blur', function () {
-        // Collapse back to text view if value unchanged. Keep
-        // input visible when dirty so the user can adjust until
-        // they submit.
-        if (input.value.trim() === original) collapseRole();
-      });
-      function collapseRole() {
+    mountReadMode(el, function () { return roleViewHTML(getCurrentRole()); }, function () {
+      enterEditMode('role', el, function () {
+        var current = getCurrentRole();
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.maxLength = 80;
+        input.value = current;
+        input.className = 'pe-inline-input';
+        var check = makeCheck('Done', function () { editing && editing.commit(); });
+        input.addEventListener('input', function () {
+          var v = input.value.trim();
+          var orig = String(record.role || '');
+          if (v === orig) delete dirty.role;
+          else dirty.role = v;
+          refreshSubmitBar();
+        });
+        input.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') { e.preventDefault(); editing && editing.commit(); }
+        });
         el.innerHTML = '';
-        el.textContent = original;
-        el.appendChild(btn);
-      }
-      el.innerHTML = '';
-      el.appendChild(input);
-      el.appendChild(btn);
-      input.focus();
-      input.select();
+        el.appendChild(input);
+        el.appendChild(check);
+        setTimeout(function () { input.focus(); input.select(); }, 0);
+        return function commitRole() {
+          var v = input.value.trim();
+          el.innerHTML = roleViewHTML(v);
+          attachPencil(el, 'Edit role', addRolePencil);
+        };
+      });
     });
-    el.appendChild(btn);
-    pencils.role = btn;
+  }
+  function getCurrentRole() {
+    if ('role' in dirty) return String(dirty.role || '');
+    return String(record && record.role || '');
+  }
+  function roleViewHTML(value) {
+    // Match the read-page rendering: just plain text. The pencil
+    // is appended afterwards by attachPencil so we don't have to
+    // splice text + button in the same string.
+    return escapeHtml(value);
   }
 
   // ── Bio ─────────────────────────────────────────────────────
   function addBioPencil() {
     var bio = document.querySelector('.profile-content');
     if (!bio) {
-      // No existing bio: inject a placeholder block so the user
-      // has something to click "edit" on.
       var introGrid = document.querySelector('.profile-intro-grid')
                    || document.querySelector('.profile-body');
       if (!introGrid) return;
       bio = document.createElement('div');
       bio.className = 'profile-content rv vis';
-      bio.innerHTML = '<p class="pe-empty">(no bio yet — click the pencil to add one)</p>';
       introGrid.insertBefore(bio, introGrid.firstChild);
+      renderBioRead(bio, '');
+    } else {
+      renderBioRead(bio, getCurrentBio());
     }
-    var btn = makePencil('Edit bio', function () {
-      if (bio.querySelector('textarea')) return;
-      var current = String(record.bio || '').trim();
-      var ta = document.createElement('textarea');
-      ta.className = 'pe-inline-textarea';
-      ta.value = current;
-      ta.rows = Math.min(20, Math.max(6, current.split('\n').length + 4));
-      ta.maxLength = 3000;
-      ta.addEventListener('input', function () {
-        var v = ta.value;
-        if (v === current) delete dirty.bio; else dirty.bio = v;
-        refreshSubmitBar();
+    function onPencilClick() {
+      enterEditMode('bio', bio, function () {
+        var current = getCurrentBio();
+        var ta = document.createElement('textarea');
+        ta.className = 'pe-inline-textarea';
+        ta.value = current;
+        ta.rows = Math.min(20, Math.max(8, current.split('\n').length + 4));
+        ta.maxLength = 5000;
+        var check = makeCheck('Done', function () { editing && editing.commit(); });
+        ta.addEventListener('input', function () {
+          var v = ta.value;
+          var orig = String(record.bio || '');
+          if (v === orig) delete dirty.bio;
+          else dirty.bio = v;
+          refreshSubmitBar();
+        });
+        bio.classList.add('pe-editing');
+        bio.innerHTML = '';
+        bio.appendChild(ta);
+        bio.appendChild(check);
+        setTimeout(function () { ta.focus(); }, 0);
+        return function commitBio() {
+          var v = ta.value;
+          bio.classList.remove('pe-editing');
+          renderBioRead(bio, v);
+        };
       });
-      bio.classList.add('pe-editing');
-      bio.innerHTML = '';
-      bio.appendChild(ta);
-      bio.appendChild(btn);
-      ta.focus();
-    });
-    bio.appendChild(btn);
-    pencils.bio = btn;
+    }
+    attachPencil(bio, 'Edit bio', onPencilClick);
+    // Stash the click handler so the read-mode pencil that
+    // re-attaches after commit can call back into this function.
+    bio.__peOnPencil = onPencilClick;
+  }
+  function getCurrentBio() {
+    if ('bio' in dirty) return String(dirty.bio || '');
+    return String(record && record.bio || '');
+  }
+  function renderBioRead(bio, text) {
+    bio.innerHTML = '';
+    if (!text) {
+      var empty = document.createElement('p');
+      empty.className = 'pe-empty';
+      empty.textContent = '(no bio yet — click the pencil to add one)';
+      bio.appendChild(empty);
+    } else {
+      text.split(/\n\n+/).forEach(function (para) {
+        var p = document.createElement('p');
+        p.textContent = para;
+        bio.appendChild(p);
+      });
+    }
+    var onClick = bio.__peOnPencil || function () {};
+    attachPencil(bio, 'Edit bio', onClick);
   }
 
-  // ── Featured project ────────────────────────────────────────
+  // ── Featured project (typeahead search picker) ──────────────
   function addFeaturedProjectPencil() {
     var card = document.querySelector('.profile-featured');
     if (!card) {
-      // No featured project: inject a stub aside so the user can
-      // pick one from scratch.
+      // Inject an empty featured-project card so the user has
+      // something to attach the pencil to.
       var introGrid = document.querySelector('.profile-intro-grid')
                    || document.querySelector('.profile-body');
       if (!introGrid) return;
@@ -250,84 +336,189 @@
       card.className = 'profile-featured rv vis';
       card.setAttribute('aria-label', 'Featured project');
       card.innerHTML = '<div class="sidebar-section-title">Featured project</div>' +
-        '<div class="pe-empty">(none yet — click the pencil to pick)</div>';
+        '<div class="pe-featured-card-slot"><div class="pe-empty">(none yet — click the pencil to pick)</div></div>';
       introGrid.appendChild(card);
-    }
-    var btn = makePencil('Change featured project', function () {
-      if (card.querySelector('select')) return;
-      loadProjectsIndex().then(function (projects) {
-        var current = record.featured_project || '';
-        var sel = document.createElement('select');
-        sel.className = 'pe-inline-select';
-        var opt0 = document.createElement('option');
-        opt0.value = '';
-        opt0.textContent = '(no featured project)';
-        sel.appendChild(opt0);
-        var sorted = projects.slice().sort(function (a, b) {
-          var ta = (a.title || '').toLowerCase();
-          var tb = (b.title || '').toLowerCase();
-          return ta < tb ? -1 : ta > tb ? 1 : 0;
-        });
-        sorted.forEach(function (p) {
-          var o = document.createElement('option');
-          o.value = p.slug;
-          o.textContent = p.title + (p.year ? ' (' + p.year + ')' : '');
-          sel.appendChild(o);
-        });
-        sel.value = current;
-        sel.addEventListener('change', function () {
-          var v = sel.value;
-          if (v === current) delete dirty.featured_project;
-          else dirty.featured_project = v;
-          refreshSubmitBar();
-        });
-        // Keep the title label visible so the user knows what
-        // this control changes.
-        var title = card.querySelector('.sidebar-section-title');
-        card.innerHTML = '';
-        if (title) card.appendChild(title);
-        card.appendChild(sel);
-        card.appendChild(btn);
-        sel.focus();
+    } else {
+      // Existing card from build: wrap the project-card body into
+      // a slot we can swap on commit.
+      var children = Array.prototype.slice.call(card.childNodes);
+      var slot = document.createElement('div');
+      slot.className = 'pe-featured-card-slot';
+      // Skip the section title; pull everything else into the slot.
+      children.forEach(function (n) {
+        if (n.nodeType === 1 && n.classList && n.classList.contains('sidebar-section-title')) return;
+        slot.appendChild(n);
       });
+      card.appendChild(slot);
+    }
+    function onPencilClick() {
+      enterEditMode('featured_project', card, function () {
+        // Slot becomes the typeahead picker.
+        var slot = card.querySelector('.pe-featured-card-slot');
+        var picker = document.createElement('div');
+        picker.className = 'pe-featured-picker';
+        picker.innerHTML =
+          '<input type="text" class="pe-featured-search" placeholder="Search projects…" autocomplete="off">' +
+          '<ul class="pe-featured-suggestions" role="listbox"></ul>';
+        slot.replaceWith(picker);
+        var check = makeCheck('Done', function () { editing && editing.commit(); });
+        card.appendChild(check);
+
+        var input = picker.querySelector('.pe-featured-search');
+        var list  = picker.querySelector('.pe-featured-suggestions');
+        var projects = [];
+        var selectedSlug = getCurrentFeatured();
+
+        loadProjectsIndex().then(function (idx) {
+          projects = Array.isArray(idx) ? idx : [];
+          renderSuggestions(projects, list, '', selectedSlug, pickProject);
+        });
+        input.addEventListener('input', function () {
+          renderSuggestions(projects, list, input.value, selectedSlug, pickProject);
+        });
+        function pickProject(slug) {
+          selectedSlug = slug;
+          var orig = String(record.featured_project || '');
+          if (slug === orig) delete dirty.featured_project;
+          else dirty.featured_project = slug;
+          refreshSubmitBar();
+          // Auto-commit on pick — the user's done with the picker.
+          editing && editing.commit();
+        }
+        setTimeout(function () { input.focus(); }, 0);
+
+        return function commitFeatured() {
+          // Replace picker with a fresh card view of the chosen project.
+          picker.replaceWith(buildFeaturedCardSlot(selectedSlug));
+          var c = card.querySelector('.pe-check');
+          if (c) c.remove();
+          attachPencil(card, 'Change featured project', onPencilClick);
+        };
+      });
+    }
+    attachPencil(card, 'Change featured project', onPencilClick);
+  }
+  function getCurrentFeatured() {
+    if ('featured_project' in dirty) return String(dirty.featured_project || '');
+    return String(record && record.featured_project || '');
+  }
+  function renderSuggestions(projects, list, query, selectedSlug, onPick) {
+    var q = String(query || '').trim().toLowerCase();
+    var matches = projects.filter(function (p) {
+      if (!q) return true;
+      return (p.title || '').toLowerCase().indexOf(q) !== -1
+          || (p.slug  || '').toLowerCase().indexOf(q) !== -1;
+    }).slice(0, 8);
+    list.innerHTML = '';
+    if (!matches.length) {
+      var li = document.createElement('li');
+      li.className = 'pe-featured-empty';
+      li.textContent = q ? 'No projects match "' + q + '".' : '(no projects)';
+      list.appendChild(li);
+      return;
+    }
+    matches.forEach(function (p) {
+      var li = document.createElement('li');
+      li.className = 'pe-featured-suggestion';
+      if (p.slug === selectedSlug) li.classList.add('is-selected');
+      li.setAttribute('data-slug', p.slug);
+      li.innerHTML =
+        '<span class="pe-featured-title">' + escapeHtml(p.title || p.slug) + '</span>' +
+        (p.year ? '<span class="pe-featured-year">' + escapeHtml(p.year) + '</span>' : '');
+      li.addEventListener('mousedown', function (e) {
+        e.preventDefault();    // keep focus stability
+        onPick(p.slug);
+      });
+      list.appendChild(li);
     });
-    card.appendChild(btn);
-    pencils.featured_project = btn;
+  }
+  // Build a fresh DOM slot for the currently-selected featured
+  // project, fetching its full record from cdn for the thumbnail.
+  // Returns the slot element immediately and patches the thumbnail
+  // in asynchronously.
+  function buildFeaturedCardSlot(slug) {
+    var slot = document.createElement('div');
+    slot.className = 'pe-featured-card-slot';
+    if (!slug) {
+      slot.innerHTML = '<div class="pe-empty">(no featured project)</div>';
+      return slot;
+    }
+    // Lightweight placeholder while we fetch the record.
+    slot.innerHTML =
+      '<div class="profile-project-card pe-featured-card">' +
+        '<div class="profile-project-card-thumb">' +
+          '<div class="profile-project-card-placeholder">?</div>' +
+        '</div>' +
+        '<div class="profile-project-card-body">' +
+          '<div class="profile-project-card-title">' + escapeHtml(slug) + '</div>' +
+        '</div>' +
+      '</div>';
+    fetch('https://cdn.ahlab.org/data/projects/' + encodeURIComponent(slug) + '.json',
+        { cache: 'default' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (proj) {
+        if (!proj) return;
+        var thumb = proj.thumbnail
+          ? '<img src="' + escapeHtml(proj.thumbnail) + '" alt="' + escapeHtml(proj.title || slug) + '" loading="lazy">'
+          : '<div class="profile-project-card-placeholder">' + escapeHtml(String(proj.title || slug).charAt(0)) + '</div>';
+        slot.innerHTML =
+          '<a class="profile-project-card pe-featured-card" href="/projects/' + escapeHtml(slug) + '/">' +
+            '<div class="profile-project-card-thumb">' + thumb + '</div>' +
+            '<div class="profile-project-card-body">' +
+              '<div class="profile-project-card-title">' + escapeHtml(proj.title || slug) + '</div>' +
+              (proj.year ? '<div class="profile-project-card-year">' + escapeHtml(proj.year) + '</div>' : '') +
+            '</div>' +
+          '</a>';
+      })
+      .catch(function () { /* keep placeholder */ });
+    return slot;
   }
 
-  // ── Social links: one pencil → mini-panel with 3 URL inputs ─
+  // ── Social links (single panel for linkedin/github/scholar) ─
   function addSocialsPencil() {
     var row = document.querySelector('.profile-socials');
     if (!row) return;
-    var btn = makePencil('Edit social links', function () {
-      if (document.querySelector('.pe-social-panel')) return;
-      var panel = document.createElement('div');
-      panel.className = 'pe-social-panel';
-      panel.innerHTML =
-        '<div class="pe-panel-title">Social links</div>' +
-        renderUrlInput('linkedin', 'LinkedIn', record.linkedin) +
-        renderUrlInput('github',   'GitHub',   record.github) +
-        renderUrlInput('google_scholar', 'Google Scholar', record.google_scholar) +
-        '<button type="button" class="pe-panel-close">Done</button>';
-      Array.prototype.forEach.call(panel.querySelectorAll('input'), function (input) {
-        var name = input.getAttribute('data-field');
-        var original = String(record[name] || '');
-        input.addEventListener('input', function () {
-          var v = input.value.trim();
-          if (v === original) delete dirty[name];
-          else dirty[name] = v;
-          refreshSubmitBar();
+    function onPencilClick() {
+      enterEditMode('socials', row.parentNode, function () {
+        // Panel is attached as a sibling so the outside-click
+        // detection's blockEl needs to include both the row AND
+        // the panel — easiest is to make the parent the blockEl.
+        var panel = document.createElement('div');
+        panel.className = 'pe-social-panel';
+        panel.innerHTML =
+          '<div class="pe-panel-title">Social links</div>' +
+          renderUrlInput('linkedin', 'LinkedIn', getCurrentSocial('linkedin')) +
+          renderUrlInput('github',   'GitHub',   getCurrentSocial('github')) +
+          renderUrlInput('google_scholar', 'Google Scholar', getCurrentSocial('google_scholar'));
+        var check = makeCheck('Done', function () { editing && editing.commit(); });
+        panel.appendChild(check);
+        Array.prototype.forEach.call(panel.querySelectorAll('input'), function (input) {
+          var name = input.getAttribute('data-field');
+          input.addEventListener('input', function () {
+            var v = input.value.trim();
+            var orig = String(record[name] || '');
+            if (v === orig) delete dirty[name];
+            else dirty[name] = v;
+            refreshSubmitBar();
+          });
         });
+        row.parentNode.insertBefore(panel, row.nextSibling);
+        var first = panel.querySelector('input');
+        if (first) setTimeout(function () { first.focus(); }, 0);
+        // Hide the pencil while the panel is open.
+        var pencil = row.querySelector('.pe-pencil');
+        if (pencil) pencil.style.visibility = 'hidden';
+        return function commitSocials() {
+          panel.remove();
+          if (pencil) pencil.style.visibility = '';
+        };
       });
-      panel.querySelector('.pe-panel-close').addEventListener('click', function () {
-        panel.remove();
-      });
-      row.parentNode.insertBefore(panel, row.nextSibling);
-      var first = panel.querySelector('input');
-      if (first) first.focus();
-    });
-    row.appendChild(btn);
-    pencils.socials = btn;
+    }
+    attachPencil(row, 'Edit social links', onPencilClick);
+  }
+  function getCurrentSocial(key) {
+    if (key in dirty) return String(dirty[key] || '');
+    return String(record && record[key] || '');
   }
   function renderUrlInput(name, label, value) {
     var v = value == null ? '' : String(value);
@@ -338,93 +529,26 @@
     '</label>';
   }
 
-  // ── External links: pencil → repeatable {label, url} rows ───
-  function addExternalLinksPencil() {
-    // We attach this pencil next to the social row so users find
-    // it. If the social row doesn't exist (older page) we attach
-    // it inside the profile-info block instead.
-    var anchor = document.querySelector('.profile-socials')
-              || document.querySelector('.profile-info');
-    if (!anchor) return;
-    var btn = makePencil('Edit other external links', function () {
-      if (document.querySelector('.pe-extlinks-panel')) return;
-      var panel = document.createElement('div');
-      panel.className = 'pe-extlinks-panel';
-      var rowsHtml = (Array.isArray(record.external_links) ? record.external_links : [])
-        .map(extlinkRowHtml).join('');
-      panel.innerHTML =
-        '<div class="pe-panel-title">Other external links</div>' +
-        '<div class="pe-extlinks-rows">' + rowsHtml + '</div>' +
-        '<button type="button" class="pe-extlinks-add">+ Add link</button>' +
-        '<button type="button" class="pe-panel-close">Done</button>';
-      var rowsWrap = panel.querySelector('.pe-extlinks-rows');
-      var originalSerialized = serializeExtlinkRows(rowsWrap);
+  // ── Pencil attach / re-attach helper ────────────────────────
+  // Removes any existing .pe-pencil inside `parent` and appends a
+  // fresh one wired to onClick. Called from every field's render
+  // step so the pencil reappears after each commit.
+  function attachPencil(parent, label, onClick) {
+    var existing = parent.querySelectorAll(':scope > .pe-pencil');
+    Array.prototype.forEach.call(existing, function (p) { p.remove(); });
+    var existingCheck = parent.querySelectorAll(':scope > .pe-check');
+    Array.prototype.forEach.call(existingCheck, function (p) { p.remove(); });
+    var btn = makePencil(label, onClick);
+    parent.appendChild(btn);
+  }
 
-      function onRowChange() {
-        if (serializeExtlinkRows(rowsWrap) === originalSerialized) {
-          delete dirty.external_links;
-        } else {
-          dirty.external_links = collectExtlinkRows(rowsWrap);
-        }
-        refreshSubmitBar();
-      }
-      panel.querySelector('.pe-extlinks-add').addEventListener('click', function () {
-        var div = document.createElement('div');
-        div.innerHTML = extlinkRowHtml({ label: '', url: '' });
-        var row = div.firstChild;
-        rowsWrap.appendChild(row);
-        wireExtlinkRow(row, onRowChange);
-        row.querySelector('input').focus();
-      });
-      panel.querySelector('.pe-panel-close').addEventListener('click', function () {
-        panel.remove();
-      });
-      Array.prototype.forEach.call(rowsWrap.children, function (row) {
-        wireExtlinkRow(row, onRowChange);
-      });
-      anchor.parentNode.insertBefore(panel, anchor.nextSibling);
-    });
-    // Render as a small text-button next to the icon socials so
-    // it's discoverable. (The other pencil on the socials row
-    // edits the three "platform" icons.)
-    btn.classList.add('pe-pencil-text');
-    btn.title = 'Edit other external links';
-    btn.innerHTML = pencilSVG() + '<span>Other links</span>';
-    anchor.appendChild(btn);
-    pencils.external_links = btn;
-  }
-  function extlinkRowHtml(l) {
-    var label = escapeHtml(l && l.label || '');
-    var url   = escapeHtml(l && l.url   || '');
-    return '<div class="pe-extlink-row" data-extlink-row>' +
-      '<input type="text" class="pe-extlink-label" placeholder="Label" value="' + label + '">' +
-      '<input type="url"  class="pe-extlink-url"   placeholder="https://…" value="' + url + '" inputmode="url">' +
-      '<button type="button" class="pe-extlink-remove" aria-label="Remove">×</button>' +
-    '</div>';
-  }
-  function wireExtlinkRow(row, onChange) {
-    row.querySelector('.pe-extlink-label').addEventListener('input', onChange);
-    row.querySelector('.pe-extlink-url').addEventListener('input', onChange);
-    row.querySelector('.pe-extlink-remove').addEventListener('click', function () {
-      row.parentNode.removeChild(row);
-      onChange();
-    });
-  }
-  function collectExtlinkRows(wrap) {
-    var rows = wrap.querySelectorAll('[data-extlink-row]');
-    var out = [];
-    Array.prototype.forEach.call(rows, function (row) {
-      var label = (row.querySelector('.pe-extlink-label').value || '').trim();
-      var url   = (row.querySelector('.pe-extlink-url').value || '').trim();
-      if (!url) return;
-      out.push({ label: label || url, url: url });
-    });
-    return out;
-  }
-  function serializeExtlinkRows(wrap) {
-    return collectExtlinkRows(wrap)
-      .map(function (l) { return l.label + '|' + l.url; })
-      .join('\n');
+  // mountReadMode is reserved for future fields that need a
+  // dedicated initial read-view re-render. Role uses attachPencil
+  // directly; we keep this stub so the call sites in the
+  // role/bio paths can share a shape.
+  function mountReadMode(el, viewHtml, onPencilClick) {
+    el.innerHTML = viewHtml();
+    attachPencil(el, 'Edit', onPencilClick);
   }
 
   // ── Submit bar ──────────────────────────────────────────────
@@ -439,7 +563,6 @@
       '</div>';
     document.body.appendChild(bar);
     bar.querySelector('.pe-submitbar-cancel').addEventListener('click', function () {
-      // Brutal but simple: reload the page → all edits gone.
       if (Object.keys(dirty).length && !confirm('Discard all unsaved changes?')) return;
       location.reload();
     });
@@ -469,26 +592,20 @@
       window.AHLAuth && window.AHLAuth.login();
       return;
     }
-
     var btn = document.querySelector('.pe-submitbar-submit');
     btn.disabled = true;
     btn.textContent = 'Submitting…';
-
     var patch = {};
     var fileWork = [];
     keys.forEach(function (k) {
       if (k === 'profile_image' && dirty[k] instanceof File) {
-        // Photo: process through AHLImage (greyscale for profile)
-        // before adding to the files[] array.
         fileWork.push(
           window.AHLImage.process(dirty[k], { greyscale: true })
-            .then(function (processed) { return processed; })
         );
       } else {
         patch[k] = dirty[k];
       }
     });
-
     Promise.all(fileWork).then(function (files) {
       window.AHLPatch.submit({
         targetType: 'profile',
@@ -498,8 +615,6 @@
         files:      files,
         returnUrl:  location.origin + '/my-ahl/'
       });
-      // submit-patch.js navigates the tab away to the broker;
-      // we won't reach any code after this call.
     }).catch(function (err) {
       btn.disabled = false;
       btn.textContent = 'Submit for review';
@@ -524,7 +639,6 @@
       .catch(function () { return []; });
     return projectsPromise;
   }
-
   function escapeHtml(s) {
     return String(s == null ? '' : s)
       .replace(/&/g, '&amp;')
