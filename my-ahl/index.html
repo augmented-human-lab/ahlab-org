@@ -273,7 +273,6 @@
 <script src="/js/publication-add.js" defer></script>
 <script src="/js/press-add.js" defer></script>
 <script src="/js/event-add.js" defer></script>
-<script src="/js/profile-edit-card.js" defer></script>
 
 <script>
 /*
@@ -684,13 +683,15 @@
     // Profile tile is laid out as a flex column so the expertise bar
     // can pin to the bottom (margin-top: auto) and fill the vertical
     // space the tile inherits from matching the ID card's height.
-    // The whole tile is wrapped in [data-profile-edit-wrap] so
-    // profile-edit-card.js can replace it with the editable card
-    // (and put it back if the user cancels). The Edit-profile
-    // button has [data-profile-edit-trigger] which the card's
-    // script auto-mounts after dashboard render.
+    // "Edit profile" is an anchor (not a button) so the browser
+    // handles navigation natively. Lands on /people/<slug>/edit/
+    // — same look as the public profile page, but with per-field
+    // pencil icons that toggle inline edit mode. Only the owner
+    // sees the pencils; non-owners visiting the URL get a
+    // read-only banner.
+    var editHref = d.profile_url ? d.profile_url.replace(/\/$/, '') + '/edit/' : '';
     var profileHTML =
-      '<div class="myahl-profile-tile" data-profile-edit-wrap>' +
+      '<div class="myahl-profile-tile">' +
         '<div class="myahl-profile-tile-main">' +
           '<div class="myahl-profile-photo">' +
             (d.profile_image ? '<img src="' + escapeHtml(d.profile_image) + '" alt="' + escapeHtml(d.name) + '">' : '') +
@@ -700,7 +701,9 @@
             (d.role ? '<div class="role">' + escapeHtml(d.role) + '</div>' : '') +
             (d.profile_url ? '<a class="public-link" href="' + escapeHtml(d.profile_url) + '">View public profile</a>' : '') +
           '</div>' +
-          '<button type="button" class="myahl-profile-edit" data-profile-edit-trigger>Edit profile</button>' +
+          (editHref
+            ? '<a class="myahl-profile-edit" href="' + escapeHtml(editHref) + '">Edit profile</a>'
+            : '<button type="button" class="myahl-profile-edit" disabled title="Profile URL not yet available">Edit profile</button>') +
         '</div>' +
         buildExpertiseBar(d.projects) +
       '</div>';

@@ -1,0 +1,343 @@
+/*
+ * profile-edit.css — styles for the per-field editor on
+ * /people/<slug>/edit/. Loaded only by edit pages (build-people.js
+ * injects the <link rel="stylesheet" href="/css/profile-edit.css">
+ * specifically into the edit-page HTML).
+ *
+ * Conventions:
+ *   • Class prefix `pe-` (profile-edit) — keeps the namespace
+ *     distinct from the read-page classes (.profile-*) we layer
+ *     onto.
+ *   • Pencils are absolute-positioned where possible so they
+ *     don't shift the underlying read-only layout (i.e. the page
+ *     still looks identical to the public one until a pencil is
+ *     clicked).
+ *   • Inputs reuse the page's typography (font-family, font-size)
+ *     so the edited fields don't look out-of-place.
+ */
+
+/* Banner at the top of the page. Shown to both owners (with
+ * "Editing your profile" copy) and non-owners (with "you can
+ * only edit your own profile"). */
+.pe-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  background: rgba(97, 0, 255, 0.08);
+  color: #4a1cb8;
+  font-family: var(--font-text);
+  font-size: 13px;
+  border-bottom: 1px solid rgba(97, 0, 255, 0.18);
+}
+.pe-banner button,
+.pe-banner .bnr-link {
+  background: transparent;
+  border: 1px solid rgba(97, 0, 255, 0.32);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #4a1cb8;
+  cursor: pointer;
+  text-decoration: none;
+}
+.pe-banner button:hover,
+.pe-banner .bnr-link:hover {
+  background: rgba(97, 0, 255, 0.12);
+}
+
+/* The pencil button itself — small, neutral, comes alive on
+ * hover. Position is set per-field below. */
+.pe-pencil {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--color-neutral-70);
+  cursor: pointer;
+  transition: background .15s, color .15s, transform .15s;
+}
+.pe-pencil:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+  transform: scale(1.06);
+}
+.pe-pencil svg { width: 14px; height: 14px; }
+
+/* The "Other links" pencil is a wider text+icon pill so users
+ * notice the secondary affordance next to the social-icon row. */
+.pe-pencil-text {
+  width: auto;
+  height: 28px;
+  padding: 0 12px;
+  gap: 6px;
+  font-family: var(--font-text);
+  font-size: 12px;
+  font-weight: 500;
+}
+.pe-pencil-text svg { width: 12px; height: 12px; }
+
+/* Photo overlay — pencil sits over the bottom-right of the
+ * photo. The photo box is already position:relative on the
+ * read page, so the absolute positioning hooks into it cleanly. */
+.profile-photo.pe-has-pencil { position: relative; }
+.pe-pencil-photo {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+/* Role pencil sits inline at the end of the role text. */
+.profile-role .pe-pencil {
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+/* Bio pencil — top-right corner of the bio content block. */
+.profile-content {
+  position: relative;
+  padding-right: 40px;     /* leave room for the pencil */
+}
+.profile-content > .pe-pencil {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.profile-content.pe-editing {
+  padding-right: 0;
+  background: rgba(97, 0, 255, 0.03);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+/* Featured project pencil — top-right corner of the aside. */
+.profile-featured {
+  position: relative;
+}
+.profile-featured > .pe-pencil {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+}
+
+/* Inline inputs that replace rendered text. */
+.pe-inline-input {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  background: #fff;
+  border: 1px solid var(--color-accent);
+  border-radius: 6px;
+  padding: 4px 10px;
+  outline: none;
+  min-width: 200px;
+}
+.pe-inline-textarea {
+  display: block;
+  width: 100%;
+  font-family: var(--font-text);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-neutral-100);
+  background: #fff;
+  border: 1px solid var(--color-accent);
+  border-radius: 8px;
+  padding: 12px 14px;
+  resize: vertical;
+  min-height: 200px;
+  outline: none;
+}
+.pe-inline-select {
+  display: block;
+  width: 100%;
+  font-family: var(--font-text);
+  font-size: 14px;
+  color: var(--color-neutral-100);
+  background: #fff;
+  border: 1px solid var(--color-accent);
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-top: 8px;
+  outline: none;
+}
+
+/* "(no bio yet)" / "(none yet)" placeholders rendered when the
+ * field is empty on the canonical record. Greyed + italic so
+ * they read as a prompt, not real content. */
+.pe-empty {
+  color: var(--color-neutral-60);
+  font-style: italic;
+}
+
+/* Social links / external links panel — slides in below the
+ * .profile-socials row. */
+.pe-social-panel,
+.pe-extlinks-panel {
+  margin: 14px 0 6px;
+  padding: 14px 16px;
+  background: #fff;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(14, 15, 17, 0.04);
+}
+.pe-panel-title {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-neutral-70);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.pe-panel-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.pe-panel-row .pe-panel-label {
+  font-size: 13px;
+  color: var(--color-neutral-70);
+  flex: 0 0 100px;
+}
+.pe-panel-row input {
+  flex: 1 1 auto;
+  font-family: var(--font-text);
+  font-size: 14px;
+  padding: 7px 10px;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: 6px;
+}
+.pe-panel-row input:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+.pe-panel-close {
+  margin-top: 4px;
+  background: transparent;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-neutral-70);
+  cursor: pointer;
+}
+.pe-panel-close:hover { background: var(--color-neutral-20); }
+
+/* External links rows */
+.pe-extlinks-rows { margin-bottom: 8px; }
+.pe-extlink-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.pe-extlink-row input {
+  font-family: var(--font-text);
+  font-size: 13px;
+  padding: 6px 9px;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: 6px;
+}
+.pe-extlink-row input:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+.pe-extlink-remove {
+  background: transparent;
+  border: 1px solid var(--color-neutral-30);
+  border-radius: 6px;
+  width: 32px;
+  font-size: 18px;
+  color: var(--color-neutral-70);
+  cursor: pointer;
+}
+.pe-extlink-remove:hover { background: var(--color-neutral-20); }
+.pe-extlinks-add {
+  background: transparent;
+  border: 1px dashed var(--color-neutral-30);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: var(--color-neutral-80);
+  cursor: pointer;
+  margin-right: 8px;
+}
+.pe-extlinks-add:hover { border-style: solid; }
+
+/* ── Sticky submit bar at the bottom of the viewport ───────── */
+.pe-submitbar {
+  position: fixed;
+  inset-inline: 0;
+  bottom: -80px;
+  z-index: 1000;
+  transition: bottom .22s ease;
+  pointer-events: none;
+}
+.pe-submitbar.is-dirty { bottom: 0; pointer-events: auto; }
+.pe-submitbar-inner {
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 24px;
+  background: #fff;
+  border-top: 1px solid var(--color-neutral-30);
+  box-shadow: 0 -6px 18px rgba(14, 15, 17, 0.06);
+}
+.pe-submitbar-count {
+  flex: 1 1 auto;
+  font-family: var(--font-text);
+  font-size: 13px;
+  color: var(--color-neutral-70);
+}
+.pe-submitbar-cancel,
+.pe-submitbar-submit {
+  font-family: var(--font-text);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 9px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid var(--color-neutral-30);
+}
+.pe-submitbar-cancel { background: transparent; color: var(--color-neutral-70); }
+.pe-submitbar-cancel:hover { background: var(--color-neutral-20); }
+.pe-submitbar-submit {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+.pe-submitbar-submit:hover { filter: brightness(1.08); }
+.pe-submitbar-submit:disabled { opacity: .5; cursor: not-allowed; }
+
+/* Leave room at the bottom of the page so the submit bar
+ * doesn't cover the footer when it's expanded. */
+html.is-edit-mode body { padding-bottom: 96px; }
+
+@media (max-width: 767px) {
+  .pe-submitbar-inner {
+    padding: 10px 14px;
+    flex-wrap: wrap;
+  }
+  .pe-submitbar-count { flex-basis: 100%; }
+  .pe-panel-row { flex-direction: column; align-items: stretch; gap: 4px; }
+  .pe-panel-row .pe-panel-label { flex-basis: auto; }
+  .pe-extlink-row { grid-template-columns: 1fr; }
+}
