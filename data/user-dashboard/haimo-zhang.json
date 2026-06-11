@@ -224,7 +224,7 @@
           "url": "https://doi.org/10.1145/3490497"
         }
       ],
-      "venue": "ACM"
+      "venue": "TOCHI"
     },
     {
       "slug": "om-a-comprehensive-tool-to-elicit-subjective-vibrotactile-expressions-associated-with-contextualised-meaning-in-our-everyday-lives",
@@ -260,7 +260,7 @@
           "url": "https://drive.google.com/file/d/1_Bp0ShrTKy81zvguDyOgrgdBunsin8iX/view?usp=sharing"
         }
       ],
-      "venue": "ACM"
+      "venue": "CSCW"
     },
     {
       "slug": "versatouch-a-versatile-plug-and-play-system-that-enables-touch-interactions-on-everyday-passive-surfaces",
@@ -296,7 +296,7 @@
           "url": "https://drive.google.com/file/d/1zo2rhxXPDy5cEuG8Ckl-RLfb0Wr9RV5_/view?usp=sharing"
         }
       ],
-      "venue": "Other"
+      "venue": "Interspeech"
     },
     {
       "slug": "ready-steady-touch-sensing-physical-contact-with-a-finger-mounted-imu",
@@ -314,7 +314,7 @@
           "url": "https://drive.google.com/file/d/1gEpRp35i_nJgMMf_RYiQBI7aKKMGmcpQ/view?usp=sharing"
         }
       ],
-      "venue": "ACM"
+      "venue": "IMWUT"
     },
     {
       "slug": "prompto-investigating-receptivity-to-prompts-based-on-cognitive-load-from-memory-training-conversational-agent",
@@ -332,7 +332,7 @@
           "url": "https://drive.google.com/file/d/1Yw-HUkFRsdeuHzvP14rxq5RMq03kENsy/view?usp=sharing"
         }
       ],
-      "venue": "ACM"
+      "venue": "IMWUT"
     },
     {
       "slug": "maghair-a-wearable-system-to-create-unique-tactile-feedback-by-stimulating-only-the-body-hair",
@@ -350,7 +350,7 @@
           "url": "https://drive.google.com/file/d/1Yzptyr2NabyuRqgJEuxv28mVEzLbqmMN/view?usp=sharing"
         }
       ],
-      "venue": "Other"
+      "venue": "MobileHCI"
     },
     {
       "slug": "aisee-an-assistive-wearable-device-to-support-visually-impaired-grocery-shoppers",
@@ -368,7 +368,7 @@
           "url": "https://drive.google.com/file/d/177bq2QQ2R957Mc_fa77Erk108vbO5x9O/view?usp=sharing"
         }
       ],
-      "venue": "ACM"
+      "venue": "IMWUT"
     },
     {
       "slug": "prospero-a-personal-wearable-memory-coach",
@@ -404,7 +404,7 @@
           "url": "https://drive.google.com/file/d/1tpwydWe6sRgWyFJ6K_H5b4hA7vgv25Kq/view?usp=sharing"
         }
       ],
-      "venue": "ACM"
+      "venue": "IMWUT"
     },
     {
       "slug": "osense-object-activity-identification-based-on-gasping-posture-and-motion",
@@ -512,7 +512,7 @@
           "url": "https://drive.google.com/file/d/1OC0qHFuRFRBxF1gUHwpiOUKGXz3OfP68/view?usp=sharing"
         }
       ],
-      "venue": "VR"
+      "venue": "VRST"
     },
     {
       "slug": "gestakey-touch-interaction-on-individual-keycaps",
@@ -586,7 +586,7 @@
           "url": "https://doi.org/10.1145/3152771.3156145"
         }
       ],
-      "venue": "Other"
+      "venue": "OzCHI"
     }
   ],
   "events": [],

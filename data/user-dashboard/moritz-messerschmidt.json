@@ -158,7 +158,7 @@
           "url": "https://drive.google.com/file/d/1iVWCo4Jh_fFHOr6wy8NUh_V55HOA7GLi/view?usp=sharing"
         }
       ],
-      "venue": "Other"
+      "venue": "SIGHCI"
     },
     {
       "slug": "anisma-a-prototyping-toolkit-to-explore-haptic-skin-deformation-applications-using-shape-memory-alloys",
@@ -172,7 +172,7 @@
           "url": "https://doi.org/10.1145/3490497"
         }
       ],
-      "venue": "ACM"
+      "venue": "TOCHI"
     },
     {
       "slug": "clothtiles-a-prototyping-platform-to-fabricate-customized-actuators-on-clothing-using-3d-printing-and-shape-memory-alloys",
@@ -199,7 +199,7 @@
       "citation": "Wei, Y., Bin Adam, I.T., Wu, H., Messerschmidt, M., Ooi, W.T., Jouffrais, C. and Nanayakkara, S., 2026, April. Towards LLM-powered Assistive Drone for Blind and Low Vision Users. In Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems (pp. 1-18).",
       "awards": [],
       "links": [],
-      "venue": null
+      "venue": "CHI"
     }
   ],
   "events": [

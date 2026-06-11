@@ -169,7 +169,7 @@
           "url": "http://www.springer.com/gp/book/9789811064029"
         }
       ],
-      "venue": "Springer"
+      "venue": "Book"
     },
     {
       "slug": "scaffolding-the-music-listening-and-music-making-experience-for-the-deaf",
@@ -183,7 +183,7 @@
           "url": "https://link.springer.com/chapter/10.1007/978-981-10-6404-3_3"
         }
       ],
-      "venue": "Springer"
+      "venue": "Book"
     },
     {
       "slug": "towards-effective-interaction-with-omnidirectional-videos-using-immersive-virtual-reality-headsets",
@@ -279,7 +279,7 @@
           "url": "http://assistaugment.xvm.mit.edu/"
         }
       ],
-      "venue": "CHI"
+      "venue": "CHI EA"
     },
     {
       "slug": "spidervision-extending-the-human-field-of-view-for-augmented-awareness",
@@ -307,7 +307,7 @@
           "url": "https://ahlab.org/wp-content/uploads/2021/03/p204-ortega-avila.pdf"
         }
       ],
-      "venue": "Other"
+      "venue": "OzCHI"
     },
     {
       "slug": "smartobjects-third-workshop-on-interacting-with-smart-objects",
@@ -357,7 +357,7 @@
           "url": "http://vimeo.com/78633545"
         }
       ],
-      "venue": "Other"
+      "venue": "TEI"
     },
     {
       "slug": "fingerreader-a-wearable-device-to-support-text-reading-on-the-go",
@@ -375,7 +375,7 @@
           "url": "http://fluid.media.mit.edu/sites/default/files/paper317.pdf"
         }
       ],
-      "venue": "CHI"
+      "venue": "CHI EA"
     },
     {
       "slug": "earput-augmenting-ear-worn-devices-for-ear-based-interaction",
@@ -393,7 +393,7 @@
           "url": "https://ahlab.org/wp-content/uploads/2021/03/p300-lissermann.pdf"
         }
       ],
-      "venue": "Other"
+      "venue": "OzCHI"
     },
     {
       "slug": "a-wearable-text-reading-device-for-the-visually-impaired",
@@ -407,7 +407,7 @@
           "url": "http://doi.acm.org/10.1145/2559206.2579520"
         }
       ],
-      "venue": "CHI"
+      "venue": "CHI EA"
     },
     {
       "slug": "a-research-overview-of-mobile-projected-user-interfaces",
@@ -421,7 +421,7 @@
           "url": "https://ahlab.org/wp-content/uploads/2021/05/art3A10.10072Fs00287-014-0819-z.pdf"
         }
       ],
-      "venue": "Other"
+      "venue": "Informatik-Spektrum"
     }
   ],
   "events": [
