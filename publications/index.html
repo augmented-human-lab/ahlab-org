@@ -54,6 +54,10 @@
         <span class="hero-chip" role="button" tabindex="0" data-group="AH" data-label="AH">31 AH</span>, <span class="hero-chip" role="button" tabindex="0" data-group="CHI" data-label="CHI">20 CHI</span>, <span class="hero-chip" role="button" tabindex="0" data-group="CHI EA" data-label="CHI EA">16 CHI EA</span>, and <span class="hero-chip" role="button" tabindex="0" data-group="other" data-label="Other">128 Other</span>.
       </span>
       <button type="button" class="hero-filter-reset" id="filterReset" aria-label="Show all publications">Show all</button>
+      <button type="button" class="hero-insights-toggle" id="insightsToggle" aria-pressed="false" aria-label="Show publication insights">
+        <svg class="hero-insights-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 14h12M3.5 14V8.5M7 14V3.5M10.5 14v-6M14 14V6"/></svg>
+        <span class="hero-insights-label">Insights</span>
+      </button>
     </p>
   </div>
 </header>
@@ -1845,6 +1849,51 @@
 
 </div>
 
+
+  <section class="insights-panel" id="insightsPanel" hidden aria-label="Publication insights">
+    <div class="container">
+      <div class="insights-head">
+        <div class="insights-control">
+          <span class="insights-control-label" id="insSchemeLbl">Classification</span>
+          <div class="ins-dd" id="insScheme" data-value="nus-ssi">
+            <button type="button" class="ins-dd-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="insSchemeLbl">
+              <span class="ins-dd-value">NUS SSI Classification</span><svg class="ins-dd-chev" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 6l4 4 4-4"/></svg>
+            </button>
+            <ul class="ins-dd-menu" role="listbox" hidden>
+              <li class="ins-dd-opt is-selected" role="option" data-value="nus-ssi" aria-selected="true" tabindex="-1">NUS SSI Classification</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="insights-control">
+          <span class="insights-control-label" id="insPeriodLbl">Period</span>
+          <div class="ins-dd" id="insPeriod" data-value="all">
+            <button type="button" class="ins-dd-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="insPeriodLbl">
+              <span class="ins-dd-value">All time</span><svg class="ins-dd-chev" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 6l4 4 4-4"/></svg>
+            </button>
+            <ul class="ins-dd-menu" role="listbox" hidden>
+              <li class="ins-dd-opt is-selected" role="option" data-value="all" aria-selected="true" tabindex="-1">All time</li>
+              <li class="ins-dd-opt" role="option" data-value="this-year" aria-selected="false" tabindex="-1">This year</li>
+              <li class="ins-dd-opt" role="option" data-value="last-year" aria-selected="false" tabindex="-1">Last year</li>
+              <li class="ins-dd-opt" role="option" data-value="current-fy" aria-selected="false" tabindex="-1">Current financial year</li>
+              <li class="ins-dd-opt" role="option" data-value="last-fy" aria-selected="false" tabindex="-1">Last financial year</li>
+              <li class="ins-dd-opt" role="option" data-value="last-5" aria-selected="false" tabindex="-1">Last 5 years</li>
+            </ul>
+          </div>
+        </div>
+
+        <span class="insights-summary" id="insSummary"></span>
+      </div>
+
+      <div class="insights-scheme">
+        <div class="insights-grid" id="insSsiGrid"></div>
+        <h2 class="insights-subhead">All venues</h2>
+        <div class="insights-grid insights-grid-venues" id="insVenueGrid"></div>
+      </div>
+    </div>
+  </section>
+  <script>window.INSIGHTS_DATA = {"schemes":{"nus-ssi":{"label":"NUS SSI Classification","categories":[{"label":"CHI papers","note":"Premier Venue in HCI","venue":"CHI"},{"label":"IEEE VR paper","note":"Premier Venue in VR · Best Paper Award","venue":"IEEE VR"},{"label":"ITiCSE paper","note":"Top Venue in Computer Science Education","venue":"ITiCSE"},{"label":"ICASSP paper","note":"Premier Venue in Signal Processing","venue":"ICASSP"},{"label":"IUI papers","note":"Top Venue in HCI & AI","venue":"IUI"},{"label":"IJHCI papers","note":"Highly Reputable Journal in HCI","venue":"IJHCI"},{"label":"IMWUT papers","note":"Premier Journal in HCI","venue":"IMWUT"}]}},"records":[{"v":"CHI","y":2026,"m":null},{"v":"CHI","y":2026,"m":null},{"v":"CHI EA","y":2026,"m":null},{"v":"CHI","y":2026,"m":null},{"v":"AH","y":2026,"m":8},{"v":"CHI","y":2026,"m":null},{"v":"CHI EA","y":2025,"m":4},{"v":"Interspeech","y":2025,"m":null},{"v":"CHI EA","y":2025,"m":4},{"v":"SIGCSE","y":2025,"m":null},{"v":"CHI","y":2025,"m":null},{"v":"CHI EA","y":2025,"m":null},{"v":"NeurIPS","y":2025,"m":null},{"v":"CHI","y":2025,"m":null},{"v":"IJHCS","y":2025,"m":8},{"v":"IEEE VR","y":2024,"m":null},{"v":"CHI","y":2024,"m":5},{"v":"IMWUT","y":2024,"m":null},{"v":"CHI EA","y":2024,"m":5},{"v":"AH","y":2024,"m":4},{"v":"CHI","y":2024,"m":5},{"v":"TASLP","y":2024,"m":null},{"v":"CHI EA","y":2024,"m":5},{"v":"CHI EA","y":2024,"m":5},{"v":"IJHCI","y":2024,"m":null},{"v":"IEEE VR","y":2024,"m":null},{"v":"ITiCSE","y":2023,"m":null},{"v":"ICASSP","y":2023,"m":6},{"v":"SIGGRAPH","y":2023,"m":8},{"v":"IJHCI","y":2023,"m":null},{"v":"IDC","y":2023,"m":6},{"v":"SIGHCI","y":2023,"m":null},{"v":"TACL","y":2023,"m":8},{"v":"IUI","y":2023,"m":3},{"v":"EMNLP","y":2023,"m":12},{"v":"IJHCI","y":2023,"m":null},{"v":"IJHCI","y":2023,"m":null},{"v":"ISMAR","y":2022,"m":8},{"v":"TECS","y":2022,"m":null},{"v":"UIST","y":2022,"m":10},{"v":"MobileHCI","y":2022,"m":null},{"v":"SIGHCI","y":2022,"m":null},{"v":"TOCHI","y":2022,"m":11},{"v":"IEEE Access","y":2022,"m":null},{"v":"Interspeech","y":2022,"m":null},{"v":"SIGCSE","y":2022,"m":3},{"v":"ACE","y":2022,"m":2},{"v":"ISS","y":2022,"m":8},{"v":"FnT HCI","y":2022,"m":3},{"v":"IEEE Sensors","y":2022,"m":10},{"v":"SIGHCI","y":2022,"m":null},{"v":"TOCHI","y":2022,"m":6},{"v":"LCTES","y":2021,"m":null},{"v":"MobileHCI","y":2021,"m":9},{"v":"IDC","y":2021,"m":6},{"v":"MobileHCI","y":2021,"m":9},{"v":"PETRA","y":2021,"m":6},{"v":"CSCW","y":2021,"m":10},{"v":"INTERACT","y":2021,"m":null},{"v":"PETRA","y":2021,"m":6},{"v":"MobileHCI","y":2021,"m":9},{"v":"CHI","y":2021,"m":5},{"v":"AH","y":2021,"m":8},{"v":"AH","y":2021,"m":8},{"v":"Sensors","y":2021,"m":null},{"v":"AH","y":2020,"m":8},{"v":"AH","y":2020,"m":8},{"v":"CHI","y":2020,"m":4},{"v":"Sensors","y":2020,"m":null},{"v":"Interspeech","y":2020,"m":null},{"v":"IMWUT","y":2020,"m":null},{"v":"IMWUT","y":2020,"m":null},{"v":"Education Sciences","y":2020,"m":null},{"v":"CHI","y":2020,"m":4},{"v":"IEEE Access","y":2020,"m":null},{"v":"MobileHCI","y":2020,"m":10},{"v":"SIGGRAPH","y":2020,"m":null},{"v":"Interspeech","y":2020,"m":null},{"v":"AH","y":2020,"m":8},{"v":"CHI EA","y":2020,"m":null},{"v":"IMWUT","y":2020,"m":null},{"v":"OzCHI","y":2019,"m":null},{"v":"AH","y":2019,"m":3},{"v":"IMWUT","y":2019,"m":null},{"v":"PETRA","y":2019,"m":null},{"v":"SIGGRAPH","y":2019,"m":11},{"v":"AH","y":2019,"m":3},{"v":"SIGGRAPH","y":2019,"m":null},{"v":"UIST","y":2019,"m":10},{"v":"Hand-Arm Vibration Conf.","y":2019,"m":5},{"v":"CHI","y":2019,"m":5},{"v":"IJCCI","y":2019,"m":null},{"v":"AH","y":2019,"m":3},{"v":"ISMAR","y":2019,"m":10},{"v":"AH","y":2019,"m":3},{"v":"VRST","y":2019,"m":11},{"v":"CHI","y":2019,"m":5},{"v":"AH","y":2019,"m":3},{"v":"AH","y":2019,"m":3},{"v":"AH","y":2018,"m":2},{"v":"ISWC","y":2018,"m":10},{"v":"APS Convention","y":2018,"m":null},{"v":"SUI","y":2018,"m":10},{"v":"NeurIPS","y":2018,"m":null},{"v":"CHI","y":2018,"m":4},{"v":"SUI","y":2018,"m":10},{"v":"UIST","y":2018,"m":10},{"v":"ISWC","y":2018,"m":10},{"v":"iWOAR","y":2018,"m":9},{"v":"MobileHCI","y":2018,"m":9},{"v":"IDC","y":2018,"m":null},{"v":"CHI","y":2018,"m":4},{"v":"IMWUT","y":2018,"m":null},{"v":"ISWC","y":2018,"m":10},{"v":"iWOAR","y":2018,"m":9},{"v":"SUI","y":2018,"m":10},{"v":"Learning Sciences & ECE","y":2018,"m":null},{"v":"Book","y":2018,"m":8},{"v":"TEI","y":2017,"m":3},{"v":"AH","y":2017,"m":3},{"v":"AH","y":2017,"m":3},{"v":"Book","y":2017,"m":8},{"v":"AH","y":2017,"m":3},{"v":"AH","y":2017,"m":3},{"v":"UIST","y":2017,"m":10},{"v":"OzCHI","y":2017,"m":11},{"v":"OzCHI","y":2016,"m":null},{"v":"UIST","y":2016,"m":null},{"v":"OzCHI","y":2016,"m":11},{"v":"OzCHI","y":2016,"m":null},{"v":"OzCHI","y":2016,"m":11},{"v":"UbiComp","y":2016,"m":null},{"v":"OzCHI","y":2016,"m":11},{"v":"Patent","y":2016,"m":11},{"v":"AH","y":2016,"m":2},{"v":"AH","y":2016,"m":2},{"v":"DIS","y":2016,"m":6},{"v":"ASSETS","y":2016,"m":10},{"v":"CHI","y":2015,"m":4},{"v":"AH","y":2015,"m":3},{"v":"IUI","y":2015,"m":3},{"v":"AH","y":2015,"m":8},{"v":"AH","y":2015,"m":3},{"v":"AH","y":2015,"m":3},{"v":"CHI","y":2015,"m":4},{"v":"AH","y":2015,"m":3},{"v":"CSUR","y":2015,"m":8},{"v":"PerDis","y":2015,"m":6},{"v":"CIS-RAM","y":2015,"m":7},{"v":"AH","y":2015,"m":3},{"v":"CHI EA","y":2014,"m":8},{"v":"AH","y":2014,"m":3},{"v":"OzCHI","y":2014,"m":1},{"v":"IUI","y":2014,"m":2},{"v":"OzCHI","y":2014,"m":1},{"v":"CHI","y":2014,"m":4},{"v":"OzCHI","y":2014,"m":12},{"v":"TEI","y":2014,"m":null},{"v":"Exhibition","y":2014,"m":null},{"v":"Exhibition","y":2014,"m":9},{"v":"Exhibition","y":2014,"m":1},{"v":"OzCHI","y":2014,"m":12},{"v":"CHI EA","y":2014,"m":null},{"v":"OzCHI","y":2014,"m":12},{"v":"CHI EA","y":2014,"m":8},{"v":"CHI EA","y":2014,"m":null},{"v":"Informatik-Spektrum","y":2014,"m":null},{"v":"UIST","y":2013,"m":10},{"v":"CHI EA","y":2013,"m":8},{"v":"OzCHI","y":2013,"m":11},{"v":"OzCHI","y":2013,"m":11},{"v":"AH","y":2013,"m":3},{"v":"AH","y":2013,"m":8},{"v":"AH","y":2013,"m":8},{"v":"HCI Journal","y":2013,"m":null},{"v":"AH","y":2013,"m":8},{"v":"ASSETS","y":2012,"m":null},{"v":"OzCHI","y":2012,"m":11},{"v":"NIME","y":2012,"m":null},{"v":"World Congress Fluency Disorders","y":2012,"m":7},{"v":"CHI EA","y":2012,"m":5},{"v":"CHI EA","y":2012,"m":null},{"v":"ASSETS","y":2012,"m":10},{"v":"CHI EA","y":2011,"m":null},{"v":"NIME","y":2011,"m":null},{"v":"CSCW","y":2011,"m":3},{"v":"Oxford Dysfluency Conf.","y":2011,"m":null},{"v":"Oxford Dysfluency Conf.","y":2011,"m":null},{"v":"OzCHI","y":2011,"m":11},{"v":"South Asian Conf. Linguistics","y":2010,"m":null},{"v":"CHI","y":2009,"m":null},{"v":"Frontiers of Speech & Music","y":2008,"m":null},{"v":"ISHA","y":2008,"m":null},{"v":"National Science Womens Congress","y":null,"m":null},{"v":"CHI","y":2026,"m":4}]};</script>
+
 <div id="site-footer-mount"></div>
 <script src="/js/footer-include.js"></script>
 <script src="/js/event-chip-live.js" defer></script>
@@ -1975,6 +2024,122 @@ venuePills?.addEventListener('keydown', e => {
   applyVenueFilter(chip.dataset.group);
 });
 filterReset?.addEventListener('click', () => applyVenueFilter('all'));
+
+// ── Insights toggle (hero "Insights" button) ──────────────
+// Swaps the paper list (year nav + content) for the static insights
+// panel. The hero stays put so the same button toggles back; its
+// label flips to "Papers" while the panel is open. The panel body
+// (counts + venue grid) is rendered client-side so the date-period
+// filter can recompute against the real current date.
+const insightsToggle = document.getElementById('insightsToggle');
+const insightsPanel  = document.getElementById('insightsPanel');
+const insightsLabel  = insightsToggle?.querySelector('.hero-insights-label');
+const pubsLayout     = document.querySelector('.pubs-layout');
+let insightsOpen = false;
+
+function setInsights(open) {
+  insightsOpen = open;
+  if (insightsPanel) insightsPanel.hidden = !open;
+  if (pubsLayout) pubsLayout.style.display = open ? 'none' : '';
+  insightsToggle?.classList.toggle('is-active', open);
+  insightsToggle?.setAttribute('aria-pressed', String(open));
+  if (insightsLabel) insightsLabel.textContent = open ? 'Papers' : 'Insights';
+}
+insightsToggle?.addEventListener('click', () => setInsights(!insightsOpen));
+
+// ── Insights: rich dropdowns + dynamic counts ─────────────
+const INS_DATA = window.INSIGHTS_DATA || { schemes: {}, records: [] };
+const insEsc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+// Financial year = April→March (Singapore / NUS convention). Change
+// this one constant to shift the FY window. A record's FY start-year
+// is its calendar year if its month is ≥ April, else the prior year;
+// citations without a parsed month fall back to mid-year (June), which
+// lands them in FY = their calendar year.
+const FY_START_MONTH = 4;
+const fyOf = r => ((r.m || 6) >= FY_START_MONTH ? r.y : r.y - 1);
+
+function periodPredicate(period) {
+  const now = new Date();
+  const cy = now.getFullYear();
+  const curFY = (now.getMonth() + 1) >= FY_START_MONTH ? cy : cy - 1;
+  switch (period) {
+    case 'this-year':  return r => r.y === cy;
+    case 'last-year':  return r => r.y === cy - 1;
+    case 'current-fy': return r => fyOf(r) === curFY;
+    case 'last-fy':    return r => fyOf(r) === curFY - 1;
+    case 'last-5':     return r => r.y > cy - 5;        // current + previous 4 calendar years
+    default:           return () => true;               // all time
+  }
+}
+
+// Generic rich-dropdown wiring: button toggles a listbox, clicking an
+// option updates the displayed value + selection state and fires
+// onChange. Closes on outside-click / Escape.
+function initInsDropdown(el, onChange) {
+  if (!el) return;
+  const btn   = el.querySelector('.ins-dd-btn');
+  const menu  = el.querySelector('.ins-dd-menu');
+  const value = el.querySelector('.ins-dd-value');
+  const setOpen = open => { menu.hidden = !open; btn.setAttribute('aria-expanded', String(open)); el.classList.toggle('is-open', open); };
+  btn.addEventListener('click', e => { e.stopPropagation(); setOpen(menu.hidden); });
+  menu.addEventListener('click', e => {
+    const opt = e.target.closest('.ins-dd-opt');
+    if (!opt) return;
+    el.dataset.value = opt.dataset.value;
+    value.textContent = opt.textContent;
+    menu.querySelectorAll('.ins-dd-opt').forEach(o => {
+      const sel = o === opt;
+      o.classList.toggle('is-selected', sel);
+      o.setAttribute('aria-selected', String(sel));
+    });
+    setOpen(false);
+    onChange(opt.dataset.value);
+  });
+  document.addEventListener('click', e => { if (!el.contains(e.target)) setOpen(false); });
+  el.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+}
+
+const insSsiGrid   = document.getElementById('insSsiGrid');
+const insVenueGrid = document.getElementById('insVenueGrid');
+const insSummary   = document.getElementById('insSummary');
+let insScheme = 'nus-ssi';
+let insPeriod = 'all';
+
+function renderInsights() {
+  if (!insSsiGrid) return;
+  // No year pre-filter: undated papers fail every year/FY predicate
+  // naturally but still count under "All time".
+  const recs = INS_DATA.records.filter(periodPredicate(insPeriod));
+  const scheme = INS_DATA.schemes[insScheme];
+
+  // Fixed-taxonomy category cards (zero counts still shown, faded)
+  insSsiGrid.innerHTML = (scheme ? scheme.categories : []).map(c => {
+    const n = recs.filter(r => r.v === c.venue).length;
+    return `<div class="insights-card${n === 0 ? ' is-zero' : ''}">
+        <span class="insights-count">${n}</span>
+        <span class="insights-cat-label">${insEsc(c.label)}</span>
+        <span class="insights-cat-note">${insEsc(c.note)}</span>
+      </div>`;
+  }).join('');
+
+  // All venues present in the period, most-frequent first
+  const vc = {};
+  recs.forEach(r => { vc[r.v] = (vc[r.v] || 0) + 1; });
+  const venues = Object.entries(vc).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  insVenueGrid.innerHTML = venues.length
+    ? venues.map(([v, n]) => `<div class="insights-card insights-card-venue">
+        <span class="insights-count">${n}</span>
+        <span class="insights-cat-label">${insEsc(v)}</span>
+      </div>`).join('')
+    : '<p class="insights-empty">No publications in this period.</p>';
+
+  if (insSummary) insSummary.textContent = `${recs.length} publication${recs.length === 1 ? '' : 's'}`;
+}
+
+initInsDropdown(document.getElementById('insScheme'), v => { insScheme = v; renderInsights(); });
+initInsDropdown(document.getElementById('insPeriod'), v => { insPeriod = v; renderInsights(); });
+renderInsights();
 
 // ── Quick title search (auto mode) ────────────────────────
 // Type any letter anywhere on the page to open the floating search

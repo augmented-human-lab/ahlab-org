@@ -9,10 +9,10 @@
     .site-footer .footer-logos{display:flex;align-items:center;gap:22px;flex-shrink:0}
     .site-footer .footer-logos a{display:inline-flex;align-items:center;opacity:.85;transition:opacity .25s}
     .site-footer .footer-logos a:hover{opacity:1}
-    .site-footer .footer-logos img{display:block;height:26px;width:auto}
-    /* NUS logo renders as-is — its source already carries the NUS
-       brand colors with enough contrast against the dark footer. */
-    .site-footer .footer-logo-nus img{height:22px}
+    .site-footer .footer-logos img{display:block;height:34px;width:auto}
+    /* NUS is the heaviest mark (crest + two text blocks), so it sits a
+       touch smaller than AHL/SSI to even out the visual weight. */
+    .site-footer .footer-logo-nus img{height:30px}
     .site-footer .footer-copy{flex:1;text-align:center;letter-spacing:.01em;min-width:0}
     .site-footer .footer-copy strong{color:rgba(255,255,255,.85);font-weight:600}
     .site-footer .footer-social{display:flex;gap:16px;align-items:center;flex-shrink:0}
@@ -31,6 +31,9 @@
     <div class="footer-logos">
       <a href="/" aria-label="Augmented Human Lab" class="footer-logo-ahl">
         <img src="https://cdn.ahlab.org/media/site/ahllogo_white.png" alt="Augmented Human Lab" loading="lazy">
+      </a>
+      <a href="https://ssi.nus.edu.sg/" target="_blank" rel="noopener" aria-label="Smart Systems Institute" class="footer-logo-ssi">
+        <img src="https://cdn.ahlab.org/media/site/ssilogo_white.png" alt="Smart Systems Institute" loading="lazy">
       </a>
       <a href="https://www.comp.nus.edu.sg/" target="_blank" rel="noopener" aria-label="NUS Computing" class="footer-logo-nus">
         <img src="https://cdn.ahlab.org/media/site/nuslogo_black.png" alt="NUS Computing" loading="lazy">
