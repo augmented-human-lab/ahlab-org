@@ -204,6 +204,15 @@
   <symbol id="i-myahl-openai" viewBox="0 0 24 24">
     <path d="M6 20v-6M12 20V4M18 20v-10"/>
   </symbol>
+  <!-- Bus — used by the "NUS ISB" resource tile linking to the NUS
+       Internal Shuttle Bus tracker (nusisb.ahlab.org). Body, window
+       divider, three windows and two wheels, stroked Feather-style. -->
+  <symbol id="i-myahl-isb" viewBox="0 0 24 24">
+    <rect x="4" y="3" width="16" height="14" rx="2"/>
+    <path d="M4 11h16M9 3v8M15 3v8"/>
+    <circle cx="8" cy="19" r="1.5"/>
+    <circle cx="16" cy="19" r="1.5"/>
+  </symbol>
   <!-- Link / chain — used by the "Add publication" form's DOI status
        line. Two interlinked oval segments, Feather-style. -->
   <symbol id="i-myahl-link" viewBox="0 0 24 24">
@@ -560,7 +569,8 @@
     { label: 'Wiki', href: 'https://wiki.ahlab.org', symbol: 'i-myahl-wiki' },
     { label: 'Chat', href: 'https://script.google.com/macros/s/AKfycbwkWOky_8R4W-gfCJYN5UKxK2hAdRgxHDEQoz06LXIRA6XblCJl6YsfBwJlnwkonk05/exec', symbol: 'i-myahl-chat' },
     { label: 'OpenAI', href: 'https://script.google.com/macros/s/AKfycbyBRAuY8ud1TcTEb5_Xj0QmeQ6tgg012-Q9X0hcDoGfgI6iHSGTgJwLAqyFZ-w8dvU8/exec', symbol: 'i-myahl-openai' },
-    { label: 'Assets', href: 'https://script.google.com/macros/s/AKfycbze3vMR21ovJX8mWdzqCTF6A-MYaKjT0mWTgFYIAkBxF3bgytkgbbn9gVI0bMTTZ4btNg/exec', symbol: 'i-myahl-asset' }
+    { label: 'Assets', href: 'https://script.google.com/macros/s/AKfycbze3vMR21ovJX8mWdzqCTF6A-MYaKjT0mWTgFYIAkBxF3bgytkgbbn9gVI0bMTTZ4btNg/exec', symbol: 'i-myahl-asset' },
+    { label: 'NUS ISB', href: 'https://nusisb.ahlab.org', symbol: 'i-myahl-isb' }
   ];
 
   function resourceCardHTML(r) {
