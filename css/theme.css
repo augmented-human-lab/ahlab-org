@@ -431,6 +431,49 @@ ul  { list-style: none; }
   pointer-events: auto;
 }
 
+/* "Insights" toggle — sits at the right edge of the hero summary line,
+   opposite the venue prose. Floated right so it shares the baseline
+   with the chips/Show-all text without flexing the prose container.
+   Active state (panel open) gives it a solid pill so it reads as the
+   current view. Label text flips to "Papers" in JS while open. */
+.hero-insights-toggle {
+  float: right;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 2px 0 0 1em;
+  padding: 4px 12px;
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+  font-size: .85em;
+  color: rgba(255, 255, 255, .85);
+  cursor: pointer;
+  transition: color .2s ease, background .2s ease, border-color .2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.hero-insights-toggle:hover,
+.hero-insights-toggle:focus-visible {
+  color: #fff;
+  border-color: #fff;
+  outline: none;
+}
+.hero-insights-toggle.is-active {
+  color: var(--color-accent);
+  background: #fff;
+  border-color: #fff;
+}
+.hero-insights-icon {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
 @media (max-width: 767px) {
   .hero-summary { font-size: 17px; }
 }
