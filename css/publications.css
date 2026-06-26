@@ -464,10 +464,16 @@
   border: 1px solid var(--color-neutral-30);
   border-radius: var(--radius);
   background: var(--color-neutral-20);
-  transition: border-color .2s, transform .2s;
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
 }
-.insights-card:hover { border-color: var(--color-neutral-40); transform: translateY(-2px); }
-.insights-card.is-zero { opacity: .45; }
+.insights-card:hover { border-color: var(--color-neutral-40); }
+.insights-card.is-zero { opacity: .45; cursor: default; }
+/* Selected cards drive the side pane; multiple may be active at once. */
+.insights-card.is-selected {
+  border-color: var(--color-accent);
+  background: rgba(97, 0, 255, .06);
+}
 .insights-card .insights-count {
   font-family: var(--font-display);
   font-weight: 700;
@@ -512,3 +518,75 @@
   color: var(--color-neutral-70);
 }
 .insights-list-venues .insights-cat-label { font-size: 16px; font-weight: 500; }
+
+/* ── Insights side pane ──────────────────────────────────────
+   Selecting one or more venue cards opens this fixed pane on the
+   right third of the screen, listing the real publications behind
+   the selection. The panel content shifts left (padding-right) so
+   the cards stay reachable while the pane is open. */
+.insights-pane {
+  position: fixed;
+  top: 0; right: 0;
+  z-index: 50;
+  width: min(33vw, 520px);
+  min-width: 320px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-neutral-10);
+  border-left: 1px solid var(--color-neutral-30);
+  box-shadow: -12px 0 40px rgba(14, 15, 17, .12);
+}
+.insights-pane[hidden] { display: none; }
+.insights-pane-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 28px;
+  border-bottom: 1px solid var(--color-neutral-30);
+}
+.insights-pane-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--color-neutral-70);
+  font-variant-numeric: tabular-nums;
+}
+.insights-pane-close {
+  flex: none;
+  width: 34px; height: 34px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 26px; line-height: 1;
+  color: var(--color-neutral-70);
+  background: var(--color-neutral-20);
+  border: 1px solid var(--color-neutral-30);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color .2s, color .2s, background .2s;
+}
+.insights-pane-close:hover {
+  color: var(--color-neutral-100);
+  border-color: var(--color-neutral-40);
+}
+.insights-pane-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 4px 28px 40px;
+}
+/* Single-column list scoped to the pane — override the wide auto-fill
+   grid the default list uses so items stack in the narrow pane. */
+.insights-pane-list { display: block; }
+.insights-pane-list .pub-item {
+  display: block;
+  padding: 20px 0;
+  border-top: 1px solid var(--color-neutral-30);
+}
+.insights-pane-list .pub-item:first-child { border-top: 0; }
+.insights-pane-list .pub-title { font-size: 17px; }
+.insights-panel.pane-open .container { padding-right: calc(min(33vw, 520px) + 48px); }
+
+@media (max-width: 767px) {
+  .insights-pane { width: 100vw; min-width: 0; }
+  .insights-panel.pane-open .container { padding-right: 20px; }
+}
