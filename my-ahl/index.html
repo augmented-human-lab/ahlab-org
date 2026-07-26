@@ -253,6 +253,14 @@
     <line x1="9" y1="3" x2="9" y2="21"/>
     <line x1="15" y1="3" x2="15" y2="21"/>
   </symbol>
+  <!-- Users — Feather "users" glyph, used by the "Directory" admin app
+       (ahl-directory-appscript: people by org unit + mailing-group sync). -->
+  <symbol id="i-myahl-directory" viewBox="0 0 24 24">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+    <circle cx="9" cy="7" r="4"/>
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+  </symbol>
 </svg>
 
 <main class="myahl-main">
@@ -609,6 +617,14 @@
       label:  'Patches',
       href:   'https://docs.google.com/spreadsheets/d/1rpE74X7rTALkvwRlSdCK5UjUhoJNzn0aVBddBlxxMZo/edit',
       symbol: 'i-myahl-patches'
+    },
+    {
+      // ahl-directory-appscript — people by org unit + one-click mailing-
+      // group sync. Server-side gated to the same admins, so this client-
+      // side reveal is just for tidiness, not the security boundary.
+      label:  'Directory',
+      href:   'https://script.google.com/macros/s/AKfycbwZWW1rrx3lvSScMhSkBr7t1LbqR6oNVolPokX-TwGj5la_3CIcp2mw43o0lQ_TXHoMXQ/exec',
+      symbol: 'i-myahl-directory'
     }
   ];
 
