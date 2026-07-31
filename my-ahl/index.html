@@ -253,6 +253,14 @@
     <line x1="9" y1="3" x2="9" y2="21"/>
     <line x1="15" y1="3" x2="15" y2="21"/>
   </symbol>
+  <!-- User-minus — Feather glyph for the "Farewell" admin app
+       (offboards departing members via the farewell-form web app;
+       the inverse of "Welcome"). -->
+  <symbol id="i-myahl-farewell" viewBox="0 0 24 24">
+    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+    <circle cx="9" cy="7" r="4"/>
+    <line x1="23" y1="11" x2="17" y2="11"/>
+  </symbol>
   <!-- Users — Feather "users" glyph, used by the "Directory" admin app
        (ahl-directory-appscript: people by org unit + mailing-group sync). -->
   <symbol id="i-myahl-directory" viewBox="0 0 24 24">
@@ -612,6 +620,14 @@
       label:  'Welcome',
       href:   'https://script.google.com/macros/s/AKfycbwRxknRvuMH8UYVmeujl3mrfdes_HcqJlY7Z-hyCmpYCwZXxhOpa-dl40rgmB8Ojc06/exec',
       symbol: 'i-myahl-welcome'
+    },
+    {
+      // ahl-farewell-form — offboards departing members (inverse of Welcome):
+      // moves account /Current→/Alumni, swaps groups, marks the person Alumni
+      // on the site. Server-side gated to @ahlab.org members.
+      label:  'Farewell',
+      href:   'https://script.google.com/macros/s/AKfycby577ERgAkt7z3cGvwU5mWrE0GTWZPwqsE9pixhQDmIq_N13ISiawyj7jmTW0xwyw23/exec',
+      symbol: 'i-myahl-farewell'
     },
     {
       label:  'Patches',
