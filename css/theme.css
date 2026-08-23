@@ -108,13 +108,19 @@ ul  { list-style: none; }
   padding: 28px 40px 0; height: 120px;
   display: flex; align-items: flex-start; justify-content: space-between;
   background: var(--gradient);
-  /* The gradient now ends in a hard bottom edge with a drop shadow
-     (replacing the old fade-to-transparent mask), so the bar reads as
-     an elevated surface — same "standing on top" feel as the insights
-     side-pane edge — while keeping the original gradient fill. */
-  box-shadow: 0 12px 40px rgba(14, 15, 17, .18);
-  transition: box-shadow .3s, filter .3s;
+  /* The bar's bottom edge fades softly to transparent so it melts into
+     the page/hero beneath it rather than ending in a hard line. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 60%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 0%, #000 60%, transparent 100%);
+  transition: filter .3s;
+  /* The bar is 120px tall but its content only lives in the top ~50px;
+     the faded lower half sits over the page below (e.g. the index-page
+     filter strip). Let clicks pass through the bar itself so they reach
+     whatever is underneath, and re-enable pointer events only on the
+     bar's real interactive children. */
+  pointer-events: none;
 }
+.site-nav > * { pointer-events: auto; }
 .site-nav.scrolled {
   filter: brightness(.92);
 }
@@ -215,8 +221,8 @@ ul  { list-style: none; }
      Sits at z-index: 9000 — well above the nav (100) and any
      page-level sticky content (year-nav at 30, etc.). The drawer
      is a body-level sibling of <nav> (NOT a child) so it isn't
-     subject to the nav's local stacking context or drop shadow.
-     The hamburger button needs an even higher z-index
+     subject to the nav's mask-image fade or local stacking
+     context. The hamburger button needs an even higher z-index
      so it's still clickable / visible to switch back to the X.
 
      Visual treatment: heavy frosted glass at the top (where the
@@ -254,8 +260,8 @@ ul  { list-style: none; }
   body:has(.nav-drawer.open) .nav-toggle span:nth-child(2) { opacity: 0; }
   body:has(.nav-drawer.open) .nav-toggle span:nth-child(3) { top: 8px; transform: rotate(-45deg); background: var(--color-neutral-100); }
 
-  /* Two-column grid: 7 links lay out as 2 cols × 4 rows, last cell
-     blank. Reset margin/padding on both <ul> and <li> because browser
+  /* Two-column grid: 6 links lay out as 2 cols × 3 rows.
+     Reset margin/padding on both <ul> and <li> because browser
      defaults add ~40px left padding on <ul>, which would push the
      second column off the right edge of narrow phones. */
   .nav-drawer-grid {
@@ -321,12 +327,34 @@ ul  { list-style: none; }
    overrides (e.g. typography tweaks) can still be added in their
    own stylesheets since these rules are deliberately unopinionated
    about h1 sizing. */
-.hero { position: relative; padding: 132px 0 48px; overflow: hidden; }
+.hero { position: relative; padding: 98px 0 40px; overflow: hidden; }
+/* Freeze the filter strip at the top once a filter is active, so the
+   controls stay reachable while the list scrolls beneath. With no filter
+   applied it stays a normal in-flow band that scrolls away. The signal is
+   .hero-summary.is-filtered, set by every index page's filter JS. Pinned
+   z-index sits below the nav (10000) but above page content. */
+body:has(.hero-summary.is-filtered) .hero,
+.hero.is-pinned {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+/* Push each page's sticky year rail down so the pinned strip doesn't
+   cover its top entries. No effect on mobile, where the year rail is a
+   bottom-fixed bar (top is ignored). */
+body:has(.hero-summary.is-filtered) .year-nav,
+body:has(.hero.is-pinned) .year-nav { top: 176px; }
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
   background: var(--gradient);
+  /* Bottom edge fades softly to transparent — same melt as the nav bar —
+     so the gradient filter strip dissolves into the page rather than
+     ending in a hard line. The fade sits in the bottom padding, below
+     the filter text, so the chips stay on solid gradient. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 calc(100% - 32px), transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 0%, #000 calc(100% - 32px), transparent 100%);
 }
 .hero .container { position: relative; z-index: 2; }
 .hero h1 {
@@ -335,7 +363,7 @@ ul  { list-style: none; }
   letter-spacing: -.02em;
 }
 @media (max-width: 991px) {
-  .hero { padding: 112px 0 40px; }
+  .hero { padding: 82px 0 32px; }
   .hero h1 { font-size: 36px; line-height: 42px; }
 }
 
@@ -358,7 +386,7 @@ ul  { list-style: none; }
                                     filter; solid underline + tinted
                                     background so it stands out. */
 .hero-summary {
-  margin-top: 22px;
+  margin-top: 0;
   font-family: var(--font-display);
   font-weight: 400;
   font-size: 20px;

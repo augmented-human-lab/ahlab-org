@@ -236,30 +236,6 @@ ul { list-style: none; }
   max-width: 620px;
   animation: fadeUp 0.8s 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-.hero-scroll {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  color: rgba(255,255,255,0.5);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  animation: fadeIn 1s 1.2s both;
-}
-.hero-scroll .scroll-line {
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
-  animation: fadeIn 1s 1.4s both;
-}
-
 @media (max-width: 991px) {
   .hero { min-height: 100vh; min-height: 100dvh; padding-bottom: 80px; }
   .hero h1 { font-size: 40px; line-height: 1.12; }
@@ -1117,10 +1093,6 @@ a.event-row:hover .event-row-title {
       <h1>We humanise technology to extend the limits of human capability.</h1>
       <p class="hero-sub">A multidisciplinary research lab exploring assistive augmentations that empower people to live more independently — and perceive the world beyond the ordinary.</p>
     </div>
-  </div>
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
   </div>
 </section>
 

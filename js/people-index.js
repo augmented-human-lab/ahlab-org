@@ -451,6 +451,17 @@
     document.querySelectorAll('#rolePills .hero-chip').forEach(chip => {
       chip.classList.toggle('is-active', state.role !== 'all' && chip.dataset.group === state.role);
     });
+
+    // Freeze the hero filter strip when ANY filter is applied — role, a
+    // specific year, or a deselected segment. `.is-filtered` above only
+    // tracks the role (it also dims non-active role chips), so pinning
+    // rides on its own class instead of overloading that one. Theme CSS
+    // turns `.hero.is-pinned` into a sticky top strip.
+    const totalSegments = segmentPills ? segmentPills.querySelectorAll('.hero-chip').length : 0;
+    const anyFilter = state.role !== 'all'
+      || state.year !== 'all'
+      || (totalSegments > 0 && state.segments.size < totalSegments);
+    document.querySelector('.hero')?.classList.toggle('is-pinned', anyFilter);
   }
 
   function syncYearNavActive() {
