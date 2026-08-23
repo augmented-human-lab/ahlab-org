@@ -276,31 +276,48 @@
     const w = hive.clientWidth  || 800;
     const h = hive.clientHeight || 480;
 
-    // Smallest ring count that holds n cells
-    let k = 0;
-    while (1 + 3 * k * (k + 1) < n) k++;
+    const coords = spiralAxial(n);
 
-    // Pick R (circumradius) so all rings fit with padding
+    // Unit-R (R=1) center of each hex. Measuring the ACTUAL filled cluster
+    // — the spiral can leave the outer ring partly empty (e.g. 27 of 37
+    // cells) — lets us size and center to what's really there rather than
+    // to a theoretical full hexagon. Without this the empty top of the last
+    // ring shows up as a lopsided gap (extra padding above the cluster).
+    const uc = coords.map(c => ({
+      x: Math.sqrt(3) * (c.q + c.r / 2),
+      y: 1.5 * c.r,
+    }));
+    let minUx = Infinity, maxUx = -Infinity, minUy = Infinity, maxUy = -Infinity;
+    uc.forEach(p => {
+      if (p.x < minUx) minUx = p.x;
+      if (p.x > maxUx) maxUx = p.x;
+      if (p.y < minUy) minUy = p.y;
+      if (p.y > maxUy) maxUy = p.y;
+    });
+    // Cluster extent in unit-R, including each edge hex's own half-size
+    // (half-width √3/2, half-height 1).
+    const uW = (maxUx - minUx) + Math.sqrt(3);
+    const uH = (maxUy - minUy) + 2;
+
+    // Fit R to the real cluster so it fills the stage with equal, tight
+    // padding on every side; then center the cluster's bounding box.
     const pad = 16;
     const availW = Math.max(80, w - pad * 2);
     const availH = Math.max(80, h - pad * 2);
-    const Rw = availW / (2 * Math.sqrt(3) * (k + 0.5));
-    const Rh = availH / (3 * k + 2);
-    let R = Math.min(Rw, Rh);
+    let R = Math.min(availW / uW, availH / uH);
     R = Math.max(22, Math.min(92, R));
 
-    const coords = spiralAxial(n);
+    const hexW = Math.sqrt(3) * R;
+    const hexH = 2 * R;
+    const midUx = (minUx + maxUx) / 2;
+    const midUy = (minUy + maxUy) / 2;
     const cx = w / 2, cy = h / 2;
 
     const frag = document.createDocumentFragment();
     cards.forEach((card, i) => {
-      const c = coords[i];
-      const px = Math.sqrt(3) * R * (c.q + c.r / 2);
-      const py = 1.5 * R * c.r;
-      const hexW = Math.sqrt(3) * R;
-      const hexH = 2 * R;
-      const tx = (cx + px) - hexW / 2;
-      const ty = (cy + py) - hexH / 2;
+      const u = uc[i];
+      const tx = (cx + (u.x - midUx) * R) - hexW / 2;
+      const ty = (cy + (u.y - midUy) * R) - hexH / 2;
       const hex = document.createElement('a');
       // `entering` starts the hex at opacity 0 + scale(0.3). We clear the
       // class on the next animation frame below so the CSS transition on
