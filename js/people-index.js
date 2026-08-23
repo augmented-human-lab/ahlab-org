@@ -299,9 +299,10 @@
     const uW = (maxUx - minUx) + Math.sqrt(3);
     const uH = (maxUy - minUy) + 2;
 
-    // Fit R to the real cluster so it fills the stage with equal, tight
-    // padding on every side; then center the cluster's bounding box.
-    const pad = 16;
+    // Fit R to the real cluster so it fills the stage edge-to-edge; then
+    // center the cluster's bounding box. Zero padding — the hexes reach the
+    // top and bottom of the stage.
+    const pad = 0;
     const availW = Math.max(80, w - pad * 2);
     const availH = Math.max(80, h - pad * 2);
     let R = Math.min(availW / uW, availH / uH);
