@@ -157,16 +157,18 @@
       section.classList.toggle('hidden', visibleCount === 0);
       const lbl = section.querySelector('.section-label');
       if (!lbl) return;
-      const base = lbl.dataset.baseLabel;
-      const crumbs = [];
-      if (state.year !== 'all') crumbs.push(String(state.year));
-      if (activeRoleLabel)       crumbs.push(activeRoleLabel);
-      // In year-scoped mode the team section absorbs everyone, so its
-      // label always reads "Current Team / {year}" — that's the "single
-      // pool" framing. Other sections' labels still get the breadcrumb
-      // suffix for free, but those sections will be hidden by the
-      // visibleCount check above since their cards have moved out.
-      lbl.textContent = crumbs.length ? `${base} / ${crumbs.join(' / ')}` : base;
+      const yearPicked = state.year !== 'all';
+      // The "Current" qualifier only makes sense for the all-time snapshot;
+      // once a specific year is chosen the section is a point-in-time team,
+      // so "Current Team" becomes just "Team" and the year reads inline
+      // ("Team 2024") rather than as a slash breadcrumb.
+      const base = yearPicked
+        ? lbl.dataset.baseLabel.replace(/^Current\s+/, '')
+        : lbl.dataset.baseLabel;
+      let label = base;
+      if (yearPicked)      label += ` ${state.year}`;
+      if (activeRoleLabel) label += ` / ${activeRoleLabel}`;
+      lbl.textContent = label;
     });
   }
 
@@ -242,8 +244,13 @@
 
       const label = document.createElement('div');
       label.className = 'section-label';
-      const base = SEGMENT_LABEL[seg] || seg;
-      const crumb = (state.year !== 'all') ? ` / ${state.year}` : '';
+      const yearPicked = state.year !== 'all';
+      // Mirror the grid labels: "Current" is an all-time-only qualifier, and
+      // a picked year reads inline ("Team 2024") rather than as a breadcrumb.
+      const base = yearPicked
+        ? (SEGMENT_LABEL[seg] || seg).replace(/^Current\s+/, '')
+        : (SEGMENT_LABEL[seg] || seg);
+      const crumb = yearPicked ? ` ${state.year}` : '';
       label.textContent = base + crumb + `  (${cards.length})`;
       wrap.appendChild(label);
 
