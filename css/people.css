@@ -145,7 +145,18 @@
    yields 4 columns; on a 4K/ultrawide display it yields 6+, keeping
    the card photo size sensible instead of stretching to huge squares. */
 .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 28px; }
-@media (max-width: 767px)  { .people-grid { gap: 16px; } }
+/* On phones, force a fixed 2-column grid rather than letting the 220px
+   min collapse the layout to a single full-width column. A full-bleed
+   thumbnail per row wastes vertical space and delivers little info at a
+   glance; two tighter cards per row let more people show above the fold.
+   The card typography scales down below so names/roles still fit the
+   narrower column. */
+@media (max-width: 767px)  {
+  .people-grid { grid-template-columns: repeat(2, 1fr); gap: 14px 12px; }
+  .person-card-photo { margin-bottom: 10px; }
+  .person-card h4 { font-size: 15px; line-height: 20px; }
+  .person-card .person-role { font-size: 13px; line-height: 18px; }
+}
 
 .person-card { display: block; transition: transform .4s ease; }
 .person-card-photo {
