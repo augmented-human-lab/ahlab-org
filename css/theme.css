@@ -340,10 +340,15 @@ body:has(.hero-summary.is-filtered) .hero,
   z-index: 40;
 }
 /* Push each page's sticky year rail down so the pinned strip doesn't
-   cover its top entries. No effect on mobile, where the year rail is a
-   bottom-fixed bar (top is ignored). */
-body:has(.hero-summary.is-filtered) .year-nav,
-body:has(.hero.is-pinned) .year-nav { top: 176px; }
+   cover its top entries. Desktop-only: on mobile (≤991px) the year rail
+   is a bottom-fixed bar with `bottom: 0`, and this `top` would combine
+   with that bottom to stretch the fixed bar over the full viewport
+   height — its translucent backdrop then covers the people grid. So we
+   scope the override to ≥992px, where the rail is a sticky top column. */
+@media (min-width: 992px) {
+  body:has(.hero-summary.is-filtered) .year-nav,
+  body:has(.hero.is-pinned) .year-nav { top: 176px; }
+}
 .hero::before {
   content: "";
   position: absolute;
