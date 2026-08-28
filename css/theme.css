@@ -360,15 +360,15 @@ ul  { list-style: none; }
     right: 0;
     z-index: 45;                 /* under the nav (10000), over content */
     min-height: 0;
-    /* Minimal height: the chips sit close to the bottom edge, with just
-       enough top room to hold the fade. */
-    padding: 16px 0 8px;
+    /* Chips sit near the bottom edge; the top padding gives the wider
+       top-fade room to spread without dissolving the chip text. */
+    padding: 28px 0 8px;
   }
   /* Fade the TOP edge of the gradient (content dissolves under it) rather
      than the bottom edge the top-band variant uses. */
   .hero:has(.hero-summary)::before {
-    -webkit-mask-image: linear-gradient(to top, #000 0%, #000 calc(100% - 18px), transparent 100%);
-            mask-image: linear-gradient(to top, #000 0%, #000 calc(100% - 18px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to top, #000 0%, #000 calc(100% - 28px), transparent 100%);
+            mask-image: linear-gradient(to top, #000 0%, #000 calc(100% - 28px), transparent 100%);
   }
   /* The hero no longer spaces the page from the top, so give each index
      layout top room to clear the fixed nav, plus bottom room so the last

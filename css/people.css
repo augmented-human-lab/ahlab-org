@@ -55,7 +55,7 @@
      framing the list between two gradient edges — same fill as the top nav
      and bottom filter bar. The rails are sized to fit the widest year label
      ("All time") plus the view-toggle above it. */
-  grid-template-columns: 84px 1fr 84px;
+  grid-template-columns: 72px 1fr 72px;
   gap: 0;
   min-height: 60vh;
 }
@@ -96,9 +96,7 @@
 .year-nav a[data-year="all"] {
   font-weight: 600;
   color: var(--color-neutral-90);
-  border-bottom: 1px solid var(--color-neutral-30);
-  margin-bottom: 6px;
-  padding-bottom: 12px;
+  margin-bottom: 4px;
 }
 .year-nav a[data-year="all"].active {
   color: var(--color-accent);
@@ -146,8 +144,8 @@
   }
   .year-nav {
     padding: 92px 0 76px 10px;
-    -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 12px), transparent 100%);
-            mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 12px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 24px), transparent 100%);
+            mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 24px), transparent 100%);
   }
   /* White year text on the gradient. The right-edge active tick lives in
      the fade zone, so the active year is signalled by full-white + weight
@@ -159,25 +157,29 @@
   .year-nav a[data-year="all"].active { color: #fff; }
   .year-nav a.active,
   .year-nav a[data-year="all"].active { font-weight: 700; border-right-color: transparent; }
-  .year-nav a[data-year="all"] { border-bottom-color: rgba(255, 255, 255, .28); }
 
-  /* Right rail holds the vertically-stacked view-mode toggle, fading on
-     its left (inner) edge. */
+  /* Right rail holds the view-mode toggle, vertically centred in the rail
+     and fading on its left (inner) edge. */
   .side-pane {
-    padding: 92px 0 76px 0;
-    -webkit-mask-image: linear-gradient(to left, #000 0%, #000 calc(100% - 12px), transparent 100%);
-            mask-image: linear-gradient(to left, #000 0%, #000 calc(100% - 12px), transparent 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-mask-image: linear-gradient(to left, #000 0%, #000 calc(100% - 24px), transparent 100%);
+            mask-image: linear-gradient(to left, #000 0%, #000 calc(100% - 24px), transparent 100%);
   }
-  /* Toggle: vertical stack, centred in the rail, on the gradient. */
+  /* Toggle: bare white icon buttons — no container box, no per-button
+     background. Vertical stack; active icon is full-white, the other dimmed. */
   .side-pane .view-toggle {
     flex-direction: column;
-    margin: 0 auto;
-    background: rgba(255, 255, 255, .16);
-    border-color: rgba(255, 255, 255, .28);
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: 0;
   }
-  .view-btn { color: rgba(255, 255, 255, .8); }
-  .view-btn:hover { color: #fff; background: rgba(255, 255, 255, .14); }
-  .view-btn.is-active { background: #fff; color: var(--color-accent); }
+  .side-pane .view-btn { color: rgba(255, 255, 255, .55); background: none; }
+  .side-pane .view-btn:hover { color: #fff; background: none; }
+  .side-pane .view-btn.is-active { color: #fff; background: none; }
 }
 /* Right rail is a desktop-only frame element. */
 @media (max-width: 991px) { .side-pane { display: none; } }
