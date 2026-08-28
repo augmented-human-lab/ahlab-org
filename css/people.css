@@ -51,7 +51,9 @@
    the whole index markup. */
 .people-layout {
   display: grid;
-  grid-template-columns: 140px 1fr;
+  /* Left rail is sized to just fit the widest year label ("All time") plus
+     the view-toggle above it — no wasted horizontal gutter. */
+  grid-template-columns: 96px 1fr;
   gap: 0;
   min-height: 60vh;
 }
@@ -62,7 +64,7 @@
   position: sticky;
   top: 92px;
   height: calc(100vh - 92px);
-  padding: 40px 0 40px 40px;
+  padding: 40px 0 40px 8px;
   overflow-y: auto;
   border-right: 1px solid var(--color-neutral-30);
   scrollbar-width: none;               /* Firefox */
@@ -73,7 +75,7 @@
   align-items: baseline;
   font-family: var(--font-display); font-weight: 500; font-size: 15px;
   color: var(--color-neutral-60);
-  padding: 8px 20px 8px 0;
+  padding: 8px 12px 8px 0;
   transition: color .25s, border-color .25s;
   border-right: 2px solid transparent;
   margin-right: -1px;

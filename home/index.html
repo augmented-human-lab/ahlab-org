@@ -895,7 +895,12 @@ a.event-row:hover .event-row-title {
    this section" link on the page reads as one consistent control. */
 .featured-cta {
   margin-top: 44px;
-  text-align: center;
+  /* Left-aligned to match the other on-page CTAs ("Read our vision",
+     "Meet our team"), aligned to the same left edge as the featured grid. */
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
 }
 .featured-cta a {
   display: inline-flex;

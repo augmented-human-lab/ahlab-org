@@ -328,26 +328,69 @@ ul  { list-style: none; }
    own stylesheets since these rules are deliberately unopinionated
    about h1 sizing. */
 .hero { position: relative; padding: 98px 0 40px; overflow: hidden; }
-/* Freeze the filter strip at the top once a filter is active, so the
-   controls stay reachable while the list scrolls beneath. With no filter
-   applied it stays a normal in-flow band that scrolls away. The signal is
-   .hero-summary.is-filtered, set by every index page's filter JS. Pinned
-   z-index sits below the nav (10000) but above page content. */
-body:has(.hero-summary.is-filtered) .hero,
-.hero.is-pinned {
-  position: sticky;
-  top: 0;
-  z-index: 40;
+/* Mobile: freeze the filter strip at the top once a filter is active, so
+   the controls stay reachable while the list scrolls beneath. With no
+   filter applied it stays a normal in-flow band that scrolls away. The
+   signal is .hero-summary.is-filtered, set by every index page's filter
+   JS. On desktop the filter strip instead docks to the bottom (below) —
+   so this top-pin is mobile-only. */
+@media (max-width: 991px) {
+  body:has(.hero-summary.is-filtered) .hero,
+  .hero.is-pinned {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
 }
-/* Push each page's sticky year rail down so the pinned strip doesn't
-   cover its top entries. Desktop-only: on mobile (≤991px) the year rail
-   is a bottom-fixed bar with `bottom: 0`, and this `top` would combine
-   with that bottom to stretch the fixed bar over the full viewport
-   height — its translucent backdrop then covers the people grid. So we
-   scope the override to ≥992px, where the rail is a sticky top column. */
+
+/* ── Desktop: filter strips dock to the bottom as a frozen footer ──────
+   The index pages (people / press / publications / projects) carry their
+   filter chips in a gradient `.hero` band. On desktop we lift that band
+   out of the top of the page and fix it to the bottom of the viewport:
+   same gradient fill, chips on one line, and a soft top edge (mask fade)
+   so the list scrolls smoothly underneath it. Targeted via
+   `:has(.hero-summary)` so ONLY the filter heroes move — the home hero
+   (image, .hero-content) and detail-page heroes are untouched. */
 @media (min-width: 992px) {
-  body:has(.hero-summary.is-filtered) .year-nav,
-  body:has(.hero.is-pinned) .year-nav { top: 176px; }
+  .hero:has(.hero-summary) {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 45;                 /* under the nav (10000), over content */
+    min-height: 0;
+    padding: 26px 0 20px;        /* top room holds the fade; keeps one line */
+  }
+  /* Fade the TOP edge of the gradient (content dissolves under it) rather
+     than the bottom edge the top-band variant uses. */
+  .hero:has(.hero-summary)::before {
+    -webkit-mask-image: linear-gradient(to top, #000 0%, #000 calc(100% - 30px), transparent 100%);
+            mask-image: linear-gradient(to top, #000 0%, #000 calc(100% - 30px), transparent 100%);
+  }
+  /* The hero no longer spaces the page from the top, so give each index
+     layout top room to clear the fixed 120px nav, plus bottom room so the
+     last rows clear the docked filter bar. */
+  .people-layout,
+  .press-layout,
+  .pubs-layout,
+  .projects-layout {
+    padding-top: 128px;
+    padding-bottom: 92px;
+  }
+  /* The sticky left year rail runs nearly full-height; give it bottom
+     padding so its last entries scroll up clear of the docked filter bar
+     instead of hiding behind it. */
+  .people-layout .year-nav,
+  .press-layout .year-nav,
+  .pubs-layout .year-nav,
+  .projects-layout .year-nav {
+    padding-bottom: 96px;
+  }
+  /* Keep the (dark) site footer's content clear of the docked bar. */
+  body:has(.hero:has(.hero-summary)) .site-footer {
+    padding-bottom: 100px;
+  }
 }
 .hero::before {
   content: "";
