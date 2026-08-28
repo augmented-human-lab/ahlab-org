@@ -160,12 +160,13 @@
   /* "All" reads as a centred header above the left-aligned year list. */
   .year-nav a[data-year="all"] { justify-content: center; padding-right: 0; }
 
-  /* Right rail holds the view-mode toggle, vertically centred in the rail
-     and fading on its left (inner) edge. */
+  /* Right rail holds the view-mode toggle, vertically centred and nudged
+     toward the outer (right) edge; fades on its left (inner) edge. */
   .side-pane {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    padding-right: 14px;
     -webkit-mask-image: linear-gradient(to left, #000 0%, #000 calc(100% - 30px), transparent 100%);
             mask-image: linear-gradient(to left, #000 0%, #000 calc(100% - 30px), transparent 100%);
   }
@@ -189,22 +190,17 @@
   .site-nav { padding-left: 88px; padding-right: 88px; }
   .hero:has(.hero-summary) .container { padding-left: 88px; padding-right: 88px; }
 
-  /* Page scrollbar merges with the gradient frame: the same viewport-anchored
-     gradient is painted on the root (canvas), the opaque white <body> covers
-     the content area, and the scrollbar track is transparent — so the gutter
-     to the right of the right rail reveals the identical gradient instead of a
-     default light track. A subtle translucent thumb rides over it. */
-  html { background: var(--gradient); background-attachment: fixed; }
-  ::-webkit-scrollbar { width: 12px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, .4);
-    border-radius: 6px;
-    border: 3px solid transparent;
-    background-clip: padding-box;
-  }
-  ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, .6); background-clip: padding-box; }
-  html { scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, .4) transparent; }
+  /* Filter chips take the main nav's text size (they were larger); nav uses
+     16px, so match it so the two gradient bars' text reads as one system. */
+  .hero:has(.hero-summary) .hero-summary { font-size: 16px; }
+
+  /* Page scrollbar: hidden so it never breaks the right gradient rail with a
+     native track — the rail runs clean to the viewport edge and scrolling
+     still works via wheel/trackpad. (overflow-x:hidden on <body> makes the
+     body the scroll container, so hide its bar too.) */
+  html, body { scrollbar-width: none; }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar { width: 0; height: 0; display: none; }
 }
 /* Right rail is a desktop-only frame element. */
 @media (max-width: 991px) { .side-pane { display: none; } }
