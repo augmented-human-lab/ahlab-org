@@ -143,9 +143,9 @@
     height: 100vh;
   }
   .year-nav {
-    padding: 92px 0 76px 10px;
-    -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 24px), transparent 100%);
-            mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 24px), transparent 100%);
+    padding: 92px 0 76px 8px;
+    -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 30px), transparent 100%);
+            mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 30px), transparent 100%);
   }
   /* White year text on the gradient. The right-edge active tick lives in
      the fade zone, so the active year is signalled by full-white + weight
@@ -157,6 +157,8 @@
   .year-nav a[data-year="all"].active { color: #fff; }
   .year-nav a.active,
   .year-nav a[data-year="all"].active { font-weight: 700; border-right-color: transparent; }
+  /* "All" reads as a centred header above the left-aligned year list. */
+  .year-nav a[data-year="all"] { justify-content: center; padding-right: 0; }
 
   /* Right rail holds the view-mode toggle, vertically centred in the rail
      and fading on its left (inner) edge. */
@@ -164,8 +166,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    -webkit-mask-image: linear-gradient(to left, #000 0%, #000 calc(100% - 24px), transparent 100%);
-            mask-image: linear-gradient(to left, #000 0%, #000 calc(100% - 24px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to left, #000 0%, #000 calc(100% - 30px), transparent 100%);
+            mask-image: linear-gradient(to left, #000 0%, #000 calc(100% - 30px), transparent 100%);
   }
   /* Toggle: bare white icon buttons — no container box, no per-button
      background. Vertical stack; active icon is full-white, the other dimmed. */
@@ -180,6 +182,29 @@
   .side-pane .view-btn { color: rgba(255, 255, 255, .55); background: none; }
   .side-pane .view-btn:hover { color: #fff; background: none; }
   .side-pane .view-btn.is-active { color: #fff; background: none; }
+
+  /* Inset the nav and bottom-bar contents past the 72px gradient rails so
+     the logo / login / filter chips sit in the content area rather than
+     visually overlapping the rails. */
+  .site-nav { padding-left: 88px; padding-right: 88px; }
+  .hero:has(.hero-summary) .container { padding-left: 88px; padding-right: 88px; }
+
+  /* Page scrollbar merges with the gradient frame: the same viewport-anchored
+     gradient is painted on the root (canvas), the opaque white <body> covers
+     the content area, and the scrollbar track is transparent — so the gutter
+     to the right of the right rail reveals the identical gradient instead of a
+     default light track. A subtle translucent thumb rides over it. */
+  html { background: var(--gradient); background-attachment: fixed; }
+  ::-webkit-scrollbar { width: 12px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, .4);
+    border-radius: 6px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, .6); background-clip: padding-box; }
+  html { scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, .4) transparent; }
 }
 /* Right rail is a desktop-only frame element. */
 @media (max-width: 991px) { .side-pane { display: none; } }
