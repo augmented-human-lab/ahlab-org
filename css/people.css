@@ -51,9 +51,11 @@
    the whole index markup. */
 .people-layout {
   display: grid;
-  /* Left rail is sized to just fit the widest year label ("All time") plus
-     the view-toggle above it — no wasted horizontal gutter. */
-  grid-template-columns: 96px 1fr;
+  /* Gradient year rail (left) + content + a matching gradient rail (right),
+     framing the list between two gradient edges — same fill as the top nav
+     and bottom filter bar. The rails are sized to fit the widest year label
+     ("All time") plus the view-toggle above it. */
+  grid-template-columns: 108px 1fr 108px;
   gap: 0;
   min-height: 60vh;
 }
@@ -64,9 +66,8 @@
   position: sticky;
   top: 92px;
   height: calc(100vh - 92px);
-  padding: 40px 0 40px 8px;
+  padding: 40px 0 40px 14px;
   overflow-y: auto;
-  border-right: 1px solid var(--color-neutral-30);
   scrollbar-width: none;               /* Firefox */
 }
 .year-nav::-webkit-scrollbar { display: none; } /* Chrome / Safari / Edge */
@@ -103,6 +104,54 @@
   color: var(--color-accent);
   border-right-color: var(--color-accent);
 }
+
+/* ── Desktop: gradient year rail + mirrored right rail ─────────────────
+   The left year rail and a matching (empty) right rail carry the same
+   gradient as the top nav / bottom filter bar, so the content sits framed
+   between four gradient edges. Each rail fades on its INNER edge (right for
+   the left rail, left for the right rail) so it dissolves toward the list.
+   Year text goes white to read on the gradient. Desktop-only — the mobile
+   year rail (below) is a light bottom bar and keeps its dark-on-light text. */
+@media (min-width: 992px) {
+  .year-nav,
+  .side-pane {
+    background: var(--gradient);
+  }
+  .year-nav {
+    -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 20px), transparent 100%);
+            mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 20px), transparent 100%);
+  }
+  /* White year text on the gradient. The right-edge active tick lives in
+     the fade zone, so the active year is signalled by full-white + weight
+     instead of the border. */
+  .year-nav a { color: rgba(255, 255, 255, .68); }
+  .year-nav a:hover { color: #fff; }
+  .year-nav a.active,
+  .year-nav a[data-year="all"],
+  .year-nav a[data-year="all"].active { color: #fff; }
+  .year-nav a.active,
+  .year-nav a[data-year="all"].active { font-weight: 700; border-right-color: transparent; }
+  .year-nav a[data-year="all"] { border-bottom-color: rgba(255, 255, 255, .28); }
+
+  /* View-toggle sits on the gradient — translucent white instead of the
+     light-grey chip it uses on white. */
+  .view-toggle { background: rgba(255, 255, 255, .16); border-color: rgba(255, 255, 255, .28); }
+  .view-btn { color: rgba(255, 255, 255, .8); }
+  .view-btn:hover { color: #fff; background: rgba(255, 255, 255, .14); }
+  .view-btn.is-active { background: #fff; color: var(--color-accent); }
+
+  /* Right rail — sticky like the year rail, fades on its left (inner) edge. */
+  .side-pane {
+    position: sticky;
+    top: 92px;
+    height: calc(100vh - 92px);
+    -webkit-mask-image: linear-gradient(to left, #000 0%, #000 calc(100% - 20px), transparent 100%);
+            mask-image: linear-gradient(to left, #000 0%, #000 calc(100% - 20px), transparent 100%);
+  }
+}
+/* Right rail is a desktop-only frame element. */
+@media (max-width: 991px) { .side-pane { display: none; } }
+
 @media (max-width: 991px) {
   .year-nav {
     position: fixed;
