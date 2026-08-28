@@ -103,79 +103,32 @@
   border-right-color: var(--color-accent);
 }
 
-/* ── Desktop: gradient year rail + mirrored right rail ─────────────────
-   The left year rail and the right rail (which holds the view-mode toggle)
-   carry the same gradient as the top nav and bottom filter bar, so the
-   content sits framed between four gradient edges.
-
-   Seamless corners: every frame element paints `var(--gradient)` with
-   `background-attachment: fixed`, so the gradient is anchored to the
-   VIEWPORT rather than each element's own box. The nav, both rails, and
-   the bottom bar therefore reveal the exact same colour at any given
-   screen point — the four edges read as one continuous gradient border
-   with no seam or white gap where they meet. For this to hold, the rails
-   start at the very top (behind the fixed nav), and their inner content
-   (year list / toggle) is padded down to clear it.
-
-   Each rail fades on its INNER edge (right for the left rail, left for the
-   right rail) so it dissolves toward the list. Year text goes white to
-   read on the gradient. Desktop-only — the mobile year rail (below) is a
-   light bottom bar and keeps its dark-on-light text. */
+/* ── Desktop: people-specific frame extras ────────────────────────────
+   The gradient rails, seamless corners, content/nav insets, scrollbar
+   hiding and auto-hide-on-idle are all shared and live in index-frame.css.
+   Here we keep only what's unique to /people/: the centred "All" header,
+   the view-toggle that sits in the right rail, the honeycomb header
+   suppression, and the scroll-focus bob on the active segment chip. */
 @media (min-width: 992px) {
-  /* Rails fill from the very top under the nav; min-height keeps the
-     full-height rails from overflowing when the list is short. */
-  .people-layout { padding-top: 0; min-height: 100vh; }
-  /* Higher specificity than the base .people-content padding shorthand
-     (which is defined later in the file) so the top clearance sticks. */
-  .people-layout .people-content { padding-top: 92px; }   /* clear the fixed nav */
-
-  /* Anchor every frame element's gradient to the viewport so the corners
-     line up seamlessly. */
-  .site-nav,
-  .hero:has(.hero-summary)::before { background-attachment: fixed; }
-
-  .year-nav,
-  .side-pane {
-    background: var(--gradient);
-    background-attachment: fixed;
-    position: sticky;
-    top: 0;
-    height: 100vh;
+  /* "All" reads as a centred header above the left-aligned year list.
+     (More specific than index-frame's `.index-layout .year-nav a` so the
+     zero side-padding + centring win.) */
+  .people-layout .year-nav a[data-year="all"] {
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
   }
-  .year-nav {
-    /* No left padding on the rail itself: the year links carry their own
-       indent (so they left-align) while the "All" header spans the full
-       rail width and centres. */
-    padding: 92px 0 76px 0;
-    -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 30px), transparent 100%);
-            mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 30px), transparent 100%);
-  }
-  .year-nav a { padding-left: 10px; }
-  /* White year text on the gradient. The right-edge active tick lives in
-     the fade zone, so the active year is signalled by full-white + weight
-     instead of the border. */
-  .year-nav a { color: rgba(255, 255, 255, .68); }
-  .year-nav a:hover { color: #fff; }
-  .year-nav a.active,
-  .year-nav a[data-year="all"],
-  .year-nav a[data-year="all"].active { color: #fff; }
-  .year-nav a.active,
-  .year-nav a[data-year="all"].active { font-weight: 700; border-right-color: transparent; }
-  /* "All" reads as a centred header above the left-aligned year list. */
-  .year-nav a[data-year="all"] { justify-content: center; padding-left: 0; padding-right: 0; }
 
-  /* Right rail holds the view-mode toggle, vertically centred and nudged
-     toward the outer (right) edge; fades on its left (inner) edge. */
+  /* Right rail holds the view-mode toggle — vertically centred, nudged to
+     the outer edge. (The rail's gradient + inner-edge fade come from
+     index-frame.css.) */
   .side-pane {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding-right: 14px;
-    -webkit-mask-image: linear-gradient(to left, #000 0%, #000 calc(100% - 30px), transparent 100%);
-            mask-image: linear-gradient(to left, #000 0%, #000 calc(100% - 30px), transparent 100%);
   }
-  /* Toggle: bare white icon buttons — no container box, no per-button
-     background. Vertical stack; active icon is full-white, the other dimmed. */
+  /* Bare white icon buttons — no container box, no per-button background. */
   .side-pane .view-toggle {
     flex-direction: column;
     gap: 10px;
@@ -188,50 +141,11 @@
   .side-pane .view-btn:hover { color: #fff; background: none; }
   .side-pane .view-btn.is-active { color: #fff; background: none; }
 
-  /* Inset the nav and bottom-bar contents past the 72px gradient rails so
-     the logo / login / filter chips sit in the content area rather than
-     visually overlapping the rails. */
-  .site-nav { padding-left: 88px; padding-right: 88px; }
-  .hero:has(.hero-summary) .container { padding-left: 88px; padding-right: 88px; }
-
-  /* Filter chips take the main nav's text size (they were larger); nav uses
-     16px, so match it so the two gradient bars' text reads as one system. */
-  .hero:has(.hero-summary) .hero-summary { font-size: 16px; }
-
-  /* Page scrollbar: hidden so it never breaks the right gradient rail with a
-     native track — the rail runs clean to the viewport edge and scrolling
-     still works via wheel/trackpad. (overflow-x:hidden on <body> makes the
-     body the scroll container, so hide its bar too.) */
-  html, body { scrollbar-width: none; }
-  html::-webkit-scrollbar,
-  body::-webkit-scrollbar { width: 0; height: 0; display: none; }
-
-  /* ── Auto-hide the four gradient frame edges on mouse inactivity ──────
-     Fast fade-IN (base transition here) when activity resumes; slow
-     fade-OUT (the .frame-idle transition below) after 5s idle. JS toggles
-     body.frame-idle. */
-  .site-nav,
-  .year-nav,
-  .side-pane,
-  .hero:has(.hero-summary),
-  #segmentBall {
-    transition: opacity .3s ease;
-  }
-  body.frame-idle .site-nav,
-  body.frame-idle .year-nav,
-  body.frame-idle .side-pane,
-  body.frame-idle .hero:has(.hero-summary),
-  body.frame-idle #segmentBall {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 2.2s ease;
-  }
-
-  /* ── Honeycomb view: drop the big section headers (the bouncing ball +
-     focused chip now signal which segment is in view). ─────────────── */
+  /* Honeycomb view: drop the big section headers (the bouncing ball +
+     focused chip now signal which segment is in view). */
   .people-hives .section-label { display: none; }
 
-  /* ── Segment focus: subtle bob on the chip the scroll is currently on ── */
+  /* Segment focus: subtle bob on the chip the scroll is currently on. */
   #segmentPills .hero-chip { display: inline-block; }
   #segmentPills .hero-chip.seg-focused {
     color: #fff;

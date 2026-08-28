@@ -389,10 +389,9 @@ ul  { list-style: none; }
   .projects-layout .year-nav {
     padding-bottom: 76px;
   }
-  /* Keep the (dark) site footer's content clear of the docked bar. */
-  body:has(.hero:has(.hero-summary)) .site-footer {
-    padding-bottom: 80px;
-  }
+  /* The docked filter bar no longer needs footer padding: index-frame.js
+     latches the bar onto the footer's top edge and rides it up on scroll,
+     so the footer shows with no occlusion. */
 }
 .hero::before {
   content: "";

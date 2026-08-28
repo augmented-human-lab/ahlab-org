@@ -620,28 +620,12 @@
   }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.rv').forEach(function (el) { obs.observe(el); });
 
-  // ── Desktop chrome auto-hide + segment scroll-spy ─────────────────────
+  // ── Desktop segment scroll-spy ───────────────────────────────────────
+  // (The frame auto-hide + footer latch are shared across index pages and
+  // live in index-frame.js.) The AHL mark bounces above whichever segment
+  // (Team / Collaborators / Alumni) is currently in view; that chip also
+  // gets a subtle bob.
   if (window.matchMedia('(min-width: 992px)').matches) {
-
-    // (A) Fade the four gradient frame edges out after 5s of inactivity;
-    //     bring them back instantly on any activity. CSS owns the timing
-    //     (slow fade-out, fast fade-in) via body.frame-idle.
-    var idleTimer = 0;
-    function wakeChrome() {
-      document.body.classList.remove('frame-idle');
-      clearTimeout(idleTimer);
-      idleTimer = setTimeout(function () { document.body.classList.add('frame-idle'); }, 5000);
-    }
-    ['mousemove', 'mousedown', 'keydown', 'wheel', 'touchstart'].forEach(function (ev) {
-      window.addEventListener(ev, wakeChrome, { passive: true });
-    });
-    window.addEventListener('scroll', wakeChrome, { passive: true });
-    window.addEventListener('focus', wakeChrome);
-    document.addEventListener('visibilitychange', function () { if (!document.hidden) wakeChrome(); });
-    wakeChrome();
-
-    // (B) The AHL mark bounces above whichever segment (Team / Collaborators
-    //     / Alumni) is currently in view; that chip also gets a subtle bob.
     var segBall = document.getElementById('segmentBall');
     var SECTION_TO_SEG = { pi: 'team', team: 'team', alumni: 'alumni', collaborators: 'collaborators' };
     var spyRaf = 0;

@@ -38,6 +38,7 @@
 <link rel="stylesheet" href="/css/publication-add.css">
 <link rel="stylesheet" href="/css/event-chip.css">
 <link rel="stylesheet" href="/css/auth.css">
+<link rel="stylesheet" href="/css/index-frame.css">
 </head>
 <body>
 
@@ -62,7 +63,7 @@
 </header>
 
 <!-- LAYOUT -->
-<div class="pubs-layout">
+<div class="pubs-layout index-layout">
 
   <aside class="year-nav" id="yearNav" aria-label="Jump to year">
     
@@ -1854,6 +1855,9 @@
     </div>
   </main>
 
+  <!-- Right gradient rail (mirrors the left year rail; empty). Desktop-only. -->
+  <aside class="side-pane" aria-hidden="true"></aside>
+
 </div>
 
 
@@ -1914,6 +1918,7 @@
 
 <div id="site-footer-mount"></div>
 <script src="/js/footer-include.js"></script>
+<script src="/js/index-frame.js" defer></script>
 <script src="/js/event-chip-live.js" defer></script>
 <script src="/js/claim-buttons.js" defer></script>
 <script src="/js/inline-add.js" defer></script>

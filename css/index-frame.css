@@ -1,0 +1,110 @@
+/* ============================================================
+   index-frame.css
+   Shared "gradient frame" for the index pages — /people/, /press/,
+   /publications/, /projects/. Turns the left year rail, a mirrored
+   (empty) right rail, the top nav, and the docked bottom filter bar
+   into one continuous gradient border around the content, plus the
+   desktop-only auto-hide-on-inactivity behaviour.
+
+   REQUIRES theme.css first. Load this AFTER each page's own stylesheet
+   (people.css / press.css / publications.css / project.css inline) so
+   it overrides their plain year-nav styling. Every index page's layout
+   wrapper carries the class `index-layout` in addition to its own
+   `{page}-layout` class.
+
+   Desktop-only. On mobile each page keeps its existing single-column
+   layout with the light bottom year bar. People layers a few extras of
+   its own (segment ball, honeycomb tweaks, view-toggle) in people.css.
+   ============================================================ */
+
+@media (min-width: 992px) {
+  /* Three columns: gradient rail | content | gradient rail. The rails
+     start at the very top (behind the fixed nav) and run full height. */
+  .index-layout {
+    grid-template-columns: 72px 1fr 72px;
+    padding-top: 0;
+    padding-bottom: 72px;
+    min-height: 100vh;
+  }
+  .index-layout > main { padding-top: 92px; }   /* clear the fixed nav */
+
+  /* Seamless corners: paint the gradient with background-attachment:fixed
+     on every frame element, so it's anchored to the VIEWPORT and the four
+     edges reveal the identical colour where they meet — no seam. */
+  .site-nav,
+  .hero:has(.hero-summary)::before { background-attachment: fixed; }
+
+  .index-layout .year-nav,
+  .index-layout .side-pane {
+    background: var(--gradient);
+    background-attachment: fixed;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    border: 0;                 /* drop any per-page rail border */
+  }
+
+  /* Left rail: fades on its right (inner) edge; white year text. The
+     per-year counts are hidden so the rail stays minimal-width. */
+  .index-layout .year-nav {
+    padding: 92px 0 76px 0;
+    -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 30px), transparent 100%);
+            mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 30px), transparent 100%);
+  }
+  .index-layout .year-nav a {
+    padding-left: 10px;
+    color: rgba(255, 255, 255, .68);
+    border-right-color: transparent;
+  }
+  .index-layout .year-nav a:hover { color: #fff; }
+  .index-layout .year-nav a.active {
+    color: #fff;
+    font-weight: 700;
+    border-right-color: transparent;
+    background: none;
+  }
+  .index-layout .year-nav a .yr-count { display: none; }
+
+  /* Right rail: mirror of the left, fading on its left (inner) edge.
+     Empty by default (people fills it with the view-toggle). */
+  .index-layout .side-pane {
+    -webkit-mask-image: linear-gradient(to left, #000 0%, #000 calc(100% - 30px), transparent 100%);
+            mask-image: linear-gradient(to left, #000 0%, #000 calc(100% - 30px), transparent 100%);
+  }
+
+  /* Inset the nav + bottom-bar contents past the 72px rails so the logo,
+     login, and filter chips sit in the content area, not over the rails. */
+  .site-nav { padding-left: 88px; padding-right: 88px; }
+  .hero:has(.hero-summary) .container { padding-left: 88px; padding-right: 88px; }
+  /* Filter chips match the main nav's text size. */
+  .hero:has(.hero-summary) .hero-summary { font-size: 16px; }
+
+  /* Hide the page scrollbar so its native track never breaks the right
+     gradient rail; scrolling still works via wheel/trackpad. */
+  html, body { scrollbar-width: none; }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar { width: 0; height: 0; display: none; }
+
+  /* Auto-hide the four gradient frame edges on inactivity: fast fade-IN
+     (this base transition) when activity resumes, slow fade-OUT (the
+     .frame-idle transition) after 5s. index-frame.js toggles the class. */
+  .site-nav,
+  .index-layout .year-nav,
+  .index-layout .side-pane,
+  .hero:has(.hero-summary),
+  #segmentBall {
+    transition: opacity .3s ease;
+  }
+  body.frame-idle .site-nav,
+  body.frame-idle .year-nav,
+  body.frame-idle .side-pane,
+  body.frame-idle .hero:has(.hero-summary),
+  body.frame-idle #segmentBall {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 2.2s ease;
+  }
+}
+
+/* Right rail is a desktop-only frame element. */
+@media (max-width: 991px) { .index-layout .side-pane { display: none; } }
