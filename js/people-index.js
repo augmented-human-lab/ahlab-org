@@ -306,13 +306,15 @@
     const uW = (maxUx - minUx) + Math.sqrt(3);
     const uH = (maxUy - minUy) + 2;
 
-    // Fit R to the real cluster so it fills the stage edge-to-edge; then
-    // center the cluster's bounding box. Zero padding — the hexes reach the
-    // top and bottom of the stage.
+    // Fit R to the real cluster, then shrink it a touch so the outermost
+    // hexes don't run under the fixed top nav / bottom filter bar (the stage
+    // spans the full column height and tucks behind both). SHRINK leaves a
+    // small margin all around the cluster while keeping it centred.
     const pad = 0;
+    const SHRINK = 0.88;
     const availW = Math.max(80, w - pad * 2);
     const availH = Math.max(80, h - pad * 2);
-    let R = Math.min(availW / uW, availH / uH);
+    let R = Math.min(availW / uW, availH / uH) * SHRINK;
     R = Math.max(22, Math.min(92, R));
 
     const hexW = Math.sqrt(3) * R;
