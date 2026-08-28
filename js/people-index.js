@@ -412,6 +412,10 @@
     else                             renderGrid();
     syncHeroChipClasses();
     syncRoleChipCounts();
+    // Re-run the segment scroll-spy after the section DOM changes (view
+    // switch, filter, year). Defined later inside the desktop-only block;
+    // exposed on window so this cross-scope call works (no-op on mobile).
+    if (window.__peopleSegmentSpy) window.__peopleSegmentSpy();
   }
 
   // Recount role-group chips ("4 Students", "12 Researchers", …) against
@@ -613,4 +617,77 @@
     });
   }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.rv').forEach(function (el) { obs.observe(el); });
+
+  // ── Desktop chrome auto-hide + segment scroll-spy ─────────────────────
+  if (window.matchMedia('(min-width: 992px)').matches) {
+
+    // (A) Fade the four gradient frame edges out after 5s of inactivity;
+    //     bring them back instantly on any activity. CSS owns the timing
+    //     (slow fade-out, fast fade-in) via body.frame-idle.
+    var idleTimer = 0;
+    function wakeChrome() {
+      document.body.classList.remove('frame-idle');
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(function () { document.body.classList.add('frame-idle'); }, 5000);
+    }
+    ['mousemove', 'mousedown', 'keydown', 'wheel', 'touchstart'].forEach(function (ev) {
+      window.addEventListener(ev, wakeChrome, { passive: true });
+    });
+    window.addEventListener('scroll', wakeChrome, { passive: true });
+    window.addEventListener('focus', wakeChrome);
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) wakeChrome(); });
+    wakeChrome();
+
+    // (B) The AHL mark bounces above whichever segment (Team / Collaborators
+    //     / Alumni) is currently in view; that chip also gets a subtle bob.
+    var segBall = document.getElementById('segmentBall');
+    var SECTION_TO_SEG = { pi: 'team', team: 'team', alumni: 'alumni', collaborators: 'collaborators' };
+    var spyRaf = 0;
+
+    function focusedSegment() {
+      // Reference line ~40% down the viewport; the section crossing it (or
+      // nearest to it) is "current".
+      var refY = window.innerHeight * 0.4;
+      var nodes = (state.view === 'honeycomb')
+        ? hivesWrap.querySelectorAll('.hive-section')
+        : sectionsWrap.querySelectorAll('.people-section:not(.hidden)');
+      var covering = null, nearest = null, nearestD = Infinity;
+      nodes.forEach(function (sec) {
+        var r = sec.getBoundingClientRect();
+        if (r.height === 0) return;
+        if (r.top <= refY && r.bottom >= refY) covering = sec;
+        var d = Math.abs((r.top + r.bottom) / 2 - refY);
+        if (d < nearestD) { nearestD = d; nearest = sec; }
+      });
+      var sec = covering || nearest;
+      if (!sec) return null;
+      var key = (state.view === 'honeycomb') ? sec.dataset.segment : sec.dataset.sectionKey;
+      return SECTION_TO_SEG[key] || key || null;
+    }
+
+    function updateSegmentBall() {
+      spyRaf = 0;
+      if (!segBall) return;
+      var seg = focusedSegment();
+      var target = null;
+      document.querySelectorAll('#segmentPills .hero-chip').forEach(function (c) {
+        var on = c.dataset.segment === seg;
+        c.classList.toggle('seg-focused', on);
+        if (on) target = c;
+      });
+      if (!target) { segBall.classList.remove('is-visible'); return; }
+      var r = target.getBoundingClientRect();
+      segBall.style.left = (r.left + r.width / 2 - segBall.offsetWidth / 2) + 'px';
+      segBall.style.top  = (r.top - segBall.offsetHeight - 8) + 'px';
+      segBall.classList.add('is-visible');
+    }
+
+    window.__peopleSegmentSpy = function () {
+      if (spyRaf) return;
+      spyRaf = requestAnimationFrame(updateSegmentBall);
+    };
+    window.addEventListener('scroll', window.__peopleSegmentSpy, { passive: true });
+    window.addEventListener('resize', window.__peopleSegmentSpy, { passive: true });
+    window.__peopleSegmentSpy();
+  }
 })();

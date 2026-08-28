@@ -143,10 +143,14 @@
     height: 100vh;
   }
   .year-nav {
-    padding: 92px 0 76px 8px;
+    /* No left padding on the rail itself: the year links carry their own
+       indent (so they left-align) while the "All" header spans the full
+       rail width and centres. */
+    padding: 92px 0 76px 0;
     -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 30px), transparent 100%);
             mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 30px), transparent 100%);
   }
+  .year-nav a { padding-left: 10px; }
   /* White year text on the gradient. The right-edge active tick lives in
      the fade zone, so the active year is signalled by full-white + weight
      instead of the border. */
@@ -158,7 +162,7 @@
   .year-nav a.active,
   .year-nav a[data-year="all"].active { font-weight: 700; border-right-color: transparent; }
   /* "All" reads as a centred header above the left-aligned year list. */
-  .year-nav a[data-year="all"] { justify-content: center; padding-right: 0; }
+  .year-nav a[data-year="all"] { justify-content: center; padding-left: 0; padding-right: 0; }
 
   /* Right rail holds the view-mode toggle, vertically centred and nudged
      toward the outer (right) edge; fades on its left (inner) edge. */
@@ -201,7 +205,70 @@
   html, body { scrollbar-width: none; }
   html::-webkit-scrollbar,
   body::-webkit-scrollbar { width: 0; height: 0; display: none; }
+
+  /* ── Auto-hide the four gradient frame edges on mouse inactivity ──────
+     Fast fade-IN (base transition here) when activity resumes; slow
+     fade-OUT (the .frame-idle transition below) after 5s idle. JS toggles
+     body.frame-idle. */
+  .site-nav,
+  .year-nav,
+  .side-pane,
+  .hero:has(.hero-summary),
+  #segmentBall {
+    transition: opacity .3s ease;
+  }
+  body.frame-idle .site-nav,
+  body.frame-idle .year-nav,
+  body.frame-idle .side-pane,
+  body.frame-idle .hero:has(.hero-summary),
+  body.frame-idle #segmentBall {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 2.2s ease;
+  }
+
+  /* ── Honeycomb view: drop the big section headers (the bouncing ball +
+     focused chip now signal which segment is in view). ─────────────── */
+  .people-hives .section-label { display: none; }
+
+  /* ── Segment focus: subtle bob on the chip the scroll is currently on ── */
+  #segmentPills .hero-chip { display: inline-block; }
+  #segmentPills .hero-chip.seg-focused {
+    color: #fff;
+    animation: seg-focus-bob 1.3s ease-in-out infinite;
+  }
+  @keyframes seg-focus-bob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-1.5px); }
+  }
 }
+
+/* ── Bouncing AHL mark that tracks the in-view segment (desktop-only;
+   position + visibility driven by JS). ─────────────────────────────── */
+#segmentBall {
+  position: fixed;
+  left: 0; top: 0;
+  width: 24px; height: 24px;
+  z-index: 46;                 /* above the bottom filter bar (45) */
+  pointer-events: none;
+  opacity: 0;
+  transition: left .45s cubic-bezier(.22, 1, .36, 1), opacity .3s ease;
+  will-change: left, transform;
+}
+#segmentBall.is-visible { opacity: 1; }
+#segmentBall img {
+  width: 100%; height: 100%; display: block;
+  filter: drop-shadow(0 4px 8px rgba(14, 15, 17, .25));
+  animation: segball-bounce 1.15s cubic-bezier(.5, 0, .5, 1) infinite;
+}
+@keyframes segball-bounce {
+  0%, 100% { transform: translateY(0)     scaleY(1);   }
+  10%      { transform: translateY(0)     scaleY(.9);  }  /* squash on launch */
+  50%      { transform: translateY(-11px) scaleY(1.02);}  /* apex */
+  90%      { transform: translateY(0)     scaleY(.92); }  /* squash on land */
+}
+@media (max-width: 991px) { #segmentBall { display: none; } }
+
 /* Right rail is a desktop-only frame element. */
 @media (max-width: 991px) { .side-pane { display: none; } }
 
