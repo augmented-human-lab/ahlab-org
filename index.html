@@ -190,16 +190,15 @@ ul { list-style: none; }
   background-position: center, calc(50% + var(--hero-tilt-x, 0%)) center;
   background-repeat: no-repeat;
   animation: scaleIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-.hero::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 40%;
-  background: linear-gradient(to top, rgba(0,0,0,0.25), transparent);
-  pointer-events: none;
+  /* Melt the image into the white section below: fade the image LAYER
+     (tint + photo) to transparent over the bottom band so the white page
+     shows through. Masking the ::before rather than overlaying white keeps
+     the hero text (a separate layer above) fully opaque, and — because the
+     page background is white — the image dissolves seamlessly into the
+     intro section with no hard boundary line. The fade sits below the
+     headline + sub copy, which end above the 82% stop. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 100%);
 }
 .hero .container {
   position: relative;
@@ -392,8 +391,10 @@ ul { list-style: none; }
   transition: opacity 0.4s ease;
   border-radius: var(--radius-lg);
 }
-.value-card:hover::before { opacity: 1; }
-.value-card:hover { border-color: transparent; }
+.value-card:hover::before,
+.value-card.is-active::before { opacity: 1; }
+.value-card:hover,
+.value-card.is-active { border-color: transparent; }
 .value-card > * { position: relative; z-index: 1; }
 
 .value-number {
@@ -405,7 +406,8 @@ ul { list-style: none; }
   margin-bottom: 24px;
   transition: color 0.4s ease;
 }
-.value-card:hover .value-number { color: rgba(255,255,255,0.2); }
+.value-card:hover .value-number,
+.value-card.is-active .value-number { color: rgba(255,255,255,0.2); }
 
 .value-card h3 {
   font-family: var(--font-display);
@@ -421,7 +423,8 @@ ul { list-style: none; }
   color: rgba(255,255,255,0.6);
   transition: color 0.4s ease;
 }
-.value-card:hover p { color: rgba(255,255,255,0.9); }
+.value-card:hover p,
+.value-card.is-active p { color: rgba(255,255,255,0.9); }
 
 /* CTA row below the three value cards. Holds the "Read our vision"
    and "Explore our projects" links side-by-side on desktop, stacked
@@ -886,25 +889,28 @@ a.event-row:hover .event-row-title {
   opacity: .9;
 }
 
-/* Footer CTA: single centered link under the grid. */
+/* Footer CTA: single centered link under the grid. Matches the other
+   section CTAs (.approach-link / .values-link) — same inline-flex layout,
+   text size, weight, and chevron that nudges on hover — so every "go to
+   this section" link on the page reads as one consistent control. */
 .featured-cta {
   margin-top: 44px;
   text-align: center;
 }
 .featured-cta a {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-text);
+  font-weight: 600;
+  font-size: 18px;
   color: var(--color-neutral-100);
   text-decoration: none;
-  border-bottom: 1px solid var(--color-neutral-40);
-  padding-bottom: 3px;
-  transition: color .25s, border-color .25s;
+  transition: color 0.3s ease;
 }
-.featured-cta a:hover {
-  color: var(--color-accent);
-  border-color: var(--color-accent);
-}
+.featured-cta a:hover { color: var(--color-accent); }
+.featured-cta a svg { transition: transform 0.3s ease; }
+.featured-cta a:hover svg { transform: translateX(4px); }
 
 @media (max-width: 767px) {
   .section-featured { padding: 72px 0; }
@@ -1282,7 +1288,10 @@ a.event-row:hover .event-row-title {
       </a>
     </div>
     <div class="featured-cta reveal reveal-delay-2">
-      <a href="/projects/">Browse all projects →</a>
+      <a href="/projects/">
+        Browse all projects
+        <svg width="8" height="16" viewBox="0 0 8 16" fill="none"><path d="M1 1L6 8L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -1562,6 +1571,24 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 reveals.forEach(el => observer.observe(el));
+
+// Mobile: light up each "three pillars" value card as it passes the
+// vertical centre of the screen. On desktop the cards use :hover; touch
+// screens have no hover, so we drive the same .is-active state (which
+// fades in the gradient fill + brightens the text) from scroll position.
+// The -50%/-50% root margin collapses the observer's viewport to a single
+// centre line, so a card activates exactly when its midpoint crosses it.
+if (window.matchMedia('(max-width: 991px)').matches) {
+  var pillars = document.querySelectorAll('.section-values .value-card');
+  if (pillars.length) {
+    var pillarObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        entry.target.classList.toggle('is-active', entry.isIntersecting);
+      });
+    }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
+    pillars.forEach(function (card) { pillarObserver.observe(card); });
+  }
+}
 
 // Nav scroll effect
 // Nav scroll handler — null-guarded because #siteNav is mounted async

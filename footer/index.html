@@ -19,12 +19,14 @@
     .site-footer .footer-social a{color:rgba(255,255,255,.55);transition:color .25s ease,transform .25s ease;display:inline-flex}
     .site-footer .footer-social a:hover{color:#fff;transform:translateY(-1px)}
     .site-footer .footer-social svg{width:18px;height:18px;display:block}
-    /* Mobile: two rows. Logos + socials share the first row; copy
-       line centers below. */
+    /* Mobile: stack everything in a centred column — logos, then copy,
+       then socials — each on its own centred row. */
     @media(max-width:640px){
       .site-footer{padding:24px 0}
-      .site-footer .container{justify-content:space-between;gap:18px}
-      .site-footer .footer-copy{order:2;flex-basis:100%;text-align:center}
+      .site-footer .container{flex-direction:column;justify-content:center;gap:18px}
+      .site-footer .footer-logos{justify-content:center;flex-wrap:wrap}
+      .site-footer .footer-copy{flex:none;flex-basis:auto;text-align:center}
+      .site-footer .footer-social{justify-content:center}
     }
   </style>
   <div class="container">

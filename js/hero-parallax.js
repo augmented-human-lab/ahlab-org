@@ -90,8 +90,11 @@
       log('first valid event:', { beta: e.beta, gamma: e.gamma, absolute: e.absolute });
       firstEvent = false;
     }
+    // Negated so the image pans WITH the tilt (tilt right → reveals the
+    // image's right edge) rather than against it — the reversed direction
+    // that reads more naturally, like looking around a window.
     var ratio = clamp(e.gamma / MAX_TILT_DEG, -1, 1);
-    targetShift = ratio * MAX_SHIFT_PCT;
+    targetShift = -ratio * MAX_SHIFT_PCT;
     if (!rafScheduled) {
       rafScheduled = true;
       requestAnimationFrame(applyShift);
