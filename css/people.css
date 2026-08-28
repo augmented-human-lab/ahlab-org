@@ -183,6 +183,33 @@
 }
 @media (max-width: 991px) { #segmentBall { display: none; } }
 
+/* ── AHL mark on the currently active year in the left rail ────────────
+   Bounces while "All" is active; static once a specific year filter is
+   applied. Positioned by JS. Desktop-only. */
+#yearBall {
+  position: fixed;
+  left: 0; top: 0;
+  width: 17px; height: 17px;
+  z-index: 46;
+  pointer-events: none;
+  opacity: 0;
+  transition: left .4s cubic-bezier(.22, 1, .36, 1), top .4s cubic-bezier(.22, 1, .36, 1), opacity .3s ease;
+  will-change: left, top, transform;
+}
+#yearBall.is-visible { opacity: 1; }
+#yearBall img {
+  width: 100%; height: 100%; display: block;
+  filter: drop-shadow(0 2px 5px rgba(14, 15, 17, .3));
+}
+#yearBall.is-bouncing img {
+  animation: yearball-bounce 1.15s cubic-bezier(.5, 0, .5, 1) infinite;
+}
+@keyframes yearball-bounce {
+  0%, 100% { transform: translateY(0);   }
+  50%      { transform: translateY(-6px);}
+}
+@media (max-width: 991px) { #yearBall { display: none; } }
+
 /* Right rail is a desktop-only frame element. */
 @media (max-width: 991px) { .side-pane { display: none; } }
 
@@ -971,6 +998,25 @@ a.profile-pub-title:hover { color: var(--color-accent); }
 .hive-section .section-label {
   font-size: 32px;
   margin-bottom: 20px;
+}
+
+/* Desktop honeycomb: treat each hive as a full-screen "page" — vertically
+   centred in the viewport and scroll-snapped — so the user moves one whole
+   group at a time instead of gradually revealing the next. The content's
+   top nav-clearance is dropped here so the first hive's centre lands on the
+   screen centre rather than below it. */
+@media (min-width: 992px) {
+  body.view-honeycomb { scroll-snap-type: y proximity; }
+  body.view-honeycomb .people-content { padding-top: 0; }
+  body.view-honeycomb .people-hives { padding-top: 0; }
+  body.view-honeycomb .hive-section {
+    min-height: 100vh;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    scroll-snap-align: center;
+  }
 }
 .hive-stage {
   position: relative;

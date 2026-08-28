@@ -95,18 +95,21 @@
   /* Auto-hide the four gradient frame edges on inactivity: fast fade-IN
      (this base transition) when activity resumes, slow fade-OUT (the
      .frame-idle transition) after 5s. index-frame.js toggles the class. */
+  /* Frame edges get a fast opacity fade-in. (The balls keep their own
+     transitions from people.css — which also animate left/top — so they're
+     not listed here; their fade-out timing is set in the .frame-idle rule.) */
   .site-nav,
   .index-layout .year-nav,
   .index-layout .side-pane,
-  .hero:has(.hero-summary),
-  #segmentBall {
+  .hero:has(.hero-summary) {
     transition: opacity .3s ease;
   }
   body.frame-idle .site-nav,
   body.frame-idle .year-nav,
   body.frame-idle .side-pane,
   body.frame-idle .hero:has(.hero-summary),
-  body.frame-idle #segmentBall {
+  body.frame-idle #segmentBall,
+  body.frame-idle #yearBall {
     opacity: 0;
     pointer-events: none;
     transition: opacity 2.2s ease;

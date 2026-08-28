@@ -410,14 +410,18 @@
   // ── Render dispatcher ────────────────────────────────────
   function applyFilters() {
     syncToolbarEnabledState();
+    // Honeycomb view gets full-screen, scroll-snapped, vertically-centred
+    // hives (CSS keys off body.view-honeycomb).
+    document.body.classList.toggle('view-honeycomb', state.view === 'honeycomb');
     if (state.view === 'honeycomb') renderHoneycomb();
     else                             renderGrid();
     syncHeroChipClasses();
     syncRoleChipCounts();
-    // Re-run the segment scroll-spy after the section DOM changes (view
+    // Re-run the desktop indicators after the section DOM changes (view
     // switch, filter, year). Defined later inside the desktop-only block;
-    // exposed on window so this cross-scope call works (no-op on mobile).
+    // exposed on window so these cross-scope calls work (no-op on mobile).
     if (window.__peopleSegmentSpy) window.__peopleSegmentSpy();
+    if (window.__peopleYearBall)   window.__peopleYearBall();
   }
 
   // Recount role-group chips ("4 Students", "12 Researchers", …) against
@@ -675,5 +679,27 @@
     window.addEventListener('scroll', window.__peopleSegmentSpy, { passive: true });
     window.addEventListener('resize', window.__peopleSegmentSpy, { passive: true });
     window.__peopleSegmentSpy();
+
+    // ── AHL mark on the active year in the left rail ────────────────────
+    // Sits just after the active year's text. Bounces while "All" is the
+    // active filter; static once a specific year is selected.
+    var yearBall = document.getElementById('yearBall');
+    window.__peopleYearBall = function () {
+      if (!yearBall || !yearNav) return;
+      var link = yearNav.querySelector('a[data-year="' + state.year + '"]');
+      if (!link) { yearBall.classList.remove('is-visible'); return; }
+      // Range gives the exact text box regardless of the link's alignment
+      // ("All" is centred, years are left-aligned), so the mark lands right
+      // after the label.
+      var rng = document.createRange();
+      rng.selectNodeContents(link);
+      var r = rng.getBoundingClientRect();
+      yearBall.style.left = (r.right + 6) + 'px';
+      yearBall.style.top  = (r.top + r.height / 2 - yearBall.offsetHeight / 2) + 'px';
+      yearBall.classList.add('is-visible');
+      yearBall.classList.toggle('is-bouncing', state.year === 'all');
+    };
+    window.addEventListener('resize', window.__peopleYearBall, { passive: true });
+    window.__peopleYearBall();
   }
 })();
