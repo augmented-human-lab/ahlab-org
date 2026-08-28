@@ -105,7 +105,7 @@ ul  { list-style: none; }
    ============================================================ */
 .site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
-  padding: 28px 40px 0; height: 120px;
+  padding: 18px 40px 0; height: 84px;
   display: flex; align-items: flex-start; justify-content: space-between;
   background: var(--gradient);
   /* The bar's bottom edge fades softly to transparent so it melts into
@@ -360,23 +360,25 @@ ul  { list-style: none; }
     right: 0;
     z-index: 45;                 /* under the nav (10000), over content */
     min-height: 0;
-    padding: 26px 0 20px;        /* top room holds the fade; keeps one line */
+    /* Minimal height: the chips sit close to the bottom edge, with just
+       enough top room to hold the fade. */
+    padding: 16px 0 8px;
   }
   /* Fade the TOP edge of the gradient (content dissolves under it) rather
      than the bottom edge the top-band variant uses. */
   .hero:has(.hero-summary)::before {
-    -webkit-mask-image: linear-gradient(to top, #000 0%, #000 calc(100% - 30px), transparent 100%);
-            mask-image: linear-gradient(to top, #000 0%, #000 calc(100% - 30px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to top, #000 0%, #000 calc(100% - 18px), transparent 100%);
+            mask-image: linear-gradient(to top, #000 0%, #000 calc(100% - 18px), transparent 100%);
   }
   /* The hero no longer spaces the page from the top, so give each index
-     layout top room to clear the fixed 120px nav, plus bottom room so the
-     last rows clear the docked filter bar. */
+     layout top room to clear the fixed nav, plus bottom room so the last
+     rows clear the docked filter bar. */
   .people-layout,
   .press-layout,
   .pubs-layout,
   .projects-layout {
-    padding-top: 128px;
-    padding-bottom: 92px;
+    padding-top: 92px;
+    padding-bottom: 72px;
   }
   /* The sticky left year rail runs nearly full-height; give it bottom
      padding so its last entries scroll up clear of the docked filter bar
@@ -385,11 +387,11 @@ ul  { list-style: none; }
   .press-layout .year-nav,
   .pubs-layout .year-nav,
   .projects-layout .year-nav {
-    padding-bottom: 96px;
+    padding-bottom: 76px;
   }
   /* Keep the (dark) site footer's content clear of the docked bar. */
   body:has(.hero:has(.hero-summary)) .site-footer {
-    padding-bottom: 100px;
+    padding-bottom: 80px;
   }
 }
 .hero::before {
