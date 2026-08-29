@@ -101,16 +101,39 @@
       yearLogo.classList.add('is-visible');
     }
     function scheduleYearLogo() { if (yRaf) return; yRaf = requestAnimationFrame(placeYearLogo); }
+
+    // Auto-scroll the rail so the active year(s) stay in view as the main
+    // content scrolls past them: bring the bottommost active year up to the
+    // bottom edge when scrolling down, the topmost down to the top edge when
+    // scrolling back up. Insets account for the fixed nav (top) + docked
+    // filter bar (bottom) overlapping the rail.
+    function ensureYearVisible() {
+      var actives = rail.querySelectorAll('a.active');
+      if (!actives.length) return;
+      var first = actives[0];
+      var last  = actives[actives.length - 1];
+      var topInset = 96, botInset = 84;
+      var lastBottom = last.offsetTop + last.offsetHeight;
+      if (lastBottom > rail.scrollTop + rail.clientHeight - botInset) {
+        rail.scrollTo({ top: lastBottom - rail.clientHeight + botInset, behavior: 'smooth' });
+      } else if (first.offsetTop < rail.scrollTop + topInset) {
+        rail.scrollTo({ top: first.offsetTop - topInset, behavior: 'smooth' });
+      }
+    }
+
     window.addEventListener('scroll', scheduleYearLogo, { passive: true });
     window.addEventListener('resize', scheduleYearLogo, { passive: true });
     // The rail scrolls internally (overflow-y), which doesn't fire a window
     // scroll event — track its own scroll so the mark stays glued to its year.
     rail.addEventListener('scroll', scheduleYearLogo, { passive: true });
     // The active year can change without a scroll (filter click / scroll-spy
-    // toggle), so watch the rail's class changes too.
-    new MutationObserver(scheduleYearLogo).observe(rail, {
-      subtree: true, attributes: true, attributeFilter: ['class']
-    });
+    // toggle): reposition the mark and auto-scroll the rail to keep it in view.
+    var mutRaf = 0;
+    new MutationObserver(function () {
+      scheduleYearLogo();
+      if (mutRaf) return;
+      mutRaf = requestAnimationFrame(function () { mutRaf = 0; ensureYearVisible(); });
+    }).observe(rail, { subtree: true, attributes: true, attributeFilter: ['class'] });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(scheduleYearLogo);
     window.addEventListener('load', scheduleYearLogo);
     scheduleYearLogo();

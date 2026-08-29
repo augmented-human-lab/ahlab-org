@@ -48,6 +48,37 @@
       }
     }
 
+    // ── Rotating AHL mark before the active nav item (desktop only) ─────
+    // A white AHL circle that spins on its vertical axis and sits just
+    // before whichever top-nav item is active on this page.
+    if (activeLink && window.matchMedia('(min-width: 992px)').matches) {
+      var navLogo = document.getElementById('navLogo');
+      if (!navLogo) {
+        navLogo = document.createElement('div');
+        navLogo.id = 'navLogo';
+        navLogo.className = 'ahl-flip-logo';
+        navLogo.setAttribute('aria-hidden', 'true');
+        navLogo.innerHTML = '<img src="https://cdn.ahlab.org/media/site/cropped-Group@2x-192x192.png" alt="">';
+        document.body.appendChild(navLogo);
+      }
+      var placeNav = function () {
+        var a = nav.querySelector('.nav-links a.active');
+        if (!a) { navLogo.classList.remove('is-visible'); return; }
+        var rng = document.createRange();
+        rng.selectNodeContents(a);
+        var r = rng.getBoundingClientRect();
+        navLogo.style.left = (r.left - navLogo.offsetWidth - 8) + 'px';
+        navLogo.style.top  = (r.top + r.height / 2 - navLogo.offsetHeight / 2) + 'px';
+        navLogo.classList.add('is-visible');
+      };
+      placeNav();
+      window.addEventListener('resize', placeNav, { passive: true });
+      // Re-place once web fonts settle (nav text width shifts after first paint).
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeNav);
+      window.addEventListener('load', placeNav);
+      setTimeout(placeNav, 800);
+    }
+
     var toggle = document.getElementById('navToggle');
     var drawer = document.getElementById('navDrawer');
     if (toggle && drawer) {

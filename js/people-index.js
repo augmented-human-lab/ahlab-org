@@ -633,7 +633,6 @@
   // (left/top transition) while the target text stays put.
   if (window.matchMedia('(min-width: 992px)').matches) {
     var segLogo  = document.getElementById('segmentLogo');
-    var navLogo  = document.getElementById('navLogo');
     var SECTION_TO_SEG = { pi: 'team', team: 'team', alumni: 'alumni', collaborators: 'collaborators' };
     var GAP = 6;   // px between a logo and the text it flanks
     var spyRaf = 0;
@@ -687,34 +686,12 @@
     // (The year-rail mark is shared across index pages — created + tracked
     // by index-frame.js, which follows the rail's `.active` year.)
 
-    // Nav logo — sits just BEFORE the active nav item. The nav mounts async
-    // (nav-include.js), so poll briefly for the active link.
-    function positionNavLogo() {
-      if (!navLogo) return;
-      var active = document.querySelector('.site-nav .nav-links a.active');
-      if (!active) { navLogo.classList.remove('is-visible'); return; }
-      var rng = document.createRange();
-      rng.selectNodeContents(active);
-      var r = rng.getBoundingClientRect();
-      navLogo.style.left = (r.left - navLogo.offsetWidth - GAP) + 'px';
-      navLogo.style.top  = (r.top + r.height / 2 - navLogo.offsetHeight / 2) + 'px';
-      navLogo.classList.add('is-visible');
-    }
-    var navTries = 0;
-    var navPoll = setInterval(function () {
-      if (document.querySelector('.site-nav .nav-links a.active') || ++navTries > 40) {
-        clearInterval(navPoll);
-        positionNavLogo();
-      }
-    }, 100);
-    window.addEventListener('resize', positionNavLogo, { passive: true });
+    // (The nav mark — before the active nav item — is now shared across all
+    // pages and created by nav-include.js.)
 
-    // Re-place every mark once the layout has settled (async web fonts and
-    // the async-mounted nav both shift text after first paint).
-    function repositionAll() {
-      positionNavLogo();
-      window.__peopleSegmentSpy();
-    }
+    // Re-place the segment mark once the layout has settled (async web fonts
+    // shift the chip positions after first paint).
+    function repositionAll() { window.__peopleSegmentSpy(); }
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(repositionAll);
     window.addEventListener('load', repositionAll);
     setTimeout(repositionAll, 1200);
