@@ -68,4 +68,51 @@
     }, 100);
     scheduleLatch();
   }
+
+  // ── 3. Year-rail selection mark ─────────────────────────────────────
+  // A rotating AHL circle glides to sit just after the active year in the
+  // left timeline rail — on every index page (people / press / publications
+  // / projects). Each page marks its own active year with `.active`; this
+  // just follows it. (People also adds nav + segment marks of its own in
+  // people-index.js; those reuse the same .ahl-flip-logo styles.)
+  var rail = document.getElementById('yearNav');
+  if (rail) {
+    var yearLogo = document.getElementById('yearLogo');
+    if (!yearLogo) {
+      yearLogo = document.createElement('div');
+      yearLogo.id = 'yearLogo';
+      yearLogo.className = 'ahl-flip-logo';
+      yearLogo.setAttribute('aria-hidden', 'true');
+      yearLogo.innerHTML = '<img src="https://cdn.ahlab.org/media/site/cropped-Group@2x-192x192.png" alt="">';
+      document.body.appendChild(yearLogo);
+    }
+    var yRaf = 0;
+    function placeYearLogo() {
+      yRaf = 0;
+      // A page may mark several years active (e.g. press highlights every
+      // year in view) — flag the first one.
+      var active = rail.querySelector('a.active');
+      if (!active) { yearLogo.classList.remove('is-visible'); return; }
+      var rng = document.createRange();
+      rng.selectNodeContents(active);   // exact text box (handles centred "All")
+      var r = rng.getBoundingClientRect();
+      yearLogo.style.left = (r.right + 6) + 'px';
+      yearLogo.style.top  = (r.top + r.height / 2 - yearLogo.offsetHeight / 2) + 'px';
+      yearLogo.classList.add('is-visible');
+    }
+    function scheduleYearLogo() { if (yRaf) return; yRaf = requestAnimationFrame(placeYearLogo); }
+    window.addEventListener('scroll', scheduleYearLogo, { passive: true });
+    window.addEventListener('resize', scheduleYearLogo, { passive: true });
+    // The rail scrolls internally (overflow-y), which doesn't fire a window
+    // scroll event — track its own scroll so the mark stays glued to its year.
+    rail.addEventListener('scroll', scheduleYearLogo, { passive: true });
+    // The active year can change without a scroll (filter click / scroll-spy
+    // toggle), so watch the rail's class changes too.
+    new MutationObserver(scheduleYearLogo).observe(rail, {
+      subtree: true, attributes: true, attributeFilter: ['class']
+    });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(scheduleYearLogo);
+    window.addEventListener('load', scheduleYearLogo);
+    scheduleYearLogo();
+  }
 })();

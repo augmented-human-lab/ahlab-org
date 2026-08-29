@@ -421,7 +421,8 @@
     // switch, filter, year). Defined later inside the desktop-only block;
     // exposed on window so these cross-scope calls work (no-op on mobile).
     if (window.__peopleSegmentSpy) window.__peopleSegmentSpy();
-    if (window.__peopleYearBall)   window.__peopleYearBall();
+    // (The shared year-rail mark repositions itself via a MutationObserver
+    // on the rail's active-year class — see index-frame.js.)
   }
 
   // Recount role-group chips ("4 Students", "12 Researchers", …) against
@@ -632,7 +633,6 @@
   // (left/top transition) while the target text stays put.
   if (window.matchMedia('(min-width: 992px)').matches) {
     var segLogo  = document.getElementById('segmentLogo');
-    var yearLogo = document.getElementById('yearLogo');
     var navLogo  = document.getElementById('navLogo');
     var SECTION_TO_SEG = { pi: 'team', team: 'team', alumni: 'alumni', collaborators: 'collaborators' };
     var GAP = 6;   // px between a logo and the text it flanks
@@ -684,32 +684,8 @@
     window.addEventListener('resize', window.__peopleSegmentSpy, { passive: true });
     window.__peopleSegmentSpy();
 
-    // Year logo — sits just AFTER the active year label. (Re-run on scroll:
-    // the sticky rail un-sticks near the footer, shifting the year.)
-    var yearRaf = 0;
-    function positionYearLogo() {
-      yearRaf = 0;
-      if (!yearLogo || !yearNav) return;
-      var link = yearNav.querySelector('a[data-year="' + state.year + '"]');
-      if (!link) { yearLogo.classList.remove('is-visible'); return; }
-      var rng = document.createRange();
-      rng.selectNodeContents(link);   // exact text box (handles centred "All")
-      var r = rng.getBoundingClientRect();
-      yearLogo.style.left = (r.right + GAP) + 'px';
-      yearLogo.style.top  = (r.top + r.height / 2 - yearLogo.offsetHeight / 2) + 'px';
-      yearLogo.classList.add('is-visible');
-    }
-    window.__peopleYearBall = function () {
-      if (yearRaf) return;
-      yearRaf = requestAnimationFrame(positionYearLogo);
-    };
-    window.addEventListener('resize', window.__peopleYearBall, { passive: true });
-    window.addEventListener('scroll', window.__peopleYearBall, { passive: true });
-    // The rail scrolls internally (overflow-y) — that doesn't fire a window
-    // scroll event, so track the rail's own scroll too, keeping the mark
-    // glued to its year as the year list moves.
-    if (yearNav) yearNav.addEventListener('scroll', window.__peopleYearBall, { passive: true });
-    window.__peopleYearBall();
+    // (The year-rail mark is shared across index pages — created + tracked
+    // by index-frame.js, which follows the rail's `.active` year.)
 
     // Nav logo — sits just BEFORE the active nav item. The nav mounts async
     // (nav-include.js), so poll briefly for the active link.
@@ -738,7 +714,6 @@
     function repositionAll() {
       positionNavLogo();
       window.__peopleSegmentSpy();
-      window.__peopleYearBall();
     }
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(repositionAll);
     window.addEventListener('load', repositionAll);
