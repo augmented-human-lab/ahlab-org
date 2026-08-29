@@ -624,14 +624,18 @@
   }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.rv').forEach(function (el) { obs.observe(el); });
 
-  // ── Desktop segment scroll-spy ───────────────────────────────────────
+  // ── Desktop selection marks (rotating AHL logos) ────────────────────
   // (The frame auto-hide + footer latch are shared across index pages and
-  // live in index-frame.js.) A hand-sketched arrow points at whichever
-  // segment (Team / Collaborators / Alumni) is currently in view; that chip
-  // also gets a subtle bob.
+  // live in index-frame.js.) Three spinning AHL circles flag the current
+  // selection: one before the active nav item, one before the in-view
+  // segment chip, one after the active year. Each glides to its target
+  // (left/top transition) while the target text stays put.
   if (window.matchMedia('(min-width: 992px)').matches) {
-    var segArrow = document.getElementById('segmentArrow');
+    var segLogo  = document.getElementById('segmentLogo');
+    var yearLogo = document.getElementById('yearLogo');
+    var navLogo  = document.getElementById('navLogo');
     var SECTION_TO_SEG = { pi: 'team', team: 'team', alumni: 'alumni', collaborators: 'collaborators' };
+    var GAP = 6;   // px between a logo and the text it flanks
     var spyRaf = 0;
 
     function focusedSegment() {
@@ -655,9 +659,10 @@
       return SECTION_TO_SEG[key] || key || null;
     }
 
-    function updateSegmentArrow() {
+    // Segment logo — sits just BEFORE the in-view segment chip.
+    function updateSegmentLogo() {
       spyRaf = 0;
-      if (!segArrow) return;
+      if (!segLogo) return;
       var seg = focusedSegment();
       var target = null;
       document.querySelectorAll('#segmentPills .hero-chip').forEach(function (c) {
@@ -665,50 +670,74 @@
         c.classList.toggle('seg-focused', on);
         if (on) target = c;
       });
-      if (!target) { segArrow.classList.remove('is-visible'); return; }
+      if (!target) { segLogo.classList.remove('is-visible'); return; }
       var r = target.getBoundingClientRect();
-      // Arrow points DOWN: sit it just above the chip, its head (bottom of
-      // the SVG) a few px above the chip's top edge, nudged slightly right of
-      // centre so it reads as pointing in.
-      segArrow.style.left = (r.left + r.width / 2 - segArrow.offsetWidth / 2 + 4) + 'px';
-      segArrow.style.top  = (r.top - segArrow.offsetHeight - 2) + 'px';
-      segArrow.classList.add('is-visible');
+      segLogo.style.left = (r.left - segLogo.offsetWidth - GAP) + 'px';
+      segLogo.style.top  = (r.top + r.height / 2 - segLogo.offsetHeight / 2) + 'px';
+      segLogo.classList.add('is-visible');
     }
-
     window.__peopleSegmentSpy = function () {
       if (spyRaf) return;
-      spyRaf = requestAnimationFrame(updateSegmentArrow);
+      spyRaf = requestAnimationFrame(updateSegmentLogo);
     };
     window.addEventListener('scroll', window.__peopleSegmentSpy, { passive: true });
     window.addEventListener('resize', window.__peopleSegmentSpy, { passive: true });
     window.__peopleSegmentSpy();
 
-    // ── Hand-sketched arrow pointing at the active year in the left rail ──
-    var yearArrow = document.getElementById('yearArrow');
+    // Year logo — sits just AFTER the active year label. (Re-run on scroll:
+    // the sticky rail un-sticks near the footer, shifting the year.)
     var yearRaf = 0;
-    function positionYearArrow() {
+    function positionYearLogo() {
       yearRaf = 0;
-      if (!yearArrow || !yearNav) return;
+      if (!yearLogo || !yearNav) return;
       var link = yearNav.querySelector('a[data-year="' + state.year + '"]');
-      if (!link) { yearArrow.classList.remove('is-visible'); return; }
-      // Range gives the exact text box regardless of the link's alignment
-      // ("All" is centred, years are left-aligned). The arrow points LEFT,
-      // so put its head (left edge of the SVG) just past the label's right.
+      if (!link) { yearLogo.classList.remove('is-visible'); return; }
       var rng = document.createRange();
-      rng.selectNodeContents(link);
+      rng.selectNodeContents(link);   // exact text box (handles centred "All")
       var r = rng.getBoundingClientRect();
-      yearArrow.style.left = (r.right + 3) + 'px';
-      yearArrow.style.top  = (r.top + r.height / 2 - yearArrow.offsetHeight / 2) + 'px';
-      yearArrow.classList.add('is-visible');
+      yearLogo.style.left = (r.right + GAP) + 'px';
+      yearLogo.style.top  = (r.top + r.height / 2 - yearLogo.offsetHeight / 2) + 'px';
+      yearLogo.classList.add('is-visible');
     }
-    // Re-run on scroll too: the sticky rail un-sticks near the footer, so the
-    // active year's on-screen position shifts.
     window.__peopleYearBall = function () {
       if (yearRaf) return;
-      yearRaf = requestAnimationFrame(positionYearArrow);
+      yearRaf = requestAnimationFrame(positionYearLogo);
     };
     window.addEventListener('resize', window.__peopleYearBall, { passive: true });
     window.addEventListener('scroll', window.__peopleYearBall, { passive: true });
     window.__peopleYearBall();
+
+    // Nav logo — sits just BEFORE the active nav item. The nav mounts async
+    // (nav-include.js), so poll briefly for the active link.
+    function positionNavLogo() {
+      if (!navLogo) return;
+      var active = document.querySelector('.site-nav .nav-links a.active');
+      if (!active) { navLogo.classList.remove('is-visible'); return; }
+      var rng = document.createRange();
+      rng.selectNodeContents(active);
+      var r = rng.getBoundingClientRect();
+      navLogo.style.left = (r.left - navLogo.offsetWidth - GAP) + 'px';
+      navLogo.style.top  = (r.top + r.height / 2 - navLogo.offsetHeight / 2) + 'px';
+      navLogo.classList.add('is-visible');
+    }
+    var navTries = 0;
+    var navPoll = setInterval(function () {
+      if (document.querySelector('.site-nav .nav-links a.active') || ++navTries > 40) {
+        clearInterval(navPoll);
+        positionNavLogo();
+      }
+    }, 100);
+    window.addEventListener('resize', positionNavLogo, { passive: true });
+
+    // Re-place every mark once the layout has settled (async web fonts and
+    // the async-mounted nav both shift text after first paint).
+    function repositionAll() {
+      positionNavLogo();
+      window.__peopleSegmentSpy();
+      window.__peopleYearBall();
+    }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(repositionAll);
+    window.addEventListener('load', repositionAll);
+    setTimeout(repositionAll, 1200);
   }
 })();

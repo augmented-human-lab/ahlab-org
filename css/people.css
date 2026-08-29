@@ -145,50 +145,41 @@
      focused chip now signal which segment is in view). */
   .people-hives .section-label { display: none; }
 
-  /* Segment focus: subtle bob on the chip the scroll is currently on. */
-  #segmentPills .hero-chip { display: inline-block; }
-  #segmentPills .hero-chip.seg-focused {
-    color: #fff;
-    animation: seg-focus-bob 1.3s ease-in-out infinite;
-  }
-  @keyframes seg-focus-bob {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-1.5px); }
-  }
+  /* Segment focus: the in-view chip just brightens to full white — no
+     motion, so the text stays put while the rotating logo moves to it. */
+  #segmentPills .hero-chip.seg-focused { color: #fff; }
 }
 
-/* ── Hand-sketched arrows marking the active segment / year ───────────
-   Static ink doodles (no animation). Positioned by JS so the arrowhead
-   points at its target: the segment arrow points DOWN at the in-view
-   segment chip, the year arrow points LEFT at the active year in the rail.
-   A soft white halo keeps the dark ink legible over both the light content
-   and the gradient rail/bar. Desktop-only. */
-.sketch-arrow {
+/* ── Rotating AHL marks flagging the active selection ─────────────────
+   A small white AHL circle spins on its vertical axis (flip) beside the
+   active nav item, the in-view segment chip, and the active year. Each is
+   fixed-positioned by JS and glides (left/top transition) to its target
+   while the target text stays still. White so it reads on the gradient
+   nav / bar / rail. Desktop-only. */
+.ahl-flip-logo {
   position: fixed;
   left: 0; top: 0;
+  width: 16px; height: 16px;
   z-index: 46;                 /* above the bottom filter bar (45) */
   pointer-events: none;
   opacity: 0;
-  transition: left .4s cubic-bezier(.22, 1, .36, 1), top .4s cubic-bezier(.22, 1, .36, 1), opacity .3s ease;
+  perspective: 220px;
+  transition: left .45s cubic-bezier(.22, 1, .36, 1), top .45s cubic-bezier(.22, 1, .36, 1), opacity .3s ease;
   will-change: left, top;
 }
-.sketch-arrow.is-visible { opacity: 1; }
-.sketch-arrow svg {
-  display: block;
-  width: 100%; height: 100%;
-  overflow: visible;
-  filter: drop-shadow(0 0 2px rgba(255, 255, 255, .85));
+.ahl-flip-logo.is-visible { opacity: 1; }
+.ahl-flip-logo img {
+  width: 100%; height: 100%; display: block;
+  /* Whiten the dark mark so it shows on the gradient. */
+  filter: brightness(0) invert(1) drop-shadow(0 1px 2px rgba(14, 15, 17, .35));
+  animation: ahl-logo-flip 2.6s cubic-bezier(.5, 0, .5, 1) infinite;
+  transform-style: preserve-3d;
 }
-.sketch-arrow svg path {
-  fill: none;
-  stroke: var(--color-neutral-100);
-  stroke-width: 2.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+@keyframes ahl-logo-flip {
+  0%   { transform: rotateY(0deg);   }
+  100% { transform: rotateY(360deg); }
 }
-#segmentArrow { width: 34px; height: 40px; }
-#yearArrow    { width: 42px; height: 36px; }
-@media (max-width: 991px) { .sketch-arrow { display: none; } }
+@media (max-width: 991px) { .ahl-flip-logo { display: none; } }
 
 /* Right rail is a desktop-only frame element. */
 @media (max-width: 991px) { .side-pane { display: none; } }
@@ -277,6 +268,29 @@
   opacity: 0; transition: opacity .4s;
 }
 .person-card:hover .person-card-photo::after { opacity: 1; }
+
+/* Principal Investigator — the PI card leads the Current Team grid with a
+   translucent strip across the bottom of the photo. */
+.person-card-pi-strip {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 2;
+  padding: 8px 10px;
+  background: rgba(14, 15, 17, .6);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: .3px;
+  text-align: center;
+  line-height: 1.2;
+}
+@media (max-width: 767px) {
+  .person-card-pi-strip { font-size: 10px; padding: 6px 6px; }
+}
+
 .person-card h4 {
   font-family: var(--font-display); font-weight: 700;
   font-size: 18px; line-height: 24px;
@@ -901,7 +915,9 @@ a.profile-pub-title:hover { color: var(--color-accent); }
    apply to the mobile list which stays grouped by section). */
 .hero-filter-segments {
   display: inline-flex;
-  gap: 14px;
+  /* Wider gap so the rotating AHL mark has room to sit just before the
+     selected chip without crowding the previous one. */
+  gap: 30px;
 }
 @media (max-width: 991px) {
   .hero-summary-right { display: none; }
