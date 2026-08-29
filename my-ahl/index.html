@@ -605,10 +605,13 @@
     '</a>';
   }
 
-  function addNewResource(label) {
-    return '<button type="button" class="myahl-resource myahl-resource-addnew" disabled title="' + ADDNEW_TIP + '">' +
+  // "Add new" tile — leads a section's grid for admins. `kind` is 'res'
+  // (public resource) or 'app' (admin-only app); clicking it reveals that
+  // section's inline add form (wired via delegation below).
+  function addNewTileHTML(kind) {
+    return '<button type="button" class="myahl-resource myahl-resource-addnew" data-addnew="' + kind + '">' +
       '<div class="myahl-resource-icon" aria-hidden="true">+</div>' +
-      '<div class="myahl-resource-label">' + escapeHtml(label) + '</div>' +
+      '<div class="myahl-resource-label">Add new</div>' +
     '</button>';
   }
 
@@ -672,42 +675,47 @@
     '</div>';
   }
 
-  // ── Admin-added apps ──────────────────────────────────────
-  // New apps an admin adds through the inline form are stored per-browser
-  // in localStorage and shown alongside the hardcoded ADMIN_APPS, until
-  // they're permanently published (added to ADMIN_APPS + a fresh build/
-  // deploy). They render with the generic app-grid icon.
-  var CUSTOM_APPS_KEY = 'ahl_custom_admin_apps';
-  function loadCustomApps() {
-    try { var v = JSON.parse(localStorage.getItem(CUSTOM_APPS_KEY)); return Array.isArray(v) ? v : []; }
+  // ── Admin-added resources / apps ──────────────────────────
+  // Admins can add two kinds of tile through an inline form:
+  //   'res' → a public resource, lands in "AHL Resources" (everyone sees it)
+  //   'app' → an admin-only app, lands in "Admin Apps"
+  // New tiles are stored per-browser in localStorage and shown alongside the
+  // hardcoded lists until they're permanently published (added to the arrays
+  // + a fresh build/deploy). They render with the generic app-grid icon.
+  // Non-admins never see an "Add new" tile or form, so they cannot add either.
+  var CUSTOM_KEYS = { res: 'ahl_custom_resources', app: 'ahl_custom_admin_apps' };
+  function loadCustom(kind) {
+    try { var v = JSON.parse(localStorage.getItem(CUSTOM_KEYS[kind])); return Array.isArray(v) ? v : []; }
     catch (e) { return []; }
   }
-  function saveCustomApps(apps) {
-    try { localStorage.setItem(CUSTOM_APPS_KEY, JSON.stringify(apps)); } catch (e) {}
+  function saveCustom(kind, arr) {
+    try { localStorage.setItem(CUSTOM_KEYS[kind], JSON.stringify(arr)); } catch (e) {}
   }
-  function customAppCardHTML(app, idx) {
+  function customCardHTML(item, idx, kind) {
     return '<div class="myahl-resource-custom">' +
-      '<a class="myahl-resource" href="' + escapeHtml(app.href) + '" target="_blank" rel="noopener">' +
+      '<a class="myahl-resource" href="' + escapeHtml(item.href) + '" target="_blank" rel="noopener">' +
         '<div class="myahl-resource-icon"><svg aria-hidden="true"><use href="#i-myahl-generic"/></svg></div>' +
-        '<div class="myahl-resource-label">' + escapeHtml(app.label) + '</div>' +
+        '<div class="myahl-resource-label">' + escapeHtml(item.label) + '</div>' +
       '</a>' +
-      '<button type="button" class="myahl-resource-remove" data-remove-custom="' + idx + '" title="Remove (this browser only)" aria-label="Remove app">×</button>' +
+      '<button type="button" class="myahl-resource-remove" data-remove-custom="' + idx + '" data-remove-kind="' + kind + '" title="Remove (this browser only)" aria-label="Remove">×</button>' +
     '</div>';
   }
-  function adminAppsGridHTML() {
-    return ADMIN_APPS.map(adminAppCardHTML).join('') +
-           loadCustomApps().map(customAppCardHTML).join('');
-  }
-  function addAppFormHTML() {
-    return '<div class="myahl-addapp">' +
-      '<button type="button" class="myahl-addapp-trigger" id="myahl-addapp-trigger">+ Add app</button>' +
-      '<form class="myahl-addapp-form" id="myahl-addapp-form" hidden>' +
-        '<input type="text" id="myahl-addapp-name" class="myahl-addapp-input" maxlength="10" placeholder="Name (max 10)" autocomplete="off" required>' +
-        '<input type="url" id="myahl-addapp-url" class="myahl-addapp-input myahl-addapp-url" placeholder="https://…" autocomplete="off" required>' +
+  // Inline add form + note for a section. Hidden until its "Add new" tile
+  // is clicked; wired by delegation in wireAddFormsOnce().
+  function addFormHTML(kind) {
+    return '<div class="myahl-addapp" data-addwrap="' + kind + '" hidden>' +
+      '<form class="myahl-addapp-form" data-form="' + kind + '">' +
+        '<input type="text" class="myahl-addapp-input" data-name="' + kind + '" maxlength="10" placeholder="Name (max 10)" autocomplete="off" required>' +
+        // type=text (not url) so scheme-less input like "example.com" is
+        // accepted; the handler prepends https:// when missing.
+        '<input type="text" inputmode="url" class="myahl-addapp-input myahl-addapp-url" data-url="' + kind + '" placeholder="https://…" autocomplete="off" required>' +
         '<button type="submit" class="myahl-addapp-save">Add</button>' +
-        '<button type="button" class="myahl-addapp-cancel" id="myahl-addapp-cancel">Cancel</button>' +
+        '<button type="button" class="myahl-addapp-cancel" data-cancel="' + kind + '">Cancel</button>' +
       '</form>' +
-      '<div class="myahl-addapp-note">Saved to this browser until it’s permanently published.</div>' +
+      '<div class="myahl-addapp-note">' +
+        (kind === 'res' ? 'Visible to everyone once published. ' : '') +
+        'Saved to this browser until it’s permanently published.' +
+      '</div>' +
     '</div>';
   }
 
@@ -765,6 +773,75 @@
       '<h2>' + escapeHtml(title) + '</h2>' +
       '<div class="myahl-section-count">' + count + (count === 1 ? ' item' : ' items') + '</div>' +
     '</div>';
+  }
+
+  // One-time delegated wiring on #myahl-root (survives re-renders). Handles:
+  // revealing/hiding each section's add form, submitting it (save to
+  // localStorage → re-render), removing a custom tile, and the demo delete.
+  var _delegatedWired = false;
+  function wireAddFormsOnce() {
+    if (_delegatedWired || !root) return;
+    _delegatedWired = true;
+
+    root.addEventListener('click', function (e) {
+      var addBtn = e.target.closest('[data-addnew]');
+      if (addBtn) {
+        var wrap = root.querySelector('[data-addwrap="' + addBtn.getAttribute('data-addnew') + '"]');
+        if (wrap) {
+          wrap.hidden = !wrap.hidden;
+          if (!wrap.hidden) { var ip = wrap.querySelector('[data-name]'); if (ip) ip.focus(); }
+        }
+        return;
+      }
+      var cancelBtn = e.target.closest('[data-cancel]');
+      if (cancelBtn) {
+        var w = root.querySelector('[data-addwrap="' + cancelBtn.getAttribute('data-cancel') + '"]');
+        if (w) { var f = w.querySelector('form'); if (f) f.reset(); w.hidden = true; }
+        return;
+      }
+      var rm = e.target.closest('[data-remove-custom]');
+      if (rm) {
+        e.preventDefault();
+        var idx = parseInt(rm.getAttribute('data-remove-custom'), 10);
+        var rkind = rm.getAttribute('data-remove-kind');
+        var arr = loadCustom(rkind);
+        if (idx >= 0 && idx < arr.length) { arr.splice(idx, 1); saveCustom(rkind, arr); renderDashboard(_lastDashboard); }
+        return;
+      }
+      var del = e.target.closest('[data-myahl-delete]');
+      if (del) {
+        e.preventDefault();
+        var targetType = del.getAttribute('data-myahl-delete');
+        var slug       = del.getAttribute('data-myahl-slug');
+        var card       = del.closest('.myahl-pub-item, .myahl-project-wrap, .myahl-tile');
+        var title      = (card && (card.querySelector('.myahl-pub-title, h5, .myahl-tile-title') || {}).textContent) || slug;
+        if (!confirm('Delete "' + title + '"?\n\nThis will be sent for review (broker pipeline not yet wired — visual change only).')) return;
+        if (card) {
+          card.style.opacity = '.4';
+          card.style.pointerEvents = 'none';
+          var note = document.createElement('div');
+          note.className = 'myahl-pending-delete-note';
+          note.textContent = 'Pending review (delete pipeline not yet wired)';
+          card.appendChild(note);
+        }
+        console.info('[myahl] delete request:', targetType, slug);
+      }
+    });
+
+    root.addEventListener('submit', function (e) {
+      var form = e.target.closest('[data-form]');
+      if (!form) return;
+      e.preventDefault();
+      var kind = form.getAttribute('data-form');
+      var name = (form.querySelector('[data-name]').value || '').trim().slice(0, 10);
+      var url  = (form.querySelector('[data-url]').value || '').trim();
+      if (!name || !url) return;
+      if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+      var arr = loadCustom(kind);
+      arr.push({ label: name, href: url });
+      saveCustom(kind, arr);
+      renderDashboard(_lastDashboard);
+    });
   }
 
   var _lastDashboard = null;
@@ -907,109 +984,44 @@
         '</div>' +
       '</section>';
 
-    // Resources — organization-wide tools (Wiki etc), shared across
-    // members. Rendered last to mirror the dashboard's "your stuff"
-    // → "lab tools" top-to-bottom flow. Static list for now; member-
-    // pinned resources land here later via the edit pipeline.
+    var currentUser = window.AHLAuth && window.AHLAuth.getUser();
+    var isAdmin     = isAdminUser(currentUser);
+
+    // Resources — organization-wide tools (Wiki etc), shared across members.
+    // Admins get an "Add new" tile + inline form (adds a PUBLIC resource,
+    // visible to everyone once published); non-admins just see the list.
+    var customRes = loadCustom('res');
     var resourcesHTML =
       '<section class="myahl-section">' +
-        sectionHeaderHTML('AHL Resources', RESOURCES.length) +
+        sectionHeaderHTML('AHL Resources', RESOURCES.length + customRes.length) +
         '<div class="myahl-resources-grid">' +
-          addNewResource('Add new') +
+          (isAdmin ? addNewTileHTML('res') : '') +
           RESOURCES.map(resourceCardHTML).join('') +
+          customRes.map(function (r, i) { return customCardHTML(r, i, 'res'); }).join('') +
         '</div>' +
+        (isAdmin ? addFormHTML('res') : '') +
       '</section>';
 
-    // Admin Apps section — only for lab admins (matched by email).
-    // Built last so the rest of the dashboard is unaffected for
-    // non-admins.
-    var currentUser  = window.AHLAuth && window.AHLAuth.getUser();
+    // Admin Apps section — only for lab admins (matched by email). Admins
+    // get an "Add new" tile + inline form (adds an ADMIN-ONLY app).
     var adminAppsHTML = '';
-    if (isAdminUser(currentUser)) {
+    if (isAdmin) {
+      var customApp = loadCustom('app');
       adminAppsHTML =
         '<section class="myahl-section myahl-admin-section">' +
-          adminSectionHeaderHTML('Admin Apps', ADMIN_APPS.length + loadCustomApps().length) +
-          '<div class="myahl-resources-grid" id="myahl-admin-grid">' +
-            adminAppsGridHTML() +
+          adminSectionHeaderHTML('Admin Apps', ADMIN_APPS.length + customApp.length) +
+          '<div class="myahl-resources-grid">' +
+            addNewTileHTML('app') +
+            ADMIN_APPS.map(adminAppCardHTML).join('') +
+            customApp.map(function (a, i) { return customCardHTML(a, i, 'app'); }).join('') +
           '</div>' +
-          addAppFormHTML() +
+          addFormHTML('app') +
         '</section>';
     }
 
-    var logoutHTML =
-      '<div class="myahl-logout-row">' +
-        '<button class="myahl-logout" type="button" id="myahl-signout">Sign out</button>' +
-      '</div>';
+    root.innerHTML = headerRowHTML + projectsHTML + pubsHTML + eventsHTML + pressHTML + resourcesHTML + adminAppsHTML;
 
-    root.innerHTML = headerRowHTML + projectsHTML + pubsHTML + eventsHTML + pressHTML + resourcesHTML + adminAppsHTML + logoutHTML;
-
-    // ── Admin: add / remove custom apps ───────────────────────
-    // (All wired to freshly-rendered elements, so no listener build-up.)
-    var addTrigger = document.getElementById('myahl-addapp-trigger');
-    var addForm    = document.getElementById('myahl-addapp-form');
-    if (addTrigger && addForm) {
-      var nameEl = document.getElementById('myahl-addapp-name');
-      addTrigger.addEventListener('click', function () {
-        addForm.hidden = false;
-        addTrigger.hidden = true;
-        if (nameEl) nameEl.focus();
-      });
-      document.getElementById('myahl-addapp-cancel').addEventListener('click', function () {
-        addForm.reset(); addForm.hidden = true; addTrigger.hidden = false;
-      });
-      addForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var name = (nameEl.value || '').trim().slice(0, 10);
-        var url  = (document.getElementById('myahl-addapp-url').value || '').trim();
-        if (!name || !url) return;
-        if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
-        var apps = loadCustomApps();
-        apps.push({ label: name, href: url });
-        saveCustomApps(apps);
-        renderDashboard(_lastDashboard);   // re-render picks up the new app
-      });
-    }
-    var adminGrid = document.getElementById('myahl-admin-grid');
-    if (adminGrid) {
-      adminGrid.addEventListener('click', function (e) {
-        var rm = e.target.closest('[data-remove-custom]');
-        if (!rm) return;
-        e.preventDefault();
-        var idx = parseInt(rm.getAttribute('data-remove-custom'), 10);
-        var apps = loadCustomApps();
-        if (idx >= 0 && idx < apps.length) {
-          apps.splice(idx, 1); saveCustomApps(apps); renderDashboard(_lastDashboard);
-        }
-      });
-    }
-
-    var signoutBtn = document.getElementById('myahl-signout');
-    if (signoutBtn) signoutBtn.addEventListener('click', function () { window.AHLAuth.logout(); });
-
-    // Delegated delete handler — every .myahl-delete button carries
-    // data-myahl-delete (targetType) + data-myahl-slug. Broker isn't
-    // wired yet; for now we confirm + show a toast and visually mark
-    // the card as pending-delete (faded) to demonstrate the flow.
-    root.addEventListener('click', function (e) {
-      var btn = e.target.closest('[data-myahl-delete]');
-      if (!btn) return;
-      e.preventDefault();
-      var targetType = btn.getAttribute('data-myahl-delete');
-      var slug       = btn.getAttribute('data-myahl-slug');
-      var card       = btn.closest('.myahl-pub-item, .myahl-project-wrap, .myahl-tile');
-      var title      = (card && (card.querySelector('.myahl-pub-title, h5, .myahl-tile-title') || {}).textContent) || slug;
-      if (!confirm('Delete "' + title + '"?\n\nThis will be sent for review (broker pipeline not yet wired — visual change only).')) return;
-      // Visual feedback only — fades the card. Reload restores it.
-      if (card) {
-        card.style.opacity = '.4';
-        card.style.pointerEvents = 'none';
-        var note = document.createElement('div');
-        note.className = 'myahl-pending-delete-note';
-        note.textContent = 'Pending review (delete pipeline not yet wired)';
-        card.appendChild(note);
-      }
-      console.info('[myahl] delete request:', targetType, slug);
-    });
+    wireAddFormsOnce();
 
     // ── ID-card flip ─────────────────────────────────────────
     // Click anywhere on the card (or Space/Enter when focused)

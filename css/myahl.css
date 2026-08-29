@@ -1080,15 +1080,9 @@ a.myahl-tile-title:hover { color: var(--color-accent); }
 }
 
 /* Add-new variant — same 84px square shape, dashed border, accent
-   plus glyph. Disabled like the other section addnew tiles. */
+   plus glyph. Enabled (admin only): reveals the section's add form. */
 .myahl-resource-addnew {
-  cursor: not-allowed;
-  opacity: .65;
-  transition: opacity .2s;
-}
-.myahl-resource-addnew:hover {
-  opacity: .85;
-  transform: none;
+  cursor: pointer;
 }
 .myahl-resource-addnew .myahl-resource-icon {
   background: transparent;
@@ -1097,10 +1091,13 @@ a.myahl-tile-title:hover { color: var(--color-accent); }
   color: var(--color-accent-light);
   font-size: 38px;
   font-weight: 300;
+  transition: border-color .2s, color .2s, box-shadow .2s;
 }
 .myahl-resource-addnew:hover .myahl-resource-icon {
   box-shadow: none;
-  border-color: var(--color-neutral-60);
+  filter: none;
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 .myahl-resource-addnew .myahl-resource-label {
   color: var(--color-neutral-70);
