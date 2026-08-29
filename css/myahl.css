@@ -1121,11 +1121,28 @@ a.myahl-tile-title:hover { color: var(--color-accent); }
   transition: opacity .2s, background .2s, color .2s, border-color .2s;
 }
 .myahl-resource-custom:hover .myahl-resource-remove { opacity: 1; }
+/* Close (remove) button turns red on hover. */
 .myahl-resource-remove:hover {
-  background: var(--color-error);
-  border-color: var(--color-error);
+  background: #ff5f57;
+  border-color: #ff5f57;
   color: #fff;
 }
+
+/* ── App status dot (macOS traffic-light style) ─────────────
+   A small dot before each app name reflecting its health check. */
+.myahl-status-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: 1px;
+  background: var(--color-neutral-40);   /* grey — not checked yet */
+  box-shadow: inset 0 0 0 .5px rgba(0, 0, 0, .14);
+  transition: background .35s ease;
+}
+.myahl-status-dot[data-status="green"]  { background: #28c840; box-shadow: inset 0 0 0 .5px rgba(0,0,0,.14), 0 0 5px rgba(40,200,64,.5); }
+.myahl-status-dot[data-status="yellow"] { background: #febc2e; box-shadow: inset 0 0 0 .5px rgba(0,0,0,.14), 0 0 5px rgba(254,188,46,.5); }
+.myahl-status-dot[data-status="red"]    { background: #ff5f57; box-shadow: inset 0 0 0 .5px rgba(0,0,0,.14), 0 0 5px rgba(255,95,87,.5); }
 
 /* ── Inline "add app" form (admin only) ─────────────────────── */
 .myahl-addapp { margin-top: 22px; }

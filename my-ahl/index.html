@@ -601,7 +601,7 @@
       '<div class="myahl-resource-icon">' +
         '<svg aria-hidden="true"><use href="#' + escapeHtml(r.symbol) + '"/></svg>' +
       '</div>' +
-      '<div class="myahl-resource-label">' + escapeHtml(r.label) + '</div>' +
+      '<div class="myahl-resource-label">' + statusDotHTML(r.href, 'published') + escapeHtml(r.label) + '</div>' +
     '</a>';
   }
 
@@ -664,7 +664,7 @@
       '<div class="myahl-resource-icon">' +
         '<svg aria-hidden="true"><use href="#' + escapeHtml(app.symbol) + '"/></svg>' +
       '</div>' +
-      '<div class="myahl-resource-label">' + escapeHtml(app.label) + '</div>' +
+      '<div class="myahl-resource-label">' + statusDotHTML(app.href, 'published') + escapeHtml(app.label) + '</div>' +
     '</a>';
   }
 
@@ -695,7 +695,7 @@
     return '<div class="myahl-resource-custom">' +
       '<a class="myahl-resource" href="' + escapeHtml(item.href) + '" target="_blank" rel="noopener">' +
         '<div class="myahl-resource-icon"><svg aria-hidden="true"><use href="#i-myahl-generic"/></svg></div>' +
-        '<div class="myahl-resource-label">' + escapeHtml(item.label) + '</div>' +
+        '<div class="myahl-resource-label">' + statusDotHTML(item.href, 'memory') + escapeHtml(item.label) + '</div>' +
       '</a>' +
       '<button type="button" class="myahl-resource-remove" data-remove-custom="' + idx + '" data-remove-kind="' + kind + '" title="Remove (this browser only)" aria-label="Remove">×</button>' +
     '</div>';
@@ -773,6 +773,42 @@
       '<h2>' + escapeHtml(title) + '</h2>' +
       '<div class="myahl-section-count">' + count + (count === 1 ? ' item' : ' items') + '</div>' +
     '</div>';
+  }
+
+  // ── App status dots (macOS traffic-light style) ──────────────
+  // A small dot before each app name reflects a lightweight health check
+  // run when the dashboard opens:
+  //   grey   — not checked yet
+  //   green  — reachable AND from the published site (hardcoded list)
+  //   yellow — reachable but staged only in this browser's localStorage
+  //   red    — unreachable (network error / DNS failure)
+  // Cross-origin CORS lets us tell "reachable" from "unreachable" via a
+  // no-cors probe, but not a reachable-but-404 apart from a 200.
+  var _reachCache = {};   // url -> Promise<bool>, one probe per URL per load
+  function pingUrl(url) {
+    if (_reachCache[url]) return _reachCache[url];
+    _reachCache[url] = new Promise(function (resolve) {
+      var settled = false;
+      var t = setTimeout(function () { if (!settled) { settled = true; resolve(false); } }, 8000);
+      fetch(url, { mode: 'no-cors', cache: 'no-store' })
+        .then(function ()  { if (!settled) { settled = true; clearTimeout(t); resolve(true);  } })
+        .catch(function () { if (!settled) { settled = true; clearTimeout(t); resolve(false); } });
+    });
+    return _reachCache[url];
+  }
+  function statusDotHTML(url, src) {
+    return '<span class="myahl-status-dot" data-status="grey" data-app-url="' +
+      escapeHtml(url) + '" data-app-src="' + src + '"></span>';
+  }
+  function checkAppStatuses() {
+    document.querySelectorAll('.myahl-status-dot').forEach(function (dot) {
+      var url = dot.getAttribute('data-app-url');
+      var src = dot.getAttribute('data-app-src');
+      if (!url) return;
+      pingUrl(url).then(function (ok) {
+        dot.setAttribute('data-status', ok ? (src === 'memory' ? 'yellow' : 'green') : 'red');
+      });
+    });
   }
 
   // One-time delegated wiring on #myahl-root (survives re-renders). Handles:
@@ -1022,6 +1058,7 @@
     root.innerHTML = headerRowHTML + projectsHTML + pubsHTML + eventsHTML + pressHTML + resourcesHTML + adminAppsHTML;
 
     wireAddFormsOnce();
+    checkAppStatuses();   // health-check the app tiles (grey → green/yellow/red)
 
     // ── ID-card flip ─────────────────────────────────────────
     // Click anywhere on the card (or Space/Enter when focused)
