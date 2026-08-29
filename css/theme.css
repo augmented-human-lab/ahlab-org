@@ -105,7 +105,10 @@ ul  { list-style: none; }
    ============================================================ */
 .site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
-  padding: 18px 40px 0; height: 84px;
+  /* 88px side inset keeps the logo + login clear of the index pages' 72px
+     gradient rails, and gives every page (home / vision / join / detail)
+     the same logo + login placement. Mobile overrides this below. */
+  padding: 18px 88px 0; height: 84px;
   display: flex; align-items: flex-start; justify-content: space-between;
   background: var(--gradient);
   /* The bar's bottom edge fades softly to transparent so it melts into

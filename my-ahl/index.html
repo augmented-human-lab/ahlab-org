@@ -269,6 +269,13 @@
     <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
     <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
   </symbol>
+  <!-- Generic 2×2 app-grid glyph — placeholder icon for admin-added apps. -->
+  <symbol id="i-myahl-generic" viewBox="0 0 24 24">
+    <rect x="3"  y="3"  width="7" height="7" rx="1.6"/>
+    <rect x="14" y="3"  width="7" height="7" rx="1.6"/>
+    <rect x="3"  y="14" width="7" height="7" rx="1.6"/>
+    <rect x="14" y="14" width="7" height="7" rx="1.6"/>
+  </symbol>
 </svg>
 
 <main class="myahl-main">
@@ -665,6 +672,45 @@
     '</div>';
   }
 
+  // ── Admin-added apps ──────────────────────────────────────
+  // New apps an admin adds through the inline form are stored per-browser
+  // in localStorage and shown alongside the hardcoded ADMIN_APPS, until
+  // they're permanently published (added to ADMIN_APPS + a fresh build/
+  // deploy). They render with the generic app-grid icon.
+  var CUSTOM_APPS_KEY = 'ahl_custom_admin_apps';
+  function loadCustomApps() {
+    try { var v = JSON.parse(localStorage.getItem(CUSTOM_APPS_KEY)); return Array.isArray(v) ? v : []; }
+    catch (e) { return []; }
+  }
+  function saveCustomApps(apps) {
+    try { localStorage.setItem(CUSTOM_APPS_KEY, JSON.stringify(apps)); } catch (e) {}
+  }
+  function customAppCardHTML(app, idx) {
+    return '<div class="myahl-resource-custom">' +
+      '<a class="myahl-resource" href="' + escapeHtml(app.href) + '" target="_blank" rel="noopener">' +
+        '<div class="myahl-resource-icon"><svg aria-hidden="true"><use href="#i-myahl-generic"/></svg></div>' +
+        '<div class="myahl-resource-label">' + escapeHtml(app.label) + '</div>' +
+      '</a>' +
+      '<button type="button" class="myahl-resource-remove" data-remove-custom="' + idx + '" title="Remove (this browser only)" aria-label="Remove app">×</button>' +
+    '</div>';
+  }
+  function adminAppsGridHTML() {
+    return ADMIN_APPS.map(adminAppCardHTML).join('') +
+           loadCustomApps().map(customAppCardHTML).join('');
+  }
+  function addAppFormHTML() {
+    return '<div class="myahl-addapp">' +
+      '<button type="button" class="myahl-addapp-trigger" id="myahl-addapp-trigger">+ Add app</button>' +
+      '<form class="myahl-addapp-form" id="myahl-addapp-form" hidden>' +
+        '<input type="text" id="myahl-addapp-name" class="myahl-addapp-input" maxlength="10" placeholder="Name (max 10)" autocomplete="off" required>' +
+        '<input type="url" id="myahl-addapp-url" class="myahl-addapp-input myahl-addapp-url" placeholder="https://…" autocomplete="off" required>' +
+        '<button type="submit" class="myahl-addapp-save">Add</button>' +
+        '<button type="button" class="myahl-addapp-cancel" id="myahl-addapp-cancel">Cancel</button>' +
+      '</form>' +
+      '<div class="myahl-addapp-note">Saved to this browser until it’s permanently published.</div>' +
+    '</div>';
+  }
+
   function addNewProjectCard(label) {
     // Anchor (not button) — navigates to the dedicated /projects/new/
     // page that already hosts the project-create flow. Same dashed
@@ -721,7 +767,9 @@
     '</div>';
   }
 
+  var _lastDashboard = null;
   function renderDashboard(d) {
+    _lastDashboard = d;   // kept so admin add/remove can re-render in place
     // Profile tile is laid out as a flex column so the expertise bar
     // can pin to the bottom (margin-top: auto) and fill the vertical
     // space the tile inherits from matching the ID card's height.
@@ -877,13 +925,14 @@
     // non-admins.
     var currentUser  = window.AHLAuth && window.AHLAuth.getUser();
     var adminAppsHTML = '';
-    if (isAdminUser(currentUser) && ADMIN_APPS.length) {
+    if (isAdminUser(currentUser)) {
       adminAppsHTML =
         '<section class="myahl-section myahl-admin-section">' +
-          adminSectionHeaderHTML('Admin Apps', ADMIN_APPS.length) +
-          '<div class="myahl-resources-grid">' +
-            ADMIN_APPS.map(adminAppCardHTML).join('') +
+          adminSectionHeaderHTML('Admin Apps', ADMIN_APPS.length + loadCustomApps().length) +
+          '<div class="myahl-resources-grid" id="myahl-admin-grid">' +
+            adminAppsGridHTML() +
           '</div>' +
+          addAppFormHTML() +
         '</section>';
     }
 
@@ -893,6 +942,46 @@
       '</div>';
 
     root.innerHTML = headerRowHTML + projectsHTML + pubsHTML + eventsHTML + pressHTML + resourcesHTML + adminAppsHTML + logoutHTML;
+
+    // ── Admin: add / remove custom apps ───────────────────────
+    // (All wired to freshly-rendered elements, so no listener build-up.)
+    var addTrigger = document.getElementById('myahl-addapp-trigger');
+    var addForm    = document.getElementById('myahl-addapp-form');
+    if (addTrigger && addForm) {
+      var nameEl = document.getElementById('myahl-addapp-name');
+      addTrigger.addEventListener('click', function () {
+        addForm.hidden = false;
+        addTrigger.hidden = true;
+        if (nameEl) nameEl.focus();
+      });
+      document.getElementById('myahl-addapp-cancel').addEventListener('click', function () {
+        addForm.reset(); addForm.hidden = true; addTrigger.hidden = false;
+      });
+      addForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var name = (nameEl.value || '').trim().slice(0, 10);
+        var url  = (document.getElementById('myahl-addapp-url').value || '').trim();
+        if (!name || !url) return;
+        if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+        var apps = loadCustomApps();
+        apps.push({ label: name, href: url });
+        saveCustomApps(apps);
+        renderDashboard(_lastDashboard);   // re-render picks up the new app
+      });
+    }
+    var adminGrid = document.getElementById('myahl-admin-grid');
+    if (adminGrid) {
+      adminGrid.addEventListener('click', function (e) {
+        var rm = e.target.closest('[data-remove-custom]');
+        if (!rm) return;
+        e.preventDefault();
+        var idx = parseInt(rm.getAttribute('data-remove-custom'), 10);
+        var apps = loadCustomApps();
+        if (idx >= 0 && idx < apps.length) {
+          apps.splice(idx, 1); saveCustomApps(apps); renderDashboard(_lastDashboard);
+        }
+      });
+    }
 
     var signoutBtn = document.getElementById('myahl-signout');
     if (signoutBtn) signoutBtn.addEventListener('click', function () { window.AHLAuth.logout(); });

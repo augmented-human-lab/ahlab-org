@@ -1042,13 +1042,11 @@ a.myahl-tile-title:hover { color: var(--color-accent); }
   background: transparent;
   border: 0;
   cursor: pointer;
-  transition: transform .25s cubic-bezier(.16, 1, .3, 1);
 }
-.myahl-resource:hover {
-  transform: translateY(-3px);
-}
+/* No hover "lift" — instead the icon's gradient warms/brightens slightly. */
 .myahl-resource:hover .myahl-resource-icon {
-  box-shadow: 0 12px 24px rgba(14, 15, 17, .18);
+  filter: brightness(1.08) saturate(1.15) hue-rotate(-14deg);
+  box-shadow: 0 6px 18px rgba(14, 15, 17, .16);
 }
 .myahl-resource-icon {
   width: 84px;
@@ -1060,7 +1058,7 @@ a.myahl-tile-title:hover { color: var(--color-accent); }
   justify-content: center;
   color: #fff;
   box-shadow: 0 4px 14px rgba(14, 15, 17, .10);
-  transition: box-shadow .25s, transform .25s;
+  transition: box-shadow .3s ease, filter .3s ease;
 }
 .myahl-resource-icon svg {
   width: 42px;
@@ -1107,6 +1105,73 @@ a.myahl-tile-title:hover { color: var(--color-accent); }
 .myahl-resource-addnew .myahl-resource-label {
   color: var(--color-neutral-70);
   font-weight: 500;
+}
+
+/* ── Admin-added app card (generic icon + local remove) ─────── */
+.myahl-resource-custom { position: relative; width: 100px; }
+.myahl-resource-remove {
+  position: absolute;
+  top: -2px; right: 2px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--color-neutral-30);
+  background: #fff;
+  color: var(--color-neutral-70);
+  font-size: 15px; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .2s, background .2s, color .2s, border-color .2s;
+}
+.myahl-resource-custom:hover .myahl-resource-remove { opacity: 1; }
+.myahl-resource-remove:hover {
+  background: var(--color-error);
+  border-color: var(--color-error);
+  color: #fff;
+}
+
+/* ── Inline "add app" form (admin only) ─────────────────────── */
+.myahl-addapp { margin-top: 22px; }
+.myahl-addapp-trigger {
+  font-family: var(--font-display);
+  font-weight: 600; font-size: 14px;
+  color: var(--color-accent);
+  background: none; border: 0;
+  padding: 6px 0; cursor: pointer;
+}
+.myahl-addapp-trigger:hover { color: var(--color-accent-dark); }
+.myahl-addapp-form {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+}
+.myahl-addapp-input {
+  font-family: var(--font-text); font-size: 14px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-neutral-40);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--color-neutral-100);
+}
+.myahl-addapp-input:focus { outline: none; border-color: var(--color-accent); }
+#myahl-addapp-name { width: 140px; }
+.myahl-addapp-url { flex: 1; min-width: 220px; }
+.myahl-addapp-save {
+  font-family: var(--font-display);
+  font-weight: 600; font-size: 14px;
+  color: #fff; background: var(--color-accent);
+  border: 0; border-radius: 8px;
+  padding: 9px 18px; cursor: pointer;
+}
+.myahl-addapp-save:hover { background: var(--color-accent-dark); }
+.myahl-addapp-cancel {
+  font-family: var(--font-text); font-size: 14px;
+  color: var(--color-neutral-70);
+  background: none; border: 0; cursor: pointer;
+}
+.myahl-addapp-cancel:hover { color: var(--color-neutral-100); }
+.myahl-addapp-note {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--color-neutral-60);
 }
 
 

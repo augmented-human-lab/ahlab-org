@@ -79,9 +79,9 @@
             mask-image: linear-gradient(to left, #000 0%, #000 calc(100% - 30px), transparent 100%);
   }
 
-  /* Inset the nav + bottom-bar contents past the 72px rails so the logo,
-     login, and filter chips sit in the content area, not over the rails. */
-  .site-nav { padding-left: 88px; padding-right: 88px; }
+  /* Inset the bottom-bar chips past the 72px rails. (The nav's matching
+     88px inset now lives globally in theme.css so every page's logo/login
+     line up identically.) */
   .hero:has(.hero-summary) .container { padding-left: 88px; padding-right: 88px; }
   /* Filter chips match the main nav's text size. */
   .hero:has(.hero-summary) .hero-summary { font-size: 16px; }
