@@ -705,6 +705,10 @@
     };
     window.addEventListener('resize', window.__peopleYearBall, { passive: true });
     window.addEventListener('scroll', window.__peopleYearBall, { passive: true });
+    // The rail scrolls internally (overflow-y) — that doesn't fire a window
+    // scroll event, so track the rail's own scroll too, keeping the mark
+    // glued to its year as the year list moves.
+    if (yearNav) yearNav.addEventListener('scroll', window.__peopleYearBall, { passive: true });
     window.__peopleYearBall();
 
     // Nav logo — sits just BEFORE the active nav item. The nav mounts async
