@@ -989,7 +989,7 @@ a.profile-pub-title:hover { color: var(--color-accent); }
   body.view-honeycomb { scroll-snap-type: y proximity; }
   /* Zero top AND bottom clearance so every hive — first, middle, last —
      centres on the screen identically (the last one no longer sits low with
-     extra space beneath it). */
+     extra space beneath it). The hive stage keeps its natural size. */
   body.view-honeycomb .people-content { padding-top: 0; padding-bottom: 0; }
   body.view-honeycomb .people-hives { padding-top: 0; }
   body.view-honeycomb .hive-section {
@@ -999,13 +999,6 @@ a.profile-pub-title:hover { color: var(--color-accent); }
     flex-direction: column;
     justify-content: center;
     scroll-snap-align: center;
-  }
-  /* Size the stage to the visible band between the fixed nav and the docked
-     filter bar (instead of a 16/9 box that can be taller than that band), so
-     even the largest cluster fits fully, centred, with no cropping. */
-  body.view-honeycomb .hive-stage {
-    aspect-ratio: auto;
-    height: calc(100vh - 190px);
   }
 }
 .hive-stage {

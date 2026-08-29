@@ -685,7 +685,9 @@
 
     // ── Hand-sketched arrow pointing at the active year in the left rail ──
     var yearArrow = document.getElementById('yearArrow');
-    window.__peopleYearBall = function () {
+    var yearRaf = 0;
+    function positionYearArrow() {
+      yearRaf = 0;
       if (!yearArrow || !yearNav) return;
       var link = yearNav.querySelector('a[data-year="' + state.year + '"]');
       if (!link) { yearArrow.classList.remove('is-visible'); return; }
@@ -698,8 +700,15 @@
       yearArrow.style.left = (r.right + 3) + 'px';
       yearArrow.style.top  = (r.top + r.height / 2 - yearArrow.offsetHeight / 2) + 'px';
       yearArrow.classList.add('is-visible');
+    }
+    // Re-run on scroll too: the sticky rail un-sticks near the footer, so the
+    // active year's on-screen position shifts.
+    window.__peopleYearBall = function () {
+      if (yearRaf) return;
+      yearRaf = requestAnimationFrame(positionYearArrow);
     };
     window.addEventListener('resize', window.__peopleYearBall, { passive: true });
+    window.addEventListener('scroll', window.__peopleYearBall, { passive: true });
     window.__peopleYearBall();
   }
 })();
