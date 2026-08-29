@@ -268,6 +268,44 @@
     }
   }
 
+  // ── Honeycomb hover detail ──────────────────────────────────
+  // Instead of a chip pinned to each hex, a single detail card pinned to a
+  // SCREEN CORNER shows the hovered person's name + title. Which corner is
+  // chosen by the hex's quadrant within its cluster (data-quad, set in
+  // layoutHive): top-left hexes surface top-left, etc. One element,
+  // repositioned via .at-{tl,tr,bl,br} classes, reused across all hives.
+  let hexHoverCard = null;
+  function ensureHexHoverCard() {
+    if (hexHoverCard) return hexHoverCard;
+    hexHoverCard = document.createElement('div');
+    hexHoverCard.className = 'hex-corner-card';
+    hexHoverCard.setAttribute('aria-hidden', 'true');
+    hexHoverCard.innerHTML =
+      '<span class="hcc-name"></span><span class="hcc-role"></span>';
+    document.body.appendChild(hexHoverCard);
+    return hexHoverCard;
+  }
+  const QUAD_CLASS = { tl: 'at-tl', tr: 'at-tr', bl: 'at-bl', br: 'at-br' };
+  if (hivesWrap) {
+    hivesWrap.addEventListener('mouseover', e => {
+      const hex = e.target.closest('.hex');
+      if (!hex || !hivesWrap.contains(hex)) return;
+      const card = ensureHexHoverCard();
+      card.querySelector('.hcc-name').textContent = hex.dataset.name || '';
+      card.querySelector('.hcc-role').textContent = hex.dataset.role || '';
+      card.classList.remove('at-tl', 'at-tr', 'at-bl', 'at-br');
+      card.classList.add(QUAD_CLASS[hex.dataset.quad] || 'at-tl');
+      card.classList.add('is-visible');
+    });
+    hivesWrap.addEventListener('mouseout', e => {
+      const hex = e.target.closest('.hex');
+      if (!hex) return;
+      // Ignore moves that stay within the same hex (child → child).
+      if (e.relatedTarget && hex.contains(e.relatedTarget)) return;
+      if (hexHoverCard) hexHoverCard.classList.remove('is-visible');
+    });
+  }
+
   // ── Hive layout ──────────────────────────────────────────
   // Spiral axial layout: find smallest ring k that fits n hexes,
   // pick R so that k+0.5 rings fit in the container width/height,
@@ -366,9 +404,17 @@
         });
       }
       const photo = card.dataset.photo || '';
+      hex.dataset.name = card.dataset.name || '';
+      hex.dataset.role = card.dataset.role || '';
+      // Which quadrant of the cluster this hex sits in, measured from the
+      // cluster centre (midUx/midUy). Drives which SCREEN corner the hover
+      // detail card appears in: a hex up-and-left of centre → top-left
+      // corner, etc. Ties (dead-centre) fall to the bottom/right side.
+      const quadY = (u.y - midUy) < 0 ? 't' : 'b';
+      const quadX = (u.x - midUx) < 0 ? 'l' : 'r';
+      hex.dataset.quad = quadY + quadX;
       hex.innerHTML =
-        `<span class="hex-inner" style="background-image:url('${photo.replace(/"/g, '&quot;')}')"></span>` +
-        `<span class="hex-label">${card.dataset.name || ''} · ${card.dataset.role || ''}</span>`;
+        `<span class="hex-inner" style="background-image:url('${photo.replace(/"/g, '&quot;')}')"></span>`;
       frag.appendChild(hex);
     });
     hive.innerHTML = '';

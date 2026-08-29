@@ -597,3 +597,72 @@
   .insights-pane { width: 100vw; min-width: 0; }
   .insights-panel.pane-open .container { padding-right: 20px; }
 }
+/* ── Insights toggle in the right gradient rail (desktop) ───────────────
+   Icon-only button; its "Insights" caption pops out to the left on hover. */
+/* Mobile: the rail-pinned toggle is desktop-only. */
+.hero-insights-toggle.side-pane-toggle { display: none; }
+
+@media (min-width: 992px) {
+  /* Icon-only button pinned to the right gradient rail (36px band). Lives
+     outside the masked .side-pane so its caption isn't clipped by the rail's
+     edge fade. Fixed to the viewport so it stays put as the list scrolls. */
+  .hero-insights-toggle.side-pane-toggle {
+    display: inline-flex;
+    position: fixed;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+    z-index: 40;
+    float: none;
+    margin: 0;
+    padding: 9px;
+    border: 1px solid rgba(255, 255, 255, .28);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .14);
+    color: #fff;
+    transition: background .2s, border-color .2s, color .2s, opacity .3s ease;
+  }
+  .hero-insights-toggle.side-pane-toggle:hover {
+    background: rgba(255, 255, 255, .26);
+    border-color: rgba(255, 255, 255, .5);
+  }
+  .hero-insights-toggle.side-pane-toggle.is-active {
+    background: #fff;
+    border-color: #fff;
+    color: var(--color-accent);
+  }
+  .hero-insights-toggle.side-pane-toggle .hero-insights-icon {
+    width: 20px; height: 20px;
+    stroke: currentColor;
+  }
+  /* Caption — hidden; pops out to the LEFT of the rail on hover. */
+  .hero-insights-toggle.side-pane-toggle .hero-insights-label {
+    position: absolute;
+    right: calc(100% + 12px);
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    background: var(--color-neutral-100);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: .2px;
+    padding: 6px 11px;
+    border-radius: 7px;
+    box-shadow: 0 6px 16px rgba(14, 15, 17, .25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s;
+  }
+  .hero-insights-toggle.side-pane-toggle:hover .hero-insights-label,
+  .hero-insights-toggle.side-pane-toggle:focus-visible .hero-insights-label {
+    opacity: 1;
+  }
+  /* Fade out with the rest of the frame on idle. */
+  body.frame-idle .hero-insights-toggle.side-pane-toggle {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 2.2s ease;
+  }
+}
