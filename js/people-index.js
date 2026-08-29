@@ -626,11 +626,11 @@
 
   // ── Desktop segment scroll-spy ───────────────────────────────────────
   // (The frame auto-hide + footer latch are shared across index pages and
-  // live in index-frame.js.) The AHL mark bounces above whichever segment
-  // (Team / Collaborators / Alumni) is currently in view; that chip also
-  // gets a subtle bob.
+  // live in index-frame.js.) A hand-sketched arrow points at whichever
+  // segment (Team / Collaborators / Alumni) is currently in view; that chip
+  // also gets a subtle bob.
   if (window.matchMedia('(min-width: 992px)').matches) {
-    var segBall = document.getElementById('segmentBall');
+    var segArrow = document.getElementById('segmentArrow');
     var SECTION_TO_SEG = { pi: 'team', team: 'team', alumni: 'alumni', collaborators: 'collaborators' };
     var spyRaf = 0;
 
@@ -655,9 +655,9 @@
       return SECTION_TO_SEG[key] || key || null;
     }
 
-    function updateSegmentBall() {
+    function updateSegmentArrow() {
       spyRaf = 0;
-      if (!segBall) return;
+      if (!segArrow) return;
       var seg = focusedSegment();
       var target = null;
       document.querySelectorAll('#segmentPills .hero-chip').forEach(function (c) {
@@ -665,39 +665,39 @@
         c.classList.toggle('seg-focused', on);
         if (on) target = c;
       });
-      if (!target) { segBall.classList.remove('is-visible'); return; }
+      if (!target) { segArrow.classList.remove('is-visible'); return; }
       var r = target.getBoundingClientRect();
-      segBall.style.left = (r.left + r.width / 2 - segBall.offsetWidth / 2) + 'px';
-      segBall.style.top  = (r.top - segBall.offsetHeight - 8) + 'px';
-      segBall.classList.add('is-visible');
+      // Arrow points DOWN: sit it just above the chip, its head (bottom of
+      // the SVG) a few px above the chip's top edge, nudged slightly right of
+      // centre so it reads as pointing in.
+      segArrow.style.left = (r.left + r.width / 2 - segArrow.offsetWidth / 2 + 4) + 'px';
+      segArrow.style.top  = (r.top - segArrow.offsetHeight - 2) + 'px';
+      segArrow.classList.add('is-visible');
     }
 
     window.__peopleSegmentSpy = function () {
       if (spyRaf) return;
-      spyRaf = requestAnimationFrame(updateSegmentBall);
+      spyRaf = requestAnimationFrame(updateSegmentArrow);
     };
     window.addEventListener('scroll', window.__peopleSegmentSpy, { passive: true });
     window.addEventListener('resize', window.__peopleSegmentSpy, { passive: true });
     window.__peopleSegmentSpy();
 
-    // ── AHL mark on the active year in the left rail ────────────────────
-    // Sits just after the active year's text. Bounces while "All" is the
-    // active filter; static once a specific year is selected.
-    var yearBall = document.getElementById('yearBall');
+    // ── Hand-sketched arrow pointing at the active year in the left rail ──
+    var yearArrow = document.getElementById('yearArrow');
     window.__peopleYearBall = function () {
-      if (!yearBall || !yearNav) return;
+      if (!yearArrow || !yearNav) return;
       var link = yearNav.querySelector('a[data-year="' + state.year + '"]');
-      if (!link) { yearBall.classList.remove('is-visible'); return; }
+      if (!link) { yearArrow.classList.remove('is-visible'); return; }
       // Range gives the exact text box regardless of the link's alignment
-      // ("All" is centred, years are left-aligned), so the mark lands right
-      // after the label.
+      // ("All" is centred, years are left-aligned). The arrow points LEFT,
+      // so put its head (left edge of the SVG) just past the label's right.
       var rng = document.createRange();
       rng.selectNodeContents(link);
       var r = rng.getBoundingClientRect();
-      yearBall.style.left = (r.right + 6) + 'px';
-      yearBall.style.top  = (r.top + r.height / 2 - yearBall.offsetHeight / 2) + 'px';
-      yearBall.classList.add('is-visible');
-      yearBall.classList.toggle('is-bouncing', state.year === 'all');
+      yearArrow.style.left = (r.right + 3) + 'px';
+      yearArrow.style.top  = (r.top + r.height / 2 - yearArrow.offsetHeight / 2) + 'px';
+      yearArrow.classList.add('is-visible');
     };
     window.addEventListener('resize', window.__peopleYearBall, { passive: true });
     window.__peopleYearBall();

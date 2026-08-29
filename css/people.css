@@ -157,58 +157,38 @@
   }
 }
 
-/* ── Bouncing AHL mark that tracks the in-view segment (desktop-only;
-   position + visibility driven by JS). ─────────────────────────────── */
-#segmentBall {
+/* ── Hand-sketched arrows marking the active segment / year ───────────
+   Static ink doodles (no animation). Positioned by JS so the arrowhead
+   points at its target: the segment arrow points DOWN at the in-view
+   segment chip, the year arrow points LEFT at the active year in the rail.
+   A soft white halo keeps the dark ink legible over both the light content
+   and the gradient rail/bar. Desktop-only. */
+.sketch-arrow {
   position: fixed;
   left: 0; top: 0;
-  width: 24px; height: 24px;
   z-index: 46;                 /* above the bottom filter bar (45) */
   pointer-events: none;
   opacity: 0;
-  transition: left .45s cubic-bezier(.22, 1, .36, 1), opacity .3s ease;
-  will-change: left, transform;
-}
-#segmentBall.is-visible { opacity: 1; }
-#segmentBall img {
-  width: 100%; height: 100%; display: block;
-  filter: drop-shadow(0 4px 8px rgba(14, 15, 17, .25));
-  animation: segball-bounce 1.15s cubic-bezier(.5, 0, .5, 1) infinite;
-}
-@keyframes segball-bounce {
-  0%, 100% { transform: translateY(0)     scaleY(1);   }
-  10%      { transform: translateY(0)     scaleY(.9);  }  /* squash on launch */
-  50%      { transform: translateY(-11px) scaleY(1.02);}  /* apex */
-  90%      { transform: translateY(0)     scaleY(.92); }  /* squash on land */
-}
-@media (max-width: 991px) { #segmentBall { display: none; } }
-
-/* ── AHL mark on the currently active year in the left rail ────────────
-   Bounces while "All" is active; static once a specific year filter is
-   applied. Positioned by JS. Desktop-only. */
-#yearBall {
-  position: fixed;
-  left: 0; top: 0;
-  width: 17px; height: 17px;
-  z-index: 46;
-  pointer-events: none;
-  opacity: 0;
   transition: left .4s cubic-bezier(.22, 1, .36, 1), top .4s cubic-bezier(.22, 1, .36, 1), opacity .3s ease;
-  will-change: left, top, transform;
+  will-change: left, top;
 }
-#yearBall.is-visible { opacity: 1; }
-#yearBall img {
-  width: 100%; height: 100%; display: block;
-  filter: drop-shadow(0 2px 5px rgba(14, 15, 17, .3));
+.sketch-arrow.is-visible { opacity: 1; }
+.sketch-arrow svg {
+  display: block;
+  width: 100%; height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, .85));
 }
-#yearBall.is-bouncing img {
-  animation: yearball-bounce 1.15s cubic-bezier(.5, 0, .5, 1) infinite;
+.sketch-arrow svg path {
+  fill: none;
+  stroke: var(--color-neutral-100);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
-@keyframes yearball-bounce {
-  0%, 100% { transform: translateY(0);   }
-  50%      { transform: translateY(-6px);}
-}
-@media (max-width: 991px) { #yearBall { display: none; } }
+#segmentArrow { width: 34px; height: 40px; }
+#yearArrow    { width: 42px; height: 36px; }
+@media (max-width: 991px) { .sketch-arrow { display: none; } }
 
 /* Right rail is a desktop-only frame element. */
 @media (max-width: 991px) { .side-pane { display: none; } }
@@ -1007,7 +987,10 @@ a.profile-pub-title:hover { color: var(--color-accent); }
    screen centre rather than below it. */
 @media (min-width: 992px) {
   body.view-honeycomb { scroll-snap-type: y proximity; }
-  body.view-honeycomb .people-content { padding-top: 0; }
+  /* Zero top AND bottom clearance so every hive — first, middle, last —
+     centres on the screen identically (the last one no longer sits low with
+     extra space beneath it). */
+  body.view-honeycomb .people-content { padding-top: 0; padding-bottom: 0; }
   body.view-honeycomb .people-hives { padding-top: 0; }
   body.view-honeycomb .hive-section {
     min-height: 100vh;
@@ -1016,6 +999,13 @@ a.profile-pub-title:hover { color: var(--color-accent); }
     flex-direction: column;
     justify-content: center;
     scroll-snap-align: center;
+  }
+  /* Size the stage to the visible band between the fixed nav and the docked
+     filter bar (instead of a 16/9 box that can be taller than that band), so
+     even the largest cluster fits fully, centred, with no cropping. */
+  body.view-honeycomb .hive-stage {
+    aspect-ratio: auto;
+    height: calc(100vh - 190px);
   }
 }
 .hive-stage {
