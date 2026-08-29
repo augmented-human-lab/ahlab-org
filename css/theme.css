@@ -169,8 +169,8 @@ ul  { list-style: none; }
   0%   { transform: rotateY(0deg);   }
   100% { transform: rotateY(360deg); }
 }
-/* The nav mark is larger — matched to the nav's own logo mark. */
-#navLogo { width: 30px; height: 30px; }
+/* The nav mark is larger — roughly matched to the nav's own logo mark. */
+#navLogo { width: 26px; height: 26px; }
 /* The year/segment marks sit under the nav (bottom bar level). */
 #yearLogo, #segmentLogo { z-index: 46; }
 @media (max-width: 991px) { .ahl-flip-logo { display: none; } }
