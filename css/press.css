@@ -121,9 +121,8 @@
 }
 .press-item:last-child { border-bottom: 1px solid var(--color-neutral-30); }
 .press-item.is-linked { cursor: pointer; }
-.press-item.is-linked:hover {
-  background: linear-gradient(90deg, var(--color-neutral-20) 0%, transparent 80%);
-}
+/* No light-grey background wash on hover — the title accent below is the
+   only hover affordance. */
 .press-item.is-linked:hover .press-title { color: var(--color-accent); }
 .press-item.hidden { display: none; }
 .press-arrow { display: none !important; }
