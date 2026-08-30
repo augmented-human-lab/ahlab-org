@@ -104,9 +104,11 @@
   .hero:has(.hero-summary) {
     transition: opacity .3s ease;
   }
-  /* The top nav (and its AHL mark) stay put — only the rails + bottom bar
-     (and their marks) fade on idle, so the nav mark is always visible like
-     it is on the non-index pages. */
+  /* On idle the whole frame fades — the top nav + its AHL mark included —
+     leaving only the content. Fast fade-in on activity (base transition
+     above), slow fade-out here. */
+  body.frame-idle .site-nav,
+  body.frame-idle #navLogo,
   body.frame-idle .year-nav,
   body.frame-idle .side-pane,
   body.frame-idle .hero:has(.hero-summary),

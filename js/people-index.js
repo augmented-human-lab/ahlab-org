@@ -281,7 +281,8 @@
     hexHoverCard.className = 'hex-corner-card';
     hexHoverCard.setAttribute('aria-hidden', 'true');
     hexHoverCard.innerHTML =
-      '<span class="hcc-name"></span><span class="hcc-role"></span>';
+      '<span class="hcc-name"></span><span class="hcc-role"></span>' +
+      '<span class="hcc-period"></span>';
     document.body.appendChild(hexHoverCard);
     return hexHoverCard;
   }
@@ -293,6 +294,15 @@
       const card = ensureHexHoverCard();
       card.querySelector('.hcc-name').textContent = hex.dataset.name || '';
       card.querySelector('.hcc-role').textContent = hex.dataset.role || '';
+      // Alumni get an extra bracketed period row (e.g. "[2002–2004]").
+      const periodEl = card.querySelector('.hcc-period');
+      if (hex.dataset.period) {
+        periodEl.textContent = `[${hex.dataset.period}]`;
+        periodEl.hidden = false;
+      } else {
+        periodEl.textContent = '';
+        periodEl.hidden = true;
+      }
       card.classList.remove('at-tl', 'at-tr', 'at-bl', 'at-br');
       card.classList.add(QUAD_CLASS[hex.dataset.quad] || 'at-tl');
       card.classList.add('is-visible');
@@ -406,6 +416,7 @@
       const photo = card.dataset.photo || '';
       hex.dataset.name = card.dataset.name || '';
       hex.dataset.role = card.dataset.role || '';
+      if (card.dataset.period) hex.dataset.period = card.dataset.period;
       // Which quadrant of the cluster this hex sits in, measured from the
       // cluster centre (midUx/midUy). Drives which SCREEN corner the hover
       // detail card appears in: a hex up-and-left of centre → top-left
