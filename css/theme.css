@@ -124,6 +124,16 @@ ul  { list-style: none; }
   pointer-events: none;
 }
 .site-nav > * { pointer-events: auto; }
+/* Anchor the nav gradient to the VIEWPORT (not the 84px nav box) on desktop
+   so the top bar shows the same slice of the cyan→purple gradient on every
+   page. Without this, the hero pages (home / vision / join) render the 221deg
+   gradient over the short nav box and come out noticeably more purple at the
+   left than the index pages (people / press / …), which already get this via
+   index-frame.css. Desktop-only to match those pages — mobile keeps the
+   default `scroll` attachment everywhere (and `fixed` is unreliable there). */
+@media (min-width: 992px) {
+  .site-nav { background-attachment: fixed; }
+}
 .site-nav.scrolled {
   filter: brightness(.92);
 }
