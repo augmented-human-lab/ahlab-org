@@ -58,7 +58,7 @@
         navLogo.id = 'navLogo';
         navLogo.className = 'ahl-flip-logo';
         navLogo.setAttribute('aria-hidden', 'true');
-        navLogo.innerHTML = '<img src="https://cdn.ahlab.org/media/site/cropped-Group@2x-192x192.png" alt="">';
+        navLogo.innerHTML = '<img src="https://cdn.ahlab.org/media/site/cropped-Group@2x-192x192.png" alt="" width="192" height="192">';
         document.body.appendChild(navLogo);
       }
       var placeNav = function () {

@@ -83,7 +83,7 @@
       yearLogo.id = 'yearLogo';
       yearLogo.className = 'ahl-flip-logo';
       yearLogo.setAttribute('aria-hidden', 'true');
-      yearLogo.innerHTML = '<img src="https://cdn.ahlab.org/media/site/cropped-Group@2x-192x192.png" alt="">';
+      yearLogo.innerHTML = '<img src="https://cdn.ahlab.org/media/site/cropped-Group@2x-192x192.png" alt="" width="192" height="192">';
       document.body.appendChild(yearLogo);
     }
     var yRaf = 0;
