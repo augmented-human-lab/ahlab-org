@@ -55,6 +55,14 @@
      per-year counts are hidden so the rail stays minimal-width. */
   .index-layout .year-nav {
     padding: 92px 0 76px 0;
+    /* Vertically centre the whole year block within the usable rail area
+       (between the 92px nav clearance at the top and the 76px filter-bar
+       clearance at the bottom). `safe` makes it fall back to top-aligned
+       when a page has enough years to overflow the rail, so the earliest
+       years stay reachable by scroll rather than being clipped off-screen. */
+    display: flex;
+    flex-direction: column;
+    justify-content: safe center;
     -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 30px), transparent 100%);
             mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 30px), transparent 100%);
   }
