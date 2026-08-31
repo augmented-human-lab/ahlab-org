@@ -5,7 +5,13 @@
        remaining space, socials on the right. Copy's flex:1 claim on the
        middle region keeps it centered even as the logo/social widths
        change. Wraps to stacked on narrow viewports. */
-    .site-footer .container{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+    /* Span the full viewport width (drop .container's 1370px cap) with the
+       same 88px side inset as the top nav, so the AHL logo latches to the
+       left screen edge and the socials to the right edge — matching the app
+       bar — instead of clustering near the middle on very wide screens. */
+    .site-footer .container{display:flex;align-items:center;gap:24px;flex-wrap:wrap;max-width:none;padding-left:88px;padding-right:88px}
+    /* Match the nav's mobile inset below 992px. */
+    @media(max-width:991px){.site-footer .container{padding-left:20px;padding-right:20px}}
     .site-footer .footer-logos{display:flex;align-items:center;gap:22px;flex-shrink:0}
     .site-footer .footer-logos a{display:inline-flex;align-items:center;opacity:.85;transition:opacity .25s}
     .site-footer .footer-logos a:hover{opacity:1}

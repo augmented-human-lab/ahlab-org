@@ -58,8 +58,13 @@
     -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 30px), transparent 100%);
             mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 30px), transparent 100%);
   }
+  /* Centre the year text within the 72px rail (counts are hidden below,
+     so the visible label is just the year — sit it in the middle of the
+     rail rather than left-aligned against the edge). */
   .index-layout .year-nav a {
-    padding-left: 10px;
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
     color: rgba(255, 255, 255, .68);
     border-right-color: transparent;
   }
@@ -79,10 +84,17 @@
             mask-image: linear-gradient(to left, #000 0%, #000 calc(100% - 30px), transparent 100%);
   }
 
-  /* Inset the bottom-bar chips past the 72px rails. (The nav's matching
-     88px inset now lives globally in theme.css so every page's logo/login
-     line up identically.) */
-  .hero:has(.hero-summary) .container { padding-left: 88px; padding-right: 88px; }
+  /* Inset the bottom-bar chips past the 72px rails, but let the bar span
+     the full viewport width like the top nav — dropping the .container's
+     1370px cap keeps the chips latched to the left edge and the Insights
+     toggle (float:right) latched to the right edge on very wide screens,
+     instead of clustering around the middle. (The nav's matching 88px
+     inset lives globally in theme.css so logo/login line up identically.) */
+  .hero:has(.hero-summary) .container {
+    max-width: none;
+    padding-left: 88px;
+    padding-right: 88px;
+  }
   /* Filter chips match the main nav's text size. */
   .hero:has(.hero-summary) .hero-summary { font-size: 16px; }
 
