@@ -615,21 +615,19 @@
     z-index: 40;
     float: none;
     margin: 0;
-    padding: 9px;
-    border: 1px solid rgba(255, 255, 255, .28);
-    border-radius: 10px;
-    background: rgba(255, 255, 255, .14);
-    color: #fff;
-    transition: background .2s, border-color .2s, color .2s, opacity .3s ease;
+    /* Bare white icon — no box, no border, no background (matches the
+       people page's rail view-toggle buttons). */
+    padding: 0;
+    border: 0;
+    background: none;
+    color: rgba(255, 255, 255, .55);
+    transition: color .2s, opacity .3s ease;
   }
   .hero-insights-toggle.side-pane-toggle:hover {
-    background: rgba(255, 255, 255, .26);
-    border-color: rgba(255, 255, 255, .5);
+    color: #fff;
   }
   .hero-insights-toggle.side-pane-toggle.is-active {
-    background: #fff;
-    border-color: #fff;
-    color: var(--color-accent);
+    color: #fff;
   }
   .hero-insights-toggle.side-pane-toggle .hero-insights-icon {
     width: 20px; height: 20px;
