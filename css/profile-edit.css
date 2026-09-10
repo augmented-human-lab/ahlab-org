@@ -331,26 +331,32 @@ body[data-edit-mode-page] .profile-socials {
   outline-offset: 1px;
   border-color: transparent;
 }
-/* ── Sticky submit bar at the bottom of the viewport ───────── */
+/* ── Floating submit bar at the bottom of the viewport ─────────
+   A frosted-glass panel that floats in from the bottom edge when there
+   are pending edits. It overlays content (no body padding is reserved),
+   so the page never scrolls past the footer. */
 .pe-submitbar {
   position: fixed;
-  inset-inline: 0;
-  bottom: -80px;
+  inset-inline: 16px;
+  bottom: -120px;
   z-index: 1000;
-  transition: bottom .22s ease;
+  transition: bottom .24s ease;
   pointer-events: none;
 }
-.pe-submitbar.is-dirty { bottom: 0; pointer-events: auto; }
+.pe-submitbar.is-dirty { bottom: 16px; pointer-events: auto; }
 .pe-submitbar-inner {
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1160px;
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 12px 24px;
-  background: #fff;
-  border-top: 1px solid var(--color-neutral-30);
-  box-shadow: 0 -6px 18px rgba(14, 15, 17, 0.06);
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.68);
+  -webkit-backdrop-filter: saturate(1.5) blur(20px);
+  backdrop-filter: saturate(1.5) blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(14, 15, 17, 0.16);
 }
 .pe-submitbar-count {
   flex: 1 1 auto;
@@ -378,12 +384,8 @@ body[data-edit-mode-page] .profile-socials {
 .pe-submitbar-submit:hover { filter: brightness(1.08); }
 .pe-submitbar-submit:disabled { opacity: .5; cursor: not-allowed; }
 
-/* Leave room at the bottom of the page so the submit bar
- * doesn't cover the footer when it's expanded. */
-/* Reserve room so the sticky submit bar doesn't cover the footer — but only
-   while the bar is actually open (dirty edits). Applying it for the whole
-   edit session left 96px of blank scroll below the footer. */
-html.is-edit-mode.is-submitbar-open body { padding-bottom: 96px; }
+/* No body padding is reserved for the bar — it floats over content, so the
+   page never scrolls past the footer (whether or not edits are pending). */
 
 @media (max-width: 767px) {
   .pe-submitbar-inner {

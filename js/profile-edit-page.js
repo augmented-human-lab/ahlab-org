@@ -209,38 +209,93 @@
   }
 
   // ── Role ────────────────────────────────────────────────────
+  // Positions are picked from the lab's canonical list rather than typed
+  // free-form, so titles stay consistent with the role-group filters and
+  // stint semantics. (Principal Investigator is a fixed designation and is
+  // deliberately not self-selectable here.)
+  var LAB_POSITIONS = [
+    'Senior Research Fellow',
+    'Research Fellow',
+    'Postdoctoral Researcher',
+    'Research Engineer',
+    'Research Assistant',
+    'PhD Candidate',
+    'PhD Student',
+    'Master Student',
+    'Visiting Student',
+    'Research Visitor',
+    'Research Attachment',
+    'Intern',
+  ];
   function addRolePencil() {
     var el = document.querySelector('.profile-role');
     if (!el) return;
-    mountReadMode(el, function () { return roleViewHTML(getCurrentRole()); }, function () {
+    mountReadMode(el, function () { return roleViewHTML(getCurrentRole()); }, onPencilClick);
+    function onPencilClick() {
       enterEditMode('role', el, function () {
         var current = getCurrentRole();
-        var input = document.createElement('input');
-        input.type = 'text';
-        input.maxLength = 80;
-        input.value = current;
-        input.className = 'pe-inline-input';
-        var check = makeCheck('Done', function () { editing && editing.commit(); });
-        input.addEventListener('input', function () {
-          var v = input.value.trim();
+        var picker = document.createElement('div');
+        picker.className = 'pe-featured-picker pe-role-picker';
+        picker.innerHTML =
+          '<input type="text" class="pe-featured-search pe-role-search" ' +
+            'placeholder="Search positions…" autocomplete="off">' +
+          '<ul class="pe-featured-suggestions pe-role-suggestions" role="listbox"></ul>';
+        el.innerHTML = '';
+        el.appendChild(picker);
+        var input = picker.querySelector('input');
+        var list  = picker.querySelector('ul');
+        function pickRole(role) {
+          var v = String(role || '').trim();
           var orig = String(record.role || '');
           if (v === orig) delete dirty.role;
           else dirty.role = v;
           refreshSubmitBar();
+          editing && editing.commit();   // auto-commit on pick
+        }
+        renderRoleSuggestions(list, '', current, pickRole);
+        input.addEventListener('input', function () {
+          renderRoleSuggestions(list, input.value, current, pickRole);
         });
         input.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter') { e.preventDefault(); editing && editing.commit(); }
+          if (e.key !== 'Enter') return;
+          e.preventDefault();
+          // Enter picks the first (or only) match; with none, close unchanged.
+          var first = list.querySelector('.pe-featured-suggestion[data-role]');
+          if (first) pickRole(first.getAttribute('data-role'));
+          else editing && editing.commit();
         });
-        el.innerHTML = '';
-        el.appendChild(input);
-        el.appendChild(check);
-        setTimeout(function () { input.focus(); input.select(); }, 0);
+        setTimeout(function () { input.focus(); }, 0);
         return function commitRole() {
-          var v = input.value.trim();
-          el.innerHTML = roleViewHTML(v);
-          attachPencil(el, 'Edit role', addRolePencil);
+          el.innerHTML = roleViewHTML(getCurrentRole());
+          attachPencil(el, 'Edit role', onPencilClick);
         };
       });
+    }
+  }
+  function renderRoleSuggestions(list, query, selectedRole, onPick) {
+    var q = String(query || '').trim().toLowerCase();
+    var matches = LAB_POSITIONS.filter(function (r) {
+      return !q || r.toLowerCase().indexOf(q) !== -1;
+    });
+    list.innerHTML = '';
+    if (!matches.length) {
+      var empty = document.createElement('li');
+      empty.className = 'pe-featured-empty';
+      empty.textContent = 'No positions match "' + query + '".';
+      list.appendChild(empty);
+      return;
+    }
+    matches.forEach(function (r) {
+      var li = document.createElement('li');
+      li.className = 'pe-featured-suggestion';
+      if (r === selectedRole) li.classList.add('is-selected');
+      li.setAttribute('data-role', r);
+      li.innerHTML = '<span class="pe-featured-title">' + escapeHtml(r) + '</span>';
+      li.addEventListener('mousedown', function (e) {
+        e.preventDefault();    // keep focus stability
+        onPick(r);
+      });
+      list.appendChild(li);
     });
   }
   function getCurrentRole() {
@@ -280,7 +335,6 @@
         ta.value = current;
         ta.rows = Math.min(20, Math.max(8, current.split('\n').length + 4));
         ta.maxLength = 5000;
-        var check = makeCheck('Done', function () { editing && editing.commit(); });
         ta.addEventListener('input', function () {
           var v = ta.value;
           var orig = String(record.bio || '');
@@ -291,7 +345,6 @@
         bio.classList.add('pe-editing');
         bio.innerHTML = '';
         bio.appendChild(ta);
-        bio.appendChild(check);
         setTimeout(function () { ta.focus(); }, 0);
         return function commitBio() {
           var v = ta.value;
@@ -372,8 +425,6 @@
           '<input type="text" class="pe-featured-search" placeholder="Search projects…" autocomplete="off">' +
           '<ul class="pe-featured-suggestions" role="listbox"></ul>';
         slot.replaceWith(picker);
-        var check = makeCheck('Done', function () { editing && editing.commit(); });
-        card.appendChild(check);
 
         var input = picker.querySelector('.pe-featured-search');
         var list  = picker.querySelector('.pe-featured-suggestions');
@@ -401,8 +452,6 @@
         return function commitFeatured() {
           // Replace picker with a fresh card view of the chosen project.
           picker.replaceWith(buildFeaturedCardSlot(selectedSlug));
-          var c = card.querySelector('.pe-check');
-          if (c) c.remove();
           attachPencil(card.querySelector('.sidebar-section-title') || card, 'Change featured project', onPencilClick);
         };
       });
@@ -454,35 +503,53 @@
       slot.innerHTML = '<div class="pe-empty">(no featured project)</div>';
       return slot;
     }
-    // Lightweight placeholder while we fetch the record.
-    slot.innerHTML =
-      '<div class="profile-project-card pe-featured-card">' +
-        '<div class="profile-project-card-thumb">' +
-          '<div class="profile-project-card-placeholder">?</div>' +
-        '</div>' +
-        '<div class="profile-project-card-body">' +
-          '<div class="profile-project-card-title">' + escapeHtml(slug) + '</div>' +
-        '</div>' +
-      '</div>';
+    // Render the SAME markup as the build-time read card (h5 title on the
+    // frosted bar + principle tag icons) so re-picking a project — even the
+    // one already featured — produces an identical-looking card rather than
+    // a black-titled, tag-less stub.
+    slot.innerHTML = featuredCardHTML(slug, null);
     fetch('https://cdn.ahlab.org/data/projects/' + encodeURIComponent(slug) + '.json',
         { cache: 'default' })
       .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (proj) {
-        if (!proj) return;
-        var thumb = proj.thumbnail
-          ? '<img src="' + escapeHtml(proj.thumbnail) + '" alt="' + escapeHtml(proj.title || slug) + '" loading="lazy">'
-          : '<div class="profile-project-card-placeholder">' + escapeHtml(String(proj.title || slug).charAt(0)) + '</div>';
-        slot.innerHTML =
-          '<a class="profile-project-card pe-featured-card" href="/projects/' + escapeHtml(slug) + '/">' +
-            '<div class="profile-project-card-thumb">' + thumb + '</div>' +
-            '<div class="profile-project-card-body">' +
-              '<div class="profile-project-card-title">' + escapeHtml(proj.title || slug) + '</div>' +
-              (proj.year ? '<div class="profile-project-card-year">' + escapeHtml(proj.year) + '</div>' : '') +
-            '</div>' +
-          '</a>';
-      })
+      .then(function (proj) { if (proj) slot.innerHTML = featuredCardHTML(slug, proj); })
       .catch(function () { /* keep placeholder */ });
     return slot;
+  }
+  // Assistive-augmentation principle icons — mirrors PRINCIPLES in
+  // build-people.js so the featured card's tag row matches the read page.
+  var PRINCIPLE_ICON_BASE = 'https://cdn.ahlab.org/media/site/';
+  var PRINCIPLES = {
+    body:          { name: 'Body',          icon: 'icon-body-1.png',          iconHover: 'icon-body-hl.png' },
+    cognitive:     { name: 'Cognitive',     icon: 'icon-cognitive-1.png',     iconHover: 'icon-cognitive-hl.png' },
+    perceptual:    { name: 'Perceptual',    icon: 'icon-perceptual-1.png',    iconHover: 'icon-perceptual-hl.png' },
+    physical:      { name: 'Physical',      icon: 'icon-physical-1.png',      iconHover: 'icon-physical-hl.png' },
+    identity:      { name: 'Identity',      icon: 'icon-identity.png',        iconHover: 'icon-identity-hl.png' },
+    sociocultural: { name: 'Sociocultural', icon: 'icon-sociocultural-1.png', iconHover: 'icon-sociocultural-hl.png' },
+  };
+  function renderProjectTags(keys) {
+    var icons = (Array.isArray(keys) ? keys : [])
+      .map(function (k) { return PRINCIPLES[k]; })
+      .filter(Boolean)
+      .map(function (p) {
+        return '<span class="profile-project-card-tag" title="' + escapeHtml(p.name) + '" aria-label="' + escapeHtml(p.name) + '">' +
+          '<img class="profile-project-card-tag-default" src="' + escapeHtml(PRINCIPLE_ICON_BASE + p.icon) + '" alt="" loading="lazy">' +
+          '<img class="profile-project-card-tag-hover" src="' + escapeHtml(PRINCIPLE_ICON_BASE + p.iconHover) + '" alt="" loading="lazy">' +
+        '</span>';
+      }).join('');
+    return icons ? '<div class="profile-project-card-tags">' + icons + '</div>' : '';
+  }
+  function featuredCardHTML(slug, proj) {
+    var title = (proj && proj.title) ? proj.title : slug;
+    var thumb = (proj && proj.thumbnail)
+      ? '<img src="' + escapeHtml(proj.thumbnail) + '" alt="' + escapeHtml(title) + '" loading="lazy">'
+      : '<div class="profile-project-card-placeholder">' + escapeHtml(String(title).charAt(0)) + '</div>';
+    return '<a class="profile-project-card" href="/projects/' + escapeHtml(slug) + '/">' +
+        '<div class="profile-project-card-thumb">' + thumb + '</div>' +
+        '<div class="profile-project-card-body">' +
+          '<h5>' + escapeHtml(title) + '</h5>' +
+          renderProjectTags(proj && proj.principles) +
+        '</div>' +
+      '</a>';
   }
 
   // ── Social links (single panel for linkedin/github/scholar) ─
@@ -501,8 +568,6 @@
           renderUrlInput('linkedin', 'LinkedIn', getCurrentSocial('linkedin')) +
           renderUrlInput('github',   'GitHub',   getCurrentSocial('github')) +
           renderUrlInput('google_scholar', 'Google Scholar', getCurrentSocial('google_scholar'));
-        var check = makeCheck('Done', function () { editing && editing.commit(); });
-        panel.appendChild(check);
         Array.prototype.forEach.call(panel.querySelectorAll('input'), function (input) {
           var name = input.getAttribute('data-field');
           input.addEventListener('input', function () {
@@ -584,9 +649,6 @@
     if (!bar) return;
     var n = Object.keys(dirty).length;
     bar.classList.toggle('is-dirty', n > 0);
-    // Reserve bottom space for the fixed submit bar ONLY while it's open —
-    // otherwise the padding sits below the footer as permanent dead scroll.
-    document.documentElement.classList.toggle('is-submitbar-open', n > 0);
     bar.querySelector('.pe-submitbar-submit').disabled = (n === 0);
     bar.querySelector('.pe-submitbar-count').textContent =
       n === 0 ? '' :
