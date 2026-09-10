@@ -257,6 +257,7 @@
   // ── Bio ─────────────────────────────────────────────────────
   function addBioPencil() {
     var bio = document.querySelector('.profile-content');
+    var created = false;
     if (!bio) {
       var introGrid = document.querySelector('.profile-intro-grid')
                    || document.querySelector('.profile-body');
@@ -264,10 +265,13 @@
       bio = document.createElement('div');
       bio.className = 'profile-content rv vis';
       introGrid.insertBefore(bio, introGrid.firstChild);
-      renderBioRead(bio, '');
-    } else {
-      renderBioRead(bio, getCurrentBio());
+      created = true;
     }
+    // Wire the click handler BEFORE the first render so renderBioRead
+    // (which reads bio.__peOnPencil when it appends the inline pencil)
+    // gets the live handler on the initial paint too.
+    bio.__peOnPencil = onPencilClick;
+    renderBioRead(bio, created ? '' : getCurrentBio());
     function onPencilClick() {
       enterEditMode('bio', bio, function () {
         var current = getCurrentBio();
@@ -296,31 +300,38 @@
         };
       });
     }
-    attachPencil(bio, 'Edit bio', onPencilClick);
-    // Stash the click handler so the read-mode pencil that
-    // re-attaches after commit can call back into this function.
-    bio.__peOnPencil = onPencilClick;
   }
   function getCurrentBio() {
     if ('bio' in dirty) return String(dirty.bio || '');
     return String(record && record.bio || '');
   }
   function renderBioRead(bio, text) {
+    bio.classList.remove('pe-editing');
     bio.innerHTML = '';
+    var lastEl = null;
     if (!text) {
       var empty = document.createElement('p');
       empty.className = 'pe-empty';
       empty.textContent = '(no bio yet — click the pencil to add one)';
       bio.appendChild(empty);
+      lastEl = empty;
     } else {
       text.split(/\n\n+/).forEach(function (para) {
         var p = document.createElement('p');
         p.textContent = para;
         bio.appendChild(p);
+        lastEl = p;
       });
     }
-    var onClick = bio.__peOnPencil || function () {};
-    attachPencil(bio, 'Edit bio', onClick);
+    // Pencil flows inline at the very end of the last paragraph.
+    var btn = makePencil('Edit bio', bio.__peOnPencil || function () {});
+    btn.classList.add('pe-pencil-inline');
+    if (lastEl) {
+      lastEl.appendChild(document.createTextNode(' '));
+      lastEl.appendChild(btn);
+    } else {
+      bio.appendChild(btn);
+    }
   }
 
   // ── Featured project (typeahead search picker) ──────────────
@@ -392,11 +403,11 @@
           picker.replaceWith(buildFeaturedCardSlot(selectedSlug));
           var c = card.querySelector('.pe-check');
           if (c) c.remove();
-          attachPencil(card, 'Change featured project', onPencilClick);
+          attachPencil(card.querySelector('.sidebar-section-title') || card, 'Change featured project', onPencilClick);
         };
       });
     }
-    attachPencil(card, 'Change featured project', onPencilClick);
+    attachPencil(card.querySelector('.sidebar-section-title') || card, 'Change featured project', onPencilClick);
   }
   function getCurrentFeatured() {
     if ('featured_project' in dirty) return String(dirty.featured_project || '');

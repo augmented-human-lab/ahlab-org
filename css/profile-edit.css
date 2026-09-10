@@ -120,33 +120,45 @@ body[data-edit-mode-page] div:has(> .profile-pub-list) {
   vertical-align: middle;
 }
 
-/* Bio pencil — top-right corner of the bio content block. */
+/* Bio pencil — flows inline at the very end of the last paragraph
+   (see renderBioRead in profile-edit-page.js) rather than pinned to a
+   corner, so it reads as "edit this paragraph". */
 .profile-content {
   position: relative;
-  padding-right: 40px;     /* leave room for the pencil */
 }
-.profile-content > .pe-pencil {
-  position: absolute;
-  top: 0;
-  right: 0;
+.pe-pencil-inline {
+  vertical-align: middle;
+  margin-left: 4px;
 }
 .profile-content.pe-editing {
-  padding-right: 0;
   background: rgba(97, 0, 255, 0.03);
   border-radius: 10px;
   padding: 16px;
 }
 
-/* Featured project pencil — top-right corner of the aside. */
+/* Featured project pencil — sits inline right after the "Featured
+   project" section title. The check button stays pinned top-right while
+   the picker is open. */
 .profile-featured {
   position: relative;
 }
-.profile-featured > .pe-pencil,
+.profile-featured .sidebar-section-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
 .profile-featured > .pe-check {
   position: absolute;
   top: 12px;
   right: 12px;
   z-index: 2;
+}
+
+/* Social-links edit pencil sits at the same level as the 38px icon
+   buttons in the row (the row would otherwise top-align the shorter
+   pencil). */
+body[data-edit-mode-page] .profile-socials {
+  align-items: center;
 }
 
 /* Featured project picker — type-to-search input + suggestions

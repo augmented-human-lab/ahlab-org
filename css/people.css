@@ -430,20 +430,23 @@
   position: absolute;
   left: 16.66%;
   right: 16.66%;
-  top: calc(36px + 6px);   /* header space + (dot height / 2) */
+  top: calc(36px + 7px);   /* header space + (dot height / 2 = 14/2) */
   height: 2px;
   background: var(--color-neutral-30);
   z-index: 0;
 }
 /* 2-node variant (current members: Then → Now at AHL; alumni: AHL → Now).
-   Two columns instead of three, and the connector line now spans from the
-   center of column 1 (25%) to the center of column 2 (75%). */
+   Two columns instead of three. The dots are left-aligned at the start of
+   each column (align-items: flex-start on .tl-node), so the connector must
+   run from the FIRST dot's center (7px in from the left) to the SECOND
+   dot's center (start of column 2 = 50%, + 7px) — not between the column
+   centres, which left the line floating past both dots. */
 .tl-track.is-2col {
   grid-template-columns: 1fr 1fr;
 }
 .tl-track.is-2col::before {
-  left: 25%;
-  right: 25%;
+  left: 7px;
+  right: calc(50% - 7px);
 }
 .tl-node {
   display: flex;
