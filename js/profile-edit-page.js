@@ -63,6 +63,11 @@
   var record   = null;     // canonical record from cdn
   var dirty    = {};       // map: field name → current value (or File)
   var editing  = null;     // currently-editing field key, or null
+  // A role change is a two-step edit: pick the new title, then set an
+  // effective date. It only becomes a pending change (role + ahlab_stints in
+  // `dirty`) once the date is valid. { role, effective } while in progress.
+  var roleChange   = null;
+  var savedTimeline = null;   // { html, n } snapshot for restoring the graph
 
   // ── Auth gate ───────────────────────────────────────────────
   function whenAuthReady(cb) {
@@ -247,11 +252,16 @@
         var list  = picker.querySelector('ul');
         function pickRole(role) {
           var v = String(role || '').trim();
-          var orig = String(record.role || '');
-          if (v === orig) delete dirty.role;
-          else dirty.role = v;
-          refreshSubmitBar();
-          editing && editing.commit();   // auto-commit on pick
+          // A role change drives a stint transition, gated on an effective
+          // date — so picking a NEW title opens the effective-date field and
+          // is NOT counted as a pending change until that date is set. Picking
+          // the current title (or clearing) cancels any in-progress change.
+          var isChange = v && v !== currentEffectiveRole();
+          roleChange = isChange ? { role: v, effective: '' } : null;
+          editing && editing.commit();   // close the picker (renders the role text)
+          if (isChange) showEffectiveDateField();
+          else          removeEffectiveDateField();
+          syncRoleChangeDirty();         // no dirty role/stints until a valid date
         }
         renderRoleSuggestions(list, '', current, pickRole);
         input.addEventListener('input', function () {
@@ -300,8 +310,196 @@
     });
   }
   function getCurrentRole() {
+    if (roleChange) return roleChange.role;     // pending-change preview
     if ('role' in dirty) return String(dirty.role || '');
     return String(record && record.role || '');
+  }
+  // The role the site currently shows for this person — derived from the
+  // most recent open stint (mirrors build/lib/stints.js effectiveRole), with
+  // the flat `role` as the fallback. Used to decide whether a picked title is
+  // actually a change.
+  function currentEffectiveRole() {
+    var filled = ((record && record.ahlab_stints) || []).filter(stintFilled)
+      .slice().sort(function (a, b) { return String(a.start).localeCompare(String(b.start)); });
+    if (!filled.length) return String(record && record.role || '');
+    var open = filled.slice().reverse().filter(function (s) { return s.end == null; })[0];
+    var pick = open || filled[filled.length - 1];
+    return String((pick && pick.role) || (record && record.role) || '');
+  }
+
+  // ── Role-change (promotion) machinery ───────────────────────
+  // Shows an effective-date field under the role; only once a valid date is
+  // entered does the change register (role + a projected ahlab_stints that
+  // closes the current open stint and opens a new one), and the Then→Now
+  // graph re-renders live to add the new node.
+  function showEffectiveDateField() {
+    var el = document.querySelector('.profile-role');
+    if (!el) return;
+    removeEffectiveDateField();
+    var openStart = currentOpenStintStart();
+    var minAttr = toDateAttr(openStart);
+    var today = new Date().toISOString().slice(0, 10);
+    var wrap = document.createElement('div');
+    wrap.className = 'pe-role-effective';
+    wrap.innerHTML =
+      '<span class="pe-role-effective-label">Effective date</span>' +
+      '<input type="date" class="pe-role-effective-input"' +
+        (minAttr ? ' min="' + escapeHtml(minAttr) + '"' : '') +
+        ' max="' + today + '">' +
+      '<span class="pe-role-effective-hint">Set when this title takes effect to record the change.</span>';
+    // Sit the field right after the role line.
+    el.parentNode.insertBefore(wrap, el.nextSibling);
+    var input = wrap.querySelector('input');
+    input.value = roleChange && roleChange.effective ? roleChange.effective : '';
+    input.addEventListener('input', function () {
+      roleChange && (roleChange.effective = input.value);
+      wrap.classList.toggle('is-invalid', !!input.value && !isValidEffective(input.value));
+      syncRoleChangeDirty();
+    });
+    setTimeout(function () { input.focus(); }, 0);
+  }
+  function removeEffectiveDateField() {
+    var w = document.querySelector('.pe-role-effective');
+    if (w) w.remove();
+  }
+  // The start date of the current open stint (the one a promotion closes).
+  function currentOpenStintStart() {
+    var open = ((record && record.ahlab_stints) || []).filter(function (s) {
+      return s && s.end == null && stintFilled(s);
+    }).slice().sort(function (a, b) { return String(a.start).localeCompare(String(b.start)); });
+    return open.length ? String(open[open.length - 1].start) : '';
+  }
+  // Normalize an ISO partial ("2025", "2025-06", "2025-06-15") to a full
+  // YYYY-MM-DD for a date input's min/max attribute.
+  function toDateAttr(iso) {
+    var s = String(iso || '');
+    if (/^\d{4}$/.test(s)) return s + '-01-01';
+    if (/^\d{4}-\d{2}$/.test(s)) return s + '-01';
+    if (/^\d{4}-\d{2}-\d{2}/.test(s)) return s.slice(0, 10);
+    return '';
+  }
+  function isValidEffective(date) {
+    if (!date) return false;
+    var openStart = currentOpenStintStart();
+    // Must fall strictly after the current role began (else the new stint
+    // would sort before it and the derived role wouldn't flip).
+    if (openStart && String(date) <= String(openStart)) return false;
+    return true;
+  }
+  // Reflect the in-progress role change into `dirty` + the live graph. Sets
+  // dirty.role and dirty.ahlab_stints only when the effective date is valid;
+  // otherwise clears them (so "Submit for review" stays disabled).
+  function syncRoleChangeDirty() {
+    if (roleChange && isValidEffective(roleChange.effective)) {
+      dirty.role = roleChange.role;
+      dirty.ahlab_stints = projectPromotionStints(roleChange.role, roleChange.effective);
+      renderTimelinePreview(dirty.ahlab_stints);
+    } else {
+      delete dirty.role;
+      delete dirty.ahlab_stints;
+      restoreTimeline();
+    }
+    refreshSubmitBar();
+  }
+  // Close the current open stint at `effective` and append a new open stint
+  // with the new role — the canonical promotion transition (mirrors the
+  // welcome-form merge and build/lib/stints.js semantics).
+  function projectPromotionStints(newRole, effective) {
+    var base = ((record && record.ahlab_stints) || []).map(function (s) {
+      return { role: s.role, start: s.start, end: s.end };   // shallow clone
+    });
+    base.forEach(function (s) {
+      if (s.end == null && s.start && String(s.start) <= String(effective)) s.end = effective;
+    });
+    base.push({ role: newRole, start: effective, end: null });
+    return base;
+  }
+
+  // ── Live Then→Now graph preview ─────────────────────────────
+  // Re-renders the AHL side of the timeline from a projected stint array so a
+  // promotion shows up immediately: the previous "Now" node becomes a past
+  // node and a new "Now" node carries the new role. Mirrors buildTimeline in
+  // build-people.js for the current-member case (self-edit is a current
+  // member). The first change snapshots the original markup so we can restore.
+  function renderTimelinePreview(projectedStints) {
+    var track = document.querySelector('.profile-timeline .tl-track');
+    if (!track) return;
+    if (!savedTimeline) {
+      savedTimeline = { html: track.innerHTML, n: track.style.getPropertyValue('--tl-n') };
+    }
+    var filled = (projectedStints || []).filter(stintFilled)
+      .slice().sort(function (a, b) { return String(a.start).localeCompare(String(b.start)); });
+    var career0 = (record && record.career && record.career[0]) || {};
+    var before = { org: career0.org || '', role: career0.role || '', period: career0.period || '' };
+    var ahl = filled.map(function (s) {
+      return { org: 'AHL', role: s.role || '', period: formatStintPeriodJS(s), open: s.end == null };
+    });
+    var nodes = [before].concat(ahl);
+    var currentIdx = nodes.length - 1;
+    for (var i = nodes.length - 1; i >= 0; i--) { if (nodes[i].open) { currentIdx = i; break; } }
+    var N = nodes.length;
+    track.style.setProperty('--tl-n', String(N));
+    track.innerHTML = nodes.map(function (n, idx) {
+      return timelineNodeHTML(n, idx, N, currentIdx);
+    }).join('');
+  }
+  function restoreTimeline() {
+    if (!savedTimeline) return;
+    var track = document.querySelector('.profile-timeline .tl-track');
+    if (track) {
+      track.innerHTML = savedTimeline.html;
+      if (savedTimeline.n) track.style.setProperty('--tl-n', savedTimeline.n);
+      else track.style.removeProperty('--tl-n');
+    }
+    savedTimeline = null;
+  }
+  function timelineNodeHTML(n, i, N, currentIdx) {
+    var header = i === 0 ? 'Then' : (i === N - 1 ? 'Now' : '');
+    var isEmpty = !n.org && !n.role && !n.period;
+    var cls = 'tl-node' + (isEmpty ? ' is-empty' : '') + (i === currentIdx ? ' is-current' : '');
+    if (isEmpty) {
+      return '<div class="' + cls + '" title="Before AHL — not added yet">' +
+        '<div class="tl-col-header">' + escapeHtml(header) + '</div>' +
+        '<div class="tl-dot"></div><div class="tl-label">—</div></div>';
+    }
+    var duration = formatDurationJS(n.period);
+    return '<div class="' + cls + '">' +
+      '<div class="tl-col-header">' + escapeHtml(header) + '</div>' +
+      '<div class="tl-dot"></div>' +
+      '<div class="tl-label">' +
+        (n.org ? '<div class="tl-org">' + escapeHtml(n.org) + '</div>' : '') +
+        (n.role ? '<div class="tl-role">' + escapeHtml(n.role) + '</div>' : '') +
+        (duration ? '<div class="tl-duration">' + escapeHtml(duration) + '</div>' : '') +
+      '</div></div>';
+  }
+  // Compact mirrors of build/lib/stints.js helpers for the browser preview.
+  function stintFilled(s) { return !!s && !isNaN(startYearJS(s.start)); }
+  function startYearJS(iso) {
+    var m = /^(\d{4})/.exec(String(iso == null ? '' : iso).trim());
+    return m ? parseInt(m[1], 10) : NaN;
+  }
+  function formatStintPeriodJS(s) {
+    var sy = startYearJS(s.start);
+    if (isNaN(sy)) return '';
+    if (s.end == null) return sy + '–present';
+    var ey = startYearJS(s.end);
+    if (isNaN(ey) || ey === sy) return String(sy);
+    return sy + '–' + ey;
+  }
+  function formatDurationJS(period) {
+    if (!period) return '';
+    var parts = String(period).trim().split(/\s*[-–—]\s*/);
+    if (parts.length < 2) return '';
+    var sy = parseInt((parts[0].match(/\d{4}/) || [])[0], 10);
+    if (isNaN(sy)) return '';
+    var ey = /^(present|now|current)$/i.test(parts[1].trim())
+      ? new Date().getFullYear()
+      : parseInt((parts[1].match(/\d{4}/) || [])[0], 10);
+    if (isNaN(ey)) return '';
+    var years = ey - sy;
+    if (years < 0) return '';
+    if (years === 0) return '<1 year';
+    return years === 1 ? '1 year' : years + ' years';
   }
   function roleViewHTML(value) {
     // Match the read-page rendering: just plain text. The pencil

@@ -415,7 +415,7 @@
 }
 .tl-track {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(var(--tl-n, 2), 1fr);
   gap: 0;
   position: relative;
   padding-top: 36px;       /* space for the column header above each dot */
@@ -425,28 +425,22 @@
    column 1 to the center of column 3 — i.e. from 1/6 to 5/6 of the
    track width — so the line starts and ends UNDER the outer dots
    instead of running off either edge. */
+/* Continuous connector behind the dots. The dots are left-aligned at the
+   start of each of the N equal columns (align-items: flex-start on
+   .tl-node), so their centres sit 7px in from each column's left edge. The
+   line therefore runs from the FIRST dot's centre (7px) to the LAST dot's
+   centre (start of the last column = (N-1)/N, i.e. 100%/N from the right,
+   minus 7px). --tl-n is set inline on the track by the build (and updated
+   live by the profile editor when a promotion adds a node). */
 .tl-track::before {
   content: "";
   position: absolute;
-  left: 16.66%;
-  right: 16.66%;
+  left: 7px;
+  right: calc(100% / var(--tl-n, 2) - 7px);
   top: calc(36px + 7px);   /* header space + (dot height / 2 = 14/2) */
   height: 2px;
   background: var(--color-neutral-30);
   z-index: 0;
-}
-/* 2-node variant (current members: Then → Now at AHL; alumni: AHL → Now).
-   Two columns instead of three. The dots are left-aligned at the start of
-   each column (align-items: flex-start on .tl-node), so the connector must
-   run from the FIRST dot's center (7px in from the left) to the SECOND
-   dot's center (start of column 2 = 50%, + 7px) — not between the column
-   centres, which left the line floating past both dots. */
-.tl-track.is-2col {
-  grid-template-columns: 1fr 1fr;
-}
-.tl-track.is-2col::before {
-  left: 7px;
-  right: calc(50% - 7px);
 }
 .tl-node {
   display: flex;
