@@ -368,7 +368,10 @@ body[data-edit-mode-page] div:has(> .profile-pub-list) {
 
 /* Leave room at the bottom of the page so the submit bar
  * doesn't cover the footer when it's expanded. */
-html.is-edit-mode body { padding-bottom: 96px; }
+/* Reserve room so the sticky submit bar doesn't cover the footer — but only
+   while the bar is actually open (dirty edits). Applying it for the whole
+   edit session left 96px of blank scroll below the footer. */
+html.is-edit-mode.is-submitbar-open body { padding-bottom: 96px; }
 
 @media (max-width: 767px) {
   .pe-submitbar-inner {

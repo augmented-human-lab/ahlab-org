@@ -573,6 +573,9 @@
     if (!bar) return;
     var n = Object.keys(dirty).length;
     bar.classList.toggle('is-dirty', n > 0);
+    // Reserve bottom space for the fixed submit bar ONLY while it's open —
+    // otherwise the padding sits below the footer as permanent dead scroll.
+    document.documentElement.classList.toggle('is-submitbar-open', n > 0);
     bar.querySelector('.pe-submitbar-submit').disabled = (n === 0);
     bar.querySelector('.pe-submitbar-count').textContent =
       n === 0 ? '' :
