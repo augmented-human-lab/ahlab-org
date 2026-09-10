@@ -161,24 +161,19 @@ body[data-edit-mode-page] .profile-socials {
   align-items: center;
 }
 
-/* Effective-date field for a role change (promotion). Appears under the
-   role once a new title is picked; the change isn't counted as pending
-   until a valid date is entered here. */
+/* Effective-date field for a role change (promotion). Sits inline on the
+   same line as the role once a new title is picked; the change isn't counted
+   as pending until a valid date is entered here. */
 .pe-role-effective {
-  display: flex;
-  flex-wrap: wrap;
+  display: inline-flex;
   align-items: center;
-  gap: 8px 10px;
-  margin-top: 10px;
-  padding: 10px 12px;
-  background: rgba(97, 0, 255, 0.05);
-  border: 1px solid rgba(97, 0, 255, 0.2);
-  border-radius: 10px;
+  gap: 6px;
+  margin-left: 12px;
+  vertical-align: middle;
   font-family: var(--font-text);
   font-size: 13px;
-  max-width: 420px;
 }
-.pe-role-effective-label { font-weight: 600; color: var(--color-accent); }
+.pe-role-effective-label { color: var(--color-neutral-70); font-weight: 500; }
 .pe-role-effective-input {
   font-family: var(--font-text);
   font-size: 13px;
@@ -194,11 +189,6 @@ body[data-edit-mode-page] .profile-socials {
 .pe-role-effective.is-invalid .pe-role-effective-input {
   border-color: #d64545;
   outline-color: #d64545;
-}
-.pe-role-effective-hint {
-  flex-basis: 100%;
-  color: var(--color-neutral-60);
-  font-size: 12px;
 }
 
 /* Featured project picker — type-to-search input + suggestions

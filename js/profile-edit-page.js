@@ -339,16 +339,15 @@
     var openStart = currentOpenStintStart();
     var minAttr = toDateAttr(openStart);
     var today = new Date().toISOString().slice(0, 10);
-    var wrap = document.createElement('div');
+    var wrap = document.createElement('span');
     wrap.className = 'pe-role-effective';
     wrap.innerHTML =
       '<span class="pe-role-effective-label">Effective date</span>' +
       '<input type="date" class="pe-role-effective-input"' +
         (minAttr ? ' min="' + escapeHtml(minAttr) + '"' : '') +
-        ' max="' + today + '">' +
-      '<span class="pe-role-effective-hint">Set when this title takes effect to record the change.</span>';
-    // Sit the field right after the role line.
-    el.parentNode.insertBefore(wrap, el.nextSibling);
+        ' max="' + today + '">';
+    // Sit the field inline on the same line as the role.
+    el.appendChild(wrap);
     var input = wrap.querySelector('input');
     input.value = roleChange && roleChange.effective ? roleChange.effective : '';
     input.addEventListener('input', function () {
