@@ -376,12 +376,19 @@
     if (/^\d{4}-\d{2}-\d{2}/.test(s)) return s.slice(0, 10);
     return '';
   }
+  // Format a Date as a LOCAL YYYY-MM-DD (toISOString would shift by the UTC
+  // offset and land on the wrong day in +ve timezones).
+  function ymdLocal(d) {
+    return d.getFullYear() + '-' +
+      ('0' + (d.getMonth() + 1)).slice(-2) + '-' +
+      ('0' + d.getDate()).slice(-2);
+  }
   // Upper bound for the effective date: the end of NEXT month, so an upcoming
   // promotion can be recorded a little early. (day 0 of the month after next
   // = the last day of next month.)
   function effectiveMaxDate() {
     var now = new Date();
-    return new Date(now.getFullYear(), now.getMonth() + 2, 0).toISOString().slice(0, 10);
+    return ymdLocal(new Date(now.getFullYear(), now.getMonth() + 2, 0));
   }
   function isValidEffective(date) {
     if (!date) return false;
