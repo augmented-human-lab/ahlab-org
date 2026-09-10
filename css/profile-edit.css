@@ -83,6 +83,11 @@ body[data-edit-mode-page] div:has(> .profile-pub-list) {
 }
 .pe-pencil svg { width: 14px; height: 14px; }
 
+/* While a submit is in flight, hide every edit affordance so the user can't
+   start another edit that wouldn't be part of the in-flight patch. */
+html.is-submitting .pe-pencil,
+html.is-submitting .pe-role-effective { display: none; }
+
 /* Check button — same dimensions as the pencil so swapping
  * doesn't shift layout. Tinted purple so it reads as "confirm". */
 .pe-check {

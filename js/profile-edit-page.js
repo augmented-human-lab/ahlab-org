@@ -884,6 +884,11 @@
     var btn = document.querySelector('.pe-submitbar-submit');
     btn.disabled = true;
     btn.textContent = 'Submitting…';
+    // Freeze the editing surface while the submit is in flight — hide every
+    // pencil so the user can't start another edit that won't be included in
+    // this in-flight patch. Cleared again only if the submit fails (on
+    // success the page navigates away to the broker receipt).
+    document.documentElement.classList.add('is-submitting');
     var patch = {};
     var fileWork = [];
     keys.forEach(function (k) {
@@ -905,6 +910,7 @@
         returnUrl:  location.origin + '/my-ahl/'
       });
     }).catch(function (err) {
+      document.documentElement.classList.remove('is-submitting');
       btn.disabled = false;
       btn.textContent = 'Submit for review';
       alert('Couldn\'t process the upload: ' + (err && err.message || err));
