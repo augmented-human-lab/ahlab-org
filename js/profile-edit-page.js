@@ -468,7 +468,7 @@
     savedTimeline = null;
   }
   function timelineNodeHTML(n, i, N, currentIdx) {
-    var header = i === 0 ? 'Then' : (i === N - 1 ? 'Now' : '');
+    var header = i === N - 1 ? 'Now' : 'Then';
     var isEmpty = !n.org && !n.role && !n.period;
     var cls = 'tl-node' + (isEmpty ? ' is-empty' : '') + (i === currentIdx ? ' is-current' : '');
     if (isEmpty) {
