@@ -338,14 +338,13 @@
     removeEffectiveDateField();
     var openStart = currentOpenStintStart();
     var minAttr = toDateAttr(openStart);
-    var today = new Date().toISOString().slice(0, 10);
     var wrap = document.createElement('span');
     wrap.className = 'pe-role-effective';
     wrap.innerHTML =
       '<span class="pe-role-effective-label">Effective date</span>' +
       '<input type="date" class="pe-role-effective-input"' +
         (minAttr ? ' min="' + escapeHtml(minAttr) + '"' : '') +
-        ' max="' + today + '">';
+        ' max="' + effectiveMaxDate() + '">';
     // Sit the field inline on the same line as the role.
     el.appendChild(wrap);
     var input = wrap.querySelector('input');
@@ -377,12 +376,21 @@
     if (/^\d{4}-\d{2}-\d{2}/.test(s)) return s.slice(0, 10);
     return '';
   }
+  // Upper bound for the effective date: the end of NEXT month, so an upcoming
+  // promotion can be recorded a little early. (day 0 of the month after next
+  // = the last day of next month.)
+  function effectiveMaxDate() {
+    var now = new Date();
+    return new Date(now.getFullYear(), now.getMonth() + 2, 0).toISOString().slice(0, 10);
+  }
   function isValidEffective(date) {
     if (!date) return false;
     var openStart = currentOpenStintStart();
     // Must fall strictly after the current role began (else the new stint
     // would sort before it and the derived role wouldn't flip).
     if (openStart && String(date) <= String(openStart)) return false;
+    // No further into the future than the end of next month.
+    if (String(date) > effectiveMaxDate()) return false;
     return true;
   }
   // Reflect the in-progress role change into `dirty` + the live graph. Sets
