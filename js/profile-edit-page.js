@@ -218,6 +218,7 @@
     'Research Fellow',
     'Postdoctoral Researcher',
     'Research Engineer',
+    'Research Associate',
     'Research Assistant',
     'PhD Candidate',
     'PhD Student',
