@@ -119,6 +119,89 @@ html.is-submitting .pe-role-effective { display: none; }
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
 }
 
+/* Inline photo crop editor — pan (drag) + zoom (slider/wheel/pinch) over the
+   photo, with a live greyscale preview (the site shows portraits greyscale).
+   Both the stage and its controls live inside .profile-photo so clicks stay
+   inside the edit block (the outside-click commit applies the crop). */
+.profile-photo.pe-photo-editing .pe-pencil-photo { display: none; }
+.pe-photo-stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  z-index: 3;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+  background: var(--color-neutral-30);
+}
+.pe-photo-stage.is-dragging { cursor: grabbing; }
+.pe-photo-crop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  filter: grayscale(100%);
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+  max-width: none;
+}
+.pe-photo-controls {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(14, 15, 17, 0.55);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.pe-photo-btn {
+  background: transparent;
+  border: 0;
+  color: #fff;
+  font-family: var(--font-text);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 4px;
+  white-space: nowrap;
+}
+.pe-photo-btn:hover { opacity: .8; }
+.pe-photo-zoom {
+  flex: 1;
+  min-width: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .35);
+  outline: none;
+}
+.pe-photo-zoom::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}
+.pe-photo-zoom::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}
+
 /* Role pencil sits inline at the end of the role text. */
 .profile-role .pe-pencil {
   margin-left: 10px;

@@ -199,18 +199,181 @@
     input.style.display = 'none';
     input.addEventListener('change', function () {
       var f = input.files && input.files[0];
+      input.value = '';   // allow re-picking the same file later
       if (!f) return;
+      if (!/^image\//.test(f.type)) { alert('Please choose an image file.'); return; }
+      if (f.size > 10 * 1024 * 1024) { alert('Image must be under 10 MB.'); return; }
       var reader = new FileReader();
-      reader.onload = function () { if (img) img.src = reader.result; };
+      reader.onload = function () { openPhotoEditor(reader.result); };
       reader.readAsDataURL(f);
-      dirty.profile_image = f;
-      refreshSubmitBar();
     });
     wrap.appendChild(input);
     var btn = makePencil('Change photo', function () { input.click(); });
     btn.classList.add('pe-pencil-photo');
     wrap.appendChild(btn);
     wrap.classList.add('pe-has-pencil');
+
+    // Open an inline crop editor over the photo: pan (drag), zoom (slider /
+    // wheel / pinch), and a live greyscale preview so the user sees exactly
+    // what the site will show. Same crop model as the welcome form.
+    function openPhotoEditor(dataUrl) {
+      var probe = new Image();
+      probe.onload = function () {
+        enterEditMode('profile_image', wrap, function () {
+          return renderPhotoEditor(dataUrl, probe.naturalWidth, probe.naturalHeight);
+        });
+      };
+      probe.src = dataUrl;
+    }
+
+    function renderPhotoEditor(dataUrl, nw, nh) {
+      wrap.classList.add('pe-photo-editing');
+      var stage = document.createElement('div');
+      stage.className = 'pe-photo-stage';
+      var cimg = document.createElement('img');
+      cimg.className = 'pe-photo-crop';
+      cimg.src = dataUrl;
+      cimg.draggable = false;
+      stage.appendChild(cimg);
+      var controls = document.createElement('div');
+      controls.className = 'pe-photo-controls';
+      controls.innerHTML =
+        '<button type="button" class="pe-photo-btn pe-photo-reset">Reset</button>' +
+        '<input type="range" class="pe-photo-zoom" min="1" max="4" step="0.01" value="1" aria-label="Zoom">' +
+        '<button type="button" class="pe-photo-btn pe-photo-done">Done</button>';
+      wrap.appendChild(stage);
+      wrap.appendChild(controls);
+      var slider = controls.querySelector('.pe-photo-zoom');
+
+      var st = { nw: nw, nh: nh, stageW: 0, stageH: 0, cover: 1, zoom: 1, x: 0, y: 0 };
+      function measure() {
+        var r = stage.getBoundingClientRect();
+        st.stageW = r.width; st.stageH = r.height;
+        st.cover = Math.max(r.width / st.nw, r.height / st.nh);
+      }
+      function clamp() {
+        var eff = st.cover * st.zoom, w = st.nw * eff, h = st.nh * eff;
+        var minX = st.stageW - w, minY = st.stageH - h;
+        if (st.x > 0) st.x = 0;
+        if (st.y > 0) st.y = 0;
+        if (st.x < minX) st.x = minX;
+        if (st.y < minY) st.y = minY;
+      }
+      function apply() {
+        clamp();
+        var eff = st.cover * st.zoom;
+        cimg.style.width = st.nw + 'px';
+        cimg.style.height = st.nh + 'px';
+        cimg.style.transform = 'translate(' + st.x + 'px,' + st.y + 'px) scale(' + eff + ')';
+      }
+      function reset() {
+        st.zoom = 1; slider.value = '1';
+        st.x = (st.stageW - st.nw * st.cover) / 2;
+        st.y = (st.stageH - st.nh * st.cover) / 2;
+        apply();
+      }
+      function zoomAt(newZoom, clientX, clientY) {
+        var r = stage.getBoundingClientRect();
+        var sx = clientX - r.left, sy = clientY - r.top;
+        var oldEff = st.cover * st.zoom, newEff = st.cover * newZoom;
+        st.x = sx - (sx - st.x) * (newEff / oldEff);
+        st.y = sy - (sy - st.y) * (newEff / oldEff);
+        st.zoom = newZoom;
+        apply();
+      }
+      // Pointer pan + two-finger pinch.
+      var pointers = {};
+      var pinch = null;
+      var pcount = function () { return Object.keys(pointers).length; };
+      var pvals  = function () { return Object.keys(pointers).map(function (k) { return pointers[k]; }); };
+      var pdist  = function (a, b) { return Math.hypot(a.x - b.x, a.y - b.y); };
+      stage.addEventListener('pointerdown', function (e) {
+        stage.setPointerCapture(e.pointerId);
+        pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
+        stage.classList.add('is-dragging');
+        if (pcount() === 2) { var p = pvals(); pinch = { dist: pdist(p[0], p[1]), zoom: st.zoom }; }
+      });
+      stage.addEventListener('pointermove', function (e) {
+        if (!pointers[e.pointerId]) return;
+        var prev = pointers[e.pointerId];
+        pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
+        if (pcount() === 1) {
+          st.x += e.clientX - prev.x;
+          st.y += e.clientY - prev.y;
+          apply();
+        } else if (pcount() === 2 && pinch) {
+          var p = pvals();
+          var d = pdist(p[0], p[1]);
+          var nz = Math.max(1, Math.min(4, pinch.zoom * (d / pinch.dist)));
+          zoomAt(nz, (p[0].x + p[1].x) / 2, (p[0].y + p[1].y) / 2);
+          slider.value = String(nz);
+        }
+      });
+      function endPointer(e) {
+        delete pointers[e.pointerId];
+        if (pcount() < 2) pinch = null;
+        if (pcount() === 0) stage.classList.remove('is-dragging');
+      }
+      stage.addEventListener('pointerup', endPointer);
+      stage.addEventListener('pointercancel', endPointer);
+      stage.addEventListener('wheel', function (e) {
+        e.preventDefault();
+        var nz = Math.max(1, Math.min(4, st.zoom * (1 - e.deltaY * 0.0015)));
+        zoomAt(nz, e.clientX, e.clientY);
+        slider.value = String(nz);
+      }, { passive: false });
+      slider.addEventListener('input', function () {
+        var r = stage.getBoundingClientRect();
+        zoomAt(parseFloat(slider.value), r.left + st.stageW / 2, r.top + st.stageH / 2);
+      });
+      controls.querySelector('.pe-photo-reset').addEventListener('click', function (e) {
+        e.stopPropagation(); reset();
+      });
+      controls.querySelector('.pe-photo-done').addEventListener('click', function (e) {
+        e.stopPropagation(); editing && editing.commit();
+      });
+
+      // Defer one frame so the stage has measurable dimensions.
+      requestAnimationFrame(function () { measure(); reset(); });
+
+      // Render the visible square crop to an 800×800 greyscale JPEG.
+      function exportJpeg() {
+        var target = 800;
+        var c = document.createElement('canvas');
+        c.width = target; c.height = target;
+        var ctx = c.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, target, target);
+        ctx.filter = 'grayscale(100%)';
+        var r = target / st.stageW, eff = st.cover * st.zoom;
+        ctx.drawImage(cimg, st.x * r, st.y * r, st.nw * eff * r, st.nh * eff * r);
+        return c.toDataURL('image/jpeg', 0.9);
+      }
+
+      return function commitPhoto() {
+        var jpeg = null;
+        try { jpeg = exportJpeg(); } catch (e) { /* keep old photo */ }
+        stage.remove();
+        controls.remove();
+        wrap.classList.remove('pe-photo-editing');
+        if (jpeg) {
+          if (img) img.src = jpeg;   // greyscale preview of the final result
+          dirty.profile_image = dataUrlToFile(jpeg, 'portrait.jpg');
+          refreshSubmitBar();
+        }
+      };
+    }
+  }
+  // dataURL → File so the existing submit path (AHLImage.process → AHLPatch)
+  // can treat a cropped portrait like any picked file.
+  function dataUrlToFile(dataUrl, name) {
+    var parts = dataUrl.split(',');
+    var mime = (parts[0].match(/:(.*?);/) || [])[1] || 'image/jpeg';
+    var bin = atob(parts[1]);
+    var n = bin.length;
+    var u8 = new Uint8Array(n);
+    while (n--) u8[n] = bin.charCodeAt(n);
+    return new File([u8], name, { type: mime });
   }
 
   // ── Role ────────────────────────────────────────────────────
