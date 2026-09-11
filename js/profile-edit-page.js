@@ -1059,6 +1059,11 @@
         fileWork.push(
           window.AHLImage.process(dirty[k], { greyscale: true })
         );
+        // Mark profile_image in the patch too, so a PHOTO-ONLY edit isn't
+        // rejected as "No editable fields supplied" (the binary rides in
+        // `files`). applyProfileEdit_ overwrites this with the promoted file
+        // URL server-side, so the sentinel value never lands in the record.
+        patch.profile_image = dirty[k].name || 'portrait.jpg';
       } else {
         patch[k] = dirty[k];
       }
