@@ -272,6 +272,12 @@
     <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
     <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
   </symbol>
+  <!-- Credit card — Feather glyph for the "Visitor Passes" admin app
+       (passes.ahlab.org: activate / track / print AHL Visitor Pass cards). -->
+  <symbol id="i-myahl-passes" viewBox="0 0 24 24">
+    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+    <line x1="1" y1="10" x2="23" y2="10"/>
+  </symbol>
   <!-- Generic 2×2 app-grid glyph — placeholder icon for admin-added apps. -->
   <symbol id="i-myahl-generic" viewBox="0 0 24 24">
     <rect x="3"  y="3"  width="7" height="7" rx="1.6"/>
@@ -643,6 +649,14 @@
       label:  'Farewell',
       href:   'https://script.google.com/macros/s/AKfycby577ERgAkt7z3cGvwU5mWrE0GTWZPwqsE9pixhQDmIq_N13ISiawyj7jmTW0xwyw23/exec',
       symbol: 'i-myahl-farewell'
+    },
+    {
+      // passes-ahlab-org — Visitor Passes console: activate printed visitor
+      // cards at handover (type or scan), track/revoke them, print new sheets.
+      // Server-side gated to ahl-visitor-form CONFIG.adminEmails.
+      label:  'Visitor Passes',
+      href:   'https://passes.ahlab.org/',
+      symbol: 'i-myahl-passes'
     },
     {
       label:  'Patches',
