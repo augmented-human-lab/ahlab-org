@@ -274,6 +274,9 @@
 .person-card .person-role {
   font-size: 15px; line-height: 22px; color: var(--color-neutral-70);
 }
+.person-card .person-affiliation {
+  font-size: 13px; line-height: 18px; color: var(--color-neutral-60);
+}
 
 /* ── Profile hero (detail) ───────────────────────────────── */
 .profile-hero { padding: 132px 0 60px; }
@@ -305,6 +308,13 @@
 .profile-role {
   font-family: var(--font-display); font-weight: 500;
   font-size: 21px; color: var(--color-neutral-70);
+  margin-bottom: 24px;
+}
+/* Collaborators: home organization, tucked under the role. */
+.profile-role:has(+ .profile-affiliation) { margin-bottom: 2px; }
+.profile-affiliation {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 17px; color: var(--color-neutral-60);
   margin-bottom: 24px;
 }
 /* ── AHL period (bracketed) ────────────────────────────────
