@@ -68,6 +68,16 @@
   // `dirty`) once the date is valid. { role, effective } while in progress.
   var roleChange   = null;
   var savedTimeline = null;   // { html, n } snapshot for restoring the graph
+  // Self-test state (see "Self-test" below). Declared up here because the
+  // auth callback can activate owner mode before the rest of this file runs.
+  var SELFTEST = null;
+  var SELFTEST_BLOCKED = false;
+  var ST_ICON = {
+    checking: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-6.2-8.6"/></svg>',
+    ok: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>',
+    fail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>'
+  };
+  var jsonpSeq = 0;
 
   // ── Auth gate ───────────────────────────────────────────────
   function whenAuthReady(cb) {
@@ -93,14 +103,20 @@
     activateOwnerMode();
   });
 
+  var ownerModeOn = false;
   function activateOwnerMode() {
+    // auth.js fires onChange again once it attaches the person record.
+    if (ownerModeOn) return;
+    ownerModeOn = true;
     document.documentElement.classList.add('is-edit-mode');
     showBanner('Editing your profile. Changes require moderator approval.',
       '<a href="/people/' + encodeURIComponent(pageSlug) + '/" class="bnr-link">View public profile</a>');
+    runSelfTest();
     fetchRecord(pageSlug).then(function (rec) {
       record = rec || {};
       injectPencils();
       injectSubmitBar();
+      refreshSubmitBar();
     });
   }
   function fetchRecord(slug) {
@@ -1025,7 +1041,7 @@
     if (!bar) return;
     var n = Object.keys(dirty).length;
     bar.classList.toggle('is-dirty', n > 0);
-    bar.querySelector('.pe-submitbar-submit').disabled = (n === 0);
+    bar.querySelector('.pe-submitbar-submit').disabled = (n === 0 || SELFTEST_BLOCKED);
     bar.querySelector('.pe-submitbar-count').textContent =
       n === 0 ? '' :
       n === 1 ? '1 change pending' :
@@ -1034,7 +1050,7 @@
 
   function submit() {
     var keys = Object.keys(dirty);
-    if (!keys.length) return;
+    if (!keys.length || SELFTEST_BLOCKED) return;
     if (!window.AHLPatch) {
       alert('Submit helper not loaded yet — reload the page.');
       return;
@@ -1091,6 +1107,164 @@
     b.className = 'pe-banner';
     b.innerHTML = '<span>' + escapeHtml(text) + '</span>' + (extraHtml || '');
     document.body.insertBefore(b, document.body.firstChild);
+  }
+
+  // ── Self-test ───────────────────────────────────────────────
+  // The broker runs the same checks status.ahlab.org shows (the edit
+  // subset: GitHub token, pending-edits sheet, token secret, mail quota)
+  // in the background as the editor opens: a spinner chip under the nav
+  // while it runs, a brief "Systems OK" when it passes. A failing check
+  // covers the editor with an overlay so nobody edits in vain; the broker
+  // re-checks on submit and on approval too. If the check itself can't
+  // run, nothing is blocked (the server gate still protects submission).
+
+  function brokerJsonp(action, extra) {
+    var broker = window.AHLAuth.getBrokerUrl();
+    var url = broker + (broker.indexOf('?') === -1 ? '?' : '&') +
+      'action=' + action + '&token=' + encodeURIComponent(window.AHLAuth.getToken() || '') + (extra || '');
+    return fetchJsonp(url);
+  }
+
+  function setSelfTestChip(state, text) {
+    var chip = document.querySelector('.pe-selftest-chip');
+    if (!chip) {
+      // Pinned just under the fixed site nav (the .pe-banner sits behind it).
+      chip = document.createElement('span');
+      chip.setAttribute('role', 'status');
+      chip.setAttribute('aria-live', 'polite');
+      document.body.appendChild(chip);
+    }
+    chip.className = 'pe-selftest-chip ' + state;
+    chip.innerHTML = ST_ICON[state] + '<span class="st-text">' + escapeHtml(text) + '</span>';
+    if (state === 'ok') {
+      setTimeout(function () { chip.classList.add('fade'); }, 2500);
+      setTimeout(function () { if (chip.classList.contains('fade')) chip.className = 'pe-selftest-chip'; }, 3200);
+    }
+  }
+
+  function selfTestOverlay() {
+    var ov = document.querySelector('.pe-selftest-overlay');
+    if (ov) return ov;
+    ov = document.createElement('div');
+    ov.className = 'pe-selftest-overlay';
+    ov.setAttribute('role', 'alertdialog');
+    ov.setAttribute('aria-modal', 'true');
+    ov.setAttribute('aria-labelledby', 'peStTitle');
+    ov.innerHTML =
+      '<div class="pe-selftest-card">' +
+        '<div class="st-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></div>' +
+        '<h2 id="peStTitle">This page can’t take profile edits right now</h2>' +
+        '<p>Something on our side needs fixing first. It isn’t anything you did. Please let a lab admin know, or use the button below and we’ll tell the developer for you.</p>' +
+        '<button type="button" class="st-notify">Notify developer</button>' +
+        '<div class="st-links">' +
+          '<button type="button" class="st-link st-copy">Copy technical details</button>' +
+          '<button type="button" class="st-link st-retry">Check again</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(ov);
+    ov.querySelector('.st-notify').addEventListener('click', notifyDeveloperClick);
+    ov.querySelector('.st-copy').addEventListener('click', copyTechDetails);
+    ov.querySelector('.st-retry').addEventListener('click', runSelfTest);
+    return ov;
+  }
+
+  function showSelfTestOverlay(show) {
+    var html = document.documentElement;
+    if (!show) {
+      html.classList.remove('pe-selftest-blocked');
+      var old = document.querySelector('.pe-selftest-overlay');
+      if (old) old.classList.remove('show');
+      return;
+    }
+    var ov = selfTestOverlay();
+    // Sit below the fixed site nav so it stays usable above the frosted cover.
+    var nav = document.querySelector('.site-nav');
+    html.style.setProperty('--pe-st-top', Math.max(0, Math.round(nav ? nav.getBoundingClientRect().bottom : 0)) + 'px');
+    html.classList.add('pe-selftest-blocked');
+    if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+    ov.classList.add('show');
+  }
+
+  function runSelfTest() {
+    if (!window.AHLAuth || !window.AHLAuth.getToken()) return;
+    var retry = document.querySelector('.pe-selftest-overlay .st-retry');
+    if (retry) { retry.disabled = true; retry.textContent = 'Checking…'; }
+    setSelfTestChip('checking', 'Checking systems');
+    var done = function () { if (retry) { retry.disabled = false; retry.textContent = 'Check again'; } };
+    brokerJsonp('self-test').then(function (r) {
+      done();
+      if (!r || r.error) throw new Error('self-test unavailable');
+      SELFTEST = r;
+      SELFTEST_BLOCKED = !r.ok;
+      showSelfTestOverlay(SELFTEST_BLOCKED);
+      if (SELFTEST_BLOCKED) setSelfTestChip('fail', 'Paused');
+      else setSelfTestChip('ok', 'Systems OK');
+      refreshSubmitBar();
+    }).catch(function () {
+      // Couldn't even run the check: don't block, the server re-checks on submit.
+      done();
+      var chip = document.querySelector('.pe-selftest-chip');
+      if (chip) chip.className = 'pe-selftest-chip';
+    });
+  }
+
+  // Plain text for whoever fixes it: what failed, when, for whom.
+  function techDetails() {
+    var r = SELFTEST || {};
+    var u = (window.AHLAuth && window.AHLAuth.getUser()) || {};
+    return 'AHL profile editor self-check' + (r.checkedAt ? ' (' + r.checkedAt + ')' : '') + '\n' +
+      'Reported by: ' + (u.email || 'unknown') + '\n' +
+      'Page: ' + location.href + '\n' +
+      (r.problems || []).map(function (p) { return '- ' + p.label + ': ' + p.detail; }).join('\n') + '\n' +
+      'Browser: ' + navigator.userAgent;
+  }
+  function copyTechDetails() {
+    var text = techDetails(), btn = document.querySelector('.pe-selftest-overlay .st-copy');
+    var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy technical details'; }, 2000); };
+    var fallback = function () {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      ta.remove();
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback);
+    else fallback();
+  }
+  function notifyDeveloperClick() {
+    var btn = document.querySelector('.pe-selftest-overlay .st-notify');
+    btn.disabled = true; btn.textContent = 'Sending…';
+    brokerJsonp('notify-developer', '&ua=' + encodeURIComponent(navigator.userAgent.slice(0, 300))).then(function (r) {
+      if (!r || r.error) throw new Error('notify failed');
+      if (r.healthy) {
+        btn.disabled = false; btn.textContent = 'Everything works again. Please try now';
+        runSelfTest();
+        return;
+      }
+      if (r.repeat) { btn.disabled = false; btn.textContent = 'Just sent. Press again in a minute'; return; }
+      if (!r.sent) throw new Error('not sent');
+      btn.classList.add('done'); btn.textContent = 'Developer notified. Thank you!';
+    }).catch(function () { btn.disabled = false; btn.textContent = 'Couldn’t send. Try again'; });
+  }
+
+  // Tiny JSONP loader (same as myahl-patches.js): Apps Script ignores CORS,
+  // a <script> tag carries the Workspace cookies. Times out at 20s.
+  function fetchJsonp(url) {
+    return new Promise(function (resolve, reject) {
+      var cb = '__ahlpe_jsonp_' + (++jsonpSeq) + '_' + Date.now().toString(36);
+      var script = document.createElement('script');
+      var timer;
+      function cleanup() {
+        try { delete window[cb]; } catch (e) { window[cb] = undefined; }
+        if (script.parentNode) script.parentNode.removeChild(script);
+        clearTimeout(timer);
+      }
+      window[cb] = function (data) { cleanup(); resolve(data); };
+      script.onerror = function () { cleanup(); reject(new Error('JSONP load failed')); };
+      script.src = url + '&callback=' + cb;
+      document.head.appendChild(script);
+      timer = setTimeout(function () { cleanup(); reject(new Error('JSONP timeout')); }, 20000);
+    });
   }
 
   // ── Helpers ─────────────────────────────────────────────────
