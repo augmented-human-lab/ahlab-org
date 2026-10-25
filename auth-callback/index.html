@@ -181,6 +181,9 @@ var RETURN_KEY  = 'ahl-auth-return-v1';
       // the broker can prove the request originated from a genuine
       // login flow on our origin (CSRF defense).
       token: token,
+      // Workspace org unit from the broker ("/Current/RF", "/Alumni", …;
+      // '' if the lookup failed). my-ahl uses it to pick which apps to show.
+      ou: params.ou || '',
       ts: ts
     }));
   } catch (e) {
