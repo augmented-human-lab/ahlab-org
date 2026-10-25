@@ -703,6 +703,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://ahlab.org/projects/test-proj26/</loc>
+    <lastmod>NaN-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://ahlab.org/people/suranga-nanayakkara/</loc>
     <lastmod>2026-10-25</lastmod>
     <changefreq>yearly</changefreq>

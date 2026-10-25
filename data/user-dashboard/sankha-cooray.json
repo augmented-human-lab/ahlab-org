@@ -67,6 +67,16 @@
         "cognitive",
         "physical"
       ]
+    },
+    {
+      "slug": "test-proj26",
+      "title": "Test Proj26",
+      "year": "Current",
+      "thumbnail": "https://cdn.ahlab.org/media/site/projects/test-proj26/Screenshot_2026-10-25_at_2.28.52_PM.jpg",
+      "principles": [
+        "body",
+        "cognitive"
+      ]
     }
   ],
   "publications": [
