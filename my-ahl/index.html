@@ -1151,7 +1151,7 @@
 
     // Tell myahl-patches.js the grid markup is in place so it can
     // overlay pending tiles (cache + broker response).
-    document.dispatchEvent(new CustomEvent('myahl:dashboard-rendered'));
+    document.dispatchEvent(new CustomEvent('myahl:dashboard-rendered', { detail: d }));
   }
 
   // Signed-in but not yet linked to a person record (e.g. email
@@ -1176,7 +1176,7 @@
 
   function fetchDashboard(slug) {
     if (dashboardCache[slug]) return Promise.resolve(dashboardCache[slug]);
-    return fetch('/data/user-dashboard/' + encodeURIComponent(slug) + '.json', { cache: 'default' })
+    return fetch('/data/user-dashboard/' + encodeURIComponent(slug) + '.json', { cache: 'no-cache' })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (json) { dashboardCache[slug] = json; return json; })
       .catch(function () { return null; });

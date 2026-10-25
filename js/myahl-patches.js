@@ -24,6 +24,7 @@
   // This way the projects grid (and friends) actually exist when we
   // try to insert pending tiles.
   var ranOnce = false;
+  var dashboard = null;
   function init() {
     if (!window.AHLAuth) return;
     document.addEventListener('myahl:dashboard-rendered', onDashboardReady);
@@ -32,7 +33,8 @@
     // future ones; the first render just lands when it lands.
   }
 
-  function onDashboardReady() {
+  function onDashboardReady(e) {
+    dashboard = (e && e.detail) || null;
     var cachedRendered = false;
     if (window.AHLPendingCache) {
       var cached = window.AHLPendingCache.getAll();
@@ -120,8 +122,36 @@
     if (profileTile) profileTile.classList.remove('is-pending');
   }
 
+  // The broker also returns patches approved in the last few hours,
+  // to cover the gap before the rebuilt dashboard JSON goes live.
+  // Once the item is in the dashboard it renders as a normal card, so
+  // drop the patch. Approved edits always have a normal card already.
+  var DASHBOARD_KEY = { project: 'projects', publication: 'publications', press: 'press' };
+  function slugify(s) {
+    return String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  }
+  function isPublished(p) {
+    if (p.status !== 'approved') return false;
+    if (p.action !== 'create') return true;
+    var items = (dashboard && dashboard[DASHBOARD_KEY[p.targetType]]) || null;
+    if (!items) return p.targetType === 'profile' || !DASHBOARD_KEY[p.targetType];
+    var patch = p.patch || {};
+    var slug = patch.slug || (p.targetSlug !== '<new>' && p.targetSlug) || slugify(patch.title);
+    return items.some(function (x) { return x.slug === slug || slugify(x.title) === slugify(patch.title); });
+  }
+
+  function badgeText(p) {
+    return p.status === 'approved' ? 'Publishing' : 'Pending';
+  }
+  function tooltipText(p) {
+    return p.status === 'approved'
+      ? 'Approved — appears here once the site finishes updating'
+      : 'Pending review — submitted ' + (p.submittedAt || '');
+  }
+
   function renderPending(data) {
-    var allPatches = (data.own || []).concat(data.coMember || []);
+    var allPatches = (data.own || []).concat(data.coMember || [])
+      .filter(function (p) { return !isPublished(p); });
     if (!allPatches.length) return;
 
     // Group by section.
@@ -152,7 +182,7 @@
     patches.forEach(function (p) {
       var card = document.createElement('div');
       card.className = 'myahl-project-wrap is-pending';
-      card.title = 'Pending review — submitted ' + (p.submittedAt || '');
+      card.title = tooltipText(p);
       var title = (p.patch && p.patch.title) || p.targetSlug || 'New project';
       card.innerHTML =
         '<div class="myahl-project-card is-pending">' +
@@ -162,7 +192,7 @@
             '<h5>' + escHtml(title) + '</h5>' +
           '</div>' +
         '</div>' +
-        '<div class="myahl-pending-badge">Pending</div>';
+        '<div class="myahl-pending-badge">' + badgeText(p) + '</div>';
       tagCacheOrigin(card, p);
       var addnew = grid.querySelector('.myahl-addnew-project');
       if (addnew && addnew.nextSibling) {
@@ -180,11 +210,11 @@
     patches.forEach(function (p) {
       var li = document.createElement('li');
       li.className = 'myahl-pub-item is-pending';
-      li.title = 'Pending review';
+      li.title = tooltipText(p);
       var title = (p.patch && p.patch.title) || 'New publication';
       var citation = (p.patch && p.patch.citation) || '';
       li.innerHTML =
-        '<div class="myahl-pub-pending-badge">Pending</div>' +
+        '<div class="myahl-pub-pending-badge">' + badgeText(p) + '</div>' +
         '<div class="myahl-pub-title">' + escHtml(title) + '</div>' +
         (citation ? '<div class="myahl-pub-citation">' + escHtml(citation) + '</div>' : '');
       tagCacheOrigin(li, p);
@@ -204,7 +234,7 @@
     patches.forEach(function (p) {
       var div = document.createElement('div');
       div.className = 'myahl-tile is-pending';
-      div.title = 'Pending review';
+      div.title = tooltipText(p);
       var title = (p.patch && p.patch.title) || 'New press mention';
       var meta = [(p.patch && p.patch.outlet), (p.patch && p.patch.year)].filter(Boolean).join(' · ');
       div.innerHTML =
@@ -213,7 +243,7 @@
           '<div class="myahl-tile-title">' + escHtml(title) + '</div>' +
           (meta ? '<div class="myahl-tile-meta">' + escHtml(meta) + '</div>' : '') +
         '</div>' +
-        '<div class="myahl-tile-pending-badge">Pending</div>';
+        '<div class="myahl-tile-pending-badge">' + badgeText(p) + '</div>';
       tagCacheOrigin(div, p);
       var addnew = grid.querySelector('.myahl-addnew-tile');
       if (addnew && addnew.nextSibling) {

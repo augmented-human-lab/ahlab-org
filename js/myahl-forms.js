@@ -157,8 +157,12 @@
     });
     if (busy) {
       btn.dataset._label = btn.textContent;
-      btn.textContent = 'Submitting…';
+      btn.classList.add('is-busy');
+      btn.setAttribute('aria-busy', 'true');
+      btn.innerHTML = '<span class="ahl-btn-spinner" aria-hidden="true"></span>Submitting…';
     } else if (btn.dataset._label) {
+      btn.classList.remove('is-busy');
+      btn.removeAttribute('aria-busy');
       btn.textContent = btn.dataset._label;
     }
   }
