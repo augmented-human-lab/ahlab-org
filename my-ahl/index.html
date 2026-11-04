@@ -266,6 +266,11 @@
   </symbol>
   <!-- Users — Feather "users" glyph, used by the "Directory" admin app
        (ahl-directory-appscript: people by org unit + mailing-group sync). -->
+  <!-- Ticket — Feather-style glyph for the "Events" (Eventbrite) admin app -->
+  <symbol id="i-myahl-events" viewBox="0 0 24 24">
+    <path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3a2 2 0 0 0 0-4z"/>
+    <path d="M14 5v2M14 11v2M14 17v2"/>
+  </symbol>
   <symbol id="i-myahl-directory" viewBox="0 0 24 24">
     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
     <circle cx="9" cy="7" r="4"/>
@@ -706,6 +711,14 @@
       label:  'Directory',
       href:   'https://script.google.com/macros/s/AKfycbwZWW1rrx3lvSScMhSkBr7t1LbqR6oNVolPokX-TwGj5la_3CIcp2mw43o0lQ_TXHoMXQ/exec',
       symbol: 'i-myahl-directory'
+    },
+    {
+      // ahl-eventbrite-appscript — AHL Events: see/create/publish the lab's
+      // public Eventbrite events + attendee lists, Slack alerts via the
+      // ahl-eventbrite-hook receiver. Server-side gated to the lab admins.
+      label:  'Events',
+      href:   'https://script.google.com/macros/s/AKfycbx3yhgZnypmYQvSHkxXs1cw6JilzjWd8dXzttiOTJvLFuZ9IrpUXi2y9poR_oifgNrq_w/exec',
+      symbol: 'i-myahl-events'
     }
   ];
 
